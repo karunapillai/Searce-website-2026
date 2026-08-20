@@ -1,4 +1,10 @@
-name: Deploy review preview to GitHub Pages
+name: Publish review preview
+
+# GitHub Pages for this repo is served from the gh-pages branch, which
+# was created (and auto-enabled Pages) rather than switched to the
+# "GitHub Actions" source. actions/deploy-pages only works with the
+# latter, and the workflow GITHUB_TOKEN cannot change the source, so
+# this job just mirrors the branch onto gh-pages instead.
 
 on:
   push:
@@ -6,38 +12,20 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
-# Never run two deployments at once; let the newest win.
 concurrency:
-  group: pages
+  group: publish-preview
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out
         uses: actions/checkout@v4
 
-      - name: Configure Pages
-        # No enablement flag: the workflow GITHUB_TOKEN cannot create a
-        # Pages site ("Resource not accessible by integration"). Pages
-        # must be switched on once in Settings -> Pages with the source
-        # set to "GitHub Actions"; after that this workflow deploys on
-        # every push to this branch.
-        uses: actions/configure-pages@v5
-
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Mirror onto gh-pages
+        # gh-pages is a publishing branch only — nobody works on it —
+        # so overwriting it with the current tree is safe.
+        run: git push --force origin HEAD:refs/heads/gh-pages

@@ -20,7 +20,7 @@
 /* ===========================================================
    Shared practice-page system: tokens, type scale, spacing,
    navigation, Let's Connect and footer are common across
-   practice pages. This page's own expression is built on top.
+   practice pages. This page's expression is built on top.
    =========================================================== */
 :root{
   --ink:#000000;
@@ -38,9 +38,9 @@
   --blue-24:#b3d0ff;
   --display:'Poppins',system-ui,sans-serif;
   --body:'Google Sans Flex Variable','Google Sans Text','Google Sans',system-ui,-apple-system,sans-serif;
-  /* shared spacing rhythm */
   --sec:88px;
-  --rule:1px;
+  /* modular grid cell — dark-section convention from the practice pages */
+  --mod:88px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -60,15 +60,14 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;color:inhe
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 48px;}
 
-/* shared eyebrow */
-.eyebrow{
-  display:block;
-  font-family:var(--display);font-weight:400;
-  font-size:14px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--blue);
-  margin-bottom:28px;
+/* modular grid overlay for the ink sections */
+.mod-grid{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size:var(--mod) var(--mod);
 }
-.eyebrow.on-dark{color:var(--blue-24);}
 
 /* ======= NAV — shared global framework ======= */
 .nav{
@@ -84,9 +83,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .nav-logo{height:20px;width:auto;}
 .nav-links{
   display:flex;align-items:center;gap:30px;
-  list-style:none;
-  font-size:14px;
-  color:var(--ink-60);
+  list-style:none;font-size:14px;color:var(--ink-60);
   flex:1;justify-content:center;
 }
 .nav-links a{position:relative;padding:6px 2px;transition:color .2s ease;}
@@ -100,23 +97,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   display:inline-flex;align-items:center;gap:8px;
   background:var(--blue);color:#fff;
   font-family:var(--display);font-size:13.5px;font-weight:400;
-  padding:10px 20px;border-radius:999px;
-  white-space:nowrap;
+  padding:10px 20px;border-radius:999px;white-space:nowrap;
   transition:background .2s ease,transform .15s ease;
 }
 .nav-cta:hover{background:var(--blue-strong);transform:translateY(-1px);}
 .nav-cta svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;}
 
 /* ===========================================================
-   HERO — black editorial banner.
-   The page opens on ink, not paper: this practice is about
-   the boundary between people and intelligence, so the hero
-   states it and then draws it.
+   HERO — black editorial banner on the modular grid
    =========================================================== */
 .hero{
   position:relative;
-  background:var(--ink);
-  color:#fff;
+  background:var(--ink);color:#fff;
   min-height:92vh;
   display:flex;flex-direction:column;justify-content:space-between;
   padding:clamp(72px,9vw,120px) 0 44px;
@@ -127,9 +119,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   right:-10%;top:-20%;
   width:80vw;max-width:1100px;aspect-ratio:1/1;
   background:radial-gradient(circle at center,
-    rgba(0,100,255,0.20) 0%,
-    rgba(0,100,255,0.07) 34%,
-    transparent 66%);
+    rgba(0,100,255,0.20) 0%, rgba(0,100,255,0.07) 34%, transparent 66%);
 }
 .hero-inner{position:relative;z-index:1;width:100%;}
 .hero-badge{
@@ -148,19 +138,23 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
 
-/* Line-by-line clip reveal — same motion family as the practice
-   pages, expressed as an editorial line wipe rather than words. */
 .hero h1{
   font-family:var(--display);font-weight:300;
   font-size:clamp(42px,7.2vw,104px);
-  line-height:1.0;letter-spacing:-0.03em;
+  line-height:1.04;letter-spacing:-0.03em;
   max-width:19ch;
   margin-bottom:clamp(32px,3.6vw,48px);
 }
-.hl{display:block;overflow:hidden;}
+/* Line wipe. The clip box is padded at the bottom so descenders
+   (the g in "Redesign", the p in "people") are never cut. */
+.hl{
+  display:block;overflow:hidden;
+  padding-bottom:.18em;
+  margin-bottom:-.14em;
+}
 .hl > span{
   display:block;
-  transform:translateY(105%);
+  transform:translateY(110%);
   animation:lineUp .95s cubic-bezier(.16,1,.3,1) forwards;
 }
 .hl:nth-child(1) > span{animation-delay:.20s;}
@@ -186,25 +180,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   display:inline-flex;align-items:center;gap:10px;
   background:var(--blue);color:#fff;
   font-family:var(--display);font-size:15px;font-weight:400;
-  padding:14px 26px;border-radius:6px;
-  transition:background .2s ease,transform .15s ease;white-space:nowrap;
+  padding:14px 26px;border-radius:6px;white-space:nowrap;
+  transition:background .2s ease,transform .15s ease;
 }
 .btn-primary:hover{background:var(--blue-strong);transform:translateY(-1px);}
 .btn-primary svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;}
-.btn-quiet{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--display);font-size:14px;font-weight:400;
-  color:rgba(255,255,255,0.6);
-  padding-bottom:4px;
-  border-bottom:1px solid rgba(255,255,255,0.22);
-  transition:color .2s ease,border-color .2s ease;white-space:nowrap;
-}
-.btn-quiet:hover{color:#fff;border-color:var(--blue);}
-.btn-quiet svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;}
 
-/* ---- The boundary band: the line between what people do and
-   what intelligence does. Drifts in the hero, settles at the close. ---- */
-.band-block{position:relative;z-index:1;width:100%;margin-top:clamp(48px,6vw,80px);opacity:0;animation:fadeUp .8s ease 1.3s forwards;}
+/* ---- boundary band: drifts in the hero, settled at the close ---- */
+.band-block{position:relative;z-index:1;width:100%;margin-top:clamp(48px,6vw,80px);}
+.hero .band-block{opacity:0;animation:fadeUp .8s ease 1.3s forwards;}
 .band-head{
   display:flex;justify-content:space-between;align-items:baseline;
   font-family:var(--display);font-weight:400;
@@ -219,10 +203,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   height:clamp(64px,9vw,104px);
   border-bottom:1px solid rgba(255,255,255,0.16);
 }
-/* fine comb rather than a bar chart — this is a measure, not data */
 .bar{
-  flex:0 0 3px;width:3px;
-  height:26%;
+  flex:0 0 3px;width:3px;height:26%;
   background:rgba(255,255,255,0.16);
   transition:height .6s cubic-bezier(.4,0,.2,1),background-color .6s ease;
 }
@@ -247,8 +229,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 
 /* ===========================================================
    SECTION 1 — THE SHIFT
-   The idea is a change of question, so the section is built
-   as a set of questions being replaced.
    =========================================================== */
 .shift{
   background:var(--paper);
@@ -263,7 +243,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .shift-top h2{
   font-family:var(--display);font-weight:300;
   font-size:clamp(34px,4.4vw,62px);
-  line-height:1.06;letter-spacing:-0.028em;
+  line-height:1.08;letter-spacing:-0.028em;
   max-width:22ch;
 }
 .shift-top h2 em{font-style:normal;color:var(--blue);}
@@ -273,12 +253,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 .shift-lede + .shift-lede{margin-top:14px;}
 
-/* Question ledger */
 .qs{border-top:1px solid var(--ink);}
 .q-head{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:0 48px;
-  padding:14px 0 0;
+  gap:0 48px;padding:14px 0 0;
   font-family:var(--display);font-weight:400;
   font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
 }
@@ -297,15 +275,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 .q-old{
   font-weight:300;color:var(--ink-40);
-  position:relative;
-  /* shrink to the text so the strike-through matches its width */
-  justify-self:start;
-  max-width:100%;
+  position:relative;justify-self:start;max-width:100%;
 }
-/* the old question gets struck through as the row arrives */
 .q-old::after{
   content:'';position:absolute;left:0;top:52%;
-  width:0;height:1px;background:var(--ink-40);
+  height:1px;background:var(--ink-40);
   transition:width .7s cubic-bezier(.16,1,.3,1) .25s;
 }
 .q-new{
@@ -314,8 +288,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1);
 }
 .q-new .mk{color:var(--blue);flex-shrink:0;}
-/* Revealed is the default state. Only once JS is confirmed do rows
-   start hidden, so the content never depends on the animation. */
+/* revealed is the default; scripted states apply only behind .js */
 .q-old::after{width:100%;}
 .js .q-old::after{width:0;}
 .js .q-new{opacity:0;transform:translateY(10px);}
@@ -324,114 +297,95 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 
 /* ===========================================================
    SECTION 2 — OFFERINGS
-   Eight capabilities read as an editorial index: choose an
-   entry on the left, the entry opens on the right.
+   Full-width editorial accordion: one entry open at a time,
+   its detail opening beneath it across the full measure.
    =========================================================== */
 .offer{
   background:var(--paper-dim);
   padding:var(--sec) 0;
   border-bottom:1px solid var(--paper-line);
 }
-.offer-head{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  gap:48px;flex-wrap:wrap;
-  margin-bottom:clamp(36px,4.5vw,56px);
+.offer-top{
+  display:grid;grid-template-columns:1fr auto;
+  gap:32px 80px;align-items:end;
+  margin-bottom:clamp(32px,4vw,48px);
 }
-.offer-head h2{
+.offer-top h2{
   font-family:var(--display);font-weight:300;
   font-size:clamp(40px,5.6vw,82px);
   line-height:1.0;letter-spacing:-0.03em;
 }
-.offer-head p{
-  font-size:15.5px;line-height:1.65;color:var(--ink-60);
-  max-width:38ch;
+.offer-top p{
+  font-size:15px;line-height:1.6;color:var(--ink-60);
+  max-width:30ch;text-align:right;
 }
-.idx{
+.acc{border-top:1px solid var(--ink);}
+.acc-item{border-bottom:1px solid var(--paper-line);}
+.acc-btn{
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:0 clamp(40px,5vw,80px);
-  border-top:1px solid var(--ink);
-}
-/* one row per offering entry (8), so the detail column can span 1/-1 */
-.js .idx{grid-template-rows:repeat(8,auto);}
-.idx-item{
-  grid-column:1;
-  display:grid;grid-template-columns:34px 1fr 16px;
-  align-items:center;gap:0 12px;
+  grid-template-columns:clamp(40px,4vw,64px) 1fr 22px;
+  align-items:center;gap:0 clamp(16px,2vw,28px);
   width:100%;text-align:left;
-  padding:19px 0;
-  border-bottom:1px solid var(--paper-line);
-  cursor:pointer;
-  transition:padding-left .28s cubic-bezier(.16,1,.3,1);
+  padding:clamp(20px,2.4vw,30px) 0;
 }
-.idx-item:hover{padding-left:8px;}
-.idx-num{
+.acc-num{
   font-family:var(--display);font-weight:300;
-  font-size:11.5px;letter-spacing:.08em;
+  font-size:12px;letter-spacing:.08em;
   color:var(--ink-40);
-  transition:color .22s ease;
+  transition:color .24s ease;
 }
-.idx-name{
+.acc-name{
   font-family:var(--display);font-weight:400;
-  font-size:clamp(15px,1.45vw,18.5px);
-  line-height:1.32;letter-spacing:-0.012em;
-  color:var(--ink-60);
-  transition:color .22s ease;
+  font-size:clamp(18px,2.1vw,29px);
+  line-height:1.18;letter-spacing:-0.02em;
+  color:var(--ink-85);
+  transition:color .24s ease;
 }
-.idx-caret{
-  font-size:14px;color:transparent;
-  transition:color .22s ease,transform .28s ease;
+.acc-btn:hover .acc-name{color:var(--blue);}
+.acc-btn:hover .acc-num{color:var(--blue);}
+.acc-item.open .acc-name,
+.acc-item.open .acc-num{color:var(--blue);}
+/* plus that becomes a minus */
+.acc-sign{position:relative;width:16px;height:16px;justify-self:end;}
+.acc-sign::before,.acc-sign::after{
+  content:'';position:absolute;left:0;top:50%;
+  width:16px;height:1.5px;background:var(--ink-40);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),background-color .24s ease;
 }
-.idx-item:hover .idx-name{color:var(--ink);}
-.idx-item:hover .idx-num{color:var(--ink-60);}
-.idx-item[aria-selected="true"] .idx-name{color:var(--blue);}
-.idx-item[aria-selected="true"] .idx-num{color:var(--blue);}
-.idx-item[aria-selected="true"] .idx-caret{color:var(--blue);transform:translateX(3px);}
-.idx-item[aria-selected="true"]{border-bottom-color:var(--blue-24);}
+.acc-sign::after{transform:rotate(90deg);}
+.acc-btn:hover .acc-sign::before,
+.acc-btn:hover .acc-sign::after{background:var(--blue);}
+.acc-item.open .acc-sign::before,
+.acc-item.open .acc-sign::after{background:var(--blue);}
+.acc-item.open .acc-sign::after{transform:rotate(0deg);}
 
-/* Without JS every entry renders beside its own row — a readable
-   index. With JS the panels stack into one sticky detail column. */
-.idx-panel{
-  grid-column:2;
-  align-self:start;
-  padding:22px 0 22px clamp(24px,2.6vw,40px);
-  border-left:2px solid var(--blue);
+.acc-body{overflow:hidden;}
+.js .acc-body{max-height:0;transition:max-height .5s cubic-bezier(.16,1,.3,1);}
+.acc-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  gap:clamp(28px,4vw,64px);
+  padding:0 0 clamp(28px,3.4vw,40px) calc(clamp(40px,4vw,64px) + clamp(16px,2vw,28px));
 }
-.js .idx-panel{
-  /* spans every entry row so the detail column is one tall cell;
-     -1 needs the explicit row template declared on .js .idx */
-  grid-row:1 / -1;
-  position:sticky;top:108px;
-  padding:6px 0 0 clamp(24px,2.6vw,40px);
-  opacity:0;visibility:hidden;
-  transition:opacity .32s ease;
+.acc-desc{
+  font-size:clamp(16px,1.45vw,19.5px);
+  line-height:1.62;color:var(--ink-60);
+  max-width:46ch;
 }
-.js .idx-panel.active{opacity:1;visibility:visible;}
-.idx-tag{
+.acc-what{
   font-family:var(--display);font-weight:400;
   font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--blue);
-  margin-bottom:16px;
+  color:var(--blue);margin-bottom:14px;
 }
-.idx-title{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(24px,2.9vw,40px);
-  line-height:1.1;letter-spacing:-0.026em;
-  margin-bottom:18px;
-}
-.idx-desc{
-  font-size:clamp(15.5px,1.35vw,18px);
-  line-height:1.66;color:var(--ink-60);
-  max-width:44ch;margin-bottom:26px;
-}
-.idx-list{list-style:none;border-top:1px solid var(--paper-line);}
-.idx-list li{
+.acc-list{list-style:none;}
+.acc-list li{
   display:flex;gap:12px;
-  padding:11px 0;
-  border-bottom:1px solid var(--paper-line);
+  padding:9px 0;
+  border-top:1px solid var(--paper-line);
   font-size:14.5px;line-height:1.55;color:var(--ink-85);
 }
-.idx-list li::before{
+.acc-list li:last-child{border-bottom:1px solid var(--paper-line);}
+.acc-list li::before{
   content:'';flex-shrink:0;
   width:5px;height:5px;border-radius:50%;
   background:var(--blue);margin-top:8px;
@@ -439,208 +393,186 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 
 /* ===========================================================
    SECTION 3 — PLATFORM MOTIONS
-   The governance rule is the design: the practice sits above,
-   the named motions hang beneath it as siblings.
+   The hierarchy is the layout: the practice above, the named
+   motions hanging beneath it as selectable siblings.
    =========================================================== */
-.motions{
-  background:var(--ink);
-  color:#fff;
-  padding:var(--sec) 0;
-}
-.motions-head{max-width:60ch;margin-bottom:clamp(48px,6vw,76px);}
+.motions{background:var(--ink);color:#fff;padding:var(--sec) 0;}
+.motions-head{max-width:56ch;margin-bottom:clamp(44px,5.5vw,68px);}
 .motions-head h2{
   font-family:var(--display);font-weight:300;
   font-size:clamp(36px,5vw,72px);
-  line-height:1.02;letter-spacing:-0.03em;
-  margin-bottom:20px;
+  line-height:1.04;letter-spacing:-0.03em;
+  margin-bottom:18px;
 }
 .motions-head p{
   font-size:clamp(16px,1.4vw,19px);line-height:1.65;
   color:rgba(255,255,255,0.55);
 }
-/* parent */
-.tree-parent{
-  display:inline-flex;flex-direction:column;align-items:center;
-  width:100%;
-}
+.tree{display:flex;flex-direction:column;align-items:center;width:100%;}
 .tree-chip{
   font-family:var(--display);font-weight:400;
   font-size:clamp(13px,1.2vw,16px);letter-spacing:.02em;
-  color:#fff;
+  color:#fff;text-align:center;
   border:1px solid var(--blue);
-  background:rgba(0,100,255,0.12);
-  border-radius:999px;
-  padding:11px 26px;
+  background:rgba(0,100,255,0.14);
+  border-radius:999px;padding:11px 28px;
 }
 .tree-chip small{
   display:block;
   font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--blue-24);margin-bottom:3px;
 }
-.tree-stem{width:1px;height:34px;background:rgba(0,100,255,0.4);}
-.tree-bar{
-  width:100%;height:1px;background:rgba(0,100,255,0.4);
-  position:relative;
-}
-.tree-cols{
+.tree-stem{width:1px;height:32px;background:rgba(0,100,255,0.45);}
+.tree-bar{width:100%;height:1px;background:rgba(0,100,255,0.45);}
+/* selectable siblings */
+.sibs{
   display:grid;grid-template-columns:repeat(4,1fr);
-  gap:0 clamp(16px,2.2vw,32px);
+  gap:0 clamp(12px,1.6vw,24px);
   width:100%;
 }
-.tree-col{display:flex;flex-direction:column;align-items:flex-start;}
-.tree-tick{width:1px;height:30px;background:rgba(0,100,255,0.4);margin-left:0;}
-.motion{
-  border-top:1px solid rgba(255,255,255,0.16);
-  padding-top:18px;width:100%;
+.sib{display:flex;flex-direction:column;align-items:stretch;}
+.sib-tick{width:1px;height:28px;background:rgba(0,100,255,0.45);}
+.sib-btn{
+  text-align:left;width:100%;
+  border-top:1px solid rgba(255,255,255,0.18);
+  padding:16px 0 0;
   transition:border-color .25s ease;
 }
-.motion:hover{border-color:var(--blue);}
-.motion h3{
+.sib-name{
   font-family:var(--display);font-weight:400;
-  font-size:clamp(15px,1.4vw,19px);
-  line-height:1.28;letter-spacing:-0.012em;
-  color:#fff;margin-bottom:10px;
+  font-size:clamp(14px,1.35vw,18px);
+  line-height:1.26;letter-spacing:-0.012em;
+  color:rgba(255,255,255,0.6);
+  transition:color .25s ease;
+  display:block;
 }
-.motion p{
-  font-size:13.5px;line-height:1.6;
-  color:rgba(255,255,255,0.45);
+.sib-btn:hover{border-color:var(--blue);}
+.sib-btn:hover .sib-name{color:#fff;}
+.sib-btn[aria-selected="true"]{border-top:1px solid var(--blue);border-top-width:2px;padding-top:15px;}
+.sib-btn[aria-selected="true"] .sib-name{color:#fff;}
+.sib-dot{
+  display:block;width:5px;height:5px;border-radius:50%;
+  background:transparent;margin-top:12px;
+  transition:background-color .25s ease;
 }
-/* rules */
+.sib-btn[aria-selected="true"] .sib-dot{background:var(--blue);}
+
+.motion-detail{
+  margin-top:clamp(32px,4vw,48px);
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(255,255,255,0.02);
+  border-radius:12px;
+  padding:clamp(26px,3vw,40px);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(24px,3.4vw,56px);
+}
+.md-pane{display:none;}
+.md-pane.active{display:contents;}
+.md-title{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(22px,2.5vw,34px);
+  line-height:1.12;letter-spacing:-0.024em;
+  color:#fff;margin-bottom:16px;
+}
+.md-desc{
+  font-size:clamp(15px,1.35vw,18px);
+  line-height:1.62;color:rgba(255,255,255,0.58);
+  max-width:44ch;
+}
+.md-k{
+  font-family:var(--display);font-weight:400;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--blue-24);margin-bottom:14px;
+}
+.md-list{list-style:none;}
+.md-list li{
+  font-size:14.5px;line-height:1.5;
+  color:rgba(255,255,255,0.72);
+  padding:10px 0;
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+.md-list li:last-child{border-bottom:1px solid rgba(255,255,255,0.1);}
+
 .rules{
   display:grid;grid-template-columns:1fr 1fr;
   gap:clamp(24px,3vw,44px);
-  margin-top:clamp(52px,6vw,80px);
+  margin-top:clamp(44px,5vw,64px);
 }
-.rule-note{
-  border-left:2px solid var(--blue);
-  padding:2px 0 2px 20px;
-}
-.rule-note .k{
-  font-family:var(--display);font-weight:400;
-  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--blue-24);margin-bottom:10px;
-}
-.rule-note p{
-  font-size:14.5px;line-height:1.62;
-  color:rgba(255,255,255,0.62);
-}
+.rule-note{border-left:2px solid var(--blue);padding:2px 0 2px 20px;}
+.rule-note p{font-size:14.5px;line-height:1.62;color:rgba(255,255,255,0.62);}
 .rule-note p strong{color:#fff;font-weight:400;}
 
 /* ===========================================================
    SECTION 4 — OUTCOME STORIES
-   There are no readings. The section is an open ledger with
-   the reading column deliberately blank.
+   No readings exist. Say exactly that, and nothing that could
+   be mistaken for a number.
    =========================================================== */
 .evidence{
   background:var(--paper);
   padding:var(--sec) 0;
   border-bottom:1px solid var(--paper-line);
 }
-.ev-top{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:0 80px;align-items:start;
-  margin-bottom:clamp(44px,5.5vw,68px);
-}
-.ev-top h2{
+.evidence h2{
   font-family:var(--display);font-weight:300;
   font-size:clamp(36px,5vw,72px);
   line-height:1.02;letter-spacing:-0.03em;
-  margin-bottom:0;
+  margin-bottom:clamp(36px,4.4vw,56px);
 }
-.ev-statement{
+.ev-col{max-width:62ch;}
+.ev-lead{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(22px,2.5vw,34px);
-  line-height:1.18;letter-spacing:-0.024em;
-  margin-bottom:20px;
+  font-size:clamp(26px,3.2vw,46px);
+  line-height:1.12;letter-spacing:-0.026em;
+  margin-bottom:18px;
 }
-.ev-statement em{font-style:normal;color:var(--blue);}
-.ev-body{
-  font-size:clamp(15.5px,1.35vw,18px);
-  line-height:1.66;color:var(--ink-60);
-  max-width:50ch;
+.ev-lead em{font-style:normal;color:var(--blue);}
+.ev-text{
+  font-size:clamp(16.5px,1.5vw,20px);
+  line-height:1.64;color:var(--ink-60);
+  margin-bottom:clamp(32px,3.6vw,44px);
 }
-/* open ledger */
-.ledger{width:100%;border-collapse:collapse;text-align:left;}
-.ledger caption{
-  text-align:left;
+.ev-next{
+  border-top:1px solid var(--ink);
+  padding-top:20px;
+  margin-bottom:clamp(32px,3.6vw,44px);
+}
+.ev-next-k{
   font-family:var(--display);font-weight:400;
   font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink-40);
-  padding-bottom:14px;
+  color:var(--ink-40);margin-bottom:4px;
 }
-.ledger th{
-  font-family:var(--display);font-weight:400;
-  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ink-40);
-  padding:0 24px 12px 0;
-  border-bottom:1px solid var(--ink);
-  vertical-align:bottom;
-}
-.ledger td{
-  padding:22px 24px 22px 0;
+.ev-next-list{list-style:none;}
+.ev-next-list li{
+  display:flex;align-items:baseline;gap:14px;
+  padding:14px 0;
   border-bottom:1px solid var(--paper-line);
-  vertical-align:top;
-}
-.ledger th:last-child,.ledger td:last-child{padding-right:0;}
-.led-src{
   font-family:var(--display);font-weight:400;
-  font-size:clamp(16px,1.5vw,20px);
-  line-height:1.28;letter-spacing:-0.015em;
+  font-size:clamp(16px,1.6vw,21px);
+  line-height:1.3;letter-spacing:-0.015em;
   color:var(--ink);
 }
-.led-what{
-  font-size:14.5px;line-height:1.58;color:var(--ink-60);
-  max-width:34ch;
-}
-.led-read{width:26%;}
-/* the blank: an empty ruled slot, never a number or a shape
-   that could be read as one */
-.blank{
-  display:block;width:100%;max-width:120px;height:1px;
-  background:var(--blue-24);margin:12px 0 12px;
-}
-.led-status{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--display);font-weight:400;
-  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-40);
-}
-.led-status i{
-  width:6px;height:6px;border-radius:50%;
+.ev-next-list li::before{
+  content:'';flex-shrink:0;
+  width:7px;height:7px;border-radius:50%;
   border:1px solid var(--blue-24);
-  flex-shrink:0;
 }
-/* the standard */
-.standard{
-  margin-top:clamp(40px,4.6vw,60px);
-  display:grid;grid-template-columns:auto 1fr;
-  gap:0 24px;align-items:start;
-  border-top:1px solid var(--ink);
-  padding-top:26px;
+.ev-standard{
+  border-left:2px solid var(--blue);
+  padding-left:22px;
 }
-.standard-k{
-  font-family:var(--display);font-weight:400;
-  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--blue);white-space:nowrap;padding-top:6px;
-}
-.standard-b h3{
+.ev-standard p{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(20px,2.2vw,30px);
-  line-height:1.2;letter-spacing:-0.022em;
-  margin-bottom:12px;
-}
-.standard-b p{
-  font-size:14.5px;line-height:1.62;color:var(--ink-60);
-  max-width:60ch;
+  font-size:clamp(19px,2vw,27px);
+  line-height:1.2;letter-spacing:-0.02em;
+  color:var(--ink);
 }
 
 /* ===========================================================
    SECTION 5 — CLOSING
-   Returns to ink and to the band, now settled.
    =========================================================== */
 .close{
   background:var(--ink);color:#fff;
-  padding:var(--sec) 0 clamp(56px,6vw,76px);
+  padding:var(--sec) 0 clamp(48px,5vw,68px);
   position:relative;overflow:hidden;
 }
 .close-glow{
@@ -650,27 +582,22 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   background:radial-gradient(ellipse at center,
     rgba(0,100,255,0.17) 0%, rgba(0,100,255,0.06) 40%, transparent 70%);
 }
-.close-inner{position:relative;z-index:1;max-width:64ch;}
+.close-inner{position:relative;z-index:1;}
 .close h2{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(30px,4.2vw,60px);
-  line-height:1.08;letter-spacing:-0.03em;
-  margin-bottom:26px;
+  font-size:clamp(32px,4.6vw,66px);
+  line-height:1.06;letter-spacing:-0.03em;
+  /* ch resolves against the heading's own size, not the body's */
+  max-width:20ch;
 }
 .close h2 em{font-style:normal;color:var(--blue);}
-.close p{
-  font-size:clamp(16px,1.5vw,20px);line-height:1.66;
-  color:rgba(255,255,255,0.6);
-  max-width:52ch;margin-bottom:20px;
-}
-/* scoped past `.close p` so the final line stays the largest */
 .close .close-final{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(22px,2.6vw,36px);
-  line-height:1.18;letter-spacing:-0.024em;
-  color:#fff;
-  max-width:34ch;
-  padding-top:26px;margin:8px 0 0;
+  font-size:clamp(18px,1.9vw,25px);
+  line-height:1.3;letter-spacing:-0.018em;
+  color:rgba(255,255,255,0.66);
+  max-width:38ch;
+  padding-top:24px;margin-top:26px;
   border-top:1px solid rgba(255,255,255,0.16);
 }
 
@@ -684,8 +611,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   font-family:var(--display);font-weight:300;
   font-size:clamp(48px,7vw,96px);
   line-height:.95;letter-spacing:-0.03em;
-  color:var(--blue-deep);
-  margin-bottom:36px;
+  color:var(--blue-deep);margin-bottom:36px;
 }
 .connect-left p{
   font-size:clamp(17px,1.5vw,21px);color:var(--ink-60);font-weight:400;
@@ -728,8 +654,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .connect-submit{
   background:var(--blue);color:#fff;
   font-family:var(--display);font-weight:400;font-size:15px;
-  padding:13px 32px;border-radius:999px;
-  border:none;cursor:pointer;
+  padding:13px 32px;border-radius:999px;border:none;cursor:pointer;
   transition:background .2s ease,transform .15s ease;
 }
 .connect-submit:hover{background:var(--blue-strong);transform:translateY(-1px);}
@@ -781,61 +706,44 @@ footer{background:#071028;padding:72px 0 0;}
 
 /* ======= RESPONSIVE ======= */
 @media(max-width:1024px){
-  :root{--sec:68px;}
+  :root{--sec:68px;--mod:72px;}
   .wrap{padding:0 28px;}
   .shift-top{grid-template-columns:1fr;gap:24px;}
-  .ev-top{grid-template-columns:1fr;gap:24px;}
-  .tree-cols{grid-template-columns:1fr 1fr;row-gap:32px;}
+  .offer-top{grid-template-columns:1fr;gap:18px;}
+  .offer-top p{text-align:left;max-width:44ch;}
+  .acc-inner{grid-template-columns:1fr;gap:24px;}
+  .sibs{grid-template-columns:1fr 1fr;row-gap:26px;}
+  .motion-detail{grid-template-columns:1fr;}
   .rules{grid-template-columns:1fr;}
   .connect-inner{grid-template-columns:1fr;gap:40px;}
   .foot-main{grid-template-columns:1fr 1fr;gap:40px;}
-  .idx{grid-template-columns:1fr;}
-  /* index becomes an inline accordion: each panel follows its entry */
-  .idx-item{grid-column:1;}
-  .idx-panel{
-    grid-column:1;grid-row:auto;
-    position:static;top:auto;
-    margin:0 0 8px;padding:20px 0 6px 18px;
-  }
-  .js .idx-panel{
-    grid-row:auto;position:static;top:auto;
-    display:none;opacity:1;visibility:visible;
-    padding:20px 0 6px 18px;
-  }
-  .js .idx-panel.active{display:block;}
 }
 @media(max-width:768px){
-  :root{--sec:56px;}
+  :root{--sec:56px;--mod:56px;}
   .nav-links{display:none;}
   .hero{min-height:0;padding-top:56px;}
   .hero h1{max-width:100%;}
   .q-head{display:none;}
   .q-row{grid-template-columns:1fr;gap:10px;padding:20px 0;}
   .q-old{font-size:16px;}
-  .tree-cols{grid-template-columns:1fr;row-gap:24px;}
-  .tree-parent .tree-bar{display:none;}
-  .tree-tick{display:none;}
-  .offer-head{gap:20px;}
-  /* ledger reflows to stacked records */
-  .ledger thead{display:none;}
-  .ledger,.ledger tbody,.ledger tr,.ledger td{display:block;width:100%;}
-  .ledger tr{border-bottom:1px solid var(--paper-line);padding:20px 0;}
-  .ledger td{border:none;padding:0 0 10px;}
-  .led-read{width:100%;}
-  .standard{grid-template-columns:1fr;gap:14px;}
+  .acc-inner{padding-left:0;}
+  .sibs{grid-template-columns:1fr;row-gap:18px;}
+  .tree-bar{display:none;}
+  .sib-tick{display:none;}
+  .close-inner{max-width:100%;}
   .foot-main{grid-template-columns:1fr;}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important;}
   .hl > span{transform:none;}
-  .hero-badge,.hero-open,.hero-ctas,.band-block{opacity:1;}
+  .hero-badge,.hero-open,.hero-ctas,.hero .band-block{opacity:1;}
   .js .q-new{opacity:1;transform:none;}
   .js .q-old::after{width:100%;}
 }
 </style>
 <script>
-  /* Progressive enhancement flag: scripted states (hidden rows, tabbed
-     panels) only apply once we know JS is running. */
+  /* Progressive enhancement flag: collapsed accordions and hidden
+     rows only apply once we know JS is running. */
   document.documentElement.classList.add('js');
 </script>
 </head>
@@ -864,6 +772,7 @@ footer{background:#071028;padding:72px 0 0;}
 
 <!-- ================= HERO ================= -->
 <header class="hero" aria-labelledby="hero-h">
+  <div class="mod-grid" aria-hidden="true"></div>
   <div class="hero-glow" aria-hidden="true"></div>
 
   <div class="wrap hero-inner">
@@ -887,14 +796,9 @@ footer{background:#071028;padding:72px 0 0;}
         See the offerings
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
-      <a href="#shift" class="btn-quiet">
-        Start with what changed
-        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2v8M2 6l4 4 4-4"/></svg>
-      </a>
     </div>
   </div>
 
-  <!-- the boundary: drifting -->
   <div class="wrap band-block">
     <div class="band-head">
       <span>People</span>
@@ -914,7 +818,6 @@ footer{background:#071028;padding:72px 0 0;}
   <div class="wrap">
     <div class="shift-top">
       <div>
-        <span class="eyebrow">The shift</span>
         <h2 id="shift-h">AI is not another tool in the stack. It is a change in <em>what work is</em>.</h2>
       </div>
       <div>
@@ -923,7 +826,7 @@ footer{background:#071028;padding:72px 0 0;}
       </div>
     </div>
 
-    <div class="qs" id="qs">
+    <div class="qs">
       <div class="q-head">
         <span class="a">The question we used to ask</span>
         <span class="b">The question that matters now</span>
@@ -956,142 +859,179 @@ footer{background:#071028;padding:72px 0 0;}
 <!-- ================= SECTION 2 — OFFERINGS ================= -->
 <section class="offer" id="offerings" aria-labelledby="offer-h">
   <div class="wrap">
-    <div class="offer-head">
-      <div>
-        <span class="eyebrow">Capabilities</span>
-        <h2 id="offer-h">Offerings</h2>
-      </div>
-      <p>Eight durable capabilities. Select an entry to see what it covers and what you get.</p>
+    <div class="offer-top">
+      <h2 id="offer-h">Offerings</h2>
+      <p>Eight durable capabilities. Open one to see what it covers.</p>
     </div>
 
-    <div class="idx" role="tablist" aria-label="Offerings">
+    <div class="acc" id="acc">
 
-      <button class="idx-item" role="tab" id="t1" aria-controls="p1" aria-selected="true">
-        <span class="idx-num">01</span>
-        <span class="idx-name">Work and role redesign for the agentic era</span>
-        <span class="idx-caret" aria-hidden="true">&rarr;</span>
-      </button>
-      <div class="idx-panel active" role="tabpanel" id="p1" aria-labelledby="t1">
-        <div class="idx-tag">Work design</div>
-        <h3 class="idx-title">Work and role redesign for the agentic era</h3>
-        <p class="idx-desc">Start with the task inventory, not the tool. We separate the work that needs a person from the work that never did, then rewrite the role, the handoffs and the decision rights around that split.</p>
-        <ul class="idx-list">
-          <li>Task-level inventory of a role, split by what moves and what stays</li>
-          <li>Rewritten role definitions, handoffs and decision rights</li>
-          <li>Escalation paths for the moments an agent must hand back</li>
-        </ul>
+      <div class="acc-item open">
+        <button class="acc-btn" aria-expanded="true" aria-controls="a1">
+          <span class="acc-num">01</span>
+          <span class="acc-name">Work and role redesign for the agentic era</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a1">
+          <div class="acc-inner">
+            <p class="acc-desc">Start with the task inventory, not the tool. We separate the work that needs a person from the work that never did, then rewrite the role, the handoffs and the decision rights around that split.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Task-level inventory of a role, split by what moves and what stays</li>
+                <li>Rewritten role definitions, handoffs and decision rights</li>
+                <li>Escalation paths for the moments an agent must hand back</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <button class="idx-item" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">
-        <span class="idx-num">02</span>
-        <span class="idx-name">AI coworker and agent enablement</span>
-        <span class="idx-caret" aria-hidden="true">&rarr;</span>
-      </button>
-      <div class="idx-panel" role="tabpanel" id="p2" aria-labelledby="t2">
-        <div class="idx-tag">Agent enablement</div>
-        <h3 class="idx-title">AI coworker and agent enablement</h3>
-        <p class="idx-desc">Agents that live inside a working day rather than beside it. Built with the people whose work they change, so the handback lands at the moment a person is genuinely needed.</p>
-        <ul class="idx-list">
-          <li>Agents scoped to named tasks inside a real workflow</li>
-          <li>Handback rules, review gates and audit trails</li>
-          <li>Working sessions with the people whose roles change</li>
-        </ul>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a2">
+          <span class="acc-num">02</span>
+          <span class="acc-name">AI coworker and agent enablement</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a2">
+          <div class="acc-inner">
+            <p class="acc-desc">Agents that live inside a working day rather than beside it. Built with the people whose work they change, so the handback lands at the moment a person is genuinely needed.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Agents scoped to named tasks inside a real workflow</li>
+                <li>Handback rules, review gates and audit trails</li>
+                <li>Working sessions with the people whose roles change</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <button class="idx-item" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">
-        <span class="idx-num">03</span>
-        <span class="idx-name">Workplace platform deployment and modernization</span>
-        <span class="idx-caret" aria-hidden="true">&rarr;</span>
-      </button>
-      <div class="idx-panel" role="tabpanel" id="p3" aria-labelledby="t3">
-        <div class="idx-tag">Workplace platforms</div>
-        <h3 class="idx-title">Workplace platform deployment and modernization</h3>
-        <p class="idx-desc">The collaboration and productivity layer deployed, migrated and modernised — configured around the redesigned work rather than the vendor's default template.</p>
-        <ul class="idx-list">
-          <li>Migration and deployment across the workplace estate</li>
-          <li>Configuration mapped to redesigned workflows</li>
-          <li>A decommissioning plan for what the new layer replaces</li>
-        </ul>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a3">
+          <span class="acc-num">03</span>
+          <span class="acc-name">Workplace platform deployment and modernization</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a3">
+          <div class="acc-inner">
+            <p class="acc-desc">The collaboration and productivity layer deployed, migrated and modernised — configured around the redesigned work rather than the vendor's default template.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Migration and deployment across the workplace estate</li>
+                <li>Configuration mapped to redesigned workflows</li>
+                <li>A decommissioning plan for what the new layer replaces</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <button class="idx-item" role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">
-        <span class="idx-num">04</span>
-        <span class="idx-name">Capability building and AI literacy at scale</span>
-        <span class="idx-caret" aria-hidden="true">&rarr;</span>
-      </button>
-      <div class="idx-panel" role="tabpanel" id="p4" aria-labelledby="t4">
-        <div class="idx-tag">Capability</div>
-        <h3 class="idx-title">Capability building and AI literacy at scale</h3>
-        <p class="idx-desc">Capability built in cohorts that can teach the next cohort. It has to reach the whole workforce, including the people who will never write a prompt.</p>
-        <ul class="idx-list">
-          <li>Role-specific curricula, from executive to frontline</li>
-          <li>Internal cohort leads who can run the next wave without us</li>
-          <li>Assessment against changed work, not course completions</li>
-        </ul>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a4">
+          <span class="acc-num">04</span>
+          <span class="acc-name">Capability building and AI literacy at scale</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a4">
+          <div class="acc-inner">
+            <p class="acc-desc">Capability built in cohorts that can teach the next cohort. It has to reach the whole workforce, including the people who will never write a prompt.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Role-specific curricula, from executive to frontline</li>
+                <li>Internal cohort leads who can run the next wave without us</li>
+                <li>Assessment against changed work, not course completions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <button class="idx-item" role="tab" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1">
-        <span class="idx-num">05</span>
-        <span class="idx-name">Adoption and change engineering</span>
-        <span class="idx-caret" aria-hidden="true">&rarr;</span>
-      </button>
-      <div class="idx-panel" role="tabpanel" id="p5" aria-labelledby="t5">
-        <div class="idx-tag">Change engineering</div>
-        <h3 class="idx-title">Adoption and change engineering</h3>
-        <p class="idx-desc">Adoption built as a system, with owners, instrumentation and gates. This is where transformations quietly die, so it gets engineered rather than announced.</p>
-        <ul class="idx-list">
-          <li>Named adoption owners with instrumented checkpoints</li>
-          <li>Enablement placed in the flow of work, not a training calendar</li>
-          <li>Gate criteria that will stop a rollout that is not landing</li>
-        </ul>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a5">
+          <span class="acc-num">05</span>
+          <span class="acc-name">Adoption and change engineering</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a5">
+          <div class="acc-inner">
+            <p class="acc-desc">Adoption built as a system, with owners, instrumentation and gates. This is where transformations quietly die, so it gets engineered rather than announced.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Named adoption owners with instrumented checkpoints</li>
+                <li>Enablement placed in the flow of work, not a training calendar</li>
+                <li>Gate criteria that will stop a rollout that is not landing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <button class="idx-item" role="tab" id="t6" aria-controls="p6" aria-selected="false" tabindex="-1">
-        <span class="idx-num">06</span>
-        <span class="idx-name">Knowledge and collaboration systems</span>
-        <span class="idx-caret" aria-hidden="true">&rarr;</span>
-      </button>
-      <div class="idx-panel" role="tabpanel" id="p6" aria-labelledby="t6">
-        <div class="idx-tag">Knowledge systems</div>
-        <h3 class="idx-title">Knowledge and collaboration systems</h3>
-        <p class="idx-desc">The retrieval layer that people and agents both read from. Governed, current and answerable — so the answer is the same whoever asks it.</p>
-        <ul class="idx-list">
-          <li>Consolidated, permissioned knowledge sources</li>
-          <li>Retrieval that serves people and agents from one place</li>
-          <li>Ownership and freshness rules per source</li>
-        </ul>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a6">
+          <span class="acc-num">06</span>
+          <span class="acc-name">Knowledge and collaboration systems</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a6">
+          <div class="acc-inner">
+            <p class="acc-desc">The retrieval layer that people and agents both read from. Governed, current and answerable — so the answer is the same whoever asks it.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Consolidated, permissioned knowledge sources</li>
+                <li>Retrieval that serves people and agents from one place</li>
+                <li>Ownership and freshness rules per source</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <button class="idx-item" role="tab" id="t7" aria-controls="p7" aria-selected="false" tabindex="-1">
-        <span class="idx-num">07</span>
-        <span class="idx-name">People operating system: hiring, onboarding and HR workflow</span>
-        <span class="idx-caret" aria-hidden="true">&rarr;</span>
-      </button>
-      <div class="idx-panel" role="tabpanel" id="p7" aria-labelledby="t7">
-        <div class="idx-tag">People operations</div>
-        <h3 class="idx-title">People operating system</h3>
-        <p class="idx-desc">Hiring, onboarding and the HR workflows underneath them, rebuilt end to end. This is the system that decides how quickly a new person becomes a productive one.</p>
-        <ul class="idx-list">
-          <li>Hiring and onboarding journeys rebuilt end to end</li>
-          <li>HR service workflows with agent-assisted resolution</li>
-          <li>Time-to-productivity instrumented as a standing measure</li>
-        </ul>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a7">
+          <span class="acc-num">07</span>
+          <span class="acc-name">People operating system: hiring, onboarding and HR workflow</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a7">
+          <div class="acc-inner">
+            <p class="acc-desc">Hiring, onboarding and the HR workflows underneath them, rebuilt end to end. This is the system that decides how quickly a new person becomes a productive one.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Hiring and onboarding journeys rebuilt end to end</li>
+                <li>HR service workflows with agent-assisted resolution</li>
+                <li>Time-to-productivity instrumented as a standing measure</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <button class="idx-item" role="tab" id="t8" aria-controls="p8" aria-selected="false" tabindex="-1">
-        <span class="idx-num">08</span>
-        <span class="idx-name">Work measurement and productivity instrumentation</span>
-        <span class="idx-caret" aria-hidden="true">&rarr;</span>
-      </button>
-      <div class="idx-panel" role="tabpanel" id="p8" aria-labelledby="t8">
-        <div class="idx-tag">Measurement</div>
-        <h3 class="idx-title">Work measurement and productivity instrumentation</h3>
-        <p class="idx-desc">Baselines and readings on how work actually moves. Without this, every claim about AI at work is a sentiment survey wearing a number.</p>
-        <ul class="idx-list">
-          <li>Baselines captured before anything is deployed</li>
-          <li>Instrumentation on cycle time, touch rate and rework</li>
-          <li>Readings a finance team will accept</li>
-        </ul>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a8">
+          <span class="acc-num">08</span>
+          <span class="acc-name">Work measurement and productivity instrumentation</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a8">
+          <div class="acc-inner">
+            <p class="acc-desc">Baselines and readings on how work actually moves. Without this, every claim about AI at work is a sentiment survey wearing a number.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Baselines captured before anything is deployed</li>
+                <li>Instrumentation on cycle time, touch rate and rework</li>
+                <li>Readings a finance team will accept</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -1102,12 +1042,11 @@ footer{background:#071028;padding:72px 0 0;}
 <section class="motions" id="motions" aria-labelledby="motions-h">
   <div class="wrap">
     <div class="motions-head">
-      <span class="eyebrow on-dark">Inside the practice</span>
       <h2 id="motions-h">Platform motions</h2>
       <p>Named motions that run inside the offerings above. They are siblings within the practice — never the practice itself.</p>
     </div>
 
-    <div class="tree-parent">
+    <div class="tree">
       <div class="tree-chip">
         <small>The practice</small>
         Human + AI Work Engineering
@@ -1116,44 +1055,103 @@ footer{background:#071028;padding:72px 0 0;}
       <span class="tree-bar" aria-hidden="true"></span>
     </div>
 
-    <div class="tree-cols">
-      <div class="tree-col">
-        <span class="tree-tick" aria-hidden="true"></span>
-        <div class="motion">
-          <h3>Gemini Enterprise transformation</h3>
-          <p>Enterprise-wide deployment paired with the work redesign that makes it land.</p>
+    <div class="sibs" role="tablist" aria-label="Platform motions">
+      <div class="sib">
+        <span class="sib-tick" aria-hidden="true"></span>
+        <button class="sib-btn" role="tab" id="m1" aria-controls="mp1" aria-selected="true">
+          <span class="sib-name">Gemini Enterprise transformation</span>
+          <span class="sib-dot" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="sib">
+        <span class="sib-tick" aria-hidden="true"></span>
+        <button class="sib-btn" role="tab" id="m2" aria-controls="mp2" aria-selected="false" tabindex="-1">
+          <span class="sib-name">Google Workspace</span>
+          <span class="sib-dot" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="sib">
+        <span class="sib-tick" aria-hidden="true"></span>
+        <button class="sib-btn" role="tab" id="m3" aria-controls="mp3" aria-selected="false" tabindex="-1">
+          <span class="sib-name">Claude adoption</span>
+          <span class="sib-dot" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="sib">
+        <span class="sib-tick" aria-hidden="true"></span>
+        <button class="sib-btn" role="tab" id="m4" aria-controls="mp4" aria-selected="false" tabindex="-1">
+          <span class="sib-name">happierWork</span>
+          <span class="sib-dot" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="motion-detail">
+      <div class="md-pane active" role="tabpanel" id="mp1" aria-labelledby="m1">
+        <div>
+          <h3 class="md-title">Gemini Enterprise transformation</h3>
+          <p class="md-desc">Enterprise-wide deployment paired with the work redesign that makes it land. The platform is the easy part; the roles around it are the engagement.</p>
+        </div>
+        <div>
+          <div class="md-k">Runs inside these offerings</div>
+          <ul class="md-list">
+            <li>Work and role redesign for the agentic era</li>
+            <li>AI coworker and agent enablement</li>
+            <li>Adoption and change engineering</li>
+          </ul>
         </div>
       </div>
-      <div class="tree-col">
-        <span class="tree-tick" aria-hidden="true"></span>
-        <div class="motion">
-          <h3>Google Workspace</h3>
-          <p>Migration, modernisation and configuration of the collaboration layer.</p>
+
+      <div class="md-pane" role="tabpanel" id="mp2" aria-labelledby="m2">
+        <div>
+          <h3 class="md-title">Google Workspace</h3>
+          <p class="md-desc">Migration, modernisation and configuration of the collaboration layer — shaped to the redesigned work rather than the default template.</p>
+        </div>
+        <div>
+          <div class="md-k">Runs inside these offerings</div>
+          <ul class="md-list">
+            <li>Workplace platform deployment and modernization</li>
+            <li>Knowledge and collaboration systems</li>
+            <li>Capability building and AI literacy at scale</li>
+          </ul>
         </div>
       </div>
-      <div class="tree-col">
-        <span class="tree-tick" aria-hidden="true"></span>
-        <div class="motion">
-          <h3>Claude adoption</h3>
-          <p>Assistant and agent adoption across knowledge work, with governance built in.</p>
+
+      <div class="md-pane" role="tabpanel" id="mp3" aria-labelledby="m3">
+        <div>
+          <h3 class="md-title">Claude adoption</h3>
+          <p class="md-desc">Assistant and agent adoption across knowledge work, with governance and review gates built in from the first cohort.</p>
+        </div>
+        <div>
+          <div class="md-k">Runs inside these offerings</div>
+          <ul class="md-list">
+            <li>AI coworker and agent enablement</li>
+            <li>Capability building and AI literacy at scale</li>
+            <li>Adoption and change engineering</li>
+          </ul>
         </div>
       </div>
-      <div class="tree-col">
-        <span class="tree-tick" aria-hidden="true"></span>
-        <div class="motion">
-          <h3>happierWork</h3>
-          <p>The people operating system: hiring, onboarding and HR workflow.</p>
+
+      <div class="md-pane" role="tabpanel" id="mp4" aria-labelledby="m4">
+        <div>
+          <h3 class="md-title">happierWork</h3>
+          <p class="md-desc">The people operating system: hiring, onboarding and the HR workflows underneath them, run as one instrumented system.</p>
+        </div>
+        <div>
+          <div class="md-k">Runs inside these offerings</div>
+          <ul class="md-list">
+            <li>People operating system: hiring, onboarding and HR workflow</li>
+            <li>Work measurement and productivity instrumentation</li>
+          </ul>
         </div>
       </div>
     </div>
 
     <div class="rules">
       <div class="rule-note">
-        <div class="k">The rule</div>
-        <p><strong>A vendor or product is never the name or the identity of the practice.</strong> The practice is defined by the work it redesigns. Platform offerings remain siblings inside it, and a client can buy one without buying the label.</p>
+        <p><strong>A vendor or product is never the name or the identity of the practice.</strong> The practice is defined by the work it redesigns. Platform offerings remain siblings inside it.</p>
       </div>
       <div class="rule-note">
-        <div class="k">Segment, not offering</div>
         <p><strong>Frontline and deskless workforces are served as a segment</strong> across every offering above — not as a separate offering. The work design differs; the capability does not.</p>
       </div>
     </div>
@@ -1163,51 +1161,22 @@ footer{background:#071028;padding:72px 0 0;}
 <!-- ================= SECTION 4 — OUTCOME STORIES ================= -->
 <section class="evidence" id="outcomes" aria-labelledby="ev-h">
   <div class="wrap">
-    <div class="ev-top">
-      <div>
-        <span class="eyebrow">Evidence</span>
-        <h2 id="ev-h">Outcome stories</h2>
-      </div>
-      <div>
-        <p class="ev-statement">This practice has <em>no verified readings</em> yet.</p>
-        <p class="ev-body">The offerings stand on their own until it does. Every number that appears in this section will be one we baselined at the start of an engagement and verified at the end — so the space below stays open until there is something real to put in it.</p>
-      </div>
-    </div>
+    <h2 id="ev-h">Outcome stories</h2>
 
-    <table class="ledger">
-      <caption>Where the first readings are expected</caption>
-      <thead>
-        <tr>
-          <th scope="col">Source</th>
-          <th scope="col">What gets read</th>
-          <th scope="col" class="led-read">Reading</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="led-src">Gemini Enterprise transformation</span></td>
-          <td><span class="led-what">Days from licence provisioned to capacity released, and work reassigned per role.</span></td>
-          <td class="led-read">
-            <span class="blank" role="img" aria-label="No reading recorded yet"></span>
-            <span class="led-status"><i aria-hidden="true"></i>Awaiting first reading</span>
-          </td>
-        </tr>
-        <tr>
-          <td><span class="led-src">Work measurement engagements</span></td>
-          <td><span class="led-what">Cycle time, touch rate and rework measured against the pre-deployment baseline.</span></td>
-          <td class="led-read">
-            <span class="blank" role="img" aria-label="No reading recorded yet"></span>
-            <span class="led-status"><i aria-hidden="true"></i>Awaiting first reading</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="ev-col">
+      <p class="ev-lead">This practice has <em>no verified readings yet</em>.</p>
+      <p class="ev-text">The offerings stand on their own until it does.</p>
 
-    <div class="standard">
-      <div class="standard-k">The standard</div>
-      <div class="standard-b">
-        <h3>We do not fill the gap with soft numbers.</h3>
-        <p>No satisfaction scores. No licence counts. No training completions or adoption percentages standing in for a change in how work gets done. An empty column is more useful to you than a flattering one.</p>
+      <div class="ev-next">
+        <div class="ev-next-k">First readings expected from</div>
+        <ul class="ev-next-list">
+          <li>Gemini Enterprise transformation engagements</li>
+          <li>Work measurement engagements</li>
+        </ul>
+      </div>
+
+      <div class="ev-standard">
+        <p>We do not fill the gap with soft numbers.</p>
       </div>
     </div>
   </div>
@@ -1215,19 +1184,17 @@ footer{background:#071028;padding:72px 0 0;}
 
 <!-- ================= SECTION 5 — CLOSING ================= -->
 <section class="close" aria-labelledby="close-h">
+  <div class="mod-grid" aria-hidden="true"></div>
   <div class="close-glow" aria-hidden="true"></div>
+
   <div class="wrap">
     <div class="close-inner">
-      <span class="eyebrow on-dark">In closing</span>
       <h2 id="close-h">An hour handed back to a person is only worth <em>what they spend it on</em>.</h2>
-      <p>So the redesign runs in both directions. Work that never needed a person moves to something that does not need one. What stays is the work that always did need a person — judgement, relationships, the decisions that carry consequence.</p>
-      <p>Intelligence is the easier half of this. Deciding what people are for is the half that takes the engineering.</p>
       <p class="close-final">Not fewer people doing the same work faster. Different work, worth a person's day.</p>
     </div>
   </div>
 
-  <!-- the boundary: settled -->
-  <div class="wrap band-block" style="animation:none;opacity:1;">
+  <div class="wrap band-block">
     <div class="band-head">
       <span>People</span>
       <span class="r">Intelligence</span>
@@ -1359,15 +1326,9 @@ footer{background:#071028;padding:72px 0 0;}
 <script>
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ===== BOUNDARY BAND =====
-   Bars left of the boundary are work people do; bars right of it
-   are work intelligence does. In the hero the boundary drifts —
-   it is continuously renegotiated. At the close it is settled. */
+/* ===== BOUNDARY BAND ===== */
 (function(){
-  const bands = document.querySelectorAll('.band');
-  if(!bands.length) return;
-
-  bands.forEach(band => {
+  document.querySelectorAll('.band').forEach(band => {
     const settled = band.dataset.settled === '1';
     const marker  = band.querySelector('.band-marker');
     let bars = [];
@@ -1391,8 +1352,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if(marker) marker.style.left = (boundary*100).toFixed(2) + '%';
       const n = bars.length;
       for(let i=0;i<n;i++){
-        const t = (i + 0.5) / n;
-        const isHuman = t <= boundary;
+        const isHuman = ((i + 0.5) / n) <= boundary;
         bars[i].classList.toggle('human', isHuman);
         bars[i].classList.toggle('agent', !isHuman);
       }
@@ -1401,18 +1361,16 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     build();
 
     if(settled || REDUCED){
-      paint(settled ? 0.38 : 0.46);
-      window.addEventListener('resize', () => { build(); paint(settled ? 0.38 : 0.46); });
+      const b = settled ? 0.38 : 0.46;
+      paint(b);
+      window.addEventListener('resize', () => { build(); paint(b); });
       return;
     }
 
-    /* Two slow sine terms so the drift never reads as a loop. */
     const t0 = performance.now();
     function tick(){
       const s = (performance.now() - t0) / 1000;
-      const b = 0.48
-        + 0.13 * Math.sin(s / 3.9)
-        + 0.05 * Math.sin(s / 1.7 + 1.1);
+      const b = 0.48 + 0.13*Math.sin(s/3.9) + 0.05*Math.sin(s/1.7 + 1.1);
       paint(Math.max(0.16, Math.min(0.84, b)));
     }
     tick();
@@ -1435,55 +1393,76 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
   rows.forEach((r,i) => {
     r.querySelector('.q-old').style.transitionDelay = (0.10 + i*0.06) + 's';
-    const nw = r.querySelector('.q-new');
-    nw.style.transitionDelay = (0.04 + i*0.06) + 's';
+    r.querySelector('.q-new').style.transitionDelay = (0.04 + i*0.06) + 's';
   });
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if(e.isIntersecting){
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {rootMargin:'0px 0px -18% 0px', threshold:0.25});
   rows.forEach(r => io.observe(r));
 })();
 
-/* ===== OFFERINGS — editorial index (tabs on desktop, accordion on mobile) ===== */
+/* ===== OFFERINGS — accordion, one open at a time ===== */
 (function(){
-  const tabs = Array.from(document.querySelectorAll('.idx-item'));
-  const panels = Array.from(document.querySelectorAll('.idx-panel'));
-  if(!tabs.length) return;
+  const items = Array.from(document.querySelectorAll('.acc-item'));
+  if(!items.length) return;
 
-  const isStacked = () => window.matchMedia('(max-width:1024px)').matches;
+  const bodyOf = it => it.querySelector('.acc-body');
+  const btnOf  = it => it.querySelector('.acc-btn');
+
+  function setOpen(it, open){
+    const body = bodyOf(it), btn = btnOf(it);
+    it.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+  }
+
+  items.forEach(it => setOpen(it, it.classList.contains('open')));
+
+  items.forEach(it => {
+    btnOf(it).addEventListener('click', () => {
+      const willOpen = !it.classList.contains('open');
+      items.forEach(o => setOpen(o, false));
+      if(willOpen) setOpen(it, true);
+    });
+  });
+
+  /* keep the open panel's height correct when the layout reflows */
+  let rz;
+  window.addEventListener('resize', () => {
+    clearTimeout(rz);
+    rz = setTimeout(() => {
+      const open = items.find(i => i.classList.contains('open'));
+      if(open){ bodyOf(open).style.maxHeight = 'none';
+                const h = bodyOf(open).scrollHeight;
+                bodyOf(open).style.maxHeight = h + 'px'; }
+    }, 150);
+  });
+})();
+
+/* ===== PLATFORM MOTIONS — selectable siblings ===== */
+(function(){
+  const tabs = Array.from(document.querySelectorAll('.sib-btn'));
+  const panes = Array.from(document.querySelectorAll('.md-pane'));
+  if(!tabs.length) return;
 
   function select(i, focus){
     tabs.forEach((t,k) => {
       const on = k === i;
       t.setAttribute('aria-selected', on ? 'true' : 'false');
       t.tabIndex = on ? 0 : -1;
-      panels[k].classList.toggle('active', on);
+      panes[k].classList.toggle('active', on);
     });
     if(focus) tabs[i].focus();
   }
 
   tabs.forEach((t,i) => {
-    t.addEventListener('click', () => {
-      /* On stacked layouts the entry behaves as a disclosure:
-         tapping the open entry closes it. */
-      if(isStacked() && t.getAttribute('aria-selected') === 'true'){
-        t.setAttribute('aria-selected','false');
-        panels[i].classList.remove('active');
-        return;
-      }
-      select(i, false);
-    });
-    t.addEventListener('mouseenter', () => { if(!isStacked()) select(i, false); });
-    t.addEventListener('keydown', (e) => {
+    t.addEventListener('click', () => select(i, false));
+    t.addEventListener('mouseenter', () => select(i, false));
+    t.addEventListener('keydown', e => {
       const last = tabs.length - 1;
       let n = null;
-      if(e.key === 'ArrowDown' || e.key === 'ArrowRight') n = i === last ? 0 : i + 1;
-      if(e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  n = i === 0 ? last : i - 1;
+      if(e.key === 'ArrowRight' || e.key === 'ArrowDown') n = i === last ? 0 : i + 1;
+      if(e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   n = i === 0 ? last : i - 1;
       if(e.key === 'Home') n = 0;
       if(e.key === 'End')  n = last;
       if(n !== null){ e.preventDefault(); select(n, true); }

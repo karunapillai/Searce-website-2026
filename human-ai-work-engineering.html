@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Human + AI Work Engineering — Searce</title>
-<meta name="description" content="Redesign work around people and intelligence. Adoption engineered as a system: work and role redesign, agent enablement, capability building and work measurement.">
+<meta name="description" content="Redesign work around people and intelligence. Work and role redesign, agent enablement, capability building, adoption engineering and work measurement.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -16,6 +16,12 @@
   font-weight:1 1000;
   src:url(https://cdn.jsdelivr.net/fontsource/fonts/google-sans-flex:vf@latest/latin-wght-normal.woff2) format('woff2-variations');
 }
+
+/* ===========================================================
+   Shared practice-page system: tokens, type scale, spacing,
+   navigation, Let's Connect and footer are common across
+   practice pages. This page's own expression is built on top.
+   =========================================================== */
 :root{
   --ink:#000000;
   --ink-85:#1a1a1c;
@@ -30,10 +36,11 @@
   --blue-06:#eef4ff;
   --blue-12:#dbe9ff;
   --blue-24:#b3d0ff;
-  --navy:#060c1a;
-  --navy-card:#0c1530;
   --display:'Poppins',system-ui,sans-serif;
   --body:'Google Sans Flex Variable','Google Sans Text','Google Sans',system-ui,-apple-system,sans-serif;
+  /* shared spacing rhythm */
+  --sec:88px;
+  --rule:1px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -48,12 +55,22 @@ body{
 }
 img{display:block;max-width:100%;}
 a{color:inherit;text-decoration:none;}
-button{font-family:inherit;background:none;border:none;cursor:pointer;}
+button{font-family:inherit;background:none;border:none;cursor:pointer;color:inherit;}
 ::selection{background:var(--blue);color:#fff;}
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 48px;}
 
-/* ======= NAV (white) ======= */
+/* shared eyebrow */
+.eyebrow{
+  display:block;
+  font-family:var(--display);font-weight:400;
+  font-size:14px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--blue);
+  margin-bottom:28px;
+}
+.eyebrow.on-dark{color:var(--blue-24);}
+
+/* ======= NAV — shared global framework ======= */
 .nav{
   position:sticky;top:0;z-index:200;
   background:var(--paper);
@@ -90,703 +107,577 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .nav-cta:hover{background:var(--blue-strong);transform:translateY(-1px);}
 .nav-cta svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;}
 
-/* ======= HERO — work redistribution canvas + word-reveal ======= */
+/* ===========================================================
+   HERO — black editorial banner.
+   The page opens on ink, not paper: this practice is about
+   the boundary between people and intelligence, so the hero
+   states it and then draws it.
+   =========================================================== */
 .hero{
-  position:relative;min-height:92vh;
-  display:flex;align-items:center;
-  background:var(--paper);
-  border-bottom:1px solid var(--paper-line);
+  position:relative;
+  background:var(--ink);
+  color:#fff;
+  min-height:92vh;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(72px,9vw,120px) 0 44px;
   overflow:hidden;isolation:isolate;
-  padding:120px 0 100px;
 }
-.hero-grid{
-  position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(0,100,255,0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,100,255,0.07) 1px, transparent 1px);
-  background-size:64px 64px;
+.hero-glow{
+  position:absolute;z-index:0;pointer-events:none;
+  right:-10%;top:-20%;
+  width:80vw;max-width:1100px;aspect-ratio:1/1;
+  background:radial-gradient(circle at center,
+    rgba(0,100,255,0.20) 0%,
+    rgba(0,100,255,0.07) 34%,
+    transparent 66%);
 }
-.hero-rings{
-  position:absolute;
-  right:-4vw;top:50%;
-  transform:translateY(-50%);
-  width:min(58vw,760px);
-  height:min(76vh,620px);
-  z-index:0;pointer-events:none;
-}
-#heroCanvas{width:100%;height:100%;display:block;}
-.hero-fade{
-  position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(to right, transparent 35%, rgba(255,255,255,0.55) 100%),
-             linear-gradient(to bottom, transparent 55%, rgba(255,255,255,0.65) 100%);
-}
-.hero .wrap{position:relative;z-index:2;width:100%;}
+.hero-inner{position:relative;z-index:1;width:100%;}
 .hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--blue-06);border:1px solid var(--blue-12);
-  color:var(--blue-strong);
-  font-family:var(--display);font-weight:400;font-size:13px;
+  display:inline-flex;align-items:center;gap:9px;
+  border:1px solid rgba(255,255,255,0.16);
+  color:var(--blue-24);
+  font-family:var(--display);font-weight:400;font-size:12.5px;
   letter-spacing:.18em;text-transform:uppercase;
-  padding:8px 18px;border-radius:6px;margin-bottom:40px;
-  opacity:0;animation:heroFade .5s ease .1s forwards;
+  padding:8px 18px;border-radius:999px;
+  margin-bottom:clamp(32px,4vw,52px);
+  opacity:0;animation:fadeUp .6s ease .1s forwards;
 }
-.hero-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:blink 2s ease-in-out infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero-badge-dot{
+  width:5px;height:5px;border-radius:50%;background:var(--blue);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
+
+/* Line-by-line clip reveal — same motion family as the practice
+   pages, expressed as an editorial line wipe rather than words. */
 .hero h1{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(48px,7.4vw,108px);
-  line-height:.97;letter-spacing:-0.025em;
-  color:var(--ink);
-  margin-bottom:clamp(40px,4.5vw,64px);
+  font-size:clamp(42px,7.2vw,104px);
+  line-height:1.0;letter-spacing:-0.03em;
+  max-width:19ch;
+  margin-bottom:clamp(32px,3.6vw,48px);
 }
-.hero h1 .line-blue{color:var(--blue);}
-.hero h1 .line-ink{color:var(--ink);}
-.hero h1 .hw{
-  display:inline-block;
-  opacity:0;transform:translateY(18px);
-  animation:hwUp .45s ease forwards;
-}
-.hero h1 .line2-wrap{
+.hl{display:block;overflow:hidden;}
+.hl > span{
   display:block;
-  opacity:0;transform:translateY(14px);
-  animation:heroFade .5s ease forwards;
+  transform:translateY(105%);
+  animation:lineUp .95s cubic-bezier(.16,1,.3,1) forwards;
 }
-@keyframes hwUp{to{opacity:1;transform:translateY(0);}}
-@keyframes heroFade{to{opacity:1;transform:translateY(0);}}
-.hero-opening{
-  max-width:52ch;margin-bottom:40px;
-  opacity:0;animation:heroFade .6s ease 1.3s forwards;
+.hl:nth-child(1) > span{animation-delay:.20s;}
+.hl:nth-child(2) > span{animation-delay:.34s;}
+@keyframes lineUp{to{transform:translateY(0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.hero h1 em{font-style:normal;color:var(--blue);}
+
+.hero-open{
+  max-width:50ch;
+  font-size:clamp(16.5px,1.5vw,21px);
+  line-height:1.62;
+  color:rgba(255,255,255,0.62);
+  margin-bottom:clamp(30px,3.4vw,42px);
+  opacity:0;animation:fadeUp .7s ease .85s forwards;
 }
-.hero-opening p{
-  font-size:clamp(16px,1.5vw,21px);line-height:1.65;
-  color:var(--ink-60);font-weight:400;
+.hero-open strong{color:#fff;font-weight:400;}
+.hero-ctas{
+  display:flex;align-items:center;gap:26px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .7s ease 1.05s forwards;
 }
-.hero-cta-row{
-  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
-  margin-bottom:56px;
-  opacity:0;animation:heroFade .6s ease 1.6s forwards;
-}
-.hero-cta-primary{
+.btn-primary{
   display:inline-flex;align-items:center;gap:10px;
   background:var(--blue);color:#fff;
   font-family:var(--display);font-size:15px;font-weight:400;
   padding:14px 26px;border-radius:6px;
   transition:background .2s ease,transform .15s ease;white-space:nowrap;
 }
-.hero-cta-primary:hover{background:var(--blue-strong);transform:translateY(-1px);}
-.hero-cta-primary svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;}
-.hero-cta-secondary{
-  display:inline-flex;align-items:center;gap:8px;color:var(--ink-60);
+.btn-primary:hover{background:var(--blue-strong);transform:translateY(-1px);}
+.btn-primary svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;}
+.btn-quiet{
+  display:inline-flex;align-items:center;gap:8px;
   font-family:var(--display);font-size:14px;font-weight:400;
-  padding:14px 0;border-bottom:1px solid var(--paper-line);
+  color:rgba(255,255,255,0.6);
+  padding-bottom:4px;
+  border-bottom:1px solid rgba(255,255,255,0.22);
   transition:color .2s ease,border-color .2s ease;white-space:nowrap;
 }
-.hero-cta-secondary:hover{color:var(--blue);border-color:var(--blue-24);}
-.hero-cta-secondary svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+.btn-quiet:hover{color:#fff;border-color:var(--blue);}
+.btn-quiet svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;}
 
-/* ======= OFFERINGS — dark navy + light blue intro band ======= */
-.offerings{
-  background:var(--navy);
-  padding:0 0 56px;
-  position:relative;
-}
-.offerings::before{
-  content:'';
-  position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size:88px 88px;
-  pointer-events:none;z-index:0;
-}
-.offerings .wrap,.offerings-intro-band{position:relative;z-index:1;}
-.offerings-intro-band{
-  background:var(--blue-06);
-  padding:80px 0 60px;
-  border-bottom:1px solid var(--blue-12);
-}
-.offerings-intro-inner{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0 80px;
-  align-items:end;
-}
-.offerings-h2{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(40px,5.2vw,76px);
-  line-height:1.05;letter-spacing:-0.025em;
-  color:var(--ink);
-  margin-bottom:0;
-}
-.offerings-subline{
-  font-size:clamp(16px,1.5vw,21px);
-  line-height:1.65;
-  color:var(--ink-60);
-  font-weight:400;
-  padding-top:4px;
-}
-.section-eyebrow{
-  display:block;
+/* ---- The boundary band: the line between what people do and
+   what intelligence does. Drifts in the hero, settles at the close. ---- */
+.band-block{position:relative;z-index:1;width:100%;margin-top:clamp(48px,6vw,80px);opacity:0;animation:fadeUp .8s ease 1.3s forwards;}
+.band-head{
+  display:flex;justify-content:space-between;align-items:baseline;
   font-family:var(--display);font-weight:400;
-  font-size:14px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--blue);
-  margin-bottom:28px;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);
+  margin-bottom:14px;
 }
-.offerings-stack-header{
-  max-width:920px;
-  margin:0 auto 36px;
-  padding-top:52px;
-  text-align:center;
+.band-head .r{color:var(--blue-24);}
+.band{
+  position:relative;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  height:clamp(64px,9vw,104px);
+  border-bottom:1px solid rgba(255,255,255,0.16);
 }
-.offerings-stack-heading{
-  font-family:var(--display);
-  font-weight:300;
-  font-size:clamp(44px,6vw,90px);
-  line-height:1.0;
-  letter-spacing:-0.03em;
-  color:#ffffff;
-  margin-bottom:20px;
+/* fine comb rather than a bar chart — this is a measure, not data */
+.bar{
+  flex:0 0 3px;width:3px;
+  height:26%;
+  background:rgba(255,255,255,0.16);
+  transition:height .6s cubic-bezier(.4,0,.2,1),background-color .6s ease;
 }
-.offerings-stack-subhead{
-  font-size:16px;
-  color:rgba(255,255,255,0.42);
-  font-weight:400;
-  line-height:1.65;
+.bar.human{height:86%;background:rgba(255,255,255,0.88);}
+.bar.agent{height:32%;background:var(--blue);}
+.band-marker{
+  position:absolute;top:-10px;bottom:-1px;
+  width:1px;background:rgba(255,255,255,0.55);
+  transition:left .6s cubic-bezier(.4,0,.2,1);
+  pointer-events:none;
+}
+.band-marker::before{
+  content:'';position:absolute;top:-3px;left:-2.5px;
+  width:6px;height:6px;border-radius:50%;background:#fff;
+}
+.band-caption{
+  margin-top:14px;
+  font-size:12.5px;line-height:1.6;
+  color:rgba(255,255,255,0.34);
   max-width:56ch;
-  margin:0 auto;
 }
-/* Offerings — reveal list */
-.offerings-stack{
-  max-width:1080px;margin:0 auto;
-  border-top:1px solid rgba(255,255,255,0.08);
-}
-.offering-card{
-  display:grid;
-  grid-template-columns:1fr auto;
-  align-items:center;
-  gap:0 24px;
-  padding:22px 0;
-  border-bottom:1px solid rgba(255,255,255,0.07);
-  cursor:pointer;
-  position:relative;
-  transition:padding-left .25s ease;
-  outline:none;
-}
-.offering-card:hover,.offering-card:focus-visible{padding-left:12px;}
-.offering-left{display:flex;align-items:baseline;gap:20px;min-width:0;}
-.offering-num{
-  font-family:var(--display);font-weight:300;
-  font-size:12px;letter-spacing:.06em;
-  color:rgba(0,100,255,0.45);
-  flex-shrink:0;
-  transition:color .2s ease;
-}
-.offering-card:hover .offering-num{color:var(--blue);}
-.offering-name{
-  font-family:var(--display);font-weight:400;
-  font-size:clamp(15px,1.5vw,19px);
-  line-height:1.3;
-  color:rgba(255,255,255,0.85);
-  transition:color .2s ease;
-}
-.offering-card:hover .offering-name{color:#fff;}
-.offering-right{display:flex;align-items:center;gap:16px;flex-shrink:0;}
-.offering-tag{
-  font-family:var(--display);font-weight:400;
-  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(255,255,255,0.28);
-  white-space:nowrap;
-  transition:color .2s ease;
-}
-.offering-card:hover .offering-tag{color:var(--blue-24);}
-.offering-arrow{
-  color:rgba(0,100,255,0.4);font-size:15px;
-  transition:transform .25s ease,color .25s ease;
-}
-.offering-card:hover .offering-arrow{transform:translateX(5px);color:var(--blue);}
-.offering-desc{
-  grid-column:1/-1;
-  font-size:14px;line-height:1.6;
-  color:rgba(255,255,255,0.45);
-  max-width:66ch;
-  max-height:0;opacity:0;overflow:hidden;
-  transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease,margin-top .35s ease;
-}
-.offering-card:hover .offering-desc,
-.offering-card:focus-visible .offering-desc{max-height:90px;opacity:1;margin-top:14px;}
 
-/* ======= PLATFORM MOTIONS — siblings inside the practice ======= */
-.motions{
-  max-width:1080px;margin:56px auto 0;
-  border-top:1px solid rgba(255,255,255,0.08);
-  padding-top:40px;
-  text-align:center;
-}
-.motions-label{
-  font-family:var(--display);font-weight:400;
-  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(255,255,255,0.35);
-  margin-bottom:22px;
-}
-.motions-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
-.motion{
-  font-family:var(--display);font-weight:400;font-size:12.5px;
-  letter-spacing:.03em;
-  color:rgba(255,255,255,0.72);
-  padding:8px 18px;
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:999px;
-  transition:color .2s ease,border-color .2s ease,background .2s ease;
-}
-.motion:hover{color:#fff;border-color:var(--blue);background:rgba(0,100,255,0.12);}
-.motions-note{
-  font-size:13px;line-height:1.65;
-  color:rgba(255,255,255,0.38);
-  max-width:64ch;margin:26px auto 0;
-}
-.motions-note strong{color:rgba(255,255,255,0.62);font-weight:400;}
-
-/* ======= OUTCOME STORIES — white BG, honest empty state ======= */
-.outcomes{
+/* ===========================================================
+   SECTION 1 — THE SHIFT
+   The idea is a change of question, so the section is built
+   as a set of questions being replaced.
+   =========================================================== */
+.shift{
   background:var(--paper);
-  padding:0;
-  position:relative;
+  padding:var(--sec) 0;
+  border-bottom:1px solid var(--paper-line);
 }
-.outcomes::before{
-  content:'';
-  position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(0,100,255,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,100,255,0.06) 1px, transparent 1px);
-  background-size:64px 64px;
-  pointer-events:none;z-index:0;
-}
-.outcomes .wrap{position:relative;z-index:1;}
-.outcomes-header{
-  padding:88px 0 0;
-  text-align:center;
-}
-.outcomes-eyebrow{
-  display:block;
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(44px,6vw,90px);
-  letter-spacing:-0.03em;
-  line-height:1.02;
-  color:var(--ink);
-  margin-bottom:0;
-}
-/* No verified readings — deliberate empty state */
-.no-readings{
-  max-width:860px;
-  margin:0 auto;
-  padding:44px 0 96px;
-  text-align:center;
-}
-.no-readings-statement{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(28px,3.6vw,50px);
-  line-height:1.12;letter-spacing:-0.025em;
-  color:var(--ink);
-  margin-bottom:22px;
-}
-.no-readings-statement em{font-style:normal;color:var(--blue);}
-.no-readings-body{
-  font-size:clamp(16px,1.5vw,20px);
-  line-height:1.65;
-  color:var(--ink-60);
-  font-weight:400;
-  max-width:56ch;
-  margin:0 auto 44px;
-}
-.pending-grid{
+.shift-top{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:24px;
-  max-width:800px;
-  margin:0 auto 40px;
-  text-align:left;
+  gap:0 80px;align-items:end;
+  padding-bottom:clamp(40px,5vw,64px);
 }
-.pending{
-  background:#fff;
-  border:1px dashed var(--blue-24);
-  border-radius:14px;
-  padding:30px 28px;
-  display:flex;flex-direction:column;
+.shift-top h2{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(34px,4.4vw,62px);
+  line-height:1.06;letter-spacing:-0.028em;
+  max-width:22ch;
 }
-.pending-label{
+.shift-top h2 em{font-style:normal;color:var(--blue);}
+.shift-lede{
+  font-size:clamp(16px,1.4vw,19px);
+  line-height:1.68;color:var(--ink-60);
+}
+.shift-lede + .shift-lede{margin-top:14px;}
+
+/* Question ledger */
+.qs{border-top:1px solid var(--ink);}
+.q-head{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0 48px;
+  padding:14px 0 0;
   font-family:var(--display);font-weight:400;
-  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+}
+.q-head .a{color:var(--ink-40);}
+.q-head .b{color:var(--blue);}
+.q-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0 48px;align-items:baseline;
+  padding:26px 0;
+  border-bottom:1px solid var(--paper-line);
+}
+.q-old,.q-new{
+  font-family:var(--display);
+  font-size:clamp(17px,1.7vw,23px);
+  line-height:1.3;letter-spacing:-0.015em;
+}
+.q-old{
+  font-weight:300;color:var(--ink-40);
+  position:relative;
+  /* shrink to the text so the strike-through matches its width */
+  justify-self:start;
+  max-width:100%;
+}
+/* the old question gets struck through as the row arrives */
+.q-old::after{
+  content:'';position:absolute;left:0;top:52%;
+  width:0;height:1px;background:var(--ink-40);
+  transition:width .7s cubic-bezier(.16,1,.3,1) .25s;
+}
+.q-new{
+  font-weight:400;color:var(--ink);
+  display:flex;gap:12px;align-items:baseline;
+  transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1);
+}
+.q-new .mk{color:var(--blue);flex-shrink:0;}
+/* Revealed is the default state. Only once JS is confirmed do rows
+   start hidden, so the content never depends on the animation. */
+.q-old::after{width:100%;}
+.js .q-old::after{width:0;}
+.js .q-new{opacity:0;transform:translateY(10px);}
+.js .q-row.in .q-old::after{width:100%;}
+.js .q-row.in .q-new{opacity:1;transform:translateY(0);}
+
+/* ===========================================================
+   SECTION 2 — OFFERINGS
+   Eight capabilities read as an editorial index: choose an
+   entry on the left, the entry opens on the right.
+   =========================================================== */
+.offer{
+  background:var(--paper-dim);
+  padding:var(--sec) 0;
+  border-bottom:1px solid var(--paper-line);
+}
+.offer-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:48px;flex-wrap:wrap;
+  margin-bottom:clamp(36px,4.5vw,56px);
+}
+.offer-head h2{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(40px,5.6vw,82px);
+  line-height:1.0;letter-spacing:-0.03em;
+}
+.offer-head p{
+  font-size:15.5px;line-height:1.65;color:var(--ink-60);
+  max-width:38ch;
+}
+.idx{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:0 clamp(40px,5vw,80px);
+  border-top:1px solid var(--ink);
+}
+/* one row per offering entry (8), so the detail column can span 1/-1 */
+.js .idx{grid-template-rows:repeat(8,auto);}
+.idx-item{
+  grid-column:1;
+  display:grid;grid-template-columns:34px 1fr 16px;
+  align-items:center;gap:0 12px;
+  width:100%;text-align:left;
+  padding:19px 0;
+  border-bottom:1px solid var(--paper-line);
+  cursor:pointer;
+  transition:padding-left .28s cubic-bezier(.16,1,.3,1);
+}
+.idx-item:hover{padding-left:8px;}
+.idx-num{
+  font-family:var(--display);font-weight:300;
+  font-size:11.5px;letter-spacing:.08em;
   color:var(--ink-40);
+  transition:color .22s ease;
+}
+.idx-name{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(15px,1.45vw,18.5px);
+  line-height:1.32;letter-spacing:-0.012em;
+  color:var(--ink-60);
+  transition:color .22s ease;
+}
+.idx-caret{
+  font-size:14px;color:transparent;
+  transition:color .22s ease,transform .28s ease;
+}
+.idx-item:hover .idx-name{color:var(--ink);}
+.idx-item:hover .idx-num{color:var(--ink-60);}
+.idx-item[aria-selected="true"] .idx-name{color:var(--blue);}
+.idx-item[aria-selected="true"] .idx-num{color:var(--blue);}
+.idx-item[aria-selected="true"] .idx-caret{color:var(--blue);transform:translateX(3px);}
+.idx-item[aria-selected="true"]{border-bottom-color:var(--blue-24);}
+
+/* Without JS every entry renders beside its own row — a readable
+   index. With JS the panels stack into one sticky detail column. */
+.idx-panel{
+  grid-column:2;
+  align-self:start;
+  padding:22px 0 22px clamp(24px,2.6vw,40px);
+  border-left:2px solid var(--blue);
+}
+.js .idx-panel{
+  /* spans every entry row so the detail column is one tall cell;
+     -1 needs the explicit row template declared on .js .idx */
+  grid-row:1 / -1;
+  position:sticky;top:108px;
+  padding:6px 0 0 clamp(24px,2.6vw,40px);
+  opacity:0;visibility:hidden;
+  transition:opacity .32s ease;
+}
+.js .idx-panel.active{opacity:1;visibility:visible;}
+.idx-tag{
+  font-family:var(--display);font-weight:400;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--blue);
   margin-bottom:16px;
 }
-.pending-source{
+.idx-title{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(19px,1.8vw,25px);
-  line-height:1.22;letter-spacing:-0.02em;
-  color:var(--ink);
-  margin-bottom:26px;
+  font-size:clamp(24px,2.9vw,40px);
+  line-height:1.1;letter-spacing:-0.026em;
+  margin-bottom:18px;
 }
-.pending-slot{
-  margin-top:auto;
-  padding-top:20px;
-  border-top:1px solid var(--paper-line);
-  display:flex;align-items:baseline;gap:12px;
+.idx-desc{
+  font-size:clamp(15.5px,1.35vw,18px);
+  line-height:1.66;color:var(--ink-60);
+  max-width:44ch;margin-bottom:26px;
 }
-.pending-dash{
-  font-family:var(--display);font-weight:300;
-  font-size:28px;line-height:.8;
-  color:var(--blue-24);
-  flex-shrink:0;
+.idx-list{list-style:none;border-top:1px solid var(--paper-line);}
+.idx-list li{
+  display:flex;gap:12px;
+  padding:11px 0;
+  border-bottom:1px solid var(--paper-line);
+  font-size:14.5px;line-height:1.55;color:var(--ink-85);
 }
-.pending-slot-text{
-  font-size:13px;line-height:1.5;
-  color:var(--ink-40);
+.idx-list li::before{
+  content:'';flex-shrink:0;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--blue);margin-top:8px;
 }
-.no-readings-note{
-  display:flex;align-items:flex-start;gap:14px;
-  text-align:left;
-  background:var(--blue-06);
-  border:1px solid var(--blue-12);
-  border-radius:10px;
-  padding:20px 24px;
-  max-width:600px;
-  margin:0 auto;
-}
-.no-readings-note-mark{
-  width:3px;
-  align-self:stretch;
-  background:var(--blue);
-  border-radius:999px;
-  flex-shrink:0;
-}
-.no-readings-note p{
-  font-size:14.5px;line-height:1.6;
-  color:var(--ink-60);
-}
-.no-readings-note strong{color:var(--blue-strong);font-weight:400;}
 
-/* ======= METRIC LADDER — dark blue + black gradient ======= */
-.metric-ladder{
-  padding:80px 0;
-  background:linear-gradient(160deg, #00112e 0%, #000000 60%);
-  overflow:visible;
+/* ===========================================================
+   SECTION 3 — PLATFORM MOTIONS
+   The governance rule is the design: the practice sits above,
+   the named motions hang beneath it as siblings.
+   =========================================================== */
+.motions{
+  background:var(--ink);
+  color:#fff;
+  padding:var(--sec) 0;
 }
-.metric-ladder .section-eyebrow{color:rgba(255,255,255,0.35);text-align:center;}
-.metric-header{margin-bottom:48px;text-align:center;}
-.metric-header h2{
+.motions-head{max-width:60ch;margin-bottom:clamp(48px,6vw,76px);}
+.motions-head h2{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(44px,6vw,90px);
-  line-height:1.02;letter-spacing:-0.03em;color:#fff;
+  font-size:clamp(36px,5vw,72px);
+  line-height:1.02;letter-spacing:-0.03em;
   margin-bottom:20px;
 }
-.metric-sub{
-  font-size:clamp(16px,1.5vw,21px);line-height:1.6;
-  color:rgba(255,255,255,0.55);max-width:54ch;font-weight:400;
-  margin:0 auto;
+.motions-head p{
+  font-size:clamp(16px,1.4vw,19px);line-height:1.65;
+  color:rgba(255,255,255,0.55);
 }
-.ladder-track-outer{position:relative;padding:40px 0 0;}
-.ladder-track{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  overflow:visible;
-  height:24px;
+/* parent */
+.tree-parent{
+  display:inline-flex;flex-direction:column;align-items:center;
+  width:100%;
 }
-.milestone{
-  flex-shrink:0;
-  position:relative;
-  z-index:3;
-  width:24px;height:24px;
-  cursor:pointer;
-  overflow:visible;
+.tree-chip{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(13px,1.2vw,16px);letter-spacing:.02em;
+  color:#fff;
+  border:1px solid var(--blue);
+  background:rgba(0,100,255,0.12);
+  border-radius:999px;
+  padding:11px 26px;
 }
-.milestone-dot{
-  width:24px;height:24px;border-radius:50%;
-  background:transparent;
-  border:2px solid var(--blue);
-  box-shadow:0 0 10px rgba(0,100,255,0.3);
-  transition:background .2s ease,box-shadow .2s ease;
+.tree-chip small{
   display:block;
-  box-sizing:border-box;
+  font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--blue-24);margin-bottom:3px;
 }
-.milestone:hover .milestone-dot,
-.milestone.active .milestone-dot{
-  background:rgba(0,100,255,0.18);
-  box-shadow:0 0 20px rgba(0,100,255,0.6);
-}
-.milestone-label{
-  position:absolute;
-  top:calc(100% + 14px);
-  left:50%;
-  transform:translateX(-50%);
-  font-family:var(--display);font-weight:400;font-size:10.5px;
-  letter-spacing:.04em;text-transform:uppercase;color:#fff;
-  text-align:center;
-  width:96px;
-  line-height:1.35;
-  pointer-events:none;
-}
-.gap-segment{
-  flex-shrink:0;
+.tree-stem{width:1px;height:34px;background:rgba(0,100,255,0.4);}
+.tree-bar{
+  width:100%;height:1px;background:rgba(0,100,255,0.4);
   position:relative;
-  height:0;
-  z-index:1;
-  overflow:visible;
-  display:flex;
-  align-items:center;
 }
-.gap-line{
-  width:100%;height:0;
-  border-top:2px dashed rgba(0,100,255,0.25);
-  transition:border-color .3s ease;
-  background:none;
-  display:block;
+.tree-cols{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0 clamp(16px,2.2vw,32px);
+  width:100%;
 }
-.gap-segment.active .gap-line{border-color:var(--blue);}
-/* In-gap panels are content sources only — never rendered in place */
-.gap-expand{display:none;}
-/* Shared detail panel below the capsules */
-.gap-panel-wrap{
-  position:relative;
-  margin-top:18px;
-  min-height:150px;
+.tree-col{display:flex;flex-direction:column;align-items:flex-start;}
+.tree-tick{width:1px;height:30px;background:rgba(0,100,255,0.4);margin-left:0;}
+.motion{
+  border-top:1px solid rgba(255,255,255,0.16);
+  padding-top:18px;width:100%;
+  transition:border-color .25s ease;
 }
-.gap-panel{
-  position:absolute;
-  top:0;
-  left:0;
-  width:250px;
-  background:#0b1428;
-  border:1px solid rgba(0,100,255,0.28);
-  border-radius:10px;
-  padding:18px 20px;
-  opacity:0;
-  pointer-events:none;
-  transform:translateX(-50%) translateY(-6px);
-  transition:opacity .22s ease, transform .22s ease, left .28s cubic-bezier(.4,0,.2,1);
+.motion:hover{border-color:var(--blue);}
+.motion h3{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(15px,1.4vw,19px);
+  line-height:1.28;letter-spacing:-0.012em;
+  color:#fff;margin-bottom:10px;
 }
-.gap-panel.visible{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
-  pointer-events:auto;
+.motion p{
+  font-size:13.5px;line-height:1.6;
+  color:rgba(255,255,255,0.45);
 }
-.gap-panel::before{
-  content:'';
-  position:absolute;
-  bottom:100%;left:50%;
-  transform:translateX(-50%);
-  width:1px;height:18px;
-  background:linear-gradient(to bottom, transparent, rgba(0,100,255,0.5));
+/* rules */
+.rules{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(24px,3vw,44px);
+  margin-top:clamp(52px,6vw,80px);
 }
-.gap-expand-route{
-  font-size:9px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--blue-24);margin-bottom:8px;line-height:1.4;
+.rule-note{
+  border-left:2px solid var(--blue);
+  padding:2px 0 2px 20px;
 }
-.gap-expand-title{
+.rule-note .k{
+  font-family:var(--display);font-weight:400;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--blue-24);margin-bottom:10px;
+}
+.rule-note p{
+  font-size:14.5px;line-height:1.62;
+  color:rgba(255,255,255,0.62);
+}
+.rule-note p strong{color:#fff;font-weight:400;}
+
+/* ===========================================================
+   SECTION 4 — OUTCOME STORIES
+   There are no readings. The section is an open ledger with
+   the reading column deliberately blank.
+   =========================================================== */
+.evidence{
+  background:var(--paper);
+  padding:var(--sec) 0;
+  border-bottom:1px solid var(--paper-line);
+}
+.ev-top{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0 80px;align-items:start;
+  margin-bottom:clamp(44px,5.5vw,68px);
+}
+.ev-top h2{
   font-family:var(--display);font-weight:300;
-  font-size:16px;line-height:1.3;color:#fff;
+  font-size:clamp(36px,5vw,72px);
+  line-height:1.02;letter-spacing:-0.03em;
+  margin-bottom:0;
+}
+.ev-statement{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(22px,2.5vw,34px);
+  line-height:1.18;letter-spacing:-0.024em;
+  margin-bottom:20px;
+}
+.ev-statement em{font-style:normal;color:var(--blue);}
+.ev-body{
+  font-size:clamp(15.5px,1.35vw,18px);
+  line-height:1.66;color:var(--ink-60);
+  max-width:50ch;
+}
+/* open ledger */
+.ledger{width:100%;border-collapse:collapse;text-align:left;}
+.ledger caption{
+  text-align:left;
+  font-family:var(--display);font-weight:400;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-40);
+  padding-bottom:14px;
+}
+.ledger th{
+  font-family:var(--display);font-weight:400;
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-40);
+  padding:0 24px 12px 0;
+  border-bottom:1px solid var(--ink);
+  vertical-align:bottom;
+}
+.ledger td{
+  padding:22px 24px 22px 0;
+  border-bottom:1px solid var(--paper-line);
+  vertical-align:top;
+}
+.ledger th:last-child,.ledger td:last-child{padding-right:0;}
+.led-src{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(16px,1.5vw,20px);
+  line-height:1.28;letter-spacing:-0.015em;
+  color:var(--ink);
+}
+.led-what{
+  font-size:14.5px;line-height:1.58;color:var(--ink-60);
+  max-width:34ch;
+}
+.led-read{width:26%;}
+/* the blank: an empty ruled slot, never a number or a shape
+   that could be read as one */
+.blank{
+  display:block;width:100%;max-width:120px;height:1px;
+  background:var(--blue-24);margin:12px 0 12px;
+}
+.led-status{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--display);font-weight:400;
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-40);
+}
+.led-status i{
+  width:6px;height:6px;border-radius:50%;
+  border:1px solid var(--blue-24);
+  flex-shrink:0;
+}
+/* the standard */
+.standard{
+  margin-top:clamp(40px,4.6vw,60px);
+  display:grid;grid-template-columns:auto 1fr;
+  gap:0 24px;align-items:start;
+  border-top:1px solid var(--ink);
+  padding-top:26px;
+}
+.standard-k{
+  font-family:var(--display);font-weight:400;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--blue);white-space:nowrap;padding-top:6px;
+}
+.standard-b h3{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(20px,2.2vw,30px);
+  line-height:1.2;letter-spacing:-0.022em;
   margin-bottom:12px;
 }
-.gap-expand-row{margin-bottom:0;}
-.gap-expand-label{
-  font-size:9px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;
-  color:rgba(255,255,255,0.35);margin-bottom:4px;
+.standard-b p{
+  font-size:14.5px;line-height:1.62;color:var(--ink-60);
+  max-width:60ch;
 }
-.gap-expand-val{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,0.7);}
-.gap-expand-val.commercial{color:rgba(0,100,255,0.75);}
-/* Gap capsules */
-.gap-tabs{
-  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
-  margin-top:72px;
-}
-.gap-tab{
-  font-family:var(--display);font-weight:400;font-size:11px;
-  letter-spacing:.05em;text-transform:uppercase;
-  color:rgba(255,255,255,0.5);
-  padding:7px 14px;
-  border:1px solid rgba(255,255,255,0.15);border-radius:999px;
-  cursor:pointer;
-  transition:all .2s ease;
-  background:transparent;
-}
-.gap-tab:hover{color:#fff;border-color:var(--blue);background:rgba(0,100,255,0.12);}
-.gap-tab.active{color:#fff;background:var(--blue);border-color:var(--blue);}
-/* Resolve strip */
-.ladder-resolve{
-  margin-top:56px;
-  display:flex;align-items:center;gap:16px;
-  border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;
-}
-.ladder-resolve-label{
-  font-family:var(--display);font-weight:400;
-  font-size:clamp(14px,1.8vw,22px);
-  letter-spacing:.06em;text-transform:uppercase;color:#fff;
-}
-.ladder-resolve-sub{font-size:13px;color:rgba(255,255,255,0.45);margin-top:3px;font-weight:400;}
-.ladder-arrow{font-family:var(--display);font-weight:300;font-size:26px;color:rgba(255,255,255,0.3);}
 
-/* ======= HOW WE BUILD ======= */
-.how-build{padding:80px 0;border-bottom:1px solid var(--paper-line);}
-.how-build-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;align-items:center;
+/* ===========================================================
+   SECTION 5 — CLOSING
+   Returns to ink and to the band, now settled.
+   =========================================================== */
+.close{
+  background:var(--ink);color:#fff;
+  padding:var(--sec) 0 clamp(56px,6vw,76px);
+  position:relative;overflow:hidden;
 }
-.how-build-left h2{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(36px,4.6vw,68px);
-  line-height:1.08;letter-spacing:-0.025em;color:var(--ink);
-  margin-bottom:28px;
-}
-.how-build-blue{color:var(--blue);}
-.how-build-body-text{
-  font-size:clamp(16px,1.4vw,20px);line-height:1.65;
-  color:var(--ink-60);margin-bottom:18px;font-weight:400;
-}
-.how-build-right{
-  display:flex;align-items:center;justify-content:center;
-}
-.build-stack{
-  width:100%;
-  display:flex;flex-direction:column;
-  gap:0;
-}
-.build-row{
-  display:flex;align-items:center;gap:16px;
-  padding:14px 0;
-  border-bottom:1px solid var(--paper-line);
-  transition:opacity .35s ease;
-  opacity:0.3;
-}
-.build-row:first-child{border-top:1px solid var(--paper-line);}
-.build-row.active{opacity:1;}
-.build-row-num{
-  font-family:var(--display);font-weight:300;
-  font-size:11px;letter-spacing:.06em;
-  color:var(--ink-40);
-  width:28px;flex-shrink:0;
-  transition:color .35s ease;
-}
-.build-row.active .build-row-num{color:var(--blue);}
-.build-row-text{
-  font-family:var(--display);font-weight:400;
-  font-size:clamp(15px,1.4vw,18px);
-  color:var(--ink-60);
-  transition:color .35s ease;
-  letter-spacing:-0.01em;
-}
-.build-row.active .build-row-text{color:var(--ink);}
-.build-row-bar{
-  margin-left:auto;
-  width:0%;height:2px;
-  background:var(--blue);
-  border-radius:999px;
-  flex-shrink:0;
-  transition:width 2s linear;
-}
-.build-row.active .build-row-bar{width:40px;}
-
-/* ======= WHAT HAPPENS AFTER ======= */
-.after{
-  background:linear-gradient(160deg,#001030 0%,#000820 100%);
-  padding:72px 0;
-  position:relative;
-  overflow:hidden;
-}
-.after-horizon{
-  position:absolute;left:50%;bottom:-42%;
-  width:150%;max-width:1600px;
-  aspect-ratio:2/1;
-  transform:translateX(-50%);
-  border-radius:50%;
+.close-glow{
+  position:absolute;z-index:0;pointer-events:none;
+  left:50%;bottom:-46%;transform:translateX(-50%);
+  width:120%;max-width:1500px;aspect-ratio:2/1;
   background:radial-gradient(ellipse at center,
-    rgba(0,100,255,0.22) 0%,
-    rgba(0,100,255,0.09) 38%,
-    transparent 68%);
-  z-index:0;pointer-events:none;
-  animation:horizonBreath 9s ease-in-out infinite;
+    rgba(0,100,255,0.17) 0%, rgba(0,100,255,0.06) 40%, transparent 70%);
 }
-@keyframes horizonBreath{
-  0%,100%{opacity:.75;transform:translateX(-50%) scale(1);}
-  50%{opacity:1;transform:translateX(-50%) scale(1.05);}
-}
-.after-arcs{
-  position:absolute;left:50%;bottom:-40%;
-  width:150%;max-width:1600px;aspect-ratio:2/1;
-  transform:translateX(-50%);
-  z-index:0;pointer-events:none;
-}
-.after-arc{
-  position:absolute;left:50%;bottom:0;
-  transform:translateX(-50%);
-  border:1px solid rgba(0,100,255,0.16);
-  border-radius:50%;
-  aspect-ratio:2/1;
-}
-.after-arc:nth-child(1){width:56%;}
-.after-arc:nth-child(2){width:74%;border-color:rgba(0,100,255,0.11);}
-.after-arc:nth-child(3){width:92%;border-color:rgba(0,100,255,0.07);}
-.after-signal{
-  position:absolute;width:3px;height:3px;border-radius:50%;
-  background:rgba(0,100,255,0.9);
-  box-shadow:0 0 8px rgba(0,100,255,0.7);
-  z-index:0;pointer-events:none;
-  animation:signalDrift 14s linear infinite;
-  opacity:0;
-}
-@keyframes signalDrift{
-  0%{opacity:0;transform:translateY(20px);}
-  12%{opacity:1;}
-  80%{opacity:.5;}
-  100%{opacity:0;transform:translateY(-140px);}
-}
-.after-content{
-  position:relative;z-index:1;
-  text-align:center;
-  max-width:700px;
-  margin:0 auto;
-}
-.after-eyebrow{
-  display:block;
-  font-family:var(--display);font-weight:400;
-  font-size:14px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--blue);margin-bottom:28px;
-}
-.after h2{
+.close-inner{position:relative;z-index:1;max-width:64ch;}
+.close h2{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(44px,6vw,90px);
-  line-height:1.02;letter-spacing:-0.03em;
-  color:#fff;
-  margin-bottom:32px;
+  font-size:clamp(30px,4.2vw,60px);
+  line-height:1.08;letter-spacing:-0.03em;
+  margin-bottom:26px;
 }
-.after-body-text{
-  font-size:clamp(17px,1.6vw,22px);line-height:1.6;
+.close h2 em{font-style:normal;color:var(--blue);}
+.close p{
+  font-size:clamp(16px,1.5vw,20px);line-height:1.66;
   color:rgba(255,255,255,0.6);
-  font-weight:400;
-  margin:0 auto 34px;
-  max-width:58ch;
+  max-width:52ch;margin-bottom:20px;
 }
-.after-close{
+/* scoped past `.close p` so the final line stays the largest */
+.close .close-final{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(20px,2.2vw,32px);
-  line-height:1.3;letter-spacing:-0.02em;
+  font-size:clamp(22px,2.6vw,36px);
+  line-height:1.18;letter-spacing:-0.024em;
   color:#fff;
-  max-width:26ch;margin:0 auto 14px;
-}
-.after-close em{font-style:normal;color:var(--blue);}
-.after-kicker{
-  font-family:var(--display);font-weight:400;
-  font-size:12px;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(255,255,255,0.32);
+  max-width:34ch;
+  padding-top:26px;margin:8px 0 0;
+  border-top:1px solid rgba(255,255,255,0.16);
 }
 
-/* ======= LET'S CONNECT — form style ======= */
-.connect{
-  background:var(--blue-06);
-  padding:80px 0;
-}
+/* ======= LET'S CONNECT — shared practice-page treatment ======= */
+.connect{background:var(--blue-06);padding:80px 0;}
 .connect-inner{
-  display:grid;
-  grid-template-columns:1fr 1.4fr;
+  display:grid;grid-template-columns:1fr 1.4fr;
   gap:80px;align-items:start;
 }
 .connect-left h2{
@@ -800,22 +691,16 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   font-size:clamp(17px,1.5vw,21px);color:var(--ink-60);font-weight:400;
   max-width:26ch;line-height:1.55;
 }
-.connect-form{
-  display:flex;flex-direction:column;gap:10px;
-}
+.connect-form{display:flex;flex-direction:column;gap:10px;}
 .connect-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .connect-form input,
 .connect-form select,
 .connect-form textarea{
-  width:100%;
-  background:#fff;
-  border:1px solid var(--blue-12);
-  border-radius:8px;
+  width:100%;background:#fff;
+  border:1px solid var(--blue-12);border-radius:8px;
   padding:14px 16px;
-  font-family:var(--body);font-size:14px;
-  color:var(--ink);
-  outline:none;
-  transition:border-color .2s ease;
+  font-family:var(--body);font-size:14px;color:var(--ink);
+  outline:none;transition:border-color .2s ease;
   -webkit-appearance:none;
 }
 .connect-form input::placeholder,
@@ -827,24 +712,19 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .connect-form select{
   cursor:pointer;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%2384868c' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 14px center;
+  background-repeat:no-repeat;background-position:right 14px center;
   padding-right:36px;
 }
 .connect-form textarea{resize:vertical;min-height:100px;}
 .connect-check{
   display:flex;align-items:flex-start;gap:10px;
-  font-size:13px;color:var(--ink-60);line-height:1.5;
-  padding:4px 0;
+  font-size:13px;color:var(--ink-60);line-height:1.5;padding:4px 0;
 }
 .connect-check input[type="checkbox"]{
   width:16px;height:16px;flex-shrink:0;margin-top:2px;
   accent-color:var(--blue);cursor:pointer;
 }
-.connect-submit-row{
-  display:flex;justify-content:flex-end;
-  margin-top:4px;
-}
+.connect-submit-row{display:flex;justify-content:flex-end;margin-top:4px;}
 .connect-submit{
   background:var(--blue);color:#fff;
   font-family:var(--display);font-weight:400;font-size:15px;
@@ -854,36 +734,27 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 .connect-submit:hover{background:var(--blue-strong);transform:translateY(-1px);}
 
-/* ======= FOOTER ======= */
-footer{
-  background:#071028;
-  padding:72px 0 0;
-}
+/* ======= FOOTER — shared ======= */
+footer{background:#071028;padding:72px 0 0;}
 .foot-main{
-  display:grid;
-  grid-template-columns:280px 1fr 1fr 1fr;
-  gap:60px;
-  padding-bottom:60px;
+  display:grid;grid-template-columns:280px 1fr 1fr 1fr;
+  gap:60px;padding-bottom:60px;
   border-bottom:1px solid rgba(255,255,255,0.08);
 }
 .foot-logo-img{height:22px;width:auto;margin-bottom:24px;}
 .foot-tagline{
   font-size:14px;line-height:1.7;
-  color:rgba(255,255,255,0.45);
-  font-weight:400;max-width:26ch;
+  color:rgba(255,255,255,0.45);font-weight:400;max-width:26ch;
 }
 .foot-col-head{
   font-family:var(--display);font-weight:400;
-  font-size:14px;color:#fff;
-  margin-bottom:20px;
-  letter-spacing:.01em;
+  font-size:14px;color:#fff;margin-bottom:20px;letter-spacing:.01em;
 }
 .foot-col-links{list-style:none;}
 .foot-col-links li{margin-bottom:12px;}
 .foot-col-links a{
   font-size:13.5px;color:rgba(255,255,255,0.42);
-  transition:color .2s ease;font-weight:400;
-  line-height:1.4;display:block;
+  transition:color .2s ease;font-weight:400;line-height:1.4;display:block;
 }
 .foot-col-links a:hover{color:#fff;}
 .foot-col-links a.current{color:#fff;}
@@ -891,83 +762,86 @@ footer{
 .foot-col-links a.connect-link:hover{color:#fff;}
 .foot-bottom-bar{
   display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:16px;
-  padding:24px 0;
+  flex-wrap:wrap;gap:16px;padding:24px 0;
 }
 .foot-social{display:flex;gap:10px;}
 .foot-social-btn{
   width:38px;height:38px;border-radius:50%;
   background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);
   display:flex;align-items:center;justify-content:center;
-  transition:background .2s ease;
-  cursor:pointer;
+  transition:background .2s ease;cursor:pointer;
 }
 .foot-social-btn:hover{background:rgba(255,255,255,0.14);}
 .foot-social-btn svg{width:16px;height:16px;fill:rgba(255,255,255,0.6);}
-.foot-legal{
-  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
-}
-.foot-legal a{
-  font-size:13px;color:rgba(255,255,255,0.35);
-  transition:color .2s ease;
-}
+.foot-legal{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.foot-legal a{font-size:13px;color:rgba(255,255,255,0.35);transition:color .2s ease;}
 .foot-legal a:hover{color:#fff;}
 .foot-legal span{color:rgba(255,255,255,0.15);}
-.foot-copy{
-  font-size:13px;color:rgba(255,255,255,0.35);
-  white-space:nowrap;
-}
+.foot-copy{font-size:13px;color:rgba(255,255,255,0.35);white-space:nowrap;}
 
 /* ======= RESPONSIVE ======= */
 @media(max-width:1024px){
+  :root{--sec:68px;}
   .wrap{padding:0 28px;}
-  .hero-opening{max-width:100%;}
-  .hero-rings{width:min(52vw,480px);height:min(50vh,400px);right:-10vw;opacity:.6;}
-  .offerings-intro-inner{grid-template-columns:1fr;gap:24px;}
-  .offerings-stack{max-width:100%;}
-  .motions{max-width:100%;}
-  .outcomes-header{padding:56px 0 0;}
-  .pending-grid{grid-template-columns:1fr;}
-  .how-build-grid{grid-template-columns:1fr;gap:32px;}
-  .foot-main{grid-template-columns:1fr 1fr;gap:40px;}
+  .shift-top{grid-template-columns:1fr;gap:24px;}
+  .ev-top{grid-template-columns:1fr;gap:24px;}
+  .tree-cols{grid-template-columns:1fr 1fr;row-gap:32px;}
+  .rules{grid-template-columns:1fr;}
   .connect-inner{grid-template-columns:1fr;gap:40px;}
+  .foot-main{grid-template-columns:1fr 1fr;gap:40px;}
+  .idx{grid-template-columns:1fr;}
+  /* index becomes an inline accordion: each panel follows its entry */
+  .idx-item{grid-column:1;}
+  .idx-panel{
+    grid-column:1;grid-row:auto;
+    position:static;top:auto;
+    margin:0 0 8px;padding:20px 0 6px 18px;
+  }
+  .js .idx-panel{
+    grid-row:auto;position:static;top:auto;
+    display:none;opacity:1;visibility:visible;
+    padding:20px 0 6px 18px;
+  }
+  .js .idx-panel.active{display:block;}
 }
 @media(max-width:768px){
+  :root{--sec:56px;}
   .nav-links{display:none;}
-  .hero-rings{display:none;}
-  .offering-card{grid-template-columns:1fr;gap:8px;}
-  .offering-right{justify-content:space-between;}
-  .hero-cta-row{flex-direction:column;align-items:flex-start;gap:12px;}
-  .no-readings{padding:32px 0 72px;}
+  .hero{min-height:0;padding-top:56px;}
+  .hero h1{max-width:100%;}
+  .q-head{display:none;}
+  .q-row{grid-template-columns:1fr;gap:10px;padding:20px 0;}
+  .q-old{font-size:16px;}
+  .tree-cols{grid-template-columns:1fr;row-gap:24px;}
+  .tree-parent .tree-bar{display:none;}
+  .tree-tick{display:none;}
+  .offer-head{gap:20px;}
+  /* ledger reflows to stacked records */
+  .ledger thead{display:none;}
+  .ledger,.ledger tbody,.ledger tr,.ledger td{display:block;width:100%;}
+  .ledger tr{border-bottom:1px solid var(--paper-line);padding:20px 0;}
+  .ledger td{border:none;padding:0 0 10px;}
+  .led-read{width:100%;}
+  .standard{grid-template-columns:1fr;gap:14px;}
   .foot-main{grid-template-columns:1fr;}
-  /* The milestone track is a fixed-width row and cannot fit a phone.
-     The capsules already carry the full path, so they take over here
-     and the detail panel opens inline beneath them on tap. */
-  .ladder-track{display:none;}
-  .ladder-track-outer{padding-top:8px;}
-  .gap-tabs{gap:6px;margin-top:0;}
-  .gap-panel-wrap{min-height:0;margin-top:0;}
-  .gap-panel{
-    position:relative;
-    left:auto !important;
-    width:100%;
-    margin-top:14px;
-    transform:translateY(-6px);
-    display:none;
-  }
-  .gap-panel.visible{transform:translateY(0);display:block;}
-  .gap-panel::before{display:none;}
 }
 @media(prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important;}
-  .hero h1 .hw{opacity:1;transform:none;}
-  .hero-badge,.hero-opening,.hero-cta-row,.hero h1 .line2-wrap{opacity:1;transform:none;}
+  *{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important;}
+  .hl > span{transform:none;}
+  .hero-badge,.hero-open,.hero-ctas,.band-block{opacity:1;}
+  .js .q-new{opacity:1;transform:none;}
+  .js .q-old::after{width:100%;}
 }
 </style>
+<script>
+  /* Progressive enhancement flag: scripted states (hidden rows, tabbed
+     panels) only apply once we know JS is running. */
+  document.documentElement.classList.add('js');
+</script>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ================= NAV (shared) ================= -->
 <nav class="nav" aria-label="Primary navigation">
   <div class="wrap">
     <a href="#" aria-label="Searce home">
@@ -981,413 +855,393 @@ footer{
       <li><a href="#">Insights</a></li>
       <li><a href="#">Company</a></li>
     </ul>
-    <a href="#" class="nav-cta">
+    <a href="#connect" class="nav-cta">
       bring us a problem
       <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
     </a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero" aria-labelledby="hero-heading">
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-rings" aria-hidden="true">
-    <canvas id="heroCanvas"></canvas>
-  </div>
-  <div class="hero-fade" aria-hidden="true"></div>
+<!-- ================= HERO ================= -->
+<header class="hero" aria-labelledby="hero-h">
+  <div class="hero-glow" aria-hidden="true"></div>
 
-  <div class="wrap">
+  <div class="wrap hero-inner">
     <div class="hero-badge">
       <span class="hero-badge-dot" aria-hidden="true"></span>
       Human + AI Work Engineering
     </div>
 
-    <h1 id="hero-heading">
-      <span class="line-blue" id="heroLine1">Redesign work around</span><br>
-      <span class="line2-wrap" id="heroLine2"><span class="line-ink">people and intelligence.</span></span>
+    <h1 id="hero-h">
+      <span class="hl"><span>Redesign work around</span></span>
+      <span class="hl"><span><em>people</em> and <em>intelligence</em>.</span></span>
     </h1>
 
-    <div class="hero-opening">
-      <p>Adoption is where transformations quietly die. The question is no longer which tools people get. It is which work people still do.</p>
-    </div>
+    <p class="hero-open">
+      Adoption is where transformations quietly die. The question is no longer which tools people get.
+      <strong>It is which work people still do.</strong>
+    </p>
 
-    <div class="hero-cta-row">
-      <a href="#offerings" class="hero-cta-primary">
-        See what we redesign
+    <div class="hero-ctas">
+      <a href="#offerings" class="btn-primary">
+        See the offerings
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="#shift" class="btn-quiet">
+        Start with what changed
+        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2v8M2 6l4 4 4-4"/></svg>
       </a>
     </div>
   </div>
-</section>
 
-<!-- OFFERINGS -->
-<section class="offerings" id="offerings" aria-labelledby="offerings-heading">
-
-  <!-- Light blue intro band -->
-  <div class="offerings-intro-band">
-    <div class="wrap">
-      <div class="offerings-intro-inner">
-        <div class="offerings-intro-left">
-          <h2 class="offerings-h2" id="offerings-heading">Here is what<br><span style="color:var(--blue);">we redesign.</span></h2>
-        </div>
-        <div class="offerings-subline">
-          Organisational designers, AI engineers, enablement leads and people-operations engineers in one squad. Deployment without work redesign is a licence count. Work redesign without the people who do the work is a slide.
-        </div>
-      </div>
+  <!-- the boundary: drifting -->
+  <div class="wrap band-block">
+    <div class="band-head">
+      <span>People</span>
+      <span class="r">Intelligence</span>
     </div>
+    <div class="band" id="bandHero" data-settled="0" aria-hidden="true">
+      <span class="band-marker"></span>
+    </div>
+    <p class="band-caption">The line between the work that needs a person and the work that never did. It moves — which is the reason this practice exists.</p>
   </div>
+</header>
 
-  <!-- Dark stack -->
+<main>
+
+<!-- ================= SECTION 1 — THE SHIFT ================= -->
+<section class="shift" id="shift" aria-labelledby="shift-h">
   <div class="wrap">
-    <div class="offerings-stack-header">
-      <h2 class="offerings-stack-heading">Offerings</h2>
-      <p class="offerings-stack-subhead">Eight durable capabilities. Platform motions sit inside them, never above them.</p>
+    <div class="shift-top">
+      <div>
+        <span class="eyebrow">The shift</span>
+        <h2 id="shift-h">AI is not another tool in the stack. It is a change in <em>what work is</em>.</h2>
+      </div>
+      <div>
+        <p class="shift-lede">Every workplace platform before this one asked people to learn a new interface and keep doing the same job. This one moves the job.</p>
+        <p class="shift-lede">Tasks that defined a role for a decade become something a system handles in the background. What remains of that role is a different job — and usually a more human one. That is a work design problem before it is a technology problem.</p>
+      </div>
     </div>
 
-    <div class="offerings-stack" role="list" aria-label="Service offerings">
-
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">01</span>
-          <span class="offering-name">Work and role redesign for the agentic era</span>
-        </div>
-        <div class="offering-right">
-          <span class="offering-tag">Work Design</span>
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">What a role does when part of it moves to an agent. We rewrite the task inventory, the handoffs and the decision rights before anything gets deployed.</p>
+    <div class="qs" id="qs">
+      <div class="q-head">
+        <span class="a">The question we used to ask</span>
+        <span class="b">The question that matters now</span>
       </div>
 
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">02</span>
-          <span class="offering-name">AI coworker and agent enablement</span>
-        </div>
-        <div class="offering-right">
-          <span class="offering-tag">AI Enablement</span>
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">Agents that sit inside a person's working day and hand back at the right moment. Built with the people whose work they change, not for them.</p>
+      <div class="q-row">
+        <p class="q-old">Which tools do people get?</p>
+        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Which work do people still do?</span></p>
       </div>
-
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">03</span>
-          <span class="offering-name">Workplace platform deployment and modernization</span>
-        </div>
-        <div class="offering-right">
-          <span class="offering-tag">Workplace Platforms</span>
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">The collaboration and productivity layer deployed, migrated and modernised. Configured around the redesigned work rather than the default template.</p>
+      <div class="q-row">
+        <p class="q-old">Train people on the software.</p>
+        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Redesign the role around the capability.</span></p>
       </div>
-
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">04</span>
-          <span class="offering-name">Capability building and AI literacy at scale</span>
-        </div>
-        <div class="offering-right">
-          <span class="offering-tag">Capability Building</span>
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">Cohort-based capability that reaches the whole workforce, including the people who will never write a prompt. Measured by changed work, not course completions.</p>
+      <div class="q-row">
+        <p class="q-old">Count licences and logins.</p>
+        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Measure the work that actually changed.</span></p>
       </div>
-
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">05</span>
-          <span class="offering-name">Adoption and change engineering</span>
-        </div>
-        <div class="offering-right">
-          <span class="offering-tag">Change Engineering</span>
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">Adoption treated as an engineering problem with owners, instrumentation and gates. This is where transformations usually die, so it gets built rather than communicated.</p>
+      <div class="q-row">
+        <p class="q-old">Roll it out to everyone.</p>
+        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Build it with the people it changes.</span></p>
       </div>
-
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">06</span>
-          <span class="offering-name">Knowledge and collaboration systems</span>
-        </div>
-        <div class="offering-right">
-          <span class="offering-tag">Knowledge Systems</span>
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">The retrieval layer your people and your agents both read from. Governed, current and answerable &mdash; so the answer is the same whoever asks.</p>
+      <div class="q-row">
+        <p class="q-old">Productivity is the same work, faster.</p>
+        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Productivity is work that was not possible before.</span></p>
       </div>
-
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">07</span>
-          <span class="offering-name">People operating system: hiring, onboarding and HR workflow</span>
-        </div>
-        <div class="offering-right">
-          <span class="offering-tag">People Operations</span>
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">Hiring, onboarding and the HR workflows underneath them, rebuilt end to end. The system that decides how fast a new person becomes productive.</p>
-      </div>
-
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">08</span>
-          <span class="offering-name">Work measurement and productivity instrumentation</span>
-        </div>
-        <div class="offering-right">
-          <span class="offering-tag">Measurement &amp; Instrumentation</span>
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">Baselines and readings on how work actually moves. Without this, every claim about AI at work is a sentiment survey.</p>
-      </div>
-
     </div>
-
-    <!-- PLATFORM MOTIONS — siblings under a vendor-neutral practice -->
-    <div class="motions">
-      <div class="motions-label">Named platform motions inside these offerings</div>
-      <div class="motions-row">
-        <span class="motion">Gemini Enterprise transformation</span>
-        <span class="motion">Google Workspace</span>
-        <span class="motion">Claude adoption</span>
-        <span class="motion">happierWork</span>
-      </div>
-      <p class="motions-note">Platform motions sit as siblings inside the offerings above, never as the practice itself. <strong>Frontline and deskless workforces are served as a segment, not a separate offering.</strong></p>
-    </div>
-
-  </div><!-- end .wrap -->
+  </div>
 </section>
 
-<!-- OUTCOME STORIES -->
-<section class="outcomes" id="outcomes" aria-labelledby="outcomes-heading">
+<!-- ================= SECTION 2 — OFFERINGS ================= -->
+<section class="offer" id="offerings" aria-labelledby="offer-h">
   <div class="wrap">
-    <div class="outcomes-header">
-      <span class="outcomes-eyebrow" id="outcomes-heading">Outcome Stories</span>
+    <div class="offer-head">
+      <div>
+        <span class="eyebrow">Capabilities</span>
+        <h2 id="offer-h">Offerings</h2>
+      </div>
+      <p>Eight durable capabilities. Select an entry to see what it covers and what you get.</p>
     </div>
 
-    <div class="no-readings">
-      <p class="no-readings-statement">This practice has <em>no verified readings</em> yet.</p>
-      <p class="no-readings-body">The offerings stand on their own until it does. Every number that appears here will be one we baselined at the start of an engagement and verified at the end.</p>
+    <div class="idx" role="tablist" aria-label="Offerings">
 
-      <div class="pending-grid" role="list" aria-label="Engagements where first readings are expected">
-        <div class="pending" role="listitem">
-          <div class="pending-label">First reading expected</div>
-          <p class="pending-source">Gemini Enterprise transformation engagements</p>
-          <div class="pending-slot">
-            <span class="pending-dash" aria-hidden="true">&mdash;</span>
-            <p class="pending-slot-text">Reading pending. Baseline in place before the claim.</p>
-          </div>
-        </div>
-        <div class="pending" role="listitem">
-          <div class="pending-label">First reading expected</div>
-          <p class="pending-source">Work measurement engagements</p>
-          <div class="pending-slot">
-            <span class="pending-dash" aria-hidden="true">&mdash;</span>
-            <p class="pending-slot-text">Reading pending. Baseline in place before the claim.</p>
-          </div>
-        </div>
+      <button class="idx-item" role="tab" id="t1" aria-controls="p1" aria-selected="true">
+        <span class="idx-num">01</span>
+        <span class="idx-name">Work and role redesign for the agentic era</span>
+        <span class="idx-caret" aria-hidden="true">&rarr;</span>
+      </button>
+      <div class="idx-panel active" role="tabpanel" id="p1" aria-labelledby="t1">
+        <div class="idx-tag">Work design</div>
+        <h3 class="idx-title">Work and role redesign for the agentic era</h3>
+        <p class="idx-desc">Start with the task inventory, not the tool. We separate the work that needs a person from the work that never did, then rewrite the role, the handoffs and the decision rights around that split.</p>
+        <ul class="idx-list">
+          <li>Task-level inventory of a role, split by what moves and what stays</li>
+          <li>Rewritten role definitions, handoffs and decision rights</li>
+          <li>Escalation paths for the moments an agent must hand back</li>
+        </ul>
       </div>
 
-      <div class="no-readings-note">
-        <span class="no-readings-note-mark" aria-hidden="true"></span>
-        <p><strong>We do not fill the gap with soft numbers.</strong> No satisfaction scores, no licence counts, no training completions standing in for a change in how work gets done.</p>
+      <button class="idx-item" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">
+        <span class="idx-num">02</span>
+        <span class="idx-name">AI coworker and agent enablement</span>
+        <span class="idx-caret" aria-hidden="true">&rarr;</span>
+      </button>
+      <div class="idx-panel" role="tabpanel" id="p2" aria-labelledby="t2">
+        <div class="idx-tag">Agent enablement</div>
+        <h3 class="idx-title">AI coworker and agent enablement</h3>
+        <p class="idx-desc">Agents that live inside a working day rather than beside it. Built with the people whose work they change, so the handback lands at the moment a person is genuinely needed.</p>
+        <ul class="idx-list">
+          <li>Agents scoped to named tasks inside a real workflow</li>
+          <li>Handback rules, review gates and audit trails</li>
+          <li>Working sessions with the people whose roles change</li>
+        </ul>
       </div>
+
+      <button class="idx-item" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">
+        <span class="idx-num">03</span>
+        <span class="idx-name">Workplace platform deployment and modernization</span>
+        <span class="idx-caret" aria-hidden="true">&rarr;</span>
+      </button>
+      <div class="idx-panel" role="tabpanel" id="p3" aria-labelledby="t3">
+        <div class="idx-tag">Workplace platforms</div>
+        <h3 class="idx-title">Workplace platform deployment and modernization</h3>
+        <p class="idx-desc">The collaboration and productivity layer deployed, migrated and modernised — configured around the redesigned work rather than the vendor's default template.</p>
+        <ul class="idx-list">
+          <li>Migration and deployment across the workplace estate</li>
+          <li>Configuration mapped to redesigned workflows</li>
+          <li>A decommissioning plan for what the new layer replaces</li>
+        </ul>
+      </div>
+
+      <button class="idx-item" role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">
+        <span class="idx-num">04</span>
+        <span class="idx-name">Capability building and AI literacy at scale</span>
+        <span class="idx-caret" aria-hidden="true">&rarr;</span>
+      </button>
+      <div class="idx-panel" role="tabpanel" id="p4" aria-labelledby="t4">
+        <div class="idx-tag">Capability</div>
+        <h3 class="idx-title">Capability building and AI literacy at scale</h3>
+        <p class="idx-desc">Capability built in cohorts that can teach the next cohort. It has to reach the whole workforce, including the people who will never write a prompt.</p>
+        <ul class="idx-list">
+          <li>Role-specific curricula, from executive to frontline</li>
+          <li>Internal cohort leads who can run the next wave without us</li>
+          <li>Assessment against changed work, not course completions</li>
+        </ul>
+      </div>
+
+      <button class="idx-item" role="tab" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1">
+        <span class="idx-num">05</span>
+        <span class="idx-name">Adoption and change engineering</span>
+        <span class="idx-caret" aria-hidden="true">&rarr;</span>
+      </button>
+      <div class="idx-panel" role="tabpanel" id="p5" aria-labelledby="t5">
+        <div class="idx-tag">Change engineering</div>
+        <h3 class="idx-title">Adoption and change engineering</h3>
+        <p class="idx-desc">Adoption built as a system, with owners, instrumentation and gates. This is where transformations quietly die, so it gets engineered rather than announced.</p>
+        <ul class="idx-list">
+          <li>Named adoption owners with instrumented checkpoints</li>
+          <li>Enablement placed in the flow of work, not a training calendar</li>
+          <li>Gate criteria that will stop a rollout that is not landing</li>
+        </ul>
+      </div>
+
+      <button class="idx-item" role="tab" id="t6" aria-controls="p6" aria-selected="false" tabindex="-1">
+        <span class="idx-num">06</span>
+        <span class="idx-name">Knowledge and collaboration systems</span>
+        <span class="idx-caret" aria-hidden="true">&rarr;</span>
+      </button>
+      <div class="idx-panel" role="tabpanel" id="p6" aria-labelledby="t6">
+        <div class="idx-tag">Knowledge systems</div>
+        <h3 class="idx-title">Knowledge and collaboration systems</h3>
+        <p class="idx-desc">The retrieval layer that people and agents both read from. Governed, current and answerable — so the answer is the same whoever asks it.</p>
+        <ul class="idx-list">
+          <li>Consolidated, permissioned knowledge sources</li>
+          <li>Retrieval that serves people and agents from one place</li>
+          <li>Ownership and freshness rules per source</li>
+        </ul>
+      </div>
+
+      <button class="idx-item" role="tab" id="t7" aria-controls="p7" aria-selected="false" tabindex="-1">
+        <span class="idx-num">07</span>
+        <span class="idx-name">People operating system: hiring, onboarding and HR workflow</span>
+        <span class="idx-caret" aria-hidden="true">&rarr;</span>
+      </button>
+      <div class="idx-panel" role="tabpanel" id="p7" aria-labelledby="t7">
+        <div class="idx-tag">People operations</div>
+        <h3 class="idx-title">People operating system</h3>
+        <p class="idx-desc">Hiring, onboarding and the HR workflows underneath them, rebuilt end to end. This is the system that decides how quickly a new person becomes a productive one.</p>
+        <ul class="idx-list">
+          <li>Hiring and onboarding journeys rebuilt end to end</li>
+          <li>HR service workflows with agent-assisted resolution</li>
+          <li>Time-to-productivity instrumented as a standing measure</li>
+        </ul>
+      </div>
+
+      <button class="idx-item" role="tab" id="t8" aria-controls="p8" aria-selected="false" tabindex="-1">
+        <span class="idx-num">08</span>
+        <span class="idx-name">Work measurement and productivity instrumentation</span>
+        <span class="idx-caret" aria-hidden="true">&rarr;</span>
+      </button>
+      <div class="idx-panel" role="tabpanel" id="p8" aria-labelledby="t8">
+        <div class="idx-tag">Measurement</div>
+        <h3 class="idx-title">Work measurement and productivity instrumentation</h3>
+        <p class="idx-desc">Baselines and readings on how work actually moves. Without this, every claim about AI at work is a sentiment survey wearing a number.</p>
+        <ul class="idx-list">
+          <li>Baselines captured before anything is deployed</li>
+          <li>Instrumentation on cycle time, touch rate and rework</li>
+          <li>Readings a finance team will accept</li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- METRIC LADDER -->
-<section class="metric-ladder" id="metric-ladder" aria-labelledby="metric-heading">
+<!-- ================= SECTION 3 — PLATFORM MOTIONS ================= -->
+<section class="motions" id="motions" aria-labelledby="motions-h">
   <div class="wrap">
-    <div class="metric-header">
-      <h2 id="metric-heading">The Metric Ladder.</h2>
-      <p class="metric-sub">Licence granted &rarr; gaps &rarr; work actually changed. Each interval is a measurable adoption gap. Hover or tap a gap to see what is engineered inside it.</p>
+    <div class="motions-head">
+      <span class="eyebrow on-dark">Inside the practice</span>
+      <h2 id="motions-h">Platform motions</h2>
+      <p>Named motions that run inside the offerings above. They are siblings within the practice — never the practice itself.</p>
     </div>
 
-    <div class="ladder-track-outer">
-      <div class="ladder-track" role="list" aria-label="Licence-to-capacity milestones">
-
-        <!-- Milestone 0 -->
-        <div class="milestone" role="listitem" data-gap="0" tabindex="0" aria-label="Hover to see: Licence provisioned to First sign-in">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label">Licence provisioned</div>
-        </div>
-
-        <!-- Gap 0 -->
-        <div class="gap-segment" style="width:150px" data-idx="0">
-          <div class="gap-line"></div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">Licence provisioned &rarr; First sign-in</div>
-              <div class="gap-expand-title">Days before anyone signs in</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Engineered by</div>
-                <div class="gap-expand-val">Enablement placed in the flow of work, not in a training calendar.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Milestone 1 -->
-        <div class="milestone" role="listitem" data-gap="1" tabindex="0" aria-label="Hover to see: First sign-in to Habitual use">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label">First sign-in</div>
-        </div>
-
-        <!-- Gap 1 -->
-        <div class="gap-segment" style="width:150px" data-idx="1">
-          <div class="gap-line"></div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">First sign-in &rarr; Habitual use</div>
-              <div class="gap-expand-title">The drop-off after the demo</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Engineered by</div>
-                <div class="gap-expand-val">Cohort capability building and AI literacy at scale.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Milestone 2 -->
-        <div class="milestone" role="listitem" data-gap="2" tabindex="0" aria-label="Hover to see: Habitual use to Workflow redesigned">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label">Habitual use</div>
-        </div>
-
-        <!-- Gap 2 -->
-        <div class="gap-segment" style="width:150px" data-idx="2">
-          <div class="gap-line"></div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">Habitual use &rarr; Workflow redesigned</div>
-              <div class="gap-expand-title">Using the tool without changing the work</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Engineered by</div>
-                <div class="gap-expand-val">Work and role redesign, with agents built into the workflow.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Milestone 3 -->
-        <div class="milestone" role="listitem" data-gap="3" tabindex="0" aria-label="Hover to see: Job architecture and policy">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label">Workflow redesigned</div>
-        </div>
-
-        <!-- Gap 3: organisational, not engineered -->
-        <div class="gap-segment" style="width:130px" data-idx="3">
-          <div class="gap-line" style="border-color:rgba(0,100,255,0.18);"></div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">Workflow redesigned &rarr; Work reassigned</div>
-              <div class="gap-expand-title">Job architecture and policy</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Organisational, not engineered</div>
-                <div class="gap-expand-val commercial">Role change sits with the enterprise. Engineering sits in the gaps around it.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Milestone 4 -->
-        <div class="milestone" role="listitem" data-gap="4" tabindex="0" aria-label="Hover to see: Work reassigned to Capacity released">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label">Work reassigned</div>
-        </div>
-
-        <!-- Gap 4 -->
-        <div class="gap-segment" style="width:150px" data-idx="4">
-          <div class="gap-line"></div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">Work reassigned &rarr; Capacity released</div>
-              <div class="gap-expand-title">Whether freed hours become output</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Engineered by</div>
-                <div class="gap-expand-val">Work measurement and productivity instrumentation.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Milestone 5 -->
-        <div class="milestone" role="listitem" data-gap="4" tabindex="0" aria-label="Capacity released">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label" style="color:var(--blue);">Capacity released</div>
-        </div>
-
+    <div class="tree-parent">
+      <div class="tree-chip">
+        <small>The practice</small>
+        Human + AI Work Engineering
       </div>
+      <span class="tree-stem" aria-hidden="true"></span>
+      <span class="tree-bar" aria-hidden="true"></span>
+    </div>
 
-      <div class="gap-tabs" role="tablist" aria-label="Adoption gaps">
-        <button class="gap-tab" data-tab="0" role="tab">Licence &rarr; First sign-in</button>
-        <button class="gap-tab" data-tab="1" role="tab">Sign-in &rarr; Habitual use</button>
-        <button class="gap-tab" data-tab="2" role="tab">Habit &rarr; Workflow redesign</button>
-        <button class="gap-tab" data-tab="3" role="tab">Job architecture</button>
-        <button class="gap-tab" data-tab="4" role="tab">Reassigned &rarr; Capacity released</button>
-      </div>
-
-      <div class="gap-panel-wrap">
-        <div class="gap-panel" id="gapPanel" role="region" aria-live="polite"></div>
-      </div>
-
-      <div class="ladder-resolve">
-        <div class="ladder-arrow" aria-hidden="true">&rarr;</div>
-        <div>
-          <div class="ladder-resolve-label">Licence-to-Capacity Days</div>
-          <div class="ladder-resolve-sub">The individual gaps above resolve into this single business outcome.</div>
+    <div class="tree-cols">
+      <div class="tree-col">
+        <span class="tree-tick" aria-hidden="true"></span>
+        <div class="motion">
+          <h3>Gemini Enterprise transformation</h3>
+          <p>Enterprise-wide deployment paired with the work redesign that makes it land.</p>
         </div>
+      </div>
+      <div class="tree-col">
+        <span class="tree-tick" aria-hidden="true"></span>
+        <div class="motion">
+          <h3>Google Workspace</h3>
+          <p>Migration, modernisation and configuration of the collaboration layer.</p>
+        </div>
+      </div>
+      <div class="tree-col">
+        <span class="tree-tick" aria-hidden="true"></span>
+        <div class="motion">
+          <h3>Claude adoption</h3>
+          <p>Assistant and agent adoption across knowledge work, with governance built in.</p>
+        </div>
+      </div>
+      <div class="tree-col">
+        <span class="tree-tick" aria-hidden="true"></span>
+        <div class="motion">
+          <h3>happierWork</h3>
+          <p>The people operating system: hiring, onboarding and HR workflow.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rules">
+      <div class="rule-note">
+        <div class="k">The rule</div>
+        <p><strong>A vendor or product is never the name or the identity of the practice.</strong> The practice is defined by the work it redesigns. Platform offerings remain siblings inside it, and a client can buy one without buying the label.</p>
+      </div>
+      <div class="rule-note">
+        <div class="k">Segment, not offering</div>
+        <p><strong>Frontline and deskless workforces are served as a segment</strong> across every offering above — not as a separate offering. The work design differs; the capability does not.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW WE BUILD -->
-<section class="how-build" id="how-build" aria-labelledby="how-build-heading">
+<!-- ================= SECTION 4 — OUTCOME STORIES ================= -->
+<section class="evidence" id="outcomes" aria-labelledby="ev-h">
   <div class="wrap">
-    <div class="how-build-grid">
-      <div class="how-build-left">
-        <h2 id="how-build-heading">Here is how<br><span class="how-build-blue">we engineer it.</span></h2>
-        <p class="how-build-body-text">Adoption is engineered, not announced. We baseline the work before deployment, redesign the roles the work sits in, and build enablement into the working day rather than into a training calendar.</p>
-        <p class="how-build-body-text">Capability is built in cohorts that can teach the next cohort. Measurement is instrumented from the first week, so the reading exists before anyone needs it to make a case.</p>
+    <div class="ev-top">
+      <div>
+        <span class="eyebrow">Evidence</span>
+        <h2 id="ev-h">Outcome stories</h2>
       </div>
-      <div class="how-build-right" aria-label="Adoption engineering methodology">
-        <div class="build-stack" id="buildStack">
-          <div class="build-row active"><span class="build-row-num">01</span><span class="build-row-text">Baseline the work, not the licence</span><span class="build-row-bar"></span></div>
-          <div class="build-row"><span class="build-row-num">02</span><span class="build-row-text">Redesign before deployment</span><span class="build-row-bar"></span></div>
-          <div class="build-row"><span class="build-row-num">03</span><span class="build-row-text">Enablement in the flow of work</span><span class="build-row-bar"></span></div>
-          <div class="build-row"><span class="build-row-num">04</span><span class="build-row-text">Agents reviewed by the people affected</span><span class="build-row-bar"></span></div>
-          <div class="build-row"><span class="build-row-num">05</span><span class="build-row-text">Instrumented from week one</span><span class="build-row-bar"></span></div>
-          <div class="build-row"><span class="build-row-num">06</span><span class="build-row-text">Verified in changed work, not sentiment</span><span class="build-row-bar"></span></div>
-        </div>
+      <div>
+        <p class="ev-statement">This practice has <em>no verified readings</em> yet.</p>
+        <p class="ev-body">The offerings stand on their own until it does. Every number that appears in this section will be one we baselined at the start of an engagement and verified at the end — so the space below stays open until there is something real to put in it.</p>
+      </div>
+    </div>
+
+    <table class="ledger">
+      <caption>Where the first readings are expected</caption>
+      <thead>
+        <tr>
+          <th scope="col">Source</th>
+          <th scope="col">What gets read</th>
+          <th scope="col" class="led-read">Reading</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="led-src">Gemini Enterprise transformation</span></td>
+          <td><span class="led-what">Days from licence provisioned to capacity released, and work reassigned per role.</span></td>
+          <td class="led-read">
+            <span class="blank" role="img" aria-label="No reading recorded yet"></span>
+            <span class="led-status"><i aria-hidden="true"></i>Awaiting first reading</span>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="led-src">Work measurement engagements</span></td>
+          <td><span class="led-what">Cycle time, touch rate and rework measured against the pre-deployment baseline.</span></td>
+          <td class="led-read">
+            <span class="blank" role="img" aria-label="No reading recorded yet"></span>
+            <span class="led-status"><i aria-hidden="true"></i>Awaiting first reading</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="standard">
+      <div class="standard-k">The standard</div>
+      <div class="standard-b">
+        <h3>We do not fill the gap with soft numbers.</h3>
+        <p>No satisfaction scores. No licence counts. No training completions or adoption percentages standing in for a change in how work gets done. An empty column is more useful to you than a flattering one.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHAT HAPPENS AFTER -->
-<section class="after" id="after" aria-labelledby="after-heading">
-  <div class="after-horizon" aria-hidden="true"></div>
-  <div class="after-arcs" aria-hidden="true">
-    <div class="after-arc"></div>
-    <div class="after-arc"></div>
-    <div class="after-arc"></div>
-  </div>
-  <div class="after-signals" id="afterSignals" aria-hidden="true"></div>
+<!-- ================= SECTION 5 — CLOSING ================= -->
+<section class="close" aria-labelledby="close-h">
+  <div class="close-glow" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="after-content">
-      <h2 id="after-heading">What Happens After</h2>
-      <p class="after-body-text">Every engagement ships with named internal owners, a trained cohort that can run the next wave without us, and instrumentation that keeps reading after handoff.</p>
-      <p class="after-close">The capability stays <em>after we leave.</em></p>
-      <p class="after-kicker">That is the whole point</p>
+    <div class="close-inner">
+      <span class="eyebrow on-dark">In closing</span>
+      <h2 id="close-h">An hour handed back to a person is only worth <em>what they spend it on</em>.</h2>
+      <p>So the redesign runs in both directions. Work that never needed a person moves to something that does not need one. What stays is the work that always did need a person — judgement, relationships, the decisions that carry consequence.</p>
+      <p>Intelligence is the easier half of this. Deciding what people are for is the half that takes the engineering.</p>
+      <p class="close-final">Not fewer people doing the same work faster. Different work, worth a person's day.</p>
+    </div>
+  </div>
+
+  <!-- the boundary: settled -->
+  <div class="wrap band-block" style="animation:none;opacity:1;">
+    <div class="band-head">
+      <span>People</span>
+      <span class="r">Intelligence</span>
+    </div>
+    <div class="band" id="bandClose" data-settled="1" aria-hidden="true">
+      <span class="band-marker"></span>
     </div>
   </div>
 </section>
 
-<!-- LET'S CONNECT -->
-<section class="connect">
+</main>
+
+<!-- ================= LET'S CONNECT (shared) ================= -->
+<section class="connect" id="connect">
   <div class="wrap">
     <div class="connect-inner">
       <div class="connect-left">
@@ -1437,7 +1291,7 @@ footer{
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ================= FOOTER (shared) ================= -->
 <footer>
   <div class="wrap">
     <div class="foot-main">
@@ -1503,298 +1357,138 @@ footer{
 </footer>
 
 <script>
-/* ===== HERO — "which work people still do" canvas =====
-   Tasks start in one lane (human work). On each cycle a portion migrate
-   down to a second lane (agent work) while the remainder stay and
-   brighten — the work that people still do. */
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ===== BOUNDARY BAND =====
+   Bars left of the boundary are work people do; bars right of it
+   are work intelligence does. In the hero the boundary drifts —
+   it is continuously renegotiated. At the close it is settled. */
 (function(){
-  const cv=document.getElementById('heroCanvas');
-  if(!cv)return;
-  const ctx=cv.getContext('2d');
-  let W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2);
+  const bands = document.querySelectorAll('.band');
+  if(!bands.length) return;
 
-  const COUNT=16;
-  /* Deterministic pattern: 1 = migrates to the agent lane, 0 = stays with people */
-  const MIGRATES=[1,0,1,1,0,1,1,1,0,1,1,0,1,1,0,1];
-  let nodes=[];
+  bands.forEach(band => {
+    const settled = band.dataset.settled === '1';
+    const marker  = band.querySelector('.band-marker');
+    let bars = [];
 
-  function seed(){
-    nodes=[];
-    for(let i=0;i<COUNT;i++){
-      nodes.push({
-        i:i,
-        moves:MIGRATES[i]===1,
-        x:0, y:0, originY:0, targetY:0,
-        stagger:(i/COUNT)*0.45,
-        jitter:(i%3-1)*0.012
-      });
-    }
-  }
-
-  function layout(){
-    const padX=W*0.12;
-    const span=W-padX*2;
-    const laneHuman=H*0.33;
-    const laneAgent=H*0.71;
-    nodes.forEach(n=>{
-      n.x=padX+(span/(COUNT-1))*n.i;
-      n.originY=laneHuman+n.jitter*H;
-      n.targetY=n.moves?laneAgent+n.jitter*H:n.originY;
-    });
-  }
-
-  function resize(){
-    const r=cv.getBoundingClientRect();
-    W=r.width; H=r.height;
-    cv.width=W*dpr; cv.height=H*dpr;
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    layout();
-  }
-
-  const easeIO=t=>t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-  const clamp01=t=>t<0?0:(t>1?1:t);
-
-  /* Cycle: hand off → hold → return → rest */
-  const T_MOVE=2600, T_HOLD=1900, T_BACK=1500, T_REST=900;
-  const CYCLE=T_MOVE+T_HOLD+T_BACK+T_REST;
-  const start=performance.now();
-
-  /* Reduced motion: render one settled frame and never loop. */
-  let animate=true, staticFrame=false;
-
-  function phase(now){
-    if(staticFrame) return {p:1, sweep:1};
-    const t=(now-start)%CYCLE;
-    if(t<T_MOVE)                return {p:t/T_MOVE, sweep:t/T_MOVE};
-    if(t<T_MOVE+T_HOLD)         return {p:1, sweep:1};
-    if(t<T_MOVE+T_HOLD+T_BACK)  return {p:1-easeIO((t-T_MOVE-T_HOLD)/T_BACK), sweep:1};
-    return {p:0, sweep:1};
-  }
-
-  function draw(now){
-    const {p,sweep}=phase(now);
-    ctx.clearRect(0,0,W,H);
-
-    const laneHuman=H*0.33;
-    const laneAgent=H*0.71;
-    const padX=W*0.12;
-
-    /* --- LANE RAILS --- */
-    ctx.lineWidth=1;
-    ctx.strokeStyle='rgba(0,100,255,0.18)';
-    ctx.beginPath();
-    ctx.moveTo(padX-24,laneHuman); ctx.lineTo(W-padX+24,laneHuman);
-    ctx.stroke();
-
-    ctx.strokeStyle='rgba(0,100,255,'+(0.05+0.16*p)+')';
-    ctx.setLineDash([5,6]);
-    ctx.beginPath();
-    ctx.moveTo(padX-24,laneAgent); ctx.lineTo(W-padX+24,laneAgent);
-    ctx.stroke();
-    ctx.setLineDash([]);
-
-    /* --- POSITION + HANDOFF TRACES --- */
-    nodes.forEach(n=>{
-      const local=n.moves?easeIO(clamp01((p-n.stagger)/(1-0.45))):0;
-      n.y=n.originY+(n.targetY-n.originY)*local;
-      n.local=local;
-
-      if(n.moves&&local>0.02){
-        ctx.strokeStyle='rgba(0,100,255,'+(0.30*(1-local*0.55))+')';
-        ctx.lineWidth=1;
-        ctx.beginPath();
-        ctx.moveTo(n.x,n.originY);
-        ctx.lineTo(n.x,n.y);
-        ctx.stroke();
+    function build(){
+      bars.forEach(b => b.remove());
+      bars = [];
+      const w = band.clientWidth || 900;
+      const n = Math.max(12, Math.min(66, Math.round(w / 18)));
+      const frag = document.createDocumentFragment();
+      for(let i=0;i<n;i++){
+        const b = document.createElement('span');
+        b.className = 'bar';
+        frag.appendChild(b);
+        bars.push(b);
       }
-    });
-
-    /* --- LINKS ALONG EACH LANE --- */
-    ctx.lineWidth=1;
-    for(let pass=0;pass<2;pass++){
-      const inLane=nodes.filter(n=>pass===0?!n.moves:n.moves);
-      if(inLane.length<2)continue;
-      /* Human-lane links hold steady; agent-lane links strengthen as work arrives */
-      ctx.strokeStyle=pass===0
-        ? 'rgba(0,100,255,'+(0.16+0.18*p)+')'
-        : 'rgba(0,100,255,'+(0.28*p)+')';
-      ctx.beginPath();
-      for(let k=0;k<inLane.length-1;k++){
-        ctx.moveTo(inLane[k].x,inLane[k].y);
-        ctx.lineTo(inLane[k+1].x,inLane[k+1].y);
-      }
-      ctx.stroke();
+      band.insertBefore(frag, marker);
     }
 
-    /* --- NODES --- */
-    nodes.forEach(n=>{
-      /* Work that stays with people grows and brightens */
-      const stayLift=n.moves?0:p;
-      const rad=3+2*(n.moves?n.local:stayLift);
-
-      if(!n.moves&&p>0.05){
-        ctx.beginPath();
-        ctx.arc(n.x,n.y,rad+5*p,0,Math.PI*2);
-        ctx.fillStyle='rgba(0,100,255,'+(0.10*p)+')';
-        ctx.fill();
+    function paint(boundary){
+      if(marker) marker.style.left = (boundary*100).toFixed(2) + '%';
+      const n = bars.length;
+      for(let i=0;i<n;i++){
+        const t = (i + 0.5) / n;
+        const isHuman = t <= boundary;
+        bars[i].classList.toggle('human', isHuman);
+        bars[i].classList.toggle('agent', !isHuman);
       }
-
-      ctx.beginPath();
-      ctx.arc(n.x,n.y,rad,0,Math.PI*2);
-      ctx.fillStyle='rgba(255,255,255,1)';
-      ctx.fill();
-      ctx.lineWidth=1.5;
-      ctx.strokeStyle='rgba(0,100,255,'+(0.35+0.45*(n.moves?n.local:stayLift))+')';
-      ctx.stroke();
-    });
-
-    /* --- SWEEP: the redesign passing through, left to right --- */
-    if(sweep>0&&sweep<1){
-      const sx=W*sweep;
-      const g=ctx.createLinearGradient(sx-70,0,sx+10,0);
-      g.addColorStop(0,'rgba(0,100,255,0)');
-      g.addColorStop(1,'rgba(0,100,255,0.28)');
-      ctx.strokeStyle=g;
-      ctx.lineWidth=2;
-      ctx.beginPath();
-      ctx.moveTo(sx,H*0.06);
-      ctx.lineTo(sx,H*0.94);
-      ctx.stroke();
     }
 
-    if(animate) requestAnimationFrame(draw);
-  }
+    build();
 
-  seed(); resize();
-  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    window.addEventListener('resize',resize);
-    requestAnimationFrame(draw);
-  } else {
-    animate=false; staticFrame=true;
-    window.addEventListener('resize',()=>{resize();draw(0);});
-    draw(0);
-  }
-})();
+    if(settled || REDUCED){
+      paint(settled ? 0.38 : 0.46);
+      window.addEventListener('resize', () => { build(); paint(settled ? 0.38 : 0.46); });
+      return;
+    }
 
-/* ===== HERO WORD REVEAL ===== */
-(function(){
-  const line1 = document.getElementById('heroLine1');
-  const line2 = document.getElementById('heroLine2');
-  if(!line1) return;
-  const words = line1.textContent.split(' ');
-  line1.innerHTML = words.map((w,i) =>
-    `<span class="hw" style="animation-delay:${0.3 + i*0.12}s">${w}</span>`
-  ).join(' ');
-  if(line2) line2.style.animationDelay = (0.3 + words.length * 0.12 + 0.1) + 's';
-})();
-
-/* ===== AFTER — drifting signals ===== */
-(function(){
-  const host=document.getElementById('afterSignals');
-  if(!host)return;
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const N=14;
-  for(let i=0;i<N;i++){
-    const s=document.createElement('div');
-    s.className='after-signal';
-    s.style.left=(6+Math.random()*88)+'%';
-    s.style.bottom=(4+Math.random()*30)+'%';
-    s.style.animationDelay=(Math.random()*14)+'s';
-    s.style.animationDuration=(11+Math.random()*7)+'s';
-    host.appendChild(s);
-  }
-})();
-
-/* ===== METRIC LADDER — shared panel on milestone / capsule hover ===== */
-(function(){
-  const milestones = document.querySelectorAll('.milestone[data-gap]');
-  const gaps = document.querySelectorAll('.gap-segment[data-idx]');
-  if(!milestones.length) return;
-
-  let clearTimer = null;
-
-  const panel = document.getElementById('gapPanel');
-  const wrap = panel ? panel.parentElement : null;
-
-  function positionPanel(idx) {
-    if (!panel || !wrap) return;
-    const cap = document.querySelector('.gap-tab[data-tab="' + idx + '"]');
-    if (!cap) return;
-    const capRect = cap.getBoundingClientRect();
-    const wrapRect = wrap.getBoundingClientRect();
-    let centre = capRect.left - wrapRect.left + capRect.width / 2;
-    const half = panel.offsetWidth / 2 || 125;
-    centre = Math.max(half, Math.min(centre, wrapRect.width - half));
-    panel.style.left = centre + 'px';
-  }
-
-  function activate(gapIdx) {
-    clearTimeout(clearTimer);
-    gaps.forEach(g => {
-      const match = parseInt(g.dataset.idx) === gapIdx;
-      g.classList.toggle('active', match);
-      if (match && panel) {
-        const src = g.querySelector('.gap-expand-inner');
-        if (src) {
-          panel.innerHTML = src.innerHTML;
-          positionPanel(gapIdx);
-          panel.classList.add('visible');
-        }
-      }
+    /* Two slow sine terms so the drift never reads as a loop. */
+    const t0 = performance.now();
+    function tick(){
+      const s = (performance.now() - t0) / 1000;
+      const b = 0.48
+        + 0.13 * Math.sin(s / 3.9)
+        + 0.05 * Math.sin(s / 1.7 + 1.1);
+      paint(Math.max(0.16, Math.min(0.84, b)));
+    }
+    tick();
+    setInterval(tick, 110);
+    let rz;
+    window.addEventListener('resize', () => {
+      clearTimeout(rz);
+      rz = setTimeout(() => { build(); tick(); }, 150);
     });
-    milestones.forEach(m => {
-      m.classList.toggle('active', parseInt(m.dataset.gap) === gapIdx);
-    });
-    document.querySelectorAll('.gap-tab').forEach(t => {
-      t.classList.toggle('active', parseInt(t.dataset.tab) === gapIdx);
-    });
-  }
-
-  function deactivate() {
-    clearTimer = setTimeout(() => {
-      gaps.forEach(g => g.classList.remove('active'));
-      milestones.forEach(m => m.classList.remove('active'));
-      document.querySelectorAll('.gap-tab').forEach(t => t.classList.remove('active'));
-      if (panel) panel.classList.remove('visible');
-    }, 120);
-  }
-
-  const tabs = document.querySelectorAll('.gap-tab');
-
-  milestones.forEach(m => {
-    m.addEventListener('mouseenter', () => activate(parseInt(m.dataset.gap)));
-    m.addEventListener('mouseleave', deactivate);
-    m.addEventListener('focus', () => activate(parseInt(m.dataset.gap)));
-    m.addEventListener('blur', deactivate);
   });
-
-  tabs.forEach(t => {
-    const i = parseInt(t.dataset.tab);
-    t.addEventListener('mouseenter', () => activate(i));
-    t.addEventListener('mouseleave', deactivate);
-    t.addEventListener('focus', () => activate(i));
-    t.addEventListener('blur', deactivate);
-    t.addEventListener('click', () => activate(i));
-  });
-
-  if (panel) {
-    panel.addEventListener('mouseenter', () => clearTimeout(clearTimer));
-    panel.addEventListener('mouseleave', deactivate);
-  }
 })();
 
-/* ===== HOW WE BUILD ROW ANIMATION ===== */
+/* ===== THE SHIFT — questions replace themselves on arrival ===== */
 (function(){
-  const rows=document.querySelectorAll('.build-row');
-  if(!rows.length)return;
-  let idx=0;
-  function step(){
-    rows.forEach(r=>r.classList.remove('active'));
-    rows[idx].classList.add('active');
-    idx=(idx+1)%rows.length;
+  const rows = document.querySelectorAll('.q-row');
+  if(!rows.length) return;
+  if(REDUCED || !('IntersectionObserver' in window)){
+    rows.forEach(r => r.classList.add('in'));
+    return;
   }
-  step();
-  setInterval(step,1800);
+  rows.forEach((r,i) => {
+    r.querySelector('.q-old').style.transitionDelay = (0.10 + i*0.06) + 's';
+    const nw = r.querySelector('.q-new');
+    nw.style.transitionDelay = (0.04 + i*0.06) + 's';
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {rootMargin:'0px 0px -18% 0px', threshold:0.25});
+  rows.forEach(r => io.observe(r));
+})();
+
+/* ===== OFFERINGS — editorial index (tabs on desktop, accordion on mobile) ===== */
+(function(){
+  const tabs = Array.from(document.querySelectorAll('.idx-item'));
+  const panels = Array.from(document.querySelectorAll('.idx-panel'));
+  if(!tabs.length) return;
+
+  const isStacked = () => window.matchMedia('(max-width:1024px)').matches;
+
+  function select(i, focus){
+    tabs.forEach((t,k) => {
+      const on = k === i;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      panels[k].classList.toggle('active', on);
+    });
+    if(focus) tabs[i].focus();
+  }
+
+  tabs.forEach((t,i) => {
+    t.addEventListener('click', () => {
+      /* On stacked layouts the entry behaves as a disclosure:
+         tapping the open entry closes it. */
+      if(isStacked() && t.getAttribute('aria-selected') === 'true'){
+        t.setAttribute('aria-selected','false');
+        panels[i].classList.remove('active');
+        return;
+      }
+      select(i, false);
+    });
+    t.addEventListener('mouseenter', () => { if(!isStacked()) select(i, false); });
+    t.addEventListener('keydown', (e) => {
+      const last = tabs.length - 1;
+      let n = null;
+      if(e.key === 'ArrowDown' || e.key === 'ArrowRight') n = i === last ? 0 : i + 1;
+      if(e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  n = i === 0 ? last : i - 1;
+      if(e.key === 'Home') n = 0;
+      if(e.key === 'End')  n = last;
+      if(n !== null){ e.preventDefault(); select(n, true); }
+    });
+  });
 })();
 </script>
 </body>

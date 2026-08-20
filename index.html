@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Searce practice pages — review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#000;--paper:#fff;--ink-60:#54555a;--ink-40:#84868c;
+    --blue:#0064ff;--blue-24:#b3d0ff;
+    --display:'Poppins',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--ink);color:#fff;
+    font-family:var(--display);font-weight:300;
+    min-height:100vh;
+    display:flex;align-items:center;
+    padding:48px;
+  }
+  .grid{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size:88px 88px;
+  }
+  .wrap{position:relative;z-index:1;max-width:840px;margin:0 auto;width:100%;}
+  .k{
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--blue-24);margin-bottom:22px;
+  }
+  h1{
+    font-size:clamp(30px,5vw,58px);line-height:1.05;letter-spacing:-0.03em;
+    font-weight:300;margin-bottom:14px;
+  }
+  .sub{
+    font-size:15px;line-height:1.6;color:rgba(255,255,255,0.5);
+    max-width:52ch;margin-bottom:48px;
+  }
+  .list{list-style:none;border-top:1px solid rgba(255,255,255,0.16);}
+  .list a{
+    display:flex;align-items:baseline;gap:18px;
+    padding:22px 2px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    color:#fff;text-decoration:none;
+    transition:padding-left .25s ease,border-color .25s ease;
+  }
+  .list a:hover{padding-left:12px;border-color:var(--blue);}
+  .n{font-size:11px;letter-spacing:.08em;color:var(--blue);flex-shrink:0;}
+  .t{font-size:clamp(17px,2vw,24px);line-height:1.25;letter-spacing:-0.018em;}
+  .arw{margin-left:auto;color:var(--blue);transition:transform .25s ease;}
+  .list a:hover .arw{transform:translateX(5px);}
+  .foot{
+    margin-top:44px;font-size:12px;line-height:1.6;
+    color:rgba(255,255,255,0.32);
+  }
+</style>
+</head>
+<body>
+<div class="grid" aria-hidden="true"></div>
+<div class="wrap">
+  <div class="k">Searce &middot; 2026 &middot; review build</div>
+  <h1>Practice pages</h1>
+  <p class="sub">Work in progress, shared for review. Not production content.</p>
+
+  <ul class="list">
+    <li>
+      <a href="human-ai-work-engineering.html">
+        <span class="n">01</span>
+        <span class="t">Human + AI Work Engineering</span>
+        <span class="arw" aria-hidden="true">&rarr;</span>
+      </a>
+    </li>
+  </ul>
+
+  <p class="foot">Anyone with this link can view it &mdash; it is a public preview, not access controlled.</p>
+</div>
+</body>
+</html>

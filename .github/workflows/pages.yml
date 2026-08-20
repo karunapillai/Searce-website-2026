@@ -26,11 +26,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configure Pages
-        # enablement: true turns Pages on the first time this runs,
-        # so no manual repository-settings step is needed.
+        # No enablement flag: the workflow GITHUB_TOKEN cannot create a
+        # Pages site ("Resource not accessible by integration"). Pages
+        # must be switched on once in Settings -> Pages with the source
+        # set to "GitHub Actions"; after that this workflow deploys on
+        # every push to this branch.
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3

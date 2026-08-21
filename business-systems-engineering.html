@@ -1599,17 +1599,17 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let d=0;
     track.querySelectorAll('.milestone,.gap-segment').forEach(el=>{
       if(el.classList.contains('milestone')){
-        setTimeout(()=>el.classList.add('revealed'),d); d+=160;
+        setTimeout(()=>el.classList.add('revealed'),d); d+=70;
       } else {
-        setTimeout(()=>el.classList.add('revealed'),d); d+=280;
+        setTimeout(()=>el.classList.add('revealed'),d); d+=120;
       }
     });
-    setTimeout(()=>{tickerReady=true;},d+500);
+    setTimeout(()=>{tickerReady=true;},d+100);
   }
   if(section){
     const obs=new IntersectionObserver(e=>{
       e.forEach(x=>{if(x.isIntersecting) revealLadder();});
-    },{threshold:0.15});
+    },{threshold:0.05});
     obs.observe(section);
   }
 

@@ -69,6 +69,75 @@
 <div>
 
 <!-- ============================================================
+     PRIMARY NAV — built to the content doc's spec.
+
+     NOTE: the live site renders its nav on the client, so no nav
+     markup was present in either page source. This is therefore
+     the doc's structure expressed in the site's own idiom, not the
+     production Navbar component -- reconcile the two before
+     shipping. The live page passes initialNavTheme "light" here,
+     so it sits dark-on-white over the white hero. The dark logo's
+     filename is a guess and needs confirming against the repo.
+     ============================================================ -->
+<header class="fixed top-0 left-0 w-full z-50 text-blue-900 bg-white/80 backdrop-blur-md">
+  <div class="max-w-[1440px] mx-auto flex items-center justify-between gap-8 h-[97px] px-4 sm:px-10 xl:px-20">
+    <a href="/" class="shrink-0" aria-label="searce home"><img src="/images/searce-logo.svg" alt="searce" class="w-[132px] h-[31px] object-contain"/></a>
+    <nav class="hidden lg:flex items-center gap-7 text-base" aria-label="Primary">
+      <a href="/outcomes" class="hover:text-blue-600 transition-colors duration-200">Outcomes</a>
+      <a href="/how-we-solve" class="hover:text-blue-600 transition-colors duration-200">How we solve</a>
+      <a href="/practices" class="hover:text-blue-600 transition-colors duration-200">Practices</a>
+      <a href="/problems" class="hover:text-blue-600 transition-colors duration-200">Problems</a>
+      <a href="/industries" class="hover:text-blue-600 transition-colors duration-200">Industries</a>
+      <a href="/insights/case-studies" class="hover:text-blue-600 transition-colors duration-200">Insights</a>
+      <div class="relative group">
+        <button class="flex items-center gap-1 text-blue-600 cursor-pointer" aria-expanded="false" aria-haspopup="true">Company<svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+        <div class="absolute left-0 top-full pt-5 opacity-0 invisible translate-y-[-6px] group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200">
+          <div class="min-w-[230px] rounded-2xl bg-white shadow-2xl p-2 text-blue-900">
+            <a class="block rounded-xl px-4 py-3 bg-blue-50 text-blue-600" href="/who-we-are" aria-current="page">Who we are</a>
+            <a class="block rounded-xl px-4 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-150" href="/partners">Partners</a>
+            <a class="block rounded-xl px-4 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-150" href="/join-us">Careers</a>
+            <a class="block rounded-xl px-4 py-3 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-150" href="https://futurify.ai" target="_blank" rel="noopener noreferrer">futurify.ai</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <a class="
+    hidden lg:inline-flex items-center justify-center
+    rounded-full font-medium
+    transition-all duration-300 ease-in-out
+    hover:scale-105 hover:shadow-lg
+    whitespace-nowrap
+    px-6 py-2 text-base gap-3
+    shrink-0
+   group" style="background-color:#0064FF;color:#ffffff;border-color:transparent;border-width:0px;border-style:solid" href="#lets-connect"><span class="inline-flex items-center gap-3 whitespace-normal"><span>let's connect</span><span class="
+    flex items-center justify-center
+    rounded-full transition-transform duration-300 p-1 h-auto!
+    group-hover:translate-x-1
+  "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" style="color:#ffffff" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></span></span></a>
+
+    <!-- Below lg the link row is hidden, so this carries the whole
+         nav. <details> keeps it working without any JS. -->
+    <details class="lg:hidden relative shrink-0">
+      <summary class="list-none [&::-webkit-details-marker]:hidden cursor-pointer p-2 -mr-2" aria-label="Open menu"><svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+      <div class="absolute right-0 top-full mt-4 min-w-[250px] rounded-2xl bg-white shadow-2xl p-2 text-blue-900">
+        <a class="block rounded-xl px-4 py-3 hover:bg-blue-50 hover:text-blue-600" href="/outcomes">Outcomes</a>
+        <a class="block rounded-xl px-4 py-3 hover:bg-blue-50 hover:text-blue-600" href="/how-we-solve">How we solve</a>
+        <a class="block rounded-xl px-4 py-3 hover:bg-blue-50 hover:text-blue-600" href="/practices">Practices</a>
+        <a class="block rounded-xl px-4 py-3 hover:bg-blue-50 hover:text-blue-600" href="/problems">Problems</a>
+        <a class="block rounded-xl px-4 py-3 hover:bg-blue-50 hover:text-blue-600" href="/industries">Industries</a>
+        <a class="block rounded-xl px-4 py-3 hover:bg-blue-50 hover:text-blue-600" href="/insights/case-studies">Insights</a>
+        <p class="px-4 pt-4 pb-2 text-sm tracking-[0.2em] text-[#999999]">COMPANY</p>
+        <a class="block rounded-xl px-4 py-3 bg-blue-50 text-blue-600" href="/who-we-are" aria-current="page">Who we are</a>
+        <a class="block rounded-xl px-4 py-3 hover:bg-blue-50 hover:text-blue-600" href="/partners">Partners</a>
+        <a class="block rounded-xl px-4 py-3 hover:bg-blue-50 hover:text-blue-600" href="/join-us">Careers</a>
+        <a class="block rounded-xl px-4 py-3 hover:bg-blue-50 hover:text-blue-600" href="https://futurify.ai" target="_blank" rel="noopener noreferrer">futurify.ai</a>
+        <a class="block rounded-xl px-4 py-3 mt-2 text-center text-white" style="background-color:#0064FF" href="#lets-connect">let's connect</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<!-- ============================================================
      HERO — layout unchanged (the live page carries the same copy
      twice, once for mobile and once from md up). Heading and body
      replaced.

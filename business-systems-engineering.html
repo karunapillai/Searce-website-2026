@@ -208,99 +208,95 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .hero-cta-primary:hover{background:var(--blue-strong);transform:translateY(-1px);}
 .hero-cta-primary svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;}
 
-/* ======= OFFERINGS — dark navy + light blue intro band ======= */
-.offerings{
-  background:var(--navy);
-  padding:0 0 56px;
-  position:relative;
+/* ======= OFFERINGS — accordion with light background ======= */
+.offer{
+  background:var(--paper-dim);
+  padding:80px 0;
+  border-bottom:1px solid var(--paper-line);
 }
-.offerings::before{
-  content:'';
-  position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size:88px 88px;
-  pointer-events:none;z-index:0;
+.offer-top{
+  display:grid;grid-template-columns:1fr auto;
+  gap:32px 80px;align-items:end;
+  margin-bottom:clamp(32px,4vw,48px);
 }
-.offerings .wrap,.offerings-intro-band{position:relative;z-index:1;}
-.offerings-intro-band{
-  background:var(--blue-06);
-  padding:80px 0 60px;
-  border-bottom:1px solid var(--blue-12);
-}
-.offerings-intro-inner{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0 80px;
-  align-items:end;
-}
-.offerings-h2{
+.offer-top h2{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(40px,5.2vw,76px);
-  line-height:1.05;letter-spacing:-0.025em;
-  color:var(--ink);
-  margin-bottom:0;
+  font-size:clamp(40px,5.6vw,82px);
+  line-height:1.0;letter-spacing:-0.03em;
 }
-.offerings-subline{
-  font-size:clamp(16px,1.5vw,21px);
-  line-height:1.65;
-  color:var(--ink-60);
-  font-weight:400;
-  padding-top:4px;
+.offer-top p{
+  font-size:15px;line-height:1.6;color:var(--ink-60);
+  max-width:38ch;text-align:right;
 }
-.offerings-stack{
-  max-width:1080px;margin:0 auto;
-  padding-top:52px;
-  border-top:1px solid rgba(255,255,255,0.08);
-}
-.offering-card{
+.acc{border-top:1px solid var(--ink);}
+.acc-item{border-bottom:1px solid var(--paper-line);}
+.acc-btn{
   display:grid;
-  grid-template-columns:1fr auto;
-  align-items:start;
-  gap:0 24px;
-  padding:28px 0;
-  border-bottom:1px solid rgba(255,255,255,0.07);
-  cursor:pointer;
-  position:relative;
-  transition:padding-left .25s ease;
-  outline:none;
+  grid-template-columns:clamp(40px,4vw,64px) 1fr 22px;
+  align-items:center;gap:0 clamp(16px,2vw,28px);
+  width:100%;text-align:left;
+  padding:clamp(20px,2.4vw,30px) 0;
 }
-.offering-card:hover,.offering-card:focus-visible{padding-left:12px;}
-.offering-left{display:flex;align-items:baseline;gap:20px;min-width:0;}
-.offering-num{
+.acc-num{
   font-family:var(--display);font-weight:300;
-  font-size:12px;letter-spacing:.06em;
-  color:rgba(0,100,255,0.45);
-  flex-shrink:0;
-  transition:color .2s ease;
+  font-size:12px;letter-spacing:.08em;
+  color:var(--ink-40);
+  transition:color .24s ease;
 }
-.offering-card:hover .offering-num{color:var(--blue);}
-.offering-name{
+.acc-name{
   font-family:var(--display);font-weight:400;
-  font-size:clamp(17px,1.6vw,22px);
-  line-height:1.3;
-  color:rgba(255,255,255,0.85);
-  transition:color .2s ease;
+  font-size:clamp(18px,2.1vw,29px);
+  line-height:1.18;letter-spacing:-0.02em;
+  color:var(--ink-85);
+  transition:color .24s ease;
 }
-.offering-card:hover .offering-name{color:#fff;}
-.offering-right{display:flex;align-items:center;gap:16px;flex-shrink:0;padding-top:4px;}
-.offering-arrow{
-  color:rgba(0,100,255,0.4);font-size:18px;
-  transition:transform .25s ease,color .25s ease;
+.acc-btn:hover .acc-name{color:var(--blue);}
+.acc-btn:hover .acc-num{color:var(--blue);}
+.acc-item.open .acc-name,
+.acc-item.open .acc-num{color:var(--blue);}
+.acc-sign{position:relative;width:16px;height:16px;justify-self:end;}
+.acc-sign::before,.acc-sign::after{
+  content:'';position:absolute;left:0;top:50%;
+  width:16px;height:1.5px;background:var(--ink-40);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),background-color .24s ease;
 }
-.offering-card:hover .offering-arrow{transform:translateX(5px);color:var(--blue);}
-.offering-desc{
-  grid-column:1/-1;
-  font-size:14.5px;line-height:1.7;
-  color:rgba(255,255,255,0.45);
-  max-width:72ch;
-  max-height:0;opacity:0;overflow:hidden;
-  padding-left:40px;
-  transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease,margin-top .35s ease;
+.acc-sign::after{transform:rotate(90deg);}
+.acc-btn:hover .acc-sign::before,
+.acc-btn:hover .acc-sign::after{background:var(--blue);}
+.acc-item.open .acc-sign::before,
+.acc-item.open .acc-sign::after{background:var(--blue);}
+.acc-item.open .acc-sign::after{transform:rotate(0deg);}
+.acc-body{overflow:hidden;}
+.js .acc-body{max-height:0;transition:max-height .5s cubic-bezier(.16,1,.3,1);}
+.acc-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  gap:clamp(28px,4vw,64px);
+  padding:0 0 clamp(28px,3.4vw,40px) calc(clamp(40px,4vw,64px) + clamp(16px,2vw,28px));
 }
-.offering-card:hover .offering-desc,
-.offering-card:focus-visible .offering-desc{max-height:180px;opacity:1;margin-top:14px;}
+.acc-desc{
+  font-size:clamp(16px,1.45vw,19.5px);
+  line-height:1.62;color:var(--ink-60);
+  max-width:46ch;
+}
+.acc-what{
+  font-family:var(--display);font-weight:400;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:14px;
+}
+.acc-list{list-style:none;}
+.acc-list li{
+  display:flex;gap:12px;
+  padding:9px 0;
+  border-top:1px solid var(--paper-line);
+  font-size:14.5px;line-height:1.55;color:var(--ink-85);
+}
+.acc-list li:last-child{border-bottom:1px solid var(--paper-line);}
+.acc-list li::before{
+  content:'';flex-shrink:0;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--blue);margin-top:8px;
+}
 
 /* ======= OUTCOME STORIES — white BG ======= */
 .outcomes{
@@ -443,7 +439,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   color:rgba(255,255,255,0.55);max-width:54ch;font-weight:400;
   margin:0 auto;
 }
-.ladder-track-outer{position:relative;padding:40px 0 0;}
+.ladder-track-outer{position:relative;padding:100px 0 0;}
 .ladder-track{
   display:flex;
   align-items:center;
@@ -476,16 +472,44 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 .milestone-label{
   position:absolute;
-  top:calc(100% + 14px);
+  bottom:calc(100% + 14px);
   left:50%;
-  transform:translateX(-50%);
-  font-family:var(--display);font-weight:400;font-size:10.5px;
+  transform-origin:bottom left;
+  transform:rotate(-45deg);
+  font-family:var(--display);font-weight:400;font-size:9.5px;
   letter-spacing:.04em;text-transform:uppercase;color:#fff;
-  text-align:center;
-  width:96px;
+  text-align:left;
+  white-space:nowrap;
   line-height:1.35;
   pointer-events:none;
 }
+.milestone.pay-term .milestone-dot{
+  border-color:#e63946;
+  box-shadow:0 0 10px rgba(230,57,70,0.3);
+}
+.milestone.pay-term:hover .milestone-dot,
+.milestone.pay-term.active .milestone-dot{
+  background:rgba(230,57,70,0.18);
+  box-shadow:0 0 20px rgba(230,57,70,0.6);
+}
+.gap-capsule{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-family:var(--display);font-weight:400;font-size:8px;
+  letter-spacing:.04em;text-transform:uppercase;
+  color:rgba(255,255,255,0.5);
+  padding:4px 8px;
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:999px;
+  cursor:pointer;
+  transition:all .2s ease;
+  background:rgba(0,8,32,0.9);
+  white-space:nowrap;
+  z-index:2;
+}
+.gap-capsule:hover{color:#fff;border-color:var(--blue);background:rgba(0,100,255,0.12);}
+.gap-segment.active .gap-capsule{color:#fff;background:var(--blue);border-color:var(--blue);}
 .gap-segment{
   flex-shrink:0;
   position:relative;
@@ -552,22 +576,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 .gap-expand-val{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,0.7);}
 .gap-expand-val.commercial{color:rgba(0,100,255,0.75);}
-.gap-tabs{
-  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
-  margin-top:72px;
-}
-.gap-tab{
-  font-family:var(--display);font-weight:400;font-size:11px;
-  letter-spacing:.05em;text-transform:uppercase;
-  color:rgba(255,255,255,0.5);
-  padding:7px 14px;
-  border:1px solid rgba(255,255,255,0.15);border-radius:999px;
-  cursor:pointer;
-  transition:all .2s ease;
-  background:transparent;
-}
-.gap-tab:hover{color:#fff;border-color:var(--blue);background:rgba(0,100,255,0.12);}
-.gap-tab.active{color:#fff;background:var(--blue);border-color:var(--blue);}
+.gap-tabs{display:none;}
 .ladder-resolve{
   margin-top:56px;
   display:flex;align-items:center;gap:16px;
@@ -646,52 +655,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   transition:width 2s linear;
 }
 .build-row.active .build-row-bar{width:40px;}
-
-/* ======= CLOSE — "Built to keep working." ======= */
-.close{
-  background:linear-gradient(160deg,#001030 0%,#000820 100%);
-  padding:72px 0;
-  position:relative;
-  overflow:hidden;
-}
-.close-canvas-wrap{
-  position:absolute;inset:0;
-  z-index:0;pointer-events:none;
-}
-#closeCanvas{width:100%;height:100%;display:block;}
-.close-vignette{
-  position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 62% 58% at 50% 50%,
-    rgba(0,8,32,0) 0%, rgba(0,8,32,0.55) 72%, rgba(0,8,32,0.9) 100%);
-}
-.close-content{
-  position:relative;z-index:1;
-  text-align:center;
-  max-width:700px;
-  margin:0 auto;
-}
-.close h2{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(44px,6vw,90px);
-  line-height:1.02;letter-spacing:-0.03em;
-  color:#fff;
-  margin-bottom:32px;
-}
-.close-body-text{
-  font-size:clamp(17px,1.6vw,22px);line-height:1.62;
-  color:rgba(255,255,255,0.62);
-  font-weight:400;
-  margin:0 auto 30px;
-  max-width:56ch;
-}
-.close-final{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(19px,2vw,28px);
-  line-height:1.4;letter-spacing:-0.015em;
-  color:#fff;
-  max-width:34ch;margin:0 auto;
-}
-.close-final em{font-style:normal;color:var(--blue);}
 
 /* ======= LET'S CONNECT — form style ======= */
 .connect{background:var(--blue-06);padding:80px 0;}
@@ -806,8 +769,9 @@ footer{background:#071028;padding:72px 0 0;}
   .wrap{padding:0 28px;}
   .hero-opening{max-width:100%;}
   .hero-rings{width:min(52vw,480px);height:min(50vh,400px);right:-10vw;opacity:.6;}
-  .offerings-intro-inner{grid-template-columns:1fr;gap:24px;}
-  .offerings-stack{max-width:100%;}
+  .offer-top{grid-template-columns:1fr;gap:18px;}
+  .offer-top p{text-align:left;max-width:44ch;}
+  .acc-inner{grid-template-columns:1fr;gap:24px;}
   .stories-pin{height:auto!important;}
   .stories-sticky{position:static;height:auto;overflow:visible;display:block;}
   .stories-viewport{overflow:visible;}
@@ -823,10 +787,8 @@ footer{background:#071028;padding:72px 0 0;}
   .nav-links{display:none;}
   .hero-rings{display:none;}
   .story-quote{max-width:100%;}
-  .offering-card{grid-template-columns:1fr;gap:8px;}
-  .offering-right{justify-content:space-between;}
+  .acc-inner{padding-left:0;}
   .hero-cta-row{flex-direction:column;align-items:flex-start;gap:12px;}
-  .close-content{max-width:100%;}
   .foot-main{grid-template-columns:1fr;}
   .gap-tabs{gap:5px;}
   .story{padding:32px 0;}
@@ -892,7 +854,9 @@ footer{background:#071028;padding:72px 0 0;}
     </h1>
 
     <div class="hero-opening">
-      <p>The buy-versus-build line moved. Workflow tooling that once took eighteen months and a licence now takes weeks, and the enterprises acting on that are rebuilding the software layer around how their business actually runs.</p>
+      <p>The buy-versus-build line moved.</p>
+      <p>Workflow tooling that once took eighteen months and a licence now takes weeks.</p>
+      <p>The enterprises acting on that are rebuilding the software layer around how their business actually runs.</p>
     </div>
 
     <div class="hero-cta-row">
@@ -904,87 +868,137 @@ footer{background:#071028;padding:72px 0 0;}
   </div>
 </section>
 
-<section class="offerings" id="offerings" aria-labelledby="offerings-heading">
-  <div class="offerings-intro-band">
-    <div class="wrap">
-      <div class="offerings-intro-inner">
-        <div class="offerings-intro-left">
-          <h2 class="offerings-h2" id="offerings-heading">Here is what<br><span style="color:var(--blue);">we engineer.</span></h2>
-        </div>
-        <div class="offerings-subline">
-          Product engineers, software and AI engineers, business process engineers and industrial engineers in one squad. Process redesign without build authority is a recommendation. Building without process authority is a faster version of broken work.
-        </div>
-      </div>
-    </div>
-  </div>
-
+<section class="offer" id="offerings" aria-labelledby="offer-h">
   <div class="wrap">
-    <div class="offerings-stack" role="list" aria-label="Service offerings">
+    <div class="offer-top">
+      <h2 id="offer-h">Offerings</h2>
+      <p>Product engineers, software and AI engineers, business process engineers and industrial engineers in one squad.</p>
+    </div>
 
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">01</span>
-          <span class="offering-name">Process re-engineering and work redesign</span>
+    <div class="acc" id="acc">
+
+      <div class="acc-item open">
+        <button class="acc-btn" aria-expanded="true" aria-controls="a1">
+          <span class="acc-num">01</span>
+          <span class="acc-name">Process re-engineering and work redesign</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a1">
+          <div class="acc-inner">
+            <p class="acc-desc">Process discovery as work actually runs. Metric ladder construction and baseline lock. Target process design.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Task-level human and agent allocation</li>
+                <li>Decision rights and human-in-the-loop placement</li>
+                <li>Industrial engineering for AI-era operations</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="offering-right">
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">Process discovery as work actually runs. Metric ladder construction and baseline lock. Target process design. Task-level human and agent allocation. Decision rights and human-in-the-loop placement. Industrial engineering for AI-era operations.</p>
       </div>
 
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">02</span>
-          <span class="offering-name">Enterprise systems rebuild</span>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a2">
+          <span class="acc-num">02</span>
+          <span class="acc-name">Enterprise systems rebuild</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a2">
+          <div class="acc-inner">
+            <p class="acc-desc">Workflow tooling replacement. Legacy and SaaS replacement at the workflow layer.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Build-versus-buy assessment and custom operations systems</li>
+                <li>Data migration and cutover</li>
+                <li>Parallel run, reconciliation and decommissioning</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="offering-right">
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">Workflow tooling replacement. Legacy and SaaS replacement at the workflow layer. Build-versus-buy assessment. Custom operations systems. Data migration and cutover. Parallel run, reconciliation and decommissioning.</p>
       </div>
 
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">03</span>
-          <span class="offering-name">Agentic workflow engineering</span>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a3">
+          <span class="acc-num">03</span>
+          <span class="acc-name">Agentic workflow engineering</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a3">
+          <div class="acc-inner">
+            <p class="acc-desc">Agent design for a named process. Multi-agent orchestration and handoff design.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Tool and system connection with scoped permissions</li>
+                <li>Evaluation harnesses and regression suites</li>
+                <li>Graduation from assisted to supervised to autonomous</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="offering-right">
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">Agent design for a named process. Multi-agent orchestration and handoff design. Tool and system connection with scoped permissions. Evaluation harnesses and regression suites. Graduation from assisted to supervised to autonomous.</p>
       </div>
 
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">04</span>
-          <span class="offering-name">Application and product engineering</span>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a4">
+          <span class="acc-num">04</span>
+          <span class="acc-name">Application and product engineering</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a4">
+          <div class="acc-inner">
+            <p class="acc-desc">Custom enterprise application build. Customer-facing product engineering.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Product management, design, front-end and mobile engineering</li>
+                <li>API and integration engineering</li>
+                <li>Quality engineering and eval-backed release gates</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="offering-right">
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">Custom enterprise application build. Customer-facing product engineering. Product management and design. Front-end and mobile engineering. API and integration engineering. Quality engineering and eval-backed release gates.</p>
       </div>
 
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">05</span>
-          <span class="offering-name">Process intelligence and dependency mapping</span>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a5">
+          <span class="acc-num">05</span>
+          <span class="acc-name">Process intelligence and dependency mapping</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a5">
+          <div class="acc-inner">
+            <p class="acc-desc">Process mining and variant analysis. Cross-functional dependency and handoff mapping.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Exception taxonomy and root-cause analysis</li>
+                <li>Opportunity sizing against the metric ladder</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="offering-right">
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">Process mining and variant analysis. Cross-functional dependency and handoff mapping. Exception taxonomy and root-cause analysis. Opportunity sizing against the metric ladder.</p>
       </div>
 
-      <div class="offering-card" role="listitem" tabindex="0">
-        <div class="offering-left">
-          <span class="offering-num">06</span>
-          <span class="offering-name">Systems consolidation and rationalisation</span>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a6">
+          <span class="acc-num">06</span>
+          <span class="acc-name">Systems consolidation and rationalisation</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a6">
+          <div class="acc-inner">
+            <p class="acc-desc">Application portfolio rationalisation. Duplicate systems consolidation.</p>
+            <div>
+              <div class="acc-what">What you get</div>
+              <ul class="acc-list">
+                <li>Process harmonisation across entities</li>
+                <li>Separation and carve-out engineering</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="offering-right">
-          <span class="offering-arrow" aria-hidden="true">&rarr;</span>
-        </div>
-        <p class="offering-desc">Application portfolio rationalisation. Duplicate systems consolidation. Process harmonisation across entities. Separation and carve-out engineering.</p>
       </div>
 
     </div>
@@ -1103,19 +1117,40 @@ footer{background:#071028;padding:72px 0 0;}
     </div>
 
     <div class="ladder-track-outer">
-      <div class="ladder-track" role="list" aria-label="Ship-to-pay milestones">
+      <div class="ladder-track" role="list" aria-label="Order-to-cash milestones">
 
-        <div class="milestone" role="listitem" data-gap="0" tabindex="0" aria-label="Hover to see: Ship date to Invoice delivery">
+        <div class="milestone" role="listitem" data-gap="0" tabindex="0">
           <div class="milestone-dot"></div>
-          <div class="milestone-label">Ship date</div>
+          <div class="milestone-label">Ship Date</div>
         </div>
 
-        <div class="gap-segment" style="width:150px" data-idx="0">
+        <div class="gap-segment" style="width:90px" data-idx="0">
           <div class="gap-line"></div>
+          <div class="gap-capsule" data-tab="0">Billing lag</div>
           <div class="gap-expand">
             <div class="gap-expand-inner">
-              <div class="gap-expand-route">Ship date &rarr; Invoice delivery</div>
+              <div class="gap-expand-route">Ship Date &rarr; Invoice Date</div>
               <div class="gap-expand-title">Days the work sits unbilled</div>
+              <div class="gap-expand-row">
+                <div class="gap-expand-label">Engineered by</div>
+                <div class="gap-expand-val">Auto-invoicing triggered by shipment confirmation.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="milestone" role="listitem" data-gap="1" tabindex="0">
+          <div class="milestone-dot"></div>
+          <div class="milestone-label">Invoice Date</div>
+        </div>
+
+        <div class="gap-segment" style="width:80px" data-idx="1">
+          <div class="gap-line"></div>
+          <div class="gap-capsule" data-tab="1">Delivery lag</div>
+          <div class="gap-expand">
+            <div class="gap-expand-inner">
+              <div class="gap-expand-route">Invoice Date &rarr; Invoice Delivery</div>
+              <div class="gap-expand-title">Days the invoice sits before reaching the customer</div>
               <div class="gap-expand-row">
                 <div class="gap-expand-label">Engineered by</div>
                 <div class="gap-expand-val">Same-day billing agents reading the shipment file.</div>
@@ -1124,16 +1159,17 @@ footer{background:#071028;padding:72px 0 0;}
           </div>
         </div>
 
-        <div class="milestone" role="listitem" data-gap="1" tabindex="0" aria-label="Hover to see: Invoice delivery to Invoice receipt">
+        <div class="milestone" role="listitem" data-gap="2" tabindex="0">
           <div class="milestone-dot"></div>
-          <div class="milestone-label">Invoice delivery</div>
+          <div class="milestone-label">Invoice Delivery Date</div>
         </div>
 
-        <div class="gap-segment" style="width:150px" data-idx="1">
+        <div class="gap-segment" style="width:100px" data-idx="2">
           <div class="gap-line"></div>
+          <div class="gap-capsule" data-tab="2">Receipt</div>
           <div class="gap-expand">
             <div class="gap-expand-inner">
-              <div class="gap-expand-route">Invoice delivery &rarr; Invoice receipt</div>
+              <div class="gap-expand-route">Invoice Delivery &rarr; Invoice Receipt</div>
               <div class="gap-expand-title">Days before the customer confirms receipt</div>
               <div class="gap-expand-row">
                 <div class="gap-expand-label">Engineered by</div>
@@ -1143,17 +1179,18 @@ footer{background:#071028;padding:72px 0 0;}
           </div>
         </div>
 
-        <div class="milestone" role="listitem" data-gap="2" tabindex="0" aria-label="Hover to see: Dispute and re-delivery">
+        <div class="milestone" role="listitem" data-gap="3" tabindex="0">
           <div class="milestone-dot"></div>
-          <div class="milestone-label">Invoice receipt</div>
+          <div class="milestone-label">Invoice Receipt Date</div>
         </div>
 
-        <div class="gap-segment" style="width:150px" data-idx="2">
+        <div class="gap-segment" style="width:120px" data-idx="3">
           <div class="gap-line"></div>
+          <div class="gap-capsule" data-tab="3">Dispute &amp; resolution</div>
           <div class="gap-expand">
             <div class="gap-expand-inner">
-              <div class="gap-expand-route">Invoice receipt &rarr; Approval</div>
-              <div class="gap-expand-title">Dispute &amp; re-delivery</div>
+              <div class="gap-expand-route">Invoice Receipt &rarr; Invoice Approval</div>
+              <div class="gap-expand-title">Dispute, follow-up &amp; resolution cycle</div>
               <div class="gap-expand-row">
                 <div class="gap-expand-label">Engineered by</div>
                 <div class="gap-expand-val">Right-first-time invoicing, dispute prevention.</div>
@@ -1162,16 +1199,17 @@ footer{background:#071028;padding:72px 0 0;}
           </div>
         </div>
 
-        <div class="milestone" role="listitem" data-gap="3" tabindex="0" aria-label="Hover to see: Approval to Remittance">
+        <div class="milestone" role="listitem" data-gap="4" tabindex="0">
           <div class="milestone-dot"></div>
-          <div class="milestone-label">Approval</div>
+          <div class="milestone-label">Invoice Approval Date</div>
         </div>
 
-        <div class="gap-segment" style="width:130px" data-idx="3">
+        <div class="gap-segment" style="width:80px" data-idx="4">
           <div class="gap-line" style="border-color:rgba(0,100,255,0.18);"></div>
+          <div class="gap-capsule" data-tab="4">Pay term</div>
           <div class="gap-expand">
             <div class="gap-expand-inner">
-              <div class="gap-expand-route">Approval &rarr; Remittance issue</div>
+              <div class="gap-expand-route">Approval &rarr; Pay Term</div>
               <div class="gap-expand-title">The contractual pay term</div>
               <div class="gap-expand-row">
                 <div class="gap-expand-label">Commercial, not engineered</div>
@@ -1181,39 +1219,74 @@ footer{background:#071028;padding:72px 0 0;}
           </div>
         </div>
 
-        <div class="milestone" role="listitem" data-gap="4" tabindex="0" aria-label="Hover to see: Remittance to Cash application">
+        <div class="milestone pay-term" role="listitem" data-gap="5" tabindex="0">
           <div class="milestone-dot"></div>
-          <div class="milestone-label">Remittance issue</div>
+          <div class="milestone-label" style="color:#e63946;">Pay Term</div>
         </div>
 
-        <div class="gap-segment" style="width:150px" data-idx="4">
+        <div class="gap-segment" style="width:100px" data-idx="5">
           <div class="gap-line"></div>
+          <div class="gap-capsule" data-tab="5">Collections</div>
           <div class="gap-expand">
             <div class="gap-expand-inner">
-              <div class="gap-expand-route">Remittance issue &rarr; Cash application</div>
-              <div class="gap-expand-title">Days overdue and percent overdue</div>
+              <div class="gap-expand-route">Pay Term &rarr; Payment Issue</div>
+              <div class="gap-expand-title">Days overdue past the contractual term</div>
               <div class="gap-expand-row">
                 <div class="gap-expand-label">Engineered by</div>
-                <div class="gap-expand-val">Prioritised collections, exception handling.</div>
+                <div class="gap-expand-val">Prioritised collections, proactive follow-up.</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="milestone" role="listitem" data-gap="4" tabindex="0" aria-label="Cash application">
+        <div class="milestone" role="listitem" data-gap="6" tabindex="0">
           <div class="milestone-dot"></div>
-          <div class="milestone-label" style="color:var(--blue);">Cash application</div>
+          <div class="milestone-label">Payment Issue Date</div>
+        </div>
+
+        <div class="gap-segment" style="width:90px" data-idx="6">
+          <div class="gap-line"></div>
+          <div class="gap-capsule" data-tab="6">Transit</div>
+          <div class="gap-expand">
+            <div class="gap-expand-inner">
+              <div class="gap-expand-route">Payment Issue &rarr; Payment Receipt</div>
+              <div class="gap-expand-title">Payment processing and transit time</div>
+              <div class="gap-expand-row">
+                <div class="gap-expand-label">Engineered by</div>
+                <div class="gap-expand-val">Payment tracking and exception alerting.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="milestone" role="listitem" data-gap="7" tabindex="0">
+          <div class="milestone-dot"></div>
+          <div class="milestone-label">Payment Receipt Date</div>
+        </div>
+
+        <div class="gap-segment" style="width:90px" data-idx="7">
+          <div class="gap-line"></div>
+          <div class="gap-capsule" data-tab="7">Matching</div>
+          <div class="gap-expand">
+            <div class="gap-expand-inner">
+              <div class="gap-expand-route">Payment Receipt &rarr; Cash Application</div>
+              <div class="gap-expand-title">Days before cash is matched and applied</div>
+              <div class="gap-expand-row">
+                <div class="gap-expand-label">Engineered by</div>
+                <div class="gap-expand-val">Automated matching, remittance parsing, exception handling.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="milestone" role="listitem" data-gap="7" tabindex="0">
+          <div class="milestone-dot"></div>
+          <div class="milestone-label" style="color:var(--blue);">Cash Application Date</div>
         </div>
 
       </div>
 
-      <div class="gap-tabs" role="tablist" aria-label="Operational gaps">
-        <button class="gap-tab" data-tab="0" role="tab">Ship &rarr; Invoice delivery</button>
-        <button class="gap-tab" data-tab="1" role="tab">Invoice delivery &rarr; Receipt</button>
-        <button class="gap-tab" data-tab="2" role="tab">Dispute &amp; re-delivery</button>
-        <button class="gap-tab" data-tab="3" role="tab">Pay term</button>
-        <button class="gap-tab" data-tab="4" role="tab">Remittance &rarr; Cash application</button>
-      </div>
+      <div class="gap-tabs" role="tablist" aria-label="Operational gaps"></div>
 
       <div class="gap-panel-wrap">
         <div class="gap-panel" id="gapPanel" role="region" aria-live="polite"></div>
@@ -1222,7 +1295,7 @@ footer{background:#071028;padding:72px 0 0;}
       <div class="ladder-resolve">
         <div class="ladder-arrow" aria-hidden="true">&rarr;</div>
         <div>
-          <div class="ladder-resolve-label">Ship-to-Pay Days</div>
+          <div class="ladder-resolve-label">Order-to-Cash Days</div>
           <div class="ladder-resolve-sub">The individual gaps above resolve into this single business outcome.</div>
         </div>
       </div>
@@ -1230,7 +1303,7 @@ footer{background:#071028;padding:72px 0 0;}
   </div>
 </section>
 
-<section class="how-build" id="how-build" aria-labelledby="how-build-heading">
+<section class="how-build<section class="how-build" id="how-build" aria-labelledby="how-build-heading">
   <div class="wrap">
     <div class="how-build-grid">
       <div class="how-build-left">
@@ -1251,19 +1324,6 @@ footer{background:#071028;padding:72px 0 0;}
   </div>
 </section>
 
-<section class="close" id="close" aria-labelledby="close-heading">
-  <div class="close-canvas-wrap" aria-hidden="true">
-    <canvas id="closeCanvas"></canvas>
-  </div>
-  <div class="close-vignette" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="close-content">
-      <h2 id="close-heading">Built to keep working.</h2>
-      <p class="close-body-text">The work doesn&rsquo;t stop when we leave. Every rebuilt system ships with a named operating owner, documented maintenance economics and a defined exit path.</p>
-      <p class="close-final">The system becomes part of how your business works &mdash; built to <em>run, evolve and keep delivering.</em></p>
-    </div>
-  </div>
-</section>
 
 <section class="connect" id="connect">
   <div class="wrap">
@@ -1531,137 +1591,6 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(measure);}
 })();
 
-/* ===== CLOSE SECTION — living network ===== */
-(function(){
-  const cv=document.getElementById('closeCanvas');
-  if(!cv)return;
-  const ctx=cv.getContext('2d');
-  const reduce=REDUCED;
-  let W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2);
-  let nodes=[],pulses=[],raf=null,running=false;
-
-  const COUNT=26, LINK_DIST=170;
-
-  function seed(){
-    nodes=[];
-    for(let i=0;i<COUNT;i++){
-      nodes.push({
-        x:Math.random()*W, y:Math.random()*H,
-        vx:(Math.random()-0.5)*0.16,
-        vy:(Math.random()-0.5)*0.16,
-        r:1.4+Math.random()*1.6
-      });
-    }
-  }
-
-  function resize(){
-    const r=cv.getBoundingClientRect();
-    W=r.width;H=r.height;
-    cv.width=W*dpr;cv.height=H*dpr;
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    if(!nodes.length||W===0) seed();
-  }
-
-  function spawnPulse(){
-    if(nodes.length<2)return;
-    const a=Math.floor(Math.random()*nodes.length);
-    let b=-1,best=Infinity;
-    for(let i=0;i<nodes.length;i++){
-      if(i===a)continue;
-      const d=Math.hypot(nodes[i].x-nodes[a].x,nodes[i].y-nodes[a].y);
-      if(d<LINK_DIST&&d<best){best=d;b=i;}
-    }
-    if(b<0)return;
-    pulses.push({a,b,t:0,speed:0.006+Math.random()*0.006});
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-
-    nodes.forEach(n=>{
-      n.x+=n.vx;n.y+=n.vy;
-      if(n.x<0||n.x>W)n.vx*=-1;
-      if(n.y<0||n.y>H)n.vy*=-1;
-    });
-
-    for(let i=0;i<nodes.length;i++){
-      for(let j=i+1;j<nodes.length;j++){
-        const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
-        const d=Math.hypot(dx,dy);
-        if(d<LINK_DIST){
-          const a=(1-d/LINK_DIST)*0.16;
-          ctx.strokeStyle='rgba(0,100,255,'+a+')';
-          ctx.lineWidth=1;
-          ctx.beginPath();
-          ctx.moveTo(nodes[i].x,nodes[i].y);
-          ctx.lineTo(nodes[j].x,nodes[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    nodes.forEach(n=>{
-      ctx.beginPath();
-      ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(120,175,255,0.55)';
-      ctx.fill();
-    });
-
-    for(let k=pulses.length-1;k>=0;k--){
-      const p=pulses[k];
-      const A=nodes[p.a],B=nodes[p.b];
-      if(!A||!B){pulses.splice(k,1);continue;}
-      p.t+=p.speed;
-      if(p.t>=1){pulses.splice(k,1);continue;}
-      const x=A.x+(B.x-A.x)*p.t, y=A.y+(B.y-A.y)*p.t;
-      const fade=Math.sin(p.t*Math.PI);
-      ctx.beginPath();
-      ctx.arc(x,y,2.6,0,Math.PI*2);
-      ctx.fillStyle='rgba(0,100,255,'+(0.9*fade)+')';
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(x,y,7,0,Math.PI*2);
-      ctx.fillStyle='rgba(0,100,255,'+(0.14*fade)+')';
-      ctx.fill();
-    }
-
-    if(pulses.length<5&&Math.random()<0.03) spawnPulse();
-    raf=requestAnimationFrame(draw);
-  }
-
-  function staticFrame(){
-    ctx.clearRect(0,0,W,H);
-    for(let i=0;i<nodes.length;i++){
-      for(let j=i+1;j<nodes.length;j++){
-        const d=Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y);
-        if(d<LINK_DIST){
-          ctx.strokeStyle='rgba(0,100,255,'+((1-d/LINK_DIST)*0.16)+')';
-          ctx.lineWidth=1;ctx.beginPath();
-          ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke();
-        }
-      }
-    }
-    nodes.forEach(n=>{
-      ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(120,175,255,0.55)';ctx.fill();
-    });
-  }
-
-  resize();
-  window.addEventListener('resize',()=>{resize();if(reduce)staticFrame();});
-
-  if(reduce){staticFrame();return;}
-
-  const sec=document.getElementById('close');
-  const io=new IntersectionObserver(es=>{
-    es.forEach(e=>{
-      if(e.isIntersecting&&!running){running=true;raf=requestAnimationFrame(draw);}
-      else if(!e.isIntersecting&&running){running=false;cancelAnimationFrame(raf);}
-    });
-  },{threshold:0.05});
-  if(sec)io.observe(sec); else raf=requestAnimationFrame(draw);
-})();
-
 /* ===== METRIC LADDER — expanding lines + popup boxes ===== */
 (function(){
   const milestones = document.querySelectorAll('.milestone[data-gap]');
@@ -1703,7 +1632,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function positionPanel(idx) {
     if (!panel || !wrap) return;
-    const cap = document.querySelector('.gap-tab[data-tab="' + idx + '"]');
+    const cap = document.querySelector('.gap-capsule[data-tab="' + idx + '"]');
     if (!cap) return;
     const capRect = cap.getBoundingClientRect();
     const wrapRect = wrap.getBoundingClientRect();
@@ -1739,12 +1668,12 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     clearTimer = setTimeout(() => {
       gaps.forEach(g => g.classList.remove('active'));
       milestones.forEach(m => m.classList.remove('active'));
-      document.querySelectorAll('.gap-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.gap-capsule').forEach(t => t.classList.remove('active'));
       if (panel) panel.classList.remove('visible');
     }, 120);
   }
 
-  const tabs = document.querySelectorAll('.gap-tab');
+  const tabs = document.querySelectorAll('.gap-capsule');
 
   milestones.forEach(m => {
     m.addEventListener('mouseenter', () => activate(parseInt(m.dataset.gap)));
@@ -1780,6 +1709,52 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
   step();
   setInterval(step,1800);
+})();
+
+
+/* ===== OFFERINGS — accordion, one open at a time ===== */
+(function(){
+  document.documentElement.classList.add('js');
+  const items = document.querySelectorAll('.acc-item');
+  if(!items.length) return;
+
+  function setOpen(item, open){
+    const body = item.querySelector('.acc-body');
+    const btn = item.querySelector('.acc-btn');
+    if(open){
+      item.classList.add('open');
+      if(btn) btn.setAttribute('aria-expanded','true');
+      if(body) body.style.maxHeight = body.scrollHeight + 'px';
+    } else {
+      item.classList.remove('open');
+      if(btn) btn.setAttribute('aria-expanded','false');
+      if(body) body.style.maxHeight = '0';
+    }
+  }
+
+  items.forEach(item => {
+    const btn = item.querySelector('.acc-btn');
+    if(!btn) return;
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      items.forEach(other => { if(other !== item) setOpen(other, false); });
+      setOpen(item, !isOpen);
+    });
+  });
+
+  const firstOpen = document.querySelector('.acc-item.open');
+  if(firstOpen){
+    const body = firstOpen.querySelector('.acc-body');
+    if(body) body.style.maxHeight = body.scrollHeight + 'px';
+  }
+
+  window.addEventListener('resize', () => {
+    const open = document.querySelector('.acc-item.open');
+    if(open){
+      const body = open.querySelector('.acc-body');
+      if(body) body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  });
 })();
 
 </script>

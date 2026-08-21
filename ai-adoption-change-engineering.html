@@ -223,47 +223,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .btn-primary:hover{background:var(--blue-strong);transform:translateY(-1px);}
 .btn-primary svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;}
 
-/* ---- boundary band: drifts in the hero, settled at the close ---- */
-.band-block{position:relative;z-index:1;width:100%;margin-top:clamp(48px,6vw,80px);}
-.hero .band-block{opacity:0;animation:fadeUp .8s ease 1.3s forwards;}
-.band-head{
-  display:flex;justify-content:space-between;align-items:baseline;
-  font-family:var(--display);font-weight:400;
-  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(255,255,255,0.4);
-  margin-bottom:14px;
-}
-.band-head .r{color:var(--blue-24);}
-.band{
-  position:relative;
-  display:flex;align-items:flex-end;justify-content:space-between;
-  height:clamp(64px,9vw,104px);
-  border-bottom:1px solid rgba(255,255,255,0.16);
-}
-.bar{
-  flex:0 0 3px;width:3px;height:26%;
-  background:rgba(255,255,255,0.16);
-  transition:height .6s cubic-bezier(.4,0,.2,1),background-color .6s ease;
-}
-.bar.human{height:86%;background:rgba(255,255,255,0.88);}
-.bar.agent{height:32%;background:var(--blue-24);}
-.band-marker{
-  position:absolute;top:-10px;bottom:-1px;
-  width:1px;background:rgba(255,255,255,0.55);
-  transition:left .6s cubic-bezier(.4,0,.2,1);
-  pointer-events:none;
-}
-.band-marker::before{
-  content:'';position:absolute;top:-3px;left:-2.5px;
-  width:6px;height:6px;border-radius:50%;background:#fff;
-}
-.band-caption{
-  margin-top:14px;
-  font-size:12.5px;line-height:1.6;
-  color:rgba(255,255,255,0.34);
-  max-width:56ch;
-}
-
 /* ===========================================================
    SECTION 1 — THE SHIFT
    =========================================================== */
@@ -540,73 +499,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .rule-note p strong{color:#fff;font-weight:400;}
 
 /* ===========================================================
-   SECTION 4 — OUTCOME STORIES
-   No readings exist. Say exactly that, and nothing that could
-   be mistaken for a number.
-   =========================================================== */
-.evidence{
-  background:var(--paper);
-  padding:var(--sec) 0;
-  border-bottom:1px solid var(--paper-line);
-}
-.evidence h2{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(36px,5vw,72px);
-  line-height:1.02;letter-spacing:-0.03em;
-  margin-bottom:clamp(36px,4.4vw,56px);
-  text-align:center;
-}
-.ev-col{max-width:62ch;margin:0 auto;text-align:center;}
-.ev-lead{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(26px,3.2vw,46px);
-  line-height:1.12;letter-spacing:-0.026em;
-  margin-bottom:18px;
-}
-.ev-lead em{font-style:normal;color:var(--blue);}
-.ev-text{
-  font-size:clamp(16.5px,1.5vw,20px);
-  line-height:1.64;color:var(--ink-60);
-  margin-bottom:clamp(32px,3.6vw,44px);
-}
-.ev-next{
-  border-top:1px solid var(--paper-line);
-  padding-top:20px;
-  margin-bottom:clamp(32px,3.6vw,44px);
-  display:inline-block;text-align:left;
-}
-.ev-next-k{
-  font-family:var(--display);font-weight:400;
-  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink-40);margin-bottom:4px;
-}
-.ev-next-list{list-style:none;}
-.ev-next-list li{
-  display:flex;align-items:baseline;gap:14px;
-  padding:14px 0;
-  border-bottom:1px solid var(--paper-line);
-  font-family:var(--display);font-weight:400;
-  font-size:clamp(16px,1.6vw,21px);
-  line-height:1.3;letter-spacing:-0.015em;
-  color:var(--ink);
-}
-.ev-next-list li::before{
-  content:'';flex-shrink:0;
-  width:7px;height:7px;border-radius:50%;
-  border:1px solid var(--blue-24);
-}
-.ev-standard{
-  border-left:none;
-  padding-left:0;
-}
-.ev-standard p{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(19px,2vw,27px);
-  line-height:1.2;letter-spacing:-0.02em;
-  color:var(--ink);
-}
-
-/* ===========================================================
    SECTION 5 — CLOSING
    =========================================================== */
 .close{
@@ -782,7 +674,7 @@ footer{background:#071028;padding:72px 0 0;}
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important;}
   .hl > span{transform:none;}
-  .hero-badge,.hero-open,.hero-ctas,.hero .band-block{opacity:1;}
+  .hero-badge,.hero-open,.hero-ctas{opacity:1;}
   .js .q-new{opacity:1;transform:none;}
   .js .q-old::after{width:100%;}
 }
@@ -856,16 +748,6 @@ footer{background:#071028;padding:72px 0 0;}
     </div>
   </div>
 
-  <div class="wrap band-block">
-    <div class="band-head">
-      <span>Deployed</span>
-      <span class="r">Adopted</span>
-    </div>
-    <div class="band" id="bandHero" data-settled="0" aria-hidden="true">
-      <span class="band-marker"></span>
-    </div>
-    <p class="band-caption">The gap between what was deployed and what was actually adopted. Closing it is the reason this practice exists.</p>
-  </div>
 </header>
 
 <main>
@@ -1191,30 +1073,6 @@ footer{background:#071028;padding:72px 0 0;}
   </div>
 </section>
 
-<!-- ================= SECTION 4 — OUTCOME STORIES ================= -->
-<section class="evidence" id="outcomes" aria-labelledby="ev-h">
-  <div class="wrap">
-    <h2 id="ev-h">Outcome stories</h2>
-
-    <div class="ev-col">
-      <p class="ev-lead">No <em>verified readings yet</em>.</p>
-      <p class="ev-text">Offerings stand on their own until there are.</p>
-
-      <div class="ev-next">
-        <div class="ev-next-k">First readings expected from</div>
-        <ul class="ev-next-list">
-          <li>Gemini Enterprise transformation and adoption measurement engagements</li>
-        </ul>
-      </div>
-
-      <div class="ev-standard">
-        <p>Do not fill this space with soft numbers.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 </main>
 
 <!-- ================= LET'S CONNECT (shared) ================= -->
@@ -1335,63 +1193,6 @@ footer{background:#071028;padding:72px 0 0;}
 
 <script>
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ===== BOUNDARY BAND ===== */
-(function(){
-  document.querySelectorAll('.band').forEach(band => {
-    const settled = band.dataset.settled === '1';
-    const marker  = band.querySelector('.band-marker');
-    let bars = [];
-
-    function build(){
-      bars.forEach(b => b.remove());
-      bars = [];
-      const w = band.clientWidth || 900;
-      const n = Math.max(12, Math.min(66, Math.round(w / 18)));
-      const frag = document.createDocumentFragment();
-      for(let i=0;i<n;i++){
-        const b = document.createElement('span');
-        b.className = 'bar';
-        frag.appendChild(b);
-        bars.push(b);
-      }
-      band.insertBefore(frag, marker);
-    }
-
-    function paint(boundary){
-      if(marker) marker.style.left = (boundary*100).toFixed(2) + '%';
-      const n = bars.length;
-      for(let i=0;i<n;i++){
-        const isHuman = ((i + 0.5) / n) <= boundary;
-        bars[i].classList.toggle('human', isHuman);
-        bars[i].classList.toggle('agent', !isHuman);
-      }
-    }
-
-    build();
-
-    if(settled || REDUCED){
-      const b = settled ? 0.38 : 0.46;
-      paint(b);
-      window.addEventListener('resize', () => { build(); paint(b); });
-      return;
-    }
-
-    const t0 = performance.now();
-    function tick(){
-      const s = (performance.now() - t0) / 1000;
-      const b = 0.48 + 0.13*Math.sin(s/3.9) + 0.05*Math.sin(s/1.7 + 1.1);
-      paint(Math.max(0.16, Math.min(0.84, b)));
-    }
-    tick();
-    setInterval(tick, 110);
-    let rz;
-    window.addEventListener('resize', () => {
-      clearTimeout(rz);
-      rz = setTimeout(() => { build(); tick(); }, 150);
-    });
-  });
-})();
 
 /* ===== THE SHIFT — questions replace themselves on arrival ===== */
 (function(){

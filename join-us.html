@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<!--
+  searce.com/join-us — with the 2026 content changes applied.
+
+  BASE: the live https://www.searce.com/join-us server-rendered DOM.
+  Every class name is the live one, so this maps 1:1 onto the Next.js
+  components. Sections the content doc marks "retain as is" are the
+  live markup untouched.
+
+  CHANGED (per Website_content_2026.md, section 9):
+    1. Hero heading -> "Become a modern solver."
+    2. "are you the solver we're looking for?" -> the four solver
+       clauses; the supporting paragraph -> the ticket-queues copy.
+    3. "what drives us" -> relaid out as equations + solver paths.
+    4. NEW "culture" section, before voice of searcians.
+
+  RETAINED AS IS: the marquee, voice of searcians, global tribe,
+  open positions, the resume CTA, the footer.
+
+  Normalised for standalone use (no content change): ?dpl= deploy
+  cache-busters dropped, /_next/image wrappers resolved to their
+  source URLs, and the RSC hydration payload / chunk <script> tags
+  removed. Site-relative asset paths are left exactly as production
+  serves them, so they 404 in local preview and resolve once this is
+  served from the site's own origin.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+<title>Searce | AI Outcome Engineering</title>
+<meta name="description" content="AI powered Searce solver squads offering modern engineering services promising acceleration of real business outcomes."/>
+<link rel="manifest" href="/site.webmanifest"/>
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png"/>
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/preview.css"/>
+</head>
+<body>
+<div>
+
+<!-- ============================================================
+     HERO — layout unchanged. Heading replaced.
+     ============================================================ -->
+<section class="relative bg-blue-900 w-full min-h-screen flex justify-center items-center py-12 md:py-0">
+  <div class="absolute w-full h-full inset-0 z-20 pointer-events-none opacity-[0.15]">
+    <div class="w-full h-full" style="background-image:linear-gradient(#7d7d7d 1px, transparent 1px), linear-gradient(90deg, #7d7d7d 1px, transparent 1px);background-size:60px 60px;background-position:-1px -1px"></div>
+  </div>
+  <div id="mainContainer" class="max-w-[1440px] mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 px-4 sm:px-6 md:px-10 xl:px-20 overflow-hidden items-center">
+    <div class="w-full text-white text-left md:text-left flex flex-col justify-center items-center md:items-start mt-10">
+      <div id="textContent" class="max-w-sm md:max-w-lg md:text-left flex flex-col items-start">
+        <div class="mb-8 inline-block px-4 py-2 border border-[#0064FF]/30 bg-[#0064FF]/5 backdrop-blur-sm"><span class="text-blue-300 tracking-wide text-sm">Make 'time travel' real</span></div>
+        <h1 class="text-[clamp(2rem,5vw,4rem)] leading-[1.15] tracking-tight mb-10 text-white" id="textHeading">Become a modern solver.</h1>
+        <button class="group px-8 py-4 bg-[#0064FF] hover:bg-[#0052D9] text-white transition-all duration-300 inline-flex items-center gap-3" id="ctaButton"><span class="tracking-wide">view job openings</span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="group-hover:translate-y-1 transition-transform duration-300" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="m20 12-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"></path></svg></button>
+      </div>
+    </div>
+    <div id="graphSection" class="flex flex-col items-center justify-center w-full mt-8 md:mt-10">
+      <svg viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] h-auto"><path id="grayGraph" d="M205.824 202.816H0L205.824 0V202.816Z" fill="#999999"></path><path id="blueGraph" d="M61.4463 0L0 202.386H61.4463V0Z" fill="#2866F5"></path><path id="whiteGraph" d="M61.4463 0L0 60.5869H61.4463V0Z" fill="white" opacity="0"></path></svg>
+      <div class="mt-4 md:mt-6 mb-4 w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px]">
+        <svg viewBox="0 0 210 2" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto"><rect id="grayBar" width="206.253" height="2.14847" fill="#999999"></rect><rect id="blueBar" width="61.4463" height="2.14847" fill="#2866F5"></rect></svg>
+      </div>
+      <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3 md:gap-4 w-full max-w-[300px] sm:max-w-[400px] md:max-w-sm text-xs sm:text-sm md:text-base px-4 md:px-0"><span id="blueBarText" class="text-blue-500 whitespace-nowrap">1000 days at searce</span><span id="equalBarText" class="text-white">=</span><span id="grayBarText" class="text-gray-400 whitespace-nowrap">10 years elsewhere</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     THE SOLVER SECTION — same two-column layout and type scale.
+     Both blocks of copy replaced. The heading copy is four
+     clauses, so it is set as four blocks using the site's own
+     <span class="block"> idiom rather than one run-on line.
+     Lowercase openings on "work" and "solvers" are as written.
+     ============================================================ -->
+<section class="bg-white">
+  <div class="max-w-[1440px] mx-auto py-12 px-6 sm:px-10 xl:px-20 grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
+    <div>
+      <h2 class="text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-6xl leading-tight text-left text-blue-900"><span class="block">work inside the problem.</span><span class="block">Understand the business.</span><span class="block">Build the system.</span><span class="block">Own the outcome.</span></h2>
+    </div>
+    <div class="space-y-6 mt-2">
+      <h3 class="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-left max-w-5xl text-blue-900">solvers at Searce don't build from ticket queues. They work where the problem lives, with the operators and leaders who own it, on outcomes that get measured and read out loud.</h3>
+    </div>
+  </div>
+</section>
+
+<!-- ============= MARQUEE — retained as is ============= -->
+<div class="w-full bg-black"><section aria-hidden="true" class="w-full h-[50vw] md:h-[20vw] bg-black"></section></div>
+
+<!-- ============================================================
+     WHAT DRIVES US — relaid out, per the content doc.
+     The copy is equations, so it is set as equations: two
+     multiplications resolving to a blue result, the
+     multiplication-not-addition note bound to them by a rule, the
+     1,000-days statement, and the seven solver paths as chips.
+     The four principle cards and the detail panel they fed are
+     replaced by this. Background kept black, as it was.
+     ============================================================ -->
+<section class="bg-[#000000] py-24 w-full">
+  <div class="max-w-[1440px] relative mx-auto px-6 sm:px-10 xl:px-20 overflow-hidden">
+    <div class="mb-16">
+      <h2 class="text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-6xl leading-tight text-left mb-6 text-white"><span class="block">what drives us</span></h2>
+    </div>
+
+    <div class="flex flex-col gap-8 border-t border-[#2D3748] pt-10">
+      <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-white">
+        <span>real thinkers</span><span class="text-[#0064FF]" aria-label="times">&times;</span><span>real doers</span><span class="text-[#0064FF]">=</span><span class="text-[#0064FF]">real solvers</span>
+      </p>
+      <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-white">
+        <span>strategy</span><span class="text-[#0064FF]" aria-label="times">&times;</span><span>execution</span><span class="text-[#0064FF]">=</span><span class="text-[#0064FF]">solving</span>
+      </p>
+      <div class="flex gap-4 border-l-2 border-[#0064FF] pl-5 mt-2">
+        <p class="text-md sm:text-lg leading-relaxed text-gray-300 max-w-2xl">Multiplication, not addition. Either one at zero, and so is the answer.</p>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-10 border-t border-[#2D3748] grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+      <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-2xl sm:text-3xl md:text-4xl leading-tight text-white">
+        <span>1,000 days at Searce</span><span class="text-[#0064FF]">=</span><span class="text-[#0064FF]">10 years anywhere else.</span>
+      </p>
+      <p class="text-md sm:text-lg leading-relaxed text-gray-300">Learning velocity is the deal: <span class="text-white">learn Monday, ship Friday, present the outcome by quarter end.</span></p>
+    </div>
+
+    <div class="mt-16 pt-10 border-t border-[#2D3748]">
+      <p class="[font-size-adjust:none] text-lg tracking-[0.2em] text-left text-[#999999] mb-8">THE SOLVER PATHS</p>
+      <div class="flex flex-wrap gap-3">
+        <span class="rounded-full border border-[#0064FF]/40 bg-[#020f27] px-5 py-3 text-md text-white">Forward-Deployed Solver</span>
+        <span class="rounded-full border border-[#0064FF]/40 bg-[#020f27] px-5 py-3 text-md text-white">AI Engineer</span>
+        <span class="rounded-full border border-[#0064FF]/40 bg-[#020f27] px-5 py-3 text-md text-white">Platform Engineer</span>
+        <span class="rounded-full border border-[#0064FF]/40 bg-[#020f27] px-5 py-3 text-md text-white">Data Engineer</span>
+        <span class="rounded-full border border-[#0064FF]/40 bg-[#020f27] px-5 py-3 text-md text-white">Software Engineer</span>
+        <span class="rounded-full border border-[#0064FF]/40 bg-[#020f27] px-5 py-3 text-md text-white">Reliability Engineer</span>
+        <span class="rounded-full border border-[#0064FF]/40 bg-[#020f27] px-5 py-3 text-md text-white">Experience Designer</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CULTURE — new section, per the content doc.
+     ============================================================ -->
+<section class="bg-[linear-gradient(90deg,#001630_67%,#004596_100%)]">
+  <div class="max-w-[1440px] mx-auto py-16 px-6 sm:px-10 xl:px-20 text-white">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-6xl leading-tight text-left mb-10 text-blue-100"><span class="block">culture</span></h2>
+    <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-left mb-10 text-[#C3C3C3] max-w-4xl"><span class="text-white">happier</span> is how we behave. <span class="text-white">Mistakes are encouraged.</span> Solve-a-thons are how we hire and how we work: <span class="text-white">never the easiest first option, three to eight iterations, always.</span></p>
+    <a class="
+    inline-flex items-center justify-center
+    rounded-full font-medium
+    transition-all duration-300 ease-in-out
+    hover:scale-105 hover:shadow-lg
+    whitespace-nowrap
+    px-6 py-3 text-lg gap-4
+   group" style="background-color:#0064FF;color:#ffffff;border-color:transparent;border-width:0px;border-style:solid" href="#open-positions"><span class="inline-flex items-center gap-3 whitespace-normal"><span>join the solver movement</span><span class="
+    flex items-center justify-center
+    rounded-full transition-transform duration-300 p-1 h-auto!
+    group-hover:translate-x-1
+  "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" style="color:#ffffff" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></span></span></a>
+  </div>
+</section>
+
+<!-- ===== VOICE OF SEARCIANS — retained as is, and everything after ===== -->
+<section class="bg-white">
+  <div class="relative max-w-[1470px] mx-auto py-12 px-6 sm:px-10 xl:px-20 overflow-hidden">
+    <div class="mb-1"><h2 class="text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-6xl leading-tight text-left text-blue-900"><span class="block">voice of searcians</span></h2></div>
+    <div class="grid grid-cols-1 lg:grid-cols-[3fr_3fr] gap-4 sm:gap-4 md:gap-4 lg:gap-4 items-center min-h-[300px]">
+      <div class="relative h-[300px] md:h-[500px] lg:h-[550px] flex items-center justify-center lg:justify-end left-4">
+        <div class="relative w-[280px] md:w-[450px] lg:w-[400px] h-full ml-0 lg:ml-12">
+          <div id="light-blue" class="absolute"><img alt="Light Blue Ball" loading="lazy" width="70" height="70" decoding="async" class="drop-shadow-lg w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20" src="/images/light-blue.svg"/></div>
+          <div id="ball-1" class="absolute rounded-full"><img alt="Ball 1" loading="lazy" width="240" height="240" decoding="async" class="drop-shadow-lg w-28 h-28 md:w-48 md:h-48 lg:w-60 lg:h-60 rounded-full" src="/images/ball-1.webp"/></div>
+          <div id="ball-2" class="absolute rounded-full"><img alt="Ball 2" loading="lazy" width="240" height="240" decoding="async" class="drop-shadow-lg w-28 h-28 md:w-48 md:h-48 lg:w-60 lg:h-60 rounded-full" src="/images/ball-2.webp"/></div>
+          <div id="ball-3" class="absolute rounded-full"><img alt="Ball 3" loading="lazy" width="180" height="180" decoding="async" class="drop-shadow-lg w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full" src="/images/ball-3.webp"/></div>
+          <div id="dark-blue" class="absolute"><img alt="Dark Blue Ball" loading="lazy" width="70" height="70" decoding="async" class="drop-shadow-lg w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20" src="/images/dark-blue.svg"/></div>
+          <div id="ball-4" class="absolute rounded-full"><img alt="Ball 4" loading="lazy" width="240" height="240" decoding="async" class="drop-shadow-lg w-28 h-28 md:w-48 md:h-48 lg:w-60 lg:h-60 rounded-full" src="/images/ball-4.webp"/></div>
+        </div>
+      </div>
+      <div class="text-blue-900 flex flex-col justify-between min-h-[400px]">
+        <div class="mb-6">
+          <div class="text-blue-600 text-2xl font-semibold mb-1">Nakul Narang</div>
+          <div class="text-sm text-blue-700 font-normal">Associate Director, Cloud Engineering</div>
+        </div>
+        <div class="flex-1"><p class="text-base md:text-lg lg:text-xl leading-relaxed mb-8 min-h-[200px] flex items-center">"At Searce, I had the incredible opportunity to build the EMEA delivery team from the ground up. Tackling 70+ complex projects was both challenging and rewarding. What made the difference? A passionate team driven by Searce's HAPPIER values. Empowered by leadership, we focused on excellence, innovation, and strong client partnerships—turning challenges into impactful results. At Searce, growth isn't just encouraged, it's built into everything we do."</p></div>
+        <div class="mt-8"><div class="flex gap-4">
+          <button class="prev-button w-12 h-12 border-2 border-blue-600 text-blue-600 rounded-full flex items-center cursor-pointer justify-center hover:bg-blue-600 hover:text-white transition-colors duration-200" aria-label="Go to Previous testimonial" title="Go to Previous testimonial"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg></button>
+          <button class="next-button w-12 h-12 border-2 border-blue-600 text-blue-600 rounded-full flex items-center cursor-pointer justify-center hover:bg-blue-600 hover:text-white transition-colors duration-200" aria-label="Go to Next testimonial" title="Go to Next testimonial"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GLOBAL TRIBE — retained as is ===== -->
+<section class="bg-[#E5EEFC]">
+  <div class="max-w-[1440px] mx-auto py-12 px-6 sm:px-10 xl:px-20 flex flex-col items-center">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-6 text-blue-600"><span class="block">find your place among our global tribe</span></h2>
+    <div class="relative w-full max-w-6xl aspect-video">
+      <img alt="World map" decoding="async" class="object-contain" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0" src="/images/JoinUsPage/WorldMap.svg"/>
+      <div class="absolute" style="left:16%;top:50%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:21%;top:47%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:23%;top:48%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:28%;top:54%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:28%;top:40%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:25%;top:33%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:45%;top:34%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:63%;top:50%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:60%;top:52%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:66.5%;top:50%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:66.5%;top:52%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:67.5%;top:53%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:68.5%;top:58%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:70%;top:54%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:68.5%;top:50%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:76%;top:62%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:75%;top:59%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:81%;top:58%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:76%;top:67%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+      <div class="absolute" style="left:88%;top:82%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OPEN POSITIONS — retained as is ===== -->
+<section id="open-positions" class="max-w-[1440px] mx-auto py-12 px-6 sm:px-10 xl:px-20">
+  <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl leading-tight text-center mb-16 text-blue-600"><span class="block">open positions</span></h2>
+  <div class="max-w-5xl mx-auto mb-8">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <input aria-label="search jobs" class="w-full md:w-1/3 bg-[#EAF2FF] text-[#767676] rounded-md p-4 placeholder-[#767676] focus:outline-none" placeholder="search" name="search" value=""/>
+      <div class="flex gap-2 md:gap-3 w-full md:w-auto min-w-0">
+        <select class="flex-1 md:flex-none md:w-48 bg-[#EAF2FF] text-[#767676] rounded-md p-4 min-w-0" name="function"><option value="" selected>function</option><option>Consulting and Information Technology</option><option>Engineering</option><option>Legal</option><option>Strategy/Planning</option></select>
+        <select class="flex-1 md:flex-none md:w-48 bg-[#EAF2FF] text-[#767676] rounded-md px-4 py-3 min-w-0" name="location"><option value="" selected>location</option><option>Bengaluru, Karnataka, India</option><option>Jakarta, Indonesia</option><option>London Area, United Kingdom</option><option>Pune District, Maharashtra, India</option></select>
+        <select class="flex-1 md:flex-none md:w-48 bg-[#EAF2FF] text-[#767676] rounded-md px-4 py-3 min-w-0" name="country"><option value="" selected>country</option><option>India</option><option>Indonesia</option><option>Singapore</option><option>United Kingdom</option></select>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-5xl mx-auto space-y-4">
+    <article class="bg-[#EAF2FF] rounded-xl p-6 flex items-center justify-between gap-4 shadow-md"><div class="max-w-2xl flex-1"><h3 class="text-2xl text-[#1E4AE8] font-medium">Field CTO</h3><p class="text-sm text-[#4B5563] mt-1">Consulting, Information Technology, and Strategy/Planning | Jakarta, Indonesia</p></div><a target="_blank" class="w-12 h-12 rounded-full bg-[#1E4AE8] flex items-center justify-center text-white flex-shrink-0" aria-label="Apply to Field CTO" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></article>
+    <article class="bg-[#EAF2FF] rounded-xl p-6 flex items-center justify-between gap-4 shadow-md"><div class="max-w-2xl flex-1"><h3 class="text-2xl text-[#1E4AE8] font-medium">Legal Director</h3><p class="text-sm text-[#4B5563] mt-1">Legal | Pune District, Maharashtra, India</p></div><a target="_blank" class="w-12 h-12 rounded-full bg-[#1E4AE8] flex items-center justify-center text-white flex-shrink-0" aria-label="Apply to Legal Director" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></article>
+    <article class="bg-[#EAF2FF] rounded-xl p-6 flex items-center justify-between gap-4 shadow-md"><div class="max-w-2xl flex-1"><h3 class="text-2xl text-[#1E4AE8] font-medium">Solutions Architect | Data Engineering</h3><p class="text-sm text-[#4B5563] mt-1">Information Technology, Consulting, and Strategy/Planning | Jakarta Metropolitan Area</p></div><a target="_blank" class="w-12 h-12 rounded-full bg-[#1E4AE8] flex items-center justify-center text-white flex-shrink-0" aria-label="Apply to Solutions Architect Data Engineering" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></article>
+    <article class="bg-[#EAF2FF] rounded-xl p-6 flex items-center justify-between gap-4 shadow-md"><div class="max-w-2xl flex-1"><h3 class="text-2xl text-[#1E4AE8] font-medium">Director Enterprise Solutions</h3><p class="text-sm text-[#4B5563] mt-1">Consulting, Information Technology, and Strategy/Planning | Jakarta, Indonesia</p></div><a target="_blank" class="w-12 h-12 rounded-full bg-[#1E4AE8] flex items-center justify-center text-white flex-shrink-0" aria-label="Apply to Director Enterprise Solutions" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></article>
+    <article class="bg-[#EAF2FF] rounded-xl p-6 flex items-center justify-between gap-4 shadow-md"><div class="max-w-2xl flex-1"><h3 class="text-2xl text-[#1E4AE8] font-medium">Director Strategic Alliances</h3><p class="text-sm text-[#4B5563] mt-1">Strategy/Planning | London Area, United Kingdom</p></div><a target="_blank" class="w-12 h-12 rounded-full bg-[#1E4AE8] flex items-center justify-center text-white flex-shrink-0" aria-label="Apply to Director Strategic Alliances" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></article>
+    <article class="bg-[#EAF2FF] rounded-xl p-6 flex items-center justify-between gap-4 shadow-md"><div class="max-w-2xl flex-1"><h3 class="text-2xl text-[#1E4AE8] font-medium">Data Architect</h3><p class="text-sm text-[#4B5563] mt-1">Engineering and Information Technology | Riyadh, Saudi Arabia</p></div><a target="_blank" class="w-12 h-12 rounded-full bg-[#1E4AE8] flex items-center justify-center text-white flex-shrink-0" aria-label="Apply to Data Architect" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></article>
+    <article class="bg-[#EAF2FF] rounded-xl p-6 flex items-center justify-between gap-4 shadow-md"><div class="max-w-2xl flex-1"><h3 class="text-2xl text-[#1E4AE8] font-medium">Principal Cloud Security Architect</h3><p class="text-sm text-[#4B5563] mt-1">Consulting, Strategy/Planning, and Sales | National Capital Region, Philippines</p></div><a target="_blank" class="w-12 h-12 rounded-full bg-[#1E4AE8] flex items-center justify-center text-white flex-shrink-0" aria-label="Apply to Principal Cloud Security Architect" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></article>
+    <article class="bg-[#EAF2FF] rounded-xl p-6 flex items-center justify-between gap-4 shadow-md"><div class="max-w-2xl flex-1"><h3 class="text-2xl text-[#1E4AE8] font-medium">Manager - Data Engineering</h3><p class="text-sm text-[#4B5563] mt-1">Engineering | Pune/Pimpri-Chinchwad Area</p></div><a target="_blank" class="w-12 h-12 rounded-full bg-[#1E4AE8] flex items-center justify-center text-white flex-shrink-0" aria-label="Apply to Manager Data Engineering" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></article>
+  </div>
+  <div class="max-w-5xl mx-auto mt-10 flex justify-center">
+    <div class="flex items-center gap-6">
+      <button class="w-10 h-10 rounded-full border flex items-center justify-center cursor-pointer border-gray-300 text-gray-300 cursor-not-allowed opacity-50" aria-label="previous page" disabled>&#8592;</button>
+      <div class="flex items-center gap-3">
+        <button class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer bg-blue-600 text-white" aria-current="page">1</button>
+        <button class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer text-gray-600">2</button>
+        <button class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer text-gray-600">3</button>
+        <button class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer text-gray-600">4</button>
+      </div>
+      <button class="w-10 h-10 rounded-full border flex items-center justify-center cursor-pointer border-blue-500 text-blue-500 hover:bg-blue-50" aria-label="next page">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESUME CTA — retained as is ===== -->
+<section class="bg-white">
+  <div class="max-w-[1440px] mx-auto py-12 px-4 sm:px-10 xl:px-20 text-center">
+    <div class="bg-[#E5EEFC] p-12 sm:p-10 rounded-lg">
+      <h3 class="text-xl sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-center text-blue-900 mb-10"><span class="block">Don't see a good fit? Send us your resume at</span></h3>
+      <a class="
+    inline-flex items-center justify-center
+    rounded-full font-medium
+    transition-all duration-300 ease-in-out
+    hover:scale-105 hover:shadow-lg
+    whitespace-nowrap
+    px-6 py-2 text-base gap-3
+    bg-[#FFFFFF] text-black
+   group" style="background-color:#ffffff;color:#2563eb;border-color:#2563eb;border-width:1px;border-style:solid" href="mailto:careers@searce.com"><span class="inline-flex items-center gap-3 whitespace-normal"><span>careers@searce.com</span><span class="
+    flex items-center justify-center
+    rounded-full transition-transform duration-300 p-1 h-auto!
+    bg-white bg-opacity-20
+    group-hover:translate-x-1
+  "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" style="color:#0064FF" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg></span></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER — retained as is ===== -->
+<footer class="bg-blue-900 text-white border-t-[0.5px] border-gray-700">
+  <div class="max-w-[1440px] mx-auto py-12 px-4 sm:px-10 xl:px-20">
+    <div class="flex flex-col lg:flex-row gap-12">
+      <div class="lg:w-3/12"><div class="mb-8 lg:mb-0">
+        <div class="mb-6"><a class="inline-block" href="/"><div class="relative w-[132px] h-[31px]"><img alt="searce logo" decoding="async" class="object-contain" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0" src="/images/searce-logo-white.svg"/></div></a></div>
+        <p class="font-google-sans-flex text-gray-300 text-base leading-relaxed max-w-sm">Pushing the boundaries of tech innovation and designing end-to-end industry solutions for our clients at global scale</p>
+      </div></div>
+      <div class="lg:w-9/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-5"><div>
+          <p class="text-white text-lg font-medium mb-4 inline-block">services</p>
+          <ul class="space-y-2">
+            <li><a href="/services/ai-native-cloud-platform-modernization" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">cloud platform modernization</a></li>
+            <li><a href="/services/ai-native-cloud-security-and-reliability-engineering" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">cloud security &amp; reliability engineering</a></li>
+            <li><a href="/services/ai-native-modern-work-ops" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">modern work ops</a></li>
+            <li><a href="/services/ai-native-modern-business-ops" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">modern business ops</a></li>
+          </ul>
+        </div></div>
+        <div class="lg:col-span-5"><div>
+          <p class="text-white text-lg font-medium mb-4 inline-block">industries</p>
+          <ul class="space-y-2">
+            <li><a href="/industries/financial-services-and-insurance" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">financial services &amp; insurance</a></li>
+            <li><a href="/industries/healthcare-and-life-sciences" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">healthcare &amp; life sciences</a></li>
+            <li><a href="/industries/travel-transportation-and-logistics" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">travel, transportation &amp; logistics</a></li>
+            <li><a href="/industries/retail-cpg-and-e-commerce" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">retail, CPG &amp; e-commerce</a></li>
+            <li><a href="/industries/telecommunications-media-entertainment-and-gaming" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">telecommunication, media, entertainment &amp; gaming</a></li>
+            <li><a href="/industries/manufacturing-industrials-and-construction" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">manufacturing, industrials &amp; construction</a></li>
+            <li><a href="/industries/technology-software-and-services" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">technology, software &amp; services</a></li>
+            <li><a href="/industries/natural-resources-energy-and-utilities" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">natural resources, energy &amp; utilities</a></li>
+            <li><a href="/industries/public-sector-and-education" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">public sector &amp; education</a></li>
+          </ul>
+        </div></div>
+        <div class="lg:col-span-2 space-y-3">
+          <div>
+            <a class="text-white text-lg font-medium mb-4 inline-block" href="/insights/case-studies">insights</a>
+            <ul class="space-y-2">
+              <li><a href="/insights/case-studies" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">case studies</a></li>
+              <li><a href="/insights/events" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">events</a></li>
+              <li><a href="/insights/articles" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">articles</a></li>
+              <li><a href="/insights/news" class="text-gray-300 text-base hover:text-white transition-colors duration-200 block">news</a></li>
+            </ul>
+          </div>
+          <div><ul class="space-y-3">
+            <li><a href="/who-we-are" class="text-white text-base hover:text-white transition-colors duration-200 block">about us</a></li>
+            <li><a href="/join-us" class="text-white text-base hover:text-white transition-colors duration-200 block">careers</a></li>
+            <li><a href="#lets-connect" class="text-white text-base hover:text-white transition-colors duration-200 block">let's connect</a></li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="hidden lg:block border-t border-gray-700 my-10 ml-[25%] w-[75%] mt-10 mb-8"></div>
+    <div class="flex flex-col lg:flex-row justify-between items-start gap-6">
+      <div class="lg:w-3/12 mt-4 lg:mt-0"><div class="flex space-x-4">
+        <a href="https://linkedin.com/company/searceinc" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn"><svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg></a>
+        <a href="https://twitter.com/searce" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors duration-200" aria-label="Twitter"><svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg></a>
+      </div></div>
+      <div class="lg:w-9/12 flex flex-col sm:flex-row justify-between gap-6">
+        <div class="relative flex flex-col md:flex-row lg:flex-row xl:flex-row 2xl:flex-row space-x-4 w-full md:w-fit">
+          <a href="/online-terms-of-service" class="text-gray-400 text-base hover:text-gray-300 transition-colors duration-200">terms of service</a>
+          <a href="/privacy" class="text-gray-400 text-base hover:text-gray-300 transition-colors duration-200">privacy policy</a>
+          <div class="relative"><a class="group flex items-center gap-1 text-gray-400 text-base hover:text-gray-300 transition-colors duration-200 cursor-pointer">legal<svg class="w-3 h-3 transition-transform duration-200 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a></div>
+        </div>
+        <div class="text-gray-400 text-base mt-20 md:mt-0 lg:mt-0"><p>&copy; 2026 Searce Technologies Inc.</p><p>all rights reserved</p></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -86,13 +86,50 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   list-style:none;font-size:14px;color:var(--ink-60);
   flex:1;justify-content:center;
 }
-.nav-links a{position:relative;padding:6px 2px;transition:color .2s ease;}
-.nav-links a:hover{color:var(--blue);}
-.nav-links a.current{color:var(--blue);}
-.nav-links a.current::after{
+.nav-links > li{position:relative;}
+.nav-links > li > a{
+  position:relative;
+  display:flex;align-items:center;gap:5px;
+  padding:6px 2px;transition:color .2s ease;
+}
+.nav-links > li > a:hover{color:var(--blue);}
+.nav-links > li > a.current{color:var(--blue);}
+.nav-links > li > a.current::after{
   content:"";position:absolute;left:0;right:0;bottom:-2px;
   height:2px;background:var(--blue);border-radius:2px;
 }
+/* dropdown — same pattern as the other practice pages */
+.chev{width:9px;height:9px;flex-shrink:0;transition:transform .2s ease;}
+.has-dropdown:hover .chev,
+.has-dropdown:focus-within .chev{transform:rotate(180deg);}
+.mega-panel{
+  position:absolute;top:100%;left:-14px;
+  margin-top:16px;
+  background:#fff;
+  border:1px solid var(--paper-line);
+  border-radius:16px;
+  box-shadow:0 28px 56px rgba(10,20,40,0.12);
+  padding:10px;
+  min-width:230px;
+  opacity:0;visibility:hidden;
+  transform:translateY(-10px);
+  transition:opacity .18s ease, transform .18s ease, visibility .18s;
+}
+.has-dropdown:hover .mega-panel,
+.has-dropdown:focus-within .mega-panel{
+  opacity:1;visibility:visible;transform:translateY(0);
+}
+.mega-item{
+  display:block;padding:11px 14px;border-radius:10px;
+  transition:background .15s ease,color .15s ease;
+}
+.mega-item:hover{background:var(--blue-06);}
+.mega-title{
+  display:block;
+  font-family:var(--display);font-weight:400;font-size:14.5px;
+  color:var(--ink);
+}
+.mega-item:hover .mega-title{color:var(--blue-strong);}
 .nav-cta{
   display:inline-flex;align-items:center;gap:8px;
   background:var(--blue);color:#fff;
@@ -705,6 +742,13 @@ footer{background:#071028;padding:72px 0 0;}
 .foot-copy{font-size:13px;color:rgba(255,255,255,0.35);white-space:nowrap;}
 
 /* ======= RESPONSIVE ======= */
+/* seven nav items plus the CTA need tighter tracking before the
+   links drop out at 768 */
+@media(max-width:1180px){
+  .nav .wrap{gap:20px;}
+  .nav-links{gap:20px;font-size:13.5px;}
+  .nav-cta{font-size:13px;padding:10px 16px;}
+}
 @media(max-width:1024px){
   :root{--sec:68px;--mod:72px;}
   .wrap{padding:0 28px;}
@@ -759,9 +803,20 @@ footer{background:#071028;padding:72px 0 0;}
       <li><a href="#">Outcomes</a></li>
       <li><a href="#">How we solve</a></li>
       <li><a href="#" class="current">Practices</a></li>
+      <li><a href="#">Problems</a></li>
       <li><a href="#">Industries</a></li>
       <li><a href="#">Insights</a></li>
-      <li><a href="#">Company</a></li>
+      <li class="has-dropdown">
+        <a href="#" aria-haspopup="true">Company
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <div class="mega-panel">
+          <a class="mega-item" href="#"><span class="mega-title">Who we are</span></a>
+          <a class="mega-item" href="#"><span class="mega-title">Partners</span></a>
+          <a class="mega-item" href="#"><span class="mega-title">Careers</span></a>
+          <a class="mega-item" href="#"><span class="mega-title">futurify.ai</span></a>
+        </div>
+      </li>
     </ul>
     <a href="#connect" class="nav-cta">
       bring us a problem

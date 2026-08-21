@@ -246,7 +246,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   transition:height .6s cubic-bezier(.4,0,.2,1),background-color .6s ease;
 }
 .bar.human{height:86%;background:rgba(255,255,255,0.88);}
-.bar.agent{height:32%;background:var(--blue);}
+.bar.agent{height:32%;background:var(--blue-24);}
 .band-marker{
   position:absolute;top:-10px;bottom:-1px;
   width:1px;background:rgba(255,255,255,0.55);
@@ -419,7 +419,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   display:flex;gap:12px;
   padding:9px 0;
   border-top:1px solid var(--paper-line);
-  font-size:14.5px;line-height:1.55;color:var(--ink-85);
+  font-size:16px;line-height:1.55;color:var(--ink-85);
 }
 .acc-list li:last-child{border-bottom:1px solid var(--paper-line);}
 .acc-list li::before{
@@ -554,8 +554,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   font-size:clamp(36px,5vw,72px);
   line-height:1.02;letter-spacing:-0.03em;
   margin-bottom:clamp(36px,4.4vw,56px);
+  text-align:center;
 }
-.ev-col{max-width:62ch;}
+.ev-col{max-width:62ch;margin:0 auto;text-align:center;}
 .ev-lead{
   font-family:var(--display);font-weight:300;
   font-size:clamp(26px,3.2vw,46px);
@@ -569,9 +570,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   margin-bottom:clamp(32px,3.6vw,44px);
 }
 .ev-next{
-  border-top:1px solid var(--ink);
+  border-top:1px solid var(--paper-line);
   padding-top:20px;
   margin-bottom:clamp(32px,3.6vw,44px);
+  display:inline-block;text-align:left;
 }
 .ev-next-k{
   font-family:var(--display);font-weight:400;
@@ -594,8 +596,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   border:1px solid var(--blue-24);
 }
 .ev-standard{
-  border-left:2px solid var(--blue);
-  padding-left:22px;
+  border-left:none;
+  padding-left:0;
 }
 .ev-standard p{
   font-family:var(--display);font-weight:300;
@@ -856,13 +858,13 @@ footer{background:#071028;padding:72px 0 0;}
 
   <div class="wrap band-block">
     <div class="band-head">
-      <span>People</span>
-      <span class="r">Intelligence</span>
+      <span>Deployed</span>
+      <span class="r">Adopted</span>
     </div>
     <div class="band" id="bandHero" data-settled="0" aria-hidden="true">
       <span class="band-marker"></span>
     </div>
-    <p class="band-caption">The line between the work that needs a person and the work that never did. It moves — which is the reason this practice exists.</p>
+    <p class="band-caption">The gap between what was deployed and what was actually adopted. Closing it is the reason this practice exists.</p>
   </div>
 </header>
 
@@ -1089,39 +1091,26 @@ footer{background:#071028;padding:72px 0 0;}
       <p>Named motions that run inside the offerings above. They are siblings within the practice — never the practice itself.</p>
     </div>
 
-    <div class="tree">
-      <div class="tree-chip">
-        <small>The practice</small>
-        AI Adoption &amp; Change Engineering
-      </div>
-      <span class="tree-stem" aria-hidden="true"></span>
-      <span class="tree-bar" aria-hidden="true"></span>
-    </div>
-
     <div class="sibs" role="tablist" aria-label="Platform motions">
       <div class="sib">
-        <span class="sib-tick" aria-hidden="true"></span>
         <button class="sib-btn" role="tab" id="m1" aria-controls="mp1" aria-selected="true">
           <span class="sib-name">Gemini Enterprise transformation</span>
           <span class="sib-dot" aria-hidden="true"></span>
         </button>
       </div>
       <div class="sib">
-        <span class="sib-tick" aria-hidden="true"></span>
         <button class="sib-btn" role="tab" id="m2" aria-controls="mp2" aria-selected="false" tabindex="-1">
           <span class="sib-name">Google Workspace</span>
           <span class="sib-dot" aria-hidden="true"></span>
         </button>
       </div>
       <div class="sib">
-        <span class="sib-tick" aria-hidden="true"></span>
         <button class="sib-btn" role="tab" id="m3" aria-controls="mp3" aria-selected="false" tabindex="-1">
           <span class="sib-name">Claude adoption</span>
           <span class="sib-dot" aria-hidden="true"></span>
         </button>
       </div>
       <div class="sib">
-        <span class="sib-tick" aria-hidden="true"></span>
         <button class="sib-btn" role="tab" id="m4" aria-controls="mp4" aria-selected="false" tabindex="-1">
           <span class="sib-name">happierWork</span>
           <span class="sib-dot" aria-hidden="true"></span>
@@ -1225,28 +1214,6 @@ footer{background:#071028;padding:72px 0 0;}
   </div>
 </section>
 
-<!-- ================= SECTION 5 — CLOSING ================= -->
-<section class="close" aria-labelledby="close-h">
-  <div class="mod-grid" aria-hidden="true"></div>
-  <div class="close-glow" aria-hidden="true"></div>
-
-  <div class="wrap">
-    <div class="close-inner">
-      <h2 id="close-h">An hour handed back to a person is only worth <em>what they spend it on</em>.</h2>
-      <p class="close-final">Not fewer people doing the same work faster. Different work, worth a person's day.</p>
-    </div>
-  </div>
-
-  <div class="wrap band-block">
-    <div class="band-head">
-      <span>People</span>
-      <span class="r">Intelligence</span>
-    </div>
-    <div class="band" id="bandClose" data-settled="1" aria-hidden="true">
-      <span class="band-marker"></span>
-    </div>
-  </div>
-</section>
 
 </main>
 

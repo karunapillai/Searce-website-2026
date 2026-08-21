@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Human + AI Work Engineering — Searce</title>
-<meta name="description" content="Redesign work around people and intelligence. Work and role redesign, agent enablement, capability building, adoption engineering and work measurement.">
+<title>Who we are — Searce</title>
+<meta name="description" content="Twenty-two years of solving for better. Searce was founded in 2004 in process consulting and today engineers AI outcomes for the agentic enterprise.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -18,9 +18,8 @@
 }
 
 /* ===========================================================
-   Shared practice-page system: tokens, type scale, spacing,
-   navigation, Let's Connect and footer are common across
-   practice pages. This page's expression is built on top.
+   Shared site system — tokens, type scale, spacing, nav,
+   Let's Connect and footer are common across pages.
    =========================================================== */
 :root{
   --ink:#000000;
@@ -39,18 +38,14 @@
   --display:'Poppins',system-ui,sans-serif;
   --body:'Google Sans Flex Variable','Google Sans Text','Google Sans',system-ui,-apple-system,sans-serif;
   --sec:88px;
-  /* modular grid cell — dark-section convention from the practice pages */
   --mod:88px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--body);
-  font-variation-settings:'wght' 400;
-  -webkit-font-smoothing:antialiased;
-  line-height:1.55;
+  background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-variation-settings:'wght' 400;
+  -webkit-font-smoothing:antialiased;line-height:1.55;
   overflow-x:hidden;
 }
 img{display:block;max-width:100%;}
@@ -60,16 +55,21 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;color:inhe
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 48px;}
 
-/* modular grid overlay for the ink sections */
+/* modular grid — light sections use the blue tint, ink sections white */
 .mod-grid{
   position:absolute;inset:0;z-index:0;pointer-events:none;
   background-image:
-    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(0,100,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,100,255,0.06) 1px, transparent 1px);
   background-size:var(--mod) var(--mod);
 }
+.mod-grid.on-dark{
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+}
 
-/* ======= NAV — shared global framework ======= */
+/* ======= NAV (shared) ======= */
 .nav{
   position:sticky;top:0;z-index:200;
   background:var(--paper);
@@ -88,8 +88,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 .nav-links > li{position:relative;}
 .nav-links > li > a{
-  position:relative;
-  display:flex;align-items:center;gap:5px;
+  position:relative;display:flex;align-items:center;gap:5px;
   padding:6px 2px;transition:color .2s ease;
 }
 .nav-links > li > a:hover{color:var(--blue);}
@@ -98,38 +97,23 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   content:"";position:absolute;left:0;right:0;bottom:-2px;
   height:2px;background:var(--blue);border-radius:2px;
 }
-/* dropdown — same pattern as the other practice pages */
 .chev{width:9px;height:9px;flex-shrink:0;transition:transform .2s ease;}
 .has-dropdown:hover .chev,
 .has-dropdown:focus-within .chev{transform:rotate(180deg);}
 .mega-panel{
-  position:absolute;top:100%;left:-14px;
-  margin-top:16px;
-  background:#fff;
-  border:1px solid var(--paper-line);
-  border-radius:16px;
-  box-shadow:0 28px 56px rgba(10,20,40,0.12);
-  padding:10px;
-  min-width:230px;
-  opacity:0;visibility:hidden;
-  transform:translateY(-10px);
+  position:absolute;top:100%;left:-14px;margin-top:16px;
+  background:#fff;border:1px solid var(--paper-line);
+  border-radius:16px;box-shadow:0 28px 56px rgba(10,20,40,0.12);
+  padding:10px;min-width:230px;
+  opacity:0;visibility:hidden;transform:translateY(-10px);
   transition:opacity .18s ease, transform .18s ease, visibility .18s;
 }
 .has-dropdown:hover .mega-panel,
-.has-dropdown:focus-within .mega-panel{
-  opacity:1;visibility:visible;transform:translateY(0);
-}
-.mega-item{
-  display:block;padding:11px 14px;border-radius:10px;
-  transition:background .15s ease,color .15s ease;
-}
-.mega-item:hover{background:var(--blue-06);}
-.mega-title{
-  display:block;
-  font-family:var(--display);font-weight:400;font-size:14.5px;
-  color:var(--ink);
-}
-.mega-item:hover .mega-title{color:var(--blue-strong);}
+.has-dropdown:focus-within .mega-panel{opacity:1;visibility:visible;transform:translateY(0);}
+.mega-item{display:block;padding:11px 14px;border-radius:10px;transition:background .15s ease,color .15s ease;}
+.mega-item:hover,.mega-item.active{background:var(--blue-06);}
+.mega-title{display:block;font-family:var(--display);font-weight:400;font-size:14.5px;color:var(--ink);}
+.mega-item:hover .mega-title,.mega-item.active .mega-title{color:var(--blue-strong);}
 .nav-cta{
   display:inline-flex;align-items:center;gap:8px;
   background:var(--blue);color:#fff;
@@ -140,79 +124,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .nav-cta:hover{background:var(--blue-strong);transform:translateY(-1px);}
 .nav-cta svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;}
 
-/* ===========================================================
-   HERO — black editorial banner on the modular grid
-   =========================================================== */
-.hero{
-  position:relative;
-  background:var(--ink);color:#fff;
-  min-height:92vh;
-  display:flex;flex-direction:column;justify-content:space-between;
-  padding:clamp(72px,9vw,120px) 0 44px;
-  overflow:hidden;isolation:isolate;
-}
-.hero-glow{
-  position:absolute;z-index:0;pointer-events:none;
-  right:-10%;top:-20%;
-  width:80vw;max-width:1100px;aspect-ratio:1/1;
-  background:radial-gradient(circle at center,
-    rgba(0,100,255,0.20) 0%, rgba(0,100,255,0.07) 34%, transparent 66%);
-}
-.hero-inner{position:relative;z-index:1;width:100%;}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:9px;
-  border:1px solid rgba(255,255,255,0.16);
-  color:var(--blue-24);
-  font-family:var(--display);font-weight:400;font-size:12.5px;
-  letter-spacing:.18em;text-transform:uppercase;
-  padding:8px 18px;border-radius:999px;
-  margin-bottom:clamp(32px,4vw,52px);
-  opacity:0;animation:fadeUp .6s ease .1s forwards;
-}
-.hero-badge-dot{
-  width:5px;height:5px;border-radius:50%;background:var(--blue);
-  animation:pulse 2.4s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
-
-.hero h1{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(42px,7.2vw,104px);
-  line-height:1.04;letter-spacing:-0.03em;
-  max-width:19ch;
-  margin-bottom:clamp(32px,3.6vw,48px);
-}
-/* Line wipe. The clip box is padded at the bottom so descenders
-   (the g in "Redesign", the p in "people") are never cut. */
-.hl{
-  display:block;overflow:hidden;
-  padding-bottom:.18em;
-  margin-bottom:-.14em;
-}
-.hl > span{
-  display:block;
-  transform:translateY(110%);
-  animation:lineUp .95s cubic-bezier(.16,1,.3,1) forwards;
-}
-.hl:nth-child(1) > span{animation-delay:.20s;}
-.hl:nth-child(2) > span{animation-delay:.34s;}
-@keyframes lineUp{to{transform:translateY(0);}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-.hero h1 em{font-style:normal;color:var(--blue);}
-
-.hero-open{
-  max-width:50ch;
-  font-size:clamp(16.5px,1.5vw,21px);
-  line-height:1.62;
-  color:rgba(255,255,255,0.62);
-  margin-bottom:clamp(30px,3.4vw,42px);
-  opacity:0;animation:fadeUp .7s ease .85s forwards;
-}
-.hero-open strong{color:#fff;font-weight:400;}
-.hero-ctas{
-  display:flex;align-items:center;gap:26px;flex-wrap:wrap;
-  opacity:0;animation:fadeUp .7s ease 1.05s forwards;
-}
 .btn-primary{
   display:inline-flex;align-items:center;gap:10px;
   background:var(--blue);color:#fff;
@@ -223,515 +134,295 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .btn-primary:hover{background:var(--blue-strong);transform:translateY(-1px);}
 .btn-primary svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;}
 
-/* ---- boundary band: drifts in the hero, settled at the close ---- */
-.band-block{position:relative;z-index:1;width:100%;margin-top:clamp(48px,6vw,80px);}
-.hero .band-block{opacity:0;animation:fadeUp .8s ease 1.3s forwards;}
-.band-head{
-  display:flex;justify-content:space-between;align-items:baseline;
-  font-family:var(--display);font-weight:400;
-  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(255,255,255,0.4);
-  margin-bottom:14px;
+/* ======= RETAINED-SECTION MARKER =======
+   These sections are marked "retain as is" in the content doc. The
+   live markup could not be read, so each is stubbed here for the
+   developer to splice production markup into. Nothing inside is
+   designed content.                                                */
+.retained{
+  border:1px dashed var(--blue-24);
+  border-radius:14px;
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(0,100,255,0.022) 0 12px, transparent 12px 24px);
+  padding:clamp(26px,3.2vw,40px);
 }
-.band-head .r{color:var(--blue-24);}
-.band{
-  position:relative;
-  display:flex;align-items:flex-end;justify-content:space-between;
-  height:clamp(64px,9vw,104px);
-  border-bottom:1px solid rgba(255,255,255,0.16);
-}
-.bar{
-  flex:0 0 3px;width:3px;height:26%;
-  background:rgba(255,255,255,0.16);
-  transition:height .6s cubic-bezier(.4,0,.2,1),background-color .6s ease;
-}
-.bar.human{height:86%;background:rgba(255,255,255,0.88);}
-.bar.agent{height:32%;background:var(--blue);}
-.band-marker{
-  position:absolute;top:-10px;bottom:-1px;
-  width:1px;background:rgba(255,255,255,0.55);
-  transition:left .6s cubic-bezier(.4,0,.2,1);
-  pointer-events:none;
-}
-.band-marker::before{
-  content:'';position:absolute;top:-3px;left:-2.5px;
-  width:6px;height:6px;border-radius:50%;background:#fff;
-}
-.band-caption{
-  margin-top:14px;
-  font-size:12.5px;line-height:1.6;
-  color:rgba(255,255,255,0.34);
-  max-width:56ch;
-}
-
-/* ===========================================================
-   SECTION 1 — THE SHIFT
-   =========================================================== */
-.shift{
-  background:var(--paper);
-  padding:var(--sec) 0;
-  border-bottom:1px solid var(--paper-line);
-}
-.shift-top{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:0 80px;align-items:end;
-  padding-bottom:clamp(40px,5vw,64px);
-}
-.shift-top h2{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(34px,4.4vw,62px);
-  line-height:1.08;letter-spacing:-0.028em;
-  max-width:22ch;
-}
-.shift-top h2 em{font-style:normal;color:var(--blue);}
-.shift-lede{
-  font-size:clamp(16px,1.4vw,19px);
-  line-height:1.68;color:var(--ink-60);
-}
-.shift-lede + .shift-lede{margin-top:14px;}
-
-.qs{border-top:1px solid var(--ink);}
-.q-head{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:0 48px;padding:14px 0 0;
-  font-family:var(--display);font-weight:400;
-  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
-}
-.q-head .a{color:var(--ink-40);}
-.q-head .b{color:var(--blue);}
-.q-row{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:0 48px;align-items:baseline;
-  padding:26px 0;
-  border-bottom:1px solid var(--paper-line);
-}
-.q-old,.q-new{
-  font-family:var(--display);
-  font-size:clamp(17px,1.7vw,23px);
-  line-height:1.3;letter-spacing:-0.015em;
-}
-.q-old{
-  font-weight:300;color:var(--ink-40);
-  position:relative;justify-self:start;max-width:100%;
-}
-.q-old::after{
-  content:'';position:absolute;left:0;top:52%;
-  height:1px;background:var(--ink-40);
-  transition:width .7s cubic-bezier(.16,1,.3,1) .25s;
-}
-.q-new{
-  font-weight:400;color:var(--ink);
-  display:flex;gap:12px;align-items:baseline;
-  transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1);
-}
-.q-new .mk{color:var(--blue);flex-shrink:0;}
-/* revealed is the default; scripted states apply only behind .js */
-.q-old::after{width:100%;}
-.js .q-old::after{width:0;}
-.js .q-new{opacity:0;transform:translateY(10px);}
-.js .q-row.in .q-old::after{width:100%;}
-.js .q-row.in .q-new{opacity:1;transform:translateY(0);}
-
-/* ===========================================================
-   SECTION 2 — OFFERINGS
-   Full-width editorial accordion: one entry open at a time,
-   its detail opening beneath it across the full measure.
-   =========================================================== */
-.offer{
-  background:var(--paper-dim);
-  padding:var(--sec) 0;
-  border-bottom:1px solid var(--paper-line);
-}
-.offer-top{
-  display:grid;grid-template-columns:1fr auto;
-  gap:32px 80px;align-items:end;
-  margin-bottom:clamp(32px,4vw,48px);
-}
-.offer-top h2{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(40px,5.6vw,82px);
-  line-height:1.0;letter-spacing:-0.03em;
-}
-.offer-top p{
-  font-size:15px;line-height:1.6;color:var(--ink-60);
-  max-width:30ch;text-align:right;
-}
-.acc{border-top:1px solid var(--ink);}
-.acc-item{border-bottom:1px solid var(--paper-line);}
-.acc-btn{
-  display:grid;
-  grid-template-columns:clamp(40px,4vw,64px) 1fr 22px;
-  align-items:center;gap:0 clamp(16px,2vw,28px);
-  width:100%;text-align:left;
-  padding:clamp(20px,2.4vw,30px) 0;
-}
-.acc-num{
-  font-family:var(--display);font-weight:300;
-  font-size:12px;letter-spacing:.08em;
-  color:var(--ink-40);
-  transition:color .24s ease;
-}
-.acc-name{
-  font-family:var(--display);font-weight:400;
-  font-size:clamp(18px,2.1vw,29px);
-  line-height:1.18;letter-spacing:-0.02em;
-  color:var(--ink-85);
-  transition:color .24s ease;
-}
-.acc-btn:hover .acc-name{color:var(--blue);}
-.acc-btn:hover .acc-num{color:var(--blue);}
-.acc-item.open .acc-name,
-.acc-item.open .acc-num{color:var(--blue);}
-/* plus that becomes a minus */
-.acc-sign{position:relative;width:16px;height:16px;justify-self:end;}
-.acc-sign::before,.acc-sign::after{
-  content:'';position:absolute;left:0;top:50%;
-  width:16px;height:1.5px;background:var(--ink-40);
-  transition:transform .3s cubic-bezier(.16,1,.3,1),background-color .24s ease;
-}
-.acc-sign::after{transform:rotate(90deg);}
-.acc-btn:hover .acc-sign::before,
-.acc-btn:hover .acc-sign::after{background:var(--blue);}
-.acc-item.open .acc-sign::before,
-.acc-item.open .acc-sign::after{background:var(--blue);}
-.acc-item.open .acc-sign::after{transform:rotate(0deg);}
-
-.acc-body{overflow:hidden;}
-.js .acc-body{max-height:0;transition:max-height .5s cubic-bezier(.16,1,.3,1);}
-.acc-inner{
-  display:grid;
-  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
-  gap:clamp(28px,4vw,64px);
-  padding:0 0 clamp(28px,3.4vw,40px) calc(clamp(40px,4vw,64px) + clamp(16px,2vw,28px));
-}
-.acc-desc{
-  font-size:clamp(16px,1.45vw,19.5px);
-  line-height:1.62;color:var(--ink-60);
-  max-width:46ch;
-}
-.acc-what{
-  font-family:var(--display);font-weight:400;
-  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--blue);margin-bottom:14px;
-}
-.acc-list{list-style:none;}
-.acc-list li{
-  display:flex;gap:12px;
-  padding:9px 0;
-  border-top:1px solid var(--paper-line);
-  font-size:14.5px;line-height:1.55;color:var(--ink-85);
-}
-.acc-list li:last-child{border-bottom:1px solid var(--paper-line);}
-.acc-list li::before{
-  content:'';flex-shrink:0;
-  width:5px;height:5px;border-radius:50%;
-  background:var(--blue);margin-top:8px;
-}
-
-/* ===========================================================
-   SECTION 3 — PLATFORM MOTIONS
-   The hierarchy is the layout: the practice above, the named
-   motions hanging beneath it as selectable siblings.
-   =========================================================== */
-.motions{background:var(--ink);color:#fff;padding:var(--sec) 0;}
-.motions-head{max-width:56ch;margin-bottom:clamp(44px,5.5vw,68px);}
-.motions-head h2{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(36px,5vw,72px);
-  line-height:1.04;letter-spacing:-0.03em;
-  margin-bottom:18px;
-}
-.motions-head p{
-  font-size:clamp(16px,1.4vw,19px);line-height:1.65;
-  color:rgba(255,255,255,0.55);
-}
-.tree{display:flex;flex-direction:column;align-items:center;width:100%;}
-.tree-chip{
-  font-family:var(--display);font-weight:400;
-  font-size:clamp(13px,1.2vw,16px);letter-spacing:.02em;
-  color:#fff;text-align:center;
-  border:1px solid var(--blue);
-  background:rgba(0,100,255,0.14);
-  border-radius:999px;padding:11px 28px;
-}
-.tree-chip small{
-  display:block;
-  font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--blue-24);margin-bottom:3px;
-}
-.tree-stem{width:1px;height:32px;background:rgba(0,100,255,0.45);}
-.tree-bar{width:100%;height:1px;background:rgba(0,100,255,0.45);}
-/* selectable siblings */
-.sibs{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:0 clamp(12px,1.6vw,24px);
-  width:100%;
-}
-.sib{display:flex;flex-direction:column;align-items:stretch;}
-.sib-tick{width:1px;height:28px;background:rgba(0,100,255,0.45);}
-.sib-btn{
-  text-align:left;width:100%;
-  border-top:1px solid rgba(255,255,255,0.18);
-  padding:16px 0 0;
-  transition:border-color .25s ease;
-}
-.sib-name{
-  font-family:var(--display);font-weight:400;
-  font-size:clamp(14px,1.35vw,18px);
-  line-height:1.26;letter-spacing:-0.012em;
-  color:rgba(255,255,255,0.6);
-  transition:color .25s ease;
-  display:block;
-}
-.sib-btn:hover{border-color:var(--blue);}
-.sib-btn:hover .sib-name{color:#fff;}
-.sib-btn[aria-selected="true"]{border-top:1px solid var(--blue);border-top-width:2px;padding-top:15px;}
-.sib-btn[aria-selected="true"] .sib-name{color:#fff;}
-.sib-dot{
-  display:block;width:5px;height:5px;border-radius:50%;
-  background:transparent;margin-top:12px;
-  transition:background-color .25s ease;
-}
-.sib-btn[aria-selected="true"] .sib-dot{background:var(--blue);}
-
-.motion-detail{
-  margin-top:clamp(32px,4vw,48px);
-  border:1px solid rgba(255,255,255,0.14);
-  background:rgba(255,255,255,0.02);
-  border-radius:12px;
-  padding:clamp(26px,3vw,40px);
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:clamp(24px,3.4vw,56px);
-}
-.md-pane{display:none;}
-.md-pane.active{display:contents;}
-.md-title{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(22px,2.5vw,34px);
-  line-height:1.12;letter-spacing:-0.024em;
-  color:#fff;margin-bottom:16px;
-}
-.md-desc{
-  font-size:clamp(15px,1.35vw,18px);
-  line-height:1.62;color:rgba(255,255,255,0.58);
-  max-width:44ch;
-}
-.md-k{
+.retained-k{
+  display:inline-flex;align-items:center;gap:8px;
   font-family:var(--display);font-weight:400;
   font-size:10px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--blue-24);margin-bottom:14px;
+  color:var(--blue-strong);
+  background:var(--blue-06);border:1px solid var(--blue-12);
+  border-radius:999px;padding:6px 14px;margin-bottom:18px;
 }
-.md-list{list-style:none;}
-.md-list li{
-  font-size:14.5px;line-height:1.5;
-  color:rgba(255,255,255,0.72);
-  padding:10px 0;
-  border-top:1px solid rgba(255,255,255,0.1);
+.retained-k i{width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;}
+.retained h2{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(24px,3vw,40px);
+  line-height:1.08;letter-spacing:-0.026em;
+  color:var(--ink);margin-bottom:12px;
 }
-.md-list li:last-child{border-bottom:1px solid rgba(255,255,255,0.1);}
-
-.rules{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:clamp(24px,3vw,44px);
-  margin-top:clamp(44px,5vw,64px);
-}
-.rule-note{border-left:2px solid var(--blue);padding:2px 0 2px 20px;}
-.rule-note p{font-size:14.5px;line-height:1.62;color:rgba(255,255,255,0.62);}
-.rule-note p strong{color:#fff;font-weight:400;}
+.retained p{font-size:14.5px;line-height:1.62;color:var(--ink-60);max-width:64ch;}
 
 /* ===========================================================
-   SECTION 4 — OUTCOME STORIES
-   No readings exist. Say exactly that, and nothing that could
-   be mistaken for a number.
+   HERO — heritage. Paper, blue modular grid, the name defined,
+   then the 2004 -> today rail the copy describes.
    =========================================================== */
-.evidence{
-  background:var(--paper);
-  padding:var(--sec) 0;
+.hero{
+  position:relative;background:var(--paper);
+  padding:clamp(56px,7vw,96px) 0 var(--sec);
   border-bottom:1px solid var(--paper-line);
+  overflow:hidden;
 }
-.evidence h2{
+.hero .wrap{position:relative;z-index:1;}
+.hero h1{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(36px,5vw,72px);
-  line-height:1.02;letter-spacing:-0.03em;
+  font-size:clamp(38px,6.4vw,92px);
+  line-height:1.04;letter-spacing:-0.032em;
+  max-width:19ch;
   margin-bottom:clamp(36px,4.4vw,56px);
 }
-.ev-col{max-width:62ch;}
-.ev-lead{
+.hero h1 em{font-style:normal;color:var(--blue);}
+.hero-body{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(32px,4.6vw,72px);
+  /* stretch so the definition's rule runs the full row rather than
+     leaving the shorter column hanging */
+  align-items:stretch;
+}
+/* the name, set as a dictionary entry */
+.defn{
+  border-left:2px solid var(--blue);
+  padding-left:clamp(20px,2.4vw,30px);
+}
+.defn-word{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(26px,3.2vw,44px);
+  line-height:1.05;letter-spacing:-0.028em;
+  color:var(--ink);
+}
+.defn-meta{
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+  margin:10px 0 18px;
+  font-size:14px;color:var(--ink-40);
+}
+.defn-meta .ipa{color:var(--blue-strong);}
+.defn-meta .pos{
+  font-family:var(--display);font-size:11px;
+  letter-spacing:.18em;text-transform:uppercase;
+}
+.defn-gloss{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(26px,3.2vw,46px);
-  line-height:1.12;letter-spacing:-0.026em;
-  margin-bottom:18px;
+  font-size:clamp(17px,1.8vw,24px);
+  line-height:1.28;letter-spacing:-0.018em;
+  color:var(--ink);margin-bottom:16px;
 }
-.ev-lead em{font-style:normal;color:var(--blue);}
-.ev-text{
-  font-size:clamp(16.5px,1.5vw,20px);
-  line-height:1.64;color:var(--ink-60);
-  margin-bottom:clamp(32px,3.6vw,44px);
-}
-.ev-next{
+.defn-commit{font-size:15px;line-height:1.65;color:var(--ink-60);}
+.defn-commit strong{color:var(--ink);font-weight:400;}
+.hero-p{font-size:clamp(16px,1.45vw,19px);line-height:1.68;color:var(--ink-60);}
+.hero-p + .hero-p{margin-top:18px;}
+.hero-p strong{color:var(--ink);font-weight:400;}
+
+/* the era rail */
+.era{
+  margin-top:clamp(48px,5.6vw,80px);
   border-top:1px solid var(--ink);
-  padding-top:20px;
-  margin-bottom:clamp(32px,3.6vw,44px);
+  padding-top:18px;
 }
-.ev-next-k{
+.era-span{
+  display:flex;justify-content:space-between;
+  font-family:var(--display);font-weight:400;
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-40);margin-bottom:26px;
+}
+.era-span .now{color:var(--blue);}
+.era-track{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  position:relative;
+}
+.era-track::before{
+  content:'';position:absolute;left:0;right:0;top:5px;
+  height:1px;background:var(--blue-24);
+}
+.era-step{position:relative;padding:24px 16px 0 0;}
+.era-step::before{
+  content:'';position:absolute;top:0;left:0;
+  width:11px;height:11px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--blue);
+  box-sizing:border-box;
+}
+.era-step:last-child::before{background:var(--blue);}
+.era-label{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(13px,1.25vw,16px);
+  line-height:1.3;letter-spacing:-0.012em;
+  color:var(--ink-85);
+}
+.era-step:last-child .era-label{color:var(--blue);}
+
+/* ===========================================================
+   OUR NORTH STAR
+   =========================================================== */
+.north{background:var(--paper);padding:var(--sec) 0;border-bottom:1px solid var(--paper-line);}
+.sec-h2{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(34px,4.8vw,68px);
+  line-height:1.03;letter-spacing:-0.03em;
+  margin-bottom:clamp(32px,4vw,52px);
+}
+.axes{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;
+  border-top:1px solid var(--ink);
+}
+.axis{
+  padding:clamp(26px,3vw,38px) clamp(24px,3vw,40px) clamp(26px,3vw,38px) 0;
+}
+.axis + .axis{
+  border-left:1px solid var(--paper-line);
+  padding-left:clamp(24px,3vw,40px);
+}
+.axis-k{
   font-family:var(--display);font-weight:400;
   font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink-40);margin-bottom:4px;
+  color:var(--blue);margin-bottom:16px;
 }
-.ev-next-list{list-style:none;}
-.ev-next-list li{
-  display:flex;align-items:baseline;gap:14px;
-  padding:14px 0;
-  border-bottom:1px solid var(--paper-line);
-  font-family:var(--display);font-weight:400;
-  font-size:clamp(16px,1.6vw,21px);
-  line-height:1.3;letter-spacing:-0.015em;
-  color:var(--ink);
-}
-.ev-next-list li::before{
-  content:'';flex-shrink:0;
-  width:7px;height:7px;border-radius:50%;
-  border:1px solid var(--blue-24);
-}
-.ev-standard{
-  border-left:2px solid var(--blue);
-  padding-left:22px;
-}
-.ev-standard p{
+.axis-t{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(19px,2vw,27px);
-  line-height:1.2;letter-spacing:-0.02em;
+  font-size:clamp(21px,2.5vw,34px);
+  line-height:1.14;letter-spacing:-0.024em;
   color:var(--ink);
+}
+.axis-t em{font-style:normal;color:var(--blue);}
+.maxims{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border-top:1px solid var(--paper-line);
+}
+.maxim{
+  padding:clamp(22px,2.6vw,32px) clamp(20px,2.4vw,32px) 0 0;
+  display:flex;align-items:baseline;gap:14px;
+}
+.maxim + .maxim{border-left:1px solid var(--paper-line);padding-left:clamp(20px,2.4vw,32px);}
+.maxim-n{
+  font-family:var(--display);font-weight:300;
+  font-size:11px;letter-spacing:.08em;color:var(--blue);flex-shrink:0;
+}
+.maxim-t{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(15px,1.5vw,19px);
+  line-height:1.28;letter-spacing:-0.015em;color:var(--ink-85);
 }
 
 /* ===========================================================
-   SECTION 5 — CLOSING
+   BY THE NUMBERS — retained
    =========================================================== */
-.close{
-  background:var(--ink);color:#fff;
-  padding:var(--sec) 0 clamp(48px,5vw,68px);
-  position:relative;overflow:hidden;
-}
-.close-glow{
-  position:absolute;z-index:0;pointer-events:none;
-  left:50%;bottom:-46%;transform:translateX(-50%);
-  width:120%;max-width:1500px;aspect-ratio:2/1;
-  background:radial-gradient(ellipse at center,
-    rgba(0,100,255,0.17) 0%, rgba(0,100,255,0.06) 40%, transparent 70%);
-}
-.close-inner{position:relative;z-index:1;}
-.close h2{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(32px,4.6vw,66px);
-  line-height:1.06;letter-spacing:-0.03em;
-  /* ch resolves against the heading's own size, not the body's */
-  max-width:20ch;
-}
-.close h2 em{font-style:normal;color:var(--blue);}
-.close .close-final{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(18px,1.9vw,25px);
-  line-height:1.3;letter-spacing:-0.018em;
-  color:rgba(255,255,255,0.66);
-  max-width:38ch;
-  padding-top:24px;margin-top:26px;
-  border-top:1px solid rgba(255,255,255,0.16);
-}
+.numbers{background:var(--paper-dim);padding:var(--sec) 0;border-bottom:1px solid var(--paper-line);}
 
-/* ======= LET'S CONNECT — shared practice-page treatment ======= */
-.connect{background:var(--blue-06);padding:80px 0;}
-.connect-inner{
-  display:grid;grid-template-columns:1fr 1.4fr;
-  gap:80px;align-items:start;
+/* ===========================================================
+   WE FUTURIFY BUSINESSES — dark blue, layout changed.
+   Heading and closing line share one size token, per the note.
+   =========================================================== */
+.futurify{
+  position:relative;overflow:hidden;
+  background:linear-gradient(155deg,#00337f 0%,#001a41 58%,#00112b 100%);
+  color:#fff;
+  padding:var(--sec) 0;
+  /* the one size shared by the heading and the closing refrain */
+  --fut:clamp(30px,4.3vw,62px);
 }
+.futurify .wrap{position:relative;z-index:1;}
+.fut-h2{
+  font-family:var(--display);font-weight:300;
+  font-size:var(--fut);
+  line-height:1.05;letter-spacing:-0.03em;
+  color:#fff;
+  max-width:22ch;
+}
+.fut-body{
+  font-size:clamp(16px,1.5vw,20px);
+  line-height:1.66;
+  color:rgba(255,255,255,0.66);
+  max-width:56ch;
+  margin:clamp(26px,3vw,38px) 0 clamp(40px,5vw,64px);
+}
+.fut-body em{font-style:normal;color:#fff;}
+.fut-close{
+  border-top:1px solid rgba(255,255,255,0.18);
+  padding-top:clamp(28px,3.4vw,44px);
+}
+.fut-close p{
+  font-family:var(--display);font-weight:300;
+  font-size:var(--fut);
+  line-height:1.16;letter-spacing:-0.03em;
+  color:#fff;
+}
+/* each phrase stays whole so the refrain breaks between phrases,
+   never inside one */
+.fut-close .ph{white-space:nowrap;}
+.fut-close .dot{color:var(--blue-24);padding:0 .22em;}
+
+/* ===========================================================
+   MEET OUR SOLVERS onward — retained
+   =========================================================== */
+.solvers{background:var(--paper);padding:var(--sec) 0;border-bottom:1px solid var(--paper-line);}
+
+/* ======= LET'S CONNECT (shared) ======= */
+.connect{background:var(--blue-06);padding:80px 0;}
+.connect-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start;}
 .connect-left h2{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(48px,7vw,96px);
-  line-height:.95;letter-spacing:-0.03em;
+  font-size:clamp(48px,7vw,96px);line-height:.95;letter-spacing:-0.03em;
   color:var(--blue-deep);margin-bottom:36px;
 }
-.connect-left p{
-  font-size:clamp(17px,1.5vw,21px);color:var(--ink-60);font-weight:400;
-  max-width:26ch;line-height:1.55;
-}
+.connect-left p{font-size:clamp(17px,1.5vw,21px);color:var(--ink-60);max-width:26ch;line-height:1.55;}
 .connect-form{display:flex;flex-direction:column;gap:10px;}
 .connect-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.connect-form input,
-.connect-form select,
-.connect-form textarea{
-  width:100%;background:#fff;
-  border:1px solid var(--blue-12);border-radius:8px;
-  padding:14px 16px;
-  font-family:var(--body);font-size:14px;color:var(--ink);
-  outline:none;transition:border-color .2s ease;
-  -webkit-appearance:none;
+.connect-form input,.connect-form select,.connect-form textarea{
+  width:100%;background:#fff;border:1px solid var(--blue-12);border-radius:8px;
+  padding:14px 16px;font-family:var(--body);font-size:14px;color:var(--ink);
+  outline:none;transition:border-color .2s ease;-webkit-appearance:none;
 }
-.connect-form input::placeholder,
-.connect-form select,
-.connect-form textarea::placeholder{color:var(--ink-40);}
-.connect-form input:focus,
-.connect-form select:focus,
-.connect-form textarea:focus{border-color:var(--blue);}
+.connect-form input::placeholder,.connect-form select,.connect-form textarea::placeholder{color:var(--ink-40);}
+.connect-form input:focus,.connect-form select:focus,.connect-form textarea:focus{border-color:var(--blue);}
 .connect-form select{
   cursor:pointer;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%2384868c' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 14px center;
-  padding-right:36px;
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;
 }
 .connect-form textarea{resize:vertical;min-height:100px;}
-.connect-check{
-  display:flex;align-items:flex-start;gap:10px;
-  font-size:13px;color:var(--ink-60);line-height:1.5;padding:4px 0;
-}
-.connect-check input[type="checkbox"]{
-  width:16px;height:16px;flex-shrink:0;margin-top:2px;
-  accent-color:var(--blue);cursor:pointer;
-}
+.connect-check{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink-60);line-height:1.5;padding:4px 0;}
+.connect-check input[type="checkbox"]{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--blue);cursor:pointer;}
 .connect-submit-row{display:flex;justify-content:flex-end;margin-top:4px;}
 .connect-submit{
-  background:var(--blue);color:#fff;
-  font-family:var(--display);font-weight:400;font-size:15px;
+  background:var(--blue);color:#fff;font-family:var(--display);font-weight:400;font-size:15px;
   padding:13px 32px;border-radius:999px;border:none;cursor:pointer;
   transition:background .2s ease,transform .15s ease;
 }
 .connect-submit:hover{background:var(--blue-strong);transform:translateY(-1px);}
 
-/* ======= FOOTER — shared ======= */
+/* ======= FOOTER (shared) ======= */
 footer{background:#071028;padding:72px 0 0;}
 .foot-main{
-  display:grid;grid-template-columns:280px 1fr 1fr 1fr;
-  gap:60px;padding-bottom:60px;
-  border-bottom:1px solid rgba(255,255,255,0.08);
+  display:grid;grid-template-columns:280px 1fr 1fr 1fr;gap:60px;
+  padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,0.08);
 }
 .foot-logo-img{height:22px;width:auto;margin-bottom:24px;}
-.foot-tagline{
-  font-size:14px;line-height:1.7;
-  color:rgba(255,255,255,0.45);font-weight:400;max-width:26ch;
-}
-.foot-col-head{
-  font-family:var(--display);font-weight:400;
-  font-size:14px;color:#fff;margin-bottom:20px;letter-spacing:.01em;
-}
+.foot-tagline{font-size:14px;line-height:1.7;color:rgba(255,255,255,0.45);max-width:26ch;}
+.foot-col-head{font-family:var(--display);font-weight:400;font-size:14px;color:#fff;margin-bottom:20px;}
 .foot-col-links{list-style:none;}
 .foot-col-links li{margin-bottom:12px;}
-.foot-col-links a{
-  font-size:13.5px;color:rgba(255,255,255,0.42);
-  transition:color .2s ease;font-weight:400;line-height:1.4;display:block;
-}
+.foot-col-links a{font-size:13.5px;color:rgba(255,255,255,0.42);transition:color .2s ease;line-height:1.4;display:block;}
 .foot-col-links a:hover{color:#fff;}
 .foot-col-links a.current{color:#fff;}
 .foot-col-links a.connect-link{color:var(--blue-24);}
 .foot-col-links a.connect-link:hover{color:#fff;}
-.foot-bottom-bar{
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:16px;padding:24px 0;
-}
+.foot-bottom-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding:24px 0;}
 .foot-social{display:flex;gap:10px;}
 .foot-social-btn{
   width:38px;height:38px;border-radius:50%;
   background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s ease;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:background .2s ease;cursor:pointer;
 }
 .foot-social-btn:hover{background:rgba(255,255,255,0.14);}
 .foot-social-btn svg{width:16px;height:16px;fill:rgba(255,255,255,0.6);}
@@ -742,8 +433,6 @@ footer{background:#071028;padding:72px 0 0;}
 .foot-copy{font-size:13px;color:rgba(255,255,255,0.35);white-space:nowrap;}
 
 /* ======= RESPONSIVE ======= */
-/* seven nav items plus the CTA need tighter tracking before the
-   links drop out at 768 */
 @media(max-width:1180px){
   .nav .wrap{gap:20px;}
   .nav-links{gap:20px;font-size:13.5px;}
@@ -752,44 +441,30 @@ footer{background:#071028;padding:72px 0 0;}
 @media(max-width:1024px){
   :root{--sec:68px;--mod:72px;}
   .wrap{padding:0 28px;}
-  .shift-top{grid-template-columns:1fr;gap:24px;}
-  .offer-top{grid-template-columns:1fr;gap:18px;}
-  .offer-top p{text-align:left;max-width:44ch;}
-  .acc-inner{grid-template-columns:1fr;gap:24px;}
-  .sibs{grid-template-columns:1fr 1fr;row-gap:26px;}
-  .motion-detail{grid-template-columns:1fr;}
-  .rules{grid-template-columns:1fr;}
+  .hero-body{grid-template-columns:1fr;gap:32px;}
+  .era-track{grid-template-columns:1fr 1fr;row-gap:26px;}
+  .era-track::before{display:none;}
+  .era-step{padding-right:12px;}
+  .axes{grid-template-columns:1fr;}
+  .axis + .axis{border-left:none;border-top:1px solid var(--paper-line);padding-left:0;}
+  .maxims{grid-template-columns:1fr;}
+  .maxim + .maxim{border-left:none;border-top:1px solid var(--paper-line);padding-left:0;}
+  .maxim{padding-right:0;}
   .connect-inner{grid-template-columns:1fr;gap:40px;}
   .foot-main{grid-template-columns:1fr 1fr;gap:40px;}
 }
 @media(max-width:768px){
   :root{--sec:56px;--mod:56px;}
   .nav-links{display:none;}
-  .hero{min-height:0;padding-top:56px;}
   .hero h1{max-width:100%;}
-  .q-head{display:none;}
-  .q-row{grid-template-columns:1fr;gap:10px;padding:20px 0;}
-  .q-old{font-size:16px;}
-  .acc-inner{padding-left:0;}
-  .sibs{grid-template-columns:1fr;row-gap:18px;}
-  .tree-bar{display:none;}
-  .sib-tick{display:none;}
-  .close-inner{max-width:100%;}
+  .era-track{grid-template-columns:1fr;}
+  .fut-h2{max-width:100%;}
   .foot-main{grid-template-columns:1fr;}
 }
 @media(prefers-reduced-motion:reduce){
-  *{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important;}
-  .hl > span{transform:none;}
-  .hero-badge,.hero-open,.hero-ctas,.hero .band-block{opacity:1;}
-  .js .q-new{opacity:1;transform:none;}
-  .js .q-old::after{width:100%;}
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important;}
 }
 </style>
-<script>
-  /* Progressive enhancement flag: collapsed accordions and hidden
-     rows only apply once we know JS is running. */
-  document.documentElement.classList.add('js');
-</script>
 </head>
 <body>
 
@@ -802,16 +477,16 @@ footer{background:#071028;padding:72px 0 0;}
     <ul class="nav-links">
       <li><a href="#">Outcomes</a></li>
       <li><a href="#">How we solve</a></li>
-      <li><a href="human-ai-work-engineering.html" class="current">Practices</a></li>
+      <li><a href="human-ai-work-engineering.html">Practices</a></li>
       <li><a href="#">Problems</a></li>
       <li><a href="#">Industries</a></li>
       <li><a href="#">Insights</a></li>
       <li class="has-dropdown">
-        <a href="#" aria-haspopup="true">Company
+        <a href="#" class="current" aria-haspopup="true">Company
           <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </a>
         <div class="mega-panel">
-          <a class="mega-item" href="who-we-are.html"><span class="mega-title">Who we are</span></a>
+          <a class="mega-item active" href="who-we-are.html" aria-current="page"><span class="mega-title">Who we are</span></a>
           <a class="mega-item" href="#"><span class="mega-title">Partners</span></a>
           <a class="mega-item" href="careers.html"><span class="mega-title">Careers</span></a>
           <a class="mega-item" href="#"><span class="mega-title">futurify.ai</span></a>
@@ -825,437 +500,114 @@ footer{background:#071028;padding:72px 0 0;}
   </div>
 </nav>
 
+<main>
+
 <!-- ================= HERO ================= -->
 <header class="hero" aria-labelledby="hero-h">
   <div class="mod-grid" aria-hidden="true"></div>
-  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <h1 id="hero-h">Twenty-two years of solving <em>for better</em>.</h1>
 
-  <div class="wrap hero-inner">
-    <div class="hero-badge">
-      <span class="hero-badge-dot" aria-hidden="true"></span>
-      Human + AI Work Engineering
+    <div class="hero-body">
+      <!-- the name, as a definition -->
+      <div class="defn">
+        <div class="defn-word">searce</div>
+        <div class="defn-meta">
+          <span class="ipa">[ˈsɪrs]</span>
+          <span class="pos">noun</span>
+          <span>a fine sieve</span>
+        </div>
+        <p class="defn-gloss">To refine, to analyze, to improve.</p>
+        <p class="defn-commit">The name is the commitment: <strong>question the status quo, iterate relentlessly, leave things better than we found them.</strong></p>
+      </div>
+
+      <div>
+        <p class="hero-p">Searce was founded in 2004 in process consulting: understanding how work actually gets done and making it better. <strong>That DNA never left.</strong> We added cloud and data engineering depth as the platforms matured, applied AI as the models arrived, and today we engineer AI outcomes for the agentic enterprise.</p>
+        <p class="hero-p">Most firms in this market were born last year. We have crossed multiple technology discontinuities and come out stronger each time. When the current hype cycle ends, <strong>we will still be here, and so will the outcomes.</strong></p>
+      </div>
     </div>
 
-    <h1 id="hero-h">
-      <span class="hl"><span>Redesign work around</span></span>
-      <span class="hl"><span><em>people</em> and <em>intelligence</em>.</span></span>
-    </h1>
-
-    <p class="hero-open">
-      Adoption is where transformations quietly die. The question is no longer which tools people get.
-      <strong>It is which work people still do.</strong>
-    </p>
-
-    <div class="hero-ctas">
-      <a href="#offerings" class="btn-primary">
-        See the offerings
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </a>
+    <!-- the arc the copy describes -->
+    <div class="era" aria-label="From process consulting in 2004 to the agentic enterprise today">
+      <div class="era-span">
+        <span>2004</span>
+        <span class="now">Today</span>
+      </div>
+      <div class="era-track">
+        <div class="era-step"><div class="era-label">Process consulting</div></div>
+        <div class="era-step"><div class="era-label">Cloud and data engineering</div></div>
+        <div class="era-step"><div class="era-label">Applied AI</div></div>
+        <div class="era-step"><div class="era-label">AI outcomes for the agentic enterprise</div></div>
+      </div>
     </div>
-  </div>
-
-  <div class="wrap band-block">
-    <div class="band-head">
-      <span>People</span>
-      <span class="r">Intelligence</span>
-    </div>
-    <div class="band" id="bandHero" data-settled="0" aria-hidden="true">
-      <span class="band-marker"></span>
-    </div>
-    <p class="band-caption">The line between the work that needs a person and the work that never did. It moves — which is the reason this practice exists.</p>
   </div>
 </header>
 
-<main>
-
-<!-- ================= SECTION 1 — THE SHIFT ================= -->
-<section class="shift" id="shift" aria-labelledby="shift-h">
+<!-- ================= OUR NORTH STAR ================= -->
+<section class="north" aria-labelledby="north-h">
   <div class="wrap">
-    <div class="shift-top">
-      <div>
-        <h2 id="shift-h">AI is not another tool in the stack. It is a change in <em>what work is</em>.</h2>
+    <h2 class="sec-h2" id="north-h">Our north star</h2>
+
+    <div class="axes">
+      <div class="axis">
+        <div class="axis-k">What Searcians engineer</div>
+        <p class="axis-t"><em>Business outcomes</em> are what Searcians engineer.</p>
       </div>
-      <div>
-        <p class="shift-lede">Every workplace platform before this one asked people to learn a new interface and keep doing the same job. This one moves the job.</p>
-        <p class="shift-lede">Tasks that defined a role for a decade become something a system handles in the background. What remains of that role is a different job — and usually a more human one. That is a work design problem before it is a technology problem.</p>
+      <div class="axis">
+        <div class="axis-k">How Searcians behave</div>
+        <p class="axis-t"><em>happier</em> is how Searcians behave.</p>
       </div>
     </div>
 
-    <div class="qs">
-      <div class="q-head">
-        <span class="a">The question we used to ask</span>
-        <span class="b">The question that matters now</span>
+    <div class="maxims">
+      <div class="maxim">
+        <span class="maxim-n">01</span>
+        <p class="maxim-t">Mistakes are encouraged.</p>
       </div>
-
-      <div class="q-row">
-        <p class="q-old">Which tools do people get?</p>
-        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Which work do people still do?</span></p>
+      <div class="maxim">
+        <span class="maxim-n">02</span>
+        <p class="maxim-t">Under-promise, over-deliver.</p>
       </div>
-      <div class="q-row">
-        <p class="q-old">Train people on the software.</p>
-        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Redesign the role around the capability.</span></p>
-      </div>
-      <div class="q-row">
-        <p class="q-old">Count licences and logins.</p>
-        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Measure the work that actually changed.</span></p>
-      </div>
-      <div class="q-row">
-        <p class="q-old">Roll it out to everyone.</p>
-        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Build it with the people it changes.</span></p>
-      </div>
-      <div class="q-row">
-        <p class="q-old">Productivity is the same work, faster.</p>
-        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Productivity is work that was not possible before.</span></p>
+      <div class="maxim">
+        <span class="maxim-n">03</span>
+        <p class="maxim-t">One initiative, one owner.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= SECTION 2 — OFFERINGS ================= -->
-<section class="offer" id="offerings" aria-labelledby="offer-h">
+<!-- ================= BY THE NUMBERS (retained) ================= -->
+<section class="numbers" aria-labelledby="numbers-h">
   <div class="wrap">
-    <div class="offer-top">
-      <h2 id="offer-h">Offerings</h2>
-      <p>Eight durable capabilities. Open one to see what it covers.</p>
-    </div>
-
-    <div class="acc" id="acc">
-
-      <div class="acc-item open">
-        <button class="acc-btn" aria-expanded="true" aria-controls="a1">
-          <span class="acc-num">01</span>
-          <span class="acc-name">Work and role redesign for the agentic era</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a1">
-          <div class="acc-inner">
-            <p class="acc-desc">Start with the task inventory, not the tool. We separate the work that needs a person from the work that never did, then rewrite the role, the handoffs and the decision rights around that split.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Task-level inventory of a role, split by what moves and what stays</li>
-                <li>Rewritten role definitions, handoffs and decision rights</li>
-                <li>Escalation paths for the moments an agent must hand back</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false" aria-controls="a2">
-          <span class="acc-num">02</span>
-          <span class="acc-name">AI coworker and agent enablement</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a2">
-          <div class="acc-inner">
-            <p class="acc-desc">Agents that live inside a working day rather than beside it. Built with the people whose work they change, so the handback lands at the moment a person is genuinely needed.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Agents scoped to named tasks inside a real workflow</li>
-                <li>Handback rules, review gates and audit trails</li>
-                <li>Working sessions with the people whose roles change</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false" aria-controls="a3">
-          <span class="acc-num">03</span>
-          <span class="acc-name">Workplace platform deployment and modernization</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a3">
-          <div class="acc-inner">
-            <p class="acc-desc">The collaboration and productivity layer deployed, migrated and modernised — configured around the redesigned work rather than the vendor's default template.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Migration and deployment across the workplace estate</li>
-                <li>Configuration mapped to redesigned workflows</li>
-                <li>A decommissioning plan for what the new layer replaces</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false" aria-controls="a4">
-          <span class="acc-num">04</span>
-          <span class="acc-name">Capability building and AI literacy at scale</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a4">
-          <div class="acc-inner">
-            <p class="acc-desc">Capability built in cohorts that can teach the next cohort. It has to reach the whole workforce, including the people who will never write a prompt.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Role-specific curricula, from executive to frontline</li>
-                <li>Internal cohort leads who can run the next wave without us</li>
-                <li>Assessment against changed work, not course completions</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false" aria-controls="a5">
-          <span class="acc-num">05</span>
-          <span class="acc-name">Adoption and change engineering</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a5">
-          <div class="acc-inner">
-            <p class="acc-desc">Adoption built as a system, with owners, instrumentation and gates. This is where transformations quietly die, so it gets engineered rather than announced.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Named adoption owners with instrumented checkpoints</li>
-                <li>Enablement placed in the flow of work, not a training calendar</li>
-                <li>Gate criteria that will stop a rollout that is not landing</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false" aria-controls="a6">
-          <span class="acc-num">06</span>
-          <span class="acc-name">Knowledge and collaboration systems</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a6">
-          <div class="acc-inner">
-            <p class="acc-desc">The retrieval layer that people and agents both read from. Governed, current and answerable — so the answer is the same whoever asks it.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Consolidated, permissioned knowledge sources</li>
-                <li>Retrieval that serves people and agents from one place</li>
-                <li>Ownership and freshness rules per source</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false" aria-controls="a7">
-          <span class="acc-num">07</span>
-          <span class="acc-name">People operating system: hiring, onboarding and HR workflow</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a7">
-          <div class="acc-inner">
-            <p class="acc-desc">Hiring, onboarding and the HR workflows underneath them, rebuilt end to end. This is the system that decides how quickly a new person becomes a productive one.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Hiring and onboarding journeys rebuilt end to end</li>
-                <li>HR service workflows with agent-assisted resolution</li>
-                <li>Time-to-productivity instrumented as a standing measure</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false" aria-controls="a8">
-          <span class="acc-num">08</span>
-          <span class="acc-name">Work measurement and productivity instrumentation</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a8">
-          <div class="acc-inner">
-            <p class="acc-desc">Baselines and readings on how work actually moves. Without this, every claim about AI at work is a sentiment survey wearing a number.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Baselines captured before anything is deployed</li>
-                <li>Instrumentation on cycle time, touch rate and rework</li>
-                <li>Readings a finance team will accept</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div class="retained">
+      <div class="retained-k"><i aria-hidden="true"></i>Retain as is — no change</div>
+      <h2 id="numbers-h">By the numbers</h2>
+      <p>Keep the production section exactly as it is today. Splice the live markup in here; nothing in this block is designed content.</p>
     </div>
   </div>
 </section>
 
-<!-- ================= SECTION 3 — PLATFORM MOTIONS ================= -->
-<section class="motions" id="motions" aria-labelledby="motions-h">
+<!-- ================= WE FUTURIFY BUSINESSES ================= -->
+<section class="futurify" aria-labelledby="fut-h">
+  <div class="mod-grid on-dark" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="motions-head">
-      <h2 id="motions-h">Platform motions</h2>
-      <p>Named motions that run inside the offerings above. They are siblings within the practice — never the practice itself.</p>
-    </div>
+    <h2 class="fut-h2" id="fut-h">We futurify businesses.</h2>
 
-    <div class="tree">
-      <div class="tree-chip">
-        <small>The practice</small>
-        Human + AI Work Engineering
-      </div>
-      <span class="tree-stem" aria-hidden="true"></span>
-      <span class="tree-bar" aria-hidden="true"></span>
-    </div>
+    <p class="fut-body">To futurify is to make a business ready for what comes next: <em>reimagine what's next, redefine the how, realize the next now.</em> It is what the group has done since 2004, and it is why the business engineering company that grew out of Searce carries the name.</p>
 
-    <div class="sibs" role="tablist" aria-label="Platform motions">
-      <div class="sib">
-        <span class="sib-tick" aria-hidden="true"></span>
-        <button class="sib-btn" role="tab" id="m1" aria-controls="mp1" aria-selected="true">
-          <span class="sib-name">Gemini Enterprise transformation</span>
-          <span class="sib-dot" aria-hidden="true"></span>
-        </button>
-      </div>
-      <div class="sib">
-        <span class="sib-tick" aria-hidden="true"></span>
-        <button class="sib-btn" role="tab" id="m2" aria-controls="mp2" aria-selected="false" tabindex="-1">
-          <span class="sib-name">Google Workspace</span>
-          <span class="sib-dot" aria-hidden="true"></span>
-        </button>
-      </div>
-      <div class="sib">
-        <span class="sib-tick" aria-hidden="true"></span>
-        <button class="sib-btn" role="tab" id="m3" aria-controls="mp3" aria-selected="false" tabindex="-1">
-          <span class="sib-name">Claude adoption</span>
-          <span class="sib-dot" aria-hidden="true"></span>
-        </button>
-      </div>
-      <div class="sib">
-        <span class="sib-tick" aria-hidden="true"></span>
-        <button class="sib-btn" role="tab" id="m4" aria-controls="mp4" aria-selected="false" tabindex="-1">
-          <span class="sib-name">happierWork</span>
-          <span class="sib-dot" aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-
-    <div class="motion-detail">
-      <div class="md-pane active" role="tabpanel" id="mp1" aria-labelledby="m1">
-        <div>
-          <h3 class="md-title">Gemini Enterprise transformation</h3>
-          <p class="md-desc">Enterprise-wide deployment paired with the work redesign that makes it land. The platform is the easy part; the roles around it are the engagement.</p>
-        </div>
-        <div>
-          <div class="md-k">Runs inside these offerings</div>
-          <ul class="md-list">
-            <li>Work and role redesign for the agentic era</li>
-            <li>AI coworker and agent enablement</li>
-            <li>Adoption and change engineering</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="md-pane" role="tabpanel" id="mp2" aria-labelledby="m2">
-        <div>
-          <h3 class="md-title">Google Workspace</h3>
-          <p class="md-desc">Migration, modernisation and configuration of the collaboration layer — shaped to the redesigned work rather than the default template.</p>
-        </div>
-        <div>
-          <div class="md-k">Runs inside these offerings</div>
-          <ul class="md-list">
-            <li>Workplace platform deployment and modernization</li>
-            <li>Knowledge and collaboration systems</li>
-            <li>Capability building and AI literacy at scale</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="md-pane" role="tabpanel" id="mp3" aria-labelledby="m3">
-        <div>
-          <h3 class="md-title">Claude adoption</h3>
-          <p class="md-desc">Assistant and agent adoption across knowledge work, with governance and review gates built in from the first cohort.</p>
-        </div>
-        <div>
-          <div class="md-k">Runs inside these offerings</div>
-          <ul class="md-list">
-            <li>AI coworker and agent enablement</li>
-            <li>Capability building and AI literacy at scale</li>
-            <li>Adoption and change engineering</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="md-pane" role="tabpanel" id="mp4" aria-labelledby="m4">
-        <div>
-          <h3 class="md-title">happierWork</h3>
-          <p class="md-desc">The people operating system: hiring, onboarding and the HR workflows underneath them, run as one instrumented system.</p>
-        </div>
-        <div>
-          <div class="md-k">Runs inside these offerings</div>
-          <ul class="md-list">
-            <li>People operating system: hiring, onboarding and HR workflow</li>
-            <li>Work measurement and productivity instrumentation</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="rules">
-      <div class="rule-note">
-        <p><strong>A vendor or product is never the name or the identity of the practice.</strong> The practice is defined by the work it redesigns. Platform offerings remain siblings inside it.</p>
-      </div>
-      <div class="rule-note">
-        <p><strong>Frontline and deskless workforces are served as a segment</strong> across every offering above — not as a separate offering. The work design differs; the capability does not.</p>
-      </div>
+    <div class="fut-close">
+      <p><span class="ph">reimagine what's next</span><span class="dot" aria-hidden="true">·</span><span class="ph">redefine the how</span><span class="dot" aria-hidden="true">·</span><span class="ph">realize the next now</span></p>
     </div>
   </div>
 </section>
 
-<!-- ================= SECTION 4 — OUTCOME STORIES ================= -->
-<section class="evidence" id="outcomes" aria-labelledby="ev-h">
+<!-- ================= MEET OUR SOLVERS onward (retained) ================= -->
+<section class="solvers" aria-labelledby="solvers-h">
   <div class="wrap">
-    <h2 id="ev-h">Outcome stories</h2>
-
-    <div class="ev-col">
-      <p class="ev-lead">This practice has <em>no verified readings yet</em>.</p>
-      <p class="ev-text">The offerings stand on their own until it does.</p>
-
-      <div class="ev-next">
-        <div class="ev-next-k">First readings expected from</div>
-        <ul class="ev-next-list">
-          <li>Gemini Enterprise transformation engagements</li>
-          <li>Work measurement engagements</li>
-        </ul>
-      </div>
-
-      <div class="ev-standard">
-        <p>We do not fill the gap with soft numbers.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= SECTION 5 — CLOSING ================= -->
-<section class="close" aria-labelledby="close-h">
-  <div class="mod-grid" aria-hidden="true"></div>
-  <div class="close-glow" aria-hidden="true"></div>
-
-  <div class="wrap">
-    <div class="close-inner">
-      <h2 id="close-h">An hour handed back to a person is only worth <em>what they spend it on</em>.</h2>
-      <p class="close-final">Not fewer people doing the same work faster. Different work, worth a person's day.</p>
-    </div>
-  </div>
-
-  <div class="wrap band-block">
-    <div class="band-head">
-      <span>People</span>
-      <span class="r">Intelligence</span>
-    </div>
-    <div class="band" id="bandClose" data-settled="1" aria-hidden="true">
-      <span class="band-marker"></span>
+    <div class="retained">
+      <div class="retained-k"><i aria-hidden="true"></i>Retain as is — no change</div>
+      <h2 id="solvers-h">Meet our solvers — and every section after it</h2>
+      <p>Everything from this point down stays exactly as it is on the live page. Splice the production markup in here.</p>
     </div>
   </div>
 </section>
@@ -1282,23 +634,15 @@ footer{background:#071028;padding:72px 0 0;}
         <div class="connect-row">
           <select aria-label="Country">
             <option value="" disabled selected>country</option>
-            <option>India</option>
-            <option>United States</option>
-            <option>United Kingdom</option>
-            <option>Singapore</option>
-            <option>Australia</option>
-            <option>UAE</option>
+            <option>India</option><option>United States</option><option>United Kingdom</option>
+            <option>Singapore</option><option>Australia</option><option>UAE</option>
           </select>
           <input type="tel" placeholder="phone number" aria-label="Phone number">
         </div>
         <select aria-label="Your title">
           <option value="" disabled selected>your title*</option>
-          <option>CXO / Executive</option>
-          <option>VP / Director</option>
-          <option>Manager</option>
-          <option>Engineer</option>
-          <option>Consultant</option>
-          <option>Other</option>
+          <option>CXO / Executive</option><option>VP / Director</option><option>Manager</option>
+          <option>Engineer</option><option>Consultant</option><option>Other</option>
         </select>
         <textarea placeholder="please describe your query here*" aria-label="Query" rows="4"></textarea>
         <label class="connect-check">
@@ -1325,7 +669,7 @@ footer{background:#071028;padding:72px 0 0;}
         <div class="foot-col-head">practices</div>
         <ul class="foot-col-links">
           <li><a href="#">business systems engineering</a></li>
-          <li><a href="#" class="current" aria-current="page">human + AI work engineering</a></li>
+          <li><a href="human-ai-work-engineering.html">human + AI work engineering</a></li>
           <li><a href="#">AI-ready platform engineering</a></li>
           <li><a href="#">AI trust &amp; resilience engineering</a></li>
         </ul>
@@ -1351,7 +695,7 @@ footer{background:#071028;padding:72px 0 0;}
           <li><a href="#">events</a></li>
           <li><a href="#">articles</a></li>
           <li><a href="#">news</a></li>
-          <li><a href="who-we-are.html">about us</a></li>
+          <li><a href="who-we-are.html" class="current" aria-current="page">about us</a></li>
           <li><a href="careers.html">careers</a></li>
           <li><a href="#" class="connect-link">let's connect</a></li>
         </ul>
@@ -1367,10 +711,8 @@ footer{background:#071028;padding:72px 0 0;}
         </button>
       </div>
       <div class="foot-legal">
-        <a href="#">terms of service</a>
-        <span>&middot;</span>
-        <a href="#">privacy policy</a>
-        <span>&middot;</span>
+        <a href="#">terms of service</a><span>&middot;</span>
+        <a href="#">privacy policy</a><span>&middot;</span>
         <a href="#">legal</a>
       </div>
       <div class="foot-copy">&copy; 2026 Searce Technologies Inc. all rights reserved</div>
@@ -1378,152 +720,5 @@ footer{background:#071028;padding:72px 0 0;}
   </div>
 </footer>
 
-<script>
-const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ===== BOUNDARY BAND ===== */
-(function(){
-  document.querySelectorAll('.band').forEach(band => {
-    const settled = band.dataset.settled === '1';
-    const marker  = band.querySelector('.band-marker');
-    let bars = [];
-
-    function build(){
-      bars.forEach(b => b.remove());
-      bars = [];
-      const w = band.clientWidth || 900;
-      const n = Math.max(12, Math.min(66, Math.round(w / 18)));
-      const frag = document.createDocumentFragment();
-      for(let i=0;i<n;i++){
-        const b = document.createElement('span');
-        b.className = 'bar';
-        frag.appendChild(b);
-        bars.push(b);
-      }
-      band.insertBefore(frag, marker);
-    }
-
-    function paint(boundary){
-      if(marker) marker.style.left = (boundary*100).toFixed(2) + '%';
-      const n = bars.length;
-      for(let i=0;i<n;i++){
-        const isHuman = ((i + 0.5) / n) <= boundary;
-        bars[i].classList.toggle('human', isHuman);
-        bars[i].classList.toggle('agent', !isHuman);
-      }
-    }
-
-    build();
-
-    if(settled || REDUCED){
-      const b = settled ? 0.38 : 0.46;
-      paint(b);
-      window.addEventListener('resize', () => { build(); paint(b); });
-      return;
-    }
-
-    const t0 = performance.now();
-    function tick(){
-      const s = (performance.now() - t0) / 1000;
-      const b = 0.48 + 0.13*Math.sin(s/3.9) + 0.05*Math.sin(s/1.7 + 1.1);
-      paint(Math.max(0.16, Math.min(0.84, b)));
-    }
-    tick();
-    setInterval(tick, 110);
-    let rz;
-    window.addEventListener('resize', () => {
-      clearTimeout(rz);
-      rz = setTimeout(() => { build(); tick(); }, 150);
-    });
-  });
-})();
-
-/* ===== THE SHIFT — questions replace themselves on arrival ===== */
-(function(){
-  const rows = document.querySelectorAll('.q-row');
-  if(!rows.length) return;
-  if(REDUCED || !('IntersectionObserver' in window)){
-    rows.forEach(r => r.classList.add('in'));
-    return;
-  }
-  rows.forEach((r,i) => {
-    r.querySelector('.q-old').style.transitionDelay = (0.10 + i*0.06) + 's';
-    r.querySelector('.q-new').style.transitionDelay = (0.04 + i*0.06) + 's';
-  });
-  const io = new IntersectionObserver(es => {
-    es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, {rootMargin:'0px 0px -18% 0px', threshold:0.25});
-  rows.forEach(r => io.observe(r));
-})();
-
-/* ===== OFFERINGS — accordion, one open at a time ===== */
-(function(){
-  const items = Array.from(document.querySelectorAll('.acc-item'));
-  if(!items.length) return;
-
-  const bodyOf = it => it.querySelector('.acc-body');
-  const btnOf  = it => it.querySelector('.acc-btn');
-
-  function setOpen(it, open){
-    const body = bodyOf(it), btn = btnOf(it);
-    it.classList.toggle('open', open);
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
-  }
-
-  items.forEach(it => setOpen(it, it.classList.contains('open')));
-
-  items.forEach(it => {
-    btnOf(it).addEventListener('click', () => {
-      const willOpen = !it.classList.contains('open');
-      items.forEach(o => setOpen(o, false));
-      if(willOpen) setOpen(it, true);
-    });
-  });
-
-  /* keep the open panel's height correct when the layout reflows */
-  let rz;
-  window.addEventListener('resize', () => {
-    clearTimeout(rz);
-    rz = setTimeout(() => {
-      const open = items.find(i => i.classList.contains('open'));
-      if(open){ bodyOf(open).style.maxHeight = 'none';
-                const h = bodyOf(open).scrollHeight;
-                bodyOf(open).style.maxHeight = h + 'px'; }
-    }, 150);
-  });
-})();
-
-/* ===== PLATFORM MOTIONS — selectable siblings ===== */
-(function(){
-  const tabs = Array.from(document.querySelectorAll('.sib-btn'));
-  const panes = Array.from(document.querySelectorAll('.md-pane'));
-  if(!tabs.length) return;
-
-  function select(i, focus){
-    tabs.forEach((t,k) => {
-      const on = k === i;
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-      t.tabIndex = on ? 0 : -1;
-      panes[k].classList.toggle('active', on);
-    });
-    if(focus) tabs[i].focus();
-  }
-
-  tabs.forEach((t,i) => {
-    t.addEventListener('click', () => select(i, false));
-    t.addEventListener('mouseenter', () => select(i, false));
-    t.addEventListener('keydown', e => {
-      const last = tabs.length - 1;
-      let n = null;
-      if(e.key === 'ArrowRight' || e.key === 'ArrowDown') n = i === last ? 0 : i + 1;
-      if(e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   n = i === 0 ? last : i - 1;
-      if(e.key === 'Home') n = 0;
-      if(e.key === 'End')  n = last;
-      if(n !== null){ e.preventDefault(); select(n, true); }
-    });
-  });
-})();
-</script>
 </body>
 </html>

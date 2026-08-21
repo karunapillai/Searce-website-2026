@@ -457,7 +457,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   align-items:center;
   position:relative;
   will-change:transform;
-  padding:28px 60px 80px;
+  padding:28px 60px 68px;
 }
 .milestone{
   flex-shrink:0;
@@ -527,7 +527,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .gap-segment.active .gap-line{border-color:var(--blue);}
 .gap-expand{display:none;}
 .gap-panel-wrap{
-  position:relative;margin-top:16px;min-height:180px;
+  position:relative;margin-top:4px;min-height:170px;
 }
 .gap-panel{
   position:absolute;top:0;left:50%;width:380px;
@@ -1613,24 +1613,16 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     obs.observe(section);
   }
 
-  /* --- Ticker scroll (ping-pong) --- */
-  const SPEED=0.35;
-  let pos=0, dir=-1, paused=false, edgePause=0, resumeTimer=null;
+  /* --- Ticker scroll (right-to-left loop) --- */
+  const SPEED=0.55;
+  let pos=0, paused=false, resumeTimer=null;
 
-  function tick(now){
+  function tick(){
     if(tickerReady&&!paused){
       const trackW=track.scrollWidth;
       const vpW=viewport.offsetWidth;
-      const maxScroll=trackW-vpW;
-      if(maxScroll>0){
-        if(edgePause>0){
-          if(now-edgePause>2200){edgePause=0; dir*=-1;}
-        } else {
-          pos+=SPEED*dir;
-          if(pos<=-maxScroll){pos=-maxScroll; edgePause=now;}
-          else if(pos>=0){pos=0; edgePause=now;}
-        }
-      }
+      pos-=SPEED;
+      if(pos<=-trackW) pos=vpW;
       track.style.transform='translateX('+pos+'px)';
     }
     requestAnimationFrame(tick);
@@ -1642,7 +1634,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
   viewport.addEventListener('mouseleave',()=>{
     deactivateGap();
-    resumeTimer=setTimeout(()=>{paused=false; edgePause=0;},1000);
+    resumeTimer=setTimeout(()=>{paused=false;},1000);
   });
 
   /* --- Gap interaction --- */

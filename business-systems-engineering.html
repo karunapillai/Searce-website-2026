@@ -186,14 +186,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 @keyframes hwUp{to{opacity:1;transform:translateY(0);}}
 @keyframes heroFade{to{opacity:1;transform:translateY(0);}}
 .hero-opening{
-  max-width:52ch;margin-bottom:40px;
+  max-width:80ch;margin-bottom:40px;
   opacity:0;animation:heroFade .6s ease 1.3s forwards;
 }
 .hero-opening p{
   font-size:clamp(16px,1.5vw,21px);line-height:1.65;
   color:var(--ink-60);font-weight:400;
 }
-.hero-opening p + p{margin-top:6px;}
+.hero-opening p + p{margin-top:10px;}
 .hero-cta-row{
   display:flex;align-items:center;gap:18px;flex-wrap:wrap;
   margin-bottom:56px;
@@ -440,16 +440,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   color:rgba(255,255,255,0.55);max-width:54ch;font-weight:400;
   margin:0 auto;
 }
-.ladder-track-outer{position:relative;padding:40px 0 0;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.ladder-track-outer{position:relative;padding:40px 0 0;}
 .ladder-track{
   display:flex;
   align-items:center;
-  justify-content:flex-start;
+  justify-content:center;
   position:relative;
   overflow:visible;
   height:24px;
-  min-width:max-content;
-  padding:0 40px;
+  padding:0 20px;
 }
 .milestone{
   flex-shrink:0;
@@ -513,7 +512,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .gap-capsule:hover{color:#fff;border-color:var(--blue);background:rgba(0,100,255,0.12);}
 .gap-segment.active .gap-capsule{color:#fff;background:var(--blue);border-color:var(--blue);}
 .gap-segment{
-  flex-shrink:0;
+  flex:1 1 0%;
   position:relative;
   height:0;
   z-index:1;
@@ -582,7 +581,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .ladder-resolve{
   margin-top:56px;
   display:flex;align-items:center;gap:16px;
-  border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;
+  padding-top:24px;
 }
 .ladder-resolve-label{
   font-family:var(--display);font-weight:400;
@@ -590,9 +589,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   letter-spacing:.06em;text-transform:uppercase;color:#fff;
 }
 .ladder-resolve-sub{font-size:14px;color:rgba(255,255,255,0.45);margin-top:3px;font-weight:400;}
-.ladder-track-outer::-webkit-scrollbar{height:4px;}
-.ladder-track-outer::-webkit-scrollbar-track{background:rgba(255,255,255,0.05);border-radius:2px;}
-.ladder-track-outer::-webkit-scrollbar-thumb{background:rgba(0,100,255,0.3);border-radius:2px;}
 .ladder-arrow{font-family:var(--display);font-weight:300;font-size:26px;color:rgba(255,255,255,0.3);}
 
 /* Expanding lines animation for metric ladder */
@@ -1129,7 +1125,7 @@ footer{background:#071028;padding:72px 0 0;}
           <div class="milestone-label">Ship Date</div>
         </div>
 
-        <div class="gap-segment" style="width:150px" data-idx="0">
+        <div class="gap-segment" data-idx="0">
           <div class="gap-line"></div>
           <div class="gap-capsule" data-tab="0">Billing lag</div>
           <div class="gap-expand">
@@ -1149,7 +1145,7 @@ footer{background:#071028;padding:72px 0 0;}
           <div class="milestone-label">Invoice Date</div>
         </div>
 
-        <div class="gap-segment" style="width:150px" data-idx="1">
+        <div class="gap-segment" data-idx="1">
           <div class="gap-line"></div>
           <div class="gap-capsule" data-tab="1">Delivery lag</div>
           <div class="gap-expand">
@@ -1169,7 +1165,7 @@ footer{background:#071028;padding:72px 0 0;}
           <div class="milestone-label">Invoice Delivery Date</div>
         </div>
 
-        <div class="gap-segment" style="width:150px" data-idx="2">
+        <div class="gap-segment" data-idx="2">
           <div class="gap-line"></div>
           <div class="gap-capsule" data-tab="2">Receipt</div>
           <div class="gap-expand">
@@ -1189,7 +1185,7 @@ footer{background:#071028;padding:72px 0 0;}
           <div class="milestone-label">Invoice Receipt Date</div>
         </div>
 
-        <div class="gap-segment" style="width:170px" data-idx="3">
+        <div class="gap-segment" data-idx="3">
           <div class="gap-line"></div>
           <div class="gap-capsule" data-tab="3">Dispute &amp; resolution</div>
           <div class="gap-expand">
@@ -1209,8 +1205,8 @@ footer{background:#071028;padding:72px 0 0;}
           <div class="milestone-label">Invoice Approval Date</div>
         </div>
 
-        <div class="gap-segment" style="width:140px" data-idx="4">
-          <div class="gap-line" style="border-color:rgba(0,100,255,0.18);"></div>
+        <div class="gap-segment" data-idx="4">
+          <div class="gap-line"></div>
           <div class="gap-capsule" data-tab="4">Pay term</div>
           <div class="gap-expand">
             <div class="gap-expand-inner">
@@ -1229,7 +1225,7 @@ footer{background:#071028;padding:72px 0 0;}
           <div class="milestone-label" style="color:#e63946;">Pay Term</div>
         </div>
 
-        <div class="gap-segment" style="width:150px" data-idx="5">
+        <div class="gap-segment" data-idx="5">
           <div class="gap-line"></div>
           <div class="gap-capsule" data-tab="5">Collections</div>
           <div class="gap-expand">
@@ -1249,7 +1245,7 @@ footer{background:#071028;padding:72px 0 0;}
           <div class="milestone-label">Payment Issue Date</div>
         </div>
 
-        <div class="gap-segment" style="width:150px" data-idx="6">
+        <div class="gap-segment" data-idx="6">
           <div class="gap-line"></div>
           <div class="gap-capsule" data-tab="6">Transit</div>
           <div class="gap-expand">
@@ -1269,7 +1265,7 @@ footer{background:#071028;padding:72px 0 0;}
           <div class="milestone-label">Payment Receipt Date</div>
         </div>
 
-        <div class="gap-segment" style="width:150px" data-idx="7">
+        <div class="gap-segment" data-idx="7">
           <div class="gap-line"></div>
           <div class="gap-capsule" data-tab="7">Matching</div>
           <div class="gap-expand">

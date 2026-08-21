@@ -389,7 +389,13 @@ footer{background:#071028;padding:72px 0 0;}
 .foot-legal a{font-size:13px;color:rgba(255,255,255,0.35);transition:color .2s ease;}
 .foot-legal a:hover{color:#fff;}
 .foot-legal span{color:rgba(255,255,255,0.15);}
+/* nowrap only where there is room for it — held on one line in the
+   footer's wide layout, allowed to wrap once the viewport is narrower
+   than the line itself */
 .foot-copy{font-size:13px;color:rgba(255,255,255,0.35);white-space:nowrap;}
+@media(max-width:420px){
+  .foot-copy{white-space:normal;}
+}
 
 /* ======= RESPONSIVE ======= */
 @media(max-width:1180px){

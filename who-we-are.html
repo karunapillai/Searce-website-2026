@@ -328,8 +328,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   background:linear-gradient(155deg,#00337f 0%,#001a41 58%,#00112b 100%);
   color:#fff;
   padding:var(--sec) 0;
-  /* the one size shared by the heading and the closing refrain */
-  --fut:clamp(30px,4.3vw,62px);
+  /* the one size shared by the heading and the closing refrain.
+     the floor is set so the longest unbreakable phrase in the
+     refrain still fits the narrowest supported viewport */
+  --fut:clamp(27px,4.3vw,62px);
 }
 .futurify .wrap{position:relative;z-index:1;}
 .fut-h2{
@@ -351,16 +353,25 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   border-top:1px solid rgba(255,255,255,0.18);
   padding-top:clamp(28px,3.4vw,44px);
 }
+/* The refrain is laid out as a wrapping row rather than a run of
+   inline spans: adjacent inline elements with no whitespace between
+   them give the line no break opportunity at all, so the refrain
+   overflowed instead of wrapping. Flex items always have one. */
 .fut-close p{
+  display:flex;flex-wrap:wrap;align-items:baseline;
+  column-gap:.42em;row-gap:.06em;
   font-family:var(--display);font-weight:300;
   font-size:var(--fut);
   line-height:1.16;letter-spacing:-0.03em;
   color:#fff;
 }
 /* each phrase stays whole so the refrain breaks between phrases,
-   never inside one */
+   never inside one; the separator rides on the phrase before it so a
+   wrap can never orphan a dot at the start of a line */
 .fut-close .ph{white-space:nowrap;}
-.fut-close .dot{color:var(--blue-24);padding:0 .22em;}
+.fut-close .ph:not(:last-child)::after{
+  content:'·';color:var(--blue-24);margin-left:.42em;
+}
 
 /* ===========================================================
    MEET OUR SOLVERS onward — retained
@@ -430,7 +441,17 @@ footer{background:#071028;padding:72px 0 0;}
 .foot-legal a{font-size:13px;color:rgba(255,255,255,0.35);transition:color .2s ease;}
 .foot-legal a:hover{color:#fff;}
 .foot-legal span{color:rgba(255,255,255,0.15);}
+/* nowrap only where there is room for it — held on one line in the
+   footer's wide layout, allowed to wrap once the viewport is narrower
+   than the line itself */
 .foot-copy{font-size:13px;color:rgba(255,255,255,0.35);white-space:nowrap;}
+@media(max-width:420px){
+  .foot-copy{white-space:normal;}
+  /* below this the longest unbreakable refrain phrase no longer fits
+     at the clamp floor, so the shared size tracks the viewport.
+     matches the main clamp at 420px, so the scale stays continuous */
+  .futurify{--fut:clamp(21px,7vw,27px);}
+}
 
 /* ======= RESPONSIVE ======= */
 @media(max-width:1180px){
@@ -596,7 +617,7 @@ footer{background:#071028;padding:72px 0 0;}
     <p class="fut-body">To futurify is to make a business ready for what comes next: <em>reimagine what's next, redefine the how, realize the next now.</em> It is what the group has done since 2004, and it is why the business engineering company that grew out of Searce carries the name.</p>
 
     <div class="fut-close">
-      <p><span class="ph">reimagine what's next</span><span class="dot" aria-hidden="true">·</span><span class="ph">redefine the how</span><span class="dot" aria-hidden="true">·</span><span class="ph">realize the next now</span></p>
+      <p><span class="ph">reimagine what's next</span> <span class="ph">redefine the how</span> <span class="ph">realize the next now</span></p>
     </div>
   </div>
 </section>

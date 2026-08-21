@@ -329,19 +329,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   text-align:center;
 }
 .ev-col{max-width:62ch;margin:0 auto;text-align:center;}
-.ev-story-card{
-  max-width:640px;
-  margin:0 auto clamp(32px,3.6vw,44px);
-  padding:clamp(32px,3.6vw,48px);
-  border:1px solid var(--paper-line);
-  border-radius:14px;
-  text-align:center;
-}
-.ev-story-card:hover{
-  border-color:var(--blue-24);
-  box-shadow:0 8px 28px rgba(0,100,255,0.08);
-  transition:border-color .25s ease, box-shadow .25s ease;
-}
 .ev-story-quote{
   font-family:var(--display);font-weight:300;
   font-size:clamp(22px,2.4vw,34px);
@@ -355,16 +342,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   font-size:clamp(28px,3.2vw,48px);
   line-height:1.0;letter-spacing:-0.025em;
   color:var(--blue);
-}
-.ev-standard{
-  border-left:none;
-  padding-left:0;
-}
-.ev-standard p{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(19px,2vw,27px);
-  line-height:1.2;letter-spacing:-0.02em;
-  color:var(--ink);
 }
 
 /* ======= LET'S CONNECT — shared practice-page treatment ======= */
@@ -767,14 +744,8 @@ footer{background:#071028;padding:72px 0 0;}
     <h2 id="ev-h">Outcome stories</h2>
 
     <div class="ev-col">
-      <div class="ev-story-card">
         <p class="ev-story-quote">&ldquo;Incidents wake people up that <em>automation should handle</em>.&rdquo;</p>
         <p class="ev-story-result">99.99% uptime.</p>
-      </div>
-
-      <div class="ev-standard">
-        <p>Do not fill this space with soft numbers.</p>
-      </div>
     </div>
   </div>
 </section>

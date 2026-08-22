@@ -73,6 +73,10 @@ h1,h2,h3,h4,h5,h6,strong,b,.font-medium,.font-semibold{ font-weight:inherit; }
     linear-gradient(90deg, rgba(0,100,255,0.04) 1px, transparent 1px);
   background-size:40px 40px;
 }
+.mod-grid-fade{
+  -webkit-mask-image:linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-image:linear-gradient(to bottom, black 60%, transparent 100%);
+}
 </style>
 </head>
 <body>
@@ -155,7 +159,7 @@ h1,h2,h3,h4,h5,h6,strong,b,.font-medium,.font-semibold{ font-weight:inherit; }
 <section class="w-full flex justify-center items-center">
   <!-- mobile hero -->
   <div class="bg-white w-full h-screen flex md:hidden items-center justify-center overflow-hidden relative">
-    <div class="mod-grid" aria-hidden="true"></div>
+    <div class="mod-grid mod-grid-fade" aria-hidden="true"></div>
     <div class="max-w-[1440px] mx-auto w-full h-screen relative px-4 sm:px-6">
       <div class="hero-main absolute inset-0 px-4 sm:px-6 flex flex-col justify-center top-10">
         <div class="hero-content relative z-0 flex items-center w-full mb-12">
@@ -190,7 +194,7 @@ h1,h2,h3,h4,h5,h6,strong,b,.font-medium,.font-semibold{ font-weight:inherit; }
   <!-- desktop hero -->
   <div class="hidden md:block bg-white w-full">
     <div class="min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div class="mod-grid" aria-hidden="true"></div>
+      <div class="mod-grid mod-grid-fade" aria-hidden="true"></div>
       <div class="max-w-[1440px] mx-auto w-full relative z-10">
         <div class="hero-main flex flex-col items-center md:flex md:flex-col lg:block px-4 sm:px-10 xl:px-20 pt-[97px]">
           <div class="hero-content md:mb-12 lg:h-full lg:flex lg:items-center relative z-0">
@@ -249,17 +253,17 @@ h1,h2,h3,h4,h5,h6,strong,b,.font-medium,.font-semibold{ font-weight:inherit; }
 <!-- ============================================================
      MISSION & VISION — a quiet pair between north star and numbers.
      ============================================================ -->
-<section class="bg-[linear-gradient(135deg,#000000_0%,#001630_50%,#002a5c_100%)]">
+<section class="bg-[linear-gradient(to_bottom,#FFFFFF_0%,#E5EEFC_100%)]">
   <div class="max-w-[1440px] mx-auto py-24 px-4 sm:px-10 xl:px-20 text-center">
     <div class="mb-6">
       <p class="text-sm tracking-[0.2em] text-[#999999] mb-3">MISSION</p>
-      <p class="text-2xl sm:text-3xl md:text-4xl leading-tight text-white">solving for better.</p>
+      <p class="text-2xl sm:text-3xl md:text-4xl leading-tight text-blue-900">solving for better.</p>
     </div>
     <div class="mb-12">
       <p class="text-sm tracking-[0.2em] text-[#999999] mb-3">VISION</p>
-      <p class="text-2xl sm:text-3xl md:text-4xl leading-tight text-white">driving intelligent outcomes.</p>
+      <p class="text-2xl sm:text-3xl md:text-4xl leading-tight text-blue-900">driving intelligent outcomes.</p>
     </div>
-    <p class="font-google-sans-flex text-lg lg:text-xl leading-relaxed text-[#C3C3C3] max-w-4xl mx-auto">The mission is why we exist and it has not changed since 2004. The vision is what we drive toward. AI Outcome Engineering is that vision made operational: the discipline through which intelligent outcomes stop being an aspiration and start being a reading we sign with the client.</p>
+    <p class="font-google-sans-flex text-lg lg:text-xl leading-relaxed text-[#555555] max-w-4xl mx-auto">The mission is why we exist and it has not changed since 2004. The vision is what we drive toward. AI Outcome Engineering is that vision made operational: the discipline through which intelligent outcomes stop being an aspiration and start being a reading we sign with the client.</p>
   </div>
 </section>
 
@@ -351,7 +355,7 @@ h1,h2,h3,h4,h5,h6,strong,b,.font-medium,.font-semibold{ font-weight:inherit; }
 
 <!-- ===== LET'S BUILD THE FUTURE ===== -->
 <section class="relative overflow-hidden bg-white">
-  <div class="dot-grid" aria-hidden="true"></div>
+  <div class="mod-grid" aria-hidden="true"></div>
   <div class="relative z-10 flex items-center justify-center p-16">
     <div class="text-center max-w-4xl">
       <div class="relative w-20 h-20 mx-auto mb-12"><div class="absolute top-0 left-8 w-4 h-20 bg-[#0064FF]"></div><div class="absolute top-8 left-0 w-20 h-4 bg-[#0064FF]"></div></div>

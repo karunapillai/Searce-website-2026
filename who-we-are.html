@@ -48,24 +48,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/preview.css"/>
 <style>
-/* The futurify section's heading and closing refrain share ONE size
-   token, per the content doc's note that they must be the same font
-   size. Declared once here so the two can never drift apart. */
+body{ font-weight:300; }
+h1,h2,h3,h4,h5,h6,strong,b,.font-medium,.font-semibold{ font-weight:inherit; }
+.font-medium{ font-weight:500!important; }
+.font-semibold{ font-weight:600!important; }
+.font-normal{ font-weight:300!important; }
+
 .futurify-section{ --fut:clamp(27px,4.3vw,62px); }
 .futurify-h2, .futurify-refrain{ font-size:var(--fut); }
-/* The refrain is a wrapping flex row, not a run of inline spans:
-   adjacent inline elements with no whitespace between them give a
-   line no break opportunity at all, and each phrase is nowrap, so
-   as inline content the refrain would overflow instead of wrapping.
-   Flex items always have a break opportunity. The separator rides on
-   the phrase before it, so a wrap can never orphan a dot. */
-.futurify-refrain{ display:flex; flex-wrap:wrap; align-items:baseline; column-gap:.42em; row-gap:.06em; }
+.futurify-refrain{ display:flex; flex-wrap:nowrap; align-items:baseline; column-gap:.42em; }
 .futurify-refrain .ph{ white-space:nowrap; }
 .futurify-refrain .ph:not(:last-child)::after{ content:'\00B7'; color:#79ADFF; margin-left:.42em; }
-@media(max-width:420px){
-  /* below this the longest unbreakable phrase no longer fits at the
-     clamp floor, so the shared size tracks the viewport instead */
-  .futurify-section{ --fut:clamp(21px,7vw,27px); }
+@media(max-width:640px){
+  .futurify-refrain{ flex-wrap:wrap; row-gap:.06em; }
+  .futurify-section{ --fut:clamp(18px,5.5vw,27px); }
+}
+
+.dot-grid{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle, rgba(0,100,255,0.18) 1.2px, transparent 1.2px);
+  background-size:32px 32px;
+}
+.dot-grid-dark{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.08) 1.2px, transparent 1.2px);
+  background-size:32px 32px;
 }
 </style>
 </head>
@@ -149,10 +158,11 @@
 <section class="w-full flex justify-center items-center">
   <!-- mobile hero -->
   <div class="bg-white w-full h-screen flex md:hidden items-center justify-center overflow-hidden relative">
+    <div class="dot-grid" aria-hidden="true"></div>
     <div class="max-w-[1440px] mx-auto w-full h-screen relative px-4 sm:px-6">
       <div class="hero-main absolute inset-0 px-4 sm:px-6 flex flex-col justify-center top-10">
         <div class="hero-content relative z-0 flex items-center w-full mb-12">
-          <h1 class="text-[9vw] leading-tight"><span class="text-blue-800 block">Twenty-two years</span><span class="text-blue-800 block">of solving</span><span class="text-blue-600 block">for better.</span></h1>
+          <h1 class="text-[9vw] leading-tight"><span class="text-blue-900 block">Twenty-two years</span><span class="text-blue-900 block">of solving</span><span class="text-blue-600 block">for better.</span></h1>
         </div>
         <div class="hero-details-wrapper w-full"><div>
           <div class="flex md:hidden hero-details w-full flex-col items-start">
@@ -183,10 +193,11 @@
   <!-- desktop hero -->
   <div class="hidden md:block bg-white w-full">
     <div class="min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div class="max-w-[1440px] mx-auto w-full">
+      <div class="dot-grid" aria-hidden="true"></div>
+      <div class="max-w-[1440px] mx-auto w-full relative z-10">
         <div class="hero-main flex flex-col items-center md:flex md:flex-col lg:block px-4 sm:px-10 xl:px-20 pt-[97px]">
           <div class="hero-content md:mb-12 lg:h-full lg:flex lg:items-center relative z-0">
-            <h1 class="text-[11vw] lg:text-[12vw] xl:text-[11vw] 2xl:text-[9vw] leading-[0.98]"><span class="text-blue-800 block">Twenty-two years</span><span class="text-blue-800 block">of solving</span><span class="text-blue-600 block">for better.</span></h1>
+            <h1 class="text-[11vw] lg:text-[12vw] xl:text-[11vw] 2xl:text-[9vw] leading-[0.98]"><span class="text-blue-900 block">Twenty-two years</span><span class="text-blue-900 block">of solving</span><span class="text-blue-600 block">for better.</span></h1>
           </div>
         </div>
       </div>
@@ -225,13 +236,7 @@
      ============================================================ -->
 <section class="bg-[linear-gradient(90deg,#001630_67%,#004596_100%)]">
   <div class="max-w-[1440px] mx-auto py-16 px-6 sm:px-10 xl:px-20 text-white">
-    <p class="[font-size-adjust:none] text-lg tracking-[0.2em] text-center text-[#999999] mb-10">OUR NORTH STAR</p>
-    <!-- The three lines that were here (eyebrow, "the happier difference"
-         and the old body) collapse to this one body copy. The eyebrow is
-         kept as the section's own name. The seven happier cards below are
-         unchanged. Set at lead scale because it is now the section's only
-         statement. -->
-    <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed text-center mb-10 text-[#C3C3C3] mx-auto max-w-5xl"><span class="text-white">Business outcomes</span> are what Searcians engineer. <span class="text-white">happier</span> is how Searcians behave. Mistakes are encouraged. Under-promise, over-deliver. One initiative, one owner.</p>
+    <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed text-center mb-10 text-[#C3C3C3] mx-auto max-w-5xl"><span class="text-white">Business outcomes</span> are what Searcians engineer. <span><span style="color:#7d7d7d">h</span><span style="color:#0064ff">a</span><span style="color:#ffb414">p</span><span style="color:#ff2850">p</span><span style="color:#734bff">i</span><span style="color:#28c8e1">e</span><span style="color:#00dc96">r</span></span> is how Searcians behave. Mistakes are encouraged. Under-promise, over-deliver. One initiative, one owner.</p>
     <div style="-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none" class="flex gap-6 overflow-x-auto pb-10 scroll-smooth">
       <div class="flex flex-col items-center relative h-[250px]"><div class="relative z-10 transition-all duration-500 ease-in-out rounded-xl shadow-md cursor-pointer overflow-hidden" style="width:162px;height:185px;background:white"><div class="absolute inset-0 flex items-center justify-center text-6xl font-normal select-none" style="color:#7d7d7d">h</div></div><div class="absolute top-[195px] left-0 text-xl text-left text-blue-100 w-[324px] transition-all duration-500 ease-in-out opacity-0 translate-y-2">We are no-ego doers. We don't attach our personal self to ideas.</div></div>
       <div class="flex flex-col items-center relative h-[250px]"><div class="relative z-10 transition-all duration-500 ease-in-out rounded-xl shadow-md cursor-pointer overflow-hidden" style="width:162px;height:185px;background:white"><div class="absolute inset-0 flex items-center justify-center text-6xl font-normal select-none" style="color:#0064ff">a</div></div><div class="absolute top-[195px] left-0 text-xl text-left text-blue-100 w-[324px] transition-all duration-500 ease-in-out opacity-0 translate-y-2">We embrace 'multiplicity of dimensions' and 'relativity of views'.</div></div>
@@ -247,19 +252,17 @@
 <!-- ============================================================
      MISSION & VISION — a quiet pair between north star and numbers.
      ============================================================ -->
-<section class="bg-white">
-  <div class="max-w-[1440px] mx-auto py-24 px-4 sm:px-10 xl:px-20">
-    <div class="flex flex-col md:flex-row gap-12 md:gap-20 mb-12">
-      <div class="flex-1">
-        <p class="text-sm tracking-[0.2em] text-[#999999] mb-3">MISSION</p>
-        <p class="text-2xl sm:text-3xl md:text-4xl leading-tight text-blue-800">solving for better.</p>
-      </div>
-      <div class="flex-1">
-        <p class="text-sm tracking-[0.2em] text-[#999999] mb-3">VISION</p>
-        <p class="text-2xl sm:text-3xl md:text-4xl leading-tight text-blue-800">driving intelligent outcomes.</p>
-      </div>
+<section class="bg-[#F2F7FF]">
+  <div class="max-w-[1440px] mx-auto py-24 px-4 sm:px-10 xl:px-20 text-center">
+    <div class="mb-6">
+      <p class="text-sm tracking-[0.2em] text-[#999999] mb-3">MISSION</p>
+      <p class="text-2xl sm:text-3xl md:text-4xl leading-tight text-blue-800">solving for better.</p>
     </div>
-    <p class="font-google-sans-flex text-lg lg:text-xl leading-relaxed text-[#555] max-w-4xl">The mission is why we exist and it has not changed since 2004. The vision is what we drive toward. AI Outcome Engineering is that vision made operational: the discipline through which intelligent outcomes stop being an aspiration and start being a reading we sign with the client.</p>
+    <div class="mb-12">
+      <p class="text-sm tracking-[0.2em] text-[#999999] mb-3">VISION</p>
+      <p class="text-2xl sm:text-3xl md:text-4xl leading-tight text-blue-800">driving intelligent outcomes.</p>
+    </div>
+    <p class="font-google-sans-flex text-lg lg:text-xl leading-relaxed text-[#555] max-w-4xl mx-auto">The mission is why we exist and it has not changed since 2004. The vision is what we drive toward. AI Outcome Engineering is that vision made operational: the discipline through which intelligent outcomes stop being an aspiration and start being a reading we sign with the client.</p>
   </div>
 </section>
 
@@ -287,7 +290,7 @@
   <div class="max-w-[1440px] mx-auto py-24 px-4 sm:px-10 xl:px-20 text-white">
     <p class="[font-size-adjust:none] text-lg tracking-[0.25em] text-[#999] mb-8">WHAT WE DO</p>
     <h2 class="futurify-h2 leading-tight text-white mb-10">We <span class="text-[#2B7BFF]">futurify</span> businesses.</h2>
-    <p class="font-google-sans-flex text-lg md:text-xl text-[#D8D8D8] leading-relaxed max-w-3xl mb-16">To futurify is to make a business ready for what comes next: <span class="text-white">reimagine what's next, redefine the how, realize the next now.</span> It is what the group has done since 2004, and it is why the business engineering company that grew out of Searce carries the name.</p>
+    <p class="font-google-sans-flex text-lg md:text-xl text-[#D8D8D8] leading-relaxed max-w-3xl mb-16">To futurify is to make a business ready for what comes next: reimagine what's next, redefine the how, realize the next now. It is what the group has done since 2004, and it is why the business engineering company that grew out of Searce carries the name.</p>
     <div class="border-t border-white/20 pt-10">
       <p class="futurify-refrain leading-[1.16] text-white"><span class="ph">reimagine what's next</span> <span class="ph">redefine the how</span> <span class="ph">realize the next now</span></p>
     </div>
@@ -349,8 +352,9 @@
   </div>
 </section>
 
-<!-- ===== LET'S BUILD THE FUTURE — retained as is ===== -->
+<!-- ===== LET'S BUILD THE FUTURE ===== -->
 <section class="relative overflow-hidden bg-white">
+  <div class="dot-grid" aria-hidden="true"></div>
   <div class="relative z-10 flex items-center justify-center p-16">
     <div class="text-center max-w-4xl">
       <div class="relative w-20 h-20 mx-auto mb-12"><div class="absolute top-0 left-8 w-4 h-20 bg-[#0064FF]"></div><div class="absolute top-8 left-0 w-20 h-4 bg-[#0064FF]"></div></div>
@@ -451,5 +455,28 @@
 </footer>
 
 </div>
+<script>
+document.querySelectorAll('.dot-grid, .dot-grid-dark').forEach(function(el){
+  var parent=el.parentElement;
+  parent.addEventListener('mousemove',function(e){
+    var r=parent.getBoundingClientRect();
+    var x=e.clientX-r.left, y=e.clientY-r.top;
+    var isDark=el.classList.contains('dot-grid-dark');
+    var baseAlpha=isDark?0.08:0.18;
+    var glowAlpha=isDark?0.35:0.55;
+    var color=isDark?'255,255,255':'0,100,255';
+    el.style.backgroundImage=
+      'radial-gradient(circle at '+x+'px '+y+'px, rgba('+color+','+glowAlpha+') 0%, rgba('+color+','+baseAlpha+') 180px, rgba('+color+','+baseAlpha+') 100%),'+
+      'radial-gradient(circle, rgba('+color+','+baseAlpha+') 1.2px, transparent 1.2px)';
+  });
+  parent.addEventListener('mouseleave',function(){
+    var isDark=el.classList.contains('dot-grid-dark');
+    var baseAlpha=isDark?0.08:0.18;
+    var color=isDark?'255,255,255':'0,100,255';
+    el.style.backgroundImage=
+      'radial-gradient(circle, rgba('+color+','+baseAlpha+') 1.2px, transparent 1.2px)';
+  });
+});
+</script>
 </body>
 </html>

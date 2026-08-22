@@ -69,8 +69,15 @@ h1,h2,h3,h4,h5,h6,strong,b,.font-medium,.font-semibold{ font-weight:inherit; }
   position:absolute;inset:0;z-index:0;pointer-events:none;
   background-image:
     radial-gradient(circle, rgba(0,100,255,0.15) 1px, transparent 1px),
-    linear-gradient(rgba(0,100,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,100,255,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(0,100,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,100,255,0.06) 1px, transparent 1px);
+  background-size:40px 40px;
+}
+.mv-grid{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,100,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,100,255,0.06) 1px, transparent 1px);
   background-size:40px 40px;
 }
 .mod-grid-fade{
@@ -253,15 +260,16 @@ h1,h2,h3,h4,h5,h6,strong,b,.font-medium,.font-semibold{ font-weight:inherit; }
 <!-- ============================================================
      MISSION & VISION — a quiet pair between north star and numbers.
      ============================================================ -->
-<section class="bg-[linear-gradient(to_bottom,#FFFFFF_0%,#E5EEFC_100%)]">
-  <div class="max-w-[1440px] mx-auto py-24 px-4 sm:px-10 xl:px-20 text-center">
+<section class="bg-[#E5EEFC] relative overflow-hidden">
+  <div class="mv-grid" aria-hidden="true"></div>
+  <div class="max-w-[1440px] mx-auto py-24 px-4 sm:px-10 xl:px-20 text-center relative z-10">
     <div class="mb-6">
       <p class="text-sm tracking-[0.2em] text-[#999999] mb-3">MISSION</p>
-      <p class="text-2xl sm:text-3xl md:text-4xl leading-tight text-blue-900">solving for better.</p>
+      <p class="text-2xl sm:text-3xl md:text-4xl leading-tight text-[#0064FF]">solving for better.</p>
     </div>
     <div class="mb-12">
       <p class="text-sm tracking-[0.2em] text-[#999999] mb-3">VISION</p>
-      <p class="text-2xl sm:text-3xl md:text-4xl leading-tight text-blue-900">driving intelligent outcomes.</p>
+      <p class="text-2xl sm:text-3xl md:text-4xl leading-tight text-[#0064FF]">driving intelligent outcomes.</p>
     </div>
     <p class="font-google-sans-flex text-lg lg:text-xl leading-relaxed text-[#555555] max-w-4xl mx-auto">The mission is why we exist and it has not changed since 2004. The vision is what we drive toward. AI Outcome Engineering is that vision made operational: the discipline through which intelligent outcomes stop being an aspiration and start being a reading we sign with the client.</p>
   </div>

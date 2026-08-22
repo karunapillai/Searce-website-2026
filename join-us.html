@@ -38,6 +38,57 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/preview.css"/>
+<style>
+body{ font-weight:300; }
+h1,h2,h3,h4,h5,h6,strong,b,.font-medium,.font-semibold{ font-weight:inherit; }
+.font-medium{ font-weight:500!important; }
+.font-semibold{ font-weight:600!important; }
+.font-normal{ font-weight:300!important; }
+
+@keyframes marquee-scroll{
+  0%{ transform:translateX(0); }
+  100%{ transform:translateX(-50%); }
+}
+.marquee-track{
+  display:flex; gap:0; width:max-content;
+  animation:marquee-scroll 30s linear infinite;
+}
+.marquee-track:hover{ animation-play-state:paused; }
+.marquee-img{
+  width:clamp(200px,22vw,340px); height:clamp(140px,15vw,240px);
+  object-fit:cover; flex-shrink:0; filter:grayscale(100%);
+  transition:filter .4s ease;
+}
+.marquee-img:hover{ filter:grayscale(0%); }
+
+.solver-path-card{
+  cursor:pointer; transition:all .3s ease;
+  border:1px solid rgba(0,100,255,.15);
+}
+.solver-path-card:hover, .solver-path-card.active{
+  border-color:#0064FF; background:linear-gradient(135deg,#E5EEFC 0%,#ffffff 100%);
+  transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,100,255,.12);
+}
+.solver-path-card .sp-icon{
+  width:48px; height:48px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(0,100,255,.08); transition:all .3s ease;
+}
+.solver-path-card:hover .sp-icon, .solver-path-card.active .sp-icon{
+  background:#0064FF; color:#fff;
+}
+.solver-path-card .sp-icon svg{ transition:color .3s ease; }
+.solver-path-card:hover .sp-icon svg, .solver-path-card.active .sp-icon svg{ color:#fff; }
+.sp-detail{ max-height:0; overflow:hidden; transition:max-height .4s ease, opacity .3s ease; opacity:0; }
+.solver-path-card.active .sp-detail{ max-height:200px; opacity:1; }
+
+#ball-1{ top:15%; left:5%; }
+#ball-2{ top:10%; right:0; }
+#ball-3{ bottom:18%; left:30%; }
+#ball-4{ bottom:5%; right:5%; }
+#light-blue{ top:5%; left:40%; }
+#dark-blue{ bottom:35%; right:20%; }
+</style>
 </head>
 <body>
 <div>
@@ -55,7 +106,7 @@
      ============================================================ -->
 <header class="fixed top-0 left-0 w-full z-50 text-white">
   <div class="max-w-[1440px] mx-auto flex items-center justify-between gap-8 h-[97px] px-4 sm:px-10 xl:px-20">
-    <a href="/" class="shrink-0" aria-label="searce home"><img src="/images/searce-logo-white.svg" alt="searce" class="w-[132px] h-[31px] object-contain"/></a>
+    <a href="/" class="shrink-0" aria-label="searce home"><img src="https://www.searce.com/images/searce-logo-white.svg" alt="searce" class="w-[132px] h-[31px] object-contain"/></a>
     <nav class="hidden lg:flex items-center gap-7 text-base" aria-label="Primary">
       <a href="/outcomes" class="hover:text-blue-300 transition-colors duration-200">Outcomes</a>
       <a href="/how-we-solve" class="hover:text-blue-300 transition-colors duration-200">How we solve</a>
@@ -137,44 +188,131 @@
   </div>
 </section>
 
-<!-- ============= MARQUEE — retained as is ============= -->
-<div class="w-full bg-black"><section aria-hidden="true" class="w-full h-[50vw] md:h-[20vw] bg-black"></section></div>
+<!-- ============= MARQUEE — team photo strip ============= -->
+<div class="w-full overflow-hidden" style="background-color:#0a0a0a">
+  <div class="marquee-track py-2">
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-1.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-2.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-3.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-4.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-5.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-6.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-7.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-8.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-1.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-2.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-3.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-4.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-5.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-6.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-7.webp" alt="Searce team" loading="lazy"/>
+    <img class="marquee-img" src="https://www.searce.com/images/JoinUsPage/marquee-8.webp" alt="Searce team" loading="lazy"/>
+  </div>
+</div>
 
 <!-- ============================================================
-     BODY — solver description and what drives us content
+     BODY — solver description, equations, and interactive paths
      ============================================================ -->
 <section class="bg-white">
-  <div class="max-w-[1440px] mx-auto py-20 px-6 sm:px-10 xl:px-20">
-    <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-blue-900 max-w-4xl mb-16">Solvers at Searce don't build from ticket queues. They work where the problem lives, with the operators and leaders who own it, on outcomes that get measured and read out loud.</p>
-
-    <div class="flex flex-col gap-8 mb-12">
-      <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-blue-900">
-        <span>real thinkers</span><span class="text-[#0064FF]" aria-label="times">&times;</span><span>real doers</span><span class="text-[#0064FF]">=</span><span class="text-[#0064FF]">real solvers</span>
-      </p>
-      <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-blue-900">
-        <span>strategy</span><span class="text-[#0064FF]" aria-label="times">&times;</span><span>execution</span><span class="text-[#0064FF]">=</span><span class="text-[#0064FF]">solving</span>
-      </p>
-      <p class="text-md sm:text-lg leading-relaxed text-[#555] max-w-2xl">Multiplication, not addition. Either one at zero, and so is the answer.</p>
-    </div>
-
-    <div class="border-t border-gray-200 pt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start mb-12">
-      <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-2xl sm:text-3xl md:text-4xl leading-tight text-blue-900">
-        <span>1,000 days at Searce</span><span class="text-[#0064FF]">=</span><span class="text-[#0064FF]">10 years anywhere else.</span>
-      </p>
-      <p class="text-md sm:text-lg leading-relaxed text-[#555]">Learning velocity is the deal: <span class="text-blue-900">learn Monday, ship Friday, present the outcome by quarter end.</span></p>
-    </div>
-
-    <div class="border-t border-gray-200 pt-10">
-      <p class="[font-size-adjust:none] text-lg tracking-[0.2em] text-left text-[#999999] mb-8">THE SOLVER PATHS</p>
-      <div class="flex flex-wrap gap-3">
-        <span class="rounded-full border border-[#0064FF]/40 bg-[#E5EEFC] px-5 py-3 text-md text-blue-900">Forward-Deployed Solver</span>
-        <span class="rounded-full border border-[#0064FF]/40 bg-[#E5EEFC] px-5 py-3 text-md text-blue-900">AI Engineer</span>
-        <span class="rounded-full border border-[#0064FF]/40 bg-[#E5EEFC] px-5 py-3 text-md text-blue-900">Platform Engineer</span>
-        <span class="rounded-full border border-[#0064FF]/40 bg-[#E5EEFC] px-5 py-3 text-md text-blue-900">Data Engineer</span>
-        <span class="rounded-full border border-[#0064FF]/40 bg-[#E5EEFC] px-5 py-3 text-md text-blue-900">Software Engineer</span>
-        <span class="rounded-full border border-[#0064FF]/40 bg-[#E5EEFC] px-5 py-3 text-md text-blue-900">Reliability Engineer</span>
-        <span class="rounded-full border border-[#0064FF]/40 bg-[#E5EEFC] px-5 py-3 text-md text-blue-900">Experience Designer</span>
+  <div class="max-w-[1440px] mx-auto pt-20 pb-10 px-6 sm:px-10 xl:px-20">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-20">
+      <div>
+        <p style="color:#999999;letter-spacing:.2em" class="text-sm mb-6">SOLVERS AT SEARCE</p>
+        <p class="text-xl sm:text-2xl md:text-3xl leading-relaxed text-blue-900 mb-8">Solvers at Searce don't build from ticket queues. They work where the problem lives.</p>
+        <p class="text-base sm:text-lg leading-relaxed" style="color:#666">With the operators and leaders who own it, on outcomes that get measured and read out loud.</p>
       </div>
+      <div class="flex flex-col gap-6">
+        <div class="rounded-2xl p-6" style="background:linear-gradient(135deg,#f0f5ff 0%,#e5eefc 100%)">
+          <p class="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xl sm:text-2xl md:text-3xl leading-tight text-blue-900">
+            <span>real thinkers</span><span style="color:#0064FF" aria-label="times">&times;</span><span>real doers</span><span style="color:#0064FF">=</span><span style="color:#0064FF">real solvers</span>
+          </p>
+        </div>
+        <div class="rounded-2xl p-6" style="background:linear-gradient(135deg,#f0f5ff 0%,#e5eefc 100%)">
+          <p class="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xl sm:text-2xl md:text-3xl leading-tight text-blue-900">
+            <span>strategy</span><span style="color:#0064FF" aria-label="times">&times;</span><span>execution</span><span style="color:#0064FF">=</span><span style="color:#0064FF">solving</span>
+          </p>
+        </div>
+        <p class="text-sm sm:text-base leading-relaxed" style="color:#888">Multiplication, not addition. Either one at zero, and so is the answer.</p>
+      </div>
+    </div>
+
+    <div class="rounded-2xl p-8 sm:p-12 mb-20" style="background:linear-gradient(90deg,#001630 67%,#004596 100%)">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-2xl sm:text-3xl md:text-4xl leading-tight text-white">
+          <span>1,000 days at Searce</span><span style="color:#0064FF">=</span><span style="color:#79ADFF">10 years anywhere else.</span>
+        </p>
+        <p class="text-base sm:text-lg leading-relaxed" style="color:#C3C3C3">Learning velocity is the deal: <span class="text-white">learn Monday, ship Friday, present the outcome by quarter end.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOLVER PATHS — interactive cards
+     ============================================================ -->
+<section style="background-color:#f8faff">
+  <div class="max-w-[1440px] mx-auto py-16 px-6 sm:px-10 xl:px-20">
+    <p style="color:#999999;letter-spacing:.2em" class="text-sm mb-3">THE SOLVER PATHS</p>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl leading-tight text-blue-900 mb-4">Choose your path</h2>
+    <p class="text-base sm:text-lg mb-10" style="color:#666">Every solver finds their edge. Click to explore.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+
+      <div class="solver-path-card rounded-2xl p-5 bg-white" onclick="this.classList.toggle('active');document.querySelectorAll('.solver-path-card').forEach(c=>{if(c!==this)c.classList.remove('active')})">
+        <div class="flex items-start gap-4 mb-3">
+          <div class="sp-icon"><svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:#0064FF"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+          <div><p class="text-blue-900 text-lg">Forward-Deployed Solver</p></div>
+        </div>
+        <div class="sp-detail"><p class="text-sm" style="color:#666">Embedded with the client. You own the problem end-to-end — from discovery to deployed outcome.</p></div>
+      </div>
+
+      <div class="solver-path-card rounded-2xl p-5 bg-white" onclick="this.classList.toggle('active');document.querySelectorAll('.solver-path-card').forEach(c=>{if(c!==this)c.classList.remove('active')})">
+        <div class="flex items-start gap-4 mb-3">
+          <div class="sp-icon"><svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:#0064FF"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+          <div><p class="text-blue-900 text-lg">AI Engineer</p></div>
+        </div>
+        <div class="sp-detail"><p class="text-sm" style="color:#666">Build AI-native systems that ship real outcomes — from LLM orchestration to production ML pipelines.</p></div>
+      </div>
+
+      <div class="solver-path-card rounded-2xl p-5 bg-white" onclick="this.classList.toggle('active');document.querySelectorAll('.solver-path-card').forEach(c=>{if(c!==this)c.classList.remove('active')})">
+        <div class="flex items-start gap-4 mb-3">
+          <div class="sp-icon"><svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:#0064FF"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg></div>
+          <div><p class="text-blue-900 text-lg">Platform Engineer</p></div>
+        </div>
+        <div class="sp-detail"><p class="text-sm" style="color:#666">Design and operate cloud-native platforms at scale — Kubernetes, IaC, and everything that keeps production reliable.</p></div>
+      </div>
+
+      <div class="solver-path-card rounded-2xl p-5 bg-white" onclick="this.classList.toggle('active');document.querySelectorAll('.solver-path-card').forEach(c=>{if(c!==this)c.classList.remove('active')})">
+        <div class="flex items-start gap-4 mb-3">
+          <div class="sp-icon"><svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:#0064FF"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg></div>
+          <div><p class="text-blue-900 text-lg">Data Engineer</p></div>
+        </div>
+        <div class="sp-detail"><p class="text-sm" style="color:#666">Build the data backbone — pipelines, warehouses, and analytics that turn raw signals into business decisions.</p></div>
+      </div>
+
+      <div class="solver-path-card rounded-2xl p-5 bg-white" onclick="this.classList.toggle('active');document.querySelectorAll('.solver-path-card').forEach(c=>{if(c!==this)c.classList.remove('active')})">
+        <div class="flex items-start gap-4 mb-3">
+          <div class="sp-icon"><svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:#0064FF"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg></div>
+          <div><p class="text-blue-900 text-lg">Software Engineer</p></div>
+        </div>
+        <div class="sp-detail"><p class="text-sm" style="color:#666">Ship products that solve real problems — clean architecture, modern stacks, and code that outlasts the sprint.</p></div>
+      </div>
+
+      <div class="solver-path-card rounded-2xl p-5 bg-white" onclick="this.classList.toggle('active');document.querySelectorAll('.solver-path-card').forEach(c=>{if(c!==this)c.classList.remove('active')})">
+        <div class="flex items-start gap-4 mb-3">
+          <div class="sp-icon"><svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:#0064FF"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+          <div><p class="text-blue-900 text-lg">Reliability Engineer</p></div>
+        </div>
+        <div class="sp-detail"><p class="text-sm" style="color:#666">Keep systems alive and fast — SRE, observability, incident response, and the discipline of zero-downtime at scale.</p></div>
+      </div>
+
+      <div class="solver-path-card rounded-2xl p-5 bg-white" onclick="this.classList.toggle('active');document.querySelectorAll('.solver-path-card').forEach(c=>{if(c!==this)c.classList.remove('active')})">
+        <div class="flex items-start gap-4 mb-3">
+          <div class="sp-icon"><svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color:#0064FF"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg></div>
+          <div><p class="text-blue-900 text-lg">Experience Designer</p></div>
+        </div>
+        <div class="sp-detail"><p class="text-sm" style="color:#666">Design experiences people remember — research, prototyping, and pixel-perfect craft that drives adoption.</p></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -208,12 +346,12 @@
     <div class="grid grid-cols-1 lg:grid-cols-[3fr_3fr] gap-4 sm:gap-4 md:gap-4 lg:gap-4 items-center min-h-[300px]">
       <div class="relative h-[300px] md:h-[500px] lg:h-[550px] flex items-center justify-center lg:justify-end left-4">
         <div class="relative w-[280px] md:w-[450px] lg:w-[400px] h-full ml-0 lg:ml-12">
-          <div id="light-blue" class="absolute"><img alt="Light Blue Ball" loading="lazy" width="70" height="70" decoding="async" class="drop-shadow-lg w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20" src="/images/light-blue.svg"/></div>
-          <div id="ball-1" class="absolute rounded-full"><img alt="Ball 1" loading="lazy" width="240" height="240" decoding="async" class="drop-shadow-lg w-28 h-28 md:w-48 md:h-48 lg:w-60 lg:h-60 rounded-full" src="/images/ball-1.webp"/></div>
-          <div id="ball-2" class="absolute rounded-full"><img alt="Ball 2" loading="lazy" width="240" height="240" decoding="async" class="drop-shadow-lg w-28 h-28 md:w-48 md:h-48 lg:w-60 lg:h-60 rounded-full" src="/images/ball-2.webp"/></div>
-          <div id="ball-3" class="absolute rounded-full"><img alt="Ball 3" loading="lazy" width="180" height="180" decoding="async" class="drop-shadow-lg w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full" src="/images/ball-3.webp"/></div>
-          <div id="dark-blue" class="absolute"><img alt="Dark Blue Ball" loading="lazy" width="70" height="70" decoding="async" class="drop-shadow-lg w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20" src="/images/dark-blue.svg"/></div>
-          <div id="ball-4" class="absolute rounded-full"><img alt="Ball 4" loading="lazy" width="240" height="240" decoding="async" class="drop-shadow-lg w-28 h-28 md:w-48 md:h-48 lg:w-60 lg:h-60 rounded-full" src="/images/ball-4.webp"/></div>
+          <div id="light-blue" class="absolute"><img alt="Light Blue Ball" loading="lazy" width="70" height="70" decoding="async" class="drop-shadow-lg w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20" src="https://www.searce.com/images/light-blue.svg"/></div>
+          <div id="ball-1" class="absolute rounded-full"><img alt="Ball 1" loading="lazy" width="240" height="240" decoding="async" class="drop-shadow-lg w-28 h-28 md:w-48 md:h-48 lg:w-60 lg:h-60 rounded-full" src="https://www.searce.com/images/ball-1.webp"/></div>
+          <div id="ball-2" class="absolute rounded-full"><img alt="Ball 2" loading="lazy" width="240" height="240" decoding="async" class="drop-shadow-lg w-28 h-28 md:w-48 md:h-48 lg:w-60 lg:h-60 rounded-full" src="https://www.searce.com/images/ball-2.webp"/></div>
+          <div id="ball-3" class="absolute rounded-full"><img alt="Ball 3" loading="lazy" width="180" height="180" decoding="async" class="drop-shadow-lg w-24 h-24 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full" src="https://www.searce.com/images/ball-3.webp"/></div>
+          <div id="dark-blue" class="absolute"><img alt="Dark Blue Ball" loading="lazy" width="70" height="70" decoding="async" class="drop-shadow-lg w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20" src="https://www.searce.com/images/dark-blue.svg"/></div>
+          <div id="ball-4" class="absolute rounded-full"><img alt="Ball 4" loading="lazy" width="240" height="240" decoding="async" class="drop-shadow-lg w-28 h-28 md:w-48 md:h-48 lg:w-60 lg:h-60 rounded-full" src="https://www.searce.com/images/ball-4.webp"/></div>
         </div>
       </div>
       <div class="text-blue-900 flex flex-col justify-between min-h-[400px]">
@@ -236,7 +374,7 @@
   <div class="max-w-[1440px] mx-auto py-12 px-6 sm:px-10 xl:px-20 flex flex-col items-center">
     <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-6 text-blue-600"><span class="block">find your place among our global tribe</span></h2>
     <div class="relative w-full max-w-6xl aspect-video">
-      <img alt="World map" decoding="async" class="object-contain" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0" src="/images/JoinUsPage/WorldMap.svg"/>
+      <img alt="World map" decoding="async" class="object-contain" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0" src="https://www.searce.com/images/JoinUsPage/WorldMap.svg"/>
       <div class="absolute" style="left:16%;top:50%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
       <div class="absolute" style="left:21%;top:47%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
       <div class="absolute" style="left:23%;top:48%;transform:translate(-50%, -50%)"><div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full border-2 sm:border-4 border-blue-600 cursor-pointer relative z-10"></div></div>
@@ -326,7 +464,7 @@
   <div class="max-w-[1440px] mx-auto py-12 px-4 sm:px-10 xl:px-20">
     <div class="flex flex-col lg:flex-row gap-12">
       <div class="lg:w-3/12"><div class="mb-8 lg:mb-0">
-        <div class="mb-6"><a class="inline-block" href="/"><div class="relative w-[132px] h-[31px]"><img alt="searce logo" decoding="async" class="object-contain" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0" src="/images/searce-logo-white.svg"/></div></a></div>
+        <div class="mb-6"><a class="inline-block" href="/"><div class="relative w-[132px] h-[31px]"><img alt="searce logo" decoding="async" class="object-contain" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0" src="https://www.searce.com/images/searce-logo-white.svg"/></div></a></div>
         <p class="font-google-sans-flex text-gray-300 text-base leading-relaxed max-w-sm">Pushing the boundaries of tech innovation and designing end-to-end industry solutions for our clients at global scale</p>
       </div></div>
       <div class="lg:w-9/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8">

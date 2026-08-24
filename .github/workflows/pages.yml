@@ -8,7 +8,9 @@ name: Publish review preview
 
 on:
   push:
-    branches: [claude/searce-visual-language-6yl7k1]
+    branches:
+      - claude/searce-visual-language-6yl7k1
+      - claude/who-we-are-page-layout-b6rp6d
   workflow_dispatch:
 
 permissions:

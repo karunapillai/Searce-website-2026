@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Who we are — Searce</title>
-<meta name="description" content="Twenty-two years of solving for better. Searce was founded in 2004 in process consulting and today engineers AI outcomes for the agentic enterprise.">
+<title>Careers — Searce</title>
+<meta name="description" content="Become a modern solver. Work inside the problem, understand the business, build the system, own the outcome.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -18,8 +18,7 @@
 }
 
 /* ===========================================================
-   Shared site system — tokens, type scale, spacing, nav,
-   Let's Connect and footer are common across pages.
+   Shared site system — identical to the other pages.
    =========================================================== */
 :root{
   --ink:#000000;
@@ -55,7 +54,6 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;color:inhe
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 48px;}
 
-/* modular grid — light sections use the blue tint, ink sections white */
 .mod-grid{
   position:absolute;inset:0;z-index:0;pointer-events:none;
   background-image:
@@ -76,10 +74,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   border-bottom:1px solid var(--paper-line);
   box-shadow:0 1px 12px rgba(0,0,0,0.06);
 }
-.nav .wrap{
-  display:flex;align-items:center;justify-content:space-between;
-  height:76px;gap:32px;
-}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;gap:32px;}
 .nav-logo{height:20px;width:auto;}
 .nav-links{
   display:flex;align-items:center;gap:30px;
@@ -98,8 +93,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   height:2px;background:var(--blue);border-radius:2px;
 }
 .chev{width:9px;height:9px;flex-shrink:0;transition:transform .2s ease;}
-.has-dropdown:hover .chev,
-.has-dropdown:focus-within .chev{transform:rotate(180deg);}
+.has-dropdown:hover .chev,.has-dropdown:focus-within .chev{transform:rotate(180deg);}
 .mega-panel{
   position:absolute;top:100%;left:-14px;margin-top:16px;
   background:#fff;border:1px solid var(--paper-line);
@@ -128,23 +122,17 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   display:inline-flex;align-items:center;gap:10px;
   background:var(--blue);color:#fff;
   font-family:var(--display);font-size:15px;font-weight:400;
-  padding:14px 26px;border-radius:6px;white-space:nowrap;
+  padding:14px 28px;border-radius:6px;white-space:nowrap;
   transition:background .2s ease,transform .15s ease;
 }
 .btn-primary:hover{background:var(--blue-strong);transform:translateY(-1px);}
 .btn-primary svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;}
 
-/* ======= RETAINED-SECTION MARKER =======
-   These sections are marked "retain as is" in the content doc. The
-   live markup could not be read, so each is stubbed here for the
-   developer to splice production markup into. Nothing inside is
-   designed content.                                                */
+/* ======= RETAINED-SECTION MARKER ======= */
 .retained{
-  border:1px dashed var(--blue-24);
-  border-radius:14px;
-  background:
-    repeating-linear-gradient(135deg,
-      rgba(0,100,255,0.022) 0 12px, transparent 12px 24px);
+  border:1px dashed var(--blue-24);border-radius:14px;
+  background:repeating-linear-gradient(135deg,
+    rgba(0,100,255,0.022) 0 12px, transparent 12px 24px);
   padding:clamp(26px,3.2vw,40px);
 }
 .retained-k{
@@ -159,213 +147,184 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .retained h2{
   font-family:var(--display);font-weight:300;
   font-size:clamp(24px,3vw,40px);
-  line-height:1.08;letter-spacing:-0.026em;
-  color:var(--ink);margin-bottom:12px;
+  line-height:1.08;letter-spacing:-0.026em;color:var(--ink);margin-bottom:12px;
 }
 .retained p{font-size:14.5px;line-height:1.62;color:var(--ink-60);max-width:64ch;}
 
 /* ===========================================================
-   HERO — heritage. Paper, blue modular grid, the name defined,
-   then the 2004 -> today rail the copy describes.
+   HERO — ink. The doc gives a heading only, so the heading is
+   all this carries.
    =========================================================== */
 .hero{
-  position:relative;background:var(--paper);
-  padding:clamp(56px,7vw,96px) 0 var(--sec);
-  border-bottom:1px solid var(--paper-line);
+  position:relative;background:var(--ink);color:#fff;
+  min-height:62vh;
+  display:flex;align-items:flex-end;
+  padding:clamp(80px,10vw,150px) 0 clamp(48px,6vw,80px);
   overflow:hidden;
 }
-.hero .wrap{position:relative;z-index:1;}
+.hero-glow{
+  position:absolute;z-index:0;pointer-events:none;
+  right:-8%;top:-24%;
+  width:70vw;max-width:1000px;aspect-ratio:1/1;
+  background:radial-gradient(circle at center,
+    rgba(0,100,255,0.22) 0%, rgba(0,100,255,0.07) 34%, transparent 66%);
+}
+.hero .wrap{position:relative;z-index:1;width:100%;}
 .hero h1{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(38px,6.4vw,92px);
-  line-height:1.04;letter-spacing:-0.032em;
-  max-width:19ch;
-  margin-bottom:clamp(36px,4.4vw,56px);
+  font-size:clamp(42px,8vw,116px);
+  line-height:1.0;letter-spacing:-0.034em;
+  max-width:15ch;
 }
 .hero h1 em{font-style:normal;color:var(--blue);}
-.hero-body{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:clamp(32px,4.6vw,72px);
-  /* stretch so the definition's rule runs the full row rather than
-     leaving the shorter column hanging */
-  align-items:stretch;
-}
-/* the name, set as a dictionary entry */
-.defn{
-  border-left:2px solid var(--blue);
-  padding-left:clamp(20px,2.4vw,30px);
-}
-.defn-word{
-  font-family:var(--display);font-weight:400;
-  font-size:clamp(26px,3.2vw,44px);
-  line-height:1.05;letter-spacing:-0.028em;
-  color:var(--ink);
-}
-.defn-meta{
-  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
-  margin:10px 0 18px;
-  font-size:14px;color:var(--ink-40);
-}
-.defn-meta .ipa{color:var(--blue-strong);}
-.defn-meta .pos{
-  font-family:var(--display);font-size:11px;
-  letter-spacing:.18em;text-transform:uppercase;
-}
-.defn-gloss{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(17px,1.8vw,24px);
-  line-height:1.28;letter-spacing:-0.018em;
-  color:var(--ink);margin-bottom:16px;
-}
-.defn-commit{font-size:15px;line-height:1.65;color:var(--ink-60);}
-.defn-commit strong{color:var(--ink);font-weight:400;}
-.hero-p{font-size:clamp(16px,1.45vw,19px);line-height:1.68;color:var(--ink-60);}
-.hero-p + .hero-p{margin-top:18px;}
-.hero-p strong{color:var(--ink);font-weight:400;}
-
-/* the era rail */
-.era{
-  margin-top:clamp(48px,5.6vw,80px);
-  border-top:1px solid var(--ink);
-  padding-top:18px;
-}
-.era-span{
-  display:flex;justify-content:space-between;
-  font-family:var(--display);font-weight:400;
-  font-size:11px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink-40);margin-bottom:26px;
-}
-.era-span .now{color:var(--blue);}
-.era-track{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  position:relative;
-}
-.era-track::before{
-  content:'';position:absolute;left:0;right:0;top:5px;
-  height:1px;background:var(--blue-24);
-}
-.era-step{position:relative;padding:24px 16px 0 0;}
-.era-step::before{
-  content:'';position:absolute;top:0;left:0;
-  width:11px;height:11px;border-radius:50%;
-  background:var(--paper);border:2px solid var(--blue);
-  box-sizing:border-box;
-}
-.era-step:last-child::before{background:var(--blue);}
-.era-label{
-  font-family:var(--display);font-weight:400;
-  font-size:clamp(13px,1.25vw,16px);
-  line-height:1.3;letter-spacing:-0.012em;
-  color:var(--ink-85);
-}
-.era-step:last-child .era-label{color:var(--blue);}
 
 /* ===========================================================
-   OUR NORTH STAR
+   WORK INSIDE THE PROBLEM — the replaced "are you the solver"
+   section. Four clauses, so four steps.
    =========================================================== */
-.north{background:var(--paper);padding:var(--sec) 0;border-bottom:1px solid var(--paper-line);}
+.solver{background:var(--paper);padding:var(--sec) 0;border-bottom:1px solid var(--paper-line);}
+.steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;
+  border-top:1px solid var(--ink);
+  margin-bottom:clamp(36px,4.4vw,56px);
+}
+.step{
+  padding:clamp(22px,2.6vw,34px) clamp(18px,2.2vw,30px) clamp(22px,2.6vw,34px) 0;
+}
+.step + .step{border-left:1px solid var(--paper-line);padding-left:clamp(18px,2.2vw,30px);}
+.step-n{
+  font-family:var(--display);font-weight:300;
+  font-size:11px;letter-spacing:.08em;color:var(--blue);
+  display:block;margin-bottom:14px;
+}
+.step-t{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(18px,2.1vw,29px);
+  line-height:1.15;letter-spacing:-0.022em;color:var(--ink);
+}
+.solver-body{
+  font-size:clamp(17px,1.7vw,23px);
+  line-height:1.6;color:var(--ink-60);
+  max-width:62ch;
+}
+.solver-body strong{color:var(--ink);font-weight:400;}
+
+/* ===========================================================
+   MARQUEE — retained
+   =========================================================== */
+.marquee-wrap{background:var(--paper-dim);padding:var(--sec) 0;border-bottom:1px solid var(--paper-line);}
+
+/* ===========================================================
+   WHAT DRIVES US — the copy is equations, so the layout is too.
+   =========================================================== */
+.drives{background:var(--paper);padding:var(--sec) 0;border-bottom:1px solid var(--paper-line);}
 .sec-h2{
   font-family:var(--display);font-weight:300;
   font-size:clamp(34px,4.8vw,68px);
   line-height:1.03;letter-spacing:-0.03em;
   margin-bottom:clamp(32px,4vw,52px);
 }
-.axes{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:0;
-  border-top:1px solid var(--ink);
-}
-.axis{
-  padding:clamp(26px,3vw,38px) clamp(24px,3vw,40px) clamp(26px,3vw,38px) 0;
-}
-.axis + .axis{
-  border-left:1px solid var(--paper-line);
-  padding-left:clamp(24px,3vw,40px);
-}
-.axis-k{
-  font-family:var(--display);font-weight:400;
-  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--blue);margin-bottom:16px;
-}
-.axis-t{
+.eqs{border-top:1px solid var(--ink);}
+.eq{
+  display:flex;flex-wrap:wrap;align-items:baseline;
+  gap:0 .34em;
   font-family:var(--display);font-weight:300;
-  font-size:clamp(21px,2.5vw,34px);
-  line-height:1.14;letter-spacing:-0.024em;
+  font-size:clamp(23px,3.5vw,52px);
+  line-height:1.12;letter-spacing:-0.03em;
   color:var(--ink);
+  padding:clamp(22px,2.8vw,36px) 0;
+  border-bottom:1px solid var(--paper-line);
 }
-.axis-t em{font-style:normal;color:var(--blue);}
-.maxims{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:0;
-  border-top:1px solid var(--paper-line);
+.eq .op{color:var(--blue-24);}
+.eq .eqs-sign{color:var(--blue-24);}
+.eq .res{color:var(--blue);}
+.eq-note{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:clamp(20px,2.4vw,30px) 0;
+  border-bottom:1px solid var(--paper-line);
 }
-.maxim{
-  padding:clamp(22px,2.6vw,32px) clamp(20px,2.4vw,32px) 0 0;
-  display:flex;align-items:baseline;gap:14px;
+.eq-note-bar{width:2px;align-self:stretch;background:var(--blue);flex-shrink:0;}
+.eq-note p{
+  font-size:clamp(16px,1.6vw,21px);line-height:1.5;
+  color:var(--ink-85);max-width:44ch;
 }
-.maxim + .maxim{border-left:1px solid var(--paper-line);padding-left:clamp(20px,2.4vw,32px);}
-.maxim-n{
+.velocity{
+  padding:clamp(26px,3.2vw,42px) 0 0;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(24px,3.4vw,56px);align-items:start;
+}
+.velocity-eq{
   font-family:var(--display);font-weight:300;
-  font-size:11px;letter-spacing:.08em;color:var(--blue);flex-shrink:0;
+  font-size:clamp(21px,2.7vw,38px);
+  line-height:1.16;letter-spacing:-0.026em;color:var(--ink);
 }
-.maxim-t{
+/* set as a deliberate two-line equation so the result never splits */
+.velocity-eq .lhs,
+.velocity-eq .rhs{display:block;}
+.velocity-eq .eqs-sign{color:var(--blue-24);padding-right:.18em;}
+.velocity-eq .rhs{color:var(--blue);}
+
+/* visually hidden, still announced */
+.vh{
+  position:absolute;width:1px;height:1px;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;
+}
+.velocity-body{font-size:clamp(15.5px,1.4vw,18.5px);line-height:1.62;color:var(--ink-60);}
+.velocity-body strong{color:var(--ink);font-weight:400;}
+/* solver paths */
+.paths{
+  margin-top:clamp(40px,5vw,64px);
+  border-top:1px solid var(--paper-line);padding-top:26px;
+}
+.paths-k{
   font-family:var(--display);font-weight:400;
-  font-size:clamp(15px,1.5vw,19px);
-  line-height:1.28;letter-spacing:-0.015em;color:var(--ink-85);
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-40);margin-bottom:20px;
 }
+.paths-row{display:flex;flex-wrap:wrap;gap:9px;}
+.path{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(13px,1.25vw,15.5px);
+  color:var(--ink-85);
+  border:1px solid var(--paper-line);border-radius:999px;
+  padding:9px 18px;background:#fff;
+  transition:border-color .2s ease,color .2s ease,background .2s ease;
+}
+.path:hover{border-color:var(--blue);color:var(--blue-strong);background:var(--blue-06);}
 
 /* ===========================================================
-   BY THE NUMBERS — retained
+   CULTURE — new section, ink
    =========================================================== */
-.numbers{background:var(--paper-dim);padding:var(--sec) 0;border-bottom:1px solid var(--paper-line);}
-
-/* ===========================================================
-   WE FUTURIFY BUSINESSES — dark blue, layout changed.
-   Heading and closing line share one size token, per the note.
-   =========================================================== */
-.futurify{
+.culture{
   position:relative;overflow:hidden;
   background:linear-gradient(155deg,#00337f 0%,#001a41 58%,#00112b 100%);
-  color:#fff;
-  padding:var(--sec) 0;
-  /* the one size shared by the heading and the closing refrain */
-  --fut:clamp(30px,4.3vw,62px);
+  color:#fff;padding:var(--sec) 0;
 }
-.futurify .wrap{position:relative;z-index:1;}
-.fut-h2{
+.culture .wrap{position:relative;z-index:1;}
+.culture h2{
   font-family:var(--display);font-weight:300;
-  font-size:var(--fut);
-  line-height:1.05;letter-spacing:-0.03em;
-  color:#fff;
-  max-width:22ch;
+  font-size:clamp(34px,4.8vw,68px);
+  line-height:1.03;letter-spacing:-0.03em;
+  color:#fff;margin-bottom:clamp(28px,3.4vw,44px);
 }
-.fut-body{
-  font-size:clamp(16px,1.5vw,20px);
-  line-height:1.66;
-  color:rgba(255,255,255,0.66);
-  max-width:56ch;
-  margin:clamp(26px,3vw,38px) 0 clamp(40px,5vw,64px);
-}
-.fut-body em{font-style:normal;color:#fff;}
-.fut-close{
-  border-top:1px solid rgba(255,255,255,0.18);
-  padding-top:clamp(28px,3.4vw,44px);
-}
-.fut-close p{
+.culture-body{
   font-family:var(--display);font-weight:300;
-  font-size:var(--fut);
-  line-height:1.16;letter-spacing:-0.03em;
-  color:#fff;
+  font-size:clamp(20px,2.4vw,34px);
+  line-height:1.22;letter-spacing:-0.024em;
+  color:rgba(255,255,255,0.78);
+  max-width:34ch;
+  margin-bottom:clamp(34px,4vw,52px);
 }
-/* each phrase stays whole so the refrain breaks between phrases,
-   never inside one */
-.fut-close .ph{white-space:nowrap;}
-.fut-close .dot{color:var(--blue-24);padding:0 .22em;}
+.culture-body em{font-style:normal;color:#fff;}
+/* --blue on this dark blue is ~2.9:1; the lighter tint is the accent
+   used on dark elsewhere in the system */
+.culture-body .b{color:var(--blue-24);}
 
 /* ===========================================================
-   MEET OUR SOLVERS onward — retained
+   VOICE OF SEARCIANS onward — retained
    =========================================================== */
-.solvers{background:var(--paper);padding:var(--sec) 0;border-bottom:1px solid var(--paper-line);}
+.voices{background:var(--paper);padding:var(--sec) 0;border-bottom:1px solid var(--paper-line);}
 
 /* ======= LET'S CONNECT (shared) ======= */
 .connect{background:var(--blue-06);padding:80px 0;}
@@ -441,24 +400,22 @@ footer{background:#071028;padding:72px 0 0;}
 @media(max-width:1024px){
   :root{--sec:68px;--mod:72px;}
   .wrap{padding:0 28px;}
-  .hero-body{grid-template-columns:1fr;gap:32px;}
-  .era-track{grid-template-columns:1fr 1fr;row-gap:26px;}
-  .era-track::before{display:none;}
-  .era-step{padding-right:12px;}
-  .axes{grid-template-columns:1fr;}
-  .axis + .axis{border-left:none;border-top:1px solid var(--paper-line);padding-left:0;}
-  .maxims{grid-template-columns:1fr;}
-  .maxim + .maxim{border-left:none;border-top:1px solid var(--paper-line);padding-left:0;}
-  .maxim{padding-right:0;}
+  .steps{grid-template-columns:1fr 1fr;}
+  .step:nth-child(3){border-left:none;padding-left:0;}
+  .step:nth-child(3),.step:nth-child(4){border-top:1px solid var(--paper-line);}
+  .velocity{grid-template-columns:1fr;gap:20px;}
   .connect-inner{grid-template-columns:1fr;gap:40px;}
   .foot-main{grid-template-columns:1fr 1fr;gap:40px;}
 }
 @media(max-width:768px){
   :root{--sec:56px;--mod:56px;}
   .nav-links{display:none;}
+  .hero{min-height:0;}
   .hero h1{max-width:100%;}
-  .era-track{grid-template-columns:1fr;}
-  .fut-h2{max-width:100%;}
+  .steps{grid-template-columns:1fr;}
+  .step + .step{border-left:none;border-top:1px solid var(--paper-line);padding-left:0;}
+  .step{padding-right:0;}
+  .culture-body{max-width:100%;}
   .foot-main{grid-template-columns:1fr;}
 }
 @media(prefers-reduced-motion:reduce){
@@ -486,9 +443,9 @@ footer{background:#071028;padding:72px 0 0;}
           <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </a>
         <div class="mega-panel">
-          <a class="mega-item active" href="who-we-are.html" aria-current="page"><span class="mega-title">Who we are</span></a>
+          <a class="mega-item" href="who-we-are.html"><span class="mega-title">Who we are</span></a>
           <a class="mega-item" href="#"><span class="mega-title">Partners</span></a>
-          <a class="mega-item" href="careers.html"><span class="mega-title">Careers</span></a>
+          <a class="mega-item active" href="careers.html" aria-current="page"><span class="mega-title">Careers</span></a>
           <a class="mega-item" href="#"><span class="mega-title">futurify.ai</span></a>
         </div>
       </li>
@@ -504,109 +461,124 @@ footer{background:#071028;padding:72px 0 0;}
 
 <!-- ================= HERO ================= -->
 <header class="hero" aria-labelledby="hero-h">
-  <div class="mod-grid" aria-hidden="true"></div>
+  <div class="mod-grid on-dark" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
   <div class="wrap">
-    <h1 id="hero-h">Twenty-two years of solving <em>for better</em>.</h1>
-
-    <div class="hero-body">
-      <!-- the name, as a definition -->
-      <div class="defn">
-        <div class="defn-word">searce</div>
-        <div class="defn-meta">
-          <span class="ipa">[ˈsɪrs]</span>
-          <span class="pos">noun</span>
-          <span>a fine sieve</span>
-        </div>
-        <p class="defn-gloss">To refine, to analyze, to improve.</p>
-        <p class="defn-commit">The name is the commitment: <strong>question the status quo, iterate relentlessly, leave things better than we found them.</strong></p>
-      </div>
-
-      <div>
-        <p class="hero-p">Searce was founded in 2004 in process consulting: understanding how work actually gets done and making it better. <strong>That DNA never left.</strong> We added cloud and data engineering depth as the platforms matured, applied AI as the models arrived, and today we engineer AI outcomes for the agentic enterprise.</p>
-        <p class="hero-p">Most firms in this market were born last year. We have crossed multiple technology discontinuities and come out stronger each time. When the current hype cycle ends, <strong>we will still be here, and so will the outcomes.</strong></p>
-      </div>
-    </div>
-
-    <!-- the arc the copy describes -->
-    <div class="era" aria-label="From process consulting in 2004 to the agentic enterprise today">
-      <div class="era-span">
-        <span>2004</span>
-        <span class="now">Today</span>
-      </div>
-      <div class="era-track">
-        <div class="era-step"><div class="era-label">Process consulting</div></div>
-        <div class="era-step"><div class="era-label">Cloud and data engineering</div></div>
-        <div class="era-step"><div class="era-label">Applied AI</div></div>
-        <div class="era-step"><div class="era-label">AI outcomes for the agentic enterprise</div></div>
-      </div>
-    </div>
+    <h1 id="hero-h">Become a <em>modern solver</em>.</h1>
   </div>
 </header>
 
-<!-- ================= OUR NORTH STAR ================= -->
-<section class="north" aria-labelledby="north-h">
+<!-- ================= WORK INSIDE THE PROBLEM ================= -->
+<section class="solver" aria-labelledby="solver-h">
   <div class="wrap">
-    <h2 class="sec-h2" id="north-h">Our north star</h2>
+    <h2 class="vh" id="solver-h">What a solver does</h2>
 
-    <div class="axes">
-      <div class="axis">
-        <div class="axis-k">What Searcians engineer</div>
-        <p class="axis-t"><em>Business outcomes</em> are what Searcians engineer.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-n">01</span>
+        <p class="step-t">work inside the problem.</p>
       </div>
-      <div class="axis">
-        <div class="axis-k">How Searcians behave</div>
-        <p class="axis-t"><em>happier</em> is how Searcians behave.</p>
+      <div class="step">
+        <span class="step-n">02</span>
+        <p class="step-t">Understand the business.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">03</span>
+        <p class="step-t">Build the system.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">04</span>
+        <p class="step-t">Own the outcome.</p>
       </div>
     </div>
 
-    <div class="maxims">
-      <div class="maxim">
-        <span class="maxim-n">01</span>
-        <p class="maxim-t">Mistakes are encouraged.</p>
-      </div>
-      <div class="maxim">
-        <span class="maxim-n">02</span>
-        <p class="maxim-t">Under-promise, over-deliver.</p>
-      </div>
-      <div class="maxim">
-        <span class="maxim-n">03</span>
-        <p class="maxim-t">One initiative, one owner.</p>
-      </div>
-    </div>
+    <p class="solver-body">solvers at Searce don't build from ticket queues. They work where the problem lives, with the operators and leaders who own it, <strong>on outcomes that get measured and read out loud.</strong></p>
   </div>
 </section>
 
-<!-- ================= BY THE NUMBERS (retained) ================= -->
-<section class="numbers" aria-labelledby="numbers-h">
+<!-- ================= MARQUEE (retained) ================= -->
+<section class="marquee-wrap" aria-labelledby="marquee-h">
   <div class="wrap">
     <div class="retained">
       <div class="retained-k"><i aria-hidden="true"></i>Retain as is — no change</div>
-      <h2 id="numbers-h">By the numbers</h2>
-      <p>Keep the production section exactly as it is today. Splice the live markup in here; nothing in this block is designed content.</p>
+      <h2 id="marquee-h">The marquee</h2>
+      <p>Keep the production marquee exactly as it is today. Splice the live markup in here; nothing in this block is designed content.</p>
     </div>
   </div>
 </section>
 
-<!-- ================= WE FUTURIFY BUSINESSES ================= -->
-<section class="futurify" aria-labelledby="fut-h">
+<!-- ================= WHAT DRIVES US ================= -->
+<section class="drives" aria-labelledby="drives-h">
+  <div class="wrap">
+    <h2 class="sec-h2" id="drives-h">What drives us</h2>
+
+    <div class="eqs">
+      <p class="eq">
+        <span>real thinkers</span>
+        <span class="op" aria-label="times">&times;</span>
+        <span>real doers</span>
+        <span class="eqs-sign" aria-hidden="true">=</span>
+        <span class="res">real solvers</span>
+      </p>
+      <p class="eq">
+        <span>strategy</span>
+        <span class="op" aria-label="times">&times;</span>
+        <span>execution</span>
+        <span class="eqs-sign" aria-hidden="true">=</span>
+        <span class="res">solving</span>
+      </p>
+
+      <div class="eq-note">
+        <span class="eq-note-bar" aria-hidden="true"></span>
+        <p>Multiplication, not addition. Either one at zero, and so is the answer.</p>
+      </div>
+    </div>
+
+    <div class="velocity">
+      <p class="velocity-eq">
+        <span class="lhs">1,000 days at Searce</span>
+        <span class="rhs"><span class="eqs-sign" aria-hidden="true">=</span>10 years anywhere else.</span>
+      </p>
+      <p class="velocity-body">Learning velocity is the deal: <strong>learn Monday, ship Friday, present the outcome by quarter end.</strong></p>
+    </div>
+
+    <div class="paths">
+      <div class="paths-k">The solver paths</div>
+      <div class="paths-row">
+        <span class="path">Forward-Deployed Solver</span>
+        <span class="path">AI Engineer</span>
+        <span class="path">Platform Engineer</span>
+        <span class="path">Data Engineer</span>
+        <span class="path">Software Engineer</span>
+        <span class="path">Reliability Engineer</span>
+        <span class="path">Experience Designer</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CULTURE (new) ================= -->
+<section class="culture" aria-labelledby="culture-h">
   <div class="mod-grid on-dark" aria-hidden="true"></div>
   <div class="wrap">
-    <h2 class="fut-h2" id="fut-h">We futurify businesses.</h2>
-
-    <p class="fut-body">To futurify is to make a business ready for what comes next: <em>reimagine what's next, redefine the how, realize the next now.</em> It is what the group has done since 2004, and it is why the business engineering company that grew out of Searce carries the name.</p>
-
-    <div class="fut-close">
-      <p><span class="ph">reimagine what's next</span><span class="dot" aria-hidden="true">·</span><span class="ph">redefine the how</span><span class="dot" aria-hidden="true">·</span><span class="ph">realize the next now</span></p>
-    </div>
+    <h2 id="culture-h">Culture</h2>
+    <p class="culture-body">
+      <em>happier</em> is how we behave. <em>Mistakes are encouraged.</em>
+      Solve-a-thons are how we hire and how we work: <span class="b">never the easiest first option, three to eight iterations, always.</span>
+    </p>
+    <a href="#connect" class="btn-primary">
+      join the solver movement
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
   </div>
 </section>
 
-<!-- ================= MEET OUR SOLVERS onward (retained) ================= -->
-<section class="solvers" aria-labelledby="solvers-h">
+<!-- ================= VOICE OF SEARCIANS onward (retained) ================= -->
+<section class="voices" aria-labelledby="voices-h">
   <div class="wrap">
     <div class="retained">
       <div class="retained-k"><i aria-hidden="true"></i>Retain as is — no change</div>
-      <h2 id="solvers-h">Meet our solvers — and every section after it</h2>
+      <h2 id="voices-h">Voice of Searcians — and every section after it</h2>
       <p>Everything from this point down stays exactly as it is on the live page. Splice the production markup in here.</p>
     </div>
   </div>
@@ -695,8 +667,8 @@ footer{background:#071028;padding:72px 0 0;}
           <li><a href="#">events</a></li>
           <li><a href="#">articles</a></li>
           <li><a href="#">news</a></li>
-          <li><a href="who-we-are.html" class="current" aria-current="page">about us</a></li>
-          <li><a href="careers.html">careers</a></li>
+          <li><a href="who-we-are.html">about us</a></li>
+          <li><a href="careers.html" class="current" aria-current="page">careers</a></li>
           <li><a href="#" class="connect-link">let's connect</a></li>
         </ul>
       </div>

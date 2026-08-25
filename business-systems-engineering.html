@@ -138,19 +138,46 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
     linear-gradient(90deg, rgba(0,100,255,0.07) 1px, transparent 1px);
   background-size:64px 64px;
 }
+/* Hero canvas fills the whole banner */
 .hero-rings{
-  position:absolute;
-  right:-4vw;top:50%;
-  transform:translateY(-50%);
-  width:min(58vw,760px);
-  height:min(76vh,620px);
+  position:absolute;inset:0;
   z-index:0;pointer-events:none;
 }
 #heroCanvas{width:100%;height:100%;display:block;}
+/* Horizontal gradient mask keeps heading/subline/CTA area clean */
 .hero-fade{
-  position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(to right, transparent 55%, rgba(255,255,255,0.25) 100%),
-             linear-gradient(to bottom, transparent 70%, rgba(255,255,255,0.35) 100%);
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,.92) 0%,
+      rgba(255,255,255,.85) 30%,
+      rgba(255,255,255,.55) 46%,
+      rgba(255,255,255,.15) 60%,
+      rgba(255,255,255,0) 74%),
+    linear-gradient(to bottom, transparent 65%, rgba(255,255,255,.35) 100%);
+}
+/* Corner schematic labels */
+.hero-marks{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  color:var(--ink-40);
+  font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+}
+.hero-marks span{position:absolute;opacity:.55;}
+.hero-marks .m-tl{top:32px;left:32px;}
+.hero-marks .m-tr{top:32px;right:32px;}
+.hero-marks .m-bl{bottom:32px;left:32px;}
+.hero-marks .m-br{bottom:32px;right:32px;color:var(--blue);opacity:.7;}
+@media (max-width:900px){
+  .hero-marks{display:none;}
+  /* Lighter mask on mobile so the schematic remains visible behind the copy */
+  .hero-fade{
+    background:
+      linear-gradient(180deg,
+        rgba(255,255,255,.55) 0%,
+        rgba(255,255,255,.35) 45%,
+        rgba(255,255,255,.10) 78%,
+        rgba(255,255,255,0) 100%);
+  }
 }
 .hero .wrap{position:relative;z-index:2;width:100%;}
 .hero-badge{
@@ -584,7 +611,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .milestone.revealed{opacity:1;transform:scale(1);}
 
 /* ======= HOW WE BUILD ======= */
-.how-build{padding:80px 0;border-bottom:1px solid var(--paper-line);}
+.how-build{padding:80px 0;border-bottom:1px solid var(--paper-line);background:linear-gradient(180deg,var(--blue-06) 0%,#f2f7ff 100%);}
 .how-build-grid{
   display:grid;grid-template-columns:1fr 1fr;
   gap:80px;align-items:center;
@@ -755,7 +782,7 @@ footer{background:#071028;padding:72px 0 0;}
 @media(max-width:1024px){
   .wrap{padding:0 28px;}
   .hero-opening{max-width:100%;}
-  .hero-rings{width:min(52vw,480px);height:min(50vh,400px);right:-10vw;opacity:.6;}
+  .hero-rings{opacity:.75;}
   .offer-top{grid-template-columns:1fr;gap:18px;}
   .offer-top p{text-align:left;max-width:44ch;}
   .acc-inner{grid-template-columns:1fr;gap:24px;}
@@ -772,13 +799,35 @@ footer{background:#071028;padding:72px 0 0;}
 }
 @media(max-width:768px){
   .nav-links{display:none;}
-  .hero-rings{display:none;}
+  .hero-rings{opacity:.55;}
   .story-quote{max-width:100%;}
   .acc-inner{padding-left:0;}
   .hero-cta-row{flex-direction:column;align-items:flex-start;gap:12px;}
   .foot-main{grid-template-columns:1fr;}
   .gap-tabs{gap:5px;}
-  .story{padding:32px 0;}
+  .story{padding:28px 24px;}
+  /* Hero heading — tighter on mobile */
+  .hero h1{font-size:clamp(40px,10vw,64px);}
+  .hero{padding:80px 0 64px;min-height:auto;}
+  .hero-badge{font-size:11px;}
+  /* Squad — tighter section, hide SVG (mobile block layout takes over) */
+  .squad{padding:64px 0 80px;}
+  .squad-diagram{max-width:none;}
+  .squad-diagram-row{margin-top:40px;}
+  .diag-desktop{display:none !important;}
+  .diag-mobile{display:flex !important;}
+  .squad-fineprint{margin-top:32px;}
+  .squad-fineprint p{font-size:15px;line-height:1.55;}
+  /* After section */
+  .after{padding:72px 0 80px;}
+  .after-cell{padding:34px 23px 29px;gap:17px;}
+  .vec-stage{max-height:120px;}
+  .after h2{font-size:clamp(28px,7vw,40px);}
+  /* One-squad section heading */
+  .squad h2{font-size:clamp(30px,8vw,42px);}
+  /* How Searce Builds */
+  .how-build{padding:64px 0;}
+  .how-build-grid{gap:24px;}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;}
@@ -828,6 +877,12 @@ footer{background:#071028;padding:72px 0 0;}
     <canvas id="heroCanvas"></canvas>
   </div>
   <div class="hero-fade" aria-hidden="true"></div>
+  <div class="hero-marks" aria-hidden="true">
+    <span class="m-tl">Business Systems Engineering</span>
+    <span class="m-tr">/ Searce</span>
+    <span class="m-bl">Ref · BSE-01</span>
+    <span class="m-br">System · running</span>
+  </div>
 
   <div class="wrap">
     <div class="hero-badge">
@@ -841,9 +896,7 @@ footer{background:#071028;padding:72px 0 0;}
     </h1>
 
     <div class="hero-opening">
-      <p>The buy-versus-build line moved.</p>
-      <p>Workflow tooling that once took eighteen months and a licence now takes weeks.</p>
-      <p>The enterprises acting on that are rebuilding the software layer around how their business actually runs.</p>
+      <p>The buy-versus-build line has moved. Workflow tooling that once required eighteen months and a licence can now be built in weeks, and the enterprises acting on that are rebuilding the software layer around how their business actually runs rather than configuring someone else's product around it.</p>
     </div>
 
     <div class="hero-cta-row">
@@ -851,6 +904,524 @@ footer{background:#071028;padding:72px 0 0;}
         See what we engineer
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ============ One squad — dark, breathable ============ */
+.squad{
+  padding:96px 0 140px;
+  background:radial-gradient(120% 90% at 15% 0%, #0b1f52 0%, transparent 60%),
+             radial-gradient(80% 60% at 100% 100%, #051033 0%, transparent 60%),
+             linear-gradient(180deg,#040814 0%, #000 100%);
+  color:#fff;
+  border-top:none;
+  position:relative;overflow:hidden;
+}
+/* Ambient animated background: slow-drifting soft grid + orbiting glow */
+.squad::before{
+  content:"";position:absolute;inset:-2px;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse at 50% 40%, #000 40%, transparent 85%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 40%, #000 40%, transparent 85%);
+  animation:squadGridDrift 40s linear infinite;
+  pointer-events:none;
+}
+.squad::after{
+  content:"";position:absolute;width:520px;height:520px;
+  left:calc(70% - 260px);top:-120px;
+  background:radial-gradient(circle, rgba(0,100,255,.28) 0%, rgba(0,100,255,0) 65%);
+  filter:blur(20px);
+  animation:squadGlow 18s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes squadGridDrift{
+  from{background-position:0 0, 0 0;}
+  to{background-position:64px 64px, 64px 64px;}
+}
+@keyframes squadGlow{
+  0%  {transform:translate(0,0) scale(1);opacity:.9;}
+  50% {transform:translate(-80px,60px) scale(1.08);opacity:.7;}
+  100%{transform:translate(60px,-40px) scale(.95);opacity:1;}
+}
+.squad .wrap{position:relative;z-index:1;}
+
+.squad .squad-head{max-width:820px;}
+.squad-eyebrow{
+  font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--blue-24);display:inline-flex;align-items:center;gap:12px;
+}
+.squad-eyebrow::before{content:"";width:24px;height:1px;background:currentColor;}
+.squad h2{
+  margin-top:22px;font-family:var(--display);font-weight:400;
+  font-size:clamp(40px,4.14vw,58px);line-height:1.18;letter-spacing:-.025em;color:#fff;
+}
+.squad h2 em{font-style:normal;color:var(--blue-24);}
+.squad .lede{margin-top:28px;font-size:20px;line-height:1.55;color:#c9d0e0;max-width:60ch;font-weight:300;}
+
+/* Diagram + caption stack */
+.squad-diagram-row{margin-top:64px;}
+.squad-diagram{position:relative;width:100%;max-width:1100px;margin:0 auto;}
+.squad-fineprint{margin:48px auto 0;max-width:900px;text-align:center;}
+.squad-fineprint p{font-size:20px;line-height:1.55;color:#c9d0e0;max-width:none;font-weight:300;}
+.squad-fineprint p + p{margin-top:14px;}
+.squad-fineprint b{color:#fff;font-weight:500;}
+
+/* SVG diagram — dark mode */
+.diag{width:100%;height:auto;overflow:visible;font-family:var(--display);}
+.diag .layer-rect{fill:rgba(255,255,255,.03);stroke:rgba(255,255,255,.16);stroke-width:1;}
+.diag .layer-rect.focus{fill:var(--blue);stroke:var(--blue);
+  filter:drop-shadow(0 20px 40px rgba(0,100,255,.35));}
+.diag .layer-tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;fill:var(--blue-24);}
+.diag .layer-tag.on-blue{fill:rgba(255,255,255,.72);}
+.diag .layer-name{font-size:17px;font-weight:500;fill:#fff;letter-spacing:-.01em;}
+.diag .layer-name.on-blue{fill:#fff;font-size:18px;}
+.diag .layer-caption{font-size:12px;fill:#a9b3c9;}
+.diag .layer-caption.on-blue{fill:#dbe9ff;}
+.diag .tick-pill{fill:#fff;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25));}
+.diag .tick-text{font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;fill:var(--blue);font-weight:600;}
+/* Discipline chips inside the workflow band */
+.diag .chip rect{fill:rgba(255,255,255,.10);stroke:rgba(255,255,255,.4);stroke-width:.9;
+  transition:fill .18s ease, stroke .18s ease;}
+.diag .chip text{fill:#fff;font-size:13px;font-weight:500;letter-spacing:.01em;
+  transition:fill .18s ease;}
+.diag .chip{opacity:.78;cursor:pointer;pointer-events:all;
+  animation:chipGlow 6.4s ease-in-out infinite;
+  transition:opacity .18s ease;}
+.diag .chip:nth-of-type(2){animation-delay:1.6s;}
+.diag .chip:nth-of-type(3){animation-delay:3.2s;}
+.diag .chip:nth-of-type(4){animation-delay:4.8s;}
+@keyframes chipGlow{
+  0%,30%,100%{opacity:.78;}
+  45%,60%{opacity:1;}
+}
+/* Interactive states */
+.diag .chip:hover{animation-play-state:paused;opacity:1;}
+.diag .chip:hover rect{fill:#fff;stroke:#fff;}
+.diag .chip:hover text{fill:var(--blue);}
+.diag .chip.active{animation:none;opacity:1;}
+.diag .chip.active rect{fill:#fff;stroke:#fff;}
+.diag .chip.active text{fill:var(--blue);}
+.diag .layer-rect{transition:stroke .2s ease, filter .2s ease;}
+.diag .layer-rect:not(.focus){cursor:default;}
+.diag .layer-rect:not(.focus):hover{stroke:var(--blue-24);}
+/* Slow sweeping highlight inside the focal band */
+.diag .focus-sweep{fill:url(#focusSweepGrad);opacity:.65;
+  animation:focusSweep 9s ease-in-out infinite;
+  mix-blend-mode:screen;}
+@keyframes focusSweep{
+  0%,100%{transform:translateX(-40%);}
+  50%{transform:translateX(40%);}
+}
+/* Arrow indicators — dotted, flowing */
+.diag .arrow-line{
+  stroke:var(--blue-24);stroke-width:1.2;opacity:.8;
+  fill:none;stroke-linecap:round;
+  stroke-dasharray:2 4;
+  animation:arrowFlow 1.2s linear infinite;
+}
+.diag .arrow-head{fill:var(--blue-24);opacity:.9;
+  animation:arrowHeadPulse 2.4s ease-in-out infinite;}
+@keyframes arrowFlow{
+  from{stroke-dashoffset:0;}
+  to{stroke-dashoffset:-12;}
+}
+@keyframes arrowHeadPulse{
+  0%,100%{opacity:.5;}
+  50%{opacity:1;}
+}
+
+@media (max-width:900px){
+  .squad-diagram-row{gap:48px;}
+  .squad-diagram{max-width:none;}
+}
+
+/* ============ Mobile diagram — stacked block layout ============ */
+.diag-mobile{display:none;flex-direction:column;gap:0;}
+.dm-layer{
+  border:1px solid rgba(255,255,255,.16);border-radius:14px;
+  padding:22px 20px;background:rgba(255,255,255,.03);
+  position:relative;
+}
+.dm-layer.dm-focus{
+  background:var(--blue);border-color:var(--blue);
+  box-shadow:0 20px 40px rgba(0,100,255,.28);
+  padding:24px 20px;
+}
+.dm-tag{
+  font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--blue-24);
+}
+.dm-focus .dm-tag{color:rgba(255,255,255,.72);}
+.dm-tag-muted{color:rgba(255,255,255,.55);}
+.dm-pill{
+  display:inline-block;background:#fff;color:var(--blue);
+  font-family:var(--display);font-weight:600;font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;padding:6px 12px;border-radius:100px;margin-top:12px;
+}
+.dm-name{
+  margin-top:14px;font-family:var(--display);font-weight:500;
+  font-size:18px;line-height:1.3;color:#fff;letter-spacing:-.01em;
+}
+.dm-focus .dm-name{margin-top:20px;font-size:17px;}
+.dm-caption{margin-top:8px;font-size:13px;line-height:1.5;color:#a9b3c9;}
+.dm-focus .dm-caption{color:#dbe9ff;}
+
+.dm-halves{
+  margin-top:22px;
+  display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:start;
+}
+.dm-half{display:flex;flex-direction:column;gap:8px;min-width:0;}
+.dm-half-label{
+  font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(255,255,255,.6);text-align:center;
+}
+.dm-chip{
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.4);
+  border-radius:100px;padding:8px 10px;
+  font-family:var(--display);font-weight:500;font-size:11.5px;line-height:1.15;color:#fff;
+  text-align:center;
+}
+.dm-plus{
+  color:rgba(255,255,255,.5);font-family:var(--display);font-size:22px;font-weight:300;
+  align-self:center;padding-top:18px;
+}
+.dm-arrow{
+  align-self:center;position:relative;
+  width:2px;height:32px;margin:14px 0;
+  background:repeating-linear-gradient(to bottom,var(--blue-24) 0 2px,transparent 2px 6px);
+}
+.dm-arrow::after{
+  content:"";position:absolute;bottom:-3px;left:50%;transform:translateX(-50%);
+  width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;
+  border-top:6px solid var(--blue-24);
+}
+
+/* ============ What happens after — vector triptych ============ */
+.after{
+  padding:140px 0;
+  background:var(--paper);
+  border-top:1px solid var(--paper-line);
+  position:relative;overflow:hidden;
+}
+/* Ambient animated background — slow drifting dot field + a soft blue sweep */
+.after::before{
+  content:"";position:absolute;inset:0;
+  background-image: radial-gradient(circle, rgba(0,100,255,.10) 1px, transparent 1.4px);
+  background-size:28px 28px;
+  mask-image:radial-gradient(ellipse at 50% 40%, #000 0%, #000 55%, transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 40%, #000 0%, #000 55%, transparent 90%);
+  animation:afterDots 40s linear infinite;
+  pointer-events:none;
+}
+.after::after{
+  content:"";position:absolute;
+  width:900px;height:520px;left:-200px;top:20%;
+  background:radial-gradient(ellipse, rgba(0,100,255,.10) 0%, rgba(0,100,255,0) 65%);
+  filter:blur(20px);
+  animation:afterSweep 22s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes afterDots{
+  from{background-position:0 0;}
+  to{background-position:56px 56px;}
+}
+@keyframes afterSweep{
+  0%{transform:translate(0,0);}
+  100%{transform:translate(700px,-80px);}
+}
+.after > .wrap{position:relative;z-index:1;}
+.after-head{max-width:820px;}
+.after-eyebrow{
+  font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--blue);display:inline-flex;align-items:center;gap:12px;
+}
+.after-eyebrow::before{content:"";width:24px;height:1px;background:currentColor;}
+.after h2{
+  margin-top:22px;font-family:var(--display);font-weight:400;
+  font-size:clamp(36px,3.8vw,52px);line-height:1.1;letter-spacing:-.02em;color:var(--ink);
+}
+.after h2 em{font-style:normal;color:var(--blue);}
+.after-triptych{
+  margin-top:88px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+  background:transparent;
+  border-top:1px solid rgba(228,230,234,.7);
+  border-bottom:1px solid rgba(228,230,234,.7);
+}
+.after-cell{
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  padding:38px 25px 34px;
+  display:flex;flex-direction:column;gap:17px;
+  transition:background .3s ease;
+}
+.after-cell:hover{background:rgba(255,255,255,.92);}
+.after-cell:hover .vec-stage svg{--play:running;}
+.vec-stage{
+  position:relative;width:100%;aspect-ratio:16/9;max-height:180px;
+  display:flex;align-items:center;justify-content:center;
+}
+.vec-stage svg{width:100%;height:100%;--play:running;}
+.after-cap{}
+.after-idx{
+  font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-40);font-variant-numeric:tabular-nums;
+}
+.after-name{
+  margin-top:12px;font-family:var(--display);font-weight:400;
+  font-size:clamp(20px,1.8vw,23px);line-height:1.15;letter-spacing:-.015em;color:var(--ink);
+}
+.after-name em{font-style:normal;color:var(--blue);}
+
+/* Vector 1 — Named operating owner */
+@keyframes v1-ring{
+  0%{r:14;opacity:.55;}
+  70%{r:38;opacity:0;}
+  100%{r:38;opacity:0;}
+}
+@keyframes v1-plate{
+  0%{stroke-dashoffset:120;}
+  60%,100%{stroke-dashoffset:0;}
+}
+@keyframes v1-tick-in{
+  0%,40%{opacity:0;transform:translateY(-4px);}
+  70%,100%{opacity:1;transform:translateY(0);}
+}
+.vec-1 .ring{fill:none;stroke:var(--blue);stroke-width:1;transform-origin:100px 55px;
+  animation:v1-ring 3.4s ease-out infinite;animation-play-state:var(--play);}
+.vec-1 .node{fill:var(--ink);}
+.vec-1 .plate{stroke:var(--ink);stroke-width:1;fill:none;stroke-dasharray:120;
+  animation:v1-plate 3.4s ease-in-out infinite;animation-play-state:var(--play);}
+.vec-1 .tag{fill:var(--blue);
+  transform-box:fill-box;transform-origin:center;
+  animation:v1-tick-in 3.4s ease-in-out infinite;animation-play-state:var(--play);}
+.vec-1 .label{font-family:var(--display);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;fill:var(--ink-40);font-weight:500;}
+
+/* Vector 2 — Documented maintenance economics */
+@keyframes v2-line{
+  0%{stroke-dashoffset:220;}
+  70%,100%{stroke-dashoffset:0;}
+}
+@keyframes v2-dot{
+  0%,10%{r:0;opacity:0;}
+  100%{r:3;opacity:1;}
+}
+@keyframes v2-baseline{
+  0%,20%{stroke-dashoffset:160;}
+  100%{stroke-dashoffset:0;}
+}
+.vec-2 .axis{stroke:var(--ink-40);stroke-width:.8;stroke-dasharray:2 3;}
+.vec-2 .baseline{stroke:var(--ink);stroke-width:1;stroke-dasharray:160;
+  animation:v2-baseline 3.6s ease-in-out infinite;animation-play-state:var(--play);}
+.vec-2 .line{fill:none;stroke:var(--blue);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:220;animation:v2-line 3.6s ease-in-out infinite;animation-play-state:var(--play);}
+.vec-2 .dot{fill:var(--blue);r:0;
+  animation:v2-dot 3.6s ease-out infinite;animation-play-state:var(--play);}
+.vec-2 .dot.d1{animation-delay:.9s;}
+.vec-2 .dot.d2{animation-delay:1.4s;}
+.vec-2 .dot.d3{animation-delay:1.9s;}
+.vec-2 .dot.d4{animation-delay:2.4s;}
+.vec-2 .dot.d5{animation-delay:2.9s;}
+.vec-2 .tick{stroke:var(--ink-40);stroke-width:.8;}
+.vec-2 .yax{stroke:var(--ink-40);stroke-width:.8;}
+
+/* Vector 3 — Defined exit path */
+@keyframes v3-trace{
+  0%{stroke-dashoffset:260;}
+  60%,100%{stroke-dashoffset:0;}
+}
+@keyframes v3-arrow{
+  0%,55%{opacity:0;transform:translateX(-8px);}
+  75%,100%{opacity:1;transform:translateX(0);}
+}
+@keyframes v3-door{
+  0%,70%{opacity:.3;}
+  90%,100%{opacity:1;}
+}
+@keyframes v3-start-pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.35);}
+}
+.vec-3 .start{fill:var(--ink);transform-box:fill-box;transform-origin:center;
+  animation:v3-start-pulse 3.6s ease-in-out infinite;animation-play-state:var(--play);}
+.vec-3 .path{fill:none;stroke:var(--blue);stroke-width:1.4;stroke-linecap:round;
+  stroke-dasharray:260;animation:v3-trace 3.6s ease-in-out infinite;animation-play-state:var(--play);}
+.vec-3 .arrow{fill:none;stroke:var(--blue);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;
+  transform-box:fill-box;transform-origin:center;
+  animation:v3-arrow 3.6s ease-out infinite;animation-play-state:var(--play);}
+.vec-3 .door{stroke:var(--ink);stroke-width:1;
+  animation:v3-door 3.6s ease-in-out infinite;animation-play-state:var(--play);}
+.vec-3 .door-top,.vec-3 .door-bot{stroke:var(--ink);stroke-width:1;}
+.vec-3 .grid-line{stroke:var(--paper-line);stroke-width:1;}
+
+@media (prefers-reduced-motion:reduce){
+  .diag .drop,
+  .vec-1 *,.vec-2 *,.vec-3 *{animation:none !important;}
+  .vec-2 .line,.vec-2 .baseline,.vec-3 .path{stroke-dashoffset:0 !important;}
+  .vec-2 .dot{r:3;opacity:1;}
+  .vec-1 .plate{stroke-dashoffset:0;}
+}
+@media (max-width:800px){
+  .after-triptych{grid-template-columns:1fr;}
+}
+</style>
+
+<section class="squad" id="squad" aria-labelledby="squad-h">
+  <div class="wrap">
+    <div class="squad-head">
+      <h2 id="squad-h">Searce Business Systems Engineering does both halves of that work <em>in one squad.</em></h2>
+      <p class="lede">Re-engineering the process and building the system that runs it. Process redesign without build authority produces a recommendation. Building without process authority produces a faster version of work that should not exist.</p>
+    </div>
+
+    <div class="squad-diagram-row">
+      <div class="squad-diagram">
+        <svg class="diag diag-desktop" viewBox="0 0 1100 420" xmlns="http://www.w3.org/2000/svg" aria-label="Where Searce works in the enterprise stack">
+          <defs>
+            <linearGradient id="focusSweepGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+              <stop offset="50%" stop-color="rgba(255,255,255,.18)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </linearGradient>
+            <clipPath id="focusClip">
+              <rect x="20" y="40" width="620" height="360" rx="12"/>
+            </clipPath>
+          </defs>
+
+          <!-- LEFT: The workflow layer (focal) -->
+          <g>
+            <rect class="layer-rect focus" x="20" y="40" width="620" height="360" rx="12"/>
+            <g clip-path="url(#focusClip)">
+              <rect class="focus-sweep" x="20" y="40" width="620" height="360"/>
+            </g>
+
+            <!-- Header row -->
+            <text class="layer-tag on-blue" x="46" y="86">The workflow layer</text>
+            <rect class="tick-pill" x="440" y="64" width="180" height="26" rx="13"/>
+            <text class="tick-text"  x="530" y="81" text-anchor="middle">One squad. One system.</text>
+
+            <!-- PROCESS / BUILD group labels -->
+            <text class="layer-tag on-blue" x="180" y="136" text-anchor="middle" style="opacity:.7;">Process</text>
+            <text class="layer-tag on-blue" x="480" y="136" text-anchor="middle" style="opacity:.7;">Build</text>
+
+            <!-- Chip row 1 -->
+            <g class="chip" transform="translate(66, 152)">
+              <rect width="228" height="34" rx="17"/>
+              <text x="114" y="22" text-anchor="middle">Business process engineers</text>
+            </g>
+            <g class="chip" transform="translate(388, 152)">
+              <rect width="184" height="34" rx="17"/>
+              <text x="92" y="22" text-anchor="middle">Product engineers</text>
+            </g>
+
+            <!-- Union "+" -->
+            <text x="330" y="209" text-anchor="middle" style="fill:rgba(255,255,255,.5);font-family:var(--display);font-size:26px;font-weight:300;">+</text>
+
+            <!-- Chip row 2 -->
+            <g class="chip" transform="translate(90, 206)">
+              <rect width="180" height="34" rx="17"/>
+              <text x="90" y="22" text-anchor="middle">Industrial engineers</text>
+            </g>
+            <g class="chip" transform="translate(370, 206)">
+              <rect width="218" height="34" rx="17"/>
+              <text x="109" y="22" text-anchor="middle">Software &amp; AI engineers</text>
+            </g>
+
+            <!-- Descriptive lines inside band -->
+            <text class="layer-name on-blue" x="46" y="304">Workflows · Internal tooling · Orchestration</text>
+            <text class="layer-name on-blue" x="46" y="332">Custom systems</text>
+            <text class="layer-caption on-blue" x="46" y="368">Process re-engineering and system build, in one squad.</text>
+          </g>
+
+          <!-- Arrow: workflow → outcomes (top branch, dotted animated) -->
+          <line class="arrow-line" x1="640" y1="125" x2="754" y2="125"/>
+          <path class="arrow-head" d="M750,120 L760,125 L750,130 Z"/>
+
+          <!-- RIGHT-TOP: Outcomes card -->
+          <g>
+            <rect class="layer-rect" x="760" y="60" width="320" height="130" rx="12"/>
+            <text class="layer-tag"  x="782" y="94">Outcomes</text>
+            <text class="layer-name" x="782" y="124">Revenue · Cost</text>
+            <text class="layer-name" x="782" y="152">Speed · Risk</text>
+            <text class="layer-caption" x="782" y="176" style="fill:#a9b3c9;">Produced by the workflow.</text>
+          </g>
+
+          <!-- Arrow: workflow → systems of record (bottom branch, dotted animated) -->
+          <line class="arrow-line" x1="640" y1="315" x2="754" y2="315"/>
+          <path class="arrow-head" d="M750,310 L760,315 L750,320 Z"/>
+
+          <!-- RIGHT-BOTTOM: Systems of record (muted tag) -->
+          <g>
+            <rect class="layer-rect" x="760" y="250" width="320" height="130" rx="12"/>
+            <text class="layer-tag" style="fill:rgba(255,255,255,.55);" x="782" y="284">Systems of record</text>
+            <text class="layer-name" x="782" y="312">ERP · CRM · Core</text>
+            <text class="layer-caption" x="782" y="338" style="fill:#a9b3c9;">Stay where they are.</text>
+            <text class="layer-caption" x="782" y="356" style="fill:#a9b3c9;">Not replaced.</text>
+          </g>
+        </svg>
+
+        <!-- Mobile stacked diagram — replaces the SVG on <=768px -->
+        <div class="diag-mobile" aria-hidden="true">
+          <div class="dm-layer dm-focus">
+            <div class="dm-tag">The workflow layer</div>
+            <span class="dm-pill">One squad. One system.</span>
+            <div class="dm-halves">
+              <div class="dm-half">
+                <div class="dm-half-label">Process</div>
+                <div class="dm-chip">Business process engineers</div>
+                <div class="dm-chip">Industrial engineers</div>
+              </div>
+              <div class="dm-plus">+</div>
+              <div class="dm-half">
+                <div class="dm-half-label">Build</div>
+                <div class="dm-chip">Product engineers</div>
+                <div class="dm-chip">Software &amp; AI engineers</div>
+              </div>
+            </div>
+            <div class="dm-name">Workflows · Internal tooling · Orchestration · Custom systems</div>
+            <div class="dm-caption">Process re-engineering and system build, in one squad.</div>
+          </div>
+
+          <div class="dm-arrow"></div>
+
+          <div class="dm-layer">
+            <div class="dm-tag">Outcomes</div>
+            <div class="dm-name">Revenue · Cost · Speed · Risk</div>
+            <div class="dm-caption">Produced by the workflow.</div>
+          </div>
+
+          <div class="dm-arrow"></div>
+
+          <div class="dm-layer">
+            <div class="dm-tag dm-tag-muted">Systems of record</div>
+            <div class="dm-name">ERP · CRM · Core</div>
+            <div class="dm-caption">Stay where they are. Not replaced.</div>
+          </div>
+        </div>
+
+        <script>
+          (function(){
+            document.querySelectorAll('#squad .diag .chip').forEach(function(c){
+              c.setAttribute('tabindex','0');
+              c.setAttribute('role','button');
+              c.addEventListener('click', function(){ c.classList.toggle('active'); });
+              c.addEventListener('keydown', function(e){
+                if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); c.classList.toggle('active'); }
+              });
+            });
+          })();
+        </script>
+      </div>
+
+      <div class="squad-fineprint">
+        <p><b>Systems of record stay where they are.</b> Searce works the layer above them — the workflows, the internal tooling, the orchestration, and the custom systems that carry competitive advantage.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1296,8 +1867,8 @@ footer{background:#071028;padding:72px 0 0;}
   <div class="wrap">
     <div class="how-build-grid">
       <div class="how-build-left">
-        <h2 id="how-build-heading">How we<br><span class="how-build-blue">build.</span></h2>
-        <p class="how-build-body-text">AI-accelerated engineering with evals, regression suites and human review at every gate. Verified replacement of load-bearing systems is the craft.</p>
+        <h2 id="how-build-heading">How Searce<br><span class="how-build-blue">builds.</span></h2>
+        <p class="how-build-body-text">AI-native engineering with evaluation suites, regression harnesses and human review at every gate.</p>
       </div>
       <div class="how-build-right" aria-label="Engineering methodology">
         <div class="build-stack" id="buildStack">
@@ -1313,6 +1884,97 @@ footer{background:#071028;padding:72px 0 0;}
   </div>
 </section>
 
+
+<section class="after" id="after" aria-labelledby="after-h">
+  <div class="wrap">
+    <div class="after-head">
+      <div class="after-eyebrow">What happens after</div>
+      <h2 id="after-h">Every rebuilt system ships with an <em>owner</em>, its <em>economics</em>, and an <em>exit.</em></h2>
+    </div>
+
+    <div class="after-triptych">
+      <!-- ============ 01 Named operating owner ============ -->
+      <div class="after-cell">
+        <div class="vec-stage">
+          <svg class="vec-1" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- concentric pulse ring -->
+            <circle class="ring" cx="100" cy="55" r="14"/>
+            <!-- name-plate underline (drawn in) -->
+            <line class="plate" x1="40" y1="88" x2="160" y2="88"/>
+            <!-- center node -->
+            <circle class="node" cx="100" cy="55" r="8"/>
+            <!-- named tag -->
+            <g class="tag">
+              <rect x="82" y="98" width="36" height="14" rx="7" fill="var(--blue)"/>
+              <text x="100" y="108" text-anchor="middle" font-family="Poppins" font-size="8" font-weight="500" fill="#fff" letter-spacing=".12em">01</text>
+            </g>
+            <!-- corner labels -->
+            <text class="label" x="40" y="80">OWNER</text>
+          </svg>
+        </div>
+        <div class="after-cap">
+          <div class="after-name"><em>Named operating owner.</em></div>
+        </div>
+      </div>
+
+      <!-- ============ 02 Documented maintenance economics ============ -->
+      <div class="after-cell">
+        <div class="vec-stage">
+          <svg class="vec-2" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- grid ticks -->
+            <line class="axis" x1="30" y1="30" x2="180" y2="30"/>
+            <line class="axis" x1="30" y1="60" x2="180" y2="60"/>
+            <line class="axis" x1="30" y1="90" x2="180" y2="90"/>
+            <!-- y axis -->
+            <line class="yax"  x1="30" y1="20" x2="30"  y2="100"/>
+            <!-- baseline (drawn in) -->
+            <line class="baseline" x1="30" y1="100" x2="180" y2="100"/>
+            <!-- data line -->
+            <path class="line" d="M40,85 L70,70 L100,72 L130,50 L160,38"/>
+            <!-- data dots -->
+            <circle class="dot d1" cx="40"  cy="85"/>
+            <circle class="dot d2" cx="70"  cy="70"/>
+            <circle class="dot d3" cx="100" cy="72"/>
+            <circle class="dot d4" cx="130" cy="50"/>
+            <circle class="dot d5" cx="160" cy="38"/>
+            <!-- x-axis ticks -->
+            <line class="tick" x1="40"  y1="100" x2="40"  y2="104"/>
+            <line class="tick" x1="70"  y1="100" x2="70"  y2="104"/>
+            <line class="tick" x1="100" y1="100" x2="100" y2="104"/>
+            <line class="tick" x1="130" y1="100" x2="130" y2="104"/>
+            <line class="tick" x1="160" y1="100" x2="160" y2="104"/>
+          </svg>
+        </div>
+        <div class="after-cap">
+          <div class="after-name"><em>Documented maintenance economics.</em></div>
+        </div>
+      </div>
+
+      <!-- ============ 03 Defined exit path ============ -->
+      <div class="after-cell">
+        <div class="vec-stage">
+          <svg class="vec-3" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- faint horizon -->
+            <line class="grid-line" x1="20" y1="60" x2="180" y2="60"/>
+            <!-- start node -->
+            <circle class="start" cx="30" cy="60" r="4.5"/>
+            <!-- traced path (curved) -->
+            <path class="path" d="M30,60 C60,20 100,100 140,60"/>
+            <!-- arrow head -->
+            <path class="arrow" d="M148,53 L158,60 L148,67"/>
+            <!-- door / exit bracket -->
+            <line class="door-top" x1="170" y1="40" x2="175" y2="40"/>
+            <line class="door"     x1="175" y1="40" x2="175" y2="80"/>
+            <line class="door-bot" x1="170" y1="80" x2="175" y2="80"/>
+          </svg>
+        </div>
+        <div class="after-cap">
+          <div class="after-name"><em>Defined exit path.</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="connect" id="connect">
   <div class="wrap">
@@ -1431,92 +2093,177 @@ footer{background:#071028;padding:72px 0 0;}
 <script>
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ===== HERO CANVAS — system rebuild animation ===== */
+/* ===== HERO CANVAS — schematic flow (orthogonal wires + packets) ===== */
 (function(){
-  const cv=document.getElementById('heroCanvas');
-  if(!cv)return;
-  const ctx=cv.getContext('2d');
-  const dpr=Math.min(window.devicePixelRatio||1,2);
-  let W=0,H=0;
-  const COUNT=48,LINK=160;
-  let nodes=[];
+  const cv = document.getElementById('heroCanvas');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  let W = 0, H = 0, dpr = 1;
+
+  const CELL = 64;
+  let cols = 0, rows = 0;
+  let nodes = [], edges = [], packets = [];
+  const idx = new Map();
+  const MAX_PACKETS = 22;
 
   function resize(){
-    const r=cv.getBoundingClientRect();
-    W=r.width;H=r.height;
-    cv.width=W*dpr;cv.height=H*dpr;
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    seed();
+    const r = cv.parentElement.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height;
+    cv.width = W * dpr; cv.height = H * dpr;
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
   }
 
-  function seed(){
-    nodes=[];
-    for(let i=0;i<COUNT;i++){
-      const angle=Math.random()*Math.PI*2;
-      const dist=Math.random()*Math.min(W,H)*0.42;
-      const cx=W*0.5,cy=H*0.5;
-      nodes.push({
-        ox:cx+Math.cos(angle)*dist,
-        oy:cy+Math.sin(angle)*dist,
-        x:Math.random()*W,
-        y:Math.random()*H,
-        r:1.6+Math.random()*2.2
-      });
-    }
-  }
+  function build(){
+    nodes = []; edges = []; packets = []; idx.clear();
+    /* Snap the schematic to the visible CSS grid (64px, origin 0,0) */
+    cols = Math.floor(W / CELL);
+    rows = Math.floor(H / CELL);
+    const offX = 0;
+    const offY = 0;
 
-  let phase=0,t0=performance.now();
-  const CHAOS=3200,ORDER=2200,TRANS=1400;
-  function draw(now){
-    const elapsed=now-t0;
-    ctx.clearRect(0,0,W,H);
-
-    if(phase===0&&elapsed>CHAOS){phase=1;t0=now;}
-    else if(phase===1&&elapsed>TRANS){phase=2;t0=now;}
-    else if(phase===2&&elapsed>ORDER){phase=3;t0=now;}
-    else if(phase===3&&elapsed>TRANS){phase=0;t0=now;nodes.forEach(n=>{n.x=Math.random()*W;n.y=Math.random()*H;});}
-
-    let lerp=0;
-    if(phase===1)lerp=Math.min(1,(elapsed/TRANS));
-    else if(phase===2||phase===3)lerp=1;
-    if(phase===3)lerp=1-Math.min(1,(elapsed/TRANS));
-
-    const ease=lerp<0.5?2*lerp*lerp:1-Math.pow(-2*lerp+2,2)/2;
-
-    nodes.forEach(n=>{
-      const px=n.x+(n.ox-n.x)*ease;
-      const py=n.y+(n.oy-n.y)*ease;
-      n.cx=px;n.cy=py;
-    });
-
-    for(let i=0;i<nodes.length;i++){
-      for(let j=i+1;j<nodes.length;j++){
-        const dx=nodes[i].cx-nodes[j].cx,dy=nodes[i].cy-nodes[j].cy;
-        const d=Math.hypot(dx,dy);
-        if(d<LINK){
-          const a=(1-d/LINK)*(0.14+ease*0.22);
-          ctx.strokeStyle='rgba(0,100,255,'+a+')';
-          ctx.lineWidth=1;
-          ctx.beginPath();ctx.moveTo(nodes[i].cx,nodes[i].cy);ctx.lineTo(nodes[j].cx,nodes[j].cy);ctx.stroke();
+    for (let j = 0; j < rows; j++){
+      for (let i = 0; i < cols; i++){
+        const rightBias = i / Math.max(1, cols-1);
+        const p = 0.18 + 0.40 * rightBias;
+        if (Math.random() < p){
+          idx.set(i+','+j, nodes.length);
+          nodes.push({
+            x: offX + i*CELL,
+            y: offY + j*CELL,
+            r: 1.6 + Math.random()*1.2,
+            phase: Math.random()*Math.PI*2,
+            i, j
+          });
         }
       }
     }
 
-    nodes.forEach(n=>{
-      ctx.beginPath();ctx.arc(n.cx,n.cy,n.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(0,100,255,'+(0.35+ease*0.45)+')';ctx.fill();
-    });
+    for (let k = 0; k < nodes.length; k++){
+      const n = nodes[k];
+      const right = idx.get((n.i+1)+','+n.j);
+      const down  = idx.get(n.i+','+(n.j+1));
+      if (right !== undefined && Math.random() < 0.7)  edges.push({a:k, b:right});
+      if (down  !== undefined && Math.random() < 0.55) edges.push({a:k, b:down});
+    }
 
-    requestAnimationFrame(draw);
+    for (let i = 0; i < MAX_PACKETS; i++) packets.push(newPacket());
+  }
+
+  function newPacket(){
+    let e;
+    for (let tries = 0; tries < 6; tries++){
+      e = edges[Math.floor(Math.random()*edges.length)];
+      if (!e) return null;
+      const midX = (nodes[e.a].x + nodes[e.b].x) / 2;
+      if (midX > W*0.35 || Math.random() < 0.2) break;
+    }
+    if (!e) return null;
+    return {
+      edge: e,
+      t: Math.random(),
+      speed: 0.0015 + Math.random()*0.0025,
+      life: 0,
+      maxLife: 900 + Math.random()*700
+    };
+  }
+
+  let t0 = performance.now();
+  function frame(now){
+    const dt = Math.min(64, now - t0); t0 = now;
+    ctx.clearRect(0, 0, W, H);
+
+    for (let k = 0; k < edges.length; k++){
+      const a = nodes[edges[k].a], b = nodes[edges[k].b];
+      const midX = (a.x + b.x) / 2;
+      const rightness = Math.max(0, Math.min(1, (midX - W*0.30) / (W*0.55)));
+      const alpha = 0.05 + 0.13 * rightness;
+      ctx.strokeStyle = 'rgba(0,100,255,' + alpha + ')';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+    }
+
+    for (let k = 0; k < nodes.length; k++){
+      const n = nodes[k];
+      const rightness = Math.max(0, Math.min(1, (n.x - W*0.30) / (W*0.55)));
+      const breath = 0.5 + 0.5 * Math.sin(now*0.0009 + n.phase);
+      const r = n.r * (0.85 + 0.30 * breath);
+      const alpha = 0.16 + 0.40 * rightness;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,100,255,' + alpha + ')';
+      ctx.fill();
+    }
+
+    for (let k = 0; k < packets.length; k++){
+      const p = packets[k];
+      if (!p) { packets[k] = newPacket(); continue; }
+      p.t += p.speed * dt;
+      p.life += dt;
+      if (p.t >= 1 || p.life > p.maxLife){
+        const endNode = p.t >= 1 ? p.edge.b : null;
+        let next = null;
+        if (endNode !== null){
+          const candidates = edges.filter(e => (e.a === endNode || e.b === endNode) && e !== p.edge);
+          if (candidates.length){
+            const c = candidates[Math.floor(Math.random()*candidates.length)];
+            const nextEdge = (c.a === endNode) ? c : {a:c.b, b:c.a};
+            next = { edge: nextEdge, t: 0, speed: p.speed, life: 0, maxLife: 900 + Math.random()*700 };
+          }
+        }
+        packets[k] = next || newPacket();
+        continue;
+      }
+      const a = nodes[p.edge.a], b = nodes[p.edge.b];
+      const x = a.x + (b.x - a.x) * p.t;
+      const y = a.y + (b.y - a.y) * p.t;
+      const rightness = Math.max(0, Math.min(1, (x - W*0.30) / (W*0.55)));
+      const alpha = 0.35 + 0.55 * rightness;
+      const lifeFade = Math.min(1, p.life/240) * Math.min(1, (p.maxLife - p.life)/240);
+
+      const dx = b.x - a.x, dy = b.y - a.y, ln = Math.hypot(dx, dy) || 1;
+      const tailT = Math.max(0, p.t - 22/ln);
+      const tailX = a.x + dx * tailT;
+      const tailY = a.y + dy * tailT;
+      const grad = ctx.createLinearGradient(tailX, tailY, x, y);
+      grad.addColorStop(0, 'rgba(0,100,255,0)');
+      grad.addColorStop(1, 'rgba(0,100,255,' + (alpha*lifeFade) + ')');
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.moveTo(tailX, tailY);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(x, y, 2.2, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,100,255,' + (0.85*lifeFade) + ')';
+      ctx.fill();
+    }
+
+    requestAnimationFrame(frame);
   }
 
   resize();
-  window.addEventListener('resize',resize);
-  if(REDUCED){
-    nodes.forEach(n=>{n.x=n.ox;n.y=n.oy;});
-    draw(performance.now());
+  window.addEventListener('resize', resize);
+
+  if (REDUCED){
+    for (let k = 0; k < edges.length; k++){
+      const a = nodes[edges[k].a], b = nodes[edges[k].b];
+      ctx.strokeStyle = 'rgba(0,100,255,0.14)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    }
+    for (const n of nodes){
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,100,255,0.35)'; ctx.fill();
+    }
   } else {
-    requestAnimationFrame(draw);
+    requestAnimationFrame(frame);
   }
 })();
 

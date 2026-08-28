@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Business Systems Engineering — Searce</title>
+<title>Business Systems Engineering - Searce</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -52,7 +52,7 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;}
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 48px;}
 
-/* ======= NAV — shared global framework ======= */
+/* ======= NAV - shared global framework ======= */
 .nav{
   position:sticky;top:0;z-index:200;
   background:var(--paper);
@@ -122,7 +122,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .nav-cta:hover{background:var(--blue-strong);transform:translateY(-1px);}
 .nav-cta svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;}
 
-/* ======= HERO — concentric rings + word-reveal animation ======= */
+/* ======= HERO - concentric rings + word-reveal animation ======= */
 .hero{
   position:relative;min-height:92vh;
   display:flex;align-items:center;
@@ -138,7 +138,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
     linear-gradient(90deg, rgba(0,100,255,0.08) 1px, transparent 1px);
   background-size:64px 64px;
 }
-/* Hero canvas fills the whole banner — hidden for now */
+/* Hero canvas fills the whole banner - hidden for now */
 .hero-rings{
   position:absolute;inset:0;
   z-index:0;pointer-events:none;
@@ -238,7 +238,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .hero-cta-primary:hover{background:var(--blue-strong);transform:translateY(-1px);}
 .hero-cta-primary svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;}
 
-/* ======= OFFERINGS — accordion with light background ======= */
+/* ======= OFFERINGS - accordion with light background ======= */
 .offer{
   background:var(--paper-dim);
   padding:80px 0;
@@ -328,7 +328,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   background:var(--blue);margin-top:8px;
 }
 
-/* ======= OUTCOME STORIES — white BG ======= */
+/* ======= OUTCOME STORIES - white BG ======= */
 .outcomes{
   background:var(--paper);
   padding:0;
@@ -451,7 +451,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   border-radius:999px;
 }
 
-/* ======= METRIC LADDER — ticker scroll ======= */
+/* ======= METRIC LADDER - ticker scroll ======= */
 .metric-ladder{
   padding:80px 0;
   background:linear-gradient(160deg, #00112e 0%, #000000 60%);
@@ -672,7 +672,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 .build-row.active .build-row-bar{width:40px;}
 
-/* ======= LET'S CONNECT — form style ======= */
+/* ======= LET'S CONNECT - form style ======= */
 .connect{background:var(--blue-06);padding:80px 0;}
 .connect-inner{
   display:grid;grid-template-columns:1fr 1.4fr;
@@ -730,7 +730,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 .connect-submit:hover{background:var(--blue-strong);transform:translateY(-1px);}
 
-/* ======= FOOTER — shared ======= */
+/* ======= FOOTER - shared ======= */
 footer{background:#071028;padding:72px 0 0;}
 .foot-main{
   display:grid;grid-template-columns:280px 1fr 1fr 1fr;
@@ -808,11 +808,11 @@ footer{background:#071028;padding:72px 0 0;}
   .foot-main{grid-template-columns:1fr;}
   .gap-tabs{gap:5px;}
   .story{padding:28px 24px;}
-  /* Hero heading — tighter on mobile */
+  /* Hero heading - tighter on mobile */
   .hero h1{font-size:clamp(40px,10vw,64px);}
   .hero{padding:80px 0 64px;min-height:auto;}
   .hero-badge{font-size:11px;}
-  /* Squad — tighter section, hide SVG (mobile block layout takes over) */
+  /* Squad - tighter section, hide SVG (mobile block layout takes over) */
   .squad{padding:64px 0 80px;}
   .squad-diagram{max-width:none;}
   .squad-diagram-row{margin-top:40px;}
@@ -910,7 +910,7 @@ footer{background:#071028;padding:72px 0 0;}
 </section>
 
 <style>
-/* ============ One squad — dark, breathable ============ */
+/* ============ One squad - dark, breathable ============ */
 .squad{
   padding:96px 0 140px;
   background:radial-gradient(120% 90% at 15% 0%, #0b1f52 0%, transparent 60%),
@@ -973,7 +973,7 @@ footer{background:#071028;padding:72px 0 0;}
 .squad-fineprint p + p{margin-top:14px;}
 .squad-fineprint b{color:#fff;font-weight:500;}
 
-/* SVG diagram — dark mode */
+/* SVG diagram - dark mode */
 .diag{width:100%;height:auto;overflow:visible;font-family:var(--display);}
 .diag .layer-rect{fill:rgba(255,255,255,.03);stroke:rgba(255,255,255,.16);stroke-width:1;}
 .diag .layer-rect.focus{fill:var(--blue);stroke:var(--blue);
@@ -1019,7 +1019,7 @@ footer{background:#071028;padding:72px 0 0;}
   0%,100%{transform:translateX(-40%);}
   50%{transform:translateX(40%);}
 }
-/* Arrow indicators — dotted, flowing */
+/* Arrow indicators - dotted, flowing */
 .diag .arrow-line{
   stroke:var(--blue-24);stroke-width:1.2;opacity:.8;
   fill:none;stroke-linecap:round;
@@ -1042,7 +1042,7 @@ footer{background:#071028;padding:72px 0 0;}
   .squad-diagram{max-width:none;}
 }
 
-/* ============ Mobile diagram — stacked block layout ============ */
+/* ============ Mobile diagram - stacked block layout ============ */
 .diag-mobile{display:none;flex-direction:column;gap:0;}
 .dm-layer{
   border:1px solid rgba(255,255,255,.16);border-radius:14px;
@@ -1103,7 +1103,7 @@ footer{background:#071028;padding:72px 0 0;}
   border-top:6px solid var(--blue-24);
 }
 
-/* ============ What happens after — centered statement on grid ============ */
+/* ============ What happens after - centered statement on grid ============ */
 .after{
   padding:140px 0;
   background:var(--paper);
@@ -1256,7 +1256,7 @@ footer{background:#071028;padding:72px 0 0;}
           </g>
         </svg>
 
-        <!-- Mobile stacked diagram — replaces the SVG on <=768px -->
+        <!-- Mobile stacked diagram - replaces the SVG on <=768px -->
         <div class="diag-mobile" aria-hidden="true">
           <div class="dm-layer dm-focus">
             <div class="dm-tag">The workflow layer</div>
@@ -1310,7 +1310,7 @@ footer{background:#071028;padding:72px 0 0;}
       </div>
 
       <div class="squad-fineprint">
-        <p><b>Systems of record stay where they are.</b> Searce works the layer above them — the workflows, the internal tooling, the orchestration, and the custom systems that carry competitive advantage.</p>
+        <p><b>Systems of record stay where they are.</b> Searce works the layer above them - the workflows, the internal tooling, the orchestration, and the custom systems that carry competitive advantage.</p>
       </div>
     </div>
   </div>
@@ -1904,12 +1904,12 @@ footer{background:#071028;padding:72px 0 0;}
 <script>
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ===== HERO CANVAS — system reorganisation ==========================
+/* ===== HERO CANVAS - system reorganisation ==========================
    Two layers:
    • Static Systems-of-Record foundation at the bottom.
    • Above it, a workflow layer that starts messy (duplicate nodes,
-     redundant paths, dead-ends, detached modules) and — slowly, in
-     staged sub-phases — collapses duplicates, drops redundant edges,
+     redundant paths, dead-ends, detached modules) and - slowly, in
+     staged sub-phases - collapses duplicates, drops redundant edges,
      straightens paths, moves detached modules into the structure,
      and reveals a clean operating system. Then loops.
    ==================================================================== */
@@ -1928,7 +1928,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
      merge      → present only in messy; translates to target then fades.
      ephemeral  → present only in messy (dead-end); fades out.        */
   const NODES = [
-    /* upper spine — kept */
+    /* upper spine - kept */
     { id:0,  m:[0.07, 0.14], c:[0.14, 0.10], keep:true },
     { id:1,  m:[0.25, 0.24], c:[0.28, 0.10], keep:true },
     { id:2,  m:[0.42, 0.20], c:[0.42, 0.10], keep:true },
@@ -1936,7 +1936,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     { id:4,  m:[0.80, 0.18], c:[0.78, 0.10], keep:true },
     { id:5,  m:[0.94, 0.30], c:[0.92, 0.10], keep:true },
 
-    /* middle branches — kept, cleaner alignment */
+    /* middle branches - kept, cleaner alignment */
     { id:6,  m:[0.20, 0.48], c:[0.28, 0.40], keep:true },
     { id:7,  m:[0.44, 0.52], c:[0.42, 0.40], keep:true },
     { id:8,  m:[0.70, 0.44], c:[0.72, 0.40], keep:true },
@@ -1954,7 +1954,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     { id:14, m:[0.63, 0.62], c:[0.63, 0.62], keep:false, ephemeral:true }
   ];
 
-  /* Messy edges — includes redundant duplicates, dead-ends, long detours. */
+  /* Messy edges - includes redundant duplicates, dead-ends, long detours. */
   const EDGES_M = [
     [0,9],[9,1],[10,2],           // duplicate-mediated paths
     [0,1],[1,2],[2,3],[3,4],[4,5],// upper spine
@@ -1968,7 +1968,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     [13,8],[13,5]                  // detached-right over-connected
   ];
 
-  /* Clean edges — precise, direct. */
+  /* Clean edges - precise, direct. */
   const EDGES_C = [
     [0,1],[1,2],[2,3],[3,4],[4,5], // clean upper spine
     [1,6],[2,7],[4,8],              // clean drops to branches
@@ -2041,7 +2041,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
   function drawSoR(){
-    /* Foundation — stays put across the cycle. Quiet, low contrast. */
+    /* Foundation - stays put across the cycle. Quiet, low contrast. */
     const [x0,y0] = pt(SA, 0.00, 0.00);
     const [x1,y1] = pt(SA, 1.00, 1.00);
     /* top rule (separates layers) */
@@ -2182,7 +2182,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(line2) line2.style.animationDelay = (0.3 + words.length * 0.12 + 0.1) + 's';
 })();
 
-/* ===== OUTCOME STORIES — scroll-driven carousel ===== */
+/* ===== OUTCOME STORIES - scroll-driven carousel ===== */
 (function(){
   const pin=document.getElementById('storiesPin');
   const track=document.getElementById('storiesTrack');
@@ -2230,7 +2230,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(measure);}
 })();
 
-/* ===== METRIC LADDER — ticker scroll + detail panels ===== */
+/* ===== METRIC LADDER - ticker scroll + detail panels ===== */
 (function(){
   const section = document.getElementById('metric-ladder');
   const viewport = document.querySelector('.ladder-viewport');
@@ -2279,7 +2279,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
   requestAnimationFrame(tick);
 
-  /* Only pause the ticker on mouse hover — on touch there is no
+  /* Only pause the ticker on mouse hover - on touch there is no
      mouseleave, so it would otherwise get stuck paused after a tap. */
   viewport.addEventListener('pointerenter',(e)=>{
     if(e.pointerType!=='mouse') return;
@@ -2338,7 +2338,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 })();
 
-/* ===== WHAT HAPPENS AFTER — blob follows cursor ===== */
+/* ===== WHAT HAPPENS AFTER - blob follows cursor ===== */
 (function(){
   const section = document.getElementById('after');
   if (!section) return;
@@ -2389,7 +2389,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 })();
 
 
-/* ===== OFFERINGS — accordion, one open at a time ===== */
+/* ===== OFFERINGS - accordion, one open at a time ===== */
 (function(){
   document.documentElement.classList.add('js');
   const items = document.querySelectorAll('.acc-item');

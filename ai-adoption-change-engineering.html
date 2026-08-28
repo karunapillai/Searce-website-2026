@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Adoption &amp; Change Engineering — Searce</title>
-<meta name="description" content="Make the change land in people, and prove it. Workplace platform deployment, AI coworker enablement, role architecture, capability building, adoption engineering and seat-to-value measurement.">
+<meta name="description" content="Turn AI spend into changed work, and prove it. AI value realisation, workplace AI deployment, seat utilisation and licence recovery, role redesign, capability building, agent enablement, adoption engineering, and knowledge and context enablement.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -182,21 +182,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   max-width:19ch;
   margin-bottom:clamp(32px,3.6vw,48px);
 }
-/* Line wipe. The clip box is padded at the bottom so descenders
-   (the g in "Redesign", the p in "people") are never cut. */
 .hl{
-  display:block;overflow:hidden;
+  display:block;
   padding-bottom:.18em;
   margin-bottom:-.14em;
 }
-.hl > span{
-  display:block;
-  transform:translateY(110%);
-  animation:lineUp .95s cubic-bezier(.16,1,.3,1) forwards;
-}
-.hl:nth-child(1) > span{animation-delay:.20s;}
-.hl:nth-child(2) > span{animation-delay:.34s;}
-@keyframes lineUp{to{transform:translateY(0);}}
+.hl > span{display:block;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 .hero h1 em{font-style:normal;color:var(--blue);}
 
@@ -274,14 +265,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 .shift-top{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:0 80px;align-items:end;
+  gap:0 80px;align-items:start;
   padding-bottom:clamp(40px,5vw,64px);
 }
 .shift-top h2{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(34px,4.4vw,62px);
-  line-height:1.08;letter-spacing:-0.028em;
-  max-width:22ch;
+  font-size:clamp(28px,3.4vw,47px);
+  line-height:1.14;letter-spacing:-0.022em;
+  max-width:24ch;
+  margin-bottom:clamp(20px,2vw,28px);
 }
 .shift-top h2 em{font-style:normal;color:var(--blue);}
 .shift-lede{
@@ -289,6 +281,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   line-height:1.68;color:var(--ink-60);
 }
 .shift-lede + .shift-lede{margin-top:14px;}
+
 
 .qs{border-top:1px solid var(--ink);}
 .q-head{
@@ -399,15 +392,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .acc-body{overflow:hidden;}
 .js .acc-body{max-height:0;transition:max-height .5s cubic-bezier(.16,1,.3,1);}
 .acc-inner{
-  display:grid;
-  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
-  gap:clamp(28px,4vw,64px);
+  display:block;
   padding:0 0 clamp(28px,3.4vw,40px) calc(clamp(40px,4vw,64px) + clamp(16px,2vw,28px));
 }
 .acc-desc{
   font-size:clamp(16px,1.45vw,19.5px);
   line-height:1.62;color:var(--ink-60);
-  max-width:46ch;
+  max-width:68ch;
 }
 .acc-what{
   font-family:var(--display);font-weight:400;
@@ -433,10 +424,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
    The hierarchy is the layout: the practice above, the named
    motions hanging beneath it as selectable siblings.
    =========================================================== */
-.motions{background:var(--ink);color:#fff;padding:var(--sec) 0;}
+.motions{background:#002659;color:#fff;padding:var(--sec) 0;}
 .motions-head{max-width:56ch;margin-bottom:clamp(44px,5.5vw,68px);}
 .motions-head h2{
-  font-family:var(--display);font-weight:300;
+  font-family:var(--display);font-weight:400;
   font-size:clamp(36px,5vw,72px);
   line-height:1.04;letter-spacing:-0.03em;
   margin-bottom:18px;
@@ -604,6 +595,182 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   font-size:clamp(19px,2vw,27px);
   line-height:1.2;letter-spacing:-0.02em;
   color:var(--ink);
+}
+
+/* value ticker — auto-cycling single reading on the ink section */
+.ticker{
+  border-top:1px solid rgba(255,255,255,0.16);
+  padding-top:clamp(28px,3.4vw,44px);
+}
+.ticker-stage{
+  display:grid;
+  grid-template-columns:clamp(44px,4.5vw,64px) 1fr;
+  gap:clamp(20px,2.2vw,32px);
+  align-items:start;
+  min-height:200px;
+}
+.ticker-icon{
+  color:#ffffff;
+  padding-top:.1em;
+  transition:opacity .35s ease, transform .35s ease;
+}
+.ticker-icon svg{
+  width:56px;height:56px;
+  display:block;
+}
+.ticker-body{
+  transition:opacity .35s ease, transform .35s ease;
+}
+.ticker-icon.swap,
+.ticker-body.swap{opacity:0;transform:translateY(10px);}
+.ticker-h{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(26px,3vw,44px);
+  line-height:1.1;letter-spacing:-0.024em;
+  color:#79adff;margin-bottom:16px;
+  max-width:22ch;
+}
+.ticker-p{
+  font-size:clamp(15.5px,1.4vw,19px);
+  line-height:1.62;color:rgba(255,255,255,0.62);
+  max-width:56ch;
+}
+.ticker-dots{
+  display:flex;gap:10px;align-items:center;
+  margin-top:clamp(28px,3vw,40px);
+  padding-top:clamp(20px,2.2vw,28px);
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+.ticker-dot{
+  flex:1 1 auto;height:3px;padding:0;
+  background:rgba(255,255,255,0.14);
+  border:none;border-radius:999px;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:background .2s ease;
+}
+.ticker-dot:hover{background:rgba(255,255,255,0.24);}
+.ticker-dot .fill{
+  position:absolute;inset:0;
+  background:#79adff;
+  transform:translateX(-100%);
+}
+.ticker-dot[aria-current="true"] .fill{
+  animation:tickerFill 3.5s linear forwards;
+}
+.ticker.paused .ticker-dot[aria-current="true"] .fill{
+  animation-play-state:paused;
+}
+@keyframes tickerFill{to{transform:translateX(0);}}
+.ticker-play{
+  flex:0 0 auto;margin-left:14px;
+  width:34px;height:34px;border-radius:50%;
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.2);
+  color:#fff;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:all .2s ease;
+}
+.ticker-play:hover{border-color:var(--blue);background:rgba(0,100,255,0.12);}
+.ticker-play svg{width:12px;height:12px;}
+@media(max-width:640px){
+  .ticker-stage{grid-template-columns:1fr;gap:8px;}
+  .ticker-index{padding-top:0;}
+}
+
+/* verified outcomes — scroll-driven horizontal carousel (BSE pattern) */
+.evidence.outcomes{padding:0;position:relative;}
+.evidence.outcomes::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,100,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,100,255,0.06) 1px, transparent 1px);
+  background-size:64px 64px;
+  pointer-events:none;z-index:0;
+}
+.outcomes .wrap,.stories-pin{position:relative;z-index:1;}
+.outcomes-header{position:relative;padding:0;text-align:center;flex-shrink:0;}
+.outcomes-header-inner{position:relative;z-index:2;}
+.outcomes-eyebrow{
+  display:block;
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(44px,6vw,90px);
+  letter-spacing:-0.03em;line-height:1.02;
+  color:var(--ink);margin-bottom:0;
+}
+.stories-pin{position:relative;}
+.stories-sticky{
+  position:sticky;top:0;
+  height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  gap:40px;overflow:hidden;
+}
+.stories-viewport{width:100%;overflow:hidden;flex-shrink:0;}
+.stories{
+  display:flex;gap:24px;will-change:transform;
+  padding:4px max(48px,calc((100vw - 1280px)/2 + 48px));
+  align-items:stretch;
+}
+.story{
+  flex:0 0 clamp(315px,27.3vw,400px);
+  background:#fff;
+  border:1px solid var(--paper-line);
+  border-radius:14px;
+  padding:34px 32px;
+  display:flex;flex-direction:column;
+  transition:border-color .25s ease, box-shadow .25s ease;
+}
+.story:hover{
+  border-color:var(--blue-24);
+  box-shadow:0 8px 28px rgba(0,100,255,0.08);
+}
+.story-meta{display:flex;align-items:baseline;gap:10px;margin-bottom:20px;}
+.story-index{
+  font-family:var(--display);font-weight:300;
+  font-size:12.5px;letter-spacing:.06em;color:var(--blue);
+}
+.story-context{
+  font-family:var(--display);font-weight:400;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-40);
+}
+.story-quote{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(21px,1.9vw,27px);
+  line-height:1.22;letter-spacing:-0.02em;
+  color:var(--ink);margin:0 0 28px 0;
+}
+.story-proof{margin-top:auto;padding-top:22px;border-top:1px solid var(--paper-line);}
+.story-changed{
+  display:block;
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(18px,1.6vw,22px);
+  line-height:1.25;letter-spacing:-0.015em;
+  color:var(--blue);margin-bottom:12px;
+}
+.story-industry{
+  font-family:var(--display);font-weight:400;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-40);
+}
+.stories-progress{
+  margin:0 auto;width:min(420px,60vw);
+  height:2px;background:var(--paper-line);
+  border-radius:999px;overflow:hidden;flex-shrink:0;
+}
+.stories-progress-bar{height:100%;width:0%;background:var(--blue);border-radius:999px;}
+@media(max-width:1024px){
+  .stories-pin{height:auto!important;}
+  .stories-sticky{position:static;height:auto;overflow:visible;display:block;}
+  .stories-viewport{overflow:visible;}
+  .outcomes-header{padding:48px 0 24px;}
+  .stories{flex-direction:column;padding:0 28px 48px;gap:16px;transform:none!important;}
+  .story{flex:1 1 auto;}
+  .stories-progress{display:none;}
+  .value-list li{grid-template-columns:1fr;gap:6px;}
+}
+@media(max-width:768px){
+  .story-quote{max-width:100%;}
+  .story{padding:28px 24px;}
 }
 
 /* ===========================================================
@@ -839,13 +1006,13 @@ footer{background:#071028;padding:72px 0 0;}
     </div>
 
     <h1 id="hero-h">
-      <span class="hl"><span>Make the change land</span></span>
-      <span class="hl"><span>in <em>people</em>, and <em>prove it</em>.</span></span>
+      <span class="hl"><span>Turn AI spend into <em>changed work</em>,</span></span>
+      <span class="hl"><span>and <em>prove it</em>.</span></span>
     </h1>
 
     <p class="hero-open">
-      Adoption is where transformations quietly die. The question is no longer which tools people get.
-      <strong>It is which work people still do, and whether anything actually changed.</strong>
+      AI does not produce ROI. People working differently produces ROI.<br>
+      AI only makes it possible.
     </p>
 
     <div class="hero-ctas">
@@ -856,16 +1023,6 @@ footer{background:#071028;padding:72px 0 0;}
     </div>
   </div>
 
-  <div class="wrap band-block">
-    <div class="band-head">
-      <span>Deployed</span>
-      <span class="r">Adopted</span>
-    </div>
-    <div class="band" id="bandHero" data-settled="0" aria-hidden="true">
-      <span class="band-marker"></span>
-    </div>
-    <p class="band-caption">The gap between what was deployed and what was actually adopted. Closing it is the reason this practice exists.</p>
-  </div>
 </header>
 
 <main>
@@ -875,11 +1032,11 @@ footer{background:#071028;padding:72px 0 0;}
   <div class="wrap">
     <div class="shift-top">
       <div>
-        <h2 id="shift-h">AI is not another tool in the stack. It is a change in <em>what work is</em>.</h2>
+        <h2 id="shift-h">Most enterprises bought the licences. Far fewer can say what work is <em>now done differently</em>.</h2>
       </div>
       <div>
-        <p class="shift-lede">Every workplace platform before this one asked people to learn a new interface and keep doing the same job. This one moves the job.</p>
-        <p class="shift-lede">Tasks that defined a role for a decade become something a system handles in the background. What remains of that role is a different job — and usually a more human one. That is a work design problem before it is a technology problem.</p>
+        <p class="shift-lede">The pilots ran. The programme was announced. But which work is now done differently, by whom, and what was it worth? That gap is not a training problem. It is an engineering and measurement problem — and it is where the return on the entire AI investment is won or lost.</p>
+        <p class="shift-lede">Searce measures adoption as tasks now done differently rather than as logins or licences issued, which puts adoption on the same metric ladder as the process itself. Where people revert to the old way, Searce fixes the workflow rather than the person, because most adoption failure is design failure.</p>
       </div>
     </div>
 
@@ -890,24 +1047,24 @@ footer{background:#071028;padding:72px 0 0;}
       </div>
 
       <div class="q-row">
-        <p class="q-old">Which tools do people get?</p>
-        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Which work do people still do?</span></p>
+        <p class="q-old">How many licences did we issue?</p>
+        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Which tasks are now done differently?</span></p>
       </div>
       <div class="q-row">
-        <p class="q-old">Train people on the software.</p>
-        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Redesign the role around the capability.</span></p>
+        <p class="q-old">How many people logged in this week?</p>
+        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>How many hours were returned to the business?</span></p>
       </div>
       <div class="q-row">
-        <p class="q-old">Count licences and logins.</p>
-        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Measure the work that actually changed.</span></p>
+        <p class="q-old">Train people on the tool.</p>
+        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Redesign the role and the workflow around it.</span></p>
       </div>
       <div class="q-row">
-        <p class="q-old">Roll it out to everyone.</p>
-        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Build it with the people it changes.</span></p>
+        <p class="q-old">Fix the person who reverted.</p>
+        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Fix the workflow they reverted from.</span></p>
       </div>
       <div class="q-row">
-        <p class="q-old">Productivity is the same work, faster.</p>
-        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>Productivity is work that was not possible before.</span></p>
+        <p class="q-old">Did the pilot succeed?</p>
+        <p class="q-new"><span class="mk" aria-hidden="true">&rarr;</span><span>What was the AI spend actually worth?</span></p>
       </div>
     </div>
   </div>
@@ -918,7 +1075,6 @@ footer{background:#071028;padding:72px 0 0;}
   <div class="wrap">
     <div class="offer-top">
       <h2 id="offer-h">Offerings</h2>
-      <p>Seven durable capabilities. Open one to see what it covers.</p>
     </div>
 
     <div class="acc" id="acc">
@@ -926,23 +1082,12 @@ footer{background:#071028;padding:72px 0 0;}
       <div class="acc-item open">
         <button class="acc-btn" aria-expanded="true" aria-controls="a1">
           <span class="acc-num">01</span>
-          <span class="acc-name">Workplace platform deployment and activation</span>
+          <span class="acc-name">AI value realisation</span>
           <span class="acc-sign" aria-hidden="true"></span>
         </button>
         <div class="acc-body" id="a1">
           <div class="acc-inner">
-            <p class="acc-desc">The collaboration and productivity layer deployed, activated and governed — configured around the redesigned work rather than the vendor's default template.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Gemini Enterprise activation and ramp plan ownership</li>
-                <li>Google Workspace deployment, migration and modernization</li>
-                <li>Claude and frontier assistant rollout</li>
-                <li>Tenant, identity and governance configuration</li>
-                <li>Seat provisioning and licence optimisation</li>
-                <li>Renewal readiness</li>
-              </ul>
-            </div>
+            <p class="acc-desc">Turning AI spend into an accountable number. Baseline the work before the programme starts, then read hours returned, cycle time, quality and capacity against it.</p>
           </div>
         </div>
       </div>
@@ -950,21 +1095,12 @@ footer{background:#071028;padding:72px 0 0;}
       <div class="acc-item">
         <button class="acc-btn" aria-expanded="false" aria-controls="a2">
           <span class="acc-num">02</span>
-          <span class="acc-name">AI coworker and agent enablement</span>
+          <span class="acc-name">Workplace AI deployment and activation</span>
           <span class="acc-sign" aria-hidden="true"></span>
         </button>
         <div class="acc-body" id="a2">
           <div class="acc-inner">
-            <p class="acc-desc">Agents that live inside a working day rather than beside it. Built with the people whose work they change, so the handback lands at the moment a person is genuinely needed.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Agent building enablement for business teams</li>
-                <li>Prompt and skill libraries by function</li>
-                <li>Approved-pattern catalogues</li>
-                <li>Champion networks and internal support models</li>
-              </ul>
-            </div>
+            <p class="acc-desc">The workplace AI layer — Gemini Enterprise, Google Workspace, Claude and adjacent assistants — deployed, activated and governed around the redesigned work rather than the vendor's default template.</p>
           </div>
         </div>
       </div>
@@ -972,21 +1108,12 @@ footer{background:#071028;padding:72px 0 0;}
       <div class="acc-item">
         <button class="acc-btn" aria-expanded="false" aria-controls="a3">
           <span class="acc-num">03</span>
-          <span class="acc-name">Role architecture and workforce transition</span>
+          <span class="acc-name">Seat utilisation and licence recovery</span>
           <span class="acc-sign" aria-hidden="true"></span>
         </button>
         <div class="acc-body" id="a3">
           <div class="acc-inner">
-            <p class="acc-desc">Start with the organisation, not the tool. We redesign roles for the agentic era, then plan the transition that gets people from here to there.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Organisation-level role design for the agentic era</li>
-                <li>Spans of control and management layer implications</li>
-                <li>Career path redesign</li>
-                <li>Workforce transition planning and sequencing</li>
-              </ul>
-            </div>
+            <p class="acc-desc">See which seats are earning their keep and which are quietly idle. Recover, redeploy or retire — and defend the renewal on evidence, not sentiment.</p>
           </div>
         </div>
       </div>
@@ -994,22 +1121,12 @@ footer{background:#071028;padding:72px 0 0;}
       <div class="acc-item">
         <button class="acc-btn" aria-expanded="false" aria-controls="a4">
           <span class="acc-num">04</span>
-          <span class="acc-name">Capability building and AI literacy at scale</span>
+          <span class="acc-name">Role and work redesign</span>
           <span class="acc-sign" aria-hidden="true"></span>
         </button>
         <div class="acc-body" id="a4">
           <div class="acc-inner">
-            <p class="acc-desc">Capability built in cohorts that can teach the next cohort. It has to reach the whole workforce, including the people who will never write a prompt.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Role-based curricula</li>
-                <li>Certification pathways aligned to platform credentials</li>
-                <li>Manager enablement and coaching playbooks</li>
-                <li>Micro-practice and on-the-job reinforcement</li>
-                <li>Executive and leadership fluency</li>
-              </ul>
-            </div>
+            <p class="acc-desc">Redesign the role and the workflow around what the system now does. Where people revert to the old way, the workflow is fixed rather than the person.</p>
           </div>
         </div>
       </div>
@@ -1017,21 +1134,12 @@ footer{background:#071028;padding:72px 0 0;}
       <div class="acc-item">
         <button class="acc-btn" aria-expanded="false" aria-controls="a5">
           <span class="acc-num">05</span>
-          <span class="acc-name">Adoption and change engineering</span>
+          <span class="acc-name">AI capability building</span>
           <span class="acc-sign" aria-hidden="true"></span>
         </button>
         <div class="acc-body" id="a5">
           <div class="acc-inner">
-            <p class="acc-desc">Adoption built as a system, with owners, instrumentation and gates. This is where transformations quietly die, so it gets engineered rather than announced.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Stakeholder and resistance analysis</li>
-                <li>Communication and behavioural intervention design</li>
-                <li>Adoption ramp modelling against seat commitments</li>
-                <li>Sustainment and reinforcement systems</li>
-              </ul>
-            </div>
+            <p class="acc-desc">Capability built in cohorts that can teach the next cohort — across role, function and seniority, including the people who will never write a prompt.</p>
           </div>
         </div>
       </div>
@@ -1039,20 +1147,12 @@ footer{background:#071028;padding:72px 0 0;}
       <div class="acc-item">
         <button class="acc-btn" aria-expanded="false" aria-controls="a6">
           <span class="acc-num">06</span>
-          <span class="acc-name">Knowledge and collaboration systems</span>
+          <span class="acc-name">Agent enablement for business teams</span>
           <span class="acc-sign" aria-hidden="true"></span>
         </button>
         <div class="acc-body" id="a6">
           <div class="acc-inner">
-            <p class="acc-desc">The retrieval layer that people and agents both read from. Governed, current and answerable — so the answer is the same whoever asks it.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Enterprise search and knowledge surfacing</li>
-                <li>Content operations and lifecycle</li>
-                <li>Collaboration workflow redesign</li>
-              </ul>
-            </div>
+            <p class="acc-desc">Business teams building and operating their own agents — inside the working day, with approved patterns, guardrails and a clean handback at the moment a person is genuinely needed.</p>
           </div>
         </div>
       </div>
@@ -1060,21 +1160,25 @@ footer{background:#071028;padding:72px 0 0;}
       <div class="acc-item">
         <button class="acc-btn" aria-expanded="false" aria-controls="a7">
           <span class="acc-num">07</span>
-          <span class="acc-name">Adoption measurement and seat-to-value</span>
+          <span class="acc-name">Adoption engineering</span>
           <span class="acc-sign" aria-hidden="true"></span>
         </button>
         <div class="acc-body" id="a7">
           <div class="acc-inner">
-            <p class="acc-desc">Baselines and readings on how work actually moves. Without this, every claim about AI at work is a sentiment survey wearing a number.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Adoption telemetry: MAU, DAU, task completion, workflow penetration</li>
-                <li>Productivity baselining and verified reading</li>
-                <li>Seat-to-value analysis for renewal defence</li>
-                <li>Consumption ramp reporting</li>
-              </ul>
-            </div>
+            <p class="acc-desc">Adoption built as a system, with owners, instrumentation and gates. Measured as tasks now done differently, not as logins or licences issued.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a8">
+          <span class="acc-num">08</span>
+          <span class="acc-name">Knowledge and context enablement</span>
+          <span class="acc-sign" aria-hidden="true"></span>
+        </button>
+        <div class="acc-body" id="a8">
+          <div class="acc-inner">
+            <p class="acc-desc">The retrieval and context layer that people and agents both read from. Governed, current and answerable — so the answer is the same whoever asks it.</p>
           </div>
         </div>
       </div>
@@ -1083,132 +1187,110 @@ footer{background:#071028;padding:72px 0 0;}
   </div>
 </section>
 
-<!-- ================= SECTION 3 — PLATFORM MOTIONS ================= -->
-<section class="motions" id="motions" aria-labelledby="motions-h">
+<!-- ================= SECTION 3 — WHERE THE VALUE SHOWS UP ================= -->
+<section class="motions" id="value" aria-labelledby="motions-h">
   <div class="wrap">
     <div class="motions-head">
-      <h2 id="motions-h">Platform motions</h2>
-      <p>Named motions that run inside the offerings above. They are siblings within the practice — never the practice itself.</p>
+      <h2 id="motions-h">Where the value shows up.</h2>
     </div>
 
-    <div class="sibs" role="tablist" aria-label="Platform motions">
-      <div class="sib">
-        <button class="sib-btn" role="tab" id="m1" aria-controls="mp1" aria-selected="true">
-          <span class="sib-name">Gemini Enterprise transformation</span>
-          <span class="sib-dot" aria-hidden="true"></span>
+    <div class="ticker" aria-label="Where the value shows up" role="region">
+      <div class="ticker-stage">
+        <div class="ticker-icon" id="tickerIcon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="ticker-body" id="tickerBody">
+          <h3 class="ticker-h" id="tickerH">Hours returned to the business.</h3>
+          <p class="ticker-p" id="tickerP">Time that used to go into the task and now goes somewhere else — baselined before the programme starts.</p>
+        </div>
+      </div>
+      <div class="ticker-dots" id="tickerDots">
+        <button class="ticker-dot" aria-current="true" data-i="0" aria-label="Reading 1"><span class="fill"></span></button>
+        <button class="ticker-dot" aria-current="false" data-i="1" aria-label="Reading 2"><span class="fill"></span></button>
+        <button class="ticker-dot" aria-current="false" data-i="2" aria-label="Reading 3"><span class="fill"></span></button>
+        <button class="ticker-dot" aria-current="false" data-i="3" aria-label="Reading 4"><span class="fill"></span></button>
+        <button class="ticker-dot" aria-current="false" data-i="4" aria-label="Reading 5"><span class="fill"></span></button>
+        <button class="ticker-play" id="tickerPlay" aria-label="Pause">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 3v6M8 3v6"/></svg>
         </button>
-      </div>
-      <div class="sib">
-        <button class="sib-btn" role="tab" id="m2" aria-controls="mp2" aria-selected="false" tabindex="-1">
-          <span class="sib-name">Google Workspace</span>
-          <span class="sib-dot" aria-hidden="true"></span>
-        </button>
-      </div>
-      <div class="sib">
-        <button class="sib-btn" role="tab" id="m3" aria-controls="mp3" aria-selected="false" tabindex="-1">
-          <span class="sib-name">Claude adoption</span>
-          <span class="sib-dot" aria-hidden="true"></span>
-        </button>
-      </div>
-      <div class="sib">
-        <button class="sib-btn" role="tab" id="m4" aria-controls="mp4" aria-selected="false" tabindex="-1">
-          <span class="sib-name">happierWork</span>
-          <span class="sib-dot" aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-
-    <div class="motion-detail">
-      <div class="md-pane active" role="tabpanel" id="mp1" aria-labelledby="m1">
-        <div>
-          <h3 class="md-title">Gemini Enterprise transformation</h3>
-          <p class="md-desc">Enterprise-wide deployment paired with the change engineering that makes it land. The platform is the easy part; the adoption around it is the engagement.</p>
-        </div>
-        <div>
-          <div class="md-k">Runs inside these offerings</div>
-          <ul class="md-list">
-            <li>Workplace platform deployment and activation</li>
-            <li>AI coworker and agent enablement</li>
-            <li>Adoption and change engineering</li>
-            <li>Adoption measurement and seat-to-value</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="md-pane" role="tabpanel" id="mp2" aria-labelledby="m2">
-        <div>
-          <h3 class="md-title">Google Workspace</h3>
-          <p class="md-desc">Migration, modernisation and configuration of the collaboration layer — shaped to the redesigned work rather than the default template.</p>
-        </div>
-        <div>
-          <div class="md-k">Runs inside these offerings</div>
-          <ul class="md-list">
-            <li>Workplace platform deployment and activation</li>
-            <li>Knowledge and collaboration systems</li>
-            <li>Capability building and AI literacy at scale</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="md-pane" role="tabpanel" id="mp3" aria-labelledby="m3">
-        <div>
-          <h3 class="md-title">Claude adoption</h3>
-          <p class="md-desc">Assistant and agent adoption across knowledge work, with governance and review gates built in from the first cohort.</p>
-        </div>
-        <div>
-          <div class="md-k">Runs inside these offerings</div>
-          <ul class="md-list">
-            <li>AI coworker and agent enablement</li>
-            <li>Capability building and AI literacy at scale</li>
-            <li>Adoption and change engineering</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="md-pane" role="tabpanel" id="mp4" aria-labelledby="m4">
-        <div>
-          <h3 class="md-title">happierWork</h3>
-          <p class="md-desc">The people operating system: hiring, onboarding and the HR workflows underneath them, run as one instrumented system.</p>
-        </div>
-        <div>
-          <div class="md-k">Runs inside these offerings</div>
-          <ul class="md-list">
-            <li>Role architecture and workforce transition</li>
-            <li>Adoption measurement and seat-to-value</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="rules">
-      <div class="rule-note">
-        <p><strong>A vendor or product is never the name or the identity of the practice.</strong> The practice is defined by the work it redesigns. Platform offerings remain siblings inside it.</p>
-      </div>
-      <div class="rule-note">
-        <p><strong>Frontline and deskless workforces are served as a segment</strong> across every offering above — not as a separate offering. The work design differs; the capability does not.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= SECTION 4 — OUTCOME STORIES ================= -->
-<section class="evidence" id="outcomes" aria-labelledby="ev-h">
-  <div class="wrap">
-    <h2 id="ev-h">Outcome stories</h2>
+<!-- ================= SECTION 4 — VERIFIED OUTCOMES ================= -->
 
-    <div class="ev-col">
-      <p class="ev-lead">No <em>verified readings yet</em>.</p>
-      <p class="ev-text">Offerings stand on their own until there are.</p>
-
-      <div class="ev-next">
-        <div class="ev-next-k">First readings expected from</div>
-        <ul class="ev-next-list">
-          <li>Gemini Enterprise transformation and adoption measurement engagements</li>
-        </ul>
+<section class="evidence outcomes" id="outcomes" aria-labelledby="ev-h">
+  <div class="stories-pin" id="storiesPin">
+    <div class="stories-sticky">
+      <div class="outcomes-header">
+        <div class="outcomes-header-inner">
+          <span class="outcomes-eyebrow" id="ev-h">Verified Outcomes</span>
+        </div>
       </div>
+      <div class="stories-viewport">
+        <div class="stories" id="storiesTrack" role="list">
 
-      <div class="ev-standard">
-        <p>Do not fill this space with soft numbers.</p>
+          <article class="story" role="listitem">
+            <div>
+              <div class="story-meta">
+                <span class="story-index">01</span>
+                <span class="story-context">Document Processing</span>
+              </div>
+              <p class="story-quote">&ldquo;Accuracy plateaued at 70&ndash;85%.&rdquo;</p>
+            </div>
+            <div class="story-proof">
+              <p class="story-changed">96% accuracy with Gemini 1.5 Flash on complex documents.</p>
+              <p class="story-industry">Enterprise operations</p>
+            </div>
+          </article>
+
+          <article class="story" role="listitem">
+            <div>
+              <div class="story-meta">
+                <span class="story-index">02</span>
+                <span class="story-context">Throughput</span>
+              </div>
+              <p class="story-quote">&ldquo;The backlog would take days to clear.&rdquo;</p>
+            </div>
+            <div class="story-proof">
+              <p class="story-changed">2,500 unstructured documents processed in 30 minutes.</p>
+              <p class="story-industry">Operations at scale</p>
+            </div>
+          </article>
+
+          <article class="story" role="listitem">
+            <div>
+              <div class="story-meta">
+                <span class="story-index">03</span>
+                <span class="story-context">Multilingual Transcription</span>
+              </div>
+              <p class="story-quote">&ldquo;Language coverage costs more than the value.&rdquo;</p>
+            </div>
+            <div class="story-proof">
+              <p class="story-changed">~93% confidence across 7 languages, 28% lower cost.</p>
+              <p class="story-industry">Customer service</p>
+            </div>
+          </article>
+
+          <article class="story" role="listitem">
+            <div>
+              <div class="story-meta">
+                <span class="story-index">04</span>
+                <span class="story-context">Real-time Analytics</span>
+              </div>
+              <p class="story-quote">&ldquo;We only see the friction after the call.&rdquo;</p>
+            </div>
+            <div class="story-proof">
+              <p class="story-changed">AI-driven Anxiety Scoring live at 96% confidence.</p>
+              <p class="story-industry">Customer service</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+      <div class="stories-progress" aria-hidden="true">
+        <div class="stories-progress-bar" id="storiesProgress"></div>
       </div>
     </div>
   </div>
@@ -1478,6 +1560,143 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if(n !== null){ e.preventDefault(); select(n, true); }
     });
   });
+})();
+
+/* ===== WHERE THE VALUE SHOWS UP — auto-cycling ticker ===== */
+(function(){
+  const SVG = (paths) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+paths+'</svg>';
+  const DATA = [
+    {
+      icon: SVG('<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'),
+      h:"Hours returned to the business.",
+      p:"Time that used to go into the task and now goes somewhere else — baselined before the programme starts."
+    },
+    {
+      icon: SVG('<path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/>'),
+      h:"Licences retired or redeployed.",
+      p:"Seats no longer earning their keep — recovered, redeployed or defended at renewal."
+    },
+    {
+      icon: SVG('<path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/>'),
+      h:"Cycle time on the work people actually do.",
+      p:"Read against a pre-programme baseline, not a vendor benchmark."
+    },
+    {
+      icon: SVG('<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>'),
+      h:"Quality and error rates.",
+      p:"Because faster work at worse quality is not a productivity gain."
+    },
+    {
+      icon: SVG('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'),
+      h:"Capacity in scarce roles.",
+      p:"The specialists you cannot hire more of — their throughput read directly."
+    }
+  ];
+  const ticker = document.querySelector('.ticker');
+  const icon = document.getElementById('tickerIcon');
+  const body = document.getElementById('tickerBody');
+  const h = document.getElementById('tickerH');
+  const p = document.getElementById('tickerP');
+  const dots = document.querySelectorAll('#tickerDots .ticker-dot');
+  const play = document.getElementById('tickerPlay');
+  if(!ticker || !icon || !dots.length) return;
+
+  const ICON_PAUSE = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 3v6M8 3v6"/></svg>';
+  const ICON_PLAY  = '<svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M4 3l6 3-6 3z"/></svg>';
+  const INTERVAL = 3500;
+  let i = 0, timer = null, playing = true;
+
+  function paint(){
+    dots.forEach((d,k) => {
+      const on = k === i;
+      d.setAttribute('aria-current', on ? 'true' : 'false');
+      const fill = d.querySelector('.fill');
+      if(fill){
+        fill.style.animation = 'none';
+        void fill.offsetWidth;
+        fill.style.animation = '';
+      }
+    });
+  }
+  function render(){
+    icon.classList.add('swap');
+    body.classList.add('swap');
+    setTimeout(() => {
+      icon.innerHTML = DATA[i].icon;
+      h.textContent = DATA[i].h;
+      p.textContent = DATA[i].p;
+      paint();
+      icon.classList.remove('swap');
+      body.classList.remove('swap');
+    }, 200);
+  }
+  function next(){ i = (i+1) % DATA.length; render(); }
+  function start(){ stop(); timer = setInterval(next, INTERVAL); }
+  function stop(){ if(timer){clearInterval(timer); timer = null;} }
+
+  dots.forEach(d => d.addEventListener('click', () => {
+    i = +d.dataset.i;
+    render();
+    if(playing) start();
+  }));
+  play.addEventListener('click', () => {
+    playing = !playing;
+    play.innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
+    play.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    ticker.classList.toggle('paused', !playing);
+    if(playing) start(); else stop();
+  });
+
+  paint();
+  start();
+})();
+
+/* ===== VERIFIED OUTCOMES — scroll-driven carousel (BSE pattern) ===== */
+(function(){
+  const pin=document.getElementById('storiesPin');
+  const track=document.getElementById('storiesTrack');
+  const bar=document.getElementById('storiesProgress');
+  if(!pin||!track)return;
+
+  const vp=track.parentElement;
+  let maxShift=0;
+  let ticking=false;
+
+  function measure(){
+    if(window.innerWidth<=1024){
+      pin.style.height='';
+      track.style.transform='';
+      maxShift=0;
+      return;
+    }
+    track.style.transform='none';
+    maxShift=Math.max(0, track.scrollWidth - vp.clientWidth);
+    pin.style.height=(window.innerHeight + maxShift)+'px';
+    apply();
+  }
+
+  function apply(){
+    if(maxShift<=0){track.style.transform='';return;}
+    const total=pin.offsetHeight - window.innerHeight;
+    if(total<=0){track.style.transform='';return;}
+    const top=pin.getBoundingClientRect().top;
+    let p=(-top)/total;
+    p=p<0?0:(p>1?1:p);
+    track.style.transform='translate3d('+(-(p*maxShift).toFixed(2))+'px,0,0)';
+    if(bar) bar.style.width=(p*100).toFixed(2)+'%';
+  }
+
+  function onScroll(){
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(()=>{apply();ticking=false;});
+  }
+
+  measure();
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',measure);
+  window.addEventListener('load',measure);
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(measure);}
 })();
 </script>
 </body>

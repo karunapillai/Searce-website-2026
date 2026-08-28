@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Trust &amp; Resilience Engineering — Searce</title>
-<meta name="description" content="Make intelligent systems trusted enough to run the business. AI assurance, governance, security engineering, zero trust, SRE, observability, managed operations, and resilience engineering.">
+<title>AI Trust &amp; Resilience Engineering, Searce</title>
+<meta name="description" content="Make intelligent systems trusted enough to run the business. Cloud security, SRE, observability, zero trust, managed detection, disaster recovery, AI governance, and model risk, engineered as one practice for agentic systems.">
+<meta name="keywords" content="cloud security, SRE, observability, zero trust, managed detection, disaster recovery, AI governance, model risk, AI assurance, agent fleet operations, resilience engineering">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -68,7 +69,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   background-size:var(--mod) var(--mod);
 }
 
-/* ======= NAV — shared global framework ======= */
+/* ======= NAV, shared global framework ======= */
 .nav{
   position:sticky;top:0;z-index:200;
   background:var(--paper);
@@ -140,7 +141,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .nav-cta svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;}
 
 /* ===========================================================
-   HERO — black editorial banner on the modular grid
+   HERO, black editorial banner on the modular grid
    =========================================================== */
 .hero{
   position:relative;
@@ -221,7 +222,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .btn-primary svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;}
 
 /* ===========================================================
-   OFFERINGS — accordion
+   OFFERINGS, accordion
    =========================================================== */
 .offer{
   background:var(--paper-dim);
@@ -346,7 +347,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   color:var(--blue);
 }
 
-/* ======= LET'S CONNECT — shared practice-page treatment ======= */
+/* ======= LET'S CONNECT, shared practice-page treatment ======= */
 .connect{background:var(--blue-06);padding:80px 0;}
 .connect-inner{
   display:grid;grid-template-columns:1fr 1.4fr;
@@ -404,7 +405,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 .connect-submit:hover{background:var(--blue-strong);transform:translateY(-1px);}
 
-/* ======= FOOTER — shared ======= */
+/* ======= FOOTER, shared ======= */
 footer{background:#071028;padding:72px 0 0;}
 .foot-main{
   display:grid;grid-template-columns:280px 1fr 1fr 1fr;
@@ -477,6 +478,207 @@ footer{background:#071028;padding:72px 0 0;}
   .hl > span{transform:none;}
   .hero-badge,.hero-open,.hero-ctas{opacity:1;}
 }
+
+/* ===========================================================
+   INTRO — two-column: statement + animated trust-loop diagram
+   =========================================================== */
+.intro{
+  background:var(--paper);
+  padding:var(--sec) 0;
+  border-bottom:1px solid var(--paper-line);
+}
+.intro-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(40px,6vw,88px);
+  align-items:center;
+}
+.intro-eyebrow{
+  font-family:var(--display);font-weight:400;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:22px;
+}
+.intro-lede{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(24px,2.6vw,36px);
+  line-height:1.22;letter-spacing:-0.02em;
+  color:var(--blue);
+  max-width:22ch;
+  margin-bottom:clamp(22px,2.4vw,32px);
+}
+.intro-body{
+  font-size:clamp(16px,1.4vw,19px);
+  line-height:1.68;color:var(--ink-60);
+  max-width:52ch;
+}
+.intro-body + .intro-body{margin-top:16px;}
+.intro-body strong{color:var(--ink);font-weight:500;}
+.intro-viz{
+  position:relative;
+  width:100%;max-width:640px;
+  margin:0 auto;
+}
+.intro-viz svg{width:100%;height:auto;display:block;overflow:visible;}
+
+/* filled soft-blue disc that holds the concentric rings */
+.iv-disc{fill:var(--blue-06);}
+.iv-ring{fill:none;stroke:var(--blue-24);stroke-width:1.4;}
+
+/* expanding pulse rings — fade fill from white (inside) to light blue (outside) */
+.iv-pulse-ring{
+  stroke:var(--blue);stroke-width:1.4;
+  transform-origin:190px 260px;
+  opacity:0;
+  fill:#ffffff;
+  animation:ivRipple 4.2s ease-out infinite;
+}
+.iv-pulse-ring.r2{animation-delay:1.4s;}
+.iv-pulse-ring.r3{animation-delay:2.8s;}
+@keyframes ivRipple{
+  0%{transform:scale(.18);opacity:0;fill:#ffffff;stroke:#ffffff;}
+  15%{opacity:.85;fill:#ffffff;stroke:var(--blue);}
+  60%{opacity:.55;fill:var(--blue-12);stroke:var(--blue);}
+  100%{transform:scale(1);opacity:0;fill:var(--blue-24);stroke:var(--blue-24);}
+}
+
+/* Agent core (pink in the reference, blue here) */
+.iv-agent{
+  fill:var(--blue-12);
+  stroke:var(--blue);stroke-width:10;
+}
+.iv-agent-glow{
+  fill:var(--blue);opacity:.14;
+  transform-origin:190px 260px;
+  animation:ivHeart 2.8s ease-in-out infinite;
+}
+@keyframes ivHeart{
+  0%,100%{transform:scale(1);opacity:.10;}
+  50%{transform:scale(1.18);opacity:.24;}
+}
+.iv-agent-label{
+  fill:var(--blue-strong);
+  font-family:var(--display);font-weight:500;
+  font-size:20px;letter-spacing:-0.01em;
+  text-anchor:middle;dominant-baseline:middle;
+}
+
+/* right-side callouts */
+.iv-lead{
+  fill:none;stroke:var(--ink-40);stroke-width:1;
+  stroke-dasharray:2 4;
+}
+.iv-callout-title{
+  fill:var(--ink);font-family:var(--display);font-weight:500;
+  font-size:19px;letter-spacing:-0.01em;
+  dominant-baseline:middle;
+}
+.iv-callout-sub{
+  fill:var(--ink-60);font-family:var(--body);
+  font-size:15px;letter-spacing:.005em;
+  dominant-baseline:middle;
+}
+
+/* traveling dot that runs along each lead line to the callout */
+.iv-lead-dot{
+  fill:var(--blue);r:3.2;
+  animation:ivLead 4.2s cubic-bezier(.4,0,.2,1) infinite;
+  opacity:0;
+}
+.iv-lead-dot.d1{animation-delay:0s;}
+.iv-lead-dot.d2{animation-delay:1.4s;}
+.iv-lead-dot.d3{animation-delay:2.8s;}
+@keyframes ivLead{
+  0%,20%{opacity:0;transform:translateX(0);}
+  30%{opacity:1;}
+  70%{opacity:1;transform:translateX(var(--iv-lead-x,180px));}
+  100%{opacity:0;transform:translateX(var(--iv-lead-x,180px));}
+}
+
+@media(max-width:900px){
+  .intro-grid{grid-template-columns:1fr;gap:48px;}
+  .intro-viz{max-width:560px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .iv-pulse-ring,.iv-agent-glow,.iv-lead-dot{animation:none;}
+  .iv-pulse-ring{opacity:.35;}
+}
+
+/* ===========================================================
+   HOW SEARCE BUILDS, dark section + auto-cycling ticker
+   (shared pattern with sibling practice pages)
+   =========================================================== */
+.motions{background:#002659;color:#fff;padding:var(--sec) 0;}
+.motions-head{max-width:none;margin-bottom:clamp(44px,5.5vw,68px);}
+.motions-head h2{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(36px,5vw,72px);
+  line-height:1.04;letter-spacing:-0.03em;
+  margin-bottom:0;
+  white-space:nowrap;
+}
+.motions-head p{
+  font-size:clamp(16px,1.4vw,19px);line-height:1.65;
+  color:rgba(255,255,255,0.55);
+}
+.motions-head p em{font-style:normal;color:#79adff;}
+.ticker{
+  border-top:1px solid rgba(255,255,255,0.16);
+  padding-top:clamp(28px,3.4vw,44px);
+}
+.ticker-stage{
+  display:grid;
+  grid-template-columns:clamp(44px,4.5vw,64px) 1fr;
+  gap:clamp(20px,2.2vw,32px);
+  align-items:start;
+  min-height:200px;
+}
+.ticker-icon{color:#fff;padding-top:.1em;transition:opacity .35s ease, transform .35s ease;}
+.ticker-icon svg{width:56px;height:56px;display:block;}
+.ticker-body{transition:opacity .35s ease, transform .35s ease;}
+.ticker-icon.swap,.ticker-body.swap{opacity:0;transform:translateY(10px);}
+.ticker-h{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(26px,3vw,44px);
+  line-height:1.1;letter-spacing:-0.024em;
+  color:#79adff;margin-bottom:16px;
+  max-width:22ch;
+}
+.ticker-p{
+  font-size:clamp(15.5px,1.4vw,19px);
+  line-height:1.62;color:rgba(255,255,255,0.62);
+  max-width:56ch;
+}
+.ticker-dots{
+  display:flex;gap:10px;align-items:center;
+  margin-top:clamp(28px,3vw,40px);
+  padding-top:clamp(20px,2.2vw,28px);
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+.ticker-dot{
+  flex:1 1 auto;height:3px;padding:0;
+  background:rgba(255,255,255,0.14);
+  border:none;border-radius:999px;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:background .2s ease;
+}
+.ticker-dot:hover{background:rgba(255,255,255,0.24);}
+.ticker-dot .fill{position:absolute;inset:0;background:#79adff;transform:translateX(-100%);}
+.ticker-dot[aria-current="true"] .fill{animation:tickerFill 3.5s linear forwards;}
+.ticker.paused .ticker-dot[aria-current="true"] .fill{animation-play-state:paused;}
+@keyframes tickerFill{to{transform:translateX(0);}}
+.ticker-play{
+  flex:0 0 auto;margin-left:14px;
+  width:34px;height:34px;border-radius:50%;
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.2);
+  color:#fff;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:all .2s ease;
+}
+.ticker-play:hover{border-color:var(--blue);background:rgba(0,100,255,0.12);}
+.ticker-play svg{width:12px;height:12px;}
+@media(max-width:640px){
+  .ticker-stage{grid-template-columns:1fr;gap:8px;}
+}
 </style>
 <script>
   document.documentElement.classList.add('js');
@@ -532,11 +734,6 @@ footer{background:#071028;padding:72px 0 0;}
       <span class="hl"><span><em>trusted</em> enough to <em>run the business</em>.</span></span>
     </h1>
 
-    <p class="hero-open">
-      Autonomy without trust never reaches production. The agentic question is not whether the cloud is configured correctly.
-      <strong>It is whether a system can be trusted to act on the business.</strong>
-    </p>
-
     <div class="hero-ctas">
       <a href="#offerings" class="btn-primary">
         See the offerings
@@ -547,6 +744,64 @@ footer{background:#071028;padding:72px 0 0;}
 </header>
 
 <main>
+
+<!-- ================= INTRO (statement + animated trust loop) ================= -->
+<section class="intro" id="intro" aria-labelledby="intro-h">
+  <div class="wrap">
+    <div class="intro-grid">
+      <div class="intro-copy">
+        <p class="intro-lede" id="intro-h">Autonomy without trust never reaches production.</p>
+        <p class="intro-body">The agentic question is not whether the cloud is configured correctly, it is whether a system can be trusted to act on the business, and whether that can be demonstrated to a board and an auditor. As agents execute multi-step workflows, touch sensitive systems, and make real-time decisions, <strong>traditional security models break down</strong>.</p>
+        <p class="intro-body">Searce embeds continuous observability, deterministic guardrails, and automated audit trails directly into your agentic stack, bridging model performance with enterprise governance. By engineering verifiable safety and privacy into every agent action, we turn experimental AI into <strong>dependable, enterprise-grade operations</strong>.</p>
+      </div>
+
+      <div class="intro-viz" aria-hidden="true">
+        <svg viewBox="0 0 640 520" xmlns="http://www.w3.org/2000/svg">
+          <!-- filled soft-blue disc -->
+          <circle class="iv-disc" cx="190" cy="260" r="200"/>
+
+          <!-- concentric guardrail rings, outer to inner -->
+          <circle class="iv-ring" cx="190" cy="260" r="200"/>
+          <circle class="iv-ring" cx="190" cy="260" r="150"/>
+          <circle class="iv-ring" cx="190" cy="260" r="100"/>
+
+          <!-- outward ripples emanating from the agent -->
+          <circle class="iv-pulse-ring"    cx="190" cy="260" r="200"/>
+          <circle class="iv-pulse-ring r2" cx="190" cy="260" r="200"/>
+          <circle class="iv-pulse-ring r3" cx="190" cy="260" r="200"/>
+
+          <!-- Agent core -->
+          <circle class="iv-agent-glow" cx="190" cy="260" r="58"/>
+          <circle class="iv-agent" cx="190" cy="260" r="46"/>
+          <text class="iv-agent-label" x="190" y="262">Agent</text>
+
+          <!-- lead lines from each ring out to the right-side callouts -->
+          <!-- outer ring, top callout: Continuous observability -->
+          <path class="iv-lead" d="M 390 165 L 430 130 L 470 130"/>
+          <!-- middle ring, mid callout: Deterministic guardrails -->
+          <path class="iv-lead" d="M 340 260 L 430 260 L 470 260"/>
+          <!-- inner ring, bottom callout: Automated audit trail -->
+          <path class="iv-lead" d="M 288 340 L 430 390 L 470 390"/>
+
+          <!-- traveling dots along each lead -->
+          <circle class="iv-lead-dot d1" cx="390" cy="130" style="--iv-lead-x:80px;"/>
+          <circle class="iv-lead-dot d2" cx="340" cy="260" style="--iv-lead-x:130px;"/>
+          <circle class="iv-lead-dot d3" cx="330" cy="390" style="--iv-lead-x:140px;"/>
+
+          <!-- callout labels -->
+          <text class="iv-callout-title" x="480" y="118">Continuous observability</text>
+          <text class="iv-callout-sub"   x="480" y="146">Watched live</text>
+
+          <text class="iv-callout-title" x="480" y="248">Deterministic guardrails</text>
+          <text class="iv-callout-sub"   x="480" y="276">Rules enforced</text>
+
+          <text class="iv-callout-title" x="480" y="378">Automated audit trail</text>
+          <text class="iv-callout-sub"   x="480" y="406">Every step logged</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ================= OFFERINGS ================= -->
 <section class="offer" id="offerings" aria-labelledby="offer-h">
@@ -589,7 +844,7 @@ footer{background:#071028;padding:72px 0 0;}
         </button>
         <div class="acc-body" id="a2">
           <div class="acc-inner">
-            <p class="acc-desc">The governance layer that turns AI ambition into auditable, approvable practice — from inventory through board reporting.</p>
+            <p class="acc-desc">The governance layer that turns AI ambition into auditable, approvable practice, from inventory through board reporting.</p>
             <div>
               <div class="acc-what">What you get</div>
               <ul class="acc-list">
@@ -636,7 +891,7 @@ footer{background:#071028;padding:72px 0 0;}
         </button>
         <div class="acc-body" id="a4">
           <div class="acc-inner">
-            <p class="acc-desc">Identity-centric security architecture that assumes breach and verifies continuously — across cloud, hybrid and multi-cloud estates.</p>
+            <p class="acc-desc">Identity-centric security architecture that assumes breach and verifies continuously, across cloud, hybrid and multi-cloud estates.</p>
             <div>
               <div class="acc-what">What you get</div>
               <ul class="acc-list">
@@ -723,7 +978,7 @@ footer{background:#071028;padding:72px 0 0;}
         </button>
         <div class="acc-body" id="a8">
           <div class="acc-inner">
-            <p class="acc-desc">When systems fail — and they will — the question is how gracefully. Disaster recovery, degradation design, and human override engineering.</p>
+            <p class="acc-desc">When systems fail, and they will, the question is how gracefully. Disaster recovery, degradation design, and human override engineering.</p>
             <div>
               <div class="acc-what">What you get</div>
               <ul class="acc-list">
@@ -740,15 +995,33 @@ footer{background:#071028;padding:72px 0 0;}
   </div>
 </section>
 
-<!-- ================= OUTCOME STORIES ================= -->
-<section class="evidence" id="outcomes" aria-labelledby="ev-h">
-  <div class="mod-grid"></div>
-  <div class="wrap" style="position:relative;z-index:1;">
-    <h2 id="ev-h">Outcome stories</h2>
+<!-- ================= HOW SEARCE BUILDS ================= -->
+<section class="motions" id="how-searce" aria-labelledby="motions-h">
+  <div class="wrap">
+    <div class="motions-head">
+      <h2 id="motions-h">How Searce builds.</h2>
+    </div>
 
-    <div class="ev-col">
-        <p class="ev-story-quote">&ldquo;Incidents wake people up that <em>automation should handle</em>.&rdquo;</p>
-        <p class="ev-story-result">99.99% uptime.</p>
+    <div class="ticker" aria-label="How Searce builds" role="region">
+      <div class="ticker-stage">
+        <div class="ticker-icon" id="tickerIcon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="ticker-body" id="tickerBody">
+          <h3 class="ticker-h" id="tickerH">Deterministic guardrails constrain every agent action.</h3>
+          <p class="ticker-p" id="tickerP">Policies expressed as code, enforced in the runtime, so what the agent may touch, spend and send is bounded before it acts, not audited after.</p>
+        </div>
+      </div>
+      <div class="ticker-dots" id="tickerDots">
+        <button class="ticker-dot" aria-current="true" data-i="0" aria-label="Reading 1"><span class="fill"></span></button>
+        <button class="ticker-dot" aria-current="false" data-i="1" aria-label="Reading 2"><span class="fill"></span></button>
+        <button class="ticker-dot" aria-current="false" data-i="2" aria-label="Reading 3"><span class="fill"></span></button>
+        <button class="ticker-dot" aria-current="false" data-i="3" aria-label="Reading 4"><span class="fill"></span></button>
+        <button class="ticker-dot" aria-current="false" data-i="4" aria-label="Reading 5"><span class="fill"></span></button>
+        <button class="ticker-play" id="tickerPlay" aria-label="Pause">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 3v6M8 3v6"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -874,7 +1147,7 @@ footer{background:#071028;padding:72px 0 0;}
 <script>
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ===== OFFERINGS — accordion, one open at a time ===== */
+/* ===== OFFERINGS, accordion, one open at a time ===== */
 (function(){
   const items = Array.from(document.querySelectorAll('.acc-item'));
   if(!items.length) return;
@@ -910,6 +1183,95 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 bodyOf(open).style.maxHeight = h + 'px'; }
     }, 150);
   });
+})();
+
+/* ===== HOW SEARCE BUILDS, auto-cycling ticker ===== */
+(function(){
+  const SVG = (paths) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+paths+'</svg>';
+  const DATA = [
+    {
+      icon: SVG('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>'),
+      h:"Deterministic guardrails constrain every agent action.",
+      p:"Policies expressed as code, enforced in the runtime, so what the agent may touch, spend and send is bounded before it acts, not audited after."
+    },
+    {
+      icon: SVG('<path d="M4 4h16v16H4z"/><path d="M9 9h6v6H9z"/>'),
+      h:"Automated evaluation harnesses prove the model is fit for the work.",
+      p:"Golden datasets, regression suites and pre-production gates that stand up to a board and an auditor, run continuously as the system and its data drift."
+    },
+    {
+      icon: SVG('<path d="M4 20h16"/><path d="M6 20V10"/><path d="M12 20V4"/><path d="M18 20v-7"/>'),
+      h:"Immutable telemetry captures every decision.",
+      p:"Prompt, tool call, output, cost and identity, written once, tamper-evident, queryable, so incident review and regulator response are a search, not an investigation."
+    },
+    {
+      icon: SVG('<circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/>'),
+      h:"Verifiable safety and privacy engineered into every action.",
+      p:"Data boundaries, redaction and consent enforced at the point of use, not the point of policy, so sensitive systems stay sensitive as autonomy scales."
+    },
+    {
+      icon: SVG('<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'),
+      h:"Audit-ready governance in real time.",
+      p:"The board question, the auditor question and the incident question answered from one substrate, as the agents run, not after quarter close."
+    }
+  ];
+  const ticker = document.querySelector('.ticker');
+  const icon = document.getElementById('tickerIcon');
+  const body = document.getElementById('tickerBody');
+  const h = document.getElementById('tickerH');
+  const p = document.getElementById('tickerP');
+  const dots = document.querySelectorAll('#tickerDots .ticker-dot');
+  const play = document.getElementById('tickerPlay');
+  if(!ticker || !icon || !dots.length) return;
+
+  const ICON_PAUSE = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 3v6M8 3v6"/></svg>';
+  const ICON_PLAY  = '<svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M4 3l6 3-6 3z"/></svg>';
+  const INTERVAL = 3500;
+  let i = 0, timer = null, playing = true;
+
+  function paint(){
+    dots.forEach((d,k) => {
+      const on = k === i;
+      d.setAttribute('aria-current', on ? 'true' : 'false');
+      const fill = d.querySelector('.fill');
+      if(fill){
+        fill.style.animation = 'none';
+        void fill.offsetWidth;
+        fill.style.animation = '';
+      }
+    });
+  }
+  function render(){
+    icon.classList.add('swap');
+    body.classList.add('swap');
+    setTimeout(() => {
+      icon.innerHTML = DATA[i].icon;
+      h.textContent = DATA[i].h;
+      p.textContent = DATA[i].p;
+      paint();
+      icon.classList.remove('swap');
+      body.classList.remove('swap');
+    }, 200);
+  }
+  function next(){ i = (i+1) % DATA.length; render(); }
+  function start(){ stop(); timer = setInterval(next, INTERVAL); }
+  function stop(){ if(timer){clearInterval(timer); timer = null;} }
+
+  dots.forEach(d => d.addEventListener('click', () => {
+    i = +d.dataset.i;
+    render();
+    if(playing) start();
+  }));
+  play.addEventListener('click', () => {
+    playing = !playing;
+    play.innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
+    play.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    ticker.classList.toggle('paused', !playing);
+    if(playing) start(); else stop();
+  });
+
+  paint();
+  start();
 })();
 </script>
 </body>

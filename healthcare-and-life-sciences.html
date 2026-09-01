@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare and Life Sciences - Searce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Google Sans Flex';font-style:normal;font-display:swap;font-weight:1 1000;src:url(https://cdn.jsdelivr.net/fontsource/fonts/google-sans-flex:vf@latest/latin-wght-normal.woff2) format('woff2-variations');}
+:root{
+  --ink:#000000; --ink-85:#1a1a1c; --ink-60:#54555a; --ink-40:#84868c;
+  --paper:#ffffff; --paper-dim:#f6f7f9; --paper-line:#e4e6ea;
+  --blue:#0064ff; --blue-strong:#004ecc; --blue-deep:#00337f;
+  --blue-06:#eef4ff; --blue-12:#dbe9ff; --blue-24:#b3d0ff;
+  --navy:#060c1a; --navy-card:#0c1530;
+  --display:'Poppins',system-ui,sans-serif;
+  --body:'Google Sans Flex',system-ui,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-variation-settings:'wght' 400;-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;background:none;border:none;cursor:pointer;}
+::selection{background:var(--blue);color:#fff;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px;}
+.wrap{max-width:1280px;margin:0 auto;padding:0 48px;}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--paper-line);}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;gap:32px;}
+.nav-logo{font-family:var(--display);font-weight:500;font-size:20px;color:var(--ink);letter-spacing:-.01em;}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none;font-size:14px;color:var(--ink-60);flex:1;justify-content:center;}
+.nav-links > li{position:relative;}
+.nav-links > li > a{position:relative;display:flex;align-items:center;gap:5px;padding:6px 2px;transition:color .2s ease;}
+.nav-links > li > a:hover, .nav-links > li > a.current{color:var(--blue);}
+.nav-links > li > a.current::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--blue);border-radius:2px;}
+.chev{width:9px;height:9px;flex-shrink:0;transition:transform .2s ease;}
+.has-dropdown:hover .chev{transform:rotate(180deg);}
+.mega-panel{position:absolute;top:100%;left:-14px;margin-top:16px;background:#fff;border:1px solid var(--paper-line);border-radius:16px;box-shadow:0 28px 56px rgba(10,20,40,0.12);padding:10px;min-width:230px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .18s ease, transform .18s ease, visibility .18s;}
+.has-dropdown:hover .mega-panel{opacity:1;visibility:visible;transform:translateY(0);}
+.mega-item{display:block;padding:11px 14px;border-radius:10px;transition:background .15s ease;}
+.mega-item:hover{background:var(--blue-06);}
+.mega-title{display:block;font-family:var(--display);font-weight:400;font-size:14.5px;color:var(--ink);}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-family:var(--display);font-size:13.5px;padding:10px 20px;border-radius:999px;white-space:nowrap;transition:background .2s ease,transform .15s ease;}
+.nav-cta:hover{background:var(--blue-strong);transform:translateY(-1px);}
+.nav-cta svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;}
+
+/* ========== HERO with video BG ========== */
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden;isolation:isolate;padding:120px 0 100px;color:#fff;background:#02040a;}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.55;}
+.hero-video-fallback{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(80% 60% at 20% 20%, rgba(0,100,255,0.35) 0%, transparent 60%),
+  radial-gradient(70% 55% at 80% 80%, rgba(0,50,180,0.35) 0%, transparent 60%),
+  linear-gradient(135deg, #02040a 0%, #050a1e 40%, #081436 100%);
+  animation:heroDrift 20s ease-in-out infinite alternate;}
+@keyframes heroDrift{0%{background-position:0 0, 0 0, 0 0;}100%{background-position:40px 20px, -30px -10px, 0 0;}}
+.hero-grid{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 30% 50%, #000 30%, transparent 80%);}
+.hero-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg, rgba(2,4,10,0.85) 0%, rgba(2,4,10,0.55) 40%, rgba(2,4,10,0.15) 70%, transparent 100%),linear-gradient(to bottom, transparent 60%, rgba(2,4,10,0.6) 100%);}
+.hero-marks{position:absolute;inset:0;z-index:2;pointer-events:none;color:rgba(255,255,255,0.4);font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.24em;text-transform:uppercase;}
+.hero-marks span{position:absolute;}
+.hero-marks .m-tl{top:32px;left:32px;}
+.hero-marks .m-tr{top:32px;right:32px;}
+.hero-marks .m-bl{bottom:32px;left:32px;}
+.hero-marks .m-br{bottom:32px;right:32px;color:var(--blue-24);}
+@media (max-width:900px){.hero-marks{display:none;}}
+.hero .wrap{position:relative;z-index:3;width:100%;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,100,255,0.15);border:1px solid rgba(179,208,255,0.3);color:#b3d0ff;font-family:var(--display);font-size:13px;letter-spacing:.18em;text-transform:uppercase;padding:8px 18px;border-radius:6px;margin-bottom:40px;}
+.hero-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--blue-24);animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(40px,5.8vw,84px);line-height:1;letter-spacing:-0.025em;color:#fff;max-width:1100px;margin-bottom:36px;}
+.hero h1 .line-blue{color:#7ba9ff;font-weight:400;}
+.hero-opening{max-width:720px;color:rgba(255,255,255,0.72);font-size:19px;line-height:1.65;margin-bottom:44px;}
+.hero-cta-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;}
+.hero-cta-primary{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);font-family:var(--display);font-size:15px;padding:16px 28px;border-radius:999px;transition:background .2s,transform .2s;}
+.hero-cta-primary:hover{background:var(--blue-24);transform:translateY(-1px);}
+.hero-cta-primary svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+
+/* ========== Section shared ========== */
+.section-eyebrow{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;display:inline-block;}
+.section-h{font-family:var(--display);font-weight:300;font-size:clamp(32px,4.2vw,56px);line-height:1.08;letter-spacing:-0.02em;color:var(--ink);max-width:900px;margin-bottom:32px;}
+
+/* ========== Reality (scannable) ========== */
+.reality{padding:120px 0;background:var(--paper);border-bottom:1px solid var(--paper-line);}
+.reality-lede{max-width:820px;color:#3a3b40;font-family:var(--body);font-weight:400;font-size:22px;line-height:1.65;letter-spacing:0;margin-bottom:0;}
+.reality-lede em{color:var(--blue);font-style:normal;font-weight:500;}
+.reality-vignettes{display:grid;grid-template-columns:repeat(2,1fr);gap:20px 40px;margin-bottom:56px;max-width:1080px;}
+.reality-vg{display:flex;gap:18px;align-items:flex-start;padding:20px 0;border-top:1px solid var(--paper-line);}
+.reality-vg-role{flex-shrink:0;width:140px;font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);padding-top:2px;}
+.reality-vg-text{color:var(--ink-60);font-size:15.5px;line-height:1.6;}
+.reality-closing{max-width:820px;padding:28px 32px;background:var(--blue-06);border-left:3px solid var(--blue);border-radius:0 12px 12px 0;color:var(--ink);font-size:16.5px;line-height:1.65;}
+.reality-closing strong{color:var(--blue-strong);font-weight:500;}
+@media (max-width:800px){.reality-vignettes{grid-template-columns:1fr;gap:0;}.reality-vg{flex-direction:column;gap:6px;}.reality-vg-role{width:auto;}}
+
+/* ========== Processes carousel ========== */
+.processes{padding:120px 0;background:radial-gradient(70% 50% at 50% 45%, #0a2a6b 0%, #041232 45%, #02040f 100%);color:#fff;border-bottom:1px solid rgba(255,255,255,0.06);overflow:hidden;position:relative;}
+.processes .wrap{position:relative;z-index:1;}
+.processes .section-eyebrow{color:var(--blue-24);}
+.processes .section-h{color:#fff;}
+.carousel-wrap{margin-top:56px;position:relative;}
+.carousel-track{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 32px;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth;}
+.carousel-track::-webkit-scrollbar{display:none;}
+.process-card{flex:0 0 320px;background:#050f2a;border:1px solid rgba(179,208,255,0.10);border-radius:20px;padding:32px 28px;scroll-snap-align:start;transition:all .25s;display:flex;flex-direction:column;gap:16px;color:#fff;}
+.process-card:hover{background:#0a1c4a;border-color:var(--blue-24);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,100,255,0.15);}
+.process-icon{width:52px;height:52px;border-radius:14px;background:rgba(179,208,255,0.08);border:1px solid rgba(179,208,255,0.2);display:flex;align-items:center;justify-content:center;color:var(--blue-24);transition:all .3s;}
+.process-card:hover .process-icon{background:var(--blue);border-color:var(--blue);color:#fff;}
+.process-icon svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.process-name{font-family:var(--display);font-weight:500;font-size:18px;color:#fff;letter-spacing:-0.01em;line-height:1.35;}
+.process-desc{color:rgba(255,255,255,0.65);font-size:14.5px;line-height:1.65;}
+.carousel-controls{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:20px;}
+.carousel-progress{flex:1;height:2px;background:rgba(255,255,255,0.12);border-radius:2px;overflow:hidden;}
+.carousel-progress-fill{height:100%;background:var(--blue-24);width:20%;border-radius:2px;transition:width .3s ease;}
+.carousel-btns{display:flex;gap:10px;}
+.carousel-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;color:#fff;}
+.carousel-btn:hover{background:#fff;color:var(--ink);border-color:#fff;}
+.carousel-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
+.carousel-btn:disabled{opacity:.35;cursor:not-allowed;}
+
+/* ========== Value leaks - stacked color bars ========== */
+.leaks{padding:120px 0;background:var(--paper);border-bottom:1px solid var(--paper-line);}
+.leaks-stack{margin-top:56px;display:flex;flex-direction:column;gap:14px;}
+.leak-bar{position:relative;background:#fff;border:1px solid var(--blue-24);border-radius:14px;padding:32px 40px;cursor:pointer;transition:all .35s ease;color:var(--ink);overflow:hidden;}
+.leak-bar:hover, .leak-bar.open{border-color:var(--blue);}
+.leak-bar-row{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;}
+.leak-bar-num{font-family:var(--display);font-weight:500;font-size:13px;letter-spacing:.14em;color:var(--blue);min-width:36px;}
+.leak-bar-title{font-family:var(--display);font-weight:400;font-size:20px;letter-spacing:-0.01em;line-height:1.3;color:var(--ink);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.leak-bar-arrow{width:44px;height:44px;border-radius:50%;background:var(--blue-06);border:1px solid var(--blue-12);display:flex;align-items:center;justify-content:center;transition:all .3s;color:var(--blue);}
+.leak-bar-arrow svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .35s;}
+.leak-bar.open .leak-bar-arrow{background:var(--blue);border-color:var(--blue);color:#fff;}
+.leak-bar.open .leak-bar-arrow svg{transform:rotate(90deg);}
+.leak-bar-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.leak-bar.open .leak-bar-body{max-height:200px;}
+.leak-bar-detail{padding-top:20px;font-size:16px;line-height:1.7;max-width:720px;color:var(--ink-60);}
+.leak-bar.open{padding:36px 40px 40px;box-shadow:0 20px 40px rgba(0,100,255,0.06);}
+.leak-bar:hover{transform:translateX(4px);}
+.leak-bar.open:hover{transform:none;}
+.leak-tag{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;padding:6px 12px;border-radius:6px;background:var(--blue-06);color:var(--blue-strong);white-space:nowrap;}
+.leak-bar[data-tone="commercial"] .leak-tag{background:rgba(255,180,20,0.12);color:#8a5a10;}
+@media (max-width:700px){.leak-bar{padding:24px 22px;}.leak-bar-row{grid-template-columns:1fr auto;}.leak-bar-num{grid-column:1;grid-row:1;}.leak-bar-arrow{grid-row:1 / span 2;}.leak-bar-title{grid-column:1;font-size:17px;}}
+
+/* ========== Outcomes - compact tabs ========== */
+.outcomes{padding:120px 0;background:linear-gradient(180deg,#040814 0%,#000 100%);color:#fff;position:relative;overflow:hidden;}
+.outcomes::before{content:"";position:absolute;inset:0;background:radial-gradient(80% 60% at 20% 30%, rgba(0,100,255,0.15) 0%, transparent 60%),radial-gradient(70% 55% at 80% 70%, rgba(0,50,180,0.15) 0%, transparent 60%);pointer-events:none;}
+.outcomes .wrap{position:relative;z-index:1;}
+.outcomes .section-eyebrow{color:var(--blue-24);}
+.outcomes .section-h{color:#fff;}
+.outcomes-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:56px;}
+.outcome-tab{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:24px 22px;text-align:left;cursor:pointer;transition:all .25s;color:inherit;font-family:var(--body);display:flex;flex-direction:column;gap:8px;min-height:130px;}
+.outcome-tab:hover{background:rgba(255,255,255,0.06);border-color:rgba(179,208,255,0.3);}
+.outcome-tab.active{background:linear-gradient(180deg, rgba(0,100,255,0.15) 0%, rgba(0,100,255,0.05) 100%);border-color:var(--blue-24);box-shadow:0 12px 28px rgba(0,100,255,0.15);}
+.outcome-tab-num{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,0.5);text-transform:uppercase;}
+.outcome-tab.active .outcome-tab-num{color:var(--blue-24);}
+.outcome-tab-metric{font-family:var(--display);font-weight:400;font-size:22px;color:#fff;letter-spacing:-0.01em;line-height:1.15;}
+.outcome-tab-metric span{color:#7ba9ff;}
+.outcome-tab-title{font-family:var(--display);font-weight:400;font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.4;margin-top:auto;}
+.outcome-tab.active .outcome-tab-title{color:rgba(255,255,255,0.9);}
+.outcome-panel{margin-top:24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.10);border-radius:20px;padding:36px 40px;display:grid;grid-template-columns:repeat(3, 1fr);gap:36px;}
+.outcome-block .outcome-label{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-24);margin-bottom:10px;}
+.outcome-block .outcome-text{color:rgba(255,255,255,0.82);font-size:15px;line-height:1.65;}
+@media (max-width:900px){.outcomes-tabs{grid-template-columns:1fr 1fr;}.outcome-panel{grid-template-columns:1fr;gap:20px;padding:28px;}}
+@media (max-width:520px){.outcomes-tabs{grid-template-columns:1fr;}}
+
+/* ========== Pillars - white + light blue mix ========== */
+.pillars{padding:140px 0;background:linear-gradient(135deg, #ffffff 0%, #eef4ff 55%, #dbe9ff 100%);border-bottom:1px solid var(--paper-line);position:relative;overflow:hidden;}
+.pillars::before{content:"";position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle, rgba(0,100,255,0.10) 0%, transparent 65%);border-radius:50%;pointer-events:none;}
+.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px;position:relative;z-index:1;}
+.pillar-card{background:rgba(255,255,255,0.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(0,100,255,0.12);border-radius:20px;padding:32px 28px;transition:all .25s;display:flex;flex-direction:column;min-height:340px;position:relative;}
+.pillar-card:hover{background:#fff;border-color:var(--blue-24);box-shadow:0 20px 40px rgba(0,100,255,0.10);transform:translateY(-3px);}
+.pillar-num{font-family:var(--display);font-weight:300;font-size:64px;color:rgba(0,100,255,0.15);letter-spacing:-0.03em;line-height:1;margin-bottom:24px;transition:color .25s;}
+.pillar-card:hover .pillar-num{color:var(--blue);}
+.pillar-icon{width:48px;height:48px;border-radius:14px;background:transparent;border:1.5px solid var(--blue);display:flex;align-items:center;justify-content:center;color:var(--blue);margin-bottom:20px;transition:all .25s;}
+.pillar-card:hover .pillar-icon{background:var(--blue-06);border-color:var(--blue-strong);color:var(--blue-strong);}
+.pillar-icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.pillar-name{font-family:var(--display);font-weight:500;font-size:18px;color:var(--ink);letter-spacing:-0.01em;line-height:1.3;margin-bottom:12px;}
+.pillar-desc{color:var(--ink-60);font-size:14px;line-height:1.6;margin-top:auto;}
+@media (max-width:1000px){.pillars-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:600px){.pillars-grid{grid-template-columns:1fr;}}
+
+/* ========== Engagement - centered, AI-Ops dark navy ========== */
+.engagement{padding:140px 0;background:radial-gradient(120% 90% at 15% 0%, #0b1f52 0%, transparent 60%),radial-gradient(80% 60% at 100% 100%, #051033 0%, transparent 60%),linear-gradient(180deg,#040814 0%, #000 100%);color:#fff;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.06);}
+.engagement::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 40%, #000 40%, transparent 85%);animation:engGrid 40s linear infinite;pointer-events:none;}
+.engagement::after{content:"";position:absolute;width:520px;height:520px;left:calc(50% - 260px);top:-260px;background:radial-gradient(circle, rgba(0,100,255,.28) 0%, rgba(0,100,255,0) 65%);filter:blur(20px);animation:engGlow 18s ease-in-out infinite alternate;pointer-events:none;}
+@keyframes engGrid{from{background-position:0 0, 0 0;}to{background-position:64px 64px, 64px 64px;}}
+@keyframes engGlow{0%{transform:translate(0,0) scale(1);opacity:.9;}50%{transform:translate(-80px,60px) scale(1.08);opacity:.7;}100%{transform:translate(60px,-40px) scale(.95);opacity:1;}}
+.engagement .wrap{position:relative;z-index:1;}
+.engagement .section-eyebrow{color:var(--blue-24);justify-content:center;}
+.engagement .section-h{color:#fff;margin:0 auto 24px;text-align:center;}
+.engagement-body{max-width:720px;margin:0 auto;color:rgba(255,255,255,0.72);font-size:19px;line-height:1.75;}
+.engagement-body p{margin-bottom:16px;}
+.engagement-body strong{color:#fff;font-weight:500;}
+.engagement-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px;}
+.engagement-pill{background:rgba(255,255,255,0.06);border:1px solid rgba(179,208,255,0.25);color:#b3d0ff;font-family:var(--display);font-size:13.5px;padding:10px 20px;border-radius:999px;}
+
+/* ========== FAQ - accordion + side visual ========== */
+.faq{padding:140px 0;background:var(--paper);position:relative;overflow:hidden;}
+.faq::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,100,255,0.06) 1px, transparent 1px),linear-gradient(90deg, rgba(0,100,255,0.06) 1px, transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 40%, #000 0%, transparent 85%);-webkit-mask-image:radial-gradient(ellipse at 50% 40%, #000 0%, transparent 85%);pointer-events:none;}
+.faq .wrap{position:relative;z-index:1;}
+.faq-layout{display:grid;grid-template-columns:1fr 1.6fr;gap:80px;margin-top:24px;align-items:flex-start;}
+.faq-sidebar{position:sticky;top:120px;}
+.faq-title{font-family:var(--display);font-weight:300;font-size:clamp(36px,4.2vw,54px);line-height:1.05;color:var(--ink);letter-spacing:-0.02em;margin-bottom:20px;}
+.faq-title span{color:var(--blue);display:block;}
+.faq-side-text{color:var(--ink-60);font-size:15.5px;line-height:1.7;max-width:340px;}
+.faq-list{display:flex;flex-direction:column;gap:12px;}
+.faq-item{border:1px solid var(--paper-line);border-radius:16px;background:#fff;overflow:hidden;transition:all .25s;}
+.faq-item:hover{border-color:var(--blue-24);}
+.faq-item.open{border-color:var(--blue);background:var(--blue-06);box-shadow:0 20px 40px rgba(0,100,255,0.08);}
+.faq-q{width:100%;text-align:left;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;gap:24px;cursor:pointer;font-family:var(--display);font-weight:400;font-size:18px;color:var(--ink);letter-spacing:-0.01em;transition:color .2s;}
+.faq-item.open .faq-q{color:var(--blue-strong);font-weight:500;}
+.faq-icon{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--paper-dim);position:relative;transition:all .3s;}
+.faq-icon::before,.faq-icon::after{content:"";position:absolute;top:50%;left:50%;background:var(--ink);border-radius:2px;}
+.faq-icon::before{width:14px;height:2px;transform:translate(-50%,-50%);}
+.faq-icon::after{width:2px;height:14px;transform:translate(-50%,-50%);transition:transform .3s;}
+.faq-item.open .faq-icon{background:var(--blue);transform:rotate(180deg);}
+.faq-item.open .faq-icon::before,.faq-item.open .faq-icon::after{background:#fff;}
+.faq-item.open .faq-icon::after{transform:translate(-50%,-50%) scaleY(0);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.faq-a-inner{padding:0 28px 28px 28px;color:var(--ink-60);font-size:15.5px;line-height:1.75;max-width:640px;border-top:1px dashed var(--blue-24);padding-top:20px;margin-top:0;}
+.faq-item.open .faq-a{max-height:400px;}
+@media (max-width:900px){.faq-layout{grid-template-columns:1fr;gap:40px;}.faq-sidebar{position:static;}.faq-count{font-size:80px;}}
+
+/* ========== Connect (form) ========== */
+.connect{padding:120px 0;background:linear-gradient(135deg,#eef4ff 0%,#dbe9ff 100%);}
+.connect-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:flex-start;}
+.connect-heading{font-family:var(--display);font-weight:300;font-size:clamp(38px,4.6vw,64px);line-height:1.05;letter-spacing:-0.02em;color:var(--ink);margin-bottom:32px;}
+.connect-heading .accent{color:var(--blue);}
+.connect-sub{color:var(--ink);font-size:19px;line-height:1.55;max-width:340px;}
+.connect-form{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.connect-form .full{grid-column:1 / -1;}
+.form-field{background:#fff;border:1px solid transparent;border-radius:14px;padding:18px 22px;font-family:var(--body);font-size:15px;color:var(--ink);width:100%;transition:border-color .2s,box-shadow .2s;}
+.form-field::placeholder{color:var(--ink-40);}
+.form-field:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-12);}
+select.form-field{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2384868c' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 22px center;padding-right:48px;}
+textarea.form-field{resize:vertical;min-height:110px;font-family:var(--body);}
+.form-consent{grid-column:1 / -1;display:flex;align-items:flex-start;gap:12px;color:var(--ink-60);font-size:14px;line-height:1.55;padding:8px 4px;}
+.form-consent input{width:18px;height:18px;margin-top:2px;accent-color:var(--blue);flex-shrink:0;}
+.form-submit-row{grid-column:1 / -1;display:flex;justify-content:flex-end;margin-top:8px;}
+.form-submit{background:var(--blue);color:#fff;font-family:var(--body);font-size:15.5px;padding:14px 40px;border-radius:999px;border:none;cursor:pointer;transition:background .2s,transform .2s;}
+.form-submit:hover{background:var(--blue-strong);transform:translateY(-1px);}
+@media (max-width:900px){.connect-layout{grid-template-columns:1fr;gap:40px;}.connect-form{grid-template-columns:1fr;}}
+
+/* ========== Big Footer ========== */
+footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-size:14px;border-top:1px solid rgba(255,255,255,0.05);}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1.2fr 1fr;gap:48px;margin-bottom:56px;}
+.footer-brand{font-family:var(--display);font-weight:500;font-size:32px;color:#fff;letter-spacing:-0.02em;margin-bottom:20px;display:inline-flex;align-items:baseline;gap:2px;}
+.footer-brand .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block;transform:translateY(-14px);}
+.footer-tag{color:rgba(255,255,255,0.55);font-size:14.5px;line-height:1.65;max-width:280px;}
+.footer-col-title{font-family:var(--display);font-weight:500;font-size:17px;color:#fff;margin-bottom:20px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.footer-col a{color:rgba(255,255,255,0.55);transition:color .2s;font-size:14.5px;line-height:1.4;display:inline-block;}
+.footer-col a:hover{color:#fff;}
+.footer-divider{height:1px;background:rgba(255,255,255,0.08);margin:0 0 32px;}
+.footer-bottom{display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center;}
+.footer-social{display:flex;gap:12px;}
+.footer-social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.7);transition:all .2s;}
+.footer-social a:hover{background:var(--blue);color:#fff;}
+.footer-social svg{width:16px;height:16px;fill:currentColor;}
+.footer-legal{display:flex;gap:32px;color:rgba(255,255,255,0.55);font-size:13.5px;justify-content:center;}
+.footer-legal a{color:inherit;transition:color .2s;}
+.footer-legal a:hover{color:#fff;}
+.footer-copy{color:rgba(255,255,255,0.4);font-size:13px;text-align:right;line-height:1.5;}
+@media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px;}.footer-bottom{grid-template-columns:1fr;gap:20px;text-align:center;}.footer-legal{justify-content:center;flex-wrap:wrap;gap:20px;}.footer-copy{text-align:center;}}
+@media (max-width:560px){.footer-grid{grid-template-columns:1fr;}}
+
+@media (max-width:900px){
+  .wrap{padding:0 24px;}
+  .nav-links{display:none;}
+  .hero{padding:100px 0 80px;min-height:auto;}
+  .reality,.processes,.leaks,.pillars,.engagement,.faq,.connect{padding:80px 0;}
+  .outcomes-intro{padding:80px 0 40px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary navigation">
+  <div class="wrap">
+    <a href="index.html" class="nav-logo" aria-label="Searce home">Searce</a>
+    <ul class="nav-links">
+      <li><a href="#">Outcomes</a></li>
+      <li><a href="#">How we solve</a></li>
+      <li><a href="business-systems-engineering.html">Practices</a></li>
+      <li><a href="#">Problems</a></li>
+      <li><a href="#" class="current">Industries</a></li>
+      <li><a href="#">Insights</a></li>
+      <li class="has-dropdown">
+        <a href="#" aria-haspopup="true">Company
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <div class="mega-panel">
+          <a class="mega-item" href="who-we-are.html"><span class="mega-title">Who we are</span></a>
+          <a class="mega-item" href="#"><span class="mega-title">Partners</span></a>
+          <a class="mega-item" href="careers.html"><span class="mega-title">Careers</span></a>
+          <a class="mega-item" href="#"><span class="mega-title">futurify.ai</span></a>
+        </div>
+      </li>
+    </ul>
+    <a href="#connect" class="nav-cta">
+      bring us a problem
+      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ============== HERO (video BG) ============== -->
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="hero-video-fallback" aria-hidden="true"></div>
+  <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-hls-poster.jpg" aria-hidden="true">
+    <source src="assets/hero-hls.mp4" type="video/mp4">
+  </video>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-vignette" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-badge">
+      <span class="hero-badge-dot" aria-hidden="true"></span>
+      Healthcare and Life Sciences
+    </div>
+    <h1 id="hero-heading">
+      What should work<br>
+      <span class="line-blue">radically better</span> in healthcare<br>and life sciences?
+    </h1>
+    <div class="hero-opening">
+      <p>Clinicians, researchers, and revenue cycle teams operate under extreme regulatory oversight while battling siloed patient records, fragmented clinical workflows, and heavy administrative overhead. Every automated path must adhere strictly to HIPAA, FDA, and GDPR mandates.</p>
+    </div>
+    <div class="hero-cta-row">
+      <a href="#outcomes" class="hero-cta-primary">
+        See what Searce has changed
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== REALITY (scannable) ============== -->
+<section class="reality" aria-labelledby="reality-h">
+  <div class="wrap">
+    <div class="section-eyebrow">The operating reality</div>
+    <h2 id="reality-h" class="section-h">Care and discovery are constrained by how fast humans extract insights from unstructured medical text.</h2>
+
+    <p class="reality-lede">Clinicians spend up to <em>40% of their shifts navigating EHRs</em> and transcribing visits. Research teams wait months to find trial-eligible candidates in unstructured records, and revenue cycle teams fight high denial rates from manual coding errors, all under HIPAA, FDA, and GDPR.</p>
+  </div>
+</section>
+
+<!-- ============== PROCESSES (carousel with icons) ============== -->
+<section class="processes" aria-labelledby="processes-h">
+  <div class="wrap">
+    <div class="section-eyebrow">The processes this industry runs on</div>
+    <h2 id="processes-h" class="section-h">Ten workflows where clinical accuracy, patient safety, and regulatory auditability all have to hold at once.</h2>
+
+    <div class="carousel-wrap">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="process-card">
+          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M9 3h6l1 3h3v14H5V6h3l1-3z"/><path d="M9 12h6M9 16h4"/></svg></div>
+          <div class="process-name">Clinical Documentation &amp; Physician Scribing</div>
+          <div class="process-desc">Real-time consultation capture, transcript structuring, EHR chart entry, and physician sign-off.</div>
+        </div>
+        <div class="process-card">
+          <div class="process-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/><path d="M17 4l2 2 3-3"/></svg></div>
+          <div class="process-name">Clinical Trial Recruitment &amp; Enrollment</div>
+          <div class="process-desc">Patient cohort identification, protocol eligibility matching, and trial site onboarding.</div>
+        </div>
+        <div class="process-card">
+          <div class="process-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M15 16l2 2 3-3"/></svg></div>
+          <div class="process-name">Prior Authorization &amp; Insurance Verification</div>
+          <div class="process-desc">Patient eligibility checks, payer rule extraction, clinical evidence assembly, and submission.</div>
+        </div>
+        <div class="process-card">
+          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M17 6H9a3 3 0 000 6h6a3 3 0 010 6H6"/></svg></div>
+          <div class="process-name">Medical Billing &amp; Revenue Cycle Operations</div>
+          <div class="process-desc">Clinical chart coding, claim generation, denial triage, and appeal management.</div>
+        </div>
+        <div class="process-card">
+          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.4 8.5-8 9-4.6-.5-8-4.5-8-9V7l8-4z"/><path d="M12 8v4M12 15h.01"/></svg></div>
+          <div class="process-name">Pharmacovigilance &amp; Adverse Event Monitoring</div>
+          <div class="process-desc">Multi-channel intake, signal detection, safety case processing, and regulatory filing.</div>
+        </div>
+        <div class="process-card">
+          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M12 2v6M12 22v-6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M2 12h6M22 12h-6M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg></div>
+          <div class="process-name">Emergency Triage &amp; Patient Intake</div>
+          <div class="process-desc">Symptom processing, risk stratification, bed allocation, and care team routing.</div>
+        </div>
+        <div class="process-card">
+          <div class="process-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="12" cy="11" r="3"/><path d="M8 20h8"/></svg></div>
+          <div class="process-name">Medical Imaging &amp; Diagnostic Analysis</div>
+          <div class="process-desc">Image ingestion, preliminary anomaly detection, radiologist reporting, and priority tagging.</div>
+        </div>
+        <div class="process-card">
+          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H8l-5 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h8M8 13h5"/></svg></div>
+          <div class="process-name">Patient Engagement &amp; Care Coordination</div>
+          <div class="process-desc">Discharge instruction delivery, post-care follow-ups, remote monitoring, and appointment scheduling.</div>
+        </div>
+        <div class="process-card">
+          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5"/><path d="M9 14l2 2 4-4"/></svg></div>
+          <div class="process-name">Regulatory Submission &amp; Labeling Compliance</div>
+          <div class="process-desc">Dossier generation, cross-jurisdiction document translation, and FDA/EMA safety audit preparation.</div>
+        </div>
+        <div class="process-card">
+          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M10 2v6l-4 4v8h12v-8l-4-4V2"/><path d="M9 16h6"/></svg></div>
+          <div class="process-name">Lab Data Extraction &amp; Diagnostics Processing</div>
+          <div class="process-desc">Unstructured lab report ingestion, normalization, and EHR lab result sync.</div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-progress"><div class="carousel-progress-fill" id="carouselProgress"></div></div>
+        <div class="carousel-btns">
+          <button class="carousel-btn" id="carouselPrev" aria-label="Previous"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></button>
+          <button class="carousel-btn" id="carouselNext" aria-label="Next"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== VALUE LEAKS (flow diagram) ============== -->
+<section class="leaks" aria-labelledby="leaks-h">
+  <div class="wrap">
+    <div class="section-eyebrow">Where the value leaks</div>
+    <h2 id="leaks-h" class="section-h">Time bleeds between the clinical event and the decision that closes the case.</h2>
+    <div class="leaks-stack">
+      <div class="leak-bar open" data-tone="4">
+        <div class="leak-bar-row">
+          <div class="leak-bar-num">01 →</div>
+          <div class="leak-bar-title">Patient Intake to Clinical Charting <span class="leak-tag">Engineered</span></div>
+          <div class="leak-bar-arrow"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+        </div>
+        <div class="leak-bar-body"><div class="leak-bar-detail">How long physicians spend manually typing visit details into EHR systems instead of delivering patient care.</div></div>
+      </div>
+      <div class="leak-bar" data-tone="3">
+        <div class="leak-bar-row">
+          <div class="leak-bar-num">02 →</div>
+          <div class="leak-bar-title">Chart Review to Trial Eligibility Match <span class="leak-tag">Engineered</span></div>
+          <div class="leak-bar-arrow"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+        </div>
+        <div class="leak-bar-body"><div class="leak-bar-detail">Time required for research teams to manually read unstructured patient records to verify trial inclusion criteria.</div></div>
+      </div>
+      <div class="leak-bar" data-tone="2">
+        <div class="leak-bar-row">
+          <div class="leak-bar-num">03 →</div>
+          <div class="leak-bar-title">Claim Submission to Payer Decision <span class="leak-tag">Engineered</span></div>
+          <div class="leak-bar-arrow"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+        </div>
+        <div class="leak-bar-body"><div class="leak-bar-detail">Delays introduced by manual coding errors, missing clinical documentation, and claim rejection loops.</div></div>
+      </div>
+      <div class="leak-bar" data-tone="1">
+        <div class="leak-bar-row">
+          <div class="leak-bar-num">04 →</div>
+          <div class="leak-bar-title">Adverse Event Reporting Time <span class="leak-tag">Engineered</span></div>
+          <div class="leak-bar-arrow"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+        </div>
+        <div class="leak-bar-body"><div class="leak-bar-detail">Time elapsed between a recorded patient complaint or incident and its official pharmacovigilance safety log.</div></div>
+      </div>
+      <div class="leak-bar" data-tone="commercial">
+        <div class="leak-bar-row">
+          <div class="leak-bar-num">05 →</div>
+          <div class="leak-bar-title">Prior Authorization Hold Time <span class="leak-tag">Commercial</span></div>
+          <div class="leak-bar-arrow"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
+        </div>
+        <div class="leak-bar-body"><div class="leak-bar-detail">Mandated payer evaluation and review periods. Commercial, not engineered.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== OUTCOMES (compact tabs) ============== -->
+<section class="outcomes" id="outcomes" aria-labelledby="outcomes-h">
+  <div class="wrap">
+    <div class="section-eyebrow">What Searce has changed here</div>
+    <h2 id="outcomes-h" class="section-h">Four intervention points. Four locked metrics.</h2>
+
+    <div class="outcomes-tabs" role="tablist">
+      <button class="outcome-tab active" data-index="0" role="tab">
+        <div class="outcome-tab-num">01 / 04</div>
+        <div class="outcome-tab-metric"><span>70–80%</span> effort drop</div>
+        <div class="outcome-tab-title">Emergency Medical Documentation</div>
+      </button>
+      <button class="outcome-tab" data-index="1" role="tab">
+        <div class="outcome-tab-num">02 / 04</div>
+        <div class="outcome-tab-metric"><span>96.4%</span> accuracy</div>
+        <div class="outcome-tab-title">Medical Form Data Extraction</div>
+      </button>
+      <button class="outcome-tab" data-index="2" role="tab">
+        <div class="outcome-tab-num">03 / 04</div>
+        <div class="outcome-tab-metric"><span>50%</span> time compression</div>
+        <div class="outcome-tab-title">Protein Prediction Pipelines</div>
+      </button>
+      <button class="outcome-tab" data-index="3" role="tab">
+        <div class="outcome-tab-num">04 / 04</div>
+        <div class="outcome-tab-metric"><span>40%</span> cost drop</div>
+        <div class="outcome-tab-title">Healthcare API &amp; Cloud Scale</div>
+      </button>
+    </div>
+
+    <div class="outcome-panel" id="outcomePanel">
+      <div class="outcome-block"><div class="outcome-label">Baseline</div><div class="outcome-text" data-slot="baseline">Emergency room intake agents and supervisors spent hours manually transcribing and structuring patient documentation per shift.</div></div>
+      <div class="outcome-block"><div class="outcome-label">Intervention</div><div class="outcome-text" data-slot="intervention">Searce deployed an AI-driven documentation platform that automates intake transcription and chart assembly with real-time error checking.</div></div>
+      <div class="outcome-block"><div class="outcome-label">Result</div><div class="outcome-text" data-slot="result">Dropped manual documentation effort by a projected 70% to 80%, drastically increasing intake capacity.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PILLARS (white + light blue mix, icons) ============== -->
+<section class="pillars" aria-labelledby="pillars-h">
+  <div class="wrap">
+    <div class="section-eyebrow">What Searce engineers in healthcare and life sciences</div>
+    <h2 id="pillars-h" class="section-h">Four engineering practices, applied above your EHR and clinical systems of record.</h2>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div>
+        <div class="pillar-name">Business Systems Engineering</div>
+        <div class="pillar-desc">Rebuilds patient onboarding, clinical documentation, medical billing, and trial management workflows, replacing legacy operational tools.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
+        <div class="pillar-name">AI-Ready Platform Engineering</div>
+        <div class="pillar-desc">HIPAA/GDPR-compliant data platforms, unifying unstructured EHR records, lab reports, and imaging archives into search-ready context layers.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.4 8.5-8 9-4.6-.5-8-4.5-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="pillar-name">AI Trust &amp; Resilience Engineering</div>
+        <div class="pillar-desc">Deterministic safety guardrails, medical evaluation suites, and continuous audit trails required for FDA compliance and risk approvals.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><path d="M13 20c0-3 2.5-5 5-5s3 2 3 5"/></svg></div>
+        <div class="pillar-name">AI Adoption &amp; Change Engineering</div>
+        <div class="pillar-desc">Redesigns clinician, nurse, and researcher workflows around intelligent agentic tools. Adoption tracked by completed care tasks, not logins.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ENGAGEMENT (centered, dark AI-Ops style) ============== -->
+<section class="engagement" aria-labelledby="engagement-h">
+  <div class="wrap">
+    <h2 id="engagement-h" class="section-h">How an <span style="color:#7ba9ff">engagement starts</span></h2>
+    <div class="engagement-body">
+      <p>Outcome Discovery on one named process from the list above. Two to four weeks, fixed price, ending in a baseline metric assessment and a ranked opportunity matrix. Most healthcare and life sciences engagements start with clinical documentation, trial recruitment, or revenue cycle operations due to their high documentation volume and immediate ROI metrics.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FAQ (interesting layout) ============== -->
+<section class="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="faq-layout">
+      <div class="faq-sidebar">
+        <div class="faq-title">Frequently<br>Asked<br><span>Questions</span></div>
+        <div class="faq-side-text">The four questions every clinical, compliance, and IT function raises before an agentic workflow reaches the bedside.</div>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            How does Searce ensure HIPAA and patient privacy compliance in AI workflows?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Searce engineers zero-trust, privacy-first architectures where patient data never leaves the organization's enterprise boundary. All models run within encrypted, permission-aware environments with strict RBAC/ABAC controls and automated audit logging.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Can these AI models integrate directly with existing EHR systems like Epic or Cerner?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Searce works at the orchestration layer above core systems of record, connecting via HL7/FHIR interfaces and custom APIs without disrupting underlying healthcare infrastructure.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            How do you validate clinical accuracy and prevent hallucinations in care recommendations?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Every clinical agent operates with deterministic safety guardrails, mandatory human-in-the-loop validation gates for medical decisions, and real-time citation back to medical source documentation.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            How long does it take to deploy an AI workflow in a regulated clinical environment?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Discovery and architecture validation take two to four weeks. Production deployments typically ship within 8 to 12 weeks, running alongside existing processes for parallel verification before full operational handoff.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONNECT (form) ============== -->
+<section class="connect" id="connect">
+  <div class="wrap">
+    <div class="connect-layout">
+      <div>
+        <h2 class="connect-heading">what's the problem<br><span class="accent">worth solving?</span></h2>
+        <p class="connect-sub">Bring us a problem. We'll come back inside 24 hours.</p>
+      </div>
+      <form class="connect-form" onsubmit="event.preventDefault();">
+        <input class="form-field" type="text" placeholder="first name*" required>
+        <input class="form-field" type="text" placeholder="last name*" required>
+        <input class="form-field" type="text" placeholder="company name">
+        <input class="form-field" type="email" placeholder="work email*" required>
+        <select class="form-field" required>
+          <option value="IN">India (भारत)</option>
+          <option value="US">United States</option>
+          <option value="GB">United Kingdom</option>
+          <option value="SG">Singapore</option>
+          <option value="AE">United Arab Emirates</option>
+        </select>
+        <input class="form-field" type="tel" placeholder="+91" required>
+        <select class="form-field full" required>
+          <option value="">your title*</option>
+          <option>Chief Executive Officer</option>
+          <option>Chief Information Officer</option>
+          <option>Chief Technology Officer</option>
+          <option>Chief Medical Officer</option>
+          <option>Chief Medical Information Officer</option>
+          <option>Head of Clinical Operations</option>
+          <option>Head of Clinical Research</option>
+          <option>Head of Revenue Cycle</option>
+          <option>Head of Regulatory Affairs</option>
+          <option>Other</option>
+        </select>
+        <textarea class="form-field full" placeholder="please describe your query here*" required></textarea>
+        <label class="form-consent">
+          <input type="checkbox" required>
+          <span>yes, i'd like searce to contact me regarding cloud services and related offerings by email or telephone.*</span>
+        </label>
+        <div class="form-submit-row">
+          <button type="submit" class="form-submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">searce<span class="dot"></span></div>
+        <div class="footer-tag">Pushing the boundaries of tech innovation and designing end-to-end industry solutions for our clients at global scale</div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">services</div>
+        <ul>
+          <li><a href="#">cloud platform modernization</a></li>
+          <li><a href="#">cloud security &amp; reliability engineering</a></li>
+          <li><a href="#">modern work ops</a></li>
+          <li><a href="#">modern business ops</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">industries</div>
+        <ul>
+          <li><a href="financial-services-and-insurance.html">financial services &amp; insurance</a></li>
+          <li><a href="healthcare-and-life-sciences.html">healthcare &amp; life sciences</a></li>
+          <li><a href="#">travel, transportation &amp; logistics</a></li>
+          <li><a href="#">retail, CPG &amp; e-commerce</a></li>
+          <li><a href="#">telecommunication, media, entertainment &amp; gaming</a></li>
+          <li><a href="#">manufacturing, industrials &amp; construction</a></li>
+          <li><a href="#">technology, software &amp; services</a></li>
+          <li><a href="#">natural resources, energy &amp; utilities</a></li>
+          <li><a href="#">public sector &amp; education</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">insights</div>
+        <ul>
+          <li><a href="#">case studies</a></li>
+          <li><a href="#">events</a></li>
+          <li><a href="#">articles</a></li>
+          <li><a href="#">news</a></li>
+          <li><a href="who-we-are.html">about us</a></li>
+          <li><a href="careers.html">careers</a></li>
+          <li><a href="#connect">let's connect</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.5 0h4.37v1.92h.06c.61-1.16 2.1-2.38 4.32-2.38 4.62 0 5.48 3.04 5.48 6.99V22h-4.56v-6.28c0-1.5-.03-3.42-2.09-3.42-2.1 0-2.42 1.63-2.42 3.32V22H7.72V8z"/></svg></a>
+        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16.05 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.58-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 01-1.93.07 4.28 4.28 0 004 2.98 8.521 8.521 0 01-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16.05 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg></a>
+      </div>
+      <div class="footer-legal">
+        <a href="#">terms of service</a>
+        <a href="#">privacy policy</a>
+        <a href="#">legal</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Searce Technologies Inc.<br>all rights reserved</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Processes carousel */
+(function(){
+  const track = document.getElementById('carouselTrack');
+  const prev = document.getElementById('carouselPrev');
+  const next = document.getElementById('carouselNext');
+  const progress = document.getElementById('carouselProgress');
+  if(!track || !prev) return;
+  const cardWidth = () => (track.querySelector('.process-card').offsetWidth + 22);
+  const updateProgress = () => {
+    const max = track.scrollWidth - track.clientWidth;
+    const pct = max > 0 ? (track.scrollLeft / max) * 100 : 0;
+    progress.style.width = Math.max(8, Math.min(100, pct)) + '%';
+  };
+  prev.addEventListener('click', () => track.scrollBy({left: -cardWidth()*2, behavior:'smooth'}));
+  next.addEventListener('click', () => track.scrollBy({left: cardWidth()*2, behavior:'smooth'}));
+  track.addEventListener('scroll', updateProgress, {passive:true});
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+})();
+
+/* Value-leaks stacked accordion */
+document.querySelectorAll('.leak-bar').forEach(bar => {
+  bar.addEventListener('click', () => {
+    const open = bar.classList.contains('open');
+    document.querySelectorAll('.leak-bar.open').forEach(b => b.classList.remove('open'));
+    if (!open) bar.classList.add('open');
+  });
+});
+
+/* Outcomes tabs */
+(function(){
+  const tabs = document.querySelectorAll('.outcome-tab');
+  const panel = document.getElementById('outcomePanel');
+  if(!tabs.length || !panel) return;
+  const data = [
+    {baseline:"Emergency room intake agents and supervisors spent hours manually transcribing and structuring patient documentation per shift.",intervention:"Searce deployed an AI-driven documentation platform that automates intake transcription and chart assembly with real-time error checking.",result:"Dropped manual documentation effort by a projected 70% to 80%, drastically increasing intake capacity."},
+    {baseline:"Revenue cycle teams relied on manual keying to ingest CMS-1500 and UB-04 billing forms, yielding low processing speed and high error rates.",intervention:"Searce engineered an automated document processing pipeline tailored for complex healthcare claim formats.",result:"Achieved 96.4% extraction accuracy for CMS-1500 and 93.1% for UB-04 forms, eliminating manual data re-entry."},
+    {baseline:"Multi-hour computational sequences for monomer and multimer analysis throttled drug discovery timelines.",intervention:"Rebuilt the bio-analytics pipeline with multi-GPU inference and parallel execution on V100 GPU clusters.",result:"Cut protein prediction times by 50%; monomer analysis from 2 hours to 1 hour; multimer sequence processing from 9 hours to 8 hours."},
+    {baseline:"Legacy deployment architectures incurred high API consumption billing and lacked automated scaling for remote healthcare workers.",intervention:"Migrated services to serverless infrastructure with automated deployment via Artifact Registry and Cloud Run alongside token/request optimizations.",result:"Ensured 100% remote accessibility while reducing total API consumption and billing by 40%."}
+  ];
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const d = data[parseInt(tab.dataset.index,10)];
+    panel.querySelector('[data-slot="baseline"]').textContent = d.baseline;
+    panel.querySelector('[data-slot="intervention"]').textContent = d.intervention;
+    panel.querySelector('[data-slot="result"]').textContent = d.result;
+    panel.style.opacity = 0;
+    requestAnimationFrame(() => { panel.style.transition = 'opacity .3s ease'; panel.style.opacity = 1; });
+  }));
+})();
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded','false');
+    });
+    if (!open) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+});
+</script>
+
+</body>
+</html>

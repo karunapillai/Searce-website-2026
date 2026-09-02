@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V3 · Stepper — HLS</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#000;--ink-60:#54555a;--ink-40:#84868c;--paper:#fff;--paper-dim:#f6f7f9;--line:#e4e6ea;--blue:#0064ff;--blue-strong:#004ecc;--blue-06:#eef4ff;--blue-12:#dbe9ff;--blue-24:#b3d0ff;--yellow:#ffb414;--yellow-06:#fff8e6;--green:#0a8b5c;--green-06:#e6f9f0;--purple:#5b3ed0;--purple-06:#f2eeff;--display:'Poppins',system-ui,sans-serif;--body:system-ui,'Segoe UI',Roboto,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;background:none;border:none;cursor:pointer;color:inherit;}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;}
+
+.crumb{background:#fff;border-bottom:1px solid var(--line);padding:16px 0;font-size:13px;color:var(--ink-60);}
+.crumb a{color:var(--blue);}
+.crumb strong{color:var(--ink);font-weight:500;margin-left:8px;}
+
+.section{padding:56px 0 80px;background:#fff;border-bottom:1px solid var(--line);}
+.eyebrow{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);}
+.section-h{font-family:var(--display);font-weight:300;font-size:clamp(26px,3.2vw,42px);line-height:1.1;letter-spacing:-0.02em;color:var(--ink);max-width:900px;margin:12px 0 8px;}
+.section-sub{color:var(--ink-60);max-width:720px;font-size:15px;margin-bottom:32px;}
+
+/* Process picker */
+.p-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.p-tab{padding:9px 14px;font-family:var(--display);font-weight:400;font-size:13px;color:var(--ink-60);border:1px solid var(--line);border-radius:999px;background:#fff;transition:all .18s;}
+.p-tab:hover{border-color:var(--blue-24);color:var(--ink);}
+.p-tab.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+/* Process header block — light and minimal */
+.proc-head{margin-bottom:16px;}
+.proc-head .breakthrough{font-family:var(--display);font-weight:400;font-size:15px;color:var(--ink-60);letter-spacing:-0.005em;line-height:1.4;margin-bottom:10px;max-width:720px;}
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.kpi{background:var(--paper-dim);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:6px;font-family:var(--display);font-weight:500;font-size:12px;color:var(--ink);line-height:1.25;letter-spacing:-0.005em;}
+.kpi .arrow{font-weight:500;}
+.kpi .arrow.down::before{content:"↓";color:#0a8b5c;}
+.kpi .arrow.up::before{content:"↑";color:#0a8b5c;}
+
+/* Stepper */
+.stepper{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px;flex-wrap:wrap;}
+.stepper-dots{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.dot-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 8px;border-radius:8px;transition:all .2s;cursor:pointer;}
+.dot-btn .dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:11px;font-weight:500;color:var(--ink-40);transition:all .2s;}
+.dot-btn:hover .dot{border-color:var(--blue-24);color:var(--ink);}
+.dot-btn.active .dot{background:var(--blue);border-color:var(--blue);color:#fff;}
+.dot-btn.done .dot{background:var(--blue-24);border-color:var(--blue-24);color:#003a8f;}
+.dot-btn .n{display:none;}
+.step-arrows{display:flex;gap:6px;}
+.arrow-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:all .18s;background:#fff;}
+.arrow-btn:hover{border-color:var(--blue);color:var(--blue);}
+.arrow-btn:disabled{opacity:.35;cursor:not-allowed;}
+.arrow-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
+
+/* Focus card */
+.focus-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 26px;display:grid;grid-template-columns:1.4fr 1fr;gap:18px 24px;box-shadow:0 20px 40px rgba(10,20,40,0.04);}
+.focus-card .stage-title{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.focus-card .stage-title .num{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.22em;color:var(--ink-40);text-transform:uppercase;}
+.focus-card .stage-title .name{font-family:var(--display);font-weight:400;font-size:26px;letter-spacing:-0.02em;line-height:1.1;color:var(--ink);flex:1;min-width:200px;}
+.mode-flag{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;border-radius:999px;white-space:nowrap;}
+.mode-flag.autonomous{background:var(--blue-06);color:var(--blue-strong);}
+.mode-flag.handoff{background:var(--yellow-06);color:#8a5a10;}
+
+.block .lbl{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px;}
+.block.what .lbl{color:var(--ink-40);}
+.block.agent .lbl{color:var(--blue);}
+.block.human .lbl{color:#a97400;}
+.block.metric .lbl{color:var(--green);}
+.block.intel .lbl{color:var(--purple);}
+.block .primary{font-family:var(--display);font-weight:500;font-size:14.5px;color:var(--ink);line-height:1.35;letter-spacing:-0.005em;}
+.block .secondary{font-size:13px;color:var(--ink-60);line-height:1.55;margin-top:3px;}
+.block.what .primary{font-family:var(--display);font-weight:300;font-size:19px;letter-spacing:-0.01em;line-height:1.3;}
+.block.none .primary{color:var(--ink-40);font-weight:400;font-size:13px;}
+.block.what{grid-column:1 / -1;padding-bottom:10px;border-bottom:1px dashed var(--line);margin-bottom:2px;}
+.block.metric{grid-column:1 / -1;}
+.block.intel{grid-column:1 / -1;}
+.intel-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px;}
+.intel-chip{font-family:var(--display);font-size:12px;color:#3d2a80;padding:4px 10px;background:var(--purple-06);border:1px solid rgba(122,92,255,0.28);border-radius:999px;}
+
+/* Bottom: human oversight functions */
+.oversight{margin-top:16px;background:linear-gradient(180deg,#fff8e6 0%,#fff 100%);border:1px solid rgba(255,180,20,0.30);border-radius:18px;padding:18px 20px;}
+.oversight .lbl{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a5a10;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.oversight .lbl::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--yellow);}
+.oversight .caption{font-size:12.5px;color:var(--ink-60);margin-bottom:10px;line-height:1.5;max-width:640px;}
+.hf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.hf-card{background:#fff;border:1px solid rgba(255,180,20,0.24);border-radius:12px;padding:12px 14px;}
+.hf-card .role{font-family:var(--display);font-weight:500;font-size:13px;color:var(--ink);letter-spacing:-0.005em;}
+.hf-card .scope{font-size:12px;color:var(--ink-60);line-height:1.5;margin-top:3px;}
+
+/* Notes */
+.notes{background:var(--paper-dim);padding:64px 0;}
+.notes h3{font-family:var(--display);font-weight:400;font-size:22px;margin-bottom:20px;}
+.notes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.note{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;}
+.note .k{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.2em;color:var(--blue);text-transform:uppercase;}
+.note .t{font-family:var(--display);font-weight:400;font-size:14.5px;margin:6px 0 6px;letter-spacing:-0.01em;}
+.note .b{font-size:13px;color:var(--ink-60);line-height:1.55;}
+
+@media (max-width:900px){
+  .focus-card{grid-template-columns:1fr;}
+  .hf-grid{grid-template-columns:1fr;}
+  .kpi-strip{grid-template-columns:1fr 1fr;}
+  .notes-grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:560px){.notes-grid{grid-template-columns:1fr;}.proc-head .row{flex-direction:column;}}
+</style>
+</head>
+<body>
+
+<div class="crumb"><div class="wrap"><a href="hls-processes-storyboard.html">← Storyboard</a> <strong>Variation 03 · Stepper</strong></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow">The processes this industry runs on</div>
+    <h2 class="section-h">One stage at a time. Step through the process without losing the whole picture.</h2>
+    <p class="section-sub">The process header holds the outcome KPIs. Human oversight functions sit at the bottom, visible across every stage. In between, one focused stage card moves as you step.</p>
+
+    <div class="p-tabs" id="pTabs"></div>
+
+    <!-- Process header: breakthrough + light KPI strip -->
+    <div class="proc-head">
+      <div class="breakthrough" id="pBreak"></div>
+      <div class="kpi-strip" id="kpiStrip"></div>
+    </div>
+
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="stepper-dots" id="stepperDots"></div>
+      <div class="step-arrows">
+        <button class="arrow-btn" id="prevBtn" aria-label="Previous stage"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></button>
+        <button class="arrow-btn" id="nextBtn" aria-label="Next stage"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></button>
+      </div>
+    </div>
+
+    <!-- Focus card -->
+    <div class="focus-card" id="focusCard"></div>
+
+    <!-- Human oversight functions -->
+    <div class="oversight">
+      <div class="lbl">Human oversight functions · span the whole process</div>
+      <div class="caption">Cross-cutting roles that watch every stage. Distinct from the per-stage owner shown in the card above.</div>
+      <div class="hf-grid" id="hfGrid"></div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+const PROCESSES = [
+  {
+    name:"Medical Imaging & Diagnostic Analysis",
+    breakthrough:"AI reads the study before the radiologist opens it and prioritises the worklist.",
+    kpis:[
+      {m:"Read turnaround",dir:"down",note:"AI-prioritised worklist"},
+      {m:"Critical-finding call time",dir:"down",note:"Automated escalation"},
+      {m:"Radiologist capacity",dir:"up",note:"Priors and measurements at hand"},
+      {m:"Repeat scan rate",dir:"down",note:"Protocol and quality checks upstream"}
+    ],
+    intel:["Modality protocols","Prior imaging","Detection models","Patient history","Reporting lexicons","Care team roster"],
+    humanFunctions:[
+      {role:"Radiologist",scope:"Owns interpretation, sign-off, and critical-finding calls."},
+      {role:"Imaging AI Ops",scope:"Monitors detection quality, resolves routing exceptions, QA reports."},
+      {role:"Continuous Optimization",scope:"Tunes detection models, expands protocol coverage, model governance."}
+    ],
+    stages:[
+      {name:"Image Acquisition",what:"Study captured with protocol matched to the clinical order.",agent:{role:"Protocol Agent",desc:"Verifies protocol and image quality before release to PACS."},human:{role:"Technologist",desc:"Runs the scan, repositions on quality flags."},metric:"Repeat scan rate",intel:[0,3]},
+      {name:"Ingestion & Routing",what:"DICOM ingested to PACS and routed to the correct radiologist worklist.",agent:{role:"Routing Agent",desc:"Routes by modality, urgency, and subspecialty."},human:null,metric:"Ingestion latency",intel:[5]},
+      {name:"Preliminary Detection",what:"AI reads the study for anomalies before the radiologist opens it.",agent:{role:"Detection Agent",desc:"Flags nodules, hemorrhage, fractures, embolism."},human:null,metric:"Priority triage accuracy",intel:[1,2]},
+      {name:"Radiologist Review",what:"Radiologist opens the study and confirms or overrides AI findings.",agent:{role:"Comparison Agent",desc:"Surfaces prior studies and side-by-side measurements."},human:{role:"Radiologist",desc:"Owns interpretation."},metric:"Read turnaround",intel:[1,3]},
+      {name:"Structured Reporting",what:"Draft report composed with findings, impression, and recommendations.",agent:{role:"Reporting Agent",desc:"Drafts structured report from dictation using lexicons."},human:null,metric:"Report completeness",intel:[4]},
+      {name:"Sign-off",what:"Radiologist reviews the draft and signs the final report.",agent:null,human:{role:"Radiologist",desc:"Signs the final report."},metric:"Sign-off time",intel:[4]},
+      {name:"Critical Findings Communication",what:"Urgent findings escalated to the ordering clinician and tracked to acknowledgment.",agent:{role:"Notification Agent",desc:"Pages ordering physician, tracks acknowledgment, escalates on delay."},human:{role:"Radiologist",desc:"Confirms the critical finding call."},metric:"Time to communication",intel:[5]}
+    ]
+  },
+  {
+    name:"Clinical Documentation",
+    breakthrough:"Ambient scribing takes the note off the physician's desk and puts it in the EHR.",
+    kpis:[
+      {m:"Documentation time",dir:"down",note:"Ambient capture and drafting"},
+      {m:"Chart completeness",dir:"up",note:"Structured extraction"},
+      {m:"Post-visit lag",dir:"down",note:"Auto-write to EHR"},
+      {m:"Same-day sign-off",dir:"up",note:"Physician reviews a ready draft"}
+    ],
+    intel:["Medical terminology","Specialty templates","Chart history","EHR schema","Ambient audio","Sign-off policy"],
+    humanFunctions:[
+      {role:"Physician",scope:"Runs the encounter and signs the final note."},
+      {role:"Scribe Ops",scope:"Reviews low-confidence extractions, QA note quality by specialty."},
+      {role:"Continuous Optimization",scope:"Tunes extraction and drafting models per specialty."}
+    ],
+    stages:[
+      {name:"Patient Encounter",what:"Ambient capture of the clinician-patient conversation.",agent:{role:"Capture Agent",desc:"On-device audio capture with speaker separation."},human:{role:"Clinician",desc:"Conducts the encounter."},metric:"Capture fidelity",intel:[4]},
+      {name:"Clinical Extraction",what:"Symptoms, medications, and orders extracted from the transcript.",agent:{role:"Extraction Agent",desc:"Structures clinical entities and links to problem lists."},human:null,metric:"Recall",intel:[0,2]},
+      {name:"Note Generation",what:"Draft SOAP note assembled in specialty-appropriate format.",agent:{role:"Scribe Agent",desc:"Composes assessment and plan in physician voice."},human:null,metric:"Draft usability",intel:[1,2]},
+      {name:"EHR Update",what:"Note pushed to the EHR with structured coding and orders.",agent:{role:"EHR Agent",desc:"Writes to the EHR via FHIR."},human:null,metric:"Post-visit lag",intel:[3]},
+      {name:"Physician Sign-off",what:"Physician reviews, edits, and signs the final note.",agent:null,human:{role:"Physician",desc:"Owns the final note."},metric:"Sign-off time",intel:[5]}
+    ]
+  },
+  {
+    name:"Clinical Trial Recruitment",
+    breakthrough:"Protocol-to-patient in days, not months, without leaving the EHR estate.",
+    kpis:[
+      {m:"Time to first patient",dir:"down",note:"Criteria matched at ingestion"},
+      {m:"Screen-fail rate",dir:"down",note:"Chart-level pre-screen"},
+      {m:"Enrollment velocity",dir:"up",note:"Ranked shortlists"},
+      {m:"Site utilization",dir:"up",note:"Capacity-aware routing"}
+    ],
+    intel:["Protocol library","EHR cohort","Genomic registry","Consent forms","Contact history","Site directory"],
+    humanFunctions:[
+      {role:"Principal Investigator",scope:"Approves shortlist and endorses outreach."},
+      {role:"Study Coordinator",scope:"Owns consent and resolves screening ambiguity."},
+      {role:"Trial Ops",scope:"Monitors matching quality and expands cohort logic."}
+    ],
+    stages:[
+      {name:"Protocol Ingestion",what:"Trial protocol parsed for inclusion and exclusion criteria.",agent:{role:"Protocol Agent",desc:"Encodes criteria as queryable rules."},human:{role:"Clinical Scientist",desc:"Validates criteria interpretation."},metric:"Criteria coverage",intel:[0]},
+      {name:"Cohort Discovery",what:"Candidate patients identified across the EHR estate.",agent:{role:"Cohort Agent",desc:"Runs criteria across structured and unstructured data."},human:null,metric:"Cohort size",intel:[1,2]},
+      {name:"Patient Screening",what:"Chart-level screening against nuanced criteria.",agent:{role:"Screening Agent",desc:"Reads free-text notes and matches exclusions."},human:{role:"Study Coordinator",desc:"Resolves ambiguity."},metric:"Screen-fail rate",intel:[1]},
+      {name:"Eligibility Match",what:"Confirmed matches ranked by clinical fit and site capacity.",agent:{role:"Matching Agent",desc:"Ranks candidates by protocol fit."},human:{role:"PI",desc:"Approves the shortlist."},metric:"Match precision",intel:[5]},
+      {name:"Patient Outreach",what:"Approach patients through their provider or directly.",agent:{role:"Outreach Agent",desc:"Drafts consent-appropriate outreach."},human:{role:"Treating Physician",desc:"Endorses outreach."},metric:"Response rate",intel:[3,4]},
+      {name:"Enrollment",what:"Consented patients enrolled and scheduled.",agent:{role:"Enrollment Agent",desc:"Books visits and tracks retention."},human:{role:"Study Coordinator",desc:"Owns consent."},metric:"Time to first visit",intel:[3,5]}
+    ]
+  },
+  {
+    name:"Prior Authorization",
+    breakthrough:"Auth packets compiled with cited evidence before the request hits the payer portal.",
+    kpis:[
+      {m:"Auth turnaround",dir:"down",note:"Automated policy retrieval"},
+      {m:"First-pass approval",dir:"up",note:"Evidence cited upfront"},
+      {m:"Denial rate",dir:"down",note:"Policy-fit checks pre-submit"},
+      {m:"Care delay",dir:"down",note:"Live status tracking"}
+    ],
+    intel:["Payer policy library","Eligibility records","Clinical evidence","Payer portals","Auth history","Escalation playbook"],
+    humanFunctions:[
+      {role:"Auth Specialist",scope:"Spot-checks packets, intervenes on delays."},
+      {role:"Physician",scope:"Runs peer-to-peer reviews on escalations."},
+      {role:"Auth Ops",scope:"Tracks payer policy drift, tunes evidence retrieval."}
+    ],
+    stages:[
+      {name:"Eligibility Verification",what:"Coverage and benefits verified for the requested service.",agent:{role:"Eligibility Agent",desc:"Queries payer APIs and normalises response."},human:null,metric:"Verification accuracy",intel:[1]},
+      {name:"Requirement Identification",what:"Payer policy rules identified for the specific procedure.",agent:{role:"Policy Agent",desc:"Retrieves and interprets payer medical policy."},human:null,metric:"Policy fit",intel:[0]},
+      {name:"Evidence Retrieval",what:"Clinical records assembled to support medical necessity.",agent:{role:"Evidence Agent",desc:"Pulls chart notes, labs, imaging."},human:null,metric:"Evidence completeness",intel:[2]},
+      {name:"Auth Assembly",what:"Auth request compiled in payer-required format with cited evidence.",agent:{role:"Assembly Agent",desc:"Composes the auth packet."},human:{role:"Auth Specialist",desc:"Spot-checks packets."},metric:"First-pass approval",intel:[0,2]},
+      {name:"Payer Submission",what:"Auth submitted through the payer portal or fax.",agent:{role:"Submission Agent",desc:"Handles portal automation."},human:null,metric:"Submission latency",intel:[3]},
+      {name:"Status Monitoring",what:"Auth status tracked to decision.",agent:{role:"Monitoring Agent",desc:"Polls status, surfaces stalls, triggers follow-ups."},human:{role:"Specialist",desc:"Intervenes on delays."},metric:"Turnaround",intel:[3,4]},
+      {name:"Exception / Escalation",what:"Denials and peer-to-peer reviews handled.",agent:{role:"Escalation Agent",desc:"Prepares peer-to-peer briefs and appeal drafts."},human:{role:"Physician",desc:"Runs peer-to-peer review."},metric:"Overturn rate",intel:[4,5]}
+    ]
+  }
+];
+
+let currentProc=0, currentStage=0;
+
+function renderTabs(){
+  document.getElementById('pTabs').innerHTML = PROCESSES.map((p,i)=>
+    `<button class="p-tab ${i===currentProc?'active':''}" data-p="${i}">${p.name}</button>`
+  ).join('');
+  document.querySelectorAll('.p-tab').forEach(el=>el.addEventListener('click',()=>{
+    currentProc = parseInt(el.dataset.p,10); currentStage = 0; render();
+  }));
+}
+function renderHead(){
+  const p = PROCESSES[currentProc];
+  document.getElementById('pBreak').textContent = p.breakthrough;
+  document.getElementById('kpiStrip').innerHTML = p.kpis.map(k=>
+    `<div class="kpi">${k.m}<span class="arrow ${k.dir}"></span></div>`
+  ).join('');
+}
+function renderStepper(){
+  const p = PROCESSES[currentProc];
+  document.getElementById('stepperDots').innerHTML = p.stages.map((s,i)=>{
+    const cls = i===currentStage?'active':(i<currentStage?'done':'');
+    return `<button class="dot-btn ${cls}" data-s="${i}" title="Stage 0${i+1}: ${s.name}"><div class="dot">${i+1}</div></button>`;
+  }).join('');
+  document.querySelectorAll('.dot-btn').forEach(el=>el.addEventListener('click',()=>{
+    currentStage = parseInt(el.dataset.s,10); renderStepper(); renderFocus();
+  }));
+  document.getElementById('prevBtn').disabled = currentStage===0;
+  document.getElementById('nextBtn').disabled = currentStage===p.stages.length-1;
+}
+function renderFocus(){
+  const p = PROCESSES[currentProc];
+  const s = p.stages[currentStage];
+  const mode = s.human ? 'handoff' : 'autonomous';
+  const modeLabel = s.human ? 'Human hand-off in this stage' : 'Fully autonomous';
+  const agentBlock = s.agent ?
+    `<div class="block agent"><div class="lbl">Agent</div><div class="primary">${s.agent.role}</div><div class="secondary">${s.agent.desc}</div></div>` :
+    `<div class="block agent none"><div class="lbl">Agent</div><div class="primary">Human-owned stage</div></div>`;
+  const humanBlock = s.human ?
+    `<div class="block human"><div class="lbl">Per-stage human</div><div class="primary">${s.human.role}</div><div class="secondary">${s.human.desc}</div></div>` :
+    `<div class="block human none"><div class="lbl">Per-stage human</div><div class="primary">Autonomous · no routine human touch</div></div>`;
+  const chips = s.intel.map(i=>`<span class="intel-chip">${p.intel[i]}</span>`).join('');
+  document.getElementById('focusCard').innerHTML = `
+    <div class="stage-title">
+      <div>
+        <div class="num">Stage 0${currentStage+1} of 0${p.stages.length}</div>
+        <div class="name">${s.name}</div>
+      </div>
+      <div class="mode-flag ${mode}">${modeLabel}</div>
+    </div>
+    <div class="block what"><div class="lbl">What happens</div><div class="primary">${s.what}</div></div>
+    ${agentBlock}
+    ${humanBlock}
+    <div class="block metric"><div class="lbl">Stage metric</div><div class="primary">${s.metric}</div></div>
+    <div class="block intel"><div class="lbl">Intelligence used at this stage</div><div class="intel-chips">${chips}</div></div>
+  `;
+}
+function renderHF(){
+  const p = PROCESSES[currentProc];
+  document.getElementById('hfGrid').innerHTML = p.humanFunctions.map(h=>
+    `<div class="hf-card"><div class="role">${h.role}</div><div class="scope">${h.scope}</div></div>`
+  ).join('');
+}
+function render(){renderTabs();renderHead();renderStepper();renderFocus();renderHF();}
+
+document.getElementById('prevBtn').addEventListener('click',()=>{ if(currentStage>0){currentStage--;renderStepper();renderFocus();}});
+document.getElementById('nextBtn').addEventListener('click',()=>{ const n=PROCESSES[currentProc].stages.length; if(currentStage<n-1){currentStage++;renderStepper();renderFocus();}});
+document.addEventListener('keydown', e=>{
+  if(e.key==='ArrowLeft') document.getElementById('prevBtn').click();
+  if(e.key==='ArrowRight') document.getElementById('nextBtn').click();
+});
+render();
+</script>
+
+</body>
+</html>

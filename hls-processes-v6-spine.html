@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V6 · Process Spine — HLS</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050a1e;
+  --bg-2:#0a1230;
+  --ink:#fff;
+  --ink-70:rgba(255,255,255,0.72);
+  --ink-60:rgba(255,255,255,0.60);
+  --ink-40:rgba(255,255,255,0.40);
+  --ink-20:rgba(255,255,255,0.18);
+  --paper:#050a1e;
+  --line:rgba(255,255,255,0.10);
+  --blue:#7ba9ff;
+  --blue-strong:#b3d0ff;
+  --blue-06:rgba(123,169,255,0.10);
+  --blue-12:rgba(123,169,255,0.20);
+  --blue-24:rgba(179,208,255,0.32);
+  --yellow:#ffd582;
+  --yellow-ink:#ffd582;
+  --green:#7ee0b8;
+  --display:'Poppins',system-ui,sans-serif;
+  --body:system-ui,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;}
+
+.crumb{background:var(--bg-2);border-bottom:1px solid var(--line);padding:16px 0;font-size:13px;color:var(--ink-60);}
+.crumb a{color:var(--blue);}
+.crumb strong{color:var(--ink);font-weight:500;margin-left:8px;}
+
+.section{padding:56px 0 96px;background:var(--bg);}
+.eyebrow{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);}
+h2{font-family:var(--display);font-weight:300;font-size:clamp(26px,3.2vw,42px);line-height:1.1;letter-spacing:-0.02em;margin:12px 0 8px;max-width:900px;}
+.sub{color:var(--ink-60);max-width:720px;font-size:15px;margin-bottom:28px;}
+
+/* Process picker: underline nav, not tabs */
+.proc-nav{display:flex;flex-wrap:wrap;gap:6px 28px;margin-bottom:24px;font-family:var(--display);font-size:14.5px;color:var(--ink-40);border-bottom:1px solid var(--line);padding-bottom:14px;letter-spacing:-0.005em;}
+.proc-nav .p{cursor:pointer;padding:2px 0;position:relative;transition:color .18s;background:none;border:none;font-family:inherit;font-size:inherit;color:inherit;}
+.proc-nav .p:hover{color:var(--ink);}
+.proc-nav .p.active{color:var(--ink);font-weight:500;}
+.proc-nav .p.active::after{content:"";position:absolute;left:0;right:0;bottom:-15px;height:2px;background:var(--blue);}
+
+.breakthrough{font-family:var(--display);font-weight:300;font-size:22px;line-height:1.35;letter-spacing:-0.01em;color:var(--ink);max-width:820px;margin-bottom:28px;}
+
+/* SVG holder — scrolls on narrow screens */
+.spine-holder{overflow-x:auto;margin:0 -32px;padding:12px 32px 8px;scrollbar-width:none;}
+.spine-holder::-webkit-scrollbar{display:none;}
+svg#spine{min-width:1100px;width:100%;height:auto;display:block;}
+
+/* Legend text under the diagram */
+.legend{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);margin-top:8px;}
+.legend .l{display:inline-flex;align-items:center;gap:8px;}
+.legend .l::before{content:"";width:14px;height:2px;background:currentColor;display:inline-block;}
+.legend .l.agent{color:var(--blue);}
+.legend .l.human{color:var(--yellow-ink);}
+.legend .l.intel{color:#a58cff;}
+.legend .l.intel::before{border-top:2px dashed currentColor;background:transparent;height:0;}
+
+/* Detail as inline prose, no borders */
+.detail{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);max-width:900px;}
+.detail .stage-num-label{font-family:var(--display);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-40);}
+.detail .stage-title{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:-0.01em;margin:4px 0 12px;color:var(--ink);}
+.detail .what{font-family:var(--display);font-weight:300;font-size:18px;letter-spacing:-0.005em;line-height:1.45;color:var(--ink);margin-bottom:14px;max-width:720px;}
+.detail .line{padding:6px 0;font-size:14.5px;color:var(--ink);line-height:1.6;}
+.detail .k{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;margin-right:10px;display:inline-block;min-width:60px;}
+.detail .k.agent{color:var(--blue);}
+.detail .k.human{color:var(--yellow-ink);}
+.detail .k.metric{color:var(--green);}
+.detail .k.intel{color:var(--ink-40);}
+.detail .none{color:var(--ink-40);font-style:italic;}
+.detail .intel-inline{color:var(--ink-60);}
+.detail .intel-inline .item{display:inline-block;margin-right:14px;position:relative;padding-right:14px;}
+.detail .intel-inline .item::after{content:"·";position:absolute;right:0;color:var(--ink-40);}
+.detail .intel-inline .item:last-child::after{content:"";}
+
+/* Meta rows: KPIs + oversight as running text */
+.meta-row{margin-top:24px;padding-top:16px;border-top:1px dashed var(--line);font-family:var(--display);font-size:14px;color:var(--ink);line-height:1.85;}
+.meta-row .lbl{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-40);margin-right:16px;}
+.meta-row .item{display:inline-block;margin-right:22px;}
+.meta-row .arrow{color:var(--green);font-weight:500;margin-right:4px;}
+.meta-row.oversight .item .role{font-weight:500;color:var(--ink);}
+.meta-row.oversight .item .scope{color:var(--ink-60);font-size:12.5px;font-weight:400;margin-left:6px;}
+.meta-row.oversight .item{margin-right:28px;padding-right:0;}
+
+@media (max-width:900px){
+  .wrap{padding:0 20px;}
+  .spine-holder{margin:0 -20px;padding:12px 20px 8px;}
+  .proc-nav{gap:4px 18px;font-size:13.5px;}
+}
+</style>
+</head>
+<body>
+
+<div class="crumb"><div class="wrap"><a href="hls-processes-storyboard.html">← Storyboard</a> <strong>Variation 06 · Process Spine</strong></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow">The processes this industry runs on</div>
+    <h2>The process as a line. Agents run above it. People step in below.</h2>
+    <p class="sub">Click a point on the line to look inside a stage. The dashed line running underneath is the shared intelligence the whole process draws on.</p>
+
+    <nav class="proc-nav" id="procNav"></nav>
+
+    <p class="breakthrough" id="breakthrough"></p>
+
+    <div class="spine-holder">
+      <svg id="spine" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+
+    <div class="legend">
+      <span class="l agent">Agent</span>
+      <span class="l human">Human intervention</span>
+      <span class="l intel">Shared intelligence</span>
+    </div>
+
+    <div class="detail" id="detail"></div>
+
+    <div class="meta-row">
+      <span class="lbl">Outcomes</span>
+      <span id="kpis"></span>
+    </div>
+    <div class="meta-row oversight">
+      <span class="lbl">Watched across the process by</span>
+      <span id="oversight"></span>
+    </div>
+  </div>
+</section>
+
+<script>
+const PROCESSES = [
+  {
+    name:"Medical Imaging & Diagnostic Analysis",
+    breakthrough:"AI reads the study before the radiologist opens it and prioritises the worklist.",
+    kpis:[{m:"Read turnaround",dir:"down"},{m:"Critical-finding call",dir:"down"},{m:"Radiologist capacity",dir:"up"},{m:"Repeat scan rate",dir:"down"}],
+    humanFunctions:[{role:"Radiologist",scope:"Interpretation and sign-off."},{role:"Imaging AI Ops",scope:"Detection quality, exception routing, QA."},{role:"Continuous Optimization",scope:"Model tuning, protocol coverage."}],
+    intel:["Modality protocols","Prior imaging","Detection models","Patient history","Reporting lexicons","Care team roster"],
+    stages:[
+      {name:"Image Acquisition",what:"Study captured with protocol matched to the clinical order.",agent:{role:"Protocol Agent",desc:"Verifies protocol match and image quality."},human:{role:"Technologist",desc:"Runs the scan, repositions on quality flags."},metric:"Repeat scan rate",intel:[0,3]},
+      {name:"Ingestion & Routing",what:"DICOM ingested to PACS and routed to the correct worklist.",agent:{role:"Routing Agent",desc:"Routes by modality, urgency, and subspecialty."},human:null,metric:"Ingestion latency",intel:[5]},
+      {name:"Preliminary Detection",what:"AI reads the study for anomalies before the radiologist opens it.",agent:{role:"Detection Agent",desc:"Flags nodules, hemorrhage, fractures, embolism."},human:null,metric:"Priority triage accuracy",intel:[1,2]},
+      {name:"Radiologist Review",what:"Radiologist opens the study and confirms or overrides AI findings.",agent:{role:"Comparison Agent",desc:"Surfaces priors and side-by-side measurements."},human:{role:"Radiologist",desc:"Owns interpretation."},metric:"Read turnaround",intel:[1,3]},
+      {name:"Structured Reporting",what:"Draft report composed with findings and impression.",agent:{role:"Reporting Agent",desc:"Drafts structured report from dictation."},human:null,metric:"Report completeness",intel:[4]},
+      {name:"Sign-off",what:"Radiologist reviews the draft and signs the final report.",agent:null,human:{role:"Radiologist",desc:"Signs the final report."},metric:"Sign-off time",intel:[4]},
+      {name:"Critical Findings Communication",what:"Urgent findings escalated to the ordering clinician and tracked to acknowledgment.",agent:{role:"Notification Agent",desc:"Pages, tracks acknowledgment, escalates on delay."},human:{role:"Radiologist",desc:"Confirms the critical finding call."},metric:"Time to communication",intel:[5]}
+    ]
+  },
+  {
+    name:"Clinical Documentation",
+    breakthrough:"Ambient scribing takes the note off the physician's desk and puts it in the EHR.",
+    kpis:[{m:"Documentation time",dir:"down"},{m:"Chart completeness",dir:"up"},{m:"Post-visit lag",dir:"down"},{m:"Same-day sign-off",dir:"up"}],
+    humanFunctions:[{role:"Physician",scope:"Runs the encounter, signs the final note."},{role:"Scribe Ops",scope:"Reviews low-confidence extractions."},{role:"Continuous Optimization",scope:"Tunes models per specialty."}],
+    intel:["Medical terminology","Specialty templates","Chart history","EHR schema","Ambient audio","Sign-off policy"],
+    stages:[
+      {name:"Patient Encounter",what:"Ambient capture of the clinician-patient conversation.",agent:{role:"Capture Agent",desc:"On-device audio capture with speaker separation."},human:{role:"Clinician",desc:"Conducts the encounter."},metric:"Capture fidelity",intel:[4]},
+      {name:"Clinical Extraction",what:"Symptoms, medications, and orders extracted.",agent:{role:"Extraction Agent",desc:"Structures clinical entities."},human:null,metric:"Recall",intel:[0,2]},
+      {name:"Note Generation",what:"Draft SOAP note assembled in specialty format.",agent:{role:"Scribe Agent",desc:"Composes assessment and plan in physician voice."},human:null,metric:"Draft usability",intel:[1,2]},
+      {name:"EHR Update",what:"Note pushed to the EHR with codes.",agent:{role:"EHR Agent",desc:"Writes to the EHR via FHIR."},human:null,metric:"Post-visit lag",intel:[3]},
+      {name:"Physician Sign-off",what:"Physician reviews, edits, and signs the final note.",agent:null,human:{role:"Physician",desc:"Owns the final note."},metric:"Sign-off time",intel:[5]}
+    ]
+  },
+  {
+    name:"Clinical Trial Recruitment",
+    breakthrough:"Protocol-to-patient in days, not months, without leaving the EHR estate.",
+    kpis:[{m:"Time to first patient",dir:"down"},{m:"Screen-fail rate",dir:"down"},{m:"Enrollment velocity",dir:"up"},{m:"Site utilization",dir:"up"}],
+    humanFunctions:[{role:"Principal Investigator",scope:"Approves shortlist and outreach."},{role:"Study Coordinator",scope:"Owns consent, resolves ambiguity."},{role:"Trial Ops",scope:"Matching quality, cohort logic."}],
+    intel:["Protocol library","EHR cohort","Genomic registry","Consent forms","Contact history","Site directory"],
+    stages:[
+      {name:"Protocol Ingestion",what:"Trial protocol parsed for criteria.",agent:{role:"Protocol Agent",desc:"Encodes criteria as queryable rules."},human:{role:"Clinical Scientist",desc:"Validates interpretation."},metric:"Criteria coverage",intel:[0]},
+      {name:"Cohort Discovery",what:"Candidate patients identified across EHR estate.",agent:{role:"Cohort Agent",desc:"Runs criteria across structured and unstructured data."},human:null,metric:"Cohort size",intel:[1,2]},
+      {name:"Patient Screening",what:"Chart-level screening against nuanced criteria.",agent:{role:"Screening Agent",desc:"Reads notes for exclusions."},human:{role:"Study Coordinator",desc:"Resolves ambiguity."},metric:"Screen-fail rate",intel:[1]},
+      {name:"Eligibility Match",what:"Matches ranked by clinical fit and capacity.",agent:{role:"Matching Agent",desc:"Ranks candidates."},human:{role:"PI",desc:"Approves shortlist."},metric:"Match precision",intel:[5]},
+      {name:"Patient Outreach",what:"Approach patients through their provider.",agent:{role:"Outreach Agent",desc:"Drafts consent-appropriate outreach."},human:{role:"Treating Physician",desc:"Endorses outreach."},metric:"Response rate",intel:[3,4]},
+      {name:"Enrollment",what:"Consented patients enrolled and scheduled.",agent:{role:"Enrollment Agent",desc:"Books visits, tracks retention."},human:{role:"Study Coordinator",desc:"Owns consent."},metric:"Time to first visit",intel:[3,5]}
+    ]
+  },
+  {
+    name:"Prior Authorization",
+    breakthrough:"Auth packets compiled with cited evidence before the request hits the payer portal.",
+    kpis:[{m:"Auth turnaround",dir:"down"},{m:"First-pass approval",dir:"up"},{m:"Denial rate",dir:"down"},{m:"Care delay",dir:"down"}],
+    humanFunctions:[{role:"Auth Specialist",scope:"Spot-checks packets, intervenes on delays."},{role:"Physician",scope:"Peer-to-peer reviews."},{role:"Auth Ops",scope:"Payer policy drift, evidence tuning."}],
+    intel:["Payer policy library","Eligibility records","Clinical evidence","Payer portals","Auth history","Escalation playbook"],
+    stages:[
+      {name:"Eligibility Verification",what:"Coverage and benefits verified.",agent:{role:"Eligibility Agent",desc:"Queries payer APIs."},human:null,metric:"Verification accuracy",intel:[1]},
+      {name:"Requirement Identification",what:"Payer policy rules identified.",agent:{role:"Policy Agent",desc:"Interprets payer policy."},human:null,metric:"Policy fit",intel:[0]},
+      {name:"Evidence Retrieval",what:"Clinical records assembled.",agent:{role:"Evidence Agent",desc:"Pulls chart, labs, imaging."},human:null,metric:"Evidence completeness",intel:[2]},
+      {name:"Auth Assembly",what:"Auth packet composed with citations.",agent:{role:"Assembly Agent",desc:"Composes with citations."},human:{role:"Auth Specialist",desc:"Spot-checks packets."},metric:"First-pass approval",intel:[0,2]},
+      {name:"Payer Submission",what:"Submitted through payer portal.",agent:{role:"Submission Agent",desc:"Portal automation."},human:null,metric:"Latency",intel:[3]},
+      {name:"Status Monitoring",what:"Auth tracked to decision.",agent:{role:"Monitoring Agent",desc:"Polls and surfaces stalls."},human:{role:"Specialist",desc:"Intervenes on delays."},metric:"Turnaround",intel:[3,4]},
+      {name:"Escalation",what:"Peer-to-peer and appeals.",agent:{role:"Escalation Agent",desc:"Prepares briefs."},human:{role:"Physician",desc:"Runs peer-to-peer."},metric:"Overturn rate",intel:[4,5]}
+    ]
+  }
+];
+
+const W = 1200, H = 490;
+const padX = 110;
+const spanW = W - padX * 2;
+const spineY = 200;
+const agentEyebrowY = 78;
+const agentY = 108;
+const humanEyebrowY = 316;
+const humanY = 340;
+const intelEyebrowY = 400;
+const intelHighwayY = 395;
+const intelBaselineY = 440;
+const intelLabelY = 458;
+
+let currentProc = 0, currentStage = 0;
+
+function stageX(i, n){ return padX + (spanW / Math.max(n - 1, 1)) * i; }
+function intelXfn(i, total){ return padX + (spanW / Math.max(total - 1, 1)) * i; }
+
+function renderNav(){
+  document.getElementById('procNav').innerHTML = PROCESSES.map((p,i)=>
+    `<button class="p ${i===currentProc?'active':''}" data-p="${i}">${p.name}</button>`
+  ).join('');
+  document.querySelectorAll('.proc-nav .p').forEach(el=>el.addEventListener('click',()=>{
+    currentProc = parseInt(el.dataset.p,10); currentStage = 0; renderAll();
+  }));
+}
+
+
+function renderSpine(){
+  const p = PROCESSES[currentProc];
+  const n = p.stages.length;
+  const totalIntel = p.intel.length;
+  const svg = [];
+  const stagePositions = p.stages.map((_, i) => stageX(i, n));
+  const intelPositions = p.intel.map((_, i) => intelXfn(i, totalIntel));
+  const activeX = stagePositions[currentStage];
+  const activeStage = p.stages[currentStage];
+  const activeIntel = activeStage.intel;
+  const halo = 'paint-order: stroke fill; stroke: #050a1e; stroke-width: 4px; stroke-linejoin: round;';
+  const trunk = 'var(--blue)';
+  const trunkW = 1.5;
+
+  // 1. PASSIVE connectors (grey) for non-active stages
+  p.stages.forEach((s, i) => {
+    if (i === currentStage) return;
+    const x = stagePositions[i];
+    if (s.agent) svg.push(`<line x1="${x}" y1="${agentY+6}" x2="${x}" y2="${spineY-7}" stroke="var(--ink-20)" stroke-width="1"/>`);
+    if (s.human) svg.push(`<line x1="${x}" y1="${spineY+7}" x2="${x}" y2="${humanY-3}" stroke="var(--ink-20)" stroke-width="1"/>`);
+  });
+
+  // 2. ACTIVE trunk (blue, all orthogonal)
+  if (activeStage.agent) {
+    svg.push(`<line x1="${activeX}" y1="${agentY+6}" x2="${activeX}" y2="${spineY-7}" stroke="${trunk}" stroke-width="${trunkW}"/>`);
+  }
+  // vertical trunk down to deepest destination
+  let trunkBottom = spineY + 7;
+  if (activeIntel.length > 0) trunkBottom = intelHighwayY;
+  else if (activeStage.human) trunkBottom = humanY - 3;
+  if (trunkBottom > spineY + 7) {
+    svg.push(`<line x1="${activeX}" y1="${spineY+7}" x2="${activeX}" y2="${trunkBottom}" stroke="${trunk}" stroke-width="${trunkW}"/>`);
+  }
+  // horizontal highway to intel items + vertical drops
+  if (activeIntel.length > 0) {
+    const xs = activeIntel.map(i => intelPositions[i]).concat([activeX]);
+    const minX = Math.min(...xs);
+    const maxX = Math.max(...xs);
+    if (maxX - minX > 0.5) {
+      svg.push(`<line x1="${minX}" y1="${intelHighwayY}" x2="${maxX}" y2="${intelHighwayY}" stroke="${trunk}" stroke-width="${trunkW}"/>`);
+    }
+    activeIntel.forEach(i => {
+      const ix = intelPositions[i];
+      svg.push(`<line x1="${ix}" y1="${intelHighwayY}" x2="${ix}" y2="${intelBaselineY-4}" stroke="${trunk}" stroke-width="${trunkW}"/>`);
+    });
+  }
+
+  // 3. Spine (over the connectors)
+  svg.push(`<line x1="${padX-30}" y1="${spineY}" x2="${W-padX+30}" y2="${spineY}" stroke="var(--ink)" stroke-width="1.5"/>`);
+  svg.push(`<circle cx="${padX-30}" cy="${spineY}" r="3" fill="var(--ink)"/>`);
+  svg.push(`<polygon points="${W-padX+30},${spineY} ${W-padX+22},${spineY-4} ${W-padX+22},${spineY+4}" fill="var(--ink)"/>`);
+
+  // 4. Intel baseline (dashed) + tick marks — purple so the intel band is legible on dark
+  svg.push(`<line x1="${padX-30}" y1="${intelBaselineY}" x2="${W-padX+30}" y2="${intelBaselineY}" stroke="rgba(115,75,255,0.65)" stroke-width="1" stroke-dasharray="3 4"/>`);
+  p.intel.forEach((_, i) => {
+    const x = intelPositions[i];
+    const isActive = activeIntel.includes(i);
+    const strokeCol = isActive ? trunk : '#a58cff';
+    const w = isActive ? 1.5 : 1.2;
+    svg.push(`<line x1="${x}" y1="${intelBaselineY-4}" x2="${x}" y2="${intelBaselineY+4}" stroke="${strokeCol}" stroke-width="${w}"/>`);
+  });
+
+  // 5. Stage nodes on the spine
+  p.stages.forEach((s, i) => {
+    const x = stagePositions[i];
+    const isActive = i === currentStage;
+    const r = isActive ? 8 : 6;
+    const fill = isActive ? 'var(--blue)' : '#050a1e';
+    const stroke = isActive ? 'var(--blue)' : 'var(--ink)';
+    svg.push(`<circle cx="${x}" cy="${spineY}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>`);
+  });
+
+  // 6. LABELS with white halo (paint over lines so text knocks out)
+  svg.push(`<text x="${padX-38}" y="${agentEyebrowY}" font-family="Poppins,system-ui,sans-serif" font-size="9.5" letter-spacing="0.22em" fill="var(--ink-40)" style="${halo}">AGENTS</text>`);
+  svg.push(`<text x="${padX-38}" y="${humanEyebrowY}" font-family="Poppins,system-ui,sans-serif" font-size="9.5" letter-spacing="0.22em" fill="var(--ink-40)" style="${halo}">HUMANS</text>`);
+  svg.push(`<text x="${padX-38}" y="${intelEyebrowY}" font-family="Poppins,system-ui,sans-serif" font-size="9.5" letter-spacing="0.22em" fill="#a58cff" style="${halo}">SHARED INTELLIGENCE</text>`);
+
+  // agents
+  p.stages.forEach((s, i) => {
+    const x = stagePositions[i];
+    const isActive = i === currentStage;
+    if (s.agent) {
+      const fillCol = isActive ? 'var(--blue-strong)' : 'var(--ink-60)';
+      const weight = isActive ? 500 : 400;
+      const op = isActive ? 1 : 0.72;
+      svg.push(`<text x="${x}" y="${agentY}" text-anchor="middle" font-family="Poppins,system-ui,sans-serif" font-size="12.5" font-weight="${weight}" fill="${fillCol}" opacity="${op}" style="${halo}">${s.agent.role}</text>`);
+    } else if (isActive) {
+      svg.push(`<text x="${x}" y="${agentY}" text-anchor="middle" font-family="Poppins,system-ui,sans-serif" font-size="11" font-style="italic" fill="var(--ink-40)" style="${halo}">no agent</text>`);
+    }
+  });
+
+  // humans
+  p.stages.forEach((s, i) => {
+    const x = stagePositions[i];
+    const isActive = i === currentStage;
+    if (s.human) {
+      const fillCol = isActive ? 'var(--yellow-ink)' : 'var(--ink-60)';
+      const weight = isActive ? 500 : 400;
+      const op = isActive ? 1 : 0.72;
+      svg.push(`<text x="${x}" y="${humanY}" text-anchor="middle" font-family="Poppins,system-ui,sans-serif" font-size="12.5" font-weight="${weight}" fill="${fillCol}" opacity="${op}" style="${halo}">${s.human.role}</text>`);
+    }
+  });
+
+  // intel labels — purple tint when passive, brighter purple when active
+  p.intel.forEach((label, i) => {
+    const x = intelPositions[i];
+    const isActive = activeIntel.includes(i);
+    const fillCol = isActive ? '#d4c3ff' : '#a58cff';
+    const weight = isActive ? 500 : 400;
+    svg.push(`<text x="${x}" y="${intelLabelY}" text-anchor="middle" font-family="Poppins,system-ui,sans-serif" font-size="11" font-weight="${weight}" fill="${fillCol}" style="${halo}">${label}</text>`);
+  });
+
+  // stage numbers above nodes
+  p.stages.forEach((s, i) => {
+    const x = stagePositions[i];
+    const isActive = i === currentStage;
+    svg.push(`<text x="${x}" y="${spineY-16}" text-anchor="middle" font-family="Poppins,system-ui,sans-serif" font-size="10" letter-spacing="0.18em" fill="${isActive?'var(--blue-strong)':'var(--ink-40)'}" style="${halo}">0${i+1}</text>`);
+  });
+
+  // stage names below nodes
+  p.stages.forEach((s, i) => {
+    const x = stagePositions[i];
+    const isActive = i === currentStage;
+    const fillCol = isActive ? 'var(--blue-strong)' : 'var(--ink)';
+    const weight = isActive ? 500 : 400;
+    svg.push(`<text x="${x}" y="${spineY+26}" text-anchor="middle" font-family="Poppins,system-ui,sans-serif" font-size="13" font-weight="${weight}" fill="${fillCol}" style="${halo}">${s.name}</text>`);
+  });
+
+  // 7. Invisible hit targets on top
+  p.stages.forEach((s, i) => {
+    const x = stagePositions[i];
+    svg.push(`<circle class="node-hit" data-stage="${i}" cx="${x}" cy="${spineY}" r="22" fill="transparent" style="cursor:pointer;"/>`);
+  });
+
+  document.getElementById('spine').innerHTML = svg.join('');
+  document.querySelectorAll('#spine .node-hit').forEach(el => {
+    el.addEventListener('click', () => {
+      currentStage = parseInt(el.dataset.stage, 10);
+      renderSpine();
+      renderDetail();
+    });
+  });
+}
+
+function renderBreakthrough(){
+  document.getElementById('breakthrough').textContent = PROCESSES[currentProc].breakthrough;
+}
+
+function renderDetail(){
+  const p = PROCESSES[currentProc];
+  const s = p.stages[currentStage];
+  const agentLine = s.agent
+    ? `<span class="k agent">Agent</span>${s.agent.role} · <span class="intel-inline">${s.agent.desc}</span>`
+    : `<span class="k agent">Agent</span><span class="none">no agent — human-owned stage</span>`;
+  const humanLine = s.human
+    ? `<span class="k human">Human</span>${s.human.role} · <span class="intel-inline">${s.human.desc}</span>`
+    : `<span class="k human">Human</span><span class="none">fully autonomous, no routine human step</span>`;
+  const intelItems = s.intel.map(i => `<span class="item">${p.intel[i]}</span>`).join('');
+  document.getElementById('detail').innerHTML = `
+    <div class="stage-num-label">Stage 0${currentStage+1} of 0${p.stages.length}</div>
+    <div class="stage-title">${s.name}</div>
+    <div class="what">${s.what}</div>
+    <div class="line">${agentLine}</div>
+    <div class="line">${humanLine}</div>
+    <div class="line"><span class="k metric">Metric</span>${s.metric}</div>
+    <div class="line"><span class="k intel">Draws on</span><span class="intel-inline">${intelItems}</span></div>
+  `;
+}
+
+function renderKpis(){
+  const p = PROCESSES[currentProc];
+  document.getElementById('kpis').innerHTML = p.kpis.map(k =>
+    `<span class="item"><span class="arrow">${k.dir==='up'?'↑':'↓'}</span>${k.m}</span>`
+  ).join('');
+}
+
+function renderOversight(){
+  const p = PROCESSES[currentProc];
+  document.getElementById('oversight').innerHTML = p.humanFunctions.map(h =>
+    `<span class="item"><span class="role">${h.role}</span><span class="scope">${h.scope}</span></span>`
+  ).join('');
+}
+
+function renderAll(){renderNav();renderBreakthrough();renderSpine();renderDetail();renderKpis();renderOversight();}
+renderAll();
+
+document.addEventListener('keydown', e=>{
+  const p = PROCESSES[currentProc];
+  if (e.key === 'ArrowLeft' && currentStage > 0){ currentStage--; renderSpine(); renderDetail(); }
+  if (e.key === 'ArrowRight' && currentStage < p.stages.length - 1){ currentStage++; renderSpine(); renderDetail(); }
+});
+</script>
+
+</body>
+</html>

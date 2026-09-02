@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V1 · Process Explorer — HLS</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#000;--ink-60:#54555a;--ink-40:#84868c;--paper:#fff;--paper-dim:#f6f7f9;--line:#e4e6ea;--blue:#0064ff;--blue-strong:#004ecc;--blue-06:#eef4ff;--blue-12:#dbe9ff;--blue-24:#b3d0ff;--yellow:#ffb414;--display:'Poppins',system-ui,sans-serif;--body:system-ui,'Segoe UI',Roboto,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;background:none;border:none;cursor:pointer;color:inherit;}
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px;}
+
+.crumb{background:#fff;border-bottom:1px solid var(--line);padding:16px 0;font-size:13px;color:var(--ink-60);}
+.crumb a{color:var(--blue);}
+.crumb strong{color:var(--ink);font-weight:500;margin-left:8px;}
+
+.section{background:radial-gradient(70% 50% at 50% 40%, #0a2a6b 0%, #041232 45%, #02040f 100%);color:#fff;padding:100px 0 120px;position:relative;overflow:hidden;}
+.eyebrow{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-24);}
+.section-h{font-family:var(--display);font-weight:300;font-size:clamp(30px,3.8vw,50px);line-height:1.1;letter-spacing:-0.02em;color:#fff;max-width:900px;margin:20px 0 12px;}
+.section-sub{color:rgba(255,255,255,0.65);max-width:720px;font-size:16px;margin-bottom:48px;}
+
+/* Process tabs */
+.p-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:56px;border-bottom:1px solid rgba(255,255,255,0.10);padding-bottom:12px;}
+.p-tab{padding:14px 20px;font-family:var(--display);font-weight:400;font-size:14.5px;color:rgba(255,255,255,0.55);border-bottom:2px solid transparent;transition:all .2s;letter-spacing:-0.005em;}
+.p-tab:hover{color:#fff;}
+.p-tab.active{color:#fff;border-bottom-color:var(--blue-24);}
+.p-tab .idx{display:inline-block;font-size:11px;color:rgba(255,255,255,0.35);margin-right:8px;letter-spacing:.16em;}
+.p-tab.active .idx{color:var(--blue-24);}
+
+/* Outcome anchor */
+.outcome-anchor{display:flex;align-items:center;gap:14px;background:rgba(179,208,255,0.06);border:1px solid rgba(179,208,255,0.18);padding:14px 20px;border-radius:12px;margin-bottom:40px;}
+.outcome-anchor .lbl{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-24);white-space:nowrap;}
+.outcome-anchor .val{color:#fff;font-size:15px;}
+
+/* Lifecycle track */
+.lifecycle{position:relative;padding:8px 0 40px;overflow-x:auto;scrollbar-width:none;}
+.lifecycle::-webkit-scrollbar{display:none;}
+.lc-track{display:flex;align-items:stretch;gap:0;min-width:min-content;}
+.lc-node{flex:0 0 auto;position:relative;padding:0 8px;}
+.lc-node-btn{width:180px;height:120px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:14px;padding:16px 14px;text-align:left;transition:all .2s;position:relative;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;gap:8px;}
+.lc-node-btn:hover{background:rgba(179,208,255,0.10);border-color:var(--blue-24);}
+.lc-node.active .lc-node-btn{background:linear-gradient(180deg,rgba(0,100,255,0.28) 0%,rgba(0,100,255,0.08) 100%);border-color:var(--blue-24);box-shadow:0 20px 40px rgba(0,100,255,0.18);}
+.lc-stage-num{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.22em;color:rgba(255,255,255,0.45);}
+.lc-node.active .lc-stage-num{color:var(--blue-24);}
+.lc-stage-name{font-family:var(--display);font-weight:400;font-size:15px;line-height:1.3;color:#fff;letter-spacing:-0.01em;}
+.lc-stage-flags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.lc-flag{font-family:var(--display);font-size:9.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+.lc-flag.a{background:rgba(0,100,255,0.22);color:#b3d0ff;}
+.lc-flag.h{background:rgba(255,180,20,0.14);color:#ffd582;}
+.lc-arrow{align-self:center;color:rgba(255,255,255,0.25);font-family:var(--display);font-size:14px;padding:0 4px;flex-shrink:0;}
+.lc-node.active + .lc-arrow, .lc-node.active .lc-arrow{color:var(--blue-24);}
+
+/* Detail panel */
+.detail{margin-top:24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.10);border-radius:20px;padding:36px 40px;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:36px;}
+.d-col h4{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-24);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.d-col h4 .dot{width:6px;height:6px;border-radius:50%;background:var(--blue-24);}
+.d-col.human h4{color:#ffd582;}
+.d-col.human h4 .dot{background:var(--yellow);}
+.d-col.outcome h4{color:#7ee0b8;}
+.d-col.outcome h4 .dot{background:#7ee0b8;}
+.d-what{color:#fff;font-size:17px;line-height:1.55;margin-bottom:20px;font-family:var(--display);font-weight:300;letter-spacing:-0.01em;}
+.d-agent-name{font-family:var(--display);font-weight:500;font-size:15px;color:#fff;margin-bottom:6px;}
+.d-agent-body,.d-body{color:rgba(255,255,255,0.72);font-size:14.5px;line-height:1.6;}
+.d-outcome-metric{font-family:var(--display);font-weight:400;font-size:22px;color:#7ee0b8;letter-spacing:-0.01em;line-height:1.15;}
+
+/* Shared intelligence bar */
+.intel-bar{margin-top:24px;background:rgba(126,224,184,0.04);border:1px dashed rgba(126,224,184,0.30);border-radius:20px;padding:22px 28px;}
+.intel-title{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#7ee0b8;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.intel-title::before{content:"";width:8px;height:8px;border-radius:50%;background:#7ee0b8;box-shadow:0 0 12px rgba(126,224,184,0.6);}
+.intel-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.intel-chip{font-family:var(--display);font-size:12.5px;color:rgba(255,255,255,0.75);padding:6px 12px;background:rgba(126,224,184,0.08);border:1px solid rgba(126,224,184,0.24);border-radius:999px;transition:all .2s;}
+.intel-chip.active{background:rgba(126,224,184,0.20);color:#fff;border-color:#7ee0b8;}
+
+/* Interaction notes */
+.notes{background:var(--paper-dim);padding:80px 0;border-top:1px solid var(--line);}
+.notes h3{font-family:var(--display);font-weight:400;font-size:22px;margin-bottom:24px;}
+.notes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.note{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;}
+.note .k{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.2em;color:var(--blue);text-transform:uppercase;}
+.note .t{font-family:var(--display);font-weight:400;font-size:15px;margin:6px 0 8px;letter-spacing:-0.01em;}
+.note .b{font-size:13.5px;color:var(--ink-60);line-height:1.6;}
+
+/* Process header with breakthrough + multi-KPI (added) */
+.proc-hero{background:rgba(255,255,255,0.04);border:1px solid rgba(179,208,255,0.14);border-radius:16px;padding:18px 22px;margin-bottom:20px;}
+.proc-hero .lbl{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.22em;color:var(--blue-24);text-transform:uppercase;}
+.proc-hero .breakthrough{font-family:var(--display);font-weight:400;font-size:17px;letter-spacing:-0.01em;margin-top:4px;color:#fff;max-width:640px;line-height:1.35;}
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px;}
+.kpi{background:rgba(255,255,255,0.05);border:1px solid rgba(179,208,255,0.16);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:6px;font-family:var(--display);font-weight:500;font-size:11.5px;color:#fff;line-height:1.3;letter-spacing:-0.005em;}
+.kpi .arrow{color:#7ee0b8;font-weight:500;}
+.kpi .arrow.down::before{content:"↓";} .kpi .arrow.up::before{content:"↑";}
+
+/* Human oversight functions strip (added) */
+.oversight{margin-top:20px;background:rgba(255,180,20,0.06);border:1px solid rgba(255,180,20,0.22);border-radius:16px;padding:18px 22px;}
+.oversight .lbl{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#ffd582;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.oversight .lbl::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--yellow);}
+.oversight .caption{font-size:12.5px;color:rgba(255,255,255,0.60);margin-bottom:12px;line-height:1.5;max-width:640px;}
+.hf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.hf-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,180,20,0.20);border-radius:10px;padding:12px 14px;}
+.hf-card .role{font-family:var(--display);font-weight:500;font-size:13px;color:#fff;letter-spacing:-0.005em;}
+.hf-card .scope{font-size:12px;color:rgba(255,255,255,0.60);line-height:1.5;margin-top:3px;}
+
+@media (max-width:900px){
+  .detail{grid-template-columns:1fr;gap:24px;padding:28px;}
+  .notes-grid{grid-template-columns:1fr 1fr;}
+  .p-tab{padding:10px 14px;font-size:13.5px;}
+  .lc-node-btn{width:150px;}
+  .kpi-strip{grid-template-columns:1fr 1fr;}
+  .hf-grid{grid-template-columns:1fr;}
+}
+@media (max-width:560px){.notes-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="crumb"><div class="wrap"><a href="hls-processes-storyboard.html">← Storyboard</a> <strong>Variation 01 · Process Explorer</strong></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow">The processes this industry runs on</div>
+    <h2 class="section-h">Five processes. Pick one and look inside how it actually runs.</h2>
+    <p class="section-sub">Each process is a lifecycle. Each stage has an agent, sometimes a human, and always a shared intelligence layer running underneath.</p>
+
+    <!-- Process tabs -->
+    <div class="p-tabs" role="tablist" id="pTabs">
+      <button class="p-tab active" data-proc="0"><span class="idx">01</span>Medical Imaging &amp; Diagnostic Analysis</button>
+      <button class="p-tab" data-proc="1"><span class="idx">02</span>Clinical Documentation</button>
+      <button class="p-tab" data-proc="2"><span class="idx">03</span>Clinical Trial Recruitment</button>
+      <button class="p-tab" data-proc="3"><span class="idx">04</span>Prior Authorization</button>
+    </div>
+
+    <!-- Process hero: breakthrough + KPIs (replaces the single-line outcome anchor) -->
+    <div class="proc-hero">
+      <div class="lbl">Selected process · breakthrough</div>
+      <div class="breakthrough" id="procBreak"></div>
+      <div class="kpi-strip" id="procKpis"></div>
+    </div>
+
+    <!-- Lifecycle -->
+    <div class="lifecycle">
+      <div class="lc-track" id="lcTrack"><!-- injected --></div>
+    </div>
+
+    <!-- Detail panel -->
+    <div class="detail" id="detail">
+      <div class="d-col">
+        <h4><span class="dot"></span>Stage · what happens</h4>
+        <div class="d-what" data-slot="what"></div>
+        <h4 style="margin-top:8px;"><span class="dot"></span>Agentic execution</h4>
+        <div class="d-agent-name" data-slot="agent"></div>
+        <div class="d-agent-body" data-slot="agent_does"></div>
+      </div>
+      <div class="d-col human">
+        <h4><span class="dot"></span>Human in the loop</h4>
+        <div class="d-body" data-slot="human"></div>
+      </div>
+      <div class="d-col outcome">
+        <h4><span class="dot"></span>Stage metric</h4>
+        <div class="d-outcome-metric" data-slot="outcome"></div>
+      </div>
+    </div>
+
+    <!-- Shared intelligence -->
+    <div class="intel-bar">
+      <div class="intel-title">Shared intelligence, persistent across every stage</div>
+      <div class="intel-chips" id="intelChips"><!-- injected --></div>
+    </div>
+
+    <!-- Human oversight functions (cross-cutting, added) -->
+    <div class="oversight">
+      <div class="lbl">Human oversight functions · span the whole process</div>
+      <div class="caption">Distinct from the per-stage human shown in the detail above. These roles watch every stage.</div>
+      <div class="hf-grid" id="hfGrid"></div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+const PROCESSES = [
+  {
+    name:"Medical Imaging &amp; Diagnostic Analysis",
+    breakthrough:"AI reads the study before the radiologist opens it and prioritises the worklist.",
+    kpis:[{m:"Read turnaround",dir:"down"},{m:"Critical-finding call",dir:"down"},{m:"Radiologist capacity",dir:"up"},{m:"Repeat scan rate",dir:"down"}],
+    humanFunctions:[{role:"Radiologist",scope:"Interpretation, sign-off, and critical-finding calls."},{role:"Imaging AI Ops",scope:"Detection quality monitoring, exception routing, report QA."},{role:"Continuous Optimization",scope:"Detection model tuning, protocol coverage, model governance."}],
+    intel:["Modality protocols","Prior imaging","Detection models","Patient history","Reporting lexicons","Care team roster"],
+    stages:[
+      {name:"Image Acquisition",what:"Study captured on the modality with protocol matched to the clinical order.",agent:"Protocol Agent",agent_does:"Verifies protocol matches the indication, checks image quality before release to PACS.",human:"Technologist runs the scan and repositions on quality flags.",outcome:"Repeat scan rate",intel:[0,3],hasHuman:true},
+      {name:"Ingestion &amp; Routing",what:"DICOM series ingested to PACS and routed to the correct radiologist worklist.",agent:"Routing Agent",agent_does:"Routes by modality, urgency, and subspecialty against worklist rules.",human:"None routinely.",outcome:"Ingestion latency",intel:[5],hasHuman:false},
+      {name:"Preliminary Detection",what:"AI reads the study for anomalies before the radiologist opens it.",agent:"Detection Agent",agent_does:"Flags nodules, hemorrhage, fractures, or embolism and prioritises the worklist.",human:"None.",outcome:"Priority triage accuracy",intel:[1,2],hasHuman:false},
+      {name:"Radiologist Review",what:"Radiologist opens the study and confirms or overrides the AI findings.",agent:"Comparison Agent",agent_does:"Surfaces prior studies and side-by-side measurements to speed interpretation.",human:"Radiologist owns the interpretation.",outcome:"Read turnaround",intel:[1,3],hasHuman:true},
+      {name:"Structured Reporting",what:"Draft report composed with findings, impression, and recommendations.",agent:"Reporting Agent",agent_does:"Drafts a structured report from dictation and applies lexicons like BI-RADS or Lung-RADS.",human:"None.",outcome:"Report completeness",intel:[4],hasHuman:false},
+      {name:"Sign-off",what:"Radiologist reviews the draft and signs the final report.",agent:"None.",agent_does:"Sign-off is human by policy.",human:"Radiologist signs the final report.",outcome:"Sign-off time",intel:[4],hasHuman:true},
+      {name:"Critical Findings Communication",what:"Urgent findings escalated to the ordering clinician and tracked to acknowledgment.",agent:"Notification Agent",agent_does:"Pages the ordering physician, tracks acknowledgment, escalates on delay.",human:"Radiologist confirms the critical finding call.",outcome:"Time to communication",intel:[5],hasHuman:true}
+    ]
+  },
+  {
+    name:"Clinical Documentation",
+    breakthrough:"Ambient scribing takes the note off the physician's desk and puts it in the EHR.",
+    kpis:[{m:"Documentation time",dir:"down"},{m:"Chart completeness",dir:"up"},{m:"Post-visit lag",dir:"down"},{m:"Same-day sign-off",dir:"up"}],
+    humanFunctions:[{role:"Physician",scope:"Runs the encounter and signs the final note."},{role:"Scribe Ops",scope:"Reviews low-confidence extractions, QA note quality."},{role:"Continuous Optimization",scope:"Tunes extraction and drafting models per specialty."}],
+    intel:["Medical terminology models","Specialty templates","Patient chart history","EHR schema","Voice/ambient audio","Sign-off policy"],
+    stages:[
+      {name:"Patient Encounter",what:"Ambient capture of the clinician-patient conversation.",agent:"Capture Agent",agent_does:"Runs on-device audio capture with speaker separation.",human:"Clinician conducts the encounter normally.",outcome:"Capture fidelity",intel:[4],hasHuman:true},
+      {name:"Clinical Extraction",what:"Symptoms, diagnoses, medications, and orders extracted from transcript.",agent:"Extraction Agent",agent_does:"Structures clinical entities and links to problem lists.",human:"None.",outcome:"Extraction recall",intel:[0,2],hasHuman:false},
+      {name:"Note Generation",what:"Draft SOAP note assembled in specialty-appropriate format.",agent:"Scribe Agent",agent_does:"Composes assessment, plan, and orders in physician voice.",human:"None.",outcome:"Draft usability",intel:[1,2],hasHuman:false},
+      {name:"EHR Update",what:"Note pushed into EHR with orders, ICD-10, and CPT codes.",agent:"EHR Agent",agent_does:"Writes to the EHR via FHIR with structured coding.",human:"None.",outcome:"Post-visit lag",intel:[3],hasHuman:false},
+      {name:"Physician Sign-off",what:"Physician reviews, edits, and signs the note.",agent:"None.",agent_does:"Sign-off is human by policy.",human:"Physician owns the final note.",outcome:"Sign-off time",intel:[5],hasHuman:true}
+    ]
+  },
+  {
+    name:"Clinical Trial Recruitment",
+    breakthrough:"Protocol-to-patient in days, not months, without leaving the EHR estate.",
+    kpis:[{m:"Time to first patient",dir:"down"},{m:"Screen-fail rate",dir:"down"},{m:"Enrollment velocity",dir:"up"},{m:"Site utilization",dir:"up"}],
+    humanFunctions:[{role:"Principal Investigator",scope:"Approves shortlist and endorses outreach."},{role:"Study Coordinator",scope:"Owns consent and resolves ambiguity."},{role:"Trial Ops",scope:"Monitors matching quality, expands cohort logic."}],
+    intel:["Protocol library","EHR cohort data","Genomic registry","Consent forms","Patient contact history","Trial site directory"],
+    stages:[
+      {name:"Protocol Ingestion",what:"Trial protocol parsed for inclusion and exclusion criteria.",agent:"Protocol Agent",agent_does:"Extracts criteria and encodes them as queryable rules.",human:"Clinical scientist validates criteria interpretation.",outcome:"Criteria coverage",intel:[0],hasHuman:true},
+      {name:"Cohort Discovery",what:"Candidate patients identified across the EHR estate.",agent:"Cohort Agent",agent_does:"Runs criteria against structured and unstructured EHR data.",human:"None.",outcome:"Cohort size",intel:[1,2],hasHuman:false},
+      {name:"Patient Screening",what:"Chart-level screening against nuanced criteria.",agent:"Screening Agent",agent_does:"Reads free-text notes and matches against exclusions.",human:"Study coordinator resolves ambiguity.",outcome:"Screen-fail rate",intel:[1],hasHuman:true},
+      {name:"Eligibility Match",what:"Confirmed matches ranked by clinical fit.",agent:"Matching Agent",agent_does:"Ranks candidates by protocol fit and site capacity.",human:"PI approves the shortlist.",outcome:"Match precision",intel:[5],hasHuman:true},
+      {name:"Patient Outreach",what:"Approach patients through their provider or directly.",agent:"Outreach Agent",agent_does:"Drafts consent-appropriate outreach.",human:"Treating physician endorses outreach.",outcome:"Response rate",intel:[3,4],hasHuman:true},
+      {name:"Enrollment",what:"Consented patients enrolled and scheduled.",agent:"Enrollment Agent",agent_does:"Books visits, handles logistics, tracks retention.",human:"Study coordinator owns consent.",outcome:"Time to first visit",intel:[3,5],hasHuman:true}
+    ]
+  },
+  {
+    name:"Prior Authorization",
+    breakthrough:"Auth packets compiled with cited evidence before the request hits the payer portal.",
+    kpis:[{m:"Auth turnaround",dir:"down"},{m:"First-pass approval",dir:"up"},{m:"Denial rate",dir:"down"},{m:"Care delay",dir:"down"}],
+    humanFunctions:[{role:"Auth Specialist",scope:"Spot-checks packets, intervenes on delays."},{role:"Physician",scope:"Runs peer-to-peer reviews on escalations."},{role:"Auth Ops",scope:"Tracks payer policy drift, tunes evidence retrieval."}],
+    intel:["Payer policy library","Eligibility records","Clinical evidence","Auth submission portals","Prior auth history","Escalation playbook"],
+    stages:[
+      {name:"Eligibility Verification",what:"Coverage and benefits verified for the requested service.",agent:"Eligibility Agent",agent_does:"Queries payer APIs and normalizes response.",human:"None.",outcome:"Verification accuracy",intel:[1],hasHuman:false},
+      {name:"Requirement Identification",what:"Payer policy rules identified for the specific procedure.",agent:"Policy Agent",agent_does:"Retrieves and interprets payer medical policy.",human:"None.",outcome:"Policy fit",intel:[0],hasHuman:false},
+      {name:"Evidence Retrieval",what:"Clinical records assembled to support medical necessity.",agent:"Evidence Agent",agent_does:"Pulls relevant chart notes, labs, and imaging.",human:"None.",outcome:"Evidence completeness",intel:[2],hasHuman:false},
+      {name:"Authorization Assembly",what:"Auth request compiled in payer-required format.",agent:"Assembly Agent",agent_does:"Composes the auth packet with citations.",human:"Auth specialist spot-checks packets.",outcome:"First-pass approval",intel:[0,2],hasHuman:true},
+      {name:"Payer Submission",what:"Auth submitted through the payer portal or fax.",agent:"Submission Agent",agent_does:"Handles portal automation and confirmations.",human:"None.",outcome:"Submission latency",intel:[3],hasHuman:false},
+      {name:"Status Monitoring",what:"Auth status tracked to decision.",agent:"Monitoring Agent",agent_does:"Polls status, surfaces stalls, triggers follow-ups.",human:"Specialist intervenes on delays.",outcome:"Turnaround time",intel:[3,4],hasHuman:true},
+      {name:"Exception / Escalation",what:"Denials and peer-to-peer reviews handled.",agent:"Escalation Agent",agent_does:"Prepares peer-to-peer briefs and appeal drafts.",human:"Physician conducts peer-to-peer review.",outcome:"Overturn rate",intel:[4,5],hasHuman:true}
+    ]
+  }
+];
+
+let currentProc = 0, currentStage = 0;
+
+function renderLifecycle(){
+  const proc = PROCESSES[currentProc];
+  const track = document.getElementById('lcTrack');
+  track.innerHTML = proc.stages.map((s,i)=>{
+    const flags = [`<span class="lc-flag a">A</span>`, s.hasHuman ? `<span class="lc-flag h">H</span>` : ''].join('');
+    const node = `<div class="lc-node ${i===currentStage?'active':''}" data-stage="${i}">
+      <button class="lc-node-btn">
+        <div class="lc-stage-num">Stage 0${i+1}</div>
+        <div class="lc-stage-name">${s.name}</div>
+        <div class="lc-stage-flags">${flags}</div>
+      </button>
+    </div>`;
+    const arrow = i < proc.stages.length-1 ? `<div class="lc-arrow">→</div>` : '';
+    return node + arrow;
+  }).join('');
+  track.querySelectorAll('.lc-node').forEach(n=>n.addEventListener('click',()=>{
+    currentStage = parseInt(n.dataset.stage,10);
+    renderLifecycle(); renderDetail(); renderIntel();
+  }));
+}
+
+function renderDetail(){
+  const s = PROCESSES[currentProc].stages[currentStage];
+  const d = document.getElementById('detail');
+  d.querySelector('[data-slot="what"]').innerHTML = s.what;
+  d.querySelector('[data-slot="agent"]').textContent = s.agent;
+  d.querySelector('[data-slot="agent_does"]').textContent = s.agent_does;
+  d.querySelector('[data-slot="human"]').textContent = s.human;
+  d.querySelector('[data-slot="outcome"]').textContent = s.outcome;
+}
+
+function renderIntel(){
+  const proc = PROCESSES[currentProc];
+  const stage = proc.stages[currentStage];
+  const chips = document.getElementById('intelChips');
+  chips.innerHTML = proc.intel.map((v,i)=>`<span class="intel-chip ${stage.intel.includes(i)?'active':''}">${v}</span>`).join('');
+}
+
+function renderOutcome(){
+  const p = PROCESSES[currentProc];
+  document.getElementById('procBreak').textContent = p.breakthrough;
+  document.getElementById('procKpis').innerHTML = p.kpis.map(k=>
+    `<div class="kpi">${k.m}<span class="arrow ${k.dir}"></span></div>`
+  ).join('');
+}
+function renderHF(){
+  const p = PROCESSES[currentProc];
+  document.getElementById('hfGrid').innerHTML = p.humanFunctions.map(h=>
+    `<div class="hf-card"><div class="role">${h.role}</div><div class="scope">${h.scope}</div></div>`
+  ).join('');
+}
+
+document.getElementById('pTabs').addEventListener('click', e=>{
+  const t = e.target.closest('.p-tab'); if(!t) return;
+  document.querySelectorAll('.p-tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  currentProc = parseInt(t.dataset.proc,10);
+  currentStage = 0;
+  renderOutcome(); renderLifecycle(); renderDetail(); renderIntel(); renderHF();
+});
+
+renderOutcome(); renderLifecycle(); renderDetail(); renderIntel(); renderHF();
+</script>
+
+</body>
+</html>

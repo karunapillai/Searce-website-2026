@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V8 · Refined Vectors · HLS</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1d1d1f;--ink-80:rgba(29,29,31,0.86);--ink-60:rgba(29,29,31,0.60);--ink-40:rgba(29,29,31,0.42);--ink-20:rgba(29,29,31,0.14);
+  --paper:#f5f5f7;--paper-2:#fff;--line:rgba(0,0,0,0.08);
+  --blue:#0064ff;--blue-strong:#004ecc;--blue-06:rgba(0,100,255,0.08);--blue-12:rgba(0,100,255,0.16);--blue-24:rgba(0,100,255,0.24);
+  --yellow:#ffb414;--yellow-ink:#8a5a10;
+  --green:#0a8b5c;--purple:#734bff;
+  --display:'Poppins',system-ui,sans-serif;--body:system-ui,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;background:none;border:none;cursor:pointer;color:inherit;}
+.wrap{max-width:1360px;margin:0 auto;padding:0 40px;}
+
+.crumb{background:#fff;border-bottom:1px solid var(--line);padding:16px 0;font-size:13px;color:var(--ink-60);}
+.crumb a{color:var(--blue);}
+.crumb strong{color:var(--ink);font-weight:500;margin-left:8px;}
+
+.section{padding:72px 0 96px;background:var(--paper);position:relative;}
+.section::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right, rgba(29,29,31,0.025) 1px, transparent 1px),linear-gradient(to bottom, rgba(29,29,31,0.025) 1px, transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 85% 75% at 50% 50%, #000 55%, transparent 100%);-webkit-mask-image:radial-gradient(ellipse 85% 75% at 50% 50%, #000 55%, transparent 100%);}
+.section .wrap{position:relative;z-index:1;}
+
+/* Process picker — Apple-style pills in one container, centered */
+.p-tabs-wrap{display:flex;justify-content:center;margin-bottom:44px;}
+.p-tabs{display:inline-flex;gap:2px;background:#e8e8ed;padding:5px;border-radius:999px;flex-wrap:wrap;justify-content:center;}
+.p-tab{padding:10px 22px;font-family:var(--display);font-weight:500;font-size:14px;color:var(--ink-80);border-radius:999px;transition:all .18s;white-space:nowrap;letter-spacing:-0.005em;}
+.p-tab:hover{color:var(--ink);}
+.p-tab.active{background:var(--ink);color:#fff;}
+
+/* Carousel of stage cards — vector only inside white card, body sits on grey */
+.carousel-wrap{position:relative;}
+.carousel-track{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:8px;scrollbar-width:none;}
+.carousel-track::-webkit-scrollbar{display:none;}
+.stage-card{flex:0 0 410px;background:transparent;padding:0;scroll-snap-align:start;display:flex;flex-direction:column;gap:22px;}
+
+.card-vector{aspect-ratio:1/0.95;background:#fff;border-radius:22px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:32px;transition:box-shadow .2s;}
+.stage-card:hover .card-vector{box-shadow:0 24px 44px rgba(0,0,0,0.06);}
+.card-vector .card-mode{position:absolute;top:20px;right:20px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:5px 12px;border-radius:999px;z-index:2;}
+.card-vector .card-mode.autonomous{background:var(--blue-06);color:var(--blue-strong);}
+.card-vector .card-mode.handoff{background:#fff3cd;color:var(--yellow-ink);}
+.card-vector .card-num{position:absolute;top:20px;left:20px;font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.22em;color:var(--ink-40);text-transform:uppercase;z-index:2;}
+.card-vector svg{width:100%;height:100%;display:block;}
+.card-vector svg text{font-family:Poppins,system-ui,sans-serif;}
+
+/* Card body — sits directly on grey ground, no card wrapper.
+   Fixed body height + facts pushed to bottom = divider line aligns across all cards. */
+.card-body{padding:0 4px;display:flex;flex-direction:column;gap:12px;min-height:230px;}
+.card-body .card-name{font-family:var(--display);font-weight:500;font-size:24px;line-height:1.15;letter-spacing:-0.02em;color:var(--ink);min-height:56px;}
+.card-body .card-what{color:var(--ink-60);font-size:14.5px;line-height:1.55;min-height:68px;}
+.card-facts{margin-top:auto;padding-top:14px;border-top:1px solid var(--ink-20);display:flex;flex-direction:column;gap:8px;}
+.card-facts .fact{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:baseline;font-family:var(--display);}
+.card-facts .fact .lbl{font-weight:500;font-size:10px;letter-spacing:.18em;text-transform:uppercase;}
+.card-facts .fact.agent .lbl{color:var(--blue);}
+.card-facts .fact.human .lbl{color:var(--yellow-ink);}
+.card-facts .fact.metric .lbl{color:var(--green);}
+.card-facts .fact .v{color:var(--ink);font-weight:500;font-size:13px;letter-spacing:-0.005em;}
+.card-facts .fact.none .v{color:var(--ink-40);font-weight:400;}
+
+/* Draw-in animation on scene SVGs */
+.card-vector svg .draw{stroke-dasharray:600;stroke-dashoffset:600;animation:drawIn 0.8s cubic-bezier(0.4,0,0.2,1) forwards;}
+.card-vector svg .fade{opacity:0;animation:fadeIn 0.5s cubic-bezier(0.4,0,0.2,1) forwards;}
+@keyframes drawIn{to{stroke-dashoffset:0;}}
+@keyframes fadeIn{to{opacity:1;}}
+
+/* Carousel controls (bottom-right arrows) */
+.carousel-controls{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:24px;}
+.carousel-progress{flex:1;max-width:180px;height:3px;background:rgba(29,29,31,0.10);border-radius:2px;overflow:hidden;margin-right:8px;}
+.carousel-progress-fill{height:100%;background:var(--ink);width:25%;transition:width .3s ease;border-radius:2px;}
+.carousel-btn{width:44px;height:44px;border-radius:50%;background:#e8e8ed;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .18s;color:var(--ink);}
+.carousel-btn:hover:not(:disabled){background:var(--ink);color:#fff;}
+.carousel-btn:disabled{opacity:.4;cursor:not-allowed;}
+.carousel-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+
+@media (max-width:560px){
+  .p-tab{padding:9px 14px;font-size:13px;}
+  .stage-card{flex:0 0 285px;}
+  .card-body .card-name{font-size:22px;}
+}
+</style>
+</head>
+<body>
+
+<div class="crumb"><div class="wrap"><a href="hls-processes-storyboard.html">← Storyboard</a> <strong>Variation 08 · Refined Vectors</strong></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="p-tabs-wrap"><div class="p-tabs" id="pTabs"></div></div>
+
+    <div class="carousel-wrap">
+      <div class="carousel-track" id="carTrack"></div>
+      <div class="carousel-controls">
+        <div class="carousel-progress"><div class="carousel-progress-fill" id="carProgress"></div></div>
+        <button class="carousel-btn" id="carPrev" aria-label="Previous"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></button>
+        <button class="carousel-btn" id="carNext" aria-label="Next"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const PROCESSES = [
+  {
+    name:"Medical Imaging & Diagnostic Analysis",
+    stages:[
+      {name:"Image Acquisition",hint:"Study captured on the modality.",what:"Study captured on the modality with the protocol matched to the clinical order and image quality verified before release.",agent:{role:"Protocol Agent",desc:"Verifies protocol and image quality."},human:{role:"Technologist",desc:"Runs the scan, repositions on flags."},metric:"Repeat scan rate"},
+      {name:"Ingestion & Routing",hint:"DICOM routed to the right worklist.",what:"DICOM series ingested to PACS and routed to the correct radiologist worklist by modality, urgency, and subspecialty.",agent:{role:"Routing Agent",desc:"Routes by modality, urgency, subspecialty."},human:null,metric:"Ingestion latency"},
+      {name:"Preliminary Detection",hint:"AI reads before the radiologist opens the study.",what:"AI reads the study for anomalies and prioritises the worklist before the radiologist opens it.",agent:{role:"Detection Agent",desc:"Flags nodules, hemorrhage, fractures, embolism."},human:null,metric:"Priority triage accuracy"},
+      {name:"Radiologist Review",hint:"Radiologist interprets with priors at hand.",what:"Radiologist opens the study, confirms or overrides AI findings, with prior studies and side-by-side measurements surfaced automatically.",agent:{role:"Comparison Agent",desc:"Surfaces priors and measurements."},human:{role:"Radiologist",desc:"Owns interpretation."},metric:"Read turnaround"},
+      {name:"Structured Reporting",hint:"Draft report composed from dictation.",what:"Draft report composed with findings, impression, and recommendations, formatted with lexicons like BI-RADS and Lung-RADS.",agent:{role:"Reporting Agent",desc:"Drafts structured report from dictation."},human:null,metric:"Report completeness"},
+      {name:"Sign-off",hint:"Radiologist signs the final report.",what:"Radiologist reviews the draft and signs the final report. Sign-off remains human by policy.",agent:null,human:{role:"Radiologist",desc:"Signs the final report."},metric:"Sign-off time"},
+      {name:"Critical Findings Communication",hint:"Urgent findings tracked to acknowledgment.",what:"Urgent findings escalated to the ordering clinician and tracked to acknowledgment, with automated pager routing and escalation on delay.",agent:{role:"Notification Agent",desc:"Pages, tracks acknowledgment, escalates on delay."},human:{role:"Radiologist",desc:"Confirms the critical finding call."},metric:"Time to communication"}
+    ]
+  },
+  {
+    name:"Clinical Documentation",
+    stages:[
+      {name:"Patient Encounter",hint:"Ambient capture of the visit.",what:"Ambient capture of the clinician-patient conversation with on-device speaker separation.",agent:{role:"Capture Agent",desc:"On-device audio capture."},human:{role:"Clinician",desc:"Conducts the encounter."},metric:"Capture fidelity"},
+      {name:"Clinical Extraction",hint:"Structured entities extracted.",what:"Symptoms, medications, and orders extracted from the transcript and linked to problem lists.",agent:{role:"Extraction Agent",desc:"Structures clinical entities."},human:null,metric:"Recall"},
+      {name:"Note Generation",hint:"Draft SOAP note composed.",what:"Draft SOAP note assembled in specialty-appropriate format, composed in the physician's voice.",agent:{role:"Scribe Agent",desc:"Composes the draft note."},human:null,metric:"Draft usability"},
+      {name:"EHR Update",hint:"Note pushed to EHR via FHIR.",what:"Note pushed to the EHR with orders, ICD-10, and CPT codes attached.",agent:{role:"EHR Agent",desc:"Writes to the EHR via FHIR."},human:null,metric:"Post-visit lag"},
+      {name:"Physician Sign-off",hint:"Physician signs the final note.",what:"Physician reviews, edits, and signs the final note. Sign-off remains human by policy.",agent:null,human:{role:"Physician",desc:"Owns the final note."},metric:"Sign-off time"}
+    ]
+  },
+  {
+    name:"Clinical Trial Recruitment",
+    stages:[
+      {name:"Protocol Ingestion",hint:"Criteria encoded as queryable rules.",what:"Trial protocol parsed for inclusion and exclusion criteria and encoded as queryable rules.",agent:{role:"Protocol Agent",desc:"Encodes criteria as rules."},human:{role:"Clinical Scientist",desc:"Validates interpretation."},metric:"Criteria coverage"},
+      {name:"Cohort Discovery",hint:"Candidates identified across EHR.",what:"Candidate patients identified across the EHR estate using structured and unstructured criteria.",agent:{role:"Cohort Agent",desc:"Runs criteria across the EHR."},human:null,metric:"Cohort size"},
+      {name:"Patient Screening",hint:"Chart-level pre-screening.",what:"Chart-level screening against nuanced criteria, reading free-text notes for exclusions.",agent:{role:"Screening Agent",desc:"Reads notes for exclusions."},human:{role:"Study Coordinator",desc:"Resolves ambiguity."},metric:"Screen-fail rate"},
+      {name:"Eligibility Match",hint:"Ranked by fit and site capacity.",what:"Confirmed matches ranked by clinical fit and site capacity.",agent:{role:"Matching Agent",desc:"Ranks candidates."},human:{role:"Principal Investigator",desc:"Approves shortlist."},metric:"Match precision"},
+      {name:"Patient Outreach",hint:"Approach through the provider.",what:"Approach patients through their treating provider with consent-appropriate messaging.",agent:{role:"Outreach Agent",desc:"Drafts outreach."},human:{role:"Physician",desc:"Endorses outreach."},metric:"Response rate"},
+      {name:"Enrollment",hint:"Enrolled, consented, scheduled.",what:"Consented patients enrolled, scheduled, and tracked for retention.",agent:{role:"Enrollment Agent",desc:"Books visits, tracks retention."},human:{role:"Study Coordinator",desc:"Owns consent."},metric:"Time to first visit"}
+    ]
+  },
+  {
+    name:"Prior Authorization",
+    stages:[
+      {name:"Eligibility Verification",hint:"Coverage verified.",what:"Coverage and benefits verified for the requested service by querying payer APIs.",agent:{role:"Eligibility Agent",desc:"Queries payer APIs."},human:null,metric:"Verification accuracy"},
+      {name:"Requirement Identification",hint:"Payer policy rules identified.",what:"Payer policy rules identified for the specific procedure.",agent:{role:"Policy Agent",desc:"Interprets payer policy."},human:null,metric:"Policy fit"},
+      {name:"Evidence Retrieval",hint:"Chart notes, labs, imaging assembled.",what:"Clinical records assembled to support medical necessity: chart notes, labs, imaging.",agent:{role:"Evidence Agent",desc:"Pulls chart, labs, imaging."},human:null,metric:"Evidence completeness"},
+      {name:"Auth Assembly",hint:"Auth packet composed with citations.",what:"Auth request compiled in payer-required format with cited evidence.",agent:{role:"Assembly Agent",desc:"Composes with citations."},human:{role:"Auth Specialist",desc:"Spot-checks packets."},metric:"First-pass approval"},
+      {name:"Payer Submission",hint:"Submitted through the portal.",what:"Auth submitted through the payer portal via automated handoff.",agent:{role:"Submission Agent",desc:"Portal automation."},human:null,metric:"Latency"},
+      {name:"Status Monitoring",hint:"Tracked to decision.",what:"Auth status tracked to decision with stalls surfaced for intervention.",agent:{role:"Monitoring Agent",desc:"Polls and surfaces stalls."},human:{role:"Specialist",desc:"Intervenes on delays."},metric:"Turnaround"},
+      {name:"Escalation",hint:"Peer-to-peer and appeals.",what:"Peer-to-peer reviews and appeals handled with pre-drafted briefs.",agent:{role:"Escalation Agent",desc:"Prepares briefs."},human:{role:"Physician",desc:"Runs peer-to-peer."},metric:"Overturn rate"}
+    ]
+  }
+];
+
+let currentProc=0, currentStage=0;
+
+/* Lucide icons per process */
+const PROC_ICONS = [
+  // Medical Imaging — scan
+  `<svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg>`,
+  // Clinical Documentation — stethoscope
+  `<svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>`,
+  // Clinical Trial Recruitment — flask-conical
+  `<svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>`,
+  // Prior Authorization — shield-check
+  `<svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>`
+];
+
+function renderTabs(){
+  document.getElementById('pTabs').innerHTML = PROCESSES.map((p,i)=>
+    `<button class="p-tab ${i===currentProc?'active':''}" data-p="${i}">${p.name}</button>`
+  ).join('');
+  document.querySelectorAll('.p-tab').forEach(el=>el.addEventListener('click',()=>{
+    currentProc = parseInt(el.dataset.p,10); currentStage = 0; renderAll();
+  }));
+}
+
+function renderCards(){
+  const p = PROCESSES[currentProc];
+  const scenes = SCENES_BY_PROC[currentProc] || MI;
+  document.getElementById('carTrack').innerHTML = p.stages.map((s,i)=>{
+    const scene = scenes[i] || scenes[0];
+    const num = String(i+1).padStart(2,'0');
+    const mode = s.human ? 'handoff' : 'autonomous';
+    const modeLabel = s.human ? 'Human hand-off' : 'Autonomous';
+    const agentFact = s.agent
+      ? `<div class="fact agent"><span class="lbl">Agent</span><span class="v">${s.agent.role}</span></div>`
+      : `<div class="fact agent none"><span class="lbl">Agent</span><span class="v">Human-owned</span></div>`;
+    const humanFact = s.human
+      ? `<div class="fact human"><span class="lbl">Human</span><span class="v">${s.human.role}</span></div>`
+      : `<div class="fact human none"><span class="lbl">Human</span><span class="v">Autonomous</span></div>`;
+    return `<article class="stage-card" data-idx="${i}">
+      <div class="card-vector">
+        <div class="card-num">Stage ${num}</div>
+        <div class="card-mode ${mode}">${modeLabel}</div>
+        ${scene()}
+      </div>
+      <div class="card-body">
+        <div class="card-name">${s.name}</div>
+        <div class="card-what">${s.what || s.hint || ''}</div>
+        <div class="card-facts">
+          ${agentFact}
+          ${humanFact}
+          <div class="fact metric"><span class="lbl">Metric</span><span class="v">${s.metric}</span></div>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+  updateProgress();
+}
+
+/* Carousel scroll behaviour */
+function cardStep(){
+  const track = document.getElementById('carTrack');
+  const first = track.querySelector('.stage-card');
+  if (!first) return 340;
+  return first.getBoundingClientRect().width + 20;
+}
+function updateProgress(){
+  const track = document.getElementById('carTrack');
+  const max = track.scrollWidth - track.clientWidth;
+  const pct = max > 0 ? (track.scrollLeft / max) * 100 : 100;
+  document.getElementById('carProgress').style.width = Math.max(15, pct) + '%';
+  document.getElementById('carPrev').disabled = track.scrollLeft <= 4;
+  document.getElementById('carNext').disabled = track.scrollLeft >= max - 4;
+}
+document.getElementById('carPrev').addEventListener('click', ()=>{
+  document.getElementById('carTrack').scrollBy({left: -cardStep(), behavior:'smooth'});
+});
+document.getElementById('carNext').addEventListener('click', ()=>{
+  document.getElementById('carTrack').scrollBy({left: cardStep(), behavior:'smooth'});
+});
+document.getElementById('carTrack').addEventListener('scroll', updateProgress, {passive:true});
+window.addEventListener('resize', updateProgress);
+
+/* ============================================================================
+   UI-MOCKUP VECTOR LANGUAGE
+   Soft-shadowed cards · blue brand tile · labeled chips · dashed connections.
+   Every stage: one clear concept, expressed as a mini enterprise product graphic.
+   ============================================================================ */
+const S = 'rgba(29,29,31,0.72)';
+const F = '#1d1d1f';
+const B = '#0064ff';
+const B_LIGHT = 'rgba(0,100,255,0.18)';
+const B_TINT = 'rgba(0,100,255,0.06)';
+const Y = '#ffb414';
+const G = '#0a8b5c';
+const DOT = 'rgba(29,29,31,0.28)';
+const DIM = 'rgba(29,29,31,0.10)';
+const BORDER = 'rgba(0,0,0,0.08)';
+const SHADOW = 'rgba(29,29,31,0.06)';
+
+const open = () => `<svg viewBox="0 0 400 380" preserveAspectRatio="xMidYMid meet">`;
+const close = `</svg>`;
+
+/* Primitives */
+const d = (x,y,r,fill,dl,cls='fade') =>
+  `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" opacity="0" class="${cls}" style="animation-delay:${dl}s"/>`;
+const ring = (x,y,r,dl,{sw=1.5,stroke=S,op=1,fill='none'}={}) =>
+  `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" opacity="${op}" class="draw" style="animation-delay:${dl}s"/>`;
+const ln = (x1,y1,x2,y2,dl,{stroke=S,sw=1,dash='',op=1}={}) =>
+  `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${stroke}" stroke-width="${sw}" stroke-dasharray="${dash}" opacity="${op}" class="draw" style="animation-delay:${dl}s"/>`;
+const rct = (x,y,w,h,dl,{stroke=S,sw=1.2,fill='none',op=1,rx=0}={}) =>
+  `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" opacity="${op}" class="draw" style="animation-delay:${dl}s"/>`;
+const pth = (dstr,dl,{stroke=S,sw=1.5,fill='none',op=1,cls='draw'}={}) =>
+  `<path d="${dstr}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" opacity="${op}" class="${cls}" style="animation-delay:${dl}s"/>`;
+const txt = (x,y,text,dl,{size=10,weight=500,fill=F,anchor='start',letter='0'}={}) =>
+  `<text x="${x}" y="${y}" text-anchor="${anchor}" font-size="${size}" font-weight="${weight}" fill="${fill}" letter-spacing="${letter}" opacity="0" class="fade" style="animation-delay:${dl}s">${text}</text>`;
+
+/* UI helpers */
+// Soft-shadowed floating card
+const card = (x,y,w,h,dl,{rx=10,fill='#fff'}={}) =>
+  `<rect x="${x+2}" y="${y+5}" width="${w}" height="${h}" rx="${rx}" fill="${SHADOW}" opacity="0" class="fade" style="animation-delay:${dl}s"/>` +
+  `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}" stroke="${BORDER}" stroke-width="1" opacity="0" class="fade" style="animation-delay:${dl}s"/>`;
+
+// Blue brand tile with glow-shadow + sparkle
+const brandTile = (x,y,size,dl,{icon='sparkle'}={}) => {
+  const cx=x+size/2, cy=y+size/2;
+  let out = `<rect x="${x-4}" y="${y+7}" width="${size+8}" height="${size}" rx="16" fill="${B_LIGHT}" opacity="0" class="fade" style="animation-delay:${dl}s"/>` +
+    `<rect x="${x}" y="${y}" width="${size}" height="${size}" rx="14" fill="${B}" opacity="0" class="fade" style="animation-delay:${dl}s"/>`;
+  if (icon==='sparkle') {
+    const s = size*0.28;
+    out += `<path d="M ${cx} ${cy-s} L ${cx+s*0.32} ${cy-s*0.32} L ${cx+s} ${cy} L ${cx+s*0.32} ${cy+s*0.32} L ${cx} ${cy+s} L ${cx-s*0.32} ${cy+s*0.32} L ${cx-s} ${cy} L ${cx-s*0.32} ${cy-s*0.32} Z" fill="#fff" opacity="0" class="fade" style="animation-delay:${dl+0.15}s"/>`;
+  } else if (icon==='people') {
+    out += `<circle cx="${cx-6}" cy="${cy-4}" r="4" fill="none" stroke="#fff" stroke-width="1.5" opacity="0" class="fade" style="animation-delay:${dl+0.15}s"/>` +
+      `<circle cx="${cx+6}" cy="${cy-4}" r="4" fill="none" stroke="#fff" stroke-width="1.5" opacity="0" class="fade" style="animation-delay:${dl+0.17}s"/>` +
+      `<path d="M ${cx-12} ${cy+8} Q ${cx-12} ${cy+2} ${cx-6} ${cy+2} Q ${cx} ${cy+2} ${cx} ${cy+8} Q ${cx} ${cy+2} ${cx+6} ${cy+2} Q ${cx+12} ${cy+2} ${cx+12} ${cy+8}" fill="none" stroke="#fff" stroke-width="1.5" opacity="0" class="fade" style="animation-delay:${dl+0.2}s"/>`;
+  } else if (icon==='bell') {
+    out += `<path d="M ${cx-9} ${cy+4} L ${cx-9} ${cy-3} Q ${cx-9} ${cy-11} ${cx} ${cy-11} Q ${cx+9} ${cy-11} ${cx+9} ${cy-3} L ${cx+9} ${cy+4} L ${cx+11} ${cy+7} L ${cx-11} ${cy+7} Z" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" opacity="0" class="fade" style="animation-delay:${dl+0.15}s"/>` +
+      `<path d="M ${cx-3} ${cy+9} Q ${cx-3} ${cy+12} ${cx} ${cy+12} Q ${cx+3} ${cy+12} ${cx+3} ${cy+9}" fill="none" stroke="#fff" stroke-width="1.5" opacity="0" class="fade" style="animation-delay:${dl+0.2}s"/>`;
+  } else if (icon==='mic') {
+    out += `<rect x="${cx-5}" y="${cy-11}" width="10" height="16" rx="5" fill="#fff" opacity="0" class="fade" style="animation-delay:${dl+0.15}s"/>` +
+      `<path d="M ${cx-9} ${cy+1} Q ${cx-9} ${cy+9} ${cx} ${cy+9} Q ${cx+9} ${cy+9} ${cx+9} ${cy+1}" fill="none" stroke="#fff" stroke-width="1.5" opacity="0" class="fade" style="animation-delay:${dl+0.2}s"/>` +
+      `<line x1="${cx}" y1="${cy+9}" x2="${cx}" y2="${cy+13}" stroke="#fff" stroke-width="1.5" opacity="0" class="fade" style="animation-delay:${dl+0.22}s"/>`;
+  } else if (icon==='route') {
+    out += `<circle cx="${cx-8}" cy="${cy-4}" r="3" fill="#fff" opacity="0" class="fade" style="animation-delay:${dl+0.15}s"/>` +
+      `<circle cx="${cx+8}" cy="${cy-4}" r="3" fill="#fff" opacity="0" class="fade" style="animation-delay:${dl+0.17}s"/>` +
+      `<circle cx="${cx}" cy="${cy+8}" r="3" fill="#fff" opacity="0" class="fade" style="animation-delay:${dl+0.19}s"/>` +
+      `<path d="M ${cx-8} ${cy-4} L ${cx} ${cy+8} L ${cx+8} ${cy-4}" fill="none" stroke="#fff" stroke-width="1.5" opacity="0" class="fade" style="animation-delay:${dl+0.22}s"/>`;
+  } else if (icon==='check') {
+    out += `<path d="M ${cx-9} ${cy} L ${cx-2} ${cy+7} L ${cx+9} ${cy-6}" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0" class="fade" style="animation-delay:${dl+0.15}s"/>`;
+  } else if (icon==='doc') {
+    out += `<rect x="${cx-8}" y="${cy-10}" width="16" height="20" rx="1" fill="none" stroke="#fff" stroke-width="1.5" opacity="0" class="fade" style="animation-delay:${dl+0.15}s"/>` +
+      `<line x1="${cx-5}" y1="${cy-5}" x2="${cx+5}" y2="${cy-5}" stroke="#fff" stroke-width="1.2" opacity="0" class="fade" style="animation-delay:${dl+0.18}s"/>` +
+      `<line x1="${cx-5}" y1="${cy}" x2="${cx+5}" y2="${cy}" stroke="#fff" stroke-width="1.2" opacity="0" class="fade" style="animation-delay:${dl+0.2}s"/>` +
+      `<line x1="${cx-5}" y1="${cy+5}" x2="${cx+3}" y2="${cy+5}" stroke="#fff" stroke-width="1.2" opacity="0" class="fade" style="animation-delay:${dl+0.22}s"/>`;
+  } else if (icon==='link') {
+    out += `<path d="M ${cx-2} ${cy-6} L ${cx-8} ${cy} L ${cx-2} ${cy+6}" fill="none" stroke="#fff" stroke-width="1.5" opacity="0" class="fade" style="animation-delay:${dl+0.15}s"/>` +
+      `<path d="M ${cx+2} ${cy-6} L ${cx+8} ${cy} L ${cx+2} ${cy+6}" fill="none" stroke="#fff" stroke-width="1.5" opacity="0" class="fade" style="animation-delay:${dl+0.18}s"/>`;
+  }
+  return out;
+};
+
+// Labeled chip pill (rounded rect w/ dot + text)
+const chip = (x,y,w,h,text,dl,{dot=true,dotColor=B,textSize=9}={}) => {
+  const r = h/2;
+  let out = `<rect x="${x+1}" y="${y+2}" width="${w}" height="${h}" rx="${r}" fill="${SHADOW}" opacity="0" class="fade" style="animation-delay:${dl}s"/>` +
+    `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="#fff" stroke="${BORDER}" stroke-width="1" opacity="0" class="fade" style="animation-delay:${dl}s"/>`;
+  if (dot) out += `<circle cx="${x+r+1}" cy="${y+r}" r="3" fill="${dotColor}" opacity="0" class="fade" style="animation-delay:${dl+0.05}s"/>`;
+  const textX = dot ? x + r + 9 : x + 12;
+  out += `<text x="${textX}" y="${y+r+3}" font-size="${textSize}" fill="${F}" font-weight="500" opacity="0" class="fade" style="animation-delay:${dl+0.1}s">${text}</text>`;
+  return out;
+};
+
+// Dashed connection path
+const dashPath = (path,dl,{stroke='rgba(0,100,255,0.4)',sw=1.2,dash='4 4'}={}) =>
+  `<path d="${path}" stroke="${stroke}" stroke-width="${sw}" stroke-dasharray="${dash}" fill="none" opacity="0" class="fade" style="animation-delay:${dl}s"/>`;
+
+// Simple user icon on a mini tile
+const userChip = (x,y,size,dl) => {
+  const cx=x+size/2, cy=y+size/2;
+  return `<rect x="${x+1}" y="${y+2}" width="${size}" height="${size}" rx="${size/2}" fill="${SHADOW}" opacity="0" class="fade" style="animation-delay:${dl}s"/>` +
+    `<rect x="${x}" y="${y}" width="${size}" height="${size}" rx="${size/2}" fill="#fff" stroke="${BORDER}" stroke-width="1" opacity="0" class="fade" style="animation-delay:${dl}s"/>` +
+    `<circle cx="${cx}" cy="${cy-3}" r="4" fill="none" stroke="${F}" stroke-width="1.5" opacity="0" class="fade" style="animation-delay:${dl+0.05}s"/>` +
+    `<path d="M ${cx-7} ${cy+8} Q ${cx-7} ${cy+2} ${cx} ${cy+2} Q ${cx+7} ${cy+2} ${cx+7} ${cy+8}" fill="none" stroke="${F}" stroke-width="1.5" opacity="0" class="fade" style="animation-delay:${dl+0.07}s"/>`;
+};
+
+// Amber badge (verified/signed indicator)
+const amberBadge = (cx,cy,r,dl) =>
+  `<circle cx="${cx+1}" cy="${cy+3}" r="${r}" fill="rgba(255,180,20,0.30)" opacity="0" class="fade" style="animation-delay:${dl}s"/>` +
+  `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${Y}" opacity="0" class="fade" style="animation-delay:${dl}s"/>` +
+  `<path d="M ${cx-r*0.45} ${cy} L ${cx-r*0.1} ${cy+r*0.4} L ${cx+r*0.5} ${cy-r*0.35}" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0" class="fade" style="animation-delay:${dl+0.12}s"/>`;
+
+/* ============ MEDICAL IMAGING ============ */
+const MI = [
+  // 0 Image Acquisition — scanner dashboard mockup with capture frame
+  () => open() +
+    // Corner brackets (viewfinder)
+    pth('M 34 60 L 34 40 L 54 40',0,{sw:2,stroke:B}) +
+    pth('M 346 40 L 366 40 L 366 60',0.08,{sw:2,stroke:B}) +
+    pth('M 366 280 L 366 300 L 346 300',0.16,{sw:2,stroke:B}) +
+    pth('M 54 300 L 34 300 L 34 280',0.24,{sw:2,stroke:B}) +
+    // Dashboard card
+    card(60,58,280,224,0.35,{rx:10}) +
+    // Header row
+    d(76,74,3,DOT,0.5) + d(86,74,3,DOT,0.52) + d(96,74,3,DOT,0.54) +
+    // Progress capture bar
+    rct(76,96,248,12,0.58,{sw:0,fill:DIM,rx:6}) +
+    rct(76,96,168,12,0.65,{sw:0,fill:B,rx:6}) +
+    txt(76,132,'CAPTURE',0.72,{size:8,fill:'rgba(29,29,31,0.5)',letter:'0.15em'}) +
+    // Chart bars in card
+    Array.from({length:9},(_,i)=>{
+      const h = [22,36,48,30,58,42,66,50,38][i];
+      return rct(78+i*28,258-h,18,h,0.78+i*0.03,{sw:0,fill:i===4?B:DIM,rx:2});
+    }).join('') +
+    close,
+
+  // 1 Ingestion & Routing — central brand tile + 3 dashed lines to worklist chips
+  () => open() +
+    brandTile(168,42,64,0,{icon:'route'}) +
+    dashPath('M 200 116 L 80 220',0.4) +
+    dashPath('M 200 116 L 200 220',0.45) +
+    dashPath('M 200 116 L 320 220',0.5) +
+    chip(24,224,112,32,'Chest',0.6) +
+    chip(146,224,108,32,'Neuro',0.7) +
+    chip(264,224,112,32,'MSK',0.8) +
+    txt(200,308,'ROUTED BY MODALITY · URGENCY',0.95,{size:9,fill:'rgba(29,29,31,0.5)',anchor:'middle',letter:'0.15em'}) +
+    close,
+
+  // 2 Preliminary Detection — dark X-ray viewer with AI L-bracket detection + priority chips
+  () => open() +
+    // Main viewer card
+    card(40,40,320,240,0,{rx:10}) +
+    // Header (window dots + study id)
+    d(56,56,3,DOT,0.15) + d(66,56,3,DOT,0.17) + d(76,56,3,DOT,0.19) +
+    txt(196,60,'STUDY · A47912',0.22,{size:9,anchor:'middle',fill:'rgba(29,29,31,0.55)',letter:'0.12em'}) +
+    // Dark X-ray viewer image area
+    rct(56,80,288,180,0.32,{sw:0,fill:'#1a2030',rx:6}) +
+    // AI spatial attention grid (very subtle white lines)
+    Array.from({length:5},(_,i)=>ln(56,116+i*32,344,116+i*32,0.42+i*0.015,{sw:0.5,stroke:'rgba(255,255,255,0.06)'})).join('') +
+    Array.from({length:9},(_,i)=>ln(88+i*32,80,88+i*32,260,0.46+i*0.012,{sw:0.5,stroke:'rgba(255,255,255,0.06)'})).join('') +
+    // Chest cavity silhouette
+    pth('M 90 168 Q 130 118 200 118 Q 270 118 310 168',0.58,{sw:1.4,stroke:'rgba(255,255,255,0.28)'}) +
+    pth('M 90 260 L 90 168',0.62,{sw:1.4,stroke:'rgba(255,255,255,0.22)'}) +
+    pth('M 310 260 L 310 168',0.64,{sw:1.4,stroke:'rgba(255,255,255,0.22)'}) +
+    // Ribcage curves (four ribs)
+    pth('M 108 180 Q 200 158 292 180',0.68,{sw:0.9,stroke:'rgba(255,255,255,0.14)'}) +
+    pth('M 108 198 Q 200 178 292 198',0.7,{sw:0.9,stroke:'rgba(255,255,255,0.14)'}) +
+    pth('M 108 216 Q 200 197 292 216',0.72,{sw:0.9,stroke:'rgba(255,255,255,0.14)'}) +
+    pth('M 108 234 Q 200 217 292 234',0.74,{sw:0.9,stroke:'rgba(255,255,255,0.14)'}) +
+    // Primary anomaly — L-bracket bounding box (professional AI detection style)
+    pth('M 217 168 L 217 155 L 232 155',0.85,{sw:2.5,stroke:B,fill:'none'}) +
+    pth('M 258 155 L 273 155 L 273 168',0.88,{sw:2.5,stroke:B,fill:'none'}) +
+    pth('M 273 192 L 273 207 L 258 207',0.91,{sw:2.5,stroke:B,fill:'none'}) +
+    pth('M 232 207 L 217 207 L 217 192',0.94,{sw:2.5,stroke:B,fill:'none'}) +
+    // Anomaly core dot
+    d(245,181,5,B,1.02) +
+    // Confidence readout attached to bracket
+    chip(278,169,64,22,'96%',1.1,{textSize:9,dotColor:B}) +
+    // AI status chip inside image (top-left)
+    chip(66,90,90,22,'AI · SCANNED',0.5,{textSize:8,dotColor:B}) +
+    // Bottom info: priority + finding
+    chip(40,296,152,28,'PRIORITY · HIGH',1.2,{textSize:9,dotColor:Y}) +
+    chip(204,296,156,28,'ANOMALY DETECTED',1.25,{textSize:9,dotColor:B}) +
+    close,
+
+  // 3 Radiologist Review — two viewer panels, right one has human mark
+  () => open() +
+    card(40,80,160,180,0,{rx:8}) +
+    d(56,96,3,DOT,0.15) + d(66,96,3,DOT,0.17) +
+    rct(56,112,128,132,0.22,{sw:0,fill:'#f2f4f8',rx:4}) +
+    // AI dot markings on left
+    d(90,150,4,DOT,0.3) + d(130,170,4,DOT,0.32) + d(160,145,4,DOT,0.34) +
+    d(110,210,4,DOT,0.36) + d(155,225,4,DOT,0.38) + d(85,225,4,DOT,0.4) +
+    // Right panel (with additional human mark)
+    card(200,80,160,180,0.42,{rx:8}) +
+    d(216,96,3,DOT,0.55) + d(226,96,3,DOT,0.57) +
+    rct(216,112,128,132,0.62,{sw:0,fill:'#f2f4f8',rx:4}) +
+    d(250,150,4,DOT,0.7) + d(290,170,4,DOT,0.72) + d(320,145,4,DOT,0.74) +
+    d(270,210,4,DOT,0.76) + d(315,225,4,DOT,0.78) + d(245,225,4,DOT,0.8) +
+    // Human circle + check on one finding (right panel)
+    ring(315,225,14,0.88,{sw:2,stroke:Y}) +
+    pth('M 328 246 L 336 254 L 348 240',1.0,{sw:2.5,stroke:Y}) +
+    // Panel labels below
+    chip(48,286,80,22,'AI READ',1.1,{textSize:8}) +
+    chip(208,286,120,22,'HUMAN REVIEW',1.15,{textSize:8,dotColor:Y}) +
+    close,
+
+  // 4 Structured Reporting — document mockup with sections progressively filling
+  () => open() +
+    card(90,40,220,300,0,{rx:8}) +
+    // Doc header
+    rct(90,40,220,36,0.15,{sw:0,fill:DIM,rx:8}) +
+    ln(108,58,240,58,0.22,{sw:2.5,stroke:F}) +
+    // Section 1
+    rct(108,88,18,18,0.3,{sw:0,fill:B,rx:4}) +
+    txt(134,101,'FINDINGS',0.35,{size:9,letter:'0.1em',fill:'rgba(29,29,31,0.6)'}) +
+    ln(108,116,292,116,0.4,{sw:1.5,stroke:DIM}) +
+    ln(108,128,270,128,0.43,{sw:1.5,stroke:DIM}) +
+    ln(108,140,282,140,0.46,{sw:1.5,stroke:DIM}) +
+    // Section 2
+    rct(108,168,18,18,0.5,{sw:0,fill:B,rx:4}) +
+    txt(134,181,'IMPRESSION',0.55,{size:9,letter:'0.1em',fill:'rgba(29,29,31,0.6)'}) +
+    ln(108,196,292,196,0.6,{sw:1.5,stroke:DIM}) +
+    ln(108,208,255,208,0.63,{sw:1.5,stroke:DIM}) +
+    // Section 3
+    rct(108,236,18,18,0.7,{sw:0,fill:B,rx:4}) +
+    txt(134,249,'RECOMMENDATION',0.75,{size:9,letter:'0.1em',fill:'rgba(29,29,31,0.6)'}) +
+    ln(108,264,292,264,0.8,{sw:1.5,stroke:DIM}) +
+    ln(108,276,265,276,0.83,{sw:1.5,stroke:DIM}) +
+    ln(108,288,285,288,0.86,{sw:1.5,stroke:DIM}) +
+    // Autonomous badge chip
+    chip(108,308,84,20,'AI DRAFT',0.95,{textSize:8}) +
+    close,
+
+  // 5 Sign-off — document mockup with amber verified signature badge
+  () => open() +
+    card(70,40,260,290,0,{rx:8}) +
+    // Doc header
+    rct(70,40,260,32,0.15,{sw:0,fill:DIM,rx:8}) +
+    d(84,56,3,DOT,0.22) + d(94,56,3,DOT,0.24) + d(104,56,3,DOT,0.26) +
+    // Content lines
+    ln(90,96,300,96,0.3,{sw:1.5,stroke:DIM}) +
+    ln(90,112,280,112,0.33,{sw:1.5,stroke:DIM}) +
+    ln(90,128,300,128,0.36,{sw:1.5,stroke:DIM}) +
+    ln(90,152,300,152,0.4,{sw:1.5,stroke:DIM}) +
+    ln(90,168,270,168,0.43,{sw:1.5,stroke:DIM}) +
+    ln(90,184,290,184,0.46,{sw:1.5,stroke:DIM}) +
+    ln(90,208,300,208,0.5,{sw:1.5,stroke:DIM}) +
+    ln(90,224,285,224,0.53,{sw:1.5,stroke:DIM}) +
+    // Sign block outlined
+    rct(90,254,220,54,0.6,{sw:1,stroke:BORDER,fill:B_TINT,rx:6}) +
+    // Amber verified badge overlapping the sign block
+    amberBadge(200,282,26,0.75) +
+    chip(90,320,110,20,'RADIOLOGIST SIGNED',0.95,{textSize:8,dotColor:Y}) +
+    close,
+
+  // 6 Critical Findings — brand tile alert center + 4 clinician user chips in corners
+  () => open() +
+    brandTile(168,140,64,0,{icon:'bell'}) +
+    // Dashed connection lines to four recipient corners
+    dashPath('M 178 152 Q 130 100 74 74',0.4) +
+    dashPath('M 222 152 Q 270 100 326 74',0.45) +
+    dashPath('M 178 216 Q 130 268 74 294',0.5) +
+    dashPath('M 222 216 Q 270 268 326 294',0.55) +
+    // Four user chips
+    userChip(44,42,44,0.65) +
+    userChip(316,42,44,0.7) +
+    userChip(44,272,44,0.75) +
+    userChip(316,272,44,0.8) +
+    // Small caption
+    txt(200,346,'ORDERING CLINICIANS · NOTIFIED',0.95,{size:9,fill:'rgba(29,29,31,0.5)',anchor:'middle',letter:'0.15em'}) +
+    close
+];
+
+/* ============ CLINICAL DOCUMENTATION ============ */
+const CD = [
+  // 0 Patient Encounter — central mic brand tile + 2 speaker cards with waves
+  () => open() +
+    // Left speaker card
+    card(28,120,110,110,0,{rx:12}) +
+    userChip(58,140,50,0.15) +
+    txt(83,220,'PATIENT',0.35,{size:8,letter:'0.15em',fill:'rgba(29,29,31,0.55)',anchor:'middle'}) +
+    // Right speaker card
+    card(262,120,110,110,0.1,{rx:12}) +
+    userChip(292,140,50,0.25) +
+    txt(317,220,'CLINICIAN',0.45,{size:8,letter:'0.15em',fill:'rgba(29,29,31,0.55)',anchor:'middle'}) +
+    // Central mic brand tile
+    brandTile(168,150,64,0.55,{icon:'mic'}) +
+    // Ambient waves under the tile
+    pth('M 138 200 Q 152 210 168 205 Q 200 195 232 205 Q 248 210 262 200',0.8,{sw:1.5,stroke:B,op:0.7}) +
+    pth('M 130 220 Q 150 232 175 226 Q 200 219 225 226 Q 250 232 270 220',0.9,{sw:1.5,stroke:B,op:0.4}) +
+    txt(200,296,'AMBIENT CAPTURE',1.05,{size:9,letter:'0.15em',fill:'rgba(29,29,31,0.5)',anchor:'middle'}) +
+    close,
+
+  // 1 Clinical Extraction — narrative container → 4 labeled entity chips
+  () => open() +
+    // Container
+    card(40,70,140,240,0,{rx:8}) +
+    d(56,86,3,DOT,0.15) + d(66,86,3,DOT,0.17) + d(76,86,3,DOT,0.19) +
+    // Scattered content dots inside container
+    Array.from({length:22},(_,i)=>{
+      const x = 56 + (i*23)%108;
+      const y = 108 + Math.floor((i*23)/108)*22;
+      return d(x,y,2.5,DOT,0.25+i*0.01);
+    }).join('') +
+    // Extraction arrows
+    dashPath('M 190 120 L 240 120',0.5) +
+    dashPath('M 190 170 L 240 170',0.55) +
+    dashPath('M 190 220 L 240 220',0.6) +
+    dashPath('M 190 270 L 240 270',0.65) +
+    // 4 extracted chips
+    chip(240,108,130,24,'Symptoms',0.72) +
+    chip(240,158,130,24,'Diagnoses',0.82) +
+    chip(240,208,130,24,'Medications',0.92) +
+    chip(240,258,130,24,'Orders',1.02) +
+    close,
+
+  // 2 Note Generation — SOAP document mockup with brand tile in corner
+  () => open() +
+    // Small brand tile top-left (drafting AI)
+    brandTile(38,38,54,0,{icon:'doc'}) +
+    // Document mockup
+    card(120,40,240,300,0.25,{rx:8}) +
+    rct(120,40,240,32,0.35,{sw:0,fill:DIM,rx:8}) +
+    // 4 sections S O A P
+    rct(140,90,20,20,0.42,{sw:0,fill:B,rx:4}) + txt(150,104,'S',0.48,{size:11,weight:600,fill:'#fff',anchor:'middle'}) +
+    ln(170,100,340,100,0.5,{sw:1.5,stroke:DIM}) + ln(170,112,320,112,0.53,{sw:1.5,stroke:DIM}) +
+    rct(140,150,20,20,0.58,{sw:0,fill:B,rx:4}) + txt(150,164,'O',0.62,{size:11,weight:600,fill:'#fff',anchor:'middle'}) +
+    ln(170,160,340,160,0.65,{sw:1.5,stroke:DIM}) + ln(170,172,310,172,0.68,{sw:1.5,stroke:DIM}) +
+    rct(140,210,20,20,0.72,{sw:0,fill:B,rx:4}) + txt(150,224,'A',0.76,{size:11,weight:600,fill:'#fff',anchor:'middle'}) +
+    ln(170,220,340,220,0.79,{sw:1.5,stroke:DIM}) + ln(170,232,325,232,0.82,{sw:1.5,stroke:DIM}) +
+    rct(140,270,20,20,0.86,{sw:0,fill:B,rx:4}) + txt(150,284,'P',0.9,{size:11,weight:600,fill:'#fff',anchor:'middle'}) +
+    ln(170,280,340,280,0.93,{sw:1.5,stroke:DIM}) + ln(170,292,300,292,0.96,{sw:1.5,stroke:DIM}) +
+    // dashed connection from tile to doc
+    dashPath('M 92 65 L 130 65',0.4) +
+    close,
+
+  // 3 EHR Update — packet card → dashed arrow → EHR system card
+  () => open() +
+    card(30,120,90,110,0,{rx:8}) +
+    d(46,136,3,DOT,0.15) + d(56,136,3,DOT,0.17) +
+    ln(46,156,104,156,0.22,{sw:1.5,stroke:DIM}) +
+    ln(46,172,94,172,0.25,{sw:1.5,stroke:DIM}) +
+    ln(46,188,104,188,0.28,{sw:1.5,stroke:DIM}) +
+    txt(75,220,'NOTE',0.35,{size:8,letter:'0.15em',fill:'rgba(29,29,31,0.55)',anchor:'middle'}) +
+    // Dashed FHIR arrow
+    dashPath('M 130 175 L 220 175',0.42) +
+    txt(175,168,'FHIR',0.5,{size:8,letter:'0.14em',fill:B,anchor:'middle'}) +
+    pth('M 214 170 L 222 175 L 214 180',0.5,{sw:1.5,stroke:B}) +
+    // EHR destination card
+    card(230,60,140,250,0.55,{rx:8}) +
+    // Header
+    rct(230,60,140,28,0.62,{sw:0,fill:DIM,rx:8}) +
+    d(244,74,3,DOT,0.68) + d(254,74,3,DOT,0.7) +
+    // Rows
+    ln(246,108,354,108,0.75,{sw:1,stroke:DIM}) +
+    ln(246,132,354,132,0.78,{sw:1,stroke:DIM}) +
+    rct(232,148,136,24,0.83,{sw:0,fill:B,op:0.15,rx:2}) +
+    d(258,160,3,B,0.9) + ln(268,160,340,160,0.92,{sw:1.5,stroke:B}) +
+    ln(246,184,354,184,0.96,{sw:1,stroke:DIM}) +
+    ln(246,208,354,208,0.98,{sw:1,stroke:DIM}) +
+    ln(246,232,354,232,1.0,{sw:1,stroke:DIM}) +
+    ln(246,256,354,256,1.02,{sw:1,stroke:DIM}) +
+    ln(246,280,354,280,1.04,{sw:1,stroke:DIM}) +
+    txt(300,335,'EHR · WRITTEN',1.1,{size:8,letter:'0.15em',fill:'rgba(29,29,31,0.55)',anchor:'middle'}) +
+    close,
+
+  // 4 Sign-off (doc) — document with amber verified badge chip
+  () => open() +
+    card(60,40,280,300,0,{rx:8}) +
+    rct(60,40,280,32,0.15,{sw:0,fill:DIM,rx:8}) +
+    d(76,56,3,DOT,0.22) + d(86,56,3,DOT,0.24) + d(96,56,3,DOT,0.26) +
+    txt(196,60,'SOAP NOTE',0.3,{size:10,anchor:'middle',fill:'rgba(29,29,31,0.7)',weight:500,letter:'0.1em'}) +
+    // Content
+    Array.from({length:8},(_,i)=>ln(80,100+i*24,320,100+i*24,0.35+i*0.03,{sw:1.5,stroke:DIM})).join('') +
+    // Sign block
+    rct(80,308,240,28,0.65,{sw:1,stroke:BORDER,fill:B_TINT,rx:6}) +
+    // Amber badge
+    amberBadge(200,322,20,0.78) +
+    // Physician signed chip
+    chip(80,352,110,22,'PHYSICIAN SIGNED',0.95,{textSize:8,dotColor:Y}) +
+    close
+];
+
+/* ============ CLINICAL TRIAL RECRUITMENT ============ */
+const CT = [
+  // 0 Protocol Ingestion — central brand tile fanning to three rule chips + one exclusion
+  () => open() +
+    brandTile(168,42,64,0,{icon:'doc'}) +
+    dashPath('M 200 110 Q 200 160 74 200',0.4) +
+    dashPath('M 200 110 L 200 200',0.45) +
+    dashPath('M 200 110 Q 200 160 326 200',0.5) +
+    chip(14,198,120,32,'AGE ≥ 18',0.6,{textSize:9,dotColor:B}) +
+    chip(140,198,120,32,'MELANOMA',0.7,{textSize:9,dotColor:B}) +
+    chip(266,198,120,32,'BRAF+',0.8,{textSize:9,dotColor:B}) +
+    chip(90,252,220,32,'EXCL · PRIOR CHEMO',0.9,{textSize:9,dotColor:B}) +
+    txt(200,310,'CRITERIA COMPILED AS RULES',1.05,{size:9,letter:'0.15em',anchor:'middle',fill:'rgba(29,29,31,0.5)'}) +
+    close,
+
+  // 1 Cohort Discovery — search results UI with highlighted matched rows
+  () => open() +
+    card(50,50,300,240,0,{rx:8}) +
+    // Search header row
+    rct(64,66,272,26,0.15,{sw:1,stroke:BORDER,fill:'#fafafa',rx:13}) +
+    d(80,79,4,B,0.22) +
+    ln(94,79,240,79,0.28,{sw:1.5,stroke:DIM}) +
+    chip(288,68,42,22,'5 / 35',0.35,{textSize:8,dotColor:G}) +
+    // Result rows
+    Array.from({length:6},(_,i)=>{
+      const y = 108 + i*28;
+      const matched = [0,2,4].includes(i);
+      const bg = matched ? rct(56,y-6,288,24,0.42+i*0.04,{sw:0,fill:B,op:0.10,rx:4}) : '';
+      return bg +
+        d(70,y+6,4,matched?B:DOT,0.5+i*0.04) +
+        ln(84,y+6,180,y+6,0.53+i*0.04,{sw:1.5,stroke:matched?F:DIM}) +
+        ln(200,y+6,260,y+6,0.55+i*0.04,{sw:1.5,stroke:DIM}) +
+        (matched ? chip(280,y-4,54,20,'MATCH',0.6+i*0.04,{textSize:7,dotColor:B}) : '');
+    }).join('') +
+    close,
+
+  // 2 Patient Screening — filter panel UI with criteria + result
+  () => open() +
+    card(50,50,300,240,0,{rx:8}) +
+    // Header
+    rct(50,50,300,32,0.15,{sw:0,fill:DIM,rx:8}) +
+    txt(66,71,'SCREENING FILTERS',0.22,{size:9,weight:500,letter:'0.15em',fill:'rgba(29,29,31,0.7)'}) +
+    // Filter rows (criteria)
+    Array.from(['Age range','Diagnosis','Biomarker','Prior therapy','Comorbidities'],(t,i)=>{
+      const y = 108 + i*26;
+      const active = [0,1,2].includes(i);
+      return d(72,y,4,active?B:DIM,0.32+i*0.05) +
+        txt(88,y+3,t,0.37+i*0.05,{size:10,fill:active?F:'rgba(29,29,31,0.5)'}) +
+        (active ? rct(280,y-8,52,16,0.42+i*0.05,{sw:0,fill:B,op:0.15,rx:8}) : rct(280,y-8,52,16,0.42+i*0.05,{sw:1,stroke:DIM,rx:8})) +
+        (active ? d(292,y,3,B,0.5+i*0.05) + txt(302,y+3,'ON',0.53+i*0.05,{size:8,weight:600,fill:B}) : txt(300,y+3,'OFF',0.5+i*0.05,{size:8,weight:500,fill:'rgba(29,29,31,0.4)'}));
+    }).join('') +
+    // Result summary bar
+    rct(66,258,268,24,0.75,{sw:0,fill:B_TINT,rx:12}) +
+    d(82,270,4,B,0.85) +
+    txt(96,274,'PASSED SCREENING',0.9,{size:9,weight:500,fill:F,letter:'0.1em'}) +
+    txt(324,274,'42',0.95,{size:11,weight:600,fill:B,anchor:'end'}) +
+    close,
+
+  // 3 Eligibility Match — ranked list UI with score bars
+  () => open() +
+    card(50,50,300,260,0,{rx:8}) +
+    // Header
+    rct(50,50,300,32,0.15,{sw:0,fill:DIM,rx:8}) +
+    txt(66,71,'RANKED MATCHES',0.22,{size:9,weight:500,letter:'0.15em',fill:'rgba(29,29,31,0.7)'}) +
+    txt(334,71,'SCORE',0.25,{size:9,weight:500,letter:'0.15em',fill:'rgba(29,29,31,0.7)',anchor:'end'}) +
+    // Ranked rows
+    Array.from({length:6},(_,i)=>{
+      const y = 108 + i*32;
+      const scores = [0.94, 0.87, 0.79, 0.71, 0.62, 0.55];
+      const isTop = i === 0;
+      const s = scores[i];
+      return txt(72,y,`#${i+1}`,0.32+i*0.05,{size:10,weight:600,fill:isTop?B:'rgba(29,29,31,0.6)'}) +
+        rct(96,y-8,152,14,0.35+i*0.05,{sw:0,fill:DIM,rx:7}) +
+        rct(96,y-8,152*s,14,0.4+i*0.05,{sw:0,fill:isTop?B:F,op:isTop?1:0.7,rx:7}) +
+        txt(334,y,s.toFixed(2),0.45+i*0.05,{size:10,weight:500,fill:isTop?B:F,anchor:'end'});
+    }).join('') +
+    close,
+
+  // 4 Patient Outreach — sender chip → provider tile → recipient chip
+  () => open() +
+    // Sender user chip
+    userChip(30,140,54,0,{fill:'#fff'}) +
+    txt(57,222,'PATIENT',0.25,{size:8,letter:'0.15em',fill:'rgba(29,29,31,0.55)',anchor:'middle'}) +
+    // First dashed connection
+    dashPath('M 90 167 L 152 167',0.35) +
+    pth('M 146 162 L 154 167 L 146 172',0.35,{sw:1.5,stroke:B}) +
+    // Provider brand tile (intermediary)
+    brandTile(163,132,72,0.45,{icon:'people'}) +
+    // Second dashed connection
+    dashPath('M 240 167 L 302 167',0.75) +
+    pth('M 296 162 L 304 167 L 296 172',0.75,{sw:1.5,stroke:B}) +
+    // Recipient user chip
+    userChip(308,140,54,0.85) +
+    txt(335,222,'PATIENT',1.0,{size:8,letter:'0.15em',fill:'rgba(29,29,31,0.55)',anchor:'middle'}) +
+    // Caption below
+    txt(199,270,'VIA TREATING PHYSICIAN',1.1,{size:9,letter:'0.15em',anchor:'middle',fill:'rgba(29,29,31,0.5)'}) +
+    close,
+
+  // 5 Enrollment — calendar UI mockup with amber booked slot
+  () => open() +
+    card(60,50,280,270,0,{rx:8}) +
+    // Header
+    rct(60,50,280,32,0.15,{sw:0,fill:DIM,rx:8}) +
+    txt(80,71,'ENROLLMENT SCHEDULE',0.22,{size:9,weight:500,letter:'0.15em',fill:'rgba(29,29,31,0.7)'}) +
+    // Weekday header
+    Array.from(['M','T','W','T','F'],(w,i)=>txt(94+i*54,102,w,0.28+i*0.02,{size:9,weight:600,fill:'rgba(29,29,31,0.5)',anchor:'middle',letter:'0.1em'})).join('') +
+    ln(60,114,340,114,0.4,{sw:1,stroke:BORDER}) +
+    // Calendar grid
+    Array.from({length:4},(_,r)=>Array.from({length:5},(_,c)=>{
+      const x=68+c*54, y=124+r*46;
+      return rct(x,y,44,38,0.4+(r*5+c)*0.02,{sw:1,stroke:BORDER,rx:4});
+    }).join('')).join('') +
+    // Booked amber slot
+    rct(176,170,44,38,0.85,{sw:0,fill:Y,op:0.9,rx:4}) +
+    pth('M 190 189 L 196 195 L 208 183',1.0,{sw:2.5,stroke:F}) +
+    // Chip
+    chip(76,326,120,22,'PATIENT ENROLLED',1.1,{textSize:8,dotColor:Y}) +
+    close
+];
+
+/* ============ PRIOR AUTHORIZATION ============ */
+const PA = [
+  // 0 Eligibility Check — two ID cards + amber verified badge
+  () => open() +
+    card(30,90,150,180,0,{rx:10}) +
+    rct(30,90,150,42,0.15,{sw:0,fill:DIM,rx:10}) +
+    d(48,111,3,DOT,0.22) + d(58,111,3,DOT,0.24) + d(68,111,3,DOT,0.26) +
+    d(80,180,20,F,0.32) +
+    ln(45,220,165,220,0.4,{sw:1.5,stroke:DIM}) +
+    ln(45,236,150,236,0.43,{sw:1.5,stroke:DIM}) +
+    ln(45,252,160,252,0.46,{sw:1.5,stroke:DIM}) +
+    card(220,90,150,180,0.12,{rx:10}) +
+    rct(220,90,150,42,0.28,{sw:0,fill:DIM,rx:10}) +
+    d(238,111,3,DOT,0.35) + d(248,111,3,DOT,0.37) + d(258,111,3,DOT,0.39) +
+    d(270,180,20,F,0.45) +
+    ln(235,220,355,220,0.5,{sw:1.5,stroke:DIM}) +
+    ln(235,236,340,236,0.53,{sw:1.5,stroke:DIM}) +
+    ln(235,252,350,252,0.56,{sw:1.5,stroke:DIM}) +
+    // Equals sign between
+    ln(184,170,216,170,0.65,{sw:2.5,stroke:B}) +
+    ln(184,190,216,190,0.72,{sw:2.5,stroke:B}) +
+    // Amber verified badge above
+    amberBadge(200,44,26,0.85) +
+    txt(200,84,'COVERAGE VERIFIED',1.0,{size:9,letter:'0.15em',anchor:'middle',fill:'rgba(29,29,31,0.55)'}) +
+    close,
+
+  // 1 Requirement ID — policy document with side tabs (some highlighted)
+  () => open() +
+    card(60,50,200,290,0,{rx:8}) +
+    rct(60,50,200,36,0.15,{sw:0,fill:DIM,rx:8}) +
+    d(76,68,3,DOT,0.22) + d(86,68,3,DOT,0.24) +
+    ln(76,110,240,110,0.3,{sw:1.5,stroke:DIM}) +
+    Array.from({length:9},(_,i)=>ln(76,130+i*22,240,130+i*22,0.34+i*0.02,{sw:1.5,stroke:DIM})).join('') +
+    // Side tabs — some highlighted blue (identified rules)
+    Array.from({length:5},(_,i)=>{
+      const y = 92 + i*48;
+      const active = [1,2,4].includes(i);
+      return (active ?
+        rct(258,y,84,40,0.55+i*0.05,{sw:0,fill:B,op:0.15,rx:6}) +
+        rct(258,y,84,40,0.6+i*0.05,{sw:1.5,stroke:B,rx:6}) +
+        d(272,y+20,4,B,0.68+i*0.05) +
+        ln(284,y+20,332,y+20,0.72+i*0.05,{sw:2,stroke:B}) +
+        ln(284,y+30,326,y+30,0.75+i*0.05,{sw:1.5,stroke:B,op:0.6})
+        :
+        rct(258,y,84,40,0.55+i*0.05,{sw:1,stroke:BORDER,rx:6}) +
+        d(272,y+20,4,DIM,0.68+i*0.05) +
+        ln(284,y+20,332,y+20,0.72+i*0.05,{sw:1.5,stroke:DIM}) +
+        ln(284,y+30,326,y+30,0.75+i*0.05,{sw:1.5,stroke:DIM})
+      );
+    }).join('') +
+    close,
+
+  // 2 Evidence Retrieval — 3 source cards → central brand tile packet
+  () => open() +
+    // Three source cards on the left
+    card(28,50,100,72,0,{rx:8}) +
+    ln(42,72,116,72,0.15,{sw:1.5,stroke:DIM}) +
+    ln(42,86,108,86,0.18,{sw:1.5,stroke:DIM}) +
+    ln(42,100,116,100,0.21,{sw:1.5,stroke:DIM}) +
+    txt(78,140,'CHART',0.3,{size:8,letter:'0.15em',anchor:'middle',fill:'rgba(29,29,31,0.55)'}) +
+    card(28,160,100,72,0.08,{rx:8}) +
+    pth('M 42 210 L 54 190 L 66 200 L 78 178 L 90 194 L 102 174 L 116 194',0.28,{sw:1.5,stroke:B}) +
+    txt(78,250,'LABS',0.4,{size:8,letter:'0.15em',anchor:'middle',fill:'rgba(29,29,31,0.55)'}) +
+    card(28,270,100,72,0.16,{rx:8}) +
+    ring(78,302,20,0.38,{sw:1,stroke:DIM}) +
+    d(78,302,10,B,0.48) +
+    txt(78,360,'IMAGING',0.5,{size:8,letter:'0.15em',anchor:'middle',fill:'rgba(29,29,31,0.55)'}) +
+    // Dashed converging connections
+    dashPath('M 136 86 Q 220 130 250 190',0.55) +
+    dashPath('M 136 196 L 250 196',0.6) +
+    dashPath('M 136 306 Q 220 260 250 200',0.65) +
+    // Central brand tile
+    brandTile(250,158,90,0.75,{icon:'link'}) +
+    txt(295,292,'EVIDENCE PACKET',1.05,{size:9,letter:'0.15em',anchor:'middle',fill:'rgba(29,29,31,0.55)'}) +
+    close,
+
+  // 3 Auth Assembly — layered document cards with citation links
+  () => open() +
+    // 3 offset stacked cards
+    card(70,50,240,110,0,{rx:8}) +
+    ln(86,80,286,80,0.15,{sw:1.5,stroke:DIM}) +
+    ln(86,96,266,96,0.18,{sw:1.5,stroke:DIM}) +
+    ln(86,112,286,112,0.21,{sw:1.5,stroke:DIM}) +
+    ln(86,128,270,128,0.24,{sw:1.5,stroke:DIM}) +
+    d(300,88,5,B,0.3) +
+    // Citation link dashed line
+    ln(300,94,300,152,0.35,{sw:1.5,stroke:B,dash:'3 3'}) +
+    card(70,150,240,110,0.4,{rx:8}) +
+    ln(86,180,286,180,0.5,{sw:1.5,stroke:DIM}) +
+    ln(86,196,266,196,0.53,{sw:1.5,stroke:DIM}) +
+    ln(86,212,286,212,0.56,{sw:1.5,stroke:DIM}) +
+    ln(86,228,270,228,0.59,{sw:1.5,stroke:DIM}) +
+    d(300,188,5,B,0.65) +
+    ln(300,194,300,252,0.7,{sw:1.5,stroke:B,dash:'3 3'}) +
+    // Assembly seal card at bottom
+    card(70,258,240,44,0.75,{rx:8,fill:'#fff'}) +
+    rct(70,258,240,44,0.8,{sw:0,fill:B,op:0.10,rx:8}) +
+    amberBadge(120,280,16,0.9) +
+    txt(148,285,'AUTH PACKET ASSEMBLED',1.0,{size:9,weight:500,letter:'0.12em',fill:F}) +
+    close,
+
+  // 4 Payer Submission — packet card → portal boundary → destination system
+  () => open() +
+    card(30,140,90,100,0,{rx:8}) +
+    d(46,158,3,DOT,0.15) + d(56,158,3,DOT,0.17) +
+    ln(46,178,104,178,0.22,{sw:1.5,stroke:DIM}) +
+    ln(46,192,94,192,0.25,{sw:1.5,stroke:DIM}) +
+    ln(46,206,104,206,0.28,{sw:1.5,stroke:DIM}) +
+    txt(75,258,'PACKET',0.35,{size:8,letter:'0.15em',anchor:'middle',fill:'rgba(29,29,31,0.55)'}) +
+    // Dashed arrow + portal
+    dashPath('M 128 190 L 168 190',0.42) +
+    pth('M 162 185 L 170 190 L 162 195',0.5,{sw:1.5,stroke:B}) +
+    // Portal double lines
+    ln(184,60,184,320,0.55,{sw:2,stroke:B,dash:'6 4'}) +
+    ln(192,60,192,320,0.6,{sw:2,stroke:B,op:0.4,dash:'6 4'}) +
+    // Destination system card
+    card(210,60,160,260,0.65,{rx:8}) +
+    rct(210,60,160,32,0.72,{sw:0,fill:DIM,rx:8}) +
+    d(226,76,3,DOT,0.78) + d(236,76,3,DOT,0.8) +
+    txt(340,80,'PAYER',0.82,{size:8,letter:'0.15em',anchor:'end',fill:'rgba(29,29,31,0.55)'}) +
+    // Rows
+    ln(224,112,354,112,0.85,{sw:1,stroke:DIM}) +
+    ln(224,136,354,136,0.87,{sw:1,stroke:DIM}) +
+    ln(224,160,354,160,0.89,{sw:1,stroke:DIM}) +
+    // Received row
+    rct(216,178,148,26,0.95,{sw:0,fill:B,op:0.15,rx:2}) +
+    d(232,191,3,B,1.05) + ln(244,191,338,191,1.08,{sw:1.5,stroke:B}) +
+    ln(224,228,354,228,1.1,{sw:1,stroke:DIM}) +
+    ln(224,252,354,252,1.12,{sw:1,stroke:DIM}) +
+    ln(224,276,354,276,1.14,{sw:1,stroke:DIM}) +
+    ln(224,300,354,300,1.16,{sw:1,stroke:DIM}) +
+    close,
+
+  // 5 Status Monitoring — timeline UI with milestones
+  () => open() +
+    card(30,100,340,180,0,{rx:8}) +
+    txt(50,128,'AUTH STATUS',0.15,{size:9,weight:500,letter:'0.15em',fill:'rgba(29,29,31,0.7)'}) +
+    chip(280,116,74,22,'3d 04h',0.22,{textSize:9,dotColor:B}) +
+    // Track
+    ln(60,200,340,200,0.35,{sw:3,stroke:DIM}) +
+    ln(60,200,208,200,0.45,{sw:3,stroke:B}) +
+    // Milestones
+    d(60,200,10,B,0.55) + pth('M 54 200 L 59 205 L 68 194',0.65,{sw:2,stroke:'#fff'}) +
+    d(134,200,10,B,0.6) + pth('M 128 200 L 133 205 L 142 194',0.7,{sw:2,stroke:'#fff'}) +
+    ring(208,200,18,0.72,{sw:2,stroke:B}) + d(208,200,9,B,0.8) +
+    ring(280,200,7,0.82,{sw:2,stroke:DOT}) +
+    ring(340,200,7,0.85,{sw:2,stroke:DOT}) +
+    // Labels
+    txt(60,236,'SUBMITTED',0.9,{size:8,letter:'0.12em',anchor:'middle',fill:'rgba(29,29,31,0.5)'}) +
+    txt(134,236,'RECEIVED',0.92,{size:8,letter:'0.12em',anchor:'middle',fill:'rgba(29,29,31,0.5)'}) +
+    txt(208,236,'REVIEW',0.94,{size:8,letter:'0.12em',anchor:'middle',fill:B,weight:600}) +
+    txt(280,236,'DECISION',0.96,{size:8,letter:'0.12em',anchor:'middle',fill:'rgba(29,29,31,0.4)'}) +
+    txt(340,236,'DELIVERED',0.98,{size:8,letter:'0.12em',anchor:'middle',fill:'rgba(29,29,31,0.4)'}) +
+    close,
+
+  // 6 Escalation — two-tier ladder with case moving from lower to upper
+  () => open() +
+    // Lower platform card
+    card(28,240,150,90,0,{rx:8}) +
+    d(74,270,3,DOT,0.15) + d(84,270,3,DOT,0.17) + d(94,270,3,DOT,0.19) +
+    ln(46,290,158,290,0.24,{sw:1.5,stroke:DIM}) +
+    ln(46,304,140,304,0.28,{sw:1.5,stroke:DIM}) +
+    chip(46,318,90,22,'SPECIALIST',0.35,{textSize:8}) +
+    // Upper platform card
+    card(222,50,150,90,0.5,{rx:8}) +
+    d(268,80,3,DOT,0.62) + d(278,80,3,DOT,0.64) + d(288,80,3,DOT,0.66) +
+    ln(240,100,352,100,0.7,{sw:1.5,stroke:DIM}) +
+    ln(240,114,334,114,0.72,{sw:1.5,stroke:DIM}) +
+    // Physician badge chip inside/attached
+    chip(240,128,110,22,'PHYSICIAN · MD',0.75,{textSize:8,dotColor:B}) +
+    // Step-up path (staircase)
+    ln(178,285,178,220,0.4,{sw:2,stroke:B,dash:'4 4'}) +
+    ln(178,220,220,220,0.45,{sw:2,stroke:B,dash:'4 4'}) +
+    ln(220,220,220,155,0.5,{sw:2,stroke:B,dash:'4 4'}) +
+    ln(220,155,268,155,0.55,{sw:2,stroke:B,dash:'4 4'}) +
+    // Escalation arrow at top
+    pth('M 262 150 L 268 155 L 262 160',0.62,{sw:1.5,stroke:B}) +
+    // Case in transit dot
+    d(220,187,6,B,0.68) +
+    // Escalation label
+    txt(200,352,'PEER-TO-PEER REVIEW',0.88,{size:9,letter:'0.15em',anchor:'middle',fill:'rgba(29,29,31,0.55)'}) +
+    close
+];
+
+const SCENES_BY_PROC = [MI, CD, CT, PA];
+
+function renderAll(){
+  renderTabs();
+  renderCards();
+  document.getElementById('carTrack').scrollTo({left:0, behavior:'auto'});
+  setTimeout(updateProgress, 50);
+}
+renderAll();
+</script>
+
+</body>
+</html>

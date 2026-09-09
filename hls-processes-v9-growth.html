@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V9 · Process Architecture — HLS</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#f2f7ff;--ink-70:rgba(255,255,255,0.72);--ink-60:rgba(255,255,255,0.58);--ink-40:rgba(255,255,255,0.42);--ink-20:rgba(255,255,255,0.18);--line:rgba(255,255,255,0.10);
+  --paper:#040a1e;--paper-2:#0a1230;
+  --blue:#0064ff;--blue-strong:#004ecc;--blue-lit:#7ba9ff;--blue-soft:#b3d0ff;
+  --display:'Poppins',system-ui,sans-serif;
+  --body:system-ui,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;background:none;border:none;cursor:pointer;color:inherit;}
+
+.wrap{max-width:1344px;margin:0 auto;padding:0 32px;position:relative;}
+.crumb{background:var(--paper);border-bottom:1px solid var(--line);padding:14px 0;font-size:12px;color:var(--ink-60);font-family:var(--display);font-weight:400;letter-spacing:0.02em;}
+.crumb a{color:var(--blue-lit);}
+.crumb strong{color:var(--ink);font-weight:500;margin-left:8px;}
+
+.section{padding:64px 0 96px;background:var(--paper);background-image:radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);background-size:22px 22px;position:relative;}
+
+/* Process tabs — centered segmented control */
+.process-tabs-wrap{display:flex;justify-content:center;margin-bottom:32px;}
+.process-tabs{display:inline-flex;gap:2px;background:rgba(255,255,255,0.05);padding:5px;border-radius:999px;flex-wrap:wrap;justify-content:center;border:1px solid rgba(255,255,255,0.07);}
+.process-tab{padding:10px 20px;color:rgba(255,255,255,0.60);border:none;border-radius:999px;transition:all .18s;letter-spacing:-0.005em;background:transparent;font-family:var(--display);font-weight:400;font-size:13px;white-space:nowrap;}
+.process-tab:hover{color:#0a1230;background:#ffffff;}
+.process-tab.active{color:#0a1230;background:#ffffff;font-weight:500;}
+
+/* Architecture card */
+.arch-card{
+  background:linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:18px;
+  padding:22px 22px 18px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+.stage{position:relative;}
+.stack-svg{width:100%;height:auto;display:block;overflow:visible;}
+
+/* Animation states */
+.stage-col{transition:opacity .55s cubic-bezier(0.4,0,0.2,1);}
+.stack-svg.cycling .stage-col:not(.is-active){opacity:0.62;}
+.stage-col.is-active .pill-rect{filter:url(#pillGlow);}
+
+@media (max-width:900px){
+  .caption{grid-template-columns:1fr;gap:8px;}
+  .arch-card{padding:20px 16px;}
+}
+</style>
+</head>
+<body>
+
+<div class="crumb"><div class="wrap"><a href="hls-processes-storyboard.html">← Storyboard</a> <strong>Variation 09 · Process Architecture</strong></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="process-tabs-wrap"><div class="process-tabs" id="pTabs"></div></div>
+
+    <div class="arch-card">
+      <div class="stage">
+        <svg class="stack-svg" id="stackSvg" viewBox="0 0 1300 470" preserveAspectRatio="xMidYMid meet" aria-label="Process architecture"></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const PROCESSES = [
+  {
+    name:"Medical Imaging & Diagnostic Analysis",
+    breakthrough:"AI reads the study before the radiologist opens it.",
+    workflow:["Image Acquisition","Ingestion & Routing","Preliminary Detection","Radiologist Review","Structured Reporting","Sign-off","Critical Findings"],
+    agents:["Protocol Agent","Routing Agent","Detection Agent","Comparison Agent","Reporting Agent","—","Notification Agent"],
+    humans:["Technologist","—","—","Radiologist","—","Radiologist","Radiologist"],
+    oversight:["Imaging AI Ops","Continuous Optimization"],
+    intel:["Modality protocols","Prior imaging","Detection models","Patient history","Reporting lexicons","Care team roster"],
+    systems:["DICOM / PACS","EHR (HL7/FHIR)","Reporting platform","Notification gateway"]
+  },
+  {
+    name:"Clinical Documentation",
+    breakthrough:"Ambient scribing takes the note off the physician's desk.",
+    workflow:["Patient Encounter","Clinical Extraction","Note Generation","EHR Update","Sign-off"],
+    agents:["Capture Agent","Extraction Agent","Scribe Agent","EHR Agent","—"],
+    humans:["Clinician","—","—","—","Physician"],
+    oversight:["Scribe Ops","Continuous Optimization"],
+    intel:["Medical terminology","Specialty templates","Chart history","EHR schema","Ambient audio","Sign-off policy"],
+    systems:["EHR (HL7/FHIR)","Voice / ambient device","ASR platform"]
+  },
+  {
+    name:"Clinical Trial Recruitment",
+    breakthrough:"Protocol-to-patient in days, not months.",
+    workflow:["Protocol Ingestion","Cohort Discovery","Patient Screening","Eligibility Match","Patient Outreach","Enrollment"],
+    agents:["Protocol Agent","Cohort Agent","Screening Agent","Matching Agent","Outreach Agent","Enrollment Agent"],
+    humans:["Clinical Scientist","—","Coordinator","PI","Physician","Coordinator"],
+    oversight:["Trial Ops","Continuous Optimization"],
+    intel:["Protocol library","EHR cohort","Genomic registry","Consent forms","Contact history","Site directory"],
+    systems:["EHR (HL7/FHIR)","CTMS","eConsent platform","Genomic data store"]
+  },
+  {
+    name:"Prior Authorization",
+    breakthrough:"Auth packets compiled before the request hits the payer.",
+    workflow:["Eligibility Check","Requirement ID","Evidence Retrieval","Auth Assembly","Submission","Status Monitoring","Escalation"],
+    agents:["Eligibility Agent","Policy Agent","Evidence Agent","Assembly Agent","Submission Agent","Monitoring Agent","Escalation Agent"],
+    humans:["—","—","—","Auth Specialist","—","Specialist","Physician"],
+    oversight:["Auth Ops","Continuous Optimization"],
+    intel:["Payer policy","Eligibility records","Clinical evidence","Payer portals","Auth history","Escalation playbook"],
+    systems:["EHR (HL7/FHIR)","Payer APIs / portals","Auth submission gateway"]
+  }
+];
+
+let currentProc = 0;
+let activeStage = 0;
+let cycleTimer = null;
+
+const CONNECTOR    = 'rgba(179,208,255,0.30)';
+const NONE_STROKE  = 'rgba(179,208,255,0.28)';
+const CONNECTOR_DASH = '3 3';
+const LABEL_COLOR  = 'rgba(179,208,255,0.68)';
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);}
+
+function wrapText(text, x, y, maxW, size, weight, color){
+  const words = String(text).split(' ');
+  const approxCharW = size*0.56;
+  const maxChars = Math.max(6, Math.floor(maxW/approxCharW));
+  const lines = []; let cur = '';
+  for(const w of words){
+    if(((cur?cur+' ':'')+w).length <= maxChars){ cur = cur?cur+' '+w:w; }
+    else { if(cur) lines.push(cur); cur = w; }
+  }
+  if(cur) lines.push(cur);
+  const lh = size*1.15;
+  const yOffset = -((lines.length-1)/2)*lh;
+  return lines.map((ln,i)=>
+    `<text x="${x}" y="${y + yOffset + i*lh}" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="${weight}" font-size="${size}" fill="${color}" style="letter-spacing:-0.005em">${escapeHtml(ln)}</text>`
+  ).join('');
+}
+
+function pill(text, x, y, w, h, opts={}){
+  const r = opts.r ?? 7;
+  const fill = opts.fill ?? 'url(#pillDefault)';
+  const textColor = opts.textColor ?? '#ffffff';
+  const size = opts.size ?? 10.5;
+  const stroke = opts.stroke ?? 'rgba(255,255,255,0.12)';
+  return `<g>
+    <rect class="pill-rect" x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}" stroke="${stroke}" stroke-width="0.8"/>
+    ${wrapText(text, x + w/2, y + h/2 + 3.5, w - 12, size, 500, textColor)}
+  </g>`;
+}
+
+function nonePill(x, y, w, h){
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="7" fill="transparent" stroke="${NONE_STROKE}" stroke-width="1" stroke-dasharray="3 3"/>`;
+}
+
+function rowLabel(x, y, text){
+  return `<text x="${x}" y="${y + 4}" font-family="Poppins,sans-serif" font-weight="500" font-size="8.5" fill="${LABEL_COLOR}" style="letter-spacing:0.22em">${text}</text>`;
+}
+
+function columns(n, leftX, rightX){
+  const cols = [];
+  const usableW = rightX - leftX;
+  for(let i=0;i<n;i++){
+    const t = n===1 ? 0.5 : i/(n-1);
+    cols.push({i, t, x: leftX + t*usableW});
+  }
+  return cols;
+}
+
+function stageGradientDef(id, index, n){
+  const t = n===1 ? 0.5 : index/(n-1);
+  const L = 20 + t*18; // 20% (deep) → 38% (mid), muted
+  const light = L + 5;
+  const dark = L - 5;
+  return `<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="hsl(217, 90%, ${light}%)"/>
+    <stop offset="1" stop-color="hsl(217, 90%, ${dark}%)"/>
+  </linearGradient>`;
+}
+
+function fixedGradientDef(id, lightness){
+  const light = lightness + 5, dark = lightness - 5;
+  return `<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="hsl(217, 90%, ${light}%)"/>
+    <stop offset="1" stop-color="hsl(217, 90%, ${dark}%)"/>
+  </linearGradient>`;
+}
+
+function renderStack(){
+  const svg = document.getElementById('stackSvg');
+  const p = PROCESSES[currentProc];
+
+  const W = 1300;
+  const LEFT_LABEL_X = 22;
+  const NODE_LEFT = 168;
+  const NODE_RIGHT = 1230;
+  const cardW = 114;
+  const cardH = 36;
+
+  const rowY = {
+    workflow: 54,
+    agents:   118,
+    humans:   182,
+    oversight:254,
+    intel:    334,
+    systems:  408
+  };
+  const totalH = 460;
+
+  const rowLabels = {
+    workflow:  'WORKFLOW',
+    agents:    'AGENTS',
+    humans:    'HUMANS',
+    oversight: 'OVERSIGHT',
+    intel:     'INTELLIGENCE',
+    systems:   'SYSTEMS'
+  };
+
+  svg.setAttribute('viewBox', `0 0 ${W} ${totalH}`);
+
+  const nStages = p.workflow.length;
+  const cols = columns(nStages, NODE_LEFT, NODE_RIGHT);
+
+  // Build defs: per-stage gradients + shared gradients + glow filter
+  let defs = '<defs>';
+  for(let i=0;i<nStages;i++){
+    defs += stageGradientDef(`stg${i}`, i, nStages);
+  }
+  defs += fixedGradientDef('pillDefault', 30);
+  defs += fixedGradientDef('hubGrad', 18);
+  defs += fixedGradientDef('intelGrad', 26);
+  defs += fixedGradientDef('sysGrad', 22);
+  defs += `<filter id="pillGlow" x="-40%" y="-60%" width="180%" height="220%">
+    <feGaussianBlur stdDeviation="5" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>`;
+  defs += '</defs>';
+
+  let out = defs;
+
+  // Subtle horizontal divider between per-stage rows and cross-cutting rows
+  out += `<line x1="${NODE_LEFT - 40}" y1="${rowY.oversight + 46}" x2="${NODE_RIGHT}" y2="${rowY.oversight + 46}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`;
+
+  const hubCenterX = W/2;
+
+  // Row labels (drawn first so pills sit above)
+  out += rowLabel(LEFT_LABEL_X, rowY.workflow, rowLabels.workflow);
+  out += rowLabel(LEFT_LABEL_X, rowY.agents, rowLabels.agents);
+  out += rowLabel(LEFT_LABEL_X, rowY.humans, rowLabels.humans);
+  out += rowLabel(LEFT_LABEL_X, rowY.oversight, rowLabels.oversight);
+  out += rowLabel(LEFT_LABEL_X, rowY.intel, rowLabels.intel);
+  out += rowLabel(LEFT_LABEL_X, rowY.systems, rowLabels.systems);
+
+  // Per-stage columns (workflow, agents, humans + connectors + fan-in to hub)
+  cols.forEach((c, i)=>{
+    let col = `<g class="stage-col" data-idx="${i}">`;
+    const num = String(i+1).padStart(2,'0');
+    const agent = p.agents[i];
+    const human = p.humans[i];
+    const hasAgent = agent && agent !== '—';
+    const hasHuman = human && human !== '—';
+
+    // Stage number tag above workflow pill
+    col += `<text x="${c.x}" y="${rowY.workflow - cardH/2 - 10}" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="500" font-size="9" fill="${LABEL_COLOR}" style="letter-spacing:0.28em">${num}</text>`;
+
+    // Build ordered list of present pills for this column, so connectors skip empties
+    const stops = [{y: rowY.workflow, label: p.workflow[i]}];
+    if(hasAgent)  stops.push({y: rowY.agents,  label: agent});
+    if(hasHuman)  stops.push({y: rowY.humans,  label: human});
+
+    // Dashed connectors between consecutive present pills
+    for(let j=0;j<stops.length-1;j++){
+      const y1 = stops[j].y + cardH/2;
+      const y2 = stops[j+1].y - cardH/2;
+      col += `<line x1="${c.x}" y1="${y1}" x2="${c.x}" y2="${y2}" stroke="${CONNECTOR}" stroke-width="1" stroke-dasharray="${CONNECTOR_DASH}"/>`;
+    }
+
+    // Render pills (workflow always, agent + human only if present)
+    col += pill(p.workflow[i], c.x - cardW/2, rowY.workflow - cardH/2, cardW, cardH, {fill:`url(#stg${i})`});
+    if(hasAgent){
+      col += pill(agent, c.x - cardW/2, rowY.agents - cardH/2, cardW, cardH, {fill:`url(#stg${i})`});
+    }
+    if(hasHuman){
+      col += pill(human, c.x - cardW/2, rowY.humans - cardH/2, cardW, cardH, {fill:`url(#stg${i})`});
+    }
+
+    // Fan-in curve to oversight hub — only if a human exists at this column
+    if(hasHuman){
+      const startY = rowY.humans + cardH/2;
+      const endY = rowY.oversight - 24;
+      const midY = (startY + endY)/2;
+      col += `<path d="M ${c.x} ${startY} C ${c.x} ${midY}, ${hubCenterX} ${midY}, ${hubCenterX} ${endY}" fill="none" stroke="${CONNECTOR}" stroke-width="1" stroke-dasharray="${CONNECTOR_DASH}"/>`;
+    }
+
+    col += `</g>`;
+    out += col;
+  });
+
+  // Oversight hub row — always active
+  const oPills = p.oversight;
+  const oW = 172, oH = 32, oGap = 14;
+  const totalOW = oPills.length*oW + (oPills.length-1)*oGap;
+  const oStartX = W/2 - totalOW/2;
+  oPills.forEach((o, i)=>{
+    const x = oStartX + i*(oW + oGap);
+    out += pill(o, x, rowY.oversight - oH/2, oW, oH, {fill:'url(#hubGrad)', r:9, size:10.5});
+  });
+
+  // Intel bracket + pills — cross-cutting, always visible
+  const railX1 = cols[0].x, railX2 = cols[cols.length-1].x;
+  out += `<line x1="${railX1}" y1="${rowY.intel - 30}" x2="${railX2}" y2="${rowY.intel - 30}" stroke="${CONNECTOR}" stroke-width="1" stroke-dasharray="${CONNECTOR_DASH}"/>`;
+  out += `<line x1="${railX1}" y1="${rowY.intel - 30}" x2="${railX1}" y2="${rowY.intel - 22}" stroke="${CONNECTOR}" stroke-width="1"/>`;
+  out += `<line x1="${railX2}" y1="${rowY.intel - 30}" x2="${railX2}" y2="${rowY.intel - 22}" stroke="${CONNECTOR}" stroke-width="1"/>`;
+  out += `<text x="${(railX1+railX2)/2}" y="${rowY.intel - 38}" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="500" font-size="8.5" fill="${LABEL_COLOR}" style="letter-spacing:0.28em">DRAWN ON BY EVERY STAGE</text>`;
+
+  const intel = p.intel;
+  const iN = intel.length;
+  const iGap = 12;
+  const iAvailW = NODE_RIGHT - NODE_LEFT;
+  const iW = (iAvailW - (iN-1)*iGap)/iN;
+  const iH = 32;
+  intel.forEach((it, i)=>{
+    const x = NODE_LEFT + i*(iW + iGap);
+    out += pill(it, x, rowY.intel - iH/2, iW, iH, {fill:'url(#intelGrad)', r:8, size:10.5});
+  });
+
+  // Systems bracket + pills
+  out += `<line x1="${railX1}" y1="${rowY.systems - 32}" x2="${railX2}" y2="${rowY.systems - 32}" stroke="${CONNECTOR}" stroke-width="1" stroke-dasharray="${CONNECTOR_DASH}"/>`;
+  out += `<line x1="${railX1}" y1="${rowY.systems - 32}" x2="${railX1}" y2="${rowY.systems - 22}" stroke="${CONNECTOR}" stroke-width="1"/>`;
+  out += `<line x1="${railX2}" y1="${rowY.systems - 32}" x2="${railX2}" y2="${rowY.systems - 22}" stroke="${CONNECTOR}" stroke-width="1"/>`;
+  out += `<text x="${(railX1+railX2)/2}" y="${rowY.systems - 40}" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="500" font-size="8.5" fill="${LABEL_COLOR}" style="letter-spacing:0.28em">FOUNDATION UNDER EVERY STAGE</text>`;
+
+  const systems = p.systems;
+  const sN = systems.length;
+  const sGap = 14;
+  const sAvailW = NODE_RIGHT - NODE_LEFT;
+  const sW = (sAvailW - (sN-1)*sGap)/sN;
+  const sH = 36;
+  systems.forEach((it, i)=>{
+    const x = NODE_LEFT + i*(sW + sGap);
+    out += pill(it, x, rowY.systems - sH/2, sW, sH, {fill:'url(#sysGrad)', r:9, size:10.5});
+  });
+
+  svg.innerHTML = out;
+  svg.classList.add('cycling');
+  applyActiveStage();
+}
+
+function applyActiveStage(){
+  const svg = document.getElementById('stackSvg');
+  svg.querySelectorAll('.stage-col').forEach(el=>{
+    const idx = parseInt(el.dataset.idx, 10);
+    el.classList.toggle('is-active', idx === activeStage);
+  });
+}
+
+function startCycle(){
+  stopCycle();
+  cycleTimer = setInterval(()=>{
+    const n = PROCESSES[currentProc].workflow.length;
+    activeStage = (activeStage + 1) % n;
+    applyActiveStage();
+  }, 2200);
+}
+function stopCycle(){
+  if(cycleTimer){ clearInterval(cycleTimer); cycleTimer = null; }
+}
+
+function renderTabs(){
+  document.getElementById('pTabs').innerHTML = PROCESSES.map((p,i)=>
+    `<button class="process-tab ${i===currentProc?'active':''}" data-p="${i}">${p.name}</button>`
+  ).join('');
+  document.querySelectorAll('.process-tab').forEach(el=>el.addEventListener('click',()=>{
+    currentProc = parseInt(el.dataset.p,10);
+    activeStage = 0;
+    renderTabs(); renderCaption(); renderStack(); startCycle();
+  }));
+}
+
+function renderCaption(){ /* caption removed */ }
+
+// Pause cycling on hover of the SVG
+document.addEventListener('DOMContentLoaded', ()=>{
+  const svg = document.getElementById('stackSvg');
+  svg.addEventListener('mouseenter', stopCycle);
+  svg.addEventListener('mouseleave', startCycle);
+});
+
+renderTabs(); renderCaption(); renderStack(); startCycle();
+</script>
+
+</body>
+</html>

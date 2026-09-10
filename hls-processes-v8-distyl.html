@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>V8 · Stage Carousel — HLS</title>
+<title>V8 · Autonomous RCM Architecture</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#fff;--ink-80:rgba(255,255,255,0.86);--ink-60:rgba(255,255,255,0.65);--ink-40:rgba(255,255,255,0.42);--ink-20:rgba(255,255,255,0.18);
   --paper:#050a1e;--paper-2:#0a1230;--paper-side:#0e1636;--line:rgba(255,255,255,0.10);
-  --blue:#0064ff;--blue-lit:#7ba9ff;--blue-strong:#b3d0ff;--blue-deep:#00337f;--blue-06:rgba(123,169,255,0.08);--blue-12:rgba(123,169,255,0.16);--blue-24:rgba(179,208,255,0.32);
-  --dark:#02061a;--dark-2:#0a1230;--dark-line:rgba(179,208,255,0.18);--dark-ink:#f2f7ff;--dark-ink-60:#a9b3c9;
-  --amber:#ffd582;
+  --blue:#0064ff;--blue-lit:#7ba9ff;--blue-strong:#b3d0ff;--blue-deep:#00337f;
+  --blue-06:rgba(123,169,255,0.08);--blue-12:rgba(123,169,255,0.16);--blue-24:rgba(179,208,255,0.32);
+  --dark:#02061a;--dark-ink:#f2f7ff;--dark-ink-60:#a9b3c9;
+  --purple:#b48cff;
   --display:'Poppins',system-ui,sans-serif;
   --body:system-ui,'Segoe UI',Roboto,sans-serif;
 }
@@ -20,15 +21,8 @@
   --paper:#fff;--paper-2:#f6f7f9;--paper-side:#f2f7ff;--line:#e4e6ea;
   --blue:#0064ff;--blue-lit:#0064ff;--blue-strong:#004ecc;--blue-deep:#00337f;
   --blue-06:#eef4ff;--blue-12:#dbe9ff;--blue-24:#b3d0ff;
-  --amber:#8a5a10;
+  --purple:#734bff;
 }
-
-/* Theme toggle — fixed top right */
-.theme-toggle{position:fixed;top:14px;right:20px;z-index:100;display:inline-flex;align-items:center;gap:6px;padding:6px;border:1px solid var(--line);border-radius:999px;background:var(--paper-2);}
-.theme-toggle button{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;color:var(--ink-60);transition:all .18s;}
-.theme-toggle button svg{width:15px;height:15px;}
-.theme-toggle button.on{background:var(--blue);color:#fff;}
-[data-theme="light"] .theme-toggle button.on{background:var(--ink);color:#fff;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;}
 a{color:inherit;text-decoration:none;}
@@ -39,33 +33,19 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;color:inhe
 .crumb a{color:var(--blue-lit);}
 .crumb strong{color:var(--ink);font-weight:500;margin-left:8px;}
 
-.section{padding:72px 0 100px;background:var(--paper);}
-.eyebrow{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-lit);}
-h2{font-family:var(--display);font-weight:300;font-size:clamp(30px,3.4vw,46px);line-height:1.05;letter-spacing:-0.02em;margin:14px 0 8px;max-width:900px;color:var(--ink);}
-.sub{color:var(--ink-60);max-width:640px;font-size:15.5px;margin-bottom:40px;}
+.section{padding:64px 0 96px;background:var(--paper);}
+.eyebrow{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-lit);text-align:center;}
+h2{font-family:var(--display);font-weight:300;font-size:clamp(30px,3.4vw,44px);line-height:1.05;letter-spacing:-0.02em;margin:14px auto 8px;max-width:900px;color:var(--ink);text-align:center;}
+.sub{color:var(--ink-60);max-width:640px;font-size:15.5px;margin:0 auto 56px;text-align:center;}
 
-/* Process picker — V7 pill style */
-.p-tabs-wrap{display:flex;justify-content:center;margin-bottom:80px;}
-.p-tabs{display:inline-flex;gap:2px;background:rgba(255,255,255,0.06);padding:5px;border-radius:999px;flex-wrap:wrap;justify-content:center;border:1px solid var(--line);}
-[data-theme="light"] .p-tabs{background:#e8e8ed;border-color:transparent;}
-.p-tab{padding:10px 22px;font-family:var(--display);font-weight:500;font-size:14px;color:var(--ink-60);border-radius:999px;transition:all .18s;white-space:nowrap;letter-spacing:-0.005em;}
-.p-tab:hover{color:var(--ink);}
-.p-tab.active{background:var(--blue);color:#fff;}
-[data-theme="light"] .p-tab.active{background:var(--ink);}
+/* Theme toggle */
+.theme-toggle{position:fixed;top:14px;right:20px;z-index:100;display:inline-flex;align-items:center;gap:6px;padding:6px;border:1px solid var(--line);border-radius:999px;background:var(--paper-2);}
+.theme-toggle button{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;color:var(--ink-60);transition:all .18s;}
+.theme-toggle button svg{width:15px;height:15px;}
+.theme-toggle button.on{background:var(--blue);color:#fff;}
+[data-theme="light"] .theme-toggle button.on{background:var(--ink);color:#fff;}
 
-/* Stage strip */
-.stage-strip{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:44px;}
-.stage-item{padding:18px 20px;flex:1;min-width:130px;cursor:pointer;text-align:left;transition:all .2s;position:relative;color:var(--ink-40);border-right:1px solid var(--line);}
-.stage-item:last-child{border-right:none;}
-.stage-item:hover{background:rgba(255,255,255,0.03);}
-.stage-item .num{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.22em;color:var(--ink-40);text-transform:uppercase;transition:color .2s;}
-.stage-item .name{font-family:var(--display);font-weight:400;font-size:14px;color:var(--ink-60);margin-top:6px;line-height:1.25;letter-spacing:-0.005em;transition:color .2s;}
-.stage-item:hover .name{color:var(--ink);}
-.stage-item.active .num{color:var(--blue-lit);font-weight:500;}
-.stage-item.active .name{color:var(--ink);font-weight:500;}
-.stage-item.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--blue-lit);}
-
-/* 3D Scroll Carousel — cards arranged around a circle in 3D space */
+/* 3D Scroll Carousel */
 .carousel{position:relative;margin:0 auto 56px;max-width:1200px;height:385px;perspective:1500px;perspective-origin:50% 50%;}
 .carousel-track{position:absolute;top:50%;left:50%;width:0;height:0;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.22,.61,.36,1);}
 .slide{position:absolute;top:-159px;left:-158px;width:316px;height:318px;
@@ -75,51 +55,56 @@ h2{font-family:var(--display);font-weight:300;font-size:clamp(30px,3.4vw,46px);l
   transform-origin:center center;backface-visibility:visible;
   transition:background .5s ease, border-color .5s ease, box-shadow .5s ease;}
 .slide.pos-center{background:linear-gradient(160deg,#0a1c4a 0%,#050a1e 100%);border-color:rgba(179,208,255,0.22);box-shadow:0 30px 70px -24px rgba(0,0,0,0.7);cursor:default;}
-.slide .stage-tag{position:absolute;top:18px;left:20px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-40);transition:color .4s;}
-.slide.pos-center .stage-tag{color:var(--blue-lit);}
-.slide .stage-name{position:absolute;bottom:18px;left:20px;right:20px;font-family:var(--display);font-weight:400;font-size:13px;line-height:1.3;letter-spacing:-0.005em;color:var(--ink-60);transition:color .4s,font-weight .4s;}
-.slide.pos-center .stage-name{color:var(--ink);font-weight:500;font-size:15px;}
-.slide svg{position:absolute;width:64%;height:56%;top:22%;left:18%;transition:opacity .4s;}
+.slide .wf-tag{position:absolute;top:18px;left:20px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-40);transition:color .4s;z-index:3;}
+.slide.pos-center .wf-tag{color:var(--blue-lit);}
+.slide .wf-mini{position:absolute;bottom:18px;left:20px;right:20px;font-family:var(--display);font-weight:400;font-size:13px;line-height:1.3;letter-spacing:-0.005em;color:var(--ink-60);transition:opacity .35s ease;z-index:2;}
+.slide.pos-center .wf-mini{opacity:0;}
+.slide svg{position:absolute;width:74%;height:66%;top:17%;left:13%;transition:opacity .4s;}
 .slide .svg-center{opacity:0;}
 .slide .svg-side{opacity:0.78;}
 [data-theme="light"] .slide .svg-side{opacity:0.72;}
 .slide.pos-center .svg-center{opacity:1;}
 .slide.pos-center .svg-side{opacity:0;}
 
-/* Carousel arrow controls */
-.car-controls{display:flex;justify-content:center;gap:14px;margin:0 auto 44px;}
+/* Slide-up info panel (only on center card) */
+.wf-panel{position:absolute;inset:0;padding:22px 22px 22px;z-index:4;
+  background:linear-gradient(180deg,rgba(2,6,26,0.75) 0%,rgba(2,6,26,0.83) 100%);
+  color:var(--dark-ink);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  opacity:0;pointer-events:none;
+  transition:opacity .5s ease;}
+.slide.pos-center.panel-visible .wf-panel,
+.slide.pos-center:hover .wf-panel{opacity:1;pointer-events:auto;}
+.wf-panel .wp-name{font-family:var(--display);font-weight:500;font-size:14px;letter-spacing:-0.01em;line-height:1.2;color:var(--dark-ink);margin-bottom:3px;}
+.wf-panel .wp-agent{font-family:var(--display);font-weight:500;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--blue-lit);margin-bottom:6px;}
+.wf-panel .wp-desc{font-family:var(--body);font-size:11px;line-height:1.5;color:var(--dark-ink-60);margin-bottom:10px;}
+.wf-panel .wp-mode{display:inline-block;font-family:var(--display);font-weight:500;font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;padding:3px 9px;border-radius:4px;background:rgba(123,169,255,0.16);color:var(--blue-lit);}
+
+/* Arrow controls */
+.car-controls{display:flex;justify-content:center;gap:14px;margin:0 auto 72px;}
 .car-btn{width:42px;height:42px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:all .18s;}
 .car-btn:hover{background:var(--blue);border-color:var(--blue);color:#fff;}
 .car-btn svg{width:16px;height:16px;}
 
-/* Text block below */
-.text-block{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;padding-top:8px;max-width:1104px;margin:0 auto;}
-.tb-left{display:flex;flex-direction:column;gap:14px;}
-.tc-meta{display:flex;align-items:center;gap:12px;}
-.tc-num{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.22em;color:var(--ink-40);text-transform:uppercase;}
-.tc-mode{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:4px 11px;border-radius:6px;}
-.tc-mode.autonomous{background:rgba(123,169,255,0.15);color:var(--blue-lit);}
-.tc-mode.handoff{background:rgba(255,213,130,0.15);color:var(--amber);}
-.tc-name{font-family:var(--display);font-weight:300;font-size:clamp(26px,2.8vw,36px);letter-spacing:-0.02em;line-height:1.1;color:var(--ink);}
-.tc-what{color:var(--ink-60);font-size:16px;line-height:1.65;}
-
-.tb-right{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line);}
-.tc-fact{display:grid;grid-template-columns:110px 1fr;gap:20px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line);}
-.tc-fact .lbl{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;}
-.tc-fact.agent .lbl{color:var(--blue-lit);}
-.tc-fact.human .lbl{color:var(--amber);}
-.tc-fact.metric .lbl{color:#b48cff;}
-[data-theme="light"] .tc-fact.metric .lbl{color:#734bff;}
-.tc-fact .val{font-family:var(--display);font-weight:500;font-size:15px;color:var(--ink);letter-spacing:-0.005em;}
-.tc-fact .val .desc{font-family:var(--body);font-weight:400;font-size:13.5px;color:var(--ink-60);margin-top:3px;}
-.tc-fact.none .val{color:var(--ink-40);font-weight:400;}
+/* Architectural footer — three minimal horizontal layers under the carousel */
+.arch-footer{max-width:1104px;margin:0 auto;}
+.arch-row{display:flex;align-items:baseline;gap:28px;padding:14px 0;border-top:1px solid var(--line);justify-content:center;text-align:center;}
+.arch-row:last-child{border-bottom:1px solid var(--line);}
+.arch-label{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.26em;text-transform:uppercase;white-space:nowrap;}
+.arch-row.intel     .arch-label{color:var(--blue-lit);}
+.arch-row.oversight .arch-label{color:var(--purple);}
+.arch-row.impact    .arch-label{color:var(--ink);}
+.arch-content{font-family:var(--display);font-weight:400;font-size:13px;color:var(--ink-80);letter-spacing:-0.005em;line-height:1.5;}
+.arch-content .sep{color:var(--ink-40);margin:0 10px;}
+.arch-row.impact .arch-content{color:var(--ink);font-weight:500;}
+.arch-row.impact .arch-content .arr{color:var(--blue-lit);margin-right:4px;font-weight:400;}
 
 @media (max-width:960px){
-  .text-block{grid-template-columns:1fr;gap:24px;}
-  .carousel-track{grid-template-columns:1fr;}
-  .slide.side{display:none;}
-  .stage-item{flex:1 0 auto;min-width:0;padding:14px 12px;}
-  .stage-item .name{font-size:13px;}
+  .carousel{height:340px;}
+  .slide{width:260px;height:260px;top:-130px;left:-130px;}
+  .arch-row{flex-direction:column;gap:6px;padding:12px 0;}
+  .arch-label{flex:0 0 auto;}
+  .arch-content{font-size:12.5px;}
 }
 </style>
 </head>
@@ -134,386 +119,56 @@ h2{font-family:var(--display);font-weight:300;font-size:clamp(30px,3.4vw,46px);l
   </button>
 </div>
 
-<div class="crumb"><div class="wrap"><a href="hls-processes-storyboard.html">← Storyboard</a> <strong>Variation 08 · Stage Carousel</strong></div></div>
+<div class="crumb"><div class="wrap"><a href="hls-processes-storyboard.html">← Storyboard</a> <strong>Variation 08 · Autonomous RCM Architecture</strong></div></div>
 
 <section class="section">
   <div class="wrap">
-    <div class="p-tabs-wrap"><div class="p-tabs" id="pTabs"></div></div>
+    <div class="eyebrow">Pioneering the first AI-native RCM stack in dental</div>
+    <h2>The Autonomous RCM Architecture.</h2>
+    <p class="sub">Six connected workflows. Purpose-built AI agents run each stage. Shared intelligence learns across every claim. Humans oversee the exceptions that matter.</p>
 
     <div class="carousel">
       <div class="carousel-track" id="carTrack"></div>
     </div>
     <div class="car-controls">
-      <button class="car-btn" id="carPrev" aria-label="Previous stage">
+      <button class="car-btn" id="carPrev" aria-label="Previous workflow">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
-      <button class="car-btn" id="carNext" aria-label="Next stage">
+      <button class="car-btn" id="carNext" aria-label="Next workflow">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     </div>
 
-    <div class="text-block">
-      <div class="tb-left" id="tbLeft"></div>
-      <div class="tb-right" id="tbRight"></div>
+    <div class="arch-footer">
+      <div class="arch-row intel">
+        <div class="arch-label">Shared Intelligence</div>
+        <div class="arch-content">Payer Knowledge Graph<span class="sep">·</span>Denial Models<span class="sep">·</span>Patient Ledger<span class="sep">·</span>Self-Learning Feedback Loop</div>
+      </div>
+      <div class="arch-row oversight">
+        <div class="arch-label">Human Oversight</div>
+        <div class="arch-content">AI Ops Specialists<span class="sep">·</span>RCM Concierge<span class="sep">·</span>Continuous Optimization</div>
+      </div>
+      <div class="arch-row impact">
+        <div class="arch-label">Business Impact</div>
+        <div class="arch-content"><span class="arr">↑</span>First-Pass Yield<span class="sep">·</span><span class="arr">↓</span>Cost to Collect<span class="sep">·</span><span class="arr">↑</span>Net Collection %<span class="sep">·</span><span class="arr">↓</span>Days in A/R</div>
+      </div>
     </div>
   </div>
 </section>
 
 <script>
-const PROCESSES = [
-  {
-    name:"Medical Imaging & Diagnostic Analysis",
-    stages:[
-      {key:"lens",       name:"Image Acquisition",  what:"The study is captured on the modality with protocol matched to the clinical order and image quality verified before release.", agent:{role:"Protocol Agent",desc:"Verifies protocol and image quality."}, human:{role:"Technologist",desc:"Runs the scan."}, metric:"Repeat scan rate"},
-      {key:"router",     name:"Ingestion & Routing", what:"DICOM series ingested to PACS and routed to the correct radiologist worklist by modality, urgency, and subspecialty.", agent:{role:"Routing Agent",desc:"Routes by modality, urgency, subspecialty."}, human:null, metric:"Ingestion latency"},
-      {key:"reticle",    name:"Preliminary Detection", what:"AI reads the study for anomalies and prioritises the worklist before the radiologist opens it.", agent:{role:"Detection Agent",desc:"Flags nodules, hemorrhage, fractures."}, human:null, metric:"Priority triage accuracy"},
-      {key:"stack",      name:"Radiologist Review", what:"The radiologist opens the study, confirms or overrides AI findings, with priors and measurements surfaced automatically.", agent:{role:"Comparison Agent",desc:"Surfaces priors and measurements."}, human:{role:"Radiologist",desc:"Owns interpretation."}, metric:"Read turnaround"},
-      {key:"grid",       name:"Structured Reporting", what:"Draft report composed with findings, impression, and recommendations, formatted with lexicons like BI-RADS.", agent:{role:"Reporting Agent",desc:"Drafts structured report from dictation."}, human:null, metric:"Report completeness"},
-      {key:"seal",       name:"Sign-off", what:"The radiologist reviews the draft and signs the final report. Sign-off remains human by policy.", agent:null, human:{role:"Radiologist",desc:"Signs the final report."}, metric:"Sign-off time"},
-      {key:"beacon",     name:"Critical Findings", what:"Urgent findings escalated to the ordering clinician and tracked to acknowledgment, with escalation on delay.", agent:{role:"Notification Agent",desc:"Pages, tracks acknowledgment."}, human:{role:"Radiologist",desc:"Confirms the critical finding."}, metric:"Time to communication"}
-    ]
-  },
-  {
-    name:"Clinical Documentation",
-    stages:[
-      {key:"wave",       name:"Patient Encounter",   what:"Ambient capture of the clinician-patient conversation with on-device speaker separation.", agent:{role:"Capture Agent",desc:"On-device audio capture."}, human:{role:"Clinician",desc:"Conducts the encounter."}, metric:"Capture fidelity"},
-      {key:"funnel",     name:"Clinical Extraction", what:"Symptoms, medications, and orders extracted from the transcript and linked to problem lists.", agent:{role:"Extraction Agent",desc:"Structures clinical entities."}, human:null, metric:"Recall"},
-      {key:"lines",      name:"Note Generation",     what:"Draft SOAP note assembled in specialty-appropriate format, composed in the physician's voice.", agent:{role:"Scribe Agent",desc:"Composes the draft note."}, human:null, metric:"Draft usability"},
-      {key:"cube",       name:"EHR Update",          what:"Note pushed to the EHR with orders, ICD-10, and CPT codes attached.", agent:{role:"EHR Agent",desc:"Writes to the EHR via FHIR."}, human:null, metric:"Post-visit lag"},
-      {key:"check",      name:"Sign-off",            what:"Physician reviews, edits, and signs the final note.", agent:null, human:{role:"Physician",desc:"Owns the final note."}, metric:"Sign-off time"}
-    ]
-  },
-  {
-    name:"Clinical Trial Recruitment",
-    stages:[
-      {key:"book",       name:"Protocol Ingestion",  what:"Trial protocol parsed for inclusion and exclusion criteria and encoded as queryable rules.", agent:{role:"Protocol Agent",desc:"Encodes criteria as rules."}, human:{role:"Clinical Scientist",desc:"Validates interpretation."}, metric:"Criteria coverage"},
-      {key:"dots",       name:"Cohort Discovery",    what:"Candidate patients identified across the EHR estate using structured and unstructured criteria.", agent:{role:"Cohort Agent",desc:"Runs criteria across the EHR."}, human:null, metric:"Cohort size"},
-      {key:"sieve",      name:"Patient Screening",   what:"Chart-level screening against nuanced criteria, reading free-text notes for exclusions.", agent:{role:"Screening Agent",desc:"Reads notes for exclusions."}, human:{role:"Coordinator",desc:"Resolves ambiguity."}, metric:"Screen-fail rate"},
-      {key:"venn",       name:"Eligibility Match",   what:"Confirmed matches ranked by clinical fit and site capacity.", agent:{role:"Matching Agent",desc:"Ranks candidates."}, human:{role:"PI",desc:"Approves shortlist."}, metric:"Match precision"},
-      {key:"signal",     name:"Patient Outreach",    what:"Approach patients through their treating provider with consent-appropriate messaging.", agent:{role:"Outreach Agent",desc:"Drafts outreach."}, human:{role:"Physician",desc:"Endorses outreach."}, metric:"Response rate"},
-      {key:"badge",      name:"Enrollment",          what:"Consented patients enrolled, scheduled, and tracked for retention.", agent:{role:"Enrollment Agent",desc:"Books visits, tracks retention."}, human:{role:"Coordinator",desc:"Owns consent."}, metric:"Time to first visit"}
-    ]
-  },
-  {
-    name:"Prior Authorization",
-    stages:[
-      {key:"card",       name:"Eligibility Check",   what:"Coverage and benefits verified for the requested service via payer APIs.", agent:{role:"Eligibility Agent",desc:"Queries payer APIs."}, human:null, metric:"Verification accuracy"},
-      {key:"policy",     name:"Requirement ID",      what:"Payer policy rules identified for the specific procedure.", agent:{role:"Policy Agent",desc:"Interprets payer policy."}, human:null, metric:"Policy fit"},
-      {key:"folder",     name:"Evidence Retrieval",  what:"Clinical records assembled to support medical necessity: chart notes, labs, imaging.", agent:{role:"Evidence Agent",desc:"Pulls chart, labs, imaging."}, human:null, metric:"Evidence completeness"},
-      {key:"packet",     name:"Auth Assembly",       what:"Auth request compiled in payer-required format with cited evidence.", agent:{role:"Assembly Agent",desc:"Composes with citations."}, human:{role:"Auth Specialist",desc:"Spot-checks packets."}, metric:"First-pass approval"},
-      {key:"portal",     name:"Submission",          what:"Auth submitted through the payer portal via automated handoff.", agent:{role:"Submission Agent",desc:"Portal automation."}, human:null, metric:"Latency"},
-      {key:"gauge",      name:"Status Monitoring",   what:"Auth status tracked to decision with stalls surfaced for intervention.", agent:{role:"Monitoring Agent",desc:"Polls and surfaces stalls."}, human:{role:"Specialist",desc:"Intervenes on delays."}, metric:"Turnaround"},
-      {key:"stairs",     name:"Escalation",          what:"Peer-to-peer reviews and appeals handled with pre-drafted briefs.", agent:{role:"Escalation Agent",desc:"Prepares briefs."}, human:{role:"Physician",desc:"Runs peer-to-peer."}, metric:"Overturn rate"}
-    ]
-  }
+const WORKFLOWS = [
+  {key:"submit",      name:"Claim Submission",           agent:"Submitter Agent",    desc:"Cleans and validates claims, scores readiness and prepares 837 submission."},
+  {key:"correct",     name:"Edits & Rejections",         agent:"Corrector Agent",    desc:"Identifies rejection issues, corrects them and prepares claims for resubmission."},
+  {key:"pursue",      name:"No-Response Claims",         agent:"Pursuer Agent",      desc:"Follows unpaid claims through 277 polling, payer portals and voice follow-up."},
+  {key:"appeal",      name:"Denial Management & Appeals",agent:"Appealer Agent",     desc:"Identifies denial root causes and prepares the appropriate appeal."},
+  {key:"post",        name:"Payment Posting",            agent:"Poster Agent",       desc:"Posts 835 payments and triages payment variances."},
+  {key:"communicate", name:"Patient Statements",         agent:"Communicator Agent", desc:"Manages patient balance communication and outreach."}
 ];
 
-let currentProc=0, currentStage=0;
+let currentStage = 0;
 
-/* -------- Isometric geometric shape library --------
-   Each returns SVG contents on a 200x200 viewBox.
-   Style: thin light lines, dashed guides, subtle fills — Distyl weave feel.
-   Colors take (stroke, dashed, fill, accent). */
-function shapeSvg(key, palette){
-  const S = palette; // {stroke, dashed, fill, accent, glow}
-  const st = S.stroke, ds = S.dashed, fl = S.fill, ac = S.accent;
-  const dash = `stroke-dasharray="2 3"`;
-  const thin = `stroke="${st}" stroke-width="1" fill="none"`;
-  const thick = `stroke="${st}" stroke-width="1.4" fill="none"`;
-  const guide = `stroke="${ds}" stroke-width="0.8" fill="none" ${dash}`;
-  const filled = `fill="${fl}" stroke="${st}" stroke-width="1.2"`;
-  const accent = `fill="${ac}" stroke="${ac}"`;
-
-  switch(key){
-    // Image Acquisition — camera lens (nested rings + aperture)
-    case "lens": return `
-      <circle cx="100" cy="100" r="78" ${guide}/>
-      <circle cx="100" cy="100" r="58" ${thin}/>
-      <circle cx="100" cy="100" r="40" ${thick}/>
-      <circle cx="100" cy="100" r="22" ${filled}/>
-      <circle cx="100" cy="100" r="6" ${accent}/>
-      ${[0,60,120,180,240,300].map(a=>{
-        const r1=40, r2=58, rad=a*Math.PI/180;
-        return `<line x1="${100+Math.cos(rad)*r1}" y1="${100+Math.sin(rad)*r1}" x2="${100+Math.cos(rad)*r2}" y2="${100+Math.sin(rad)*r2}" ${thin}/>`;
-      }).join('')}`;
-
-    // Ingestion & Routing — hub with three branches
-    case "router": return `
-      <circle cx="100" cy="100" r="80" ${guide}/>
-      <circle cx="100" cy="100" r="18" ${filled}/>
-      <line x1="100" y1="100" x2="40" y2="50" ${thin}/>
-      <line x1="100" y1="100" x2="160" y2="50" ${thin}/>
-      <line x1="100" y1="100" x2="100" y2="170" ${thin}/>
-      <rect x="26" y="36" width="28" height="28" rx="3" ${filled}/>
-      <rect x="146" y="36" width="28" height="28" rx="3" ${filled}/>
-      <rect x="86" y="156" width="28" height="28" rx="3" ${filled}/>
-      <circle cx="100" cy="100" r="4" ${accent}/>`;
-
-    // Preliminary Detection — reticle / target with pinpoint
-    case "reticle": return `
-      <circle cx="100" cy="100" r="82" ${guide}/>
-      <circle cx="100" cy="100" r="60" ${thin}/>
-      <circle cx="100" cy="100" r="38" ${thin}/>
-      <line x1="10" y1="100" x2="90" y2="100" ${thin}/>
-      <line x1="110" y1="100" x2="190" y2="100" ${thin}/>
-      <line x1="100" y1="10" x2="100" y2="90" ${thin}/>
-      <line x1="100" y1="110" x2="100" y2="190" ${thin}/>
-      <circle cx="128" cy="82" r="8" ${accent}/>
-      <circle cx="128" cy="82" r="14" ${thin} stroke="${ac}"/>`;
-
-    // Radiologist Review — stacked film sheets (offset)
-    case "stack": return `
-      <rect x="30" y="30" width="120" height="90" rx="2" ${guide}/>
-      <rect x="45" y="50" width="120" height="90" rx="2" ${thin}/>
-      <rect x="60" y="70" width="120" height="90" rx="2" ${filled}/>
-      <line x1="72" y1="90" x2="168" y2="90" ${thin}/>
-      <line x1="72" y1="105" x2="168" y2="105" ${thin}/>
-      <line x1="72" y1="120" x2="140" y2="120" ${thin}/>
-      <circle cx="120" cy="135" r="10" ${accent} fill="none" stroke-width="1.4"/>
-      <circle cx="120" cy="135" r="3" ${accent}/>`;
-
-    // Structured Reporting — clinical report with labelled sections + BI-RADS tag
-    case "grid": return `
-      <rect x="34" y="22" width="132" height="160" rx="3" ${filled}/>
-      <rect x="34" y="22" width="132" height="26" fill="${ac}" fill-opacity="0.14"/>
-      <line x1="46" y1="35" x2="96" y2="35" stroke="${ac}" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="46" y1="41" x2="80" y2="41" ${thin}/>
-      <text x="120" y="39" font-family="Poppins" font-size="7.5" font-weight="500" fill="${ac}" letter-spacing="1.4">BI-RADS</text>
-      <text x="46" y="66" font-family="Poppins" font-size="7" font-weight="500" fill="${st}" letter-spacing="1.6" opacity="0.6">FINDINGS</text>
-      <line x1="46" y1="76" x2="152" y2="76" ${thin}/>
-      <line x1="46" y1="86" x2="152" y2="86" ${thin}/>
-      <line x1="46" y1="96" x2="136" y2="96" ${thin}/>
-      <text x="46" y="118" font-family="Poppins" font-size="7" font-weight="500" fill="${st}" letter-spacing="1.6" opacity="0.6">IMPRESSION</text>
-      <rect x="46" y="124" width="106" height="20" fill="${ac}" fill-opacity="0.10" rx="2"/>
-      <line x1="52" y1="132" x2="140" y2="132" ${thin} stroke="${ac}"/>
-      <line x1="52" y1="139" x2="120" y2="139" ${thin} stroke="${ac}"/>
-      <text x="46" y="162" font-family="Poppins" font-size="7" font-weight="500" fill="${st}" letter-spacing="1.6" opacity="0.6">RECOMMENDATION</text>
-      <line x1="46" y1="171" x2="130" y2="171" ${thin}/>`;
-
-    // Sign-off — stamp / signature seal
-    case "seal": return `
-      <circle cx="100" cy="100" r="82" ${guide}/>
-      <circle cx="100" cy="100" r="58" ${thick}/>
-      <circle cx="100" cy="100" r="48" ${thin}/>
-      <path d="M 70 100 L 92 122 L 132 82" ${thick} stroke="${ac}" stroke-width="3"/>
-      ${[0,45,90,135,180,225,270,315].map(a=>{
-        const rad=a*Math.PI/180;
-        return `<line x1="${100+Math.cos(rad)*58}" y1="${100+Math.sin(rad)*58}" x2="${100+Math.cos(rad)*72}" y2="${100+Math.sin(rad)*72}" ${thin}/>`;
-      }).join('')}`;
-
-    // Critical Findings — beacon / alert triangle
-    case "beacon": return `
-      <circle cx="100" cy="110" r="80" ${guide}/>
-      <path d="M 100 30 L 175 160 L 25 160 Z" ${filled}/>
-      <line x1="100" y1="70" x2="100" y2="120" stroke="${ac}" stroke-width="4" stroke-linecap="round"/>
-      <circle cx="100" cy="140" r="4" ${accent}/>
-      ${[-30,30].map(a=>`<path d="M 100 20 L ${100+Math.cos((a-90)*Math.PI/180)*24} ${20+Math.sin((a-90)*Math.PI/180)*24}" ${thin} stroke="${ac}"/>`).join('')}`;
-
-    // Patient Encounter — waveform between two nodes
-    case "wave": return `
-      <circle cx="30" cy="100" r="16" ${filled}/>
-      <circle cx="170" cy="100" r="16" ${filled}/>
-      <circle cx="30" cy="100" r="26" ${guide}/>
-      <circle cx="170" cy="100" r="26" ${guide}/>
-      <path d="M 52 100 Q 60 70 68 100 T 84 100 T 100 100 T 116 100 T 132 100 T 148 100" ${thick} stroke="${ac}"/>
-      <path d="M 52 100 Q 60 130 68 100 T 84 100 T 100 100 T 116 100 T 132 100 T 148 100" ${thick} stroke="${ac}" opacity="0.5"/>`;
-
-    // Clinical Extraction — funnel
-    case "funnel": return `
-      <path d="M 30 40 L 170 40 L 120 110 L 120 170 L 80 170 L 80 110 Z" ${filled}/>
-      <line x1="30" y1="60" x2="170" y2="60" ${thin}/>
-      <line x1="45" y1="80" x2="155" y2="80" ${thin}/>
-      ${[50,70,90,110,130,150].map(x=>`<circle cx="${x}" cy="30" r="2.5" ${accent}/>`).join('')}
-      <rect x="88" y="176" width="24" height="4" ${accent}/>`;
-
-    // Note Generation — SOAP note being drafted with a fountain-pen nib
-    // Note Generation — patient/clinician chat exchange composed into a clinical note
-    case "lines": return `
-      <rect x="18" y="20" width="76" height="26" rx="12" ${filled}/>
-      <line x1="28" y1="29" x2="78" y2="29" ${thin}/>
-      <line x1="28" y1="37" x2="68" y2="37" ${thin}/>
-      <path d="M 26 44 L 22 52 L 34 47 Z" ${filled}/>
-      <rect x="106" y="54" width="76" height="26" rx="12" fill="${ac}" fill-opacity="0.20" stroke="${ac}" stroke-width="1"/>
-      <line x1="116" y1="63" x2="172" y2="63" ${thin} stroke="${ac}"/>
-      <line x1="116" y1="71" x2="164" y2="71" ${thin} stroke="${ac}"/>
-      <path d="M 174 78 L 178 86 L 166 81 Z" fill="${ac}" fill-opacity="0.20" stroke="${ac}" stroke-width="1"/>
-      <path d="M 100 92 L 100 108 M 93 101 L 100 108 L 107 101" stroke="${ac}" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M 116 96 L 117 98.5 L 119.5 99.5 L 117 100.5 L 116 103 L 115 100.5 L 112.5 99.5 L 115 98.5 Z" fill="${ac}"/>
-      <rect x="26" y="114" width="148" height="72" rx="4" ${filled}/>
-      <rect x="26" y="114" width="148" height="18" fill="${ac}" fill-opacity="0.14"/>
-      <text x="38" y="126" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">CLINICAL NOTE</text>
-      <circle cx="164" cy="123" r="3" fill="${ac}"/>
-      <line x1="38" y1="144" x2="160" y2="144" ${thin}/>
-      <line x1="38" y1="154" x2="146" y2="154" ${thin}/>
-      <line x1="38" y1="164" x2="154" y2="164" ${thin}/>
-      <line x1="38" y1="174" x2="118" y2="174" ${thin}/>
-      <line x1="120" y1="169" x2="120" y2="179" stroke="${ac}" stroke-width="2"/>`;
-
-    // EHR Update — isometric cube (Distyl-style)
-    case "cube": return `
-      <path d="M 100 30 L 170 65 L 170 135 L 100 170 L 30 135 L 30 65 Z" ${guide}/>
-      <path d="M 100 60 L 150 82 L 150 132 L 100 154 L 50 132 L 50 82 Z" ${filled}/>
-      <path d="M 100 60 L 100 154" ${thin}/>
-      <path d="M 50 82 L 100 105 L 150 82" ${thin}/>
-      <path d="M 100 105 L 100 154" ${thin} stroke="${ac}"/>
-      <circle cx="100" cy="105" r="4" ${accent}/>`;
-
-    // Sign-off (documentation) — checkmark inside rounded square
-    case "check": return `
-      <rect x="34" y="34" width="132" height="132" rx="12" ${guide}/>
-      <rect x="50" y="50" width="100" height="100" rx="10" ${filled}/>
-      <path d="M 70 102 L 94 124 L 134 78" stroke="${ac}" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
-
-    // Protocol Ingestion — clipboard with inclusion (✓) and exclusion (✕) criteria
-    case "book": return `
-      <rect x="42" y="34" width="116" height="150" rx="5" ${filled}/>
-      <rect x="82" y="22" width="36" height="20" rx="3" ${filled}/>
-      <rect x="94" y="18" width="12" height="8" rx="2" fill="${ac}"/>
-      <text x="54" y="60" font-family="Poppins" font-size="7.5" font-weight="600" fill="${ac}" letter-spacing="1.8">PROTOCOL</text>
-      <line x1="54" y1="66" x2="146" y2="66" ${thin}/>
-      <text x="54" y="82" font-family="Poppins" font-size="6.5" font-weight="500" fill="${st}" letter-spacing="1.6" opacity="0.55">INCLUSION</text>
-      ${[92,108,124].map((y,i)=>`
-        <circle cx="60" cy="${y}" r="5.5" fill="${ac}" fill-opacity="0.18" stroke="${ac}" stroke-width="1"/>
-        <path d="M ${60-3} ${y} L ${60-0.5} ${y+2.5} L ${60+3.5} ${y-2.5}" stroke="${ac}" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <line x1="72" y1="${y}" x2="${140-i*6}" y2="${y}" ${thin}/>
-      `).join('')}
-      <text x="54" y="144" font-family="Poppins" font-size="6.5" font-weight="500" fill="${st}" letter-spacing="1.6" opacity="0.55">EXCLUSION</text>
-      ${[154,170].map((y,i)=>`
-        <circle cx="60" cy="${y}" r="5.5" ${thin}/>
-        <path d="M ${60-2.5} ${y-2.5} L ${60+2.5} ${y+2.5} M ${60+2.5} ${y-2.5} L ${60-2.5} ${y+2.5}" ${thin} stroke-width="1.2" stroke-linecap="round"/>
-        <line x1="72" y1="${y}" x2="${134-i*8}" y2="${y}" ${thin}/>
-      `).join('')}`;
-
-    // Cohort Discovery — grid of dots with selection ring
-    case "dots": return `
-      ${(()=>{let out='';for(let r=0;r<5;r++)for(let c=0;c<5;c++){const x=40+c*30,y=40+r*30;const sel=(r===2&&c===3)||(r===1&&c===1)||(r===3&&c===2);out+=`<circle cx="${x}" cy="${y}" r="${sel?4.5:3}" ${sel?accent:`fill="${ds}" stroke="${st}" stroke-width="0.8"`}/>`;}return out;})()}
-      <circle cx="130" cy="100" r="16" ${thin} stroke="${ac}"/>
-      <circle cx="70" cy="70" r="16" ${thin} stroke="${ac}"/>
-      <circle cx="100" cy="130" r="16" ${thin} stroke="${ac}"/>`;
-
-    // Patient Screening — magnifying glass examining stacked patient charts, match highlighted
-    case "sieve": return `
-      <rect x="22" y="46" width="82" height="108" rx="4" ${guide}/>
-      <rect x="30" y="54" width="82" height="108" rx="4" ${thin} fill="${fl}"/>
-      <rect x="38" y="62" width="82" height="108" rx="4" ${filled}/>
-      <rect x="46" y="72" width="14" height="16" rx="2" fill="${ac}" fill-opacity="0.22"/>
-      <line x1="64" y1="76" x2="112" y2="76" ${thin}/>
-      <line x1="64" y1="84" x2="102" y2="84" ${thin}/>
-      <rect x="42" y="94" width="76" height="10" fill="${ac}" fill-opacity="0.16" rx="1.5"/>
-      <line x1="46" y1="99" x2="116" y2="99" ${thin} stroke="${ac}" stroke-width="1.3"/>
-      <line x1="46" y1="112" x2="112" y2="112" ${thin}/>
-      <line x1="46" y1="120" x2="106" y2="120" ${thin}/>
-      <line x1="46" y1="128" x2="114" y2="128" ${thin}/>
-      <line x1="46" y1="136" x2="98" y2="136" ${thin}/>
-      <line x1="46" y1="144" x2="110" y2="144" ${thin}/>
-      <line x1="46" y1="152" x2="90" y2="152" ${thin}/>
-      <g transform="translate(140 96)">
-        <circle cx="0" cy="0" r="30" fill="${S.dark||'#00112e'}" fill-opacity="0.04" stroke="${ac}" stroke-width="2.4"/>
-        <circle cx="0" cy="0" r="24" fill="none" stroke="${ac}" stroke-width="0.8" opacity="0.5" stroke-dasharray="2 2"/>
-        <path d="M -10 1 L -3 8 L 11 -7" stroke="${ac}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <line x1="21" y1="21" x2="40" y2="40" stroke="${ac}" stroke-width="4.5" stroke-linecap="round"/>
-        <circle cx="42" cy="42" r="4" fill="${ac}"/>
-      </g>`;
-
-    // Eligibility Match — overlapping circles (venn)
-    case "venn": return `
-      <circle cx="78" cy="100" r="55" ${thin} fill="${fl}" fill-opacity="0.7"/>
-      <circle cx="122" cy="100" r="55" ${thin} fill="${ac}" fill-opacity="0.5"/>
-      <circle cx="78" cy="100" r="55" ${guide}/>
-      <circle cx="122" cy="100" r="55" ${guide}/>
-      <ellipse cx="100" cy="100" rx="22" ry="40" fill="${ac}" fill-opacity="0.6"/>
-      <circle cx="100" cy="100" r="4" ${accent}/>`;
-
-    // Patient Outreach — signal / radiating envelope
-    case "signal": return `
-      <rect x="60" y="90" width="80" height="52" rx="3" ${filled}/>
-      <path d="M 60 90 L 100 120 L 140 90" ${thin}/>
-      ${[24,42,60].map(r=>`<path d="M ${100-r} 60 Q 100 ${60-r*0.8} ${100+r} 60" ${thin} stroke="${ac}" opacity="${0.9-r*0.015}"/>`).join('')}
-      <circle cx="100" cy="60" r="4" ${accent}/>`;
-
-    // Enrollment — badge with ribbon
-    case "badge": return `
-      <circle cx="100" cy="92" r="60" ${guide}/>
-      <circle cx="100" cy="92" r="46" ${filled}/>
-      <path d="M 66 128 L 60 180 L 82 168 L 100 178 L 118 168 L 140 180 L 134 128" ${thin} fill="${fl}"/>
-      <path d="M 82 90 L 96 106 L 122 78" stroke="${ac}" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
-
-    // Eligibility Check — ID card with checkmark
-    case "card": return `
-      <rect x="26" y="52" width="148" height="96" rx="6" ${guide}/>
-      <rect x="38" y="64" width="148" height="96" rx="6" ${filled}/>
-      <circle cx="72" cy="98" r="14" ${thin} stroke="${ac}"/>
-      <path d="M 60 128 Q 72 116 84 128" ${thin} stroke="${ac}"/>
-      <line x1="102" y1="90" x2="170" y2="90" ${thin}/>
-      <line x1="102" y1="104" x2="156" y2="104" ${thin}/>
-      <line x1="102" y1="118" x2="144" y2="118" ${thin}/>
-      <path d="M 122 138 L 132 148 L 152 128" stroke="${ac}" stroke-width="2.5" fill="none" stroke-linecap="round"/>`;
-
-    // Requirement ID — policy rule grid with highlighted row
-    case "policy": return `
-      <rect x="30" y="30" width="140" height="140" rx="4" ${filled}/>
-      ${[54,78,102,126,150].map((y,i)=>`
-        <line x1="30" y1="${y}" x2="170" y2="${y}" ${thin}/>
-        <rect x="42" y="${y-14}" width="10" height="10" ${i===2?accent:`fill="${ds}" stroke="${st}"`} stroke-width="0.8"/>
-        <line x1="62" y1="${y-6}" x2="${100+i*8}" y2="${y-6}" ${thin}/>
-      `).join('')}
-      <rect x="30" y="94" width="140" height="16" fill="${ac}" fill-opacity="0.12"/>`;
-
-    // Evidence Retrieval — folder stack
-    case "folder": return `
-      <path d="M 30 60 L 70 60 L 80 72 L 170 72 L 170 160 L 30 160 Z" ${guide}/>
-      <path d="M 40 78 L 80 78 L 90 90 L 180 90 L 168 172 L 40 172 Z" ${thin} fill="${fl}"/>
-      <path d="M 50 96 L 90 96 L 100 108 L 175 108 L 158 170 L 42 170 Z" ${filled}/>
-      <line x1="70" y1="122" x2="150" y2="122" ${thin}/>
-      <line x1="70" y1="136" x2="140" y2="136" ${thin}/>
-      <circle cx="150" cy="146" r="6" ${accent}/>`;
-
-    // Auth Assembly — packet / stapled papers
-    case "packet": return `
-      <rect x="42" y="30" width="110" height="140" rx="2" ${guide}/>
-      <rect x="52" y="40" width="110" height="140" rx="2" ${filled}/>
-      <rect x="94" y="30" width="16" height="16" ${accent}/>
-      <line x1="66" y1="70" x2="150" y2="70" ${thin}/>
-      <line x1="66" y1="86" x2="150" y2="86" ${thin}/>
-      <line x1="66" y1="102" x2="132" y2="102" ${thin}/>
-      <line x1="66" y1="126" x2="150" y2="126" ${thin} stroke="${ac}"/>
-      <line x1="66" y1="140" x2="140" y2="140" ${thin} stroke="${ac}"/>
-      <text x="70" y="164" font-family="Poppins" font-size="9" fill="${ac}" letter-spacing="2">CITED</text>`;
-
-    // Submission — arrow into portal
-    case "portal": return `
-      <rect x="110" y="40" width="70" height="120" rx="4" ${filled}/>
-      <line x1="126" y1="60" x2="164" y2="60" ${thin}/>
-      <line x1="126" y1="76" x2="164" y2="76" ${thin}/>
-      <line x1="126" y1="92" x2="150" y2="92" ${thin}/>
-      <path d="M 20 100 L 100 100 M 80 82 L 100 100 L 80 118" stroke="${ac}" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      <rect x="102" y="70" width="12" height="60" fill="${ac}" fill-opacity="0.15"/>`;
-
-    // Status Monitoring — gauge / dial
-    case "gauge": return `
-      <circle cx="100" cy="110" r="80" ${guide}/>
-      <path d="M 30 110 A 70 70 0 0 1 170 110" ${thick}/>
-      <path d="M 30 110 A 70 70 0 0 1 100 40" ${thick} stroke="${ac}" stroke-width="2.5"/>
-      ${[0,30,60,90,120,150,180].map(a=>{
-        const rad=(a+180)*Math.PI/180;
-        const r1=64, r2=70;
-        return `<line x1="${100+Math.cos(rad)*r1}" y1="${110+Math.sin(rad)*r1}" x2="${100+Math.cos(rad)*r2}" y2="${110+Math.sin(rad)*r2}" ${thin}/>`;
-      }).join('')}
-      <line x1="100" y1="110" x2="60" y2="70" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
-      <circle cx="100" cy="110" r="8" ${filled}/>
-      <circle cx="100" cy="110" r="3" ${accent}/>`;
-
-    // Escalation — ascending stairs
-    case "stairs": return `
-      <path d="M 30 160 L 60 160 L 60 130 L 90 130 L 90 100 L 120 100 L 120 70 L 150 70 L 150 40 L 180 40 L 180 170 L 30 170 Z" ${filled}/>
-      <path d="M 30 160 L 60 160 L 60 130 L 90 130 L 90 100 L 120 100 L 120 70 L 150 70 L 150 40 L 180 40" ${thick}/>
-      <path d="M 40 60 L 60 40 L 80 60 M 60 40 L 60 80" stroke="${ac}" stroke-width="2.2" fill="none" stroke-linecap="round"/>`;
-
-    default: return `<circle cx="100" cy="100" r="60" ${filled}/>`;
-  }
-}
-
-/* Palettes for dark (center) and dim (side) slides */
+/* Palettes */
 const PAL_DARK      = {stroke:"#dbe9ff", dashed:"rgba(179,208,255,0.32)", fill:"rgba(179,208,255,0.06)", accent:"#7ba9ff", dark:"#02061a"};
 const PAL_SIDE_DARK = {stroke:"rgba(255,255,255,0.55)", dashed:"rgba(255,255,255,0.22)", fill:"rgba(255,255,255,0.03)", accent:"rgba(123,169,255,0.65)", dark:"#0e1636"};
 const PAL_SIDE_LITE = {stroke:"#54555a", dashed:"rgba(84,86,92,0.35)", fill:"rgba(84,86,92,0.04)", accent:"#0064ff", dark:"#f2f7ff"};
@@ -521,99 +176,250 @@ function sidePalette(){
   return document.documentElement.getAttribute("data-theme")==="light" ? PAL_SIDE_LITE : PAL_SIDE_DARK;
 }
 
-/* Lucide icons per process — inline SVGs */
-const PROC_ICONS = [
-  // Medical Imaging — scan icon (frame corners)
-  `<svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg>`,
-  // Clinical Documentation — stethoscope
-  `<svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>`,
-  // Clinical Trial Recruitment — flask-conical
-  `<svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>`,
-  // Prior Authorization — shield-check
-  `<svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>`
-];
+/* Shape library — six RCM vectors */
+function shapeSvg(key, S){
+  const st = S.stroke, ds = S.dashed, fl = S.fill, ac = S.accent, dk = S.dark;
+  const thin   = `stroke="${st}" stroke-width="1" fill="none"`;
+  const thick  = `stroke="${st}" stroke-width="1.4" fill="none"`;
+  const guide  = `stroke="${ds}" stroke-width="0.8" fill="none" stroke-dasharray="2 3"`;
+  const filled = `fill="${fl}" stroke="${st}" stroke-width="1.2"`;
+  const accent = `fill="${ac}" stroke="${ac}"`;
 
-function slideMarkup(stage, idx){
+  switch(key){
+
+    /* 01 Claim Submission — single validated claim with score bar, 837 badge and outbound signal */
+    case "submit": return `
+      <rect x="34" y="28" width="112" height="150" rx="4" ${filled}/>
+      <rect x="118" y="18" width="46" height="20" rx="4" fill="${ac}"/>
+      <text x="141" y="32" text-anchor="middle" font-family="Poppins" font-size="8" font-weight="700" fill="${dk}" letter-spacing="1.6">837</text>
+      <line x1="46" y1="52" x2="118" y2="52" ${thin} stroke="${ac}"/>
+      <line x1="46" y1="60" x2="96" y2="60" ${thin}/>
+      ${[80,98,116].map((y,i)=>`
+        <g transform="translate(52 ${y})">
+          <circle cx="0" cy="0" r="4.5" fill="${ac}"/>
+          <path d="M -2 0 L -0.4 1.7 L 2.5 -1.6" stroke="${dk}" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <line x1="62" y1="${y}" x2="${138-i*6}" y2="${y}" ${thin}/>
+      `).join('')}
+      <text x="46" y="138" font-family="Poppins" font-size="6.5" font-weight="500" fill="${st}" opacity="0.55" letter-spacing="1.6">CLEAN-CLAIM SCORE</text>
+      <text x="134" y="138" text-anchor="end" font-family="Poppins" font-size="8.5" font-weight="600" fill="${ac}">98</text>
+      <rect x="46" y="146" width="88" height="5" rx="2.5" fill="${ds}" opacity="0.6"/>
+      <rect x="46" y="146" width="80" height="5" rx="2.5" fill="${ac}"/>
+      <path d="M 156 100 L 178 100 M 172 94 L 178 100 L 172 106" stroke="${ac}" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="182" cy="100" r="2.4" fill="${ac}"/>`;
+
+    /* 02 Edits & Rejections — rejected claim → edit action → corrected claim (before/after) */
+    case "correct": return `
+      <rect x="14" y="42" width="70" height="116" rx="3" ${filled}/>
+      <g transform="translate(49 62)">
+        <circle cx="0" cy="0" r="10" ${thin} stroke="${ac}" stroke-width="1.4"/>
+        <path d="M -3.5 -3.5 L 3.5 3.5 M 3.5 -3.5 L -3.5 3.5" stroke="${ac}" stroke-width="1.6" stroke-linecap="round"/>
+      </g>
+      <line x1="24" y1="86" x2="74" y2="86" ${thin}/>
+      <rect x="20" y="94" width="58" height="10" fill="${ac}" fill-opacity="0.14"/>
+      <line x1="24" y1="99" x2="74" y2="99" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 2"/>
+      <line x1="24" y1="112" x2="70" y2="112" ${thin}/>
+      <line x1="24" y1="120" x2="76" y2="120" ${thin}/>
+      <line x1="24" y1="128" x2="66" y2="128" ${thin}/>
+      <text x="49" y="146" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6" opacity="0.85">REJECTED</text>
+      <path d="M 88 100 L 112 100 M 106 94 L 112 100 L 106 106" stroke="${ac}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="116" y="42" width="70" height="116" rx="3" ${filled}/>
+      <g transform="translate(151 62)">
+        <circle cx="0" cy="0" r="10" fill="${ac}"/>
+        <path d="M -3.5 0 L -1 2.5 L 4 -2.8" stroke="${dk}" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <line x1="126" y1="86" x2="176" y2="86" ${thin}/>
+      <line x1="126" y1="94" x2="172" y2="94" ${thin}/>
+      <rect x="122" y="102" width="58" height="10" fill="${ac}" fill-opacity="0.18"/>
+      <line x1="126" y1="107" x2="176" y2="107" stroke="${ac}" stroke-width="1.2"/>
+      <line x1="126" y1="118" x2="170" y2="118" ${thin}/>
+      <line x1="126" y1="126" x2="176" y2="126" ${thin}/>
+      <line x1="126" y1="134" x2="164" y2="134" ${thin}/>
+      <text x="151" y="150" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">CORRECTED</text>`;
+
+    /* 03 No-Response Claims — central claim with 3 pulse rings to 3 channel endpoints */
+    case "pursue": return `
+      ${[44,64,86].map((r,i)=>`<circle cx="100" cy="100" r="${r}" fill="none" stroke="${ac}" stroke-width="0.9" opacity="${0.55 - i*0.16}" stroke-dasharray="3 4"/>`).join('')}
+      <rect x="80" y="80" width="40" height="46" rx="3" ${filled}/>
+      <line x1="86" y1="92" x2="114" y2="92" ${thin}/>
+      <line x1="86" y1="100" x2="110" y2="100" ${thin}/>
+      <line x1="86" y1="108" x2="114" y2="108" ${thin}/>
+      <line x1="86" y1="116" x2="104" y2="116" ${thin}/>
+      <rect x="88" y="70" width="24" height="10" rx="1.5" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="0.8"/>
+      <text x="100" y="77.5" text-anchor="middle" font-family="Poppins" font-size="6" font-weight="600" fill="${ac}" letter-spacing="1.4">277</text>
+      <g transform="translate(24 32)">
+        <rect x="0" y="0" width="30" height="22" rx="2" ${filled}/>
+        <line x1="0" y1="7" x2="30" y2="7" ${thin}/>
+        <circle cx="4" cy="3.5" r="1.2" fill="${ac}"/>
+        <circle cx="8" cy="3.5" r="1.2" fill="${ac}"/>
+        <circle cx="12" cy="3.5" r="1.2" fill="${ac}"/>
+        <line x1="5" y1="13" x2="20" y2="13" ${thin} stroke="${ac}"/>
+        <line x1="5" y1="17" x2="14" y2="17" ${thin}/>
+      </g>
+      <line x1="54" y1="54" x2="80" y2="82" ${thin} stroke="${ac}" stroke-dasharray="2 3"/>
+      <g transform="translate(146 32)">
+        <rect x="0" y="0" width="24" height="34" rx="4" ${filled}/>
+        <rect x="4" y="6" width="16" height="20" fill="${ds}" opacity="0.55"/>
+        <circle cx="12" cy="30" r="1.6" fill="${ac}"/>
+      </g>
+      <line x1="146" y1="52" x2="120" y2="82" ${thin} stroke="${ac}" stroke-dasharray="2 3"/>
+      <g transform="translate(80 156)">
+        <rect x="0" y="0" width="40" height="26" rx="2.5" ${filled}/>
+        <path d="M 0 0 L 20 16 L 40 0" ${thin} stroke="${ac}"/>
+        <circle cx="34" cy="20" r="3.5" fill="${ac}"/>
+      </g>
+      <line x1="100" y1="126" x2="100" y2="156" ${thin} stroke="${ac}" stroke-dasharray="2 3"/>`;
+
+    /* 04 Denial Management & Appeals — denial branches into root causes, converge, rise as appeal */
+    case "appeal": return `
+      <g transform="translate(100 30)">
+        <rect x="-34" y="-14" width="68" height="26" rx="4" ${filled}/>
+        <path d="M -6 -5 L 6 5 M 6 -5 L -6 5" stroke="${ac}" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/>
+      </g>
+      <text x="100" y="60" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">DENIAL</text>
+      ${[48,100,152].map(x=>`
+        <path d="M 100 66 Q 100 78 ${x} 88" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
+        <circle cx="${x}" cy="96" r="9" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1.1"/>
+        <circle cx="${x}" cy="96" r="2.5" fill="${ac}"/>
+      `).join('')}
+      <path d="M 48 106 Q 48 118 100 128" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
+      <path d="M 100 106 L 100 128" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
+      <path d="M 152 106 Q 152 118 100 128" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
+      <circle cx="100" cy="132" r="5.5" fill="${ac}"/>
+      <path d="M 100 138 L 100 156 M 94 148 L 100 138 L 106 148" stroke="${ac}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <g transform="translate(100 174)">
+        <rect x="-36" y="-14" width="72" height="26" rx="4" fill="${ac}"/>
+        <text x="0" y="3.5" text-anchor="middle" font-family="Poppins" font-size="8" font-weight="700" fill="${dk}" letter-spacing="1.6">APPEAL</text>
+      </g>`;
+
+    /* 05 Payment Posting — 835 streams converge into a ledger; one variance row flagged */
+    case "post": return `
+      <text x="20" y="34" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">835</text>
+      ${[56,80,104,128,152].map((y,i)=>`
+        <circle cx="18" cy="${y}" r="2.4" fill="${ac}" opacity="${0.45+i*0.08}"/>
+        <path d="M 22 ${y} Q 44 ${y} 62 104" fill="none" stroke="${ac}" stroke-width="0.9" opacity="${0.35+i*0.08}"/>
+      `).join('')}
+      <rect x="66" y="36" width="118" height="132" rx="4" ${filled}/>
+      <rect x="66" y="36" width="118" height="20" fill="${ac}" fill-opacity="0.14"/>
+      <text x="78" y="49" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">LEDGER</text>
+      <line x1="118" y1="56" x2="118" y2="168" ${thin}/>
+      <line x1="152" y1="56" x2="152" y2="168" ${thin}/>
+      ${[74,92,110,128,146,164].map((y,i)=>{
+        const isVar = i===2;
+        if(isVar) return `
+          <rect x="66" y="${y-9}" width="118" height="18" fill="${ac}" fill-opacity="0.20"/>
+          <line x1="74" y1="${y}" x2="112" y2="${y}" stroke="${ac}" stroke-width="1.1"/>
+          <line x1="124" y1="${y}" x2="146" y2="${y}" stroke="${ac}" stroke-width="1.1"/>
+          <line x1="158" y1="${y}" x2="178" y2="${y}" stroke="${ac}" stroke-width="1.1"/>
+          <circle cx="60" cy="${y}" r="3.5" fill="${ac}"/>`;
+        return `
+          <line x1="74" y1="${y}" x2="112" y2="${y}" ${thin} opacity="0.7"/>
+          <line x1="124" y1="${y}" x2="146" y2="${y}" ${thin} opacity="0.7"/>
+          <line x1="158" y1="${y}" x2="178" y2="${y}" ${thin} opacity="0.7"/>`;
+      }).join('')}`;
+
+    /* 06 Patient Statements — balance statement fans out to email · SMS · voice */
+    case "communicate": return `
+      <rect x="16" y="36" width="88" height="128" rx="4" ${filled}/>
+      <rect x="16" y="36" width="88" height="20" fill="${ac}" fill-opacity="0.14"/>
+      <text x="26" y="49" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">STATEMENT</text>
+      <line x1="26" y1="70" x2="94" y2="70" ${thin}/>
+      <line x1="26" y1="78" x2="82" y2="78" ${thin}/>
+      <line x1="26" y1="86" x2="90" y2="86" ${thin}/>
+      <line x1="26" y1="94" x2="76" y2="94" ${thin}/>
+      <line x1="26" y1="106" x2="94" y2="106" ${thin} opacity="0.6"/>
+      <text x="26" y="128" font-family="Poppins" font-size="6.5" font-weight="500" fill="${st}" opacity="0.55" letter-spacing="1.6">BALANCE DUE</text>
+      <text x="94" y="150" text-anchor="end" font-family="Poppins" font-size="16" font-weight="600" fill="${ac}" letter-spacing="-0.02em">$248</text>
+      <path d="M 108 65 Q 122 65 128 50" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
+      <path d="M 108 100 Q 122 100 128 100" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
+      <path d="M 108 135 Q 122 135 128 156" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
+      <g transform="translate(132 32)">
+        <rect x="0" y="0" width="52" height="32" rx="3" ${filled}/>
+        <path d="M 0 0 L 26 22 L 52 0" ${thin} stroke="${ac}"/>
+      </g>
+      <g transform="translate(132 80)">
+        <path d="M 6 0 Q 0 0 0 6 L 0 26 Q 0 32 6 32 L 30 32 L 40 42 L 36 32 L 46 32 Q 52 32 52 26 L 52 6 Q 52 0 46 0 Z" ${filled}/>
+        <circle cx="16" cy="16" r="1.8" fill="${ac}"/>
+        <circle cx="26" cy="16" r="1.8" fill="${ac}"/>
+        <circle cx="36" cy="16" r="1.8" fill="${ac}"/>
+      </g>
+      <g transform="translate(140 140)">
+        <rect x="0" y="0" width="30" height="40" rx="4" ${filled}/>
+        <rect x="4" y="6" width="22" height="24" fill="${ds}" opacity="0.5"/>
+        <circle cx="15" cy="35" r="1.8" fill="${ac}"/>
+      </g>`;
+
+    default: return `<circle cx="100" cy="100" r="60" ${filled}/>`;
+  }
+}
+
+function slideMarkup(wf, idx){
   const num = String(idx+1).padStart(2,'0');
   const sidePal = sidePalette();
   return `
     <div class="slide" data-idx="${idx}">
-      <div class="stage-tag">Stage ${num}</div>
-      <svg class="svg-side"   viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(stage.key, sidePal)}</svg>
-      <svg class="svg-center" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(stage.key, PAL_DARK)}</svg>
-      <div class="stage-name">${stage.name}</div>
+      <div class="wf-tag">Workflow ${num}</div>
+      <svg class="svg-side"   viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(wf.key, sidePal)}</svg>
+      <svg class="svg-center" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(wf.key, PAL_DARK)}</svg>
+      <div class="wf-mini">${wf.name}</div>
+      <div class="wf-panel">
+        <div class="wp-agent">${wf.agent}</div>
+        <div class="wp-name">${wf.name}</div>
+        <div class="wp-desc">${wf.desc}</div>
+        <span class="wp-mode">Autonomous</span>
+      </div>
     </div>`;
 }
 
-function renderTabs(){
-  document.getElementById('pTabs').innerHTML = PROCESSES.map((p,i)=>
-    `<button class="p-tab ${i===currentProc?'active':''}" data-p="${i}">${p.name}</button>`
-  ).join('');
-  document.querySelectorAll('.p-tab').forEach(el=>el.addEventListener('click',()=>{
-    currentProc = parseInt(el.dataset.p,10); currentStage = 0; renderAll();
-  }));
-}
-
 function renderCarousel(){
-  const stages = PROCESSES[currentProc].stages;
   const track = document.getElementById('carTrack');
   const theme = document.documentElement.getAttribute('data-theme') || 'dark';
-  const sig = `${currentProc}-${theme}`;
+  const sig = `wf-${theme}`;
   if(track.dataset.sig !== sig){
     track.dataset.sig = sig;
-    track.innerHTML = stages.map((s,i)=>slideMarkup(s,i)).join('');
+    track.innerHTML = WORKFLOWS.map((w,i)=>slideMarkup(w,i)).join('');
     track.querySelectorAll('.slide').forEach(el=>el.addEventListener('click',()=>{
       const idx = parseInt(el.dataset.idx,10);
-      if(idx !== currentStage){ currentStage = idx; updatePositions(); renderText(); }
+      if(idx !== currentStage){ currentStage = idx; updatePositions(); }
     }));
   }
   updatePositions();
 }
 
+const panelTimers = new Map();
+function clearPanelTimers(el){
+  const t = panelTimers.get(el);
+  if(t){ clearTimeout(t.show); clearTimeout(t.hide); panelTimers.delete(el); }
+}
 function updatePositions(){
   const track = document.getElementById('carTrack');
-  const n = PROCESSES[currentProc].stages.length;
+  const n = WORKFLOWS.length;
   const step = 360 / n;
-  const radius = Math.max(420, Math.round(170 / Math.tan(Math.PI/n)));
+  const radius = Math.max(420, Math.round(160 / Math.tan(Math.PI/n)));
   track.querySelectorAll('.slide').forEach((el,i)=>{
     el.style.transform = `rotateY(${i*step}deg) translateZ(${radius}px)`;
-    el.classList.toggle('pos-center', i===currentStage);
+    const isCenter = (i===currentStage);
+    el.classList.toggle('pos-center', isCenter);
+    if(!isCenter){
+      el.classList.remove('panel-visible');
+      clearPanelTimers(el);
+    } else {
+      clearPanelTimers(el);
+      const show = setTimeout(()=>el.classList.add('panel-visible'), 1050);
+      const hide = setTimeout(()=>el.classList.remove('panel-visible'), 4200);
+      panelTimers.set(el, {show, hide});
+    }
   });
   track.style.transform = `rotateY(${-currentStage*step}deg)`;
 }
 
-function renderText(){
-  const p = PROCESSES[currentProc];
-  const s = p.stages[currentStage];
-  const mode = s.human ? 'handoff' : 'autonomous';
-  const modeLabel = s.human ? 'Human hand-off' : 'Autonomous';
-  document.getElementById('tbLeft').innerHTML = `
-    <div class="tc-meta">
-      <div class="tc-num">Stage ${String(currentStage+1).padStart(2,'0')} of ${String(p.stages.length).padStart(2,'0')}</div>
-      <div class="tc-mode ${mode}">${modeLabel}</div>
-    </div>
-    <div class="tc-name">${s.name}</div>
-    <div class="tc-what">${s.what}</div>
-  `;
-  const agentFact = s.agent
-    ? `<div class="tc-fact agent"><div class="lbl">Agent</div><div class="val">${s.agent.role}<div class="desc">${s.agent.desc}</div></div></div>`
-    : `<div class="tc-fact agent none"><div class="lbl">Agent</div><div class="val">Human-owned stage</div></div>`;
-  const humanFact = s.human
-    ? `<div class="tc-fact human"><div class="lbl">Human</div><div class="val">${s.human.role}<div class="desc">${s.human.desc}</div></div></div>`
-    : `<div class="tc-fact human none"><div class="lbl">Human</div><div class="val">Autonomous</div></div>`;
-  document.getElementById('tbRight').innerHTML =
-    agentFact + humanFact +
-    `<div class="tc-fact metric"><div class="lbl">Metric</div><div class="val">${s.metric}</div></div>`;
-}
-
-function renderAll(){renderTabs(); renderCarousel(); renderText();}
-renderAll();
+renderCarousel();
 
 /* Arrow controls */
 function step(dir){
-  const n = PROCESSES[currentProc].stages.length;
+  const n = WORKFLOWS.length;
   currentStage = (currentStage + dir + n) % n;
-  updatePositions(); renderText();
+  updatePositions();
 }
 document.getElementById('carPrev').addEventListener('click', ()=>step(-1));
 document.getElementById('carNext').addEventListener('click', ()=>step(1));

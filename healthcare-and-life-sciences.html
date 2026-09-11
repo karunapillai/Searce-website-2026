@@ -29,14 +29,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .wrap{max-width:1280px;margin:0 auto;padding:0 48px;}
 
 /* NAV */
-.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--paper-line);}
+.nav{position:absolute;top:0;left:0;right:0;z-index:200;background:transparent;border-bottom:none;}
+.nav.nav-scrolled{position:fixed;background:rgba(6,12,26,0.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;gap:32px;}
-.nav-logo{font-family:var(--display);font-weight:500;font-size:20px;color:var(--ink);letter-spacing:-.01em;}
-.nav-links{display:flex;align-items:center;gap:30px;list-style:none;font-size:14px;color:var(--ink-60);flex:1;justify-content:center;}
+.nav-logo{font-family:var(--display);font-weight:500;font-size:20px;color:#fff;letter-spacing:-.01em;}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none;font-size:14px;color:rgba(255,255,255,0.78);flex:1;justify-content:center;}
 .nav-links > li{position:relative;}
 .nav-links > li > a{position:relative;display:flex;align-items:center;gap:5px;padding:6px 2px;transition:color .2s ease;}
-.nav-links > li > a:hover, .nav-links > li > a.current{color:var(--blue);}
-.nav-links > li > a.current::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--blue);border-radius:2px;}
+.nav-links > li > a:hover, .nav-links > li > a.current{color:#fff;}
+.nav-links > li > a.current::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--blue-24);border-radius:2px;}
 .chev{width:9px;height:9px;flex-shrink:0;transition:transform .2s ease;}
 .has-dropdown:hover .chev{transform:rotate(180deg);}
 .mega-panel{position:absolute;top:100%;left:-14px;margin-top:16px;background:#fff;border:1px solid var(--paper-line);border-radius:16px;box-shadow:0 28px 56px rgba(10,20,40,0.12);padding:10px;min-width:230px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .18s ease, transform .18s ease, visibility .18s;}
@@ -49,42 +50,54 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .nav-cta svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;}
 
 /* ========== HERO with video BG ========== */
-.hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden;isolation:isolate;padding:120px 0 100px;color:#fff;background:#02040a;}
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.55;}
-.hero-video-fallback{position:absolute;inset:0;z-index:0;background:
-  radial-gradient(80% 60% at 20% 20%, rgba(0,100,255,0.35) 0%, transparent 60%),
-  radial-gradient(70% 55% at 80% 80%, rgba(0,50,180,0.35) 0%, transparent 60%),
-  linear-gradient(135deg, #02040a 0%, #050a1e 40%, #081436 100%);
-  animation:heroDrift 20s ease-in-out infinite alternate;}
-@keyframes heroDrift{0%{background-position:0 0, 0 0, 0 0;}100%{background-position:40px 20px, -30px -10px, 0 0;}}
-.hero-grid{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 30% 50%, #000 30%, transparent 80%);}
-.hero-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg, rgba(2,4,10,0.85) 0%, rgba(2,4,10,0.55) 40%, rgba(2,4,10,0.15) 70%, transparent 100%),linear-gradient(to bottom, transparent 60%, rgba(2,4,10,0.6) 100%);}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;isolation:isolate;padding:180px 0 100px;color:#fff;background:#02040a;}
+.hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;z-index:0;}
+.hero-overlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  linear-gradient(120deg, rgba(2,10,40,0.55) 0%, rgba(4,18,60,0.38) 50%, rgba(6,24,80,0.22) 100%),
+  radial-gradient(80% 60% at 20% 30%, rgba(0,50,180,0.28) 0%, transparent 70%);}
+.hero-grid{position:absolute;inset:0;z-index:2;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 30% 50%, #000 30%, transparent 80%);}
+.hero-vignette{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg, rgba(2,4,10,0.45) 0%, rgba(2,4,10,0.15) 45%, transparent 80%),linear-gradient(to bottom, transparent 70%, rgba(2,4,10,0.35) 100%);}
 .hero-marks{position:absolute;inset:0;z-index:2;pointer-events:none;color:rgba(255,255,255,0.4);font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.24em;text-transform:uppercase;}
 .hero-marks span{position:absolute;}
 .hero-marks .m-tl{top:32px;left:32px;}
 .hero-marks .m-tr{top:32px;right:32px;}
 .hero-marks .m-bl{bottom:32px;left:32px;}
 .hero-marks .m-br{bottom:32px;right:32px;color:var(--blue-24);}
+@keyframes heroDrift{0%{background-position:0 0;}100%{background-position:40px 20px;}}
 @media (max-width:900px){.hero-marks{display:none;}}
 .hero .wrap{position:relative;z-index:3;width:100%;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,100,255,0.15);border:1px solid rgba(179,208,255,0.3);color:#b3d0ff;font-family:var(--display);font-size:13px;letter-spacing:.18em;text-transform:uppercase;padding:8px 18px;border-radius:6px;margin-bottom:40px;}
-.hero-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--blue-24);animation:blink 2s ease-in-out infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
-.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(40px,5.8vw,84px);line-height:1;letter-spacing:-0.025em;color:#fff;max-width:1100px;margin-bottom:36px;}
-.hero h1 .line-blue{color:#7ba9ff;font-weight:400;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg, rgba(0,60,180,0.18) 0%, rgba(0,30,120,0.22) 100%);border:1px solid rgba(123,169,255,0.35);color:#fff;font-family:var(--display);font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:8px 17px 8px 13px;border-radius:999px;margin-bottom:40px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 6px 18px rgba(0,20,80,0.20), inset 0 1px 0 rgba(255,255,255,0.08);}
+.hero-badge-icon{width:22px;height:22px;flex-shrink:0;}
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(38px,5.5vw,80px);line-height:1.08;letter-spacing:-0.025em;color:#fff;max-width:1100px;margin-bottom:36px;}
+.hero h1 .line-blue{color:#fff;font-weight:300;}
 .hero-opening{max-width:720px;color:rgba(255,255,255,0.72);font-size:19px;line-height:1.65;margin-bottom:44px;}
 .hero-cta-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;}
-.hero-cta-primary{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);font-family:var(--display);font-size:15px;padding:16px 28px;border-radius:999px;transition:background .2s,transform .2s;}
-.hero-cta-primary:hover{background:var(--blue-24);transform:translateY(-1px);}
-.hero-cta-primary svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+.hero-cta-primary{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;font-family:var(--display);font-size:14.25px;padding:15px 26.5px;border-radius:999px;transition:background .2s,transform .2s;}
+.hero-cta-primary:hover{background:var(--blue-strong);transform:translateY(-1px);}
+.hero-cta-primary svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;}
 
 /* ========== Section shared ========== */
 .section-eyebrow{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;display:inline-block;}
 .section-h{font-family:var(--display);font-weight:300;font-size:clamp(32px,4.2vw,56px);line-height:1.08;letter-spacing:-0.02em;color:var(--ink);max-width:900px;margin-bottom:32px;}
 
-/* ========== Reality (scannable) ========== */
-.reality{padding:120px 0;background:var(--paper);border-bottom:1px solid var(--paper-line);}
-.reality-lede{max-width:820px;color:#3a3b40;font-family:var(--body);font-weight:400;font-size:22px;line-height:1.65;letter-spacing:0;margin-bottom:0;}
+/* Shared recurring grid motif — echoes the hero, opacity varies per section */
+.grid-motif{position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(currentColor 1px, transparent 1px),linear-gradient(90deg, currentColor 1px, transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(ellipse at 50% 50%, #000 30%, transparent 85%);mask-image:radial-gradient(ellipse at 50% 50%, #000 30%, transparent 85%);}
+.reality, .leaks, .pillars{position:relative;overflow:hidden;}
+.reality > .wrap, .leaks > .wrap, .pillars > .wrap{position:relative;z-index:1;}
+.reality .grid-motif{color:rgba(0,50,150,0.045);}
+.leaks .grid-motif{color:rgba(0,60,180,0.06);}
+.processes .grid-motif{color:rgba(0,60,180,0.04);}
+.pillars .grid-motif{color:rgba(179,208,255,0.07);}
+
+/* ========== Reality (scannable, centered) ========== */
+.reality{padding:94px 0;background:linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);border-bottom:1px solid var(--paper-line);text-align:center;}
+.reality .wrap{display:flex;flex-direction:column;align-items:center;}
+.reality .section-eyebrow{display:inline-block;margin-bottom:16px;}
+.reality .section-h{margin:0 auto 24px;font-size:clamp(20px,2.56vw,33px);line-height:1.35;max-width:990px;text-align:center;}
+.reality-word{display:inline-block;color:rgba(0,22,48,0.22);transition:color .35s ease;}
+.reality-word.on{color:#001630;}
+.reality-lede{max-width:820px;margin:0 auto;color:#8a8c92;font-family:var(--body);font-weight:400;font-size:20px;line-height:1.65;letter-spacing:0;text-align:center;}
+.reality-lede em{color:#8a8c92;font-style:normal;font-weight:400;}
 .reality-lede em{color:var(--blue);font-style:normal;font-weight:500;}
 .reality-vignettes{display:grid;grid-template-columns:repeat(2,1fr);gap:20px 40px;margin-bottom:56px;max-width:1080px;}
 .reality-vg{display:flex;gap:18px;align-items:flex-start;padding:20px 0;border-top:1px solid var(--paper-line);}
@@ -94,129 +107,186 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .reality-closing strong{color:var(--blue-strong);font-weight:500;}
 @media (max-width:800px){.reality-vignettes{grid-template-columns:1fr;gap:0;}.reality-vg{flex-direction:column;gap:6px;}.reality-vg-role{width:auto;}}
 
-/* ========== Processes carousel ========== */
-.processes{padding:120px 0;background:radial-gradient(70% 50% at 50% 45%, #0a2a6b 0%, #041232 45%, #02040f 100%);color:#fff;border-bottom:1px solid rgba(255,255,255,0.06);overflow:hidden;position:relative;}
+/* ========== Processes (Autonomous RCM Architecture — V8, light) ========== */
+.processes{padding:72px 0 64px;background:var(--paper);color:var(--ink);border-bottom:1px solid var(--paper-line);overflow:hidden;position:relative;}
 .processes .wrap{position:relative;z-index:1;}
-.processes .section-eyebrow{color:var(--blue-24);}
-.processes .section-h{color:#fff;}
-.carousel-wrap{margin-top:56px;position:relative;}
-.carousel-track{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 32px;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth;}
-.carousel-track::-webkit-scrollbar{display:none;}
-.process-card{flex:0 0 320px;background:#050f2a;border:1px solid rgba(179,208,255,0.10);border-radius:20px;padding:32px 28px;scroll-snap-align:start;transition:all .25s;display:flex;flex-direction:column;gap:16px;color:#fff;}
-.process-card:hover{background:#0a1c4a;border-color:var(--blue-24);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,100,255,0.15);}
-.process-icon{width:52px;height:52px;border-radius:14px;background:rgba(179,208,255,0.08);border:1px solid rgba(179,208,255,0.2);display:flex;align-items:center;justify-content:center;color:var(--blue-24);transition:all .3s;}
-.process-card:hover .process-icon{background:var(--blue);border-color:var(--blue);color:#fff;}
-.process-icon svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
-.process-name{font-family:var(--display);font-weight:500;font-size:18px;color:#fff;letter-spacing:-0.01em;line-height:1.35;}
-.process-desc{color:rgba(255,255,255,0.65);font-size:14.5px;line-height:1.65;}
-.carousel-controls{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:20px;}
-.carousel-progress{flex:1;height:2px;background:rgba(255,255,255,0.12);border-radius:2px;overflow:hidden;}
-.carousel-progress-fill{height:100%;background:var(--blue-24);width:20%;border-radius:2px;transition:width .3s ease;}
-.carousel-btns{display:flex;gap:10px;}
-.carousel-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;color:#fff;}
-.carousel-btn:hover{background:#fff;color:var(--ink);border-color:#fff;}
-.carousel-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
-.carousel-btn:disabled{opacity:.35;cursor:not-allowed;}
+.processes .section-eyebrow{color:var(--blue);text-align:center;display:block;}
+.processes .section-h{color:var(--ink);text-align:center;margin-left:auto;margin-right:auto;}
+.processes .section-sub{color:var(--ink-60);max-width:640px;font-size:15.5px;margin:0 auto 56px;text-align:center;}
 
-/* ========== Value leaks - stacked color bars ========== */
-.leaks{padding:120px 0;background:var(--paper);border-bottom:1px solid var(--paper-line);}
-.leaks-stack{margin-top:56px;display:flex;flex-direction:column;gap:14px;}
-.leak-bar{position:relative;background:#fff;border:1px solid var(--blue-24);border-radius:14px;padding:32px 40px;cursor:pointer;transition:all .35s ease;color:var(--ink);overflow:hidden;}
-.leak-bar:hover, .leak-bar.open{border-color:var(--blue);}
-.leak-bar-row{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;}
-.leak-bar-num{font-family:var(--display);font-weight:500;font-size:13px;letter-spacing:.14em;color:var(--blue);min-width:36px;}
-.leak-bar-title{font-family:var(--display);font-weight:400;font-size:20px;letter-spacing:-0.01em;line-height:1.3;color:var(--ink);display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-.leak-bar-arrow{width:44px;height:44px;border-radius:50%;background:var(--blue-06);border:1px solid var(--blue-12);display:flex;align-items:center;justify-content:center;transition:all .3s;color:var(--blue);}
-.leak-bar-arrow svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .35s;}
-.leak-bar.open .leak-bar-arrow{background:var(--blue);border-color:var(--blue);color:#fff;}
-.leak-bar.open .leak-bar-arrow svg{transform:rotate(90deg);}
-.leak-bar-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
-.leak-bar.open .leak-bar-body{max-height:200px;}
-.leak-bar-detail{padding-top:20px;font-size:16px;line-height:1.7;max-width:720px;color:var(--ink-60);}
-.leak-bar.open{padding:36px 40px 40px;box-shadow:0 20px 40px rgba(0,100,255,0.06);}
-.leak-bar:hover{transform:translateX(4px);}
-.leak-bar.open:hover{transform:none;}
-.leak-tag{font-family:var(--display);font-weight:500;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;padding:6px 12px;border-radius:6px;background:var(--blue-06);color:var(--blue-strong);white-space:nowrap;}
-.leak-bar[data-tone="commercial"] .leak-tag{background:rgba(255,180,20,0.12);color:#8a5a10;}
-@media (max-width:700px){.leak-bar{padding:24px 22px;}.leak-bar-row{grid-template-columns:1fr auto;}.leak-bar-num{grid-column:1;grid-row:1;}.leak-bar-arrow{grid-row:1 / span 2;}.leak-bar-title{grid-column:1;font-size:17px;}}
+.rcm-arch{--rcm-ink:#1a1a1c;--rcm-ink-40:#84868c;--rcm-ink-60:#54555a;--rcm-ink-80:#1a1a1c;--rcm-line:#e4e6ea;--rcm-blue-lit:#0064ff;--rcm-purple:#734bff;--rcm-paper-side:#f6f7f9;--rcm-paper-center:#ffffff;--rcm-card-ink:#1a1a1c;--rcm-card-ink-60:#54555a;--rcm-card-ink-40:#84868c;--rcm-card-line:#e4e6ea;--rcm-dark:#02061a;--rcm-dark-ink:#f2f7ff;--rcm-dark-ink-60:#a9b3c9;}
+.rcm-arch .rcm-carousel{position:relative;margin:0 auto 56px;max-width:1200px;height:385px;perspective:1500px;perspective-origin:50% 50%;}
+.rcm-arch .rcm-track{position:absolute;top:50%;left:50%;width:0;height:0;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.22,.61,.36,1);}
+.rcm-arch .rcm-slide{position:absolute;top:-159px;left:-158px;width:316px;height:318px;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f2f7ff;border:1px solid var(--rcm-card-line);cursor:pointer;transform-origin:center center;backface-visibility:visible;transition:background .5s ease, border-color .5s ease, box-shadow .5s ease;}
+.rcm-arch .rcm-slide.pos-center{background:linear-gradient(160deg,#0a1c4a 0%,#050a1e 100%);border-color:rgba(179,208,255,0.22);box-shadow:0 30px 70px -24px rgba(0,0,0,0.7);cursor:default;}
+.rcm-arch .rcm-slide .wf-tag{position:absolute;top:18px;left:20px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--rcm-card-ink-40);transition:color .4s;z-index:3;}
+.rcm-arch .rcm-slide.pos-center .wf-tag{color:#7ba9ff;}
+.rcm-arch .rcm-slide .wf-mini{position:absolute;bottom:18px;left:20px;right:20px;font-family:var(--display);font-weight:400;font-size:13px;line-height:1.3;letter-spacing:-0.005em;color:var(--rcm-card-ink-60);transition:opacity .35s ease;z-index:2;}
+.rcm-arch .rcm-slide.pos-center .wf-mini{opacity:0;}
+.rcm-arch .rcm-slide svg{position:absolute;width:74%;height:66%;top:17%;left:13%;transition:opacity .4s;}
+.rcm-arch .rcm-slide .svg-center{opacity:0;}
+.rcm-arch .rcm-slide .svg-side{opacity:0.78;}
+.rcm-arch .rcm-slide.pos-center .svg-center{opacity:1;}
+.rcm-arch .rcm-slide.pos-center .svg-side{opacity:0;}
+.rcm-arch .wf-panel{position:absolute;inset:0;padding:22px 22px 22px;z-index:4;background:linear-gradient(180deg,rgba(2,6,26,0.75) 0%,rgba(2,6,26,0.83) 100%);color:#f2f7ff;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;pointer-events:none;transition:opacity .5s ease;}
+.rcm-arch .rcm-slide.pos-center.panel-visible .wf-panel,
+.rcm-arch .rcm-slide.pos-center:hover .wf-panel{opacity:1;pointer-events:auto;}
+.rcm-arch .wf-panel .wp-name{font-family:var(--display);font-weight:500;font-size:14px;letter-spacing:-0.01em;line-height:1.2;color:#f2f7ff;margin-bottom:3px;}
+.rcm-arch .wf-panel .wp-agent{font-family:var(--display);font-weight:500;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:#7ba9ff;margin-bottom:6px;}
+.rcm-arch .wf-panel .wp-desc{font-family:var(--body);font-size:11px;line-height:1.5;color:#a9b3c9;margin-bottom:10px;}
+.rcm-arch .wf-panel .wp-mode{display:inline-block;font-family:var(--display);font-weight:500;font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;padding:3px 9px;border-radius:4px;background:rgba(123,169,255,0.16);color:#7ba9ff;}
+.rcm-arch .car-controls{display:flex;justify-content:center;gap:14px;margin:0 auto 72px;}
+.rcm-arch .car-btn{width:42px;height:42px;border-radius:999px;border:1px solid var(--rcm-line);background:transparent;color:var(--rcm-ink);display:flex;align-items:center;justify-content:center;transition:all .18s;cursor:pointer;}
+.rcm-arch .car-btn:hover{background:var(--blue);border-color:var(--blue);color:#fff;}
+.rcm-arch .car-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.rcm-arch .arch-footer{max-width:1104px;margin:0 auto;}
+.rcm-arch .arch-row{display:flex;align-items:baseline;gap:28px;padding:14px 0;border-top:1px solid var(--rcm-line);justify-content:center;text-align:center;}
+.rcm-arch .arch-row:last-child{border-bottom:1px solid var(--rcm-line);}
+.rcm-arch .arch-label{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.26em;text-transform:uppercase;white-space:nowrap;}
+.rcm-arch .arch-row.intel     .arch-label{color:var(--rcm-blue-lit);}
+.rcm-arch .arch-row.oversight .arch-label{color:var(--rcm-purple);}
+.rcm-arch .arch-row.impact    .arch-label{color:var(--rcm-ink);}
+.rcm-arch .arch-content{font-family:var(--display);font-weight:400;font-size:13px;color:var(--rcm-ink-80);letter-spacing:-0.005em;line-height:1.5;}
+.rcm-arch .arch-content .sep{color:var(--rcm-ink-40);margin:0 10px;}
+.rcm-arch .arch-row.impact .arch-content{color:var(--rcm-ink);font-weight:500;}
+.rcm-arch .arch-row.impact .arch-content .arr{color:var(--rcm-blue-lit);margin-right:4px;font-weight:400;}
+@media (max-width:960px){
+  .rcm-arch .rcm-carousel{height:340px;}
+  .rcm-arch .rcm-slide{width:260px;height:260px;top:-130px;left:-130px;}
+  .rcm-arch .arch-row{flex-direction:column;gap:6px;padding:12px 0;}
+  .rcm-arch .arch-label{flex:0 0 auto;}
+  .rcm-arch .arch-content{font-size:12.5px;}
+}
 
-/* ========== Outcomes - compact tabs ========== */
-.outcomes{padding:120px 0;background:linear-gradient(180deg,#040814 0%,#000 100%);color:#fff;position:relative;overflow:hidden;}
-.outcomes::before{content:"";position:absolute;inset:0;background:radial-gradient(80% 60% at 20% 30%, rgba(0,100,255,0.15) 0%, transparent 60%),radial-gradient(70% 55% at 80% 70%, rgba(0,50,180,0.15) 0%, transparent 60%);pointer-events:none;}
-.outcomes .wrap{position:relative;z-index:1;}
-.outcomes .section-eyebrow{color:var(--blue-24);}
-.outcomes .section-h{color:#fff;}
-.outcomes-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:56px;}
-.outcome-tab{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:24px 22px;text-align:left;cursor:pointer;transition:all .25s;color:inherit;font-family:var(--body);display:flex;flex-direction:column;gap:8px;min-height:130px;}
-.outcome-tab:hover{background:rgba(255,255,255,0.06);border-color:rgba(179,208,255,0.3);}
-.outcome-tab.active{background:linear-gradient(180deg, rgba(0,100,255,0.15) 0%, rgba(0,100,255,0.05) 100%);border-color:var(--blue-24);box-shadow:0 12px 28px rgba(0,100,255,0.15);}
-.outcome-tab-num{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,0.5);text-transform:uppercase;}
-.outcome-tab.active .outcome-tab-num{color:var(--blue-24);}
-.outcome-tab-metric{font-family:var(--display);font-weight:400;font-size:22px;color:#fff;letter-spacing:-0.01em;line-height:1.15;}
-.outcome-tab-metric span{color:#7ba9ff;}
-.outcome-tab-title{font-family:var(--display);font-weight:400;font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.4;margin-top:auto;}
-.outcome-tab.active .outcome-tab-title{color:rgba(255,255,255,0.9);}
-.outcome-panel{margin-top:24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.10);border-radius:20px;padding:36px 40px;display:grid;grid-template-columns:repeat(3, 1fr);gap:36px;}
-.outcome-block .outcome-label{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-24);margin-bottom:10px;}
-.outcome-block .outcome-text{color:rgba(255,255,255,0.82);font-size:15px;line-height:1.65;}
+/* ========== Value leaks - deep navy with center glow ========== */
+.leaks{padding:120px 0;background:radial-gradient(80% 60% at 50% 0%, #0a1c4a 0%, #050b1e 55%, #02040f 100%);color:#fff;border-bottom:1px solid rgba(255,255,255,0.06);}
+.leaks .section-eyebrow{color:var(--blue-24);}
+.leaks .section-h{color:#fff;}
+.leaks .grid-motif{color:rgba(179,208,255,0.09);}
+.leaks-stack{margin-top:56px;display:grid;grid-template-columns:repeat(6,1fr);gap:20px;position:relative;z-index:1;}
+.leak-card{grid-column:span 2;background:linear-gradient(180deg, rgba(10,28,74,0.55) 0%, rgba(5,14,46,0.65) 100%);border:1px solid rgba(0,100,255,0.28);border-radius:20px;padding:32px 32px 28px;display:flex;flex-direction:column;min-height:280px;transition:background .25s, border-color .25s, transform .25s, box-shadow .25s;position:relative;overflow:hidden;}
+.leak-card::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 0%, rgba(0,100,255,0.12) 0%, transparent 70%);pointer-events:none;}
+.leak-card:nth-child(4), .leak-card:nth-child(5){grid-column:span 3;}
+.leak-card:hover{background:linear-gradient(180deg, rgba(14,38,96,0.75) 0%, rgba(8,22,64,0.85) 100%);border-color:rgba(77,143,255,0.55);transform:translateY(-3px);box-shadow:0 24px 48px rgba(0,100,255,0.20);}
+.leak-card-icon{width:40px;height:40px;color:#4d8fff;margin-bottom:32px;transition:color .25s;position:relative;z-index:1;}
+.leak-card:hover .leak-card-icon{color:#7ba9ff;}
+.leak-card-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.leak-card-title{font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:-0.01em;line-height:1.25;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.leak-card-desc{color:rgba(255,255,255,0.65);font-size:15.5px;line-height:1.65;margin-bottom:0;position:relative;z-index:1;}
+.leak-card-link{margin-top:auto;font-family:var(--display);font-weight:500;font-size:14px;color:var(--blue-24);display:inline-flex;align-items:center;gap:8px;transition:gap .2s, color .2s;}
+.leak-card-link:hover{gap:12px;color:#fff;}
+.leak-card-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.leak-tag{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:6px;background:rgba(0,100,255,0.20);color:var(--blue-24);white-space:nowrap;border:1px solid rgba(179,208,255,0.20);}
+.leak-card[data-tone="commercial"] .leak-tag{background:rgba(179,208,255,0.10);color:#dbe9ff;}
+@media (max-width:900px){.leaks-stack{grid-template-columns:repeat(2,1fr);}.leak-card,.leak-card:nth-child(4),.leak-card:nth-child(5){grid-column:span 1;}}
+@media (max-width:560px){.leaks-stack{grid-template-columns:1fr;}}
+
+/* ========== Outcomes - accordion left + baseline/intervention/result right ========== */
+.outcomes{background:linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);color:var(--ink);position:relative;padding:100px 0 120px;border-bottom:1px solid var(--paper-line);}
+.outcomes > .wrap{max-width:1296px;}
+.outcomes-intro{text-align:center;margin-bottom:48px;}
+.outcomes-intro .section-eyebrow{color:var(--blue);display:inline-block;margin-bottom:14px;}
+.outcomes-intro .section-h{color:var(--ink);margin:0 auto;text-align:center;font-size:clamp(30px,3.8vw,48px);}
+.outcomes-frame{background:transparent;border-radius:0;padding:0;position:relative;min-height:0;}
+.outcomes-panel-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.3fr;gap:24px;align-items:stretch;min-height:564px;}
+.outcomes-accordion{background:#fff;border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;}
+.outcomes-item{border-radius:12px;padding:18px 22px;cursor:pointer;transition:background .25s;border:none;background:transparent;text-align:left;font-family:var(--body);color:inherit;width:100%;display:grid;grid-template-columns:44px 1fr 26px;gap:16px;align-items:center;flex:1;}
+.outcomes-item:hover{background:#f4f7ff;}
+.outcomes-item.active{background:#e6edff;}
+.outcomes-item-icon{width:44px;height:44px;border-radius:12px;background:#f0f4ff;color:var(--blue);display:flex;align-items:center;justify-content:center;transition:all .25s;}
+.outcomes-item.active .outcomes-item-icon{background:linear-gradient(135deg, #0064ff 0%, #0051cb 100%);color:#fff;box-shadow:0 8px 18px -6px rgba(0,80,200,0.35);}
+.outcomes-item-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.outcomes-item-title{font-family:var(--display);font-weight:500;font-size:16px;color:var(--ink);letter-spacing:-0.005em;line-height:1.3;}
+.outcomes-item-arrow{width:26px;height:26px;flex-shrink:0;color:var(--ink-40);transition:transform .3s ease, color .25s;}
+.outcomes-item.active .outcomes-item-arrow{transform:rotate(90deg);color:var(--blue);}
+.outcomes-item-arrow svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.outcomes-detail{background:#fff;border-radius:16px;padding:44px 44px;display:flex;flex-direction:column;gap:0;transition:opacity .3s ease, transform .3s ease;}
+.outcomes-detail.swap{opacity:0;transform:translateY(4px);}
+.outcomes-detail-metric{margin-bottom:24px;padding-bottom:0;border-bottom:none;}
+.outcomes-detail-metric-value{font-family:var(--display);font-weight:500;font-size:clamp(28px,3.2vw,42px);color:var(--blue);letter-spacing:-0.02em;line-height:1;}
+.outcomes-detail-metric-label{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-60);margin-top:7px;}
+.outcomes-detail-block{padding:16px 0;border-top:none;}
+.outcomes-detail-block:first-of-type{padding-top:4px;}
+.outcomes-detail-label{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.outcomes-detail-text{color:var(--ink);font-size:17px;line-height:1.7;margin:0;}
+@media (max-width:900px){.outcomes-panel-grid{grid-template-columns:1fr;}.outcomes-detail{padding:28px;}.outcomes-frame{min-height:0;}}
 @media (max-width:900px){.outcomes-tabs{grid-template-columns:1fr 1fr;}.outcome-panel{grid-template-columns:1fr;gap:20px;padding:28px;}}
 @media (max-width:520px){.outcomes-tabs{grid-template-columns:1fr;}}
 
-/* ========== Pillars - white + light blue mix ========== */
-.pillars{padding:140px 0;background:linear-gradient(135deg, #ffffff 0%, #eef4ff 55%, #dbe9ff 100%);border-bottom:1px solid var(--paper-line);position:relative;overflow:hidden;}
-.pillars::before{content:"";position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle, rgba(0,100,255,0.10) 0%, transparent 65%);border-radius:50%;pointer-events:none;}
-.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px;position:relative;z-index:1;}
-.pillar-card{background:rgba(255,255,255,0.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(0,100,255,0.12);border-radius:20px;padding:32px 28px;transition:all .25s;display:flex;flex-direction:column;min-height:340px;position:relative;}
-.pillar-card:hover{background:#fff;border-color:var(--blue-24);box-shadow:0 20px 40px rgba(0,100,255,0.10);transform:translateY(-3px);}
-.pillar-num{font-family:var(--display);font-weight:300;font-size:64px;color:rgba(0,100,255,0.15);letter-spacing:-0.03em;line-height:1;margin-bottom:24px;transition:color .25s;}
-.pillar-card:hover .pillar-num{color:var(--blue);}
-.pillar-icon{width:48px;height:48px;border-radius:14px;background:transparent;border:1.5px solid var(--blue);display:flex;align-items:center;justify-content:center;color:var(--blue);margin-bottom:20px;transition:all .25s;}
-.pillar-card:hover .pillar-icon{background:var(--blue-06);border-color:var(--blue-strong);color:var(--blue-strong);}
-.pillar-icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
-.pillar-name{font-family:var(--display);font-weight:500;font-size:18px;color:var(--ink);letter-spacing:-0.01em;line-height:1.3;margin-bottom:12px;}
-.pillar-desc{color:var(--ink-60);font-size:14px;line-height:1.6;margin-top:auto;}
+/* ========== Pillars - split intro + staggered card grid (light) ========== */
+.pillars{padding:120px 0;background:var(--paper);color:var(--ink);border-bottom:1px solid var(--paper-line);}
+.pillars .section-eyebrow{color:var(--blue);}
+.pillars .section-h{color:var(--ink);}
+.pillars-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;margin-top:24px;align-items:start;position:relative;z-index:1;}
+.pillars-intro{padding-top:12px;}
+.pillars-intro .section-h{font-size:clamp(30px,3.6vw,48px);margin-bottom:24px;max-width:520px;}
+.pillars-intro-sub{color:var(--ink-60);font-size:16.5px;line-height:1.65;max-width:440px;}
+.pillars-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;grid-auto-rows:1fr;}
+.pillars-cards > .pillar-card:nth-child(even){margin-top:56px;}
+.pillar-card{position:relative;background:#eef4ff;border-radius:20px;padding:28px 28px 32px;display:flex;flex-direction:column;min-height:280px;height:100%;transition:background .3s, transform .25s, box-shadow .25s;}
+.pillar-card:hover{background:linear-gradient(135deg, #0064ff 0%, #0051cb 100%);transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,80,200,0.25);}
+.pillar-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:44px;}
+.pillar-card-icon{width:36px;height:36px;color:var(--blue);transition:color .25s;}
+.pillar-card:hover .pillar-card-icon{color:#fff;}
+.pillar-card-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.pillar-card-arrow{width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--ink-60);transition:background .2s, color .2s;}
+.pillar-card:hover .pillar-card-arrow{background:#fff;color:var(--blue);}
+.pillar-card-arrow svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.pillar-card .pillar-name{font-family:var(--display);font-weight:500;font-size:22px;color:var(--ink);letter-spacing:-0.01em;line-height:1.2;margin-bottom:14px;transition:color .25s;}
+.pillar-card:hover .pillar-name{color:#fff;}
+.pillar-card .pillar-desc{color:var(--ink-60);font-size:15.5px;line-height:1.65;margin:0;transition:color .25s;}
+.pillar-card:hover .pillar-desc{color:rgba(255,255,255,0.9);}
+@media (max-width:960px){.pillars-layout{grid-template-columns:1fr;gap:48px;}.pillars-cards > .pillar-card:nth-child(even){margin-top:0;}}
+@media (max-width:560px){.pillars-cards{grid-template-columns:1fr;}}
+.pillars-manifesto,.pillars-grid{display:none;}
+/* legacy pillar-card/-icon rules removed — manifesto layout above owns Pillars */
 @media (max-width:1000px){.pillars-grid{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:600px){.pillars-grid{grid-template-columns:1fr;}}
 
-/* ========== Engagement - centered, AI-Ops dark navy ========== */
-.engagement{padding:140px 0;background:radial-gradient(120% 90% at 15% 0%, #0b1f52 0%, transparent 60%),radial-gradient(80% 60% at 100% 100%, #051033 0%, transparent 60%),linear-gradient(180deg,#040814 0%, #000 100%);color:#fff;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.06);}
-.engagement::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 40%, #000 40%, transparent 85%);animation:engGrid 40s linear infinite;pointer-events:none;}
-.engagement::after{content:"";position:absolute;width:520px;height:520px;left:calc(50% - 260px);top:-260px;background:radial-gradient(circle, rgba(0,100,255,.28) 0%, rgba(0,100,255,0) 65%);filter:blur(20px);animation:engGlow 18s ease-in-out infinite alternate;pointer-events:none;}
-@keyframes engGrid{from{background-position:0 0, 0 0;}to{background-position:64px 64px, 64px 64px;}}
-@keyframes engGlow{0%{transform:translate(0,0) scale(1);opacity:.9;}50%{transform:translate(-80px,60px) scale(1.08);opacity:.7;}100%{transform:translate(60px,-40px) scale(.95);opacity:1;}}
+/* ========== Engagement - Searce-blue hero card straddling white / navy ========== */
+.engagement{padding:120px 0;background:#02061a;color:#fff;position:relative;overflow:hidden;}
 .engagement .wrap{position:relative;z-index:1;}
-.engagement .section-eyebrow{color:var(--blue-24);justify-content:center;}
-.engagement .section-h{color:#fff;margin:0 auto 24px;text-align:center;}
-.engagement-body{max-width:720px;margin:0 auto;color:rgba(255,255,255,0.72);font-size:19px;line-height:1.75;}
-.engagement-body p{margin-bottom:16px;}
-.engagement-body strong{color:#fff;font-weight:500;}
-.engagement-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px;}
-.engagement-pill{background:rgba(255,255,255,0.06);border:1px solid rgba(179,208,255,0.25);color:#b3d0ff;font-family:var(--display);font-size:13.5px;padding:10px 20px;border-radius:999px;}
+.eng-card{position:relative;background:linear-gradient(135deg, #0064ff 0%, #004ecc 60%, #00337f 100%);border-radius:28px;padding:88px 72px;overflow:hidden;box-shadow:0 40px 80px -20px rgba(0,50,180,0.35);text-align:center;}
+.eng-card::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px);background-size:60px 60px;mask-image:linear-gradient(180deg, #000 30%, rgba(0,0,0,0.35) 100%);-webkit-mask-image:linear-gradient(180deg, #000 30%, rgba(0,0,0,0.35) 100%);pointer-events:none;}
+.eng-card::after{content:"";position:absolute;width:400px;height:400px;right:-100px;bottom:-100px;background:radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 65%);filter:blur(30px);pointer-events:none;}
+.eng-card-left{position:relative;z-index:1;}
+.eng-card-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#fff;margin-bottom:22px;}
+.eng-card-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#fff;}
+.eng-card h2{font-family:var(--display);font-weight:500;font-size:clamp(34px,4.2vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#fff;margin:0 auto 24px;max-width:820px;}
+.eng-card-body{color:rgba(255,255,255,0.82);font-size:16.5px;line-height:1.65;max-width:720px;margin:0 auto;}
+.eng-card-right{position:relative;z-index:1;background:#fff;border-radius:20px;padding:36px 34px;box-shadow:0 24px 60px -12px rgba(0,20,80,0.35);}
+.eng-card-right-label{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;}
+.eng-card-pull{font-family:var(--display);font-weight:400;font-size:clamp(24px,2.6vw,32px);line-height:1.15;letter-spacing:-0.015em;color:var(--ink);margin-bottom:20px;}
+.eng-card-pull strong{color:var(--blue-strong);font-weight:500;}
+.eng-card-meta{display:flex;flex-wrap:wrap;gap:8px 20px;padding-top:20px;border-top:1px solid var(--paper-line);}
+.eng-card-meta-item{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:12.5px;color:var(--ink-60);}
+.eng-card-meta-item svg{width:14px;height:14px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+@media (max-width:900px){.eng-card{grid-template-columns:1fr;padding:48px 32px;gap:32px;border-radius:20px;}.eng-card-right{padding:28px 24px;}}
 
 /* ========== FAQ - accordion + side visual ========== */
-.faq{padding:140px 0;background:var(--paper);position:relative;overflow:hidden;}
-.faq::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,100,255,0.06) 1px, transparent 1px),linear-gradient(90deg, rgba(0,100,255,0.06) 1px, transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 40%, #000 0%, transparent 85%);-webkit-mask-image:radial-gradient(ellipse at 50% 40%, #000 0%, transparent 85%);pointer-events:none;}
+.faq{padding:120px 0;background:#02061a;color:#fff;position:relative;overflow:hidden;}
+.faq::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(179,208,255,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(179,208,255,0.05) 1px, transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 50% 40%, #000 0%, transparent 85%);-webkit-mask-image:radial-gradient(ellipse at 50% 40%, #000 0%, transparent 85%);pointer-events:none;}
 .faq .wrap{position:relative;z-index:1;}
 .faq-layout{display:grid;grid-template-columns:1fr 1.6fr;gap:80px;margin-top:24px;align-items:flex-start;}
 .faq-sidebar{position:sticky;top:120px;}
-.faq-title{font-family:var(--display);font-weight:300;font-size:clamp(36px,4.2vw,54px);line-height:1.05;color:var(--ink);letter-spacing:-0.02em;margin-bottom:20px;}
-.faq-title span{color:var(--blue);display:block;}
-.faq-side-text{color:var(--ink-60);font-size:15.5px;line-height:1.7;max-width:340px;}
+.faq-title{font-family:var(--display);font-weight:300;font-size:clamp(36px,4.2vw,54px);line-height:1.05;color:#fff;letter-spacing:-0.02em;margin-bottom:20px;}
+.faq-title span{color:var(--blue-24);display:block;}
+.faq-side-text{color:rgba(255,255,255,0.65);font-size:15.5px;line-height:1.7;max-width:340px;}
 .faq-list{display:flex;flex-direction:column;gap:12px;}
-.faq-item{border:1px solid var(--paper-line);border-radius:16px;background:#fff;overflow:hidden;transition:all .25s;}
-.faq-item:hover{border-color:var(--blue-24);}
-.faq-item.open{border-color:var(--blue);background:var(--blue-06);box-shadow:0 20px 40px rgba(0,100,255,0.08);}
-.faq-q{width:100%;text-align:left;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;gap:24px;cursor:pointer;font-family:var(--display);font-weight:400;font-size:18px;color:var(--ink);letter-spacing:-0.01em;transition:color .2s;}
-.faq-item.open .faq-q{color:var(--blue-strong);font-weight:500;}
-.faq-icon{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--paper-dim);position:relative;transition:all .3s;}
-.faq-icon::before,.faq-icon::after{content:"";position:absolute;top:50%;left:50%;background:var(--ink);border-radius:2px;}
+.faq-item{border:1px solid rgba(179,208,255,0.14);border-radius:16px;background:rgba(255,255,255,0.03);overflow:hidden;transition:all .25s;}
+.faq-item:hover{border-color:var(--blue-24);background:rgba(0,100,255,0.06);}
+.faq-item.open{border-color:var(--blue-24);background:rgba(0,100,255,0.10);box-shadow:0 20px 40px rgba(0,100,255,0.14);}
+.faq-q{width:100%;text-align:left;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;gap:24px;cursor:pointer;font-family:var(--display);font-weight:400;font-size:18px;color:#fff;letter-spacing:-0.01em;transition:color .2s;}
+.faq-item.open .faq-q{color:#fff;font-weight:500;}
+.faq-icon{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.06);position:relative;transition:all .3s;}
+.faq-icon::before,.faq-icon::after{content:"";position:absolute;top:50%;left:50%;background:#fff;border-radius:2px;}
 .faq-icon::before{width:14px;height:2px;transform:translate(-50%,-50%);}
 .faq-icon::after{width:2px;height:14px;transform:translate(-50%,-50%);transition:transform .3s;}
 .faq-item.open .faq-icon{background:var(--blue);transform:rotate(180deg);}
 .faq-item.open .faq-icon::before,.faq-item.open .faq-icon::after{background:#fff;}
 .faq-item.open .faq-icon::after{transform:translate(-50%,-50%) scaleY(0);}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
-.faq-a-inner{padding:0 28px 28px 28px;color:var(--ink-60);font-size:15.5px;line-height:1.75;max-width:640px;border-top:1px dashed var(--blue-24);padding-top:20px;margin-top:0;}
+.faq-a-inner{padding:0 28px 28px 28px;color:rgba(255,255,255,0.72);font-size:15.5px;line-height:1.75;max-width:640px;border-top:1px dashed rgba(179,208,255,0.24);padding-top:20px;margin-top:0;}
 .faq-item.open .faq-a{max-height:400px;}
 @media (max-width:900px){.faq-layout{grid-template-columns:1fr;gap:40px;}.faq-sidebar{position:static;}.faq-count{font-size:80px;}}
 
@@ -303,25 +373,28 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   </div>
 </nav>
 
-<!-- ============== HERO (video BG) ============== -->
+<!-- ============== HERO (image BG with dark blue overlay) ============== -->
 <section class="hero" aria-labelledby="hero-heading">
-  <div class="hero-video-fallback" aria-hidden="true"></div>
-  <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-hls-poster.jpg" aria-hidden="true">
-    <source src="assets/hero-hls.mp4" type="video/mp4">
-  </video>
+  <img class="hero-image" src="HCLS.webp" alt="" aria-hidden="true">
+  <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-vignette" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-badge">
-      <span class="hero-badge-dot" aria-hidden="true"></span>
+      <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true">
+        <rect fill="#163a80" x="155" y="25"  width="65"  height="115"/>
+        <rect fill="#163a80" x="250" y="155" width="100" height="45"/>
+        <rect fill="#2563ff" x="25"  y="155" width="215" height="45"/>
+        <rect fill="#2563ff" x="140" y="225" width="65"  height="125"/>
+      </svg>
       Healthcare and Life Sciences
     </div>
     <h1 id="hero-heading">
       What should work<br>
-      <span class="line-blue">radically better</span> in healthcare<br>and life sciences?
+      <span class="line-blue">radically better</span> in<br>healthcare and life sciences?
     </h1>
     <div class="hero-opening">
-      <p>Clinicians, researchers, and revenue cycle teams operate under extreme regulatory oversight while battling siloed patient records, fragmented clinical workflows, and heavy administrative overhead. Every automated path must adhere strictly to HIPAA, FDA, and GDPR mandates.</p>
+      <p>Clinicians, researchers, and revenue cycle teams operate under extreme regulatory oversight, battling siloed records, fragmented workflows, and heavy admin overhead. Every automated path must hold to HIPAA, FDA, and GDPR.</p>
     </div>
     <div class="hero-cta-row">
       <a href="#outcomes" class="hero-cta-primary">
@@ -334,78 +407,47 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 
 <!-- ============== REALITY (scannable) ============== -->
 <section class="reality" aria-labelledby="reality-h">
+  <span class="grid-motif" aria-hidden="true"></span>
   <div class="wrap">
     <div class="section-eyebrow">The operating reality</div>
-    <h2 id="reality-h" class="section-h">Care and discovery are constrained by how fast humans extract insights from unstructured medical text.</h2>
+    <h2 id="reality-h" class="section-h">Care and discovery are constrained by unstructured medical text, with clinicians spending up to 40% of their shifts navigating EHRs and transcribing visits.<br><br>Research teams face months-long trial matching, while revenue cycle teams battle coding errors and denials under HIPAA, FDA, and GDPR.</h2>
 
-    <p class="reality-lede">Clinicians spend up to <em>40% of their shifts navigating EHRs</em> and transcribing visits. Research teams wait months to find trial-eligible candidates in unstructured records, and revenue cycle teams fight high denial rates from manual coding errors, all under HIPAA, FDA, and GDPR.</p>
   </div>
 </section>
 
-<!-- ============== PROCESSES (carousel with icons) ============== -->
+<!-- ============== PROCESSES (Autonomous RCM Architecture — V8) ============== -->
 <section class="processes" aria-labelledby="processes-h">
+  <span class="grid-motif" aria-hidden="true"></span>
   <div class="wrap">
-    <div class="section-eyebrow">The processes this industry runs on</div>
-    <h2 id="processes-h" class="section-h">Ten workflows where clinical accuracy, patient safety, and regulatory auditability all have to hold at once.</h2>
+    <div class="section-eyebrow">Pioneering the first AI-native RCM stack in dental</div>
+    <h2 id="processes-h" class="section-h">The Autonomous RCM Architecture.</h2>
+    <p class="section-sub">Six connected workflows. Purpose-built AI agents run each stage. Shared intelligence learns across every claim. Humans oversee the exceptions that matter.</p>
 
-    <div class="carousel-wrap">
-      <div class="carousel-track" id="carouselTrack">
-        <div class="process-card">
-          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M9 3h6l1 3h3v14H5V6h3l1-3z"/><path d="M9 12h6M9 16h4"/></svg></div>
-          <div class="process-name">Clinical Documentation &amp; Physician Scribing</div>
-          <div class="process-desc">Real-time consultation capture, transcript structuring, EHR chart entry, and physician sign-off.</div>
-        </div>
-        <div class="process-card">
-          <div class="process-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/><path d="M17 4l2 2 3-3"/></svg></div>
-          <div class="process-name">Clinical Trial Recruitment &amp; Enrollment</div>
-          <div class="process-desc">Patient cohort identification, protocol eligibility matching, and trial site onboarding.</div>
-        </div>
-        <div class="process-card">
-          <div class="process-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M15 16l2 2 3-3"/></svg></div>
-          <div class="process-name">Prior Authorization &amp; Insurance Verification</div>
-          <div class="process-desc">Patient eligibility checks, payer rule extraction, clinical evidence assembly, and submission.</div>
-        </div>
-        <div class="process-card">
-          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M17 6H9a3 3 0 000 6h6a3 3 0 010 6H6"/></svg></div>
-          <div class="process-name">Medical Billing &amp; Revenue Cycle Operations</div>
-          <div class="process-desc">Clinical chart coding, claim generation, denial triage, and appeal management.</div>
-        </div>
-        <div class="process-card">
-          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.4 8.5-8 9-4.6-.5-8-4.5-8-9V7l8-4z"/><path d="M12 8v4M12 15h.01"/></svg></div>
-          <div class="process-name">Pharmacovigilance &amp; Adverse Event Monitoring</div>
-          <div class="process-desc">Multi-channel intake, signal detection, safety case processing, and regulatory filing.</div>
-        </div>
-        <div class="process-card">
-          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M12 2v6M12 22v-6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M2 12h6M22 12h-6M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg></div>
-          <div class="process-name">Emergency Triage &amp; Patient Intake</div>
-          <div class="process-desc">Symptom processing, risk stratification, bed allocation, and care team routing.</div>
-        </div>
-        <div class="process-card">
-          <div class="process-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="12" cy="11" r="3"/><path d="M8 20h8"/></svg></div>
-          <div class="process-name">Medical Imaging &amp; Diagnostic Analysis</div>
-          <div class="process-desc">Image ingestion, preliminary anomaly detection, radiologist reporting, and priority tagging.</div>
-        </div>
-        <div class="process-card">
-          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H8l-5 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h8M8 13h5"/></svg></div>
-          <div class="process-name">Patient Engagement &amp; Care Coordination</div>
-          <div class="process-desc">Discharge instruction delivery, post-care follow-ups, remote monitoring, and appointment scheduling.</div>
-        </div>
-        <div class="process-card">
-          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5"/><path d="M9 14l2 2 4-4"/></svg></div>
-          <div class="process-name">Regulatory Submission &amp; Labeling Compliance</div>
-          <div class="process-desc">Dossier generation, cross-jurisdiction document translation, and FDA/EMA safety audit preparation.</div>
-        </div>
-        <div class="process-card">
-          <div class="process-icon"><svg viewBox="0 0 24 24"><path d="M10 2v6l-4 4v8h12v-8l-4-4V2"/><path d="M9 16h6"/></svg></div>
-          <div class="process-name">Lab Data Extraction &amp; Diagnostics Processing</div>
-          <div class="process-desc">Unstructured lab report ingestion, normalization, and EHR lab result sync.</div>
-        </div>
+    <div class="rcm-arch">
+      <div class="rcm-carousel">
+        <div class="rcm-track" id="carTrack"></div>
       </div>
-      <div class="carousel-controls">
-        <div class="carousel-progress"><div class="carousel-progress-fill" id="carouselProgress"></div></div>
-        <div class="carousel-btns">
-          <button class="carousel-btn" id="carouselPrev" aria-label="Previous"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></button>
-          <button class="carousel-btn" id="carouselNext" aria-label="Next"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></button>
+      <div class="car-controls">
+        <button class="car-btn" id="carPrev" aria-label="Previous workflow">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="car-btn" id="carNext" aria-label="Next workflow">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div class="arch-footer">
+        <div class="arch-row intel">
+          <div class="arch-label">Shared Intelligence</div>
+          <div class="arch-content">Payer Knowledge Graph<span class="sep">·</span>Denial Models<span class="sep">·</span>Patient Ledger<span class="sep">·</span>Self-Learning Feedback Loop</div>
+        </div>
+        <div class="arch-row oversight">
+          <div class="arch-label">Human Oversight</div>
+          <div class="arch-content">AI Ops Specialists<span class="sep">·</span>RCM Concierge<span class="sep">·</span>Continuous Optimization</div>
+        </div>
+        <div class="arch-row impact">
+          <div class="arch-label">Business Impact</div>
+          <div class="arch-content"><span class="arr">↑</span>First-Pass Yield<span class="sep">·</span><span class="arr">↓</span>Cost to Collect<span class="sep">·</span><span class="arr">↑</span>Net Collection %<span class="sep">·</span><span class="arr">↓</span>Days in A/R</div>
         </div>
       </div>
     </div>
@@ -414,49 +456,35 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 
 <!-- ============== VALUE LEAKS (flow diagram) ============== -->
 <section class="leaks" aria-labelledby="leaks-h">
+  <span class="grid-motif" aria-hidden="true"></span>
   <div class="wrap">
     <div class="section-eyebrow">Where the value leaks</div>
     <h2 id="leaks-h" class="section-h">Time bleeds between the clinical event and the decision that closes the case.</h2>
     <div class="leaks-stack">
-      <div class="leak-bar open" data-tone="4">
-        <div class="leak-bar-row">
-          <div class="leak-bar-num">01 →</div>
-          <div class="leak-bar-title">Patient Intake to Clinical Charting <span class="leak-tag">Engineered</span></div>
-          <div class="leak-bar-arrow"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
-        </div>
-        <div class="leak-bar-body"><div class="leak-bar-detail">How long physicians spend manually typing visit details into EHR systems instead of delivering patient care.</div></div>
+      <div class="leak-card">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/></svg></div>
+        <div class="leak-card-title">Patient Intake to Clinical Charting <span class="leak-tag">Engineered</span></div>
+        <div class="leak-card-desc">How long physicians spend manually typing visit details into EHR systems instead of delivering patient care.</div>
       </div>
-      <div class="leak-bar" data-tone="3">
-        <div class="leak-bar-row">
-          <div class="leak-bar-num">02 →</div>
-          <div class="leak-bar-title">Chart Review to Trial Eligibility Match <span class="leak-tag">Engineered</span></div>
-          <div class="leak-bar-arrow"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
-        </div>
-        <div class="leak-bar-body"><div class="leak-bar-detail">Time required for research teams to manually read unstructured patient records to verify trial inclusion criteria.</div></div>
+      <div class="leak-card">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg></div>
+        <div class="leak-card-title">Chart Review to Trial Eligibility Match <span class="leak-tag">Engineered</span></div>
+        <div class="leak-card-desc">Time required for research teams to manually read unstructured patient records to verify trial inclusion criteria.</div>
       </div>
-      <div class="leak-bar" data-tone="2">
-        <div class="leak-bar-row">
-          <div class="leak-bar-num">03 →</div>
-          <div class="leak-bar-title">Claim Submission to Payer Decision <span class="leak-tag">Engineered</span></div>
-          <div class="leak-bar-arrow"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
-        </div>
-        <div class="leak-bar-body"><div class="leak-bar-detail">Delays introduced by manual coding errors, missing clinical documentation, and claim rejection loops.</div></div>
+      <div class="leak-card">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h4"/></svg></div>
+        <div class="leak-card-title">Claim Submission to Payer Decision <span class="leak-tag">Engineered</span></div>
+        <div class="leak-card-desc">Delays introduced by manual coding errors, missing clinical documentation, and claim rejection loops.</div>
       </div>
-      <div class="leak-bar" data-tone="1">
-        <div class="leak-bar-row">
-          <div class="leak-bar-num">04 →</div>
-          <div class="leak-bar-title">Adverse Event Reporting Time <span class="leak-tag">Engineered</span></div>
-          <div class="leak-bar-arrow"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
-        </div>
-        <div class="leak-bar-body"><div class="leak-bar-detail">Time elapsed between a recorded patient complaint or incident and its official pharmacovigilance safety log.</div></div>
+      <div class="leak-card">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div>
+        <div class="leak-card-title">Adverse Event Reporting Time <span class="leak-tag">Engineered</span></div>
+        <div class="leak-card-desc">Time elapsed between a recorded patient complaint or incident and its official pharmacovigilance safety log.</div>
       </div>
-      <div class="leak-bar" data-tone="commercial">
-        <div class="leak-bar-row">
-          <div class="leak-bar-num">05 →</div>
-          <div class="leak-bar-title">Prior Authorization Hold Time <span class="leak-tag">Commercial</span></div>
-          <div class="leak-bar-arrow"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></div>
-        </div>
-        <div class="leak-bar-body"><div class="leak-bar-detail">Mandated payer evaluation and review periods. Commercial, not engineered.</div></div>
+      <div class="leak-card" data-tone="commercial">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div class="leak-card-title">Prior Authorization Hold Time <span class="leak-tag">Commercial</span></div>
+        <div class="leak-card-desc">Mandated payer evaluation and review periods. Commercial, not engineered.</div>
       </div>
     </div>
   </div>
@@ -465,65 +493,101 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 <!-- ============== OUTCOMES (compact tabs) ============== -->
 <section class="outcomes" id="outcomes" aria-labelledby="outcomes-h">
   <div class="wrap">
-    <div class="section-eyebrow">What Searce has changed here</div>
-    <h2 id="outcomes-h" class="section-h">Four intervention points. Four locked metrics.</h2>
-
-    <div class="outcomes-tabs" role="tablist">
-      <button class="outcome-tab active" data-index="0" role="tab">
-        <div class="outcome-tab-num">01 / 04</div>
-        <div class="outcome-tab-metric"><span>70–80%</span> effort drop</div>
-        <div class="outcome-tab-title">Emergency Medical Documentation</div>
-      </button>
-      <button class="outcome-tab" data-index="1" role="tab">
-        <div class="outcome-tab-num">02 / 04</div>
-        <div class="outcome-tab-metric"><span>96.4%</span> accuracy</div>
-        <div class="outcome-tab-title">Medical Form Data Extraction</div>
-      </button>
-      <button class="outcome-tab" data-index="2" role="tab">
-        <div class="outcome-tab-num">03 / 04</div>
-        <div class="outcome-tab-metric"><span>50%</span> time compression</div>
-        <div class="outcome-tab-title">Protein Prediction Pipelines</div>
-      </button>
-      <button class="outcome-tab" data-index="3" role="tab">
-        <div class="outcome-tab-num">04 / 04</div>
-        <div class="outcome-tab-metric"><span>40%</span> cost drop</div>
-        <div class="outcome-tab-title">Healthcare API &amp; Cloud Scale</div>
-      </button>
+    <div class="outcomes-intro">
+      <div class="section-eyebrow">What Searce has changed here</div>
+      <h2 id="outcomes-h" class="section-h">Four intervention points.<br>Four locked metrics.</h2>
     </div>
 
-    <div class="outcome-panel" id="outcomePanel">
-      <div class="outcome-block"><div class="outcome-label">Baseline</div><div class="outcome-text" data-slot="baseline">Emergency room intake agents and supervisors spent hours manually transcribing and structuring patient documentation per shift.</div></div>
-      <div class="outcome-block"><div class="outcome-label">Intervention</div><div class="outcome-text" data-slot="intervention">Searce deployed an AI-driven documentation platform that automates intake transcription and chart assembly with real-time error checking.</div></div>
-      <div class="outcome-block"><div class="outcome-label">Result</div><div class="outcome-text" data-slot="result">Dropped manual documentation effort by a projected 70% to 80%, drastically increasing intake capacity.</div></div>
+    <div class="outcomes-frame">
+      <div class="outcomes-panel-grid">
+        <div class="outcomes-accordion" id="outcomesAccordion">
+          <button class="outcomes-item active" data-index="0">
+            <div class="outcomes-item-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+            <div class="outcomes-item-title">Emergency Medical Documentation</div>
+            <div class="outcomes-item-arrow"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
+          </button>
+          <button class="outcomes-item" data-index="1">
+            <div class="outcomes-item-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div>
+            <div class="outcomes-item-title">Medical Form Data Extraction</div>
+            <div class="outcomes-item-arrow"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
+          </button>
+          <button class="outcomes-item" data-index="2">
+            <div class="outcomes-item-icon"><svg viewBox="0 0 24 24"><path d="M4 12h4l3-8 4 16 3-8h2"/></svg></div>
+            <div class="outcomes-item-title">Protein Prediction &amp; Research Pipelines</div>
+            <div class="outcomes-item-arrow"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
+          </button>
+          <button class="outcomes-item" data-index="3">
+            <div class="outcomes-item-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
+            <div class="outcomes-item-title">Healthcare API Operations &amp; Cloud Scale</div>
+            <div class="outcomes-item-arrow"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
+          </button>
+        </div>
+
+        <div class="outcomes-detail" id="outcomesDetail">
+          <div class="outcomes-detail-metric">
+            <div class="outcomes-detail-metric-value" data-field="metric">70–80%</div>
+            <div class="outcomes-detail-metric-label" data-field="metricLabel">Manual Effort Reduction</div>
+          </div>
+          <div class="outcomes-detail-block">
+            <div class="outcomes-detail-label">Baseline</div>
+            <p class="outcomes-detail-text" data-field="baseline">Emergency room intake agents and supervisors spent hours manually transcribing and structuring patient documentation per shift.</p>
+          </div>
+          <div class="outcomes-detail-block">
+            <div class="outcomes-detail-label">Intervention</div>
+            <p class="outcomes-detail-text" data-field="intervention">Searce deployed an AI-driven documentation platform that automates intake transcription and chart assembly with real-time error checking.</p>
+          </div>
+          <div class="outcomes-detail-block">
+            <div class="outcomes-detail-label">Result</div>
+            <p class="outcomes-detail-text" data-field="result">Dropped manual documentation effort by a projected 70% to 80%, drastically increasing intake capacity.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============== PILLARS (white + light blue mix, icons) ============== -->
 <section class="pillars" aria-labelledby="pillars-h">
+  <span class="grid-motif" aria-hidden="true"></span>
   <div class="wrap">
-    <div class="section-eyebrow">What Searce engineers in healthcare and life sciences</div>
-    <h2 id="pillars-h" class="section-h">Four engineering practices, applied above your EHR and clinical systems of record.</h2>
-    <div class="pillars-grid">
-      <div class="pillar-card">
-        <div class="pillar-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div>
-        <div class="pillar-name">Business Systems Engineering</div>
-        <div class="pillar-desc">Rebuilds patient onboarding, clinical documentation, medical billing, and trial management workflows, replacing legacy operational tools.</div>
+    <div class="pillars-layout">
+      <div class="pillars-intro">
+        <div class="section-eyebrow">What Searce engineers in healthcare and life sciences</div>
+        <h2 id="pillars-h" class="section-h">Four engineering practices, applied above your EHR and clinical systems of record.</h2>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
-        <div class="pillar-name">AI-Ready Platform Engineering</div>
-        <div class="pillar-desc">HIPAA/GDPR-compliant data platforms, unifying unstructured EHR records, lab reports, and imaging archives into search-ready context layers.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.4 8.5-8 9-4.6-.5-8-4.5-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="pillar-name">AI Trust &amp; Resilience Engineering</div>
-        <div class="pillar-desc">Deterministic safety guardrails, medical evaluation suites, and continuous audit trails required for FDA compliance and risk approvals.</div>
-      </div>
-      <div class="pillar-card">
-        <div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><path d="M13 20c0-3 2.5-5 5-5s3 2 3 5"/></svg></div>
-        <div class="pillar-name">AI Adoption &amp; Change Engineering</div>
-        <div class="pillar-desc">Redesigns clinician, nurse, and researcher workflows around intelligent agentic tools. Adoption tracked by completed care tasks, not logins.</div>
+      <div class="pillars-cards">
+        <div class="pillar-card">
+          <div class="pillar-card-top">
+            <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div>
+            <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+          </div>
+          <div class="pillar-name">Business Systems Engineering</div>
+          <p class="pillar-desc">Rebuilds patient onboarding, clinical documentation, medical billing, and trial management workflows, replacing legacy operational tools.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-card-top">
+            <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
+            <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+          </div>
+          <div class="pillar-name">AI-Ready Platform Engineering</div>
+          <p class="pillar-desc">HIPAA/GDPR-compliant data platforms, unifying unstructured EHR records, lab reports, and imaging archives into search-ready context layers.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-card-top">
+            <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.4 8.5-8 9-4.6-.5-8-4.5-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+          </div>
+          <div class="pillar-name">AI Trust &amp; Resilience Engineering</div>
+          <p class="pillar-desc">Deterministic safety guardrails, medical evaluation suites, and continuous audit trails required for FDA compliance and risk approvals.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-card-top">
+            <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+          </div>
+          <div class="pillar-name">AI Adoption &amp; Change Engineering</div>
+          <p class="pillar-desc">Redesigns clinician, nurse, and researcher workflows around intelligent agentic tools. Adoption tracked by completed care tasks, not logins.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -532,9 +596,11 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 <!-- ============== ENGAGEMENT (centered, dark AI-Ops style) ============== -->
 <section class="engagement" aria-labelledby="engagement-h">
   <div class="wrap">
-    <h2 id="engagement-h" class="section-h">How an <span style="color:#7ba9ff">engagement starts</span></h2>
-    <div class="engagement-body">
-      <p>Outcome Discovery on one named process from the list above. Two to four weeks, fixed price, ending in a baseline metric assessment and a ranked opportunity matrix. Most healthcare and life sciences engagements start with clinical documentation, trial recruitment, or revenue cycle operations due to their high documentation volume and immediate ROI metrics.</p>
+    <div class="eng-card">
+      <div class="eng-card-left">
+        <h2 id="engagement-h">How an engagement starts</h2>
+        <p class="eng-card-body">Outcome Discovery on one named process from the list above. Two to four weeks, fixed price, ending in a baseline metric assessment and a ranked opportunity matrix. Most healthcare and life sciences engagements start with clinical documentation, trial recruitment, or revenue cycle operations due to their high documentation volume and immediate ROI metrics.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -689,24 +755,262 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 </footer>
 
 <script>
-/* Processes carousel */
+/* Reality — scroll-driven word-by-word blue highlight */
 (function(){
-  const track = document.getElementById('carouselTrack');
-  const prev = document.getElementById('carouselPrev');
-  const next = document.getElementById('carouselNext');
-  const progress = document.getElementById('carouselProgress');
-  if(!track || !prev) return;
-  const cardWidth = () => (track.querySelector('.process-card').offsetWidth + 22);
-  const updateProgress = () => {
-    const max = track.scrollWidth - track.clientWidth;
-    const pct = max > 0 ? (track.scrollLeft / max) * 100 : 0;
-    progress.style.width = Math.max(8, Math.min(100, pct)) + '%';
-  };
-  prev.addEventListener('click', () => track.scrollBy({left: -cardWidth()*2, behavior:'smooth'}));
-  next.addEventListener('click', () => track.scrollBy({left: cardWidth()*2, behavior:'smooth'}));
-  track.addEventListener('scroll', updateProgress, {passive:true});
-  window.addEventListener('resize', updateProgress);
-  updateProgress();
+  const h = document.getElementById('reality-h');
+  if(!h) return;
+  const nodes = [];
+  // Walk the h2 preserving <br> tags, splitting text runs into word spans
+  const frag = document.createDocumentFragment();
+  h.childNodes.forEach(node => {
+    if(node.nodeType === Node.TEXT_NODE){
+      const parts = node.textContent.split(/(\s+)/);
+      parts.forEach(part => {
+        if(part.trim().length === 0){ frag.appendChild(document.createTextNode(part)); return; }
+        const s = document.createElement('span');
+        s.className = 'reality-word';
+        s.textContent = part;
+        frag.appendChild(s);
+        nodes.push(s);
+      });
+    } else {
+      frag.appendChild(node.cloneNode(true));
+    }
+  });
+  h.innerHTML = '';
+  h.appendChild(frag);
+  const total = nodes.length;
+  if(!total) return;
+
+  let ticking = false;
+  function update(){
+    ticking = false;
+    const rect = h.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    // progress 0 when heading enters (bottom of viewport), 1 when heading has scrolled to top
+    // Aim for the heading's center crossing the viewport center to hit ~1
+    const start = vh * 0.85;   // heading bottom near start line
+    const end   = vh * 0.35;   // heading bottom near end line
+    const y = rect.bottom;
+    let p = (start - y) / (start - end);
+    if(p < 0) p = 0;
+    if(p > 1) p = 1;
+    const revealCount = Math.round(p * total);
+    for(let i = 0; i < total; i++){
+      const on = i < revealCount;
+      if(nodes[i].classList.contains('on') !== on){
+        nodes[i].classList.toggle('on', on);
+      }
+    }
+  }
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+
+/* Nav — solidify on scroll */
+(function(){
+  const nav = document.querySelector('.nav');
+  if(!nav) return;
+  const onScroll = () => nav.classList.toggle('nav-scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+/* Processes carousel — Autonomous RCM Architecture (V8) */
+(function(){
+  const WORKFLOWS = [
+    {key:"submit",      name:"Claim Submission",           agent:"Submitter Agent",    desc:"Cleans and validates claims, scores readiness and prepares 837 submission."},
+    {key:"correct",     name:"Edits & Rejections",         agent:"Corrector Agent",    desc:"Identifies rejection issues, corrects them and prepares claims for resubmission."},
+    {key:"pursue",      name:"No-Response Claims",         agent:"Pursuer Agent",      desc:"Follows unpaid claims through 277 polling, payer portals and voice follow-up."},
+    {key:"appeal",      name:"Denial Management & Appeals",agent:"Appealer Agent",     desc:"Identifies denial root causes and prepares the appropriate appeal."},
+    {key:"post",        name:"Payment Posting",            agent:"Poster Agent",       desc:"Posts 835 payments and triages payment variances."},
+    {key:"communicate", name:"Patient Statements",         agent:"Communicator Agent", desc:"Manages patient balance communication and outreach."}
+  ];
+
+  let currentStage = 0;
+  const PAL_DARK      = {stroke:"#dbe9ff", dashed:"rgba(179,208,255,0.32)", fill:"rgba(179,208,255,0.06)", accent:"#7ba9ff", dark:"#02061a"};
+  const PAL_SIDE_DARK = {stroke:"#54555a", dashed:"rgba(84,86,92,0.35)", fill:"rgba(84,86,92,0.04)", accent:"#0064ff", dark:"#f2f7ff"};
+
+  function shapeSvg(key, S){
+    const st = S.stroke, ds = S.dashed, fl = S.fill, ac = S.accent, dk = S.dark;
+    const thin   = `stroke="${st}" stroke-width="1" fill="none"`;
+    const filled = `fill="${fl}" stroke="${st}" stroke-width="1.2"`;
+    switch(key){
+      case "submit": return `
+        <rect x="34" y="28" width="112" height="150" rx="4" ${filled}/>
+        <rect x="118" y="18" width="46" height="20" rx="4" fill="${ac}"/>
+        <text x="141" y="32" text-anchor="middle" font-family="Poppins" font-size="8" font-weight="700" fill="${dk}" letter-spacing="1.6">837</text>
+        <line x1="46" y1="52" x2="118" y2="52" ${thin} stroke="${ac}"/>
+        <line x1="46" y1="60" x2="96" y2="60" ${thin}/>
+        ${[80,98,116].map((y,i)=>`
+          <g transform="translate(52 ${y})">
+            <circle cx="0" cy="0" r="4.5" fill="${ac}"/>
+            <path d="M -2 0 L -0.4 1.7 L 2.5 -1.6" stroke="${dk}" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <line x1="62" y1="${y}" x2="${138-i*6}" y2="${y}" ${thin}/>
+        `).join('')}
+        <text x="46" y="138" font-family="Poppins" font-size="6.5" font-weight="500" fill="${st}" opacity="0.55" letter-spacing="1.6">CLEAN-CLAIM SCORE</text>
+        <text x="134" y="138" text-anchor="end" font-family="Poppins" font-size="8.5" font-weight="600" fill="${ac}">98</text>
+        <rect x="46" y="146" width="88" height="5" rx="2.5" fill="${ds}" opacity="0.6"/>
+        <rect x="46" y="146" width="80" height="5" rx="2.5" fill="${ac}"/>
+        <path d="M 156 100 L 178 100 M 172 94 L 178 100 L 172 106" stroke="${ac}" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="182" cy="100" r="2.4" fill="${ac}"/>`;
+      case "correct": return `
+        <rect x="14" y="42" width="70" height="116" rx="3" ${filled}/>
+        <g transform="translate(49 62)"><circle cx="0" cy="0" r="10" ${thin} stroke="${ac}" stroke-width="1.4"/><path d="M -3.5 -3.5 L 3.5 3.5 M 3.5 -3.5 L -3.5 3.5" stroke="${ac}" stroke-width="1.6" stroke-linecap="round"/></g>
+        <line x1="24" y1="86" x2="74" y2="86" ${thin}/>
+        <rect x="20" y="94" width="58" height="10" fill="${ac}" fill-opacity="0.14"/>
+        <line x1="24" y1="99" x2="74" y2="99" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 2"/>
+        <line x1="24" y1="112" x2="70" y2="112" ${thin}/>
+        <line x1="24" y1="120" x2="76" y2="120" ${thin}/>
+        <line x1="24" y1="128" x2="66" y2="128" ${thin}/>
+        <text x="49" y="146" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6" opacity="0.85">REJECTED</text>
+        <path d="M 88 100 L 112 100 M 106 94 L 112 100 L 106 106" stroke="${ac}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="116" y="42" width="70" height="116" rx="3" ${filled}/>
+        <g transform="translate(151 62)"><circle cx="0" cy="0" r="10" fill="${ac}"/><path d="M -3.5 0 L -1 2.5 L 4 -2.8" stroke="${dk}" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <line x1="126" y1="86" x2="176" y2="86" ${thin}/>
+        <line x1="126" y1="94" x2="172" y2="94" ${thin}/>
+        <rect x="122" y="102" width="58" height="10" fill="${ac}" fill-opacity="0.18"/>
+        <line x1="126" y1="107" x2="176" y2="107" stroke="${ac}" stroke-width="1.2"/>
+        <line x1="126" y1="118" x2="170" y2="118" ${thin}/>
+        <line x1="126" y1="126" x2="176" y2="126" ${thin}/>
+        <line x1="126" y1="134" x2="164" y2="134" ${thin}/>
+        <text x="151" y="150" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">CORRECTED</text>`;
+      case "pursue": return `
+        ${[44,64,86].map((r,i)=>`<circle cx="100" cy="100" r="${r}" fill="none" stroke="${ac}" stroke-width="0.9" opacity="${0.55 - i*0.16}" stroke-dasharray="3 4"/>`).join('')}
+        <rect x="80" y="80" width="40" height="46" rx="3" ${filled}/>
+        <line x1="86" y1="92" x2="114" y2="92" ${thin}/>
+        <line x1="86" y1="100" x2="110" y2="100" ${thin}/>
+        <line x1="86" y1="108" x2="114" y2="108" ${thin}/>
+        <line x1="86" y1="116" x2="104" y2="116" ${thin}/>
+        <rect x="88" y="70" width="24" height="10" rx="1.5" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="0.8"/>
+        <text x="100" y="77.5" text-anchor="middle" font-family="Poppins" font-size="6" font-weight="600" fill="${ac}" letter-spacing="1.4">277</text>
+        <g transform="translate(24 32)"><rect x="0" y="0" width="30" height="22" rx="2" ${filled}/><line x1="0" y1="7" x2="30" y2="7" ${thin}/><circle cx="4" cy="3.5" r="1.2" fill="${ac}"/><circle cx="8" cy="3.5" r="1.2" fill="${ac}"/><circle cx="12" cy="3.5" r="1.2" fill="${ac}"/><line x1="5" y1="13" x2="20" y2="13" ${thin} stroke="${ac}"/><line x1="5" y1="17" x2="14" y2="17" ${thin}/></g>
+        <line x1="54" y1="54" x2="80" y2="82" ${thin} stroke="${ac}" stroke-dasharray="2 3"/>
+        <g transform="translate(146 32)"><rect x="0" y="0" width="24" height="34" rx="4" ${filled}/><rect x="4" y="6" width="16" height="20" fill="${ds}" opacity="0.55"/><circle cx="12" cy="30" r="1.6" fill="${ac}"/></g>
+        <line x1="146" y1="52" x2="120" y2="82" ${thin} stroke="${ac}" stroke-dasharray="2 3"/>
+        <g transform="translate(80 156)"><rect x="0" y="0" width="40" height="26" rx="2.5" ${filled}/><path d="M 0 0 L 20 16 L 40 0" ${thin} stroke="${ac}"/><circle cx="34" cy="20" r="3.5" fill="${ac}"/></g>
+        <line x1="100" y1="126" x2="100" y2="156" ${thin} stroke="${ac}" stroke-dasharray="2 3"/>`;
+      case "appeal": return `
+        <g transform="translate(100 30)"><rect x="-34" y="-14" width="68" height="26" rx="4" ${filled}/><path d="M -6 -5 L 6 5 M 6 -5 L -6 5" stroke="${ac}" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/></g>
+        <text x="100" y="60" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">DENIAL</text>
+        ${[48,100,152].map(x=>`
+          <path d="M 100 66 Q 100 78 ${x} 88" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
+          <circle cx="${x}" cy="96" r="9" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1.1"/>
+          <circle cx="${x}" cy="96" r="2.5" fill="${ac}"/>`).join('')}
+        <path d="M 48 106 Q 48 118 100 128" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
+        <path d="M 100 106 L 100 128" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
+        <path d="M 152 106 Q 152 118 100 128" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
+        <circle cx="100" cy="132" r="5.5" fill="${ac}"/>
+        <path d="M 100 138 L 100 156 M 94 148 L 100 138 L 106 148" stroke="${ac}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <g transform="translate(100 174)"><rect x="-36" y="-14" width="72" height="26" rx="4" fill="${ac}"/><text x="0" y="3.5" text-anchor="middle" font-family="Poppins" font-size="8" font-weight="700" fill="${dk}" letter-spacing="1.6">APPEAL</text></g>`;
+      case "post": return `
+        <text x="20" y="34" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">835</text>
+        ${[56,80,104,128,152].map((y,i)=>`<circle cx="18" cy="${y}" r="2.4" fill="${ac}" opacity="${0.45+i*0.08}"/><path d="M 22 ${y} Q 44 ${y} 62 104" fill="none" stroke="${ac}" stroke-width="0.9" opacity="${0.35+i*0.08}"/>`).join('')}
+        <rect x="66" y="36" width="118" height="132" rx="4" ${filled}/>
+        <rect x="66" y="36" width="118" height="20" fill="${ac}" fill-opacity="0.14"/>
+        <text x="78" y="49" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">LEDGER</text>
+        <line x1="118" y1="56" x2="118" y2="168" ${thin}/>
+        <line x1="152" y1="56" x2="152" y2="168" ${thin}/>
+        ${[74,92,110,128,146,164].map((y,i)=>{
+          const isVar = i===2;
+          if(isVar) return `
+            <rect x="66" y="${y-9}" width="118" height="18" fill="${ac}" fill-opacity="0.20"/>
+            <line x1="74" y1="${y}" x2="112" y2="${y}" stroke="${ac}" stroke-width="1.1"/>
+            <line x1="124" y1="${y}" x2="146" y2="${y}" stroke="${ac}" stroke-width="1.1"/>
+            <line x1="158" y1="${y}" x2="178" y2="${y}" stroke="${ac}" stroke-width="1.1"/>
+            <circle cx="60" cy="${y}" r="3.5" fill="${ac}"/>`;
+          return `
+            <line x1="74" y1="${y}" x2="112" y2="${y}" ${thin} opacity="0.7"/>
+            <line x1="124" y1="${y}" x2="146" y2="${y}" ${thin} opacity="0.7"/>
+            <line x1="158" y1="${y}" x2="178" y2="${y}" ${thin} opacity="0.7"/>`;
+        }).join('')}`;
+      case "communicate": return `
+        <rect x="16" y="36" width="88" height="128" rx="4" ${filled}/>
+        <rect x="16" y="36" width="88" height="20" fill="${ac}" fill-opacity="0.14"/>
+        <text x="26" y="49" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">STATEMENT</text>
+        <line x1="26" y1="70" x2="94" y2="70" ${thin}/>
+        <line x1="26" y1="78" x2="82" y2="78" ${thin}/>
+        <line x1="26" y1="86" x2="90" y2="86" ${thin}/>
+        <line x1="26" y1="94" x2="76" y2="94" ${thin}/>
+        <line x1="26" y1="106" x2="94" y2="106" ${thin} opacity="0.6"/>
+        <text x="26" y="128" font-family="Poppins" font-size="6.5" font-weight="500" fill="${st}" opacity="0.55" letter-spacing="1.6">BALANCE DUE</text>
+        <text x="94" y="150" text-anchor="end" font-family="Poppins" font-size="16" font-weight="600" fill="${ac}" letter-spacing="-0.02em">$248</text>
+        <path d="M 108 65 Q 122 65 128 50" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
+        <path d="M 108 100 Q 122 100 128 100" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
+        <path d="M 108 135 Q 122 135 128 156" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
+        <g transform="translate(132 32)"><rect x="0" y="0" width="52" height="32" rx="3" ${filled}/><path d="M 0 0 L 26 22 L 52 0" ${thin} stroke="${ac}"/></g>
+        <g transform="translate(132 80)"><path d="M 6 0 Q 0 0 0 6 L 0 26 Q 0 32 6 32 L 30 32 L 40 42 L 36 32 L 46 32 Q 52 32 52 26 L 52 6 Q 52 0 46 0 Z" ${filled}/><circle cx="16" cy="16" r="1.8" fill="${ac}"/><circle cx="26" cy="16" r="1.8" fill="${ac}"/><circle cx="36" cy="16" r="1.8" fill="${ac}"/></g>
+        <g transform="translate(140 140)"><rect x="0" y="0" width="30" height="40" rx="4" ${filled}/><rect x="4" y="6" width="22" height="24" fill="${ds}" opacity="0.5"/><circle cx="15" cy="35" r="1.8" fill="${ac}"/></g>`;
+      default: return `<circle cx="100" cy="100" r="60" ${filled}/>`;
+    }
+  }
+
+  function slideMarkup(wf, idx){
+    const num = String(idx+1).padStart(2,'0');
+    return `
+      <div class="rcm-slide" data-idx="${idx}">
+        <div class="wf-tag">Workflow ${num}</div>
+        <svg class="svg-side"   viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(wf.key, PAL_SIDE_DARK)}</svg>
+        <svg class="svg-center" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(wf.key, PAL_DARK)}</svg>
+        <div class="wf-mini">${wf.name}</div>
+        <div class="wf-panel">
+          <div class="wp-agent">${wf.agent}</div>
+          <div class="wp-name">${wf.name}</div>
+          <div class="wp-desc">${wf.desc}</div>
+          <span class="wp-mode">Autonomous</span>
+        </div>
+      </div>`;
+  }
+
+  const track = document.getElementById('carTrack');
+  if(!track) return;
+  track.innerHTML = WORKFLOWS.map((w,i)=>slideMarkup(w,i)).join('');
+  track.querySelectorAll('.rcm-slide').forEach(el=>el.addEventListener('click',()=>{
+    const idx = parseInt(el.dataset.idx,10);
+    if(idx !== currentStage){ currentStage = idx; updatePositions(); }
+  }));
+
+  const panelTimers = new Map();
+  function clearPanelTimers(el){
+    const t = panelTimers.get(el);
+    if(t){ clearTimeout(t.show); clearTimeout(t.hide); panelTimers.delete(el); }
+  }
+  function updatePositions(){
+    const n = WORKFLOWS.length;
+    const step = 360 / n;
+    const radius = Math.max(420, Math.round(160 / Math.tan(Math.PI/n)));
+    track.querySelectorAll('.rcm-slide').forEach((el,i)=>{
+      el.style.transform = `rotateY(${i*step}deg) translateZ(${radius}px)`;
+      const isCenter = (i===currentStage);
+      el.classList.toggle('pos-center', isCenter);
+      if(!isCenter){
+        el.classList.remove('panel-visible');
+        clearPanelTimers(el);
+      } else {
+        clearPanelTimers(el);
+        const show = setTimeout(()=>el.classList.add('panel-visible'), 1050);
+        const hide = setTimeout(()=>el.classList.remove('panel-visible'), 4200);
+        panelTimers.set(el, {show, hide});
+      }
+    });
+    track.style.transform = `rotateY(${-currentStage*step}deg)`;
+  }
+  updatePositions();
+
+  function stepFn(dir){
+    const n = WORKFLOWS.length;
+    currentStage = (currentStage + dir + n) % n;
+    updatePositions();
+  }
+  document.getElementById('carPrev').addEventListener('click', ()=>stepFn(-1));
+  document.getElementById('carNext').addEventListener('click', ()=>stepFn(1));
 })();
 
 /* Value-leaks stacked accordion */
@@ -718,27 +1022,43 @@ document.querySelectorAll('.leak-bar').forEach(bar => {
   });
 });
 
-/* Outcomes tabs */
+/* Outcomes — accordion left + baseline/intervention/result right */
 (function(){
-  const tabs = document.querySelectorAll('.outcome-tab');
-  const panel = document.getElementById('outcomePanel');
-  if(!tabs.length || !panel) return;
+  const items = document.querySelectorAll('.outcomes-item');
+  const detail = document.getElementById('outcomesDetail');
+  if(!items.length || !detail) return;
   const data = [
-    {baseline:"Emergency room intake agents and supervisors spent hours manually transcribing and structuring patient documentation per shift.",intervention:"Searce deployed an AI-driven documentation platform that automates intake transcription and chart assembly with real-time error checking.",result:"Dropped manual documentation effort by a projected 70% to 80%, drastically increasing intake capacity."},
-    {baseline:"Revenue cycle teams relied on manual keying to ingest CMS-1500 and UB-04 billing forms, yielding low processing speed and high error rates.",intervention:"Searce engineered an automated document processing pipeline tailored for complex healthcare claim formats.",result:"Achieved 96.4% extraction accuracy for CMS-1500 and 93.1% for UB-04 forms, eliminating manual data re-entry."},
-    {baseline:"Multi-hour computational sequences for monomer and multimer analysis throttled drug discovery timelines.",intervention:"Rebuilt the bio-analytics pipeline with multi-GPU inference and parallel execution on V100 GPU clusters.",result:"Cut protein prediction times by 50%; monomer analysis from 2 hours to 1 hour; multimer sequence processing from 9 hours to 8 hours."},
-    {baseline:"Legacy deployment architectures incurred high API consumption billing and lacked automated scaling for remote healthcare workers.",intervention:"Migrated services to serverless infrastructure with automated deployment via Artifact Registry and Cloud Run alongside token/request optimizations.",result:"Ensured 100% remote accessibility while reducing total API consumption and billing by 40%."}
+    {heading:"Emergency Medical Documentation", metric:"70–80%", metricLabel:"Manual Effort Reduction",
+      baseline:"Emergency room intake agents and supervisors spent hours manually transcribing and structuring patient documentation per shift.",
+      intervention:"Searce deployed an AI-driven documentation platform that automates intake transcription and chart assembly with real-time error checking.",
+      result:"Dropped manual documentation effort by a projected 70% to 80%, drastically increasing intake capacity."},
+    {heading:"Medical Form Data Extraction", metric:"96.4%", metricLabel:"Accuracy Rate",
+      baseline:"Revenue cycle teams relied on manual keying to ingest CMS-1500 and UB-04 billing forms, yielding low processing speed and high error rates.",
+      intervention:"Searce engineered an automated document processing pipeline tailored for complex healthcare claim formats.",
+      result:"Achieved an overall extraction accuracy of 96.4% for CMS-1500 and 93.1% for UB-04 forms, eliminating manual data re-entry."},
+    {heading:"Protein Prediction & Research Pipelines", metric:"50%", metricLabel:"Time Compression",
+      baseline:"Multi-hour computational sequences for monomer and multimer analysis throttled drug discovery timelines.",
+      intervention:"Rebuilt the bio-analytics pipeline with multi-GPU inference and parallel execution on V100 GPU clusters.",
+      result:"Cut protein prediction times by 50%, reduced monomer analysis from 2 hours to 1 hour, and compressed multimer sequence processing from 9 hours to 8 hours."},
+    {heading:"Healthcare API Operations & Cloud Scale", metric:"40%", metricLabel:"Cost Drop",
+      baseline:"Legacy deployment architectures incurred high API consumption billing and lacked automated scaling for remote healthcare workers.",
+      intervention:"Migrated services to serverless infrastructure with automated deployment via Artifact Registry and Cloud Run alongside token/request optimizations.",
+      result:"Ensured 100% remote accessibility while reducing total API consumption and billing by 40%."}
   ];
-  tabs.forEach(tab => tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    const d = data[parseInt(tab.dataset.index,10)];
-    panel.querySelector('[data-slot="baseline"]').textContent = d.baseline;
-    panel.querySelector('[data-slot="intervention"]').textContent = d.intervention;
-    panel.querySelector('[data-slot="result"]').textContent = d.result;
-    panel.style.opacity = 0;
-    requestAnimationFrame(() => { panel.style.transition = 'opacity .3s ease'; panel.style.opacity = 1; });
-  }));
+  function setActive(idx){
+    items.forEach((t,i) => t.classList.toggle('active', i === idx));
+    const d = data[idx];
+    detail.classList.add('swap');
+    setTimeout(() => {
+      detail.querySelector('[data-field="metric"]').textContent = d.metric;
+      detail.querySelector('[data-field="metricLabel"]').textContent = d.metricLabel;
+      detail.querySelector('[data-field="baseline"]').textContent = d.baseline;
+      detail.querySelector('[data-field="intervention"]').textContent = d.intervention;
+      detail.querySelector('[data-field="result"]').textContent = d.result;
+      detail.classList.remove('swap');
+    }, 180);
+  }
+  items.forEach(t => t.addEventListener('click', () => setActive(parseInt(t.dataset.index,10))));
 })();
 
 /* FAQ accordion */

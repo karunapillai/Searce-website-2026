@@ -27,6 +27,7 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;}
 ::selection{background:var(--blue);color:#fff;}
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 48px;}
+.nav .wrap,.hero .wrap,.reality > .wrap,.agentic > .wrap{max-width:1560px;}
 
 /* NAV */
 .nav{position:absolute;top:0;left:0;right:0;z-index:200;background:transparent;border-bottom:none;}
@@ -49,66 +50,107 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .nav-cta:hover{background:var(--blue-strong);transform:translateY(-1px);}
 .nav-cta svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;}
 
-/* ========== HERO with video BG ========== */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;isolation:isolate;padding:180px 0 100px;color:#fff;background:#02040a;}
-.hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;z-index:0;}
-.hero-overlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:
-  linear-gradient(120deg, rgba(2,10,40,0.55) 0%, rgba(4,18,60,0.38) 50%, rgba(6,24,80,0.22) 100%),
-  radial-gradient(80% 60% at 20% 30%, rgba(0,50,180,0.28) 0%, transparent 70%);}
-.hero-grid{position:absolute;inset:0;z-index:2;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 30% 50%, #000 30%, transparent 80%);}
-.hero-vignette{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg, rgba(2,4,10,0.45) 0%, rgba(2,4,10,0.15) 45%, transparent 80%),linear-gradient(to bottom, transparent 70%, rgba(2,4,10,0.35) 100%);}
-.hero-marks{position:absolute;inset:0;z-index:2;pointer-events:none;color:rgba(255,255,255,0.4);font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.24em;text-transform:uppercase;}
-.hero-marks span{position:absolute;}
-.hero-marks .m-tl{top:32px;left:32px;}
-.hero-marks .m-tr{top:32px;right:32px;}
-.hero-marks .m-bl{bottom:32px;left:32px;}
-.hero-marks .m-br{bottom:32px;right:32px;color:var(--blue-24);}
-@keyframes heroDrift{0%{background-position:0 0;}100%{background-position:40px 20px;}}
-@media (max-width:900px){.hero-marks{display:none;}}
+/* ========== HERO (Searce modular collage + heading) ========== */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;isolation:isolate;padding:96px 0 100px;color:#fff;background:#000;}
 .hero .wrap{position:relative;z-index:3;width:100%;}
+
+/* Full-bleed art-directed composition — Verily-style modular grid on a 1584x354 frame (11 cols x 3 rows of 139.25u, top row cropped under the nav) */
+.hero-composition{position:relative;z-index:2;width:100%;aspect-ratio:1584/354;overflow:hidden;margin-bottom:54px;}
+.hero-video-wrap{position:absolute;inset:0;z-index:1;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201584%20354'%20preserveAspectRatio='none'><g%20transform='translate%280%20-63.71%29'%20fill='%23fff'><rect%20width='278.506'%20height='304.616'/><rect%20width='278.506'%20height='113.143'%20transform='translate%28140.125%20304.617%29'/><rect%20width='139.253'%20height='139.253'%20transform='translate%28443.867%20139.254%29'/><path%20d='M0%20138.608C0%2062.058%2062.702%200%20139.253%200v277.217C62.702%20277.217%200%20215.16%200%20138.608'%20transform='translate%28304.617%200.297%29'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201584%20354'%20preserveAspectRatio='none'><g%20transform='translate%280%20-63.71%29'%20fill='%23fff'><rect%20width='278.506'%20height='304.616'/><rect%20width='278.506'%20height='113.143'%20transform='translate%28140.125%20304.617%29'/><rect%20width='139.253'%20height='139.253'%20transform='translate%28443.867%20139.254%29'/><path%20d='M0%20138.608C0%2062.058%2062.702%200%20139.253%200v277.217C62.702%20277.217%200%20215.16%200%20138.608'%20transform='translate%28304.617%200.297%29'/></g></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;}
+.hero-video-wrap video{position:absolute;left:-6.3%;top:-40%;width:57%;height:143%;object-fit:cover;object-position:50% 50%;display:block;}
+.hero-svg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;overflow:hidden;}
+.hero-svg .in{transform-box:fill-box;transform-origin:center;animation:hmEnter 1.685s cubic-bezier(0.2,0.7,0.2,1) both;}
+.hero-video-wrap video{--sx:-60px;--sy:400px;--sr:2deg;--ss:0.94;transform-origin:center;animation:hmEnter 1.685s cubic-bezier(0.2,0.7,0.2,1) both;}
+@keyframes hmEnter{from{opacity:0;transform:translate(var(--sx,0px),var(--sy,420px)) rotate(var(--sr,0deg)) scale(var(--ss,0.9));}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion:reduce){.hero-svg .in,.hero-video-wrap video{animation:none;}}
+@media (max-width:720px){
+  .hero-composition{width:260%;margin-left:-80%;margin-bottom:36px;}
+}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg, rgba(0,60,180,0.18) 0%, rgba(0,30,120,0.22) 100%);border:1px solid rgba(123,169,255,0.35);color:#fff;font-family:var(--display);font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:8px 17px 8px 13px;border-radius:999px;margin-bottom:40px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 6px 18px rgba(0,20,80,0.20), inset 0 1px 0 rgba(255,255,255,0.08);}
 .hero-badge-icon{width:22px;height:22px;flex-shrink:0;}
-.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(38px,5.5vw,80px);line-height:1.08;letter-spacing:-0.025em;color:#fff;max-width:1100px;margin-bottom:36px;}
-.hero h1 .line-blue{color:#fff;font-weight:300;}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,4.7vw,78px);line-height:1.05;letter-spacing:-0.025em;color:#fff;max-width:1200px;margin:0 0 36px;opacity:0;transform:translateY(20px);animation:heroTextIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;animation-delay:0.55s;}
+.hero h1 .line-blue{color:#fff;font-weight:400;}
+@keyframes heroTextIn{to{opacity:1;transform:translateY(0);}}
 .hero-opening{max-width:720px;color:rgba(255,255,255,0.72);font-size:19px;line-height:1.65;margin-bottom:44px;}
-.hero-cta-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;}
+.hero-cta-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;opacity:0;transform:translateY(20px);animation:heroTextIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;animation-delay:0.75s;}
 .hero-cta-primary{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;font-family:var(--display);font-size:14.25px;padding:15px 26.5px;border-radius:999px;transition:background .2s,transform .2s;}
 .hero-cta-primary:hover{background:var(--blue-strong);transform:translateY(-1px);}
 .hero-cta-primary svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;}
+
+/* Geometric section dividers — the two motif SVGs reused at varied scale/crop/orientation, straddling section boundaries */
+.motif{position:absolute;pointer-events:none;z-index:1;opacity:0.3;height:auto;display:block;}
+@media (max-width:900px){.motif,.agentic-motif{display:none;}}
 
 /* ========== Section shared ========== */
 .section-eyebrow{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;display:inline-block;}
 .section-h{font-family:var(--display);font-weight:300;font-size:clamp(32px,4.2vw,56px);line-height:1.08;letter-spacing:-0.02em;color:var(--ink);max-width:900px;margin-bottom:32px;}
 
+/* Shared background transition shapes — Searce modular geometry, cropped/low-contrast */
+.bg-shapes{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-shapes .shape{position:absolute;display:block;}
+
 /* Shared recurring grid motif — echoes the hero, opacity varies per section */
 .grid-motif{position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(currentColor 1px, transparent 1px),linear-gradient(90deg, currentColor 1px, transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(ellipse at 50% 50%, #000 30%, transparent 85%);mask-image:radial-gradient(ellipse at 50% 50%, #000 30%, transparent 85%);}
-.reality, .leaks, .pillars{position:relative;overflow:hidden;}
-.reality > .wrap, .leaks > .wrap, .pillars > .wrap{position:relative;z-index:1;}
+.reality, .leaks, .pillars, .agentic, .outcomes, .processes, .engagement, .faq, .connect{position:relative;overflow:hidden;}
+.reality > .wrap, .leaks > .wrap, .pillars > .wrap, .agentic > .wrap, .outcomes > .wrap, .processes > .wrap, .engagement > .wrap, .faq > .wrap, .connect > .wrap{position:relative;z-index:1;}
 .reality .grid-motif{color:rgba(0,50,150,0.045);}
 .leaks .grid-motif{color:rgba(0,60,180,0.06);}
-.processes .grid-motif{color:rgba(0,60,180,0.04);}
+.processes .grid-motif{color:rgba(0,60,180,0.10);background-position:0 40px;}
 .pillars .grid-motif{color:rgba(179,208,255,0.07);}
 
-/* ========== Reality (scannable, centered) ========== */
-.reality{padding:94px 0;background:linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);border-bottom:1px solid var(--paper-line);text-align:center;}
-.reality .wrap{display:flex;flex-direction:column;align-items:center;}
-.reality .section-eyebrow{display:inline-block;margin-bottom:16px;}
-.reality .section-h{margin:0 auto 24px;font-size:clamp(20px,2.56vw,33px);line-height:1.35;max-width:990px;text-align:center;}
-.reality-word{display:inline-block;color:rgba(0,22,48,0.22);transition:color .35s ease;}
-.reality-word.on{color:#001630;}
-.reality-lede{max-width:820px;margin:0 auto;color:#8a8c92;font-family:var(--body);font-weight:400;font-size:20px;line-height:1.65;letter-spacing:0;text-align:center;}
-.reality-lede em{color:#8a8c92;font-style:normal;font-weight:400;}
-.reality-lede em{color:var(--blue);font-style:normal;font-weight:500;}
-.reality-vignettes{display:grid;grid-template-columns:repeat(2,1fr);gap:20px 40px;margin-bottom:56px;max-width:1080px;}
-.reality-vg{display:flex;gap:18px;align-items:flex-start;padding:20px 0;border-top:1px solid var(--paper-line);}
-.reality-vg-role{flex-shrink:0;width:140px;font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);padding-top:2px;}
-.reality-vg-text{color:var(--ink-60);font-size:15.5px;line-height:1.6;}
-.reality-closing{max-width:820px;padding:28px 32px;background:var(--blue-06);border-left:3px solid var(--blue);border-radius:0 12px 12px 0;color:var(--ink);font-size:16.5px;line-height:1.65;}
-.reality-closing strong{color:var(--blue-strong);font-weight:500;}
-@media (max-width:800px){.reality-vignettes{grid-template-columns:1fr;gap:0;}.reality-vg{flex-direction:column;gap:6px;}.reality-vg-role{width:auto;}}
+/* ========== Reality (dark, image-left + stats-right editorial) ========== */
+.reality{padding:64px 0 68px;background:#04070d;color:#fff;border-bottom:none;position:relative;overflow:hidden;}
+.reality > .wrap{position:relative;z-index:1;}
+.reality .grid-motif{color:rgba(255,255,255,0.07);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 22% 75% at 5% 30%, #000 0%, rgba(0,0,0,0.6) 50%, transparent 100%);mask-image:radial-gradient(ellipse 22% 75% at 5% 30%, #000 0%, rgba(0,0,0,0.6) 50%, transparent 100%);}
+.reality-layout{display:grid;grid-template-columns:1fr 1.22fr;gap:76px;align-items:center;}
+.reality-media{position:relative;margin-left:64px;}
+.reality-media-img{position:relative;z-index:1;aspect-ratio:600/490;overflow:hidden;background:#050a1e;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20600%20490'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%200H20A170%20170%200%200%201%20190%20170V490H0Z'/><path%20d='M360%200H450V370A120%20120%200%200%201%20330%20490H190V170A170%20170%200%200%201%20360%200Z'/><path%20d='M562%200H600V390A100%20100%200%200%201%20500%20490H462V100A100%20100%200%200%201%20562%200Z'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20600%20490'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%200H20A170%20170%200%200%201%20190%20170V490H0Z'/><path%20d='M360%200H450V370A120%20120%200%200%201%20330%20490H190V170A170%20170%200%200%201%20360%200Z'/><path%20d='M562%200H600V390A100%20100%200%200%201%20500%20490H462V100A100%20100%200%200%201%20562%200Z'/></g></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;}
+.reality-media-img img{width:100%;height:100%;object-fit:cover;object-position:0% 40%;display:block;filter:saturate(0.9) brightness(0.95);}
+.reality-media-img::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg, rgba(0,50,180,0.28) 0%, transparent 50%, rgba(2,4,10,0.25) 100%);pointer-events:none;}
+.reality-media-quarter{position:absolute;z-index:1;left:-112px;bottom:0;width:112px;height:150px;background:linear-gradient(160deg,#79adff 0%,var(--blue) 55%,#0038a8 100%);border-radius:0 0 0 100%;pointer-events:none;opacity:0.45;}
+.reality-content{max-width:740px;}
+.reality-content .section-eyebrow{color:#c5d2e8;letter-spacing:.24em;font-size:12px;text-transform:uppercase;margin-bottom:22px;display:block;font-weight:400;}
+.reality-content h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,3.3vw,46px);line-height:1.12;letter-spacing:-0.02em;color:#fff;margin-bottom:44px;}
+.reality-content h2 span{color:#9bbcff;display:block;}
+.reality-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:0 0 30px;border-bottom:1px solid rgba(255,255,255,0.32);margin-bottom:32px;}
+.reality-stat{padding:0 30px;border-right:1px solid rgba(255,255,255,0.22);}
+.reality-stat:first-child{padding-left:0;}
+.reality-stat:last-child{border-right:none;padding-right:0;}
+.reality-stat-value{font-family:var(--display);font-weight:400;font-size:clamp(28px,3vw,42px);line-height:1;letter-spacing:-0.01em;color:#5f9dff;margin-bottom:16px;}
+.reality-stat-text{color:rgba(255,255,255,0.92);font-size:15px;line-height:1.55;}
+.reality-closing{color:rgba(255,255,255,0.92);font-size:16px;line-height:1.6;max-width:720px;}
+@media (max-width:960px){.reality-layout{grid-template-columns:1fr;gap:56px;}.reality-media{margin-left:48px;}.reality-stats{grid-template-columns:1fr;gap:24px;}.reality-stat{padding:20px 0;border-right:none;border-bottom:1px solid rgba(255,255,255,0.14);}.reality-stat:last-child{border-bottom:none;}}
 
-/* ========== Processes (Autonomous RCM Architecture — V8, light) ========== */
-.processes{padding:72px 0 64px;background:var(--paper);color:var(--ink);border-bottom:1px solid var(--paper-line);overflow:hidden;position:relative;}
+/* ========== Our Perspective (white, intro left + 2x2 cards with dotted loop) ========== */
+.agentic{padding:130px 0 140px;background:#fff;color:var(--ink);border-bottom:none;position:relative;overflow:hidden;}
+.agentic > .wrap{position:relative;z-index:1;}
+.agentic-layout{display:grid;grid-template-columns:1fr 1.25fr;gap:80px;align-items:center;}
+.agentic-intro{max-width:520px;}
+.agentic-intro .section-eyebrow{color:#2b2f3a;font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:22px;display:block;}
+.agentic-intro h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,3.4vw,48px);line-height:1.08;letter-spacing:-0.02em;color:#0b1a3a;margin-bottom:22px;}
+.agentic-intro h2 span{color:#3b82ff;font-weight:400;}
+.agentic-intro p{color:#2b2f3a;font-size:16px;line-height:1.6;max-width:460px;}
+.agentic-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.agentic-motif{position:absolute;right:0;bottom:-170px;width:560px;height:auto;opacity:0.2;pointer-events:none;z-index:0;}
+.agentic-path{position:absolute;left:-34px;top:-34px;width:calc(100% + 68px);height:calc(100% + 68px);pointer-events:none;overflow:visible;z-index:0;}
+.agentic-path path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;}
+.agentic-path .dots{stroke:#b3d0ff;stroke-width:2;stroke-dasharray:1 3.4;}
+.agentic-path .runner{stroke:var(--blue);stroke-width:2.5;stroke-dasharray:34 366;stroke-dashoffset:0;animation:agenticLoop 7s linear infinite;}
+@keyframes agenticLoop{to{stroke-dashoffset:-400;}}
+@media (prefers-reduced-motion:reduce){.agentic-path .runner{animation:none;}}
+.agentic-card{position:relative;z-index:1;background:#fff;border-radius:20px;box-shadow:0 18px 50px -22px rgba(10,20,60,0.22), 0 1px 3px rgba(10,20,60,0.06);padding:30px 30px 28px;min-height:240px;display:flex;flex-direction:column;transition:box-shadow .25s, transform .25s;}
+.agentic-card:hover{transform:translateY(-3px);box-shadow:0 26px 60px -22px rgba(0,100,255,0.28), 0 1px 3px rgba(10,20,60,0.06);}
+.agentic-card:nth-of-type(3){grid-column:2;grid-row:2;}
+.agentic-card:nth-of-type(4){grid-column:1;grid-row:2;}
+.agentic-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;}
+.agentic-card-icon{width:56px;height:56px;border-radius:14px;background:#f3f6fc;display:flex;align-items:center;justify-content:center;color:var(--blue);}
+.agentic-card-icon svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.agentic-card-label{font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:-0.01em;color:#0b1020;margin-bottom:10px;}
+.agentic-card-text{color:#5f6470;font-size:15.5px;line-height:1.55;}
+@media (max-width:1024px){.agentic-layout{grid-template-columns:1fr;gap:56px;}.agentic-intro{max-width:100%;}}
+@media (max-width:560px){.agentic-grid{grid-template-columns:1fr;}.agentic-card:nth-of-type(3),.agentic-card:nth-of-type(4){grid-column:1;grid-row:auto;}.agentic-path{display:none;}}
+
+.processes{padding:72px 0 64px;background:var(--paper);color:var(--ink);border-bottom:none;overflow:hidden;position:relative;}
 .processes .wrap{position:relative;z-index:1;}
 .processes .section-eyebrow{color:var(--blue);text-align:center;display:block;}
 .processes .section-h{color:var(--ink);text-align:center;margin-left:auto;margin-right:auto;}
@@ -117,7 +159,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .rcm-arch{--rcm-ink:#1a1a1c;--rcm-ink-40:#84868c;--rcm-ink-60:#54555a;--rcm-ink-80:#1a1a1c;--rcm-line:#e4e6ea;--rcm-blue-lit:#0064ff;--rcm-purple:#734bff;--rcm-paper-side:#f6f7f9;--rcm-paper-center:#ffffff;--rcm-card-ink:#1a1a1c;--rcm-card-ink-60:#54555a;--rcm-card-ink-40:#84868c;--rcm-card-line:#e4e6ea;--rcm-dark:#02061a;--rcm-dark-ink:#f2f7ff;--rcm-dark-ink-60:#a9b3c9;}
 .rcm-arch .rcm-carousel{position:relative;margin:0 auto 56px;max-width:1200px;height:385px;perspective:1500px;perspective-origin:50% 50%;}
 .rcm-arch .rcm-track{position:absolute;top:50%;left:50%;width:0;height:0;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.22,.61,.36,1);}
-.rcm-arch .rcm-slide{position:absolute;top:-159px;left:-158px;width:316px;height:318px;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f2f7ff;border:1px solid var(--rcm-card-line);cursor:pointer;transform-origin:center center;backface-visibility:visible;transition:background .5s ease, border-color .5s ease, box-shadow .5s ease;}
+.rcm-arch .rcm-slide{position:absolute;top:-159px;left:-158px;width:316px;height:318px;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid rgba(10,20,60,0.06);box-shadow:0 18px 50px -24px rgba(10,20,60,0.18), 0 1px 3px rgba(10,20,60,0.05);cursor:pointer;transform-origin:center center;backface-visibility:visible;transition:background .5s ease, border-color .5s ease, box-shadow .5s ease;}
 .rcm-arch .rcm-slide.pos-center{background:linear-gradient(160deg,#0a1c4a 0%,#050a1e 100%);border-color:rgba(179,208,255,0.22);box-shadow:0 30px 70px -24px rgba(0,0,0,0.7);cursor:default;}
 .rcm-arch .rcm-slide .wf-tag{position:absolute;top:18px;left:20px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--rcm-card-ink-40);transition:color .4s;z-index:3;}
 .rcm-arch .rcm-slide.pos-center .wf-tag{color:#7ba9ff;}
@@ -140,8 +182,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .rcm-arch .car-btn:hover{background:var(--blue);border-color:var(--blue);color:#fff;}
 .rcm-arch .car-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .rcm-arch .arch-footer{max-width:1104px;margin:0 auto;}
-.rcm-arch .arch-row{display:flex;align-items:baseline;gap:28px;padding:14px 0;border-top:1px solid var(--rcm-line);justify-content:center;text-align:center;}
-.rcm-arch .arch-row:last-child{border-bottom:1px solid var(--rcm-line);}
+.rcm-arch .arch-row{display:flex;align-items:baseline;gap:28px;padding:14px 0;border-top:none;justify-content:center;text-align:center;}
 .rcm-arch .arch-label{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.26em;text-transform:uppercase;white-space:nowrap;}
 .rcm-arch .arch-row.intel     .arch-label{color:var(--rcm-blue-lit);}
 .rcm-arch .arch-row.oversight .arch-label{color:var(--rcm-purple);}
@@ -159,84 +200,98 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 
 /* ========== Value leaks - deep navy with center glow ========== */
-.leaks{padding:120px 0;background:radial-gradient(80% 60% at 50% 0%, #0a1c4a 0%, #050b1e 55%, #02040f 100%);color:#fff;border-bottom:1px solid rgba(255,255,255,0.06);}
-.leaks .section-eyebrow{color:var(--blue-24);}
-.leaks .section-h{color:#fff;}
-.leaks .grid-motif{color:rgba(179,208,255,0.09);}
+.leaks{padding:120px 0;background:#fff;color:var(--ink);border-bottom:none;}
+.leaks .section-eyebrow{color:var(--blue);}
+.leaks .section-h{color:var(--ink);}
+.leaks .grid-motif{color:rgba(0,60,180,0.05);}
 .leaks-stack{margin-top:56px;display:grid;grid-template-columns:repeat(6,1fr);gap:20px;position:relative;z-index:1;}
-.leak-card{grid-column:span 2;background:linear-gradient(180deg, rgba(10,28,74,0.55) 0%, rgba(5,14,46,0.65) 100%);border:1px solid rgba(0,100,255,0.28);border-radius:20px;padding:32px 32px 28px;display:flex;flex-direction:column;min-height:280px;transition:background .25s, border-color .25s, transform .25s, box-shadow .25s;position:relative;overflow:hidden;}
-.leak-card::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 0%, rgba(0,100,255,0.12) 0%, transparent 70%);pointer-events:none;}
+.leaks-stack > .leak-card{z-index:1;}
+.leaks-motif{position:absolute;left:-110px;bottom:-150px;width:390px;height:auto;opacity:0.13;pointer-events:none;z-index:0;}
+.leaks{overflow:visible;}
+.leak-card{grid-column:span 2;background:#fff;border:1px solid rgba(10,20,60,0.06);border-radius:20px;box-shadow:0 18px 50px -24px rgba(10,20,60,0.18), 0 1px 3px rgba(10,20,60,0.05);padding:32px 32px 28px;display:flex;flex-direction:column;min-height:280px;transition:background .25s, border-color .25s, transform .25s, box-shadow .25s;position:relative;overflow:hidden;}
+.leak-card::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 0%, rgba(0,100,255,0.05) 0%, transparent 70%);pointer-events:none;border-radius:inherit;}
 .leak-card:nth-child(4), .leak-card:nth-child(5){grid-column:span 3;}
-.leak-card:hover{background:linear-gradient(180deg, rgba(14,38,96,0.75) 0%, rgba(8,22,64,0.85) 100%);border-color:rgba(77,143,255,0.55);transform:translateY(-3px);box-shadow:0 24px 48px rgba(0,100,255,0.20);}
-.leak-card-icon{width:40px;height:40px;color:#4d8fff;margin-bottom:32px;transition:color .25s;position:relative;z-index:1;}
-.leak-card:hover .leak-card-icon{color:#7ba9ff;}
+.leak-card:hover{background:#fff;border-color:rgba(0,100,255,0.28);transform:translateY(-3px);box-shadow:0 26px 60px -24px rgba(0,100,255,0.22), 0 1px 3px rgba(10,20,60,0.05);}
+.leak-card-icon{width:40px;height:40px;color:var(--blue);margin-bottom:32px;transition:color .25s;position:relative;z-index:1;}
+.leak-card:hover .leak-card-icon{color:var(--blue-strong);}
 .leak-card-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.leak-card-title{font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:-0.01em;line-height:1.25;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
-.leak-card-desc{color:rgba(255,255,255,0.65);font-size:15.5px;line-height:1.65;margin-bottom:0;position:relative;z-index:1;}
-.leak-card-link{margin-top:auto;font-family:var(--display);font-weight:500;font-size:14px;color:var(--blue-24);display:inline-flex;align-items:center;gap:8px;transition:gap .2s, color .2s;}
-.leak-card-link:hover{gap:12px;color:#fff;}
+.leak-card-title{font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:-0.01em;line-height:1.25;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.leak-card-desc{color:var(--ink-60);font-size:15.5px;line-height:1.65;margin-bottom:0;position:relative;z-index:1;}
+.leak-card-link{margin-top:auto;font-family:var(--display);font-weight:500;font-size:14px;color:var(--blue);display:inline-flex;align-items:center;gap:8px;transition:gap .2s, color .2s;}
+.leak-card-link:hover{gap:12px;color:var(--blue-strong);}
 .leak-card-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.leak-tag{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:6px;background:rgba(0,100,255,0.20);color:var(--blue-24);white-space:nowrap;border:1px solid rgba(179,208,255,0.20);}
-.leak-card[data-tone="commercial"] .leak-tag{background:rgba(179,208,255,0.10);color:#dbe9ff;}
-@media (max-width:900px){.leaks-stack{grid-template-columns:repeat(2,1fr);}.leak-card,.leak-card:nth-child(4),.leak-card:nth-child(5){grid-column:span 1;}}
+.leak-tag{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:6px;background:var(--blue-06);color:var(--blue-strong);white-space:nowrap;border:1px solid var(--blue-12);}
+.leak-card[data-tone="commercial"] .leak-tag{background:var(--paper-dim);color:var(--ink-60);border-color:var(--paper-line);}
+@media (max-width:900px){.leaks-motif{display:none;}.leaks-stack{grid-template-columns:repeat(2,1fr);}.leak-card,.leak-card:nth-child(4),.leak-card:nth-child(5){grid-column:span 1;}}
 @media (max-width:560px){.leaks-stack{grid-template-columns:1fr;}}
 
 /* ========== Outcomes - accordion left + baseline/intervention/result right ========== */
-.outcomes{background:linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);color:var(--ink);position:relative;padding:100px 0 120px;border-bottom:1px solid var(--paper-line);}
+.outcomes{background:#fff;color:var(--ink);position:relative;padding:100px 0 120px;border-bottom:none;}
 .outcomes > .wrap{max-width:1296px;}
 .outcomes-intro{text-align:center;margin-bottom:48px;}
 .outcomes-intro .section-eyebrow{color:var(--blue);display:inline-block;margin-bottom:14px;}
 .outcomes-intro .section-h{color:var(--ink);margin:0 auto;text-align:center;font-size:clamp(30px,3.8vw,48px);}
-.outcomes-frame{background:transparent;border-radius:0;padding:0;position:relative;min-height:0;}
-.outcomes-panel-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.3fr;gap:24px;align-items:stretch;min-height:564px;}
-.outcomes-accordion{background:#fff;border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:4px;}
-.outcomes-item{border-radius:12px;padding:18px 22px;cursor:pointer;transition:background .25s;border:none;background:transparent;text-align:left;font-family:var(--body);color:inherit;width:100%;display:grid;grid-template-columns:44px 1fr 26px;gap:16px;align-items:center;flex:1;}
-.outcomes-item:hover{background:#f4f7ff;}
-.outcomes-item.active{background:#e6edff;}
-.outcomes-item-icon{width:44px;height:44px;border-radius:12px;background:#f0f4ff;color:var(--blue);display:flex;align-items:center;justify-content:center;transition:all .25s;}
-.outcomes-item.active .outcomes-item-icon{background:linear-gradient(135deg, #0064ff 0%, #0051cb 100%);color:#fff;box-shadow:0 8px 18px -6px rgba(0,80,200,0.35);}
-.outcomes-item-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.outcomes-item-title{font-family:var(--display);font-weight:500;font-size:16px;color:var(--ink);letter-spacing:-0.005em;line-height:1.3;}
-.outcomes-item-arrow{width:26px;height:26px;flex-shrink:0;color:var(--ink-40);transition:transform .3s ease, color .25s;}
-.outcomes-item.active .outcomes-item-arrow{transform:rotate(90deg);color:var(--blue);}
-.outcomes-item-arrow svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.outcomes-detail{background:#fff;border-radius:16px;padding:44px 44px;display:flex;flex-direction:column;gap:0;transition:opacity .3s ease, transform .3s ease;}
-.outcomes-detail.swap{opacity:0;transform:translateY(4px);}
-.outcomes-detail-metric{margin-bottom:24px;padding-bottom:0;border-bottom:none;}
-.outcomes-detail-metric-value{font-family:var(--display);font-weight:500;font-size:clamp(28px,3.2vw,42px);color:var(--blue);letter-spacing:-0.02em;line-height:1;}
-.outcomes-detail-metric-label{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-60);margin-top:7px;}
-.outcomes-detail-block{padding:16px 0;border-top:none;}
-.outcomes-detail-block:first-of-type{padding-top:4px;}
+.outcomes-story{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.15fr;gap:72px;align-items:center;transition:opacity .3s ease, transform .3s ease;}
+.outcomes-story.swap{opacity:0;transform:translateY(4px);}
+.outcomes-copy{max-width:560px;}
+.outcomes-case{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-40);margin-bottom:34px;}
+.outcomes-detail-block{padding:18px 0;}
+.outcomes-detail-block:first-of-type{padding-top:0;}
 .outcomes-detail-label{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
 .outcomes-detail-text{color:var(--ink);font-size:17px;line-height:1.7;margin:0;}
-@media (max-width:900px){.outcomes-panel-grid{grid-template-columns:1fr;}.outcomes-detail{padding:28px;}.outcomes-frame{min-height:0;}}
-@media (max-width:900px){.outcomes-tabs{grid-template-columns:1fr 1fr;}.outcome-panel{grid-template-columns:1fr;gap:20px;padding:28px;}}
+.outcomes-media{position:relative;aspect-ratio:3/2;}
+.outcomes-media.shape-2 .outcomes-media-shape img{object-position:72% 50%;}
+.outcomes-media-shape{position:absolute;inset:0;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;transition:opacity .3s ease;}
+.outcomes-media-shape img{width:100%;height:100%;object-fit:cover;display:block;}
+.outcomes-media.shape-1 .outcomes-media-shape{-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='36'%20cy='27'%20r='27'/><rect%20x='72'%20y='7'%20width='28'%20height='39'/><path%20d='M12%2066.7A24%2024%200%200%201%2060%2066.7Z'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='36'%20cy='27'%20r='27'/><rect%20x='72'%20y='7'%20width='28'%20height='39'/><path%20d='M12%2066.7A24%2024%200%200%201%2060%2066.7Z'/></g></svg>");}
+.outcomes-media.shape-2 .outcomes-media-shape{-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%2066.7V4H30A28%2028%200%200%201%2058%2032V66.7Z'/><path%20d='M66%2030A17%2017%200%200%201%20100%2030V66.7H66Z'/><circle%20cx='83'%20cy='9'%20r='7'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%2066.7V4H30A28%2028%200%200%201%2058%2032V66.7Z'/><path%20d='M66%2030A17%2017%200%200%201%20100%2030V66.7H66Z'/><circle%20cx='83'%20cy='9'%20r='7'/></g></svg>");}
+.outcomes-media.shape-3 .outcomes-media-shape{-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%207H45A45%2045%200%200%201%2060%2045V66.7H0Z'/><path%20d='M74%2011H100V58H66V19Q66%2011%2074%2011Z'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%207H45A45%2045%200%200%201%2060%2045V66.7H0Z'/><path%20d='M74%2011H100V58H66V19Q66%2011%2074%2011Z'/></g></svg>");}
+.outcomes-media.shape-4 .outcomes-media-shape{-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='64'%20cy='27'%20r='27'/><rect%20x='0'%20y='7'%20width='28'%20height='39'/><path%20d='M40%2066.7A24%2024%200%200%201%2088%2066.7Z'/><rect%20x='72'%20y='50'%20width='28'%20height='16.7'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='64'%20cy='27'%20r='27'/><rect%20x='0'%20y='7'%20width='28'%20height='39'/><path%20d='M40%2066.7A24%2024%200%200%201%2088%2066.7Z'/><rect%20x='72'%20y='50'%20width='28'%20height='16.7'/></g></svg>");}
+
+.outcomes-metric-box{position:absolute;right:22px;bottom:22px;min-width:240px;max-width:70%;background:linear-gradient(160deg,#eef4ff 0%,#dbe9ff 100%);border-radius:14px;padding:22px 26px 20px;box-shadow:0 14px 34px -18px rgba(0,40,140,0.35);}
+.outcomes-metric-value{font-family:var(--display);font-weight:500;font-size:clamp(30px,2.6vw,40px);line-height:1;letter-spacing:-0.02em;color:#0b1a3a;margin-bottom:8px;}
+.outcomes-metric-label{font-family:var(--body);font-size:15px;color:#1a1f2e;line-height:1.3;}
+.outcomes-tabs2{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:0 0 64px;padding-bottom:22px;}
+.outcomes-item{border:none;background:transparent;cursor:pointer;font-family:var(--display);color:var(--ink-40);display:flex;align-items:center;justify-content:flex-start;gap:14px;padding:12px 0;text-align:left;min-height:64px;transition:color .25s;}
+.outcomes-item:hover{color:var(--ink);}
+.outcomes-item.active{color:var(--ink);}
+.outcomes-item-icon{width:36px;height:36px;border-radius:10px;background:#f0f4ff;color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s;}
+.outcomes-item.active .outcomes-item-icon{background:linear-gradient(135deg, #0064ff 0%, #0051cb 100%);color:#fff;box-shadow:0 8px 18px -6px rgba(0,80,200,0.35);}
+.outcomes-item-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.outcomes-item-title{font-weight:500;font-size:14px;letter-spacing:-0.005em;line-height:1.3;white-space:nowrap;}
+.outcomes-tabs-line{position:absolute;left:0;right:0;bottom:0;height:1px;background:#e2e5eb;}
+.outcomes-tabs-line i{position:absolute;left:0;top:-1px;height:3px;width:25%;border-radius:2px;background:var(--blue);transition:transform .35s cubic-bezier(0.22,0.61,0.36,1);}
+@media (max-width:960px){.outcomes-story{grid-template-columns:1fr;gap:40px;}.outcomes-copy{max-width:100%;}.outcomes-tabs2{grid-template-columns:1fr 1fr;row-gap:8px;}.outcomes-tabs-line i{width:50%;}.outcomes-item{justify-content:flex-start;}}
+@media (max-width:560px){.outcomes-tabs2{grid-template-columns:1fr;}.outcomes-tabs-line{display:none;}.outcomes-metric-box{right:14px;bottom:14px;min-width:0;padding:16px 18px;}}
 @media (max-width:520px){.outcomes-tabs{grid-template-columns:1fr;}}
 
 /* ========== Pillars - split intro + staggered card grid (light) ========== */
-.pillars{padding:120px 0;background:var(--paper);color:var(--ink);border-bottom:1px solid var(--paper-line);}
+.pillars{padding:120px 0;background:var(--paper);color:var(--ink);border-bottom:none;}
 .pillars .section-eyebrow{color:var(--blue);}
 .pillars .section-h{color:var(--ink);}
 .pillars-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;margin-top:24px;align-items:start;position:relative;z-index:1;}
 .pillars-intro{padding-top:12px;}
 .pillars-intro .section-h{font-size:clamp(30px,3.6vw,48px);margin-bottom:24px;max-width:520px;}
+.pillars-motif{position:absolute;right:-110px;top:-170px;width:390px;height:auto;opacity:0.2;pointer-events:none;z-index:0;}
+.pillars{overflow:visible;}
 .pillars-intro-sub{color:var(--ink-60);font-size:16.5px;line-height:1.65;max-width:440px;}
-.pillars-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;grid-auto-rows:1fr;}
+.pillars-cards{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:18px;grid-auto-rows:1fr;}
+.pillars-cards > .pillar-card{position:relative;z-index:1;}
 .pillars-cards > .pillar-card:nth-child(even){margin-top:56px;}
-.pillar-card{position:relative;background:#eef4ff;border-radius:20px;padding:28px 28px 32px;display:flex;flex-direction:column;min-height:280px;height:100%;transition:background .3s, transform .25s, box-shadow .25s;}
-.pillar-card:hover{background:linear-gradient(135deg, #0064ff 0%, #0051cb 100%);transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,80,200,0.25);}
+.pillar-card{position:relative;background:#fff;border:1px solid rgba(10,20,60,0.06);border-radius:20px;box-shadow:0 18px 50px -24px rgba(10,20,60,0.18), 0 1px 3px rgba(10,20,60,0.05);padding:28px 28px 32px;display:flex;flex-direction:column;min-height:280px;height:100%;transition:border-color .25s, transform .25s, box-shadow .25s;}
+.pillar-card:hover{border-color:rgba(0,100,255,0.28);transform:translateY(-3px);box-shadow:0 26px 60px -24px rgba(0,100,255,0.22), 0 1px 3px rgba(10,20,60,0.05);}
 .pillar-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:44px;}
 .pillar-card-icon{width:36px;height:36px;color:var(--blue);transition:color .25s;}
-.pillar-card:hover .pillar-card-icon{color:#fff;}
+.pillar-card:hover .pillar-card-icon{color:var(--blue-strong);}
 .pillar-card-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.pillar-card-arrow{width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--ink-60);transition:background .2s, color .2s;}
-.pillar-card:hover .pillar-card-arrow{background:#fff;color:var(--blue);}
+.pillar-card-arrow{width:32px;height:32px;border-radius:50%;background:#f0f4ff;display:flex;align-items:center;justify-content:center;color:var(--ink-60);transition:background .2s, color .2s;}
+.pillar-card:hover .pillar-card-arrow{background:var(--blue);color:#fff;}
 .pillar-card-arrow svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .pillar-card .pillar-name{font-family:var(--display);font-weight:500;font-size:22px;color:var(--ink);letter-spacing:-0.01em;line-height:1.2;margin-bottom:14px;transition:color .25s;}
-.pillar-card:hover .pillar-name{color:#fff;}
+.pillar-card:hover .pillar-name{color:var(--ink);}
 .pillar-card .pillar-desc{color:var(--ink-60);font-size:15.5px;line-height:1.65;margin:0;transition:color .25s;}
-.pillar-card:hover .pillar-desc{color:rgba(255,255,255,0.9);}
-@media (max-width:960px){.pillars-layout{grid-template-columns:1fr;gap:48px;}.pillars-cards > .pillar-card:nth-child(even){margin-top:0;}}
+.pillar-card:hover .pillar-desc{color:var(--ink-60);}
+@media (max-width:960px){.pillars-layout{grid-template-columns:1fr;gap:48px;}.pillars-cards > .pillar-card:nth-child(even){margin-top:0;}.pillars-motif{display:none;}}
 @media (max-width:560px){.pillars-cards{grid-template-columns:1fr;}}
 .pillars-manifesto,.pillars-grid{display:none;}
 /* legacy pillar-card/-icon rules removed — manifesto layout above owns Pillars */
@@ -340,6 +395,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   .reality,.processes,.leaks,.pillars,.engagement,.faq,.connect{padding:80px 0;}
   .outcomes-intro{padding:80px 0 40px;}
 }
+.reality,.agentic,.processes,.leaks,.outcomes,.pillars,.engagement,.faq,.connect{overflow:visible;}
 </style>
 </head>
 <body>
@@ -373,29 +429,96 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   </div>
 </nav>
 
-<!-- ============== HERO (image BG with dark blue overlay) ============== -->
+<!-- ============== HERO (Searce modular collage + heading) ============== -->
 <section class="hero" aria-labelledby="hero-heading">
-  <img class="hero-image" src="assets/HCLS.webp" alt="" aria-hidden="true">
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-vignette" aria-hidden="true"></div>
+  <!-- Full-bleed art-directed Searce composition: 3 healthcare visuals + modular shapes on a 1676x385 reference frame -->
+  <div class="hero-composition" aria-hidden="true">
+    <div class="hero-video-wrap"><video src="assets/hero-microscope.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+    <svg class="hero-svg" viewBox="0 0 1584 354" preserveAspectRatio="none">
+      <defs>
+        <!-- Searce blue family: sky -> indigo -> Searce blue -->
+        <linearGradient id="hgA" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#46b6ff"/><stop offset="0.5" stop-color="#1c1ac9"/><stop offset="1" stop-color="#0064ff"/></linearGradient>
+        <linearGradient id="hgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0064ff"/><stop offset="0.55" stop-color="#1c1ac9"/><stop offset="1" stop-color="#46b6ff"/></linearGradient>
+        <linearGradient id="hgC" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#46b6ff"/><stop offset="0.5" stop-color="#0064ff"/><stop offset="1" stop-color="#1c1ac9"/></linearGradient>
+        <linearGradient id="hgW" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfdcf8"/></linearGradient>
+        <linearGradient id="hgW2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b9cdf6"/></linearGradient>
+        <linearGradient id="hgDarkBk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0051cb"/><stop offset="1" stop-color="#001630"/></linearGradient>
+        <linearGradient id="hgG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7d7e85"/><stop offset="0.5" stop-color="#54555a"/><stop offset="1" stop-color="#2f3038"/></linearGradient>
+        <linearGradient id="hgDark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a3fd0"/><stop offset="0.5" stop-color="#0d2a99"/><stop offset="1" stop-color="#03113f"/></linearGradient>
+        <linearGradient id="hgOv" x1="0" y1="1" x2="1" y2="0.4"><stop offset="0" stop-color="#0064ff"/><stop offset="1" stop-color="#1c1ac9"/></linearGradient>
+        <!-- Large off-centre elliptical washes (Verily treatment) -->
+        <radialGradient id="hwNavy" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(61 139) rotate(180) scale(458 1322)"><stop offset="0" stop-color="#001a66"/><stop offset="1" stop-color="#001a66" stop-opacity="0"/></radialGradient>
+        <radialGradient id="hwSky" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-192 278) rotate(-180) scale(333 302)"><stop offset="0" stop-color="#8fd3ff"/><stop offset="1" stop-color="#8fd3ff" stop-opacity="0"/></radialGradient>
+        <radialGradient id="hwSky2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-288 139) scale(239 217)"><stop offset="0" stop-color="#8fd3ff"/><stop offset="1" stop-color="#8fd3ff" stop-opacity="0"/></radialGradient>
+        <radialGradient id="hwNavy2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(450 139) rotate(-180) scale(511 737)"><stop offset="0" stop-color="#001a66"/><stop offset="1" stop-color="#001a66" stop-opacity="0"/></radialGradient>
+        <radialGradient id="hwWhite" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-132 166) rotate(-27) scale(341 347)"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+        <radialGradient id="hwTri" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-255 1046) rotate(-74.6) scale(1176 2135)"><stop offset="0" stop-color="#8fd3ff"/><stop offset="1" stop-color="#8fd3ff" stop-opacity="0"/></radialGradient>
+        <radialGradient id="hwTri2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(357 -63) rotate(135.7) scale(641 229)"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+        <!-- Big circle -->
+        <radialGradient id="hgCircle" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(206 98) rotate(-131.5) scale(557 375)"><stop offset="0" stop-color="#0064ff"/><stop offset="0.45" stop-color="#1c1ac9"/><stop offset="1" stop-color="#46b6ff"/></radialGradient>
+        <radialGradient id="hwCircle" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(45 278) rotate(-1.9) scale(306 295)"><stop offset="0" stop-color="#8fd3ff"/><stop offset="1" stop-color="#8fd3ff" stop-opacity="0"/></radialGradient>
+        <!-- Bottom triangle: white -> pale -->
+        <radialGradient id="hgTriW" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(266 149) rotate(-128) scale(244 442)"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c9d9f9"/></radialGradient>
+        <!-- Dots + grid -->
+        <pattern id="hpDot" width="27.72" height="27.72" patternUnits="userSpaceOnUse"><circle cx="1.83" cy="1.83" r="1.83" fill="#595959"/></pattern>
+        <pattern id="hpDotL" width="27.72" height="27.72" patternUnits="userSpaceOnUse"><circle cx="1.83" cy="1.83" r="1.83" fill="#a0a0a0"/></pattern>
+        <pattern id="hpGrid" width="54.03" height="54.03" patternUnits="userSpaceOnUse"><path d="M54.03 0H0V54.03" fill="none" stroke="#fff" stroke-width="0.7"/></pattern>
+        <radialGradient id="hmDots" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(669 46) rotate(90) scale(249 215)"><stop offset="0.35" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="hmDotsM"><rect x="404" y="-127" width="530" height="614" fill="url(#hmDots)"/></mask>
+        <radialGradient id="hmGrid" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1156 86) rotate(56.8) scale(155 185)"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="hmGridM"><rect x="923" y="-208" width="648" height="543" fill="url(#hmGrid)"/></mask>
+        <radialGradient id="hmGrid2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(324 110) rotate(90) scale(244 324)"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="hmGridM2"><rect x="0" y="-134" width="648" height="488" fill="url(#hmGrid2)"/></mask>
+        <!-- Photo mask: pill + leaf + rounded piece -->
+        <mask id="hmPhoto"><g transform="translate(748.48 -63.71)" fill="#fff"><rect width="252.396" height="113.143" rx="69.6265"/><path d="M0 111.403C0 49.877 49.877 0 111.402 0H261.1v140.994c0 61.526-49.877 111.402-111.403 111.402H0z" transform="translate(252.398)"/><path d="M0 55.701C0 24.938 24.938 0 55.701 0h83.552v57.442c0 30.763-24.938 55.701-55.701 55.701H0z" transform="translate(252.398 113.145) rotate(90)"/></g></mask>
+        <clipPath id="hcSq"><path d="M0 55.701C0 24.938 24.938 0 55.701 0h83.552v83.552c0 30.763-24.938 55.701-55.701 55.701H0z"/></clipPath>
+        <linearGradient id="hgNavyTri" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#001630"/><stop offset="1" stop-color="#002659"/></linearGradient>
+        <linearGradient id="hgRing" x1="0.22" y1="0.25" x2="0.85" y2="0.81"><stop offset="0" stop-color="#0038A8"/><stop offset="0.55" stop-color="#0051CB"/><stop offset="1" stop-color="#0064FF"/></linearGradient>
+        <linearGradient id="hgBigCircle" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0064ff"/><stop offset="1" stop-color="#79adff"/></linearGradient>
+        <linearGradient id="hgLight" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#79adff"/><stop offset="1" stop-color="#efefff"/></linearGradient>
+        <radialGradient id="hgDarkR" cx="0.3" cy="0.25" r="0.9"><stop offset="0" stop-color="#1a4fe0"/><stop offset="0.55" stop-color="#0d2a99"/><stop offset="1" stop-color="#03113f"/></radialGradient>
+      </defs>
+
+      <!-- Fading line grid over the video area -->
+      <g class="in" style="--sx:-88px;--sy:443px;--sr:3.2deg;--ss:0.89"><rect x="0" y="-134" width="648" height="488" fill="url(#hpGrid)" mask="url(#hmGridM2)"/></g>
+
+      <!-- Tilted photo behind pill + leaf mask -->
+      <g class="in" style="--sx:-97px;--sy:545px;--sr:4.9deg;--ss:0.97"><g mask="url(#hmPhoto)">
+        <image href="assets/hero-brain.jpg" x="748" y="-64" width="612" height="252" preserveAspectRatio="xMidYMin slice"/>
+      </g></g>
+
+      <!-- Dotted disc behind the circle + right dot field -->
+      <g class="in" style="--sx:94px;--sy:413px;--sr:-2.2deg;--ss:0.95"><rect x="1280.26" y="7.28" width="308" height="336" fill="url(#hpDot)"/></g>
+
+      <!-- Shapes on the 139.25u grid -->
+      <g class="in" style="--sx:-28px;--sy:582px;--sr:-4.5deg;--ss:0.92"><g transform="translate(1418.62 214.8)" clip-path="url(#hcSq)"><image href="assets/hero-vial.jpg" width="139.253" height="139.253" preserveAspectRatio="xMidYMid slice"/></g></g>
+      <g class="in" style="--sx:30px;--sy:345px;--sr:-2.6deg;--ss:0.9"><g transform="translate(1279.37 75.54)"><path d="M0 69.627C0 31.172 31.173 0 69.627 0H208.88c38.453 0 69.626 31.173 69.626 69.627v69.626H69.626C31.173 139.253 0 108.08 0 69.627" fill="url(#hgB)"/><path d="M0 69.627C0 31.172 31.173 0 69.627 0H208.88c38.453 0 69.626 31.173 69.626 69.627v69.626H69.626C31.173 139.253 0 108.08 0 69.627" fill="url(#hwSky)"/><path d="M0 69.627C0 31.172 31.173 0 69.627 0H208.88c38.453 0 69.626 31.173 69.626 69.627v69.626H69.626C31.173 139.253 0 108.08 0 69.627" fill="url(#hwNavy2)"/></g></g>
+      <g class="in" style="--sx:119px;--sy:545px;--sr:-4.8deg;--ss:0.9"><g transform="translate(1418.62 -63.71)"><path d="M0 55.701C0 24.938 24.938 0 55.701 0h83.552v83.552c0 30.763-24.938 55.701-55.701 55.701H0z" fill="url(#hgW)"/></g></g>
+      <g class="in" style="--sx:-4px;--sy:316px;--sr:4.9deg;--ss:0.99"><g transform="translate(1000.88 214.8)"><path d="M0 69.627C0 31.172 31.173 0 69.627 0H208.88c38.453 0 69.626 31.173 69.626 69.627s-31.173 69.626-69.626 69.626H69.627C31.172 139.253 0 108.08 0 69.627" fill="url(#hgA)"/><path d="M0 69.627C0 31.172 31.173 0 69.627 0H208.88c38.453 0 69.626 31.173 69.626 69.627s-31.173 69.626-69.626 69.626H69.627C31.172 139.253 0 108.08 0 69.627" fill="url(#hwSky2)"/><path d="M0 69.627C0 31.172 31.173 0 69.627 0H208.88c38.453 0 69.626 31.173 69.626 69.627s-31.173 69.626-69.626 69.626H69.627C31.172 139.253 0 108.08 0 69.627" fill="url(#hwNavy2)"/></g></g>
+      <g class="in" style="--sx:-69px;--sy:535px;--sr:4.9deg;--ss:0.87"><g transform="translate(861.63 214.8)"><rect width="139.253" height="139.253" fill="url(#hgRing)"/></g></g>
+      <g class="in" style="--sx:84px;--sy:323px;--sr:-4.7deg;--ss:0.93"><g transform="translate(443.87 214.8)"><path d="M0 139.253h139.253L0 0z" fill="url(#hgTriW)"/></g></g>
+      <g class="in" style="--sx:-91px;--sy:446px;--sr:-0.2deg;--ss:0.94"><g transform="translate(585.905 78.325) scale(0.1965)"><path d="M694.5 353.335C882.632 353.335 1035.66 506.369 1035.66 694.5C1035.66 882.631 882.632 1035.66 694.5 1035.66C506.369 1035.66 353.335 882.631 353.335 694.5C353.335 506.369 506.369 353.335 694.5 353.335ZM694.5 0C310.936 0 0 310.935 0 694.5C0 1078.06 310.936 1389 694.5 1389C1078.07 1389 1389 1078.06 1389 694.5C1389 310.935 1078.07 0 694.5 0Z" fill="url(#hgRing)" fill-rule="evenodd"/></g></g>
+      <g class="in" style="--sx:-51px;--sy:551px;--sr:-2.3deg;--ss:0.88"><rect x="404" y="-127" width="530" height="614" fill="url(#hpDotL)" mask="url(#hmDotsM)"/></g>
+      <g class="in" style="--sx:-73px;--sy:496px;--sr:1.5deg;--ss:0.9"><g transform="translate(583.12 -63.71)"><path d="M0 55.701C0 24.938 24.938 0 55.701 0h83.552v83.552c0 30.763-24.938 55.701-55.701 55.701H0z" fill="url(#hgW2)"/><path d="M0 55.701C0 24.938 24.938 0 55.701 0h83.552v83.552c0 30.763-24.938 55.701-55.701 55.701H0z" fill="url(#hwWhite)"/></g></g>
+      <g class="in" style="--sx:-102px;--sy:614px;--sr:-2.1deg;--ss:0.98"><g transform="translate(443.87 -63.71)"><path d="M0 139.253h139.253L0 0z" fill="url(#hgRing)"/></g></g>
+
+      <g class="in" style="--sx:-24px;--sy:613px;--sr:-5.4deg;--ss:0.92"><g transform="translate(26.984 354.05) rotate(-90)"><path d="M0 113.143h113.143L0 0z" fill="url(#hgLight)"/></g></g>
+
+      <!-- Fading fine line grid -->
+      <g class="in" style="--sx:46px;--sy:488px;--sr:0.5deg;--ss:0.91"><rect x="923.29" y="-208.06" width="648.4" height="543" fill="url(#hpGrid)" mask="url(#hmGridM)"/></g>
+
+      <!-- 50% colour overlay shape sitting on the photo -->
+      <g class="in" style="--sx:-45px;--sy:477px;--sr:2.7deg;--ss:0.87"><g transform="translate(1000.88 -63.71)"><path d="M261.1 140.993c0 61.526-49.877 111.403-111.403 111.403H0V111.402C0 49.877 49.877 0 111.402 0H261.1z" fill="url(#hgOv)" opacity="0.5"/></g></g>
+
+      <!-- Round thumbnail -->
+      <g class="in" style="--sx:54px;--sy:375px;--sr:3.8deg;--ss:0.86"><g><path d="M1336 241H1362V272H1393V298H1362V329H1336V298H1305V272H1336Z" fill="url(#hgLight)"/></g></g>
+    </svg>
+  </div>
   <div class="wrap">
-    <div class="hero-badge">
-      <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true">
-        <rect fill="#163a80" x="155" y="25"  width="65"  height="115"/>
-        <rect fill="#163a80" x="250" y="155" width="100" height="45"/>
-        <rect fill="#2563ff" x="25"  y="155" width="215" height="45"/>
-        <rect fill="#2563ff" x="140" y="225" width="65"  height="125"/>
-      </svg>
-      Healthcare and Life Sciences
-    </div>
     <h1 id="hero-heading">
       What should work<br>
-      <span class="line-blue">radically better</span> in<br>healthcare and life sciences?
+      <span class="line-blue">radically better in</span><br>healthcare and life sciences?
     </h1>
-    <div class="hero-opening">
-      <p>Clinicians, researchers, and revenue cycle teams operate under extreme regulatory oversight, battling siloed records, fragmented workflows, and heavy admin overhead. Every automated path must hold to HIPAA, FDA, and GDPR.</p>
-    </div>
     <div class="hero-cta-row">
       <a href="#outcomes" class="hero-cta-primary">
         See what Searce has changed
@@ -409,9 +532,71 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 <section class="reality" aria-labelledby="reality-h">
   <span class="grid-motif" aria-hidden="true"></span>
   <div class="wrap">
-    <div class="section-eyebrow">The operating reality</div>
-    <h2 id="reality-h" class="section-h">Care and discovery are constrained by unstructured medical text, with clinicians spending up to 40% of their shifts navigating EHRs and transcribing visits.<br><br>Research teams face months-long trial matching, while revenue cycle teams battle coding errors and denials under HIPAA, FDA, and GDPR.</h2>
+    <div class="reality-layout">
+      <div class="reality-media">
+        <div class="reality-media-img"><img src="assets/reality.jpg" alt="Scientist examining a petri dish in a laboratory"></div>
+        <span class="reality-media-quarter" aria-hidden="true"></span>
+      </div>
+      <div class="reality-content">
+        <span class="section-eyebrow">The operating reality</span>
+        <h2 id="reality-h">Progress in healthcare is held <span>back by fragmented information.</span></h2>
+        <div class="reality-stats">
+          <div class="reality-stat">
+            <div class="reality-stat-value">40%</div>
+            <div class="reality-stat-text">of a clinician's shift is spent navigating EHRs and transcribing patient visits.</div>
+          </div>
+          <div class="reality-stat">
+            <div class="reality-stat-value">Months</div>
+            <div class="reality-stat-text">to find trial-eligible candidates as research teams search unstructured records.</div>
+          </div>
+          <div class="reality-stat">
+            <div class="reality-stat-value">High risk</div>
+            <div class="reality-stat-text">of revenue loss from manual coding errors and claim denials.</div>
+          </div>
+        </div>
+        <p class="reality-closing">Every automated path must meet HIPAA, FDA, and GDPR requirements, making safety, privacy, human oversight, and complete decision lineage prerequisites for deployment.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ============== OUR PERSPECTIVE (white, intro + 4 circles) ============== -->
+<section class="agentic" aria-labelledby="agentic-h">
+  <div class="wrap">
+    <div class="agentic-layout">
+      <div class="agentic-intro">
+        <span class="section-eyebrow">Our perspective</span>
+        <h2 id="agentic-h">From fragmented operations to <span>agentic systems.</span></h2>
+        <p>We reimagine how work gets done by unifying people, data, and AI agents across the healthcare value chain.</p>
+      </div>
+      <div class="agentic-grid">
+        <img class="agentic-motif" src="assets/perspective-shapes.svg" alt="" aria-hidden="true">
+        <svg class="agentic-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <path class="dots" pathLength="400" d="M4 1H96Q99 1 99 4V96Q99 99 96 99H4Q1 99 1 96V4Q1 1 4 1Z"/>
+          <path class="runner" pathLength="400" d="M4 1H96Q99 1 99 4V96Q99 99 96 99H4Q1 99 1 96V4Q1 1 4 1Z"/>
+        </svg>
+        <article class="agentic-card">
+          <div class="agentic-card-top"><div class="agentic-card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg></div></div>
+          <div class="agentic-card-label">Understand</div>
+          <p class="agentic-card-text">Make sense of unstructured data at scale.</p>
+        </article>
+        <article class="agentic-card">
+          <div class="agentic-card-top"><div class="agentic-card-icon"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7l3 8M16 7l-3 8"/></svg></div></div>
+          <div class="agentic-card-label">Coordinate</div>
+          <p class="agentic-card-text">Orchestrate people, systems, and specialized agents.</p>
+        </article>
+        <article class="agentic-card">
+          <div class="agentic-card-top"><div class="agentic-card-icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 10-12h-7l1-8z"/></svg></div></div>
+          <div class="agentic-card-label">Act</div>
+          <p class="agentic-card-text">Automate end-to-end workflows with confidence.</p>
+        </article>
+        <article class="agentic-card">
+          <div class="agentic-card-top"><div class="agentic-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.4 8.5-8 9-4.6-.5-8-4.5-8-9V7l8-4z"/></svg></div></div>
+          <div class="agentic-card-label">Govern</div>
+          <p class="agentic-card-text">Ensure safety, compliance, and measurable outcomes.</p>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -486,6 +671,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         <div class="leak-card-title">Prior Authorization Hold Time <span class="leak-tag">Commercial</span></div>
         <div class="leak-card-desc">Mandated payer evaluation and review periods. Commercial, not engineered.</div>
       </div>
+      <img class="leaks-motif" src="assets/leaks-shapes.svg" alt="" aria-hidden="true">
     </div>
   </div>
 </section>
@@ -498,51 +684,51 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       <h2 id="outcomes-h" class="section-h">Four intervention points.<br>Four locked metrics.</h2>
     </div>
 
-    <div class="outcomes-frame">
-      <div class="outcomes-panel-grid">
-        <div class="outcomes-accordion" id="outcomesAccordion">
-          <button class="outcomes-item active" data-index="0">
-            <div class="outcomes-item-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
-            <div class="outcomes-item-title">Emergency Medical Documentation</div>
-            <div class="outcomes-item-arrow"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
-          </button>
-          <button class="outcomes-item" data-index="1">
-            <div class="outcomes-item-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div>
-            <div class="outcomes-item-title">Medical Form Data Extraction</div>
-            <div class="outcomes-item-arrow"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
-          </button>
-          <button class="outcomes-item" data-index="2">
-            <div class="outcomes-item-icon"><svg viewBox="0 0 24 24"><path d="M4 12h4l3-8 4 16 3-8h2"/></svg></div>
-            <div class="outcomes-item-title">Protein Prediction &amp; Research Pipelines</div>
-            <div class="outcomes-item-arrow"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
-          </button>
-          <button class="outcomes-item" data-index="3">
-            <div class="outcomes-item-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
-            <div class="outcomes-item-title">Healthcare API Operations &amp; Cloud Scale</div>
-            <div class="outcomes-item-arrow"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div>
-          </button>
-        </div>
+    <div class="outcomes-tabs2" id="outcomesAccordion" role="tablist">
+      <button class="outcomes-item active" data-index="0" role="tab" aria-selected="true">
+        <span class="outcomes-item-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+        <span class="outcomes-item-title">Emergency Medical<br>Documentation</span>
+      </button>
+      <button class="outcomes-item" data-index="1" role="tab" aria-selected="false">
+        <span class="outcomes-item-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></span>
+        <span class="outcomes-item-title">Medical Form<br>Data Extraction</span>
+      </button>
+      <button class="outcomes-item" data-index="2" role="tab" aria-selected="false">
+        <span class="outcomes-item-icon"><svg viewBox="0 0 24 24"><path d="M4 12h4l3-8 4 16 3-8h2"/></svg></span>
+        <span class="outcomes-item-title">Protein Prediction &amp;<br>Research Pipelines</span>
+      </button>
+      <button class="outcomes-item" data-index="3" role="tab" aria-selected="false">
+        <span class="outcomes-item-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>
+        <span class="outcomes-item-title">Healthcare API Operations<br>&amp; Cloud Scale</span>
+      </button>
+      <span class="outcomes-tabs-line" aria-hidden="true"><i></i></span>
+    </div>
 
-        <div class="outcomes-detail" id="outcomesDetail">
-          <div class="outcomes-detail-metric">
-            <div class="outcomes-detail-metric-value" data-field="metric">70–80%</div>
-            <div class="outcomes-detail-metric-label" data-field="metricLabel">Manual Effort Reduction</div>
-          </div>
-          <div class="outcomes-detail-block">
-            <div class="outcomes-detail-label">Baseline</div>
-            <p class="outcomes-detail-text" data-field="baseline">Emergency room intake agents and supervisors spent hours manually transcribing and structuring patient documentation per shift.</p>
-          </div>
-          <div class="outcomes-detail-block">
-            <div class="outcomes-detail-label">Intervention</div>
-            <p class="outcomes-detail-text" data-field="intervention">Searce deployed an AI-driven documentation platform that automates intake transcription and chart assembly with real-time error checking.</p>
-          </div>
-          <div class="outcomes-detail-block">
-            <div class="outcomes-detail-label">Result</div>
-            <p class="outcomes-detail-text" data-field="result">Dropped manual documentation effort by a projected 70% to 80%, drastically increasing intake capacity.</p>
-          </div>
+    <div class="outcomes-story" id="outcomesDetail">
+      <div class="outcomes-copy">
+        <div class="outcomes-case" data-field="heading">Emergency Medical Documentation</div>
+        <div class="outcomes-detail-block">
+          <div class="outcomes-detail-label">Baseline</div>
+          <p class="outcomes-detail-text" data-field="baseline">Emergency room intake agents and supervisors spent hours manually transcribing and structuring patient documentation per shift.</p>
+        </div>
+        <div class="outcomes-detail-block">
+          <div class="outcomes-detail-label">Intervention</div>
+          <p class="outcomes-detail-text" data-field="intervention">Searce deployed an AI-driven documentation platform that automates intake transcription and chart assembly with real-time error checking.</p>
+        </div>
+        <div class="outcomes-detail-block">
+          <div class="outcomes-detail-label">Result</div>
+          <p class="outcomes-detail-text" data-field="result">Dropped manual documentation effort by a projected 70% to 80%, drastically increasing intake capacity.</p>
+        </div>
+      </div>
+      <div class="outcomes-media shape-1" id="outcomesMedia">
+        <div class="outcomes-media-shape"><img data-field="image" src="assets/outcome-docs.jpg" alt="Nurse charting patient vitals beside an ICU monitor"></div>
+        <div class="outcomes-metric-box">
+          <div class="outcomes-metric-value" data-field="metric">70–80%</div>
+          <div class="outcomes-metric-label" data-field="metricLabel">Manual Effort Reduction</div>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -556,12 +742,13 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         <h2 id="pillars-h" class="section-h">Four engineering practices, applied above your EHR and clinical systems of record.</h2>
       </div>
       <div class="pillars-cards">
+        <img class="pillars-motif" src="assets/practices-shapes.svg" alt="" aria-hidden="true">
         <div class="pillar-card">
           <div class="pillar-card-top">
             <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div>
             <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
           </div>
-          <div class="pillar-name">Business Systems Engineering</div>
+          <div class="pillar-name">AI Outcome Engineering</div>
           <p class="pillar-desc">Rebuilds patient onboarding, clinical documentation, medical billing, and trial management workflows, replacing legacy operational tools.</p>
         </div>
         <div class="pillar-card">
@@ -569,7 +756,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
             <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
             <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
           </div>
-          <div class="pillar-name">AI-Ready Platform Engineering</div>
+          <div class="pillar-name">Cloud and AI Platform Engineering</div>
           <p class="pillar-desc">HIPAA/GDPR-compliant data platforms, unifying unstructured EHR records, lab reports, and imaging archives into search-ready context layers.</p>
         </div>
         <div class="pillar-card">
@@ -755,64 +942,6 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 </footer>
 
 <script>
-/* Reality — scroll-driven word-by-word blue highlight */
-(function(){
-  const h = document.getElementById('reality-h');
-  if(!h) return;
-  const nodes = [];
-  // Walk the h2 preserving <br> tags, splitting text runs into word spans
-  const frag = document.createDocumentFragment();
-  h.childNodes.forEach(node => {
-    if(node.nodeType === Node.TEXT_NODE){
-      const parts = node.textContent.split(/(\s+)/);
-      parts.forEach(part => {
-        if(part.trim().length === 0){ frag.appendChild(document.createTextNode(part)); return; }
-        const s = document.createElement('span');
-        s.className = 'reality-word';
-        s.textContent = part;
-        frag.appendChild(s);
-        nodes.push(s);
-      });
-    } else {
-      frag.appendChild(node.cloneNode(true));
-    }
-  });
-  h.innerHTML = '';
-  h.appendChild(frag);
-  const total = nodes.length;
-  if(!total) return;
-
-  let ticking = false;
-  function update(){
-    ticking = false;
-    const rect = h.getBoundingClientRect();
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    // progress 0 when heading enters (bottom of viewport), 1 when heading has scrolled to top
-    // Aim for the heading's center crossing the viewport center to hit ~1
-    const start = vh * 0.85;   // heading bottom near start line
-    const end   = vh * 0.35;   // heading bottom near end line
-    const y = rect.bottom;
-    let p = (start - y) / (start - end);
-    if(p < 0) p = 0;
-    if(p > 1) p = 1;
-    const revealCount = Math.round(p * total);
-    for(let i = 0; i < total; i++){
-      const on = i < revealCount;
-      if(nodes[i].classList.contains('on') !== on){
-        nodes[i].classList.toggle('on', on);
-      }
-    }
-  }
-  function onScroll(){
-    if(ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  window.addEventListener('resize', onScroll);
-  update();
-})();
-
 /* Nav — solidify on scroll */
 (function(){
   const nav = document.querySelector('.nav');
@@ -1028,28 +1157,33 @@ document.querySelectorAll('.leak-bar').forEach(bar => {
   const detail = document.getElementById('outcomesDetail');
   if(!items.length || !detail) return;
   const data = [
-    {heading:"Emergency Medical Documentation", metric:"70–80%", metricLabel:"Manual Effort Reduction",
+    {heading:"Emergency Medical Documentation", image:"assets/outcome-docs.jpg", alt:"Nurse charting patient vitals beside an ICU monitor", metric:"70–80%", metricLabel:"Manual Effort Reduction",
       baseline:"Emergency room intake agents and supervisors spent hours manually transcribing and structuring patient documentation per shift.",
       intervention:"Searce deployed an AI-driven documentation platform that automates intake transcription and chart assembly with real-time error checking.",
       result:"Dropped manual documentation effort by a projected 70% to 80%, drastically increasing intake capacity."},
-    {heading:"Medical Form Data Extraction", metric:"96.4%", metricLabel:"Accuracy Rate",
+    {heading:"Medical Form Data Extraction", image:"assets/outcome-forms.jpg", alt:"Nurse reviewing patient records alongside an EHR screen", metric:"96.4%", metricLabel:"Accuracy Rate",
       baseline:"Revenue cycle teams relied on manual keying to ingest CMS-1500 and UB-04 billing forms, yielding low processing speed and high error rates.",
       intervention:"Searce engineered an automated document processing pipeline tailored for complex healthcare claim formats.",
       result:"Achieved an overall extraction accuracy of 96.4% for CMS-1500 and 93.1% for UB-04 forms, eliminating manual data re-entry."},
-    {heading:"Protein Prediction & Research Pipelines", metric:"50%", metricLabel:"Time Compression",
+    {heading:"Protein Prediction & Research Pipelines", image:"assets/outcome-protein.jpg", alt:"Microscope objective over a sample dish in a research lab", metric:"50%", metricLabel:"Time Compression",
       baseline:"Multi-hour computational sequences for monomer and multimer analysis throttled drug discovery timelines.",
       intervention:"Rebuilt the bio-analytics pipeline with multi-GPU inference and parallel execution on V100 GPU clusters.",
       result:"Cut protein prediction times by 50%, reduced monomer analysis from 2 hours to 1 hour, and compressed multimer sequence processing from 9 hours to 8 hours."},
-    {heading:"Healthcare API Operations & Cloud Scale", metric:"40%", metricLabel:"Cost Drop",
+    {heading:"Healthcare API Operations & Cloud Scale", image:"assets/outcome-cloud.jpg", alt:"Researcher working on a tablet and laptop in a lab", metric:"40%", metricLabel:"Cost Drop",
       baseline:"Legacy deployment architectures incurred high API consumption billing and lacked automated scaling for remote healthcare workers.",
       intervention:"Migrated services to serverless infrastructure with automated deployment via Artifact Registry and Cloud Run alongside token/request optimizations.",
       result:"Ensured 100% remote accessibility while reducing total API consumption and billing by 40%."}
   ];
+  const line = document.querySelector('.outcomes-tabs-line i');
   function setActive(idx){
-    items.forEach((t,i) => t.classList.toggle('active', i === idx));
+    items.forEach((t,i) => { const on = i === idx; t.classList.toggle('active', on); t.setAttribute('aria-selected', on ? 'true' : 'false'); });
+    if(line) line.style.transform = 'translateX(' + (idx * 100) + '%)';
     const d = data[idx];
     detail.classList.add('swap');
     setTimeout(() => {
+      detail.querySelector('[data-field="heading"]').textContent = d.heading;
+      const media = document.getElementById('outcomesMedia'); if(media) media.className = 'outcomes-media shape-' + (idx+1);
+      const img = detail.querySelector('[data-field="image"]'); img.src = d.image; img.alt = d.alt;
       detail.querySelector('[data-field="metric"]').textContent = d.metric;
       detail.querySelector('[data-field="metricLabel"]').textContent = d.metricLabel;
       detail.querySelector('[data-field="baseline"]').textContent = d.baseline;

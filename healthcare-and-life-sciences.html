@@ -27,12 +27,12 @@ button{font-family:inherit;background:none;border:none;cursor:pointer;}
 ::selection{background:var(--blue);color:#fff;}
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 48px;}
-.nav .wrap,.hero .wrap,.reality > .wrap,.agentic > .wrap{max-width:1560px;}
+.nav .wrap,.hero .wrap,.reality > .wrap,.agentic > .wrap{max-width:1440px;padding:0 72px;}
 
 /* NAV */
 .nav{position:absolute;top:0;left:0;right:0;z-index:200;background:transparent;border-bottom:none;}
 .nav.nav-scrolled{position:fixed;background:rgba(6,12,26,0.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;gap:32px;}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:96px;gap:32px;}
 .nav-logo{font-family:var(--display);font-weight:500;font-size:20px;color:#fff;letter-spacing:-.01em;}
 .nav-links{display:flex;align-items:center;gap:30px;list-style:none;font-size:14px;color:rgba(255,255,255,0.78);flex:1;justify-content:center;}
 .nav-links > li{position:relative;}
@@ -51,11 +51,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .nav-cta svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;}
 
 /* ========== HERO (Searce modular collage + heading) ========== */
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;isolation:isolate;padding:96px 0 100px;color:#fff;background:#000;}
-.hero .wrap{position:relative;z-index:3;width:100%;}
+.hero{position:relative;height:100vh;min-height:760px;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;isolation:isolate;padding:96px 0 0;color:#fff;background:#000;}
+.hero .wrap{position:relative;z-index:3;width:100%;flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:24px;}
 
 /* Full-bleed art-directed composition — Verily-style modular grid on a 1584x354 frame (11 cols x 3 rows of 139.25u, top row cropped under the nav) */
-.hero-composition{position:relative;z-index:2;width:100%;aspect-ratio:1584/354;overflow:hidden;margin-bottom:54px;}
+.hero-composition{position:relative;z-index:2;width:100%;aspect-ratio:1584/354;overflow:hidden;margin-bottom:0;flex-shrink:0;}
 .hero-video-wrap{position:absolute;inset:0;z-index:1;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201584%20354'%20preserveAspectRatio='none'><g%20transform='translate%280%20-63.71%29'%20fill='%23fff'><rect%20width='278.506'%20height='304.616'/><rect%20width='278.506'%20height='113.143'%20transform='translate%28140.125%20304.617%29'/><rect%20width='139.253'%20height='139.253'%20transform='translate%28443.867%20139.254%29'/><path%20d='M0%20138.608C0%2062.058%2062.702%200%20139.253%200v277.217C62.702%20277.217%200%20215.16%200%20138.608'%20transform='translate%28304.617%200.297%29'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201584%20354'%20preserveAspectRatio='none'><g%20transform='translate%280%20-63.71%29'%20fill='%23fff'><rect%20width='278.506'%20height='304.616'/><rect%20width='278.506'%20height='113.143'%20transform='translate%28140.125%20304.617%29'/><rect%20width='139.253'%20height='139.253'%20transform='translate%28443.867%20139.254%29'/><path%20d='M0%20138.608C0%2062.058%2062.702%200%20139.253%200v277.217C62.702%20277.217%200%20215.16%200%20138.608'%20transform='translate%28304.617%200.297%29'/></g></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;}
 .hero-video-wrap video{position:absolute;left:-6.3%;top:-40%;width:57%;height:143%;object-fit:cover;object-position:50% 50%;display:block;}
 .hero-svg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;overflow:hidden;}
@@ -68,7 +68,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 }
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg, rgba(0,60,180,0.18) 0%, rgba(0,30,120,0.22) 100%);border:1px solid rgba(123,169,255,0.35);color:#fff;font-family:var(--display);font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:8px 17px 8px 13px;border-radius:999px;margin-bottom:40px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 6px 18px rgba(0,20,80,0.20), inset 0 1px 0 rgba(255,255,255,0.08);}
 .hero-badge-icon{width:22px;height:22px;flex-shrink:0;}
-.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,4.7vw,78px);line-height:1.05;letter-spacing:-0.025em;color:#fff;max-width:1200px;margin:0 0 36px;opacity:0;transform:translateY(20px);animation:heroTextIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;animation-delay:0.55s;}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,4.9vw,82px);line-height:1.05;letter-spacing:-0.025em;color:#fff;max-width:1200px;margin:0 0 36px;opacity:0;transform:translateY(20px);animation:heroTextIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;animation-delay:0.55s;}
 .hero h1 .line-blue{color:#fff;font-weight:400;}
 @keyframes heroTextIn{to{opacity:1;transform:translateY(0);}}
 .hero-opening{max-width:720px;color:rgba(255,255,255,0.72);font-size:19px;line-height:1.65;margin-bottom:44px;}
@@ -391,11 +391,48 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 @media (max-width:900px){
   .wrap{padding:0 24px;}
   .nav-links{display:none;}
-  .hero{padding:100px 0 80px;min-height:auto;}
+  .hero{padding:100px 0 80px;height:auto;min-height:auto;}
   .reality,.processes,.leaks,.pillars,.engagement,.faq,.connect{padding:80px 0;}
   .outcomes-intro{padding:80px 0 40px;}
 }
 .reality,.agentic,.processes,.leaks,.outcomes,.pillars,.engagement,.faq,.connect{overflow:visible;}
+
+/* ========== Light-mode preview toggle (hero + operating reality only) ========== */
+.theme-toggle{position:fixed;top:108px;right:24px;z-index:400;display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:999px;background:rgba(255,255,255,0.92);color:#0b1020;border:1px solid rgba(10,20,60,0.12);box-shadow:0 10px 30px -14px rgba(10,20,60,0.35);font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.04em;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+.theme-toggle i{width:22px;height:22px;border-radius:50%;background:#0b1020;display:inline-block;position:relative;transition:background .25s;}
+.theme-toggle i::after{content:"";position:absolute;inset:5px;border-radius:50%;background:#fff;}
+body.hero-light .theme-toggle{background:rgba(11,16,32,0.9);color:#fff;border-color:rgba(255,255,255,0.14);}
+body.hero-light .theme-toggle i{background:#79adff;}
+/* Nav on light */
+body.hero-light .nav-logo{color:#0b1020;}
+body.hero-light .nav-links{color:rgba(11,16,32,0.72);}
+body.hero-light .nav-links > li > a:hover, body.hero-light .nav-links > li > a.current{color:#0b1020;}
+body.hero-light .nav-links > li > a.current::after{background:var(--blue);}
+/* Hero on light */
+body.hero-light .hero{background:#fff;color:#0b1a3a;}
+body.hero-light .hero h1, body.hero-light .hero h1 .line-blue{color:#0b1a3a;}
+body.hero-light .hero-composition{background:#fff;}
+body.hero-light .hero-svg [fill="url(#hgW)"]{fill:url(#hgWl);}
+body.hero-light .hero-svg [fill="url(#hgW2)"]{fill:url(#hgWl);}
+body.hero-light .hero-svg [fill="url(#hgTriW)"]{fill:url(#hgWl);}
+body.hero-light .hero-svg [fill="url(#hgLight)"]{fill:url(#hgWl);}
+body.hero-light .hero-svg [fill="url(#hwWhite)"]{fill:none;}
+body.hero-light #hpGrid path{stroke:#0b1020;}
+body.hero-light #hpDot circle{fill:#8a94a8;}
+body.hero-light #hpDotL circle{fill:#9aa3b5;}
+body.hero-light .el-modgrid{display:none;}
+/* Operating reality on light */
+body.hero-light .reality{background:#fff;color:#0b1a3a;}
+body.hero-light .reality .grid-motif{color:rgba(0,60,180,0.08);}
+body.hero-light .reality-content .section-eyebrow{color:#54555a;}
+body.hero-light .reality-content h2{color:#0b1a3a;}
+body.hero-light .reality-content h2 span{color:#3b82ff;}
+body.hero-light .reality-stats{border-bottom-color:rgba(10,20,60,0.18);}
+body.hero-light .reality-stat{border-right-color:rgba(10,20,60,0.14);}
+body.hero-light .reality-stat-value{color:var(--blue);}
+body.hero-light .reality-stat-text, body.hero-light .reality-closing{color:#2b2f3a;}
+body.hero-light .reality-media-img{background:#eef4ff;}
+body.hero-light .reality-media-img::after{background:linear-gradient(160deg, rgba(0,100,255,0.10) 0%, transparent 55%, rgba(10,20,60,0.06) 100%);}
 </style>
 </head>
 <body>
@@ -429,6 +466,8 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   </div>
 </nav>
 
+<button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false"><i aria-hidden="true"></i><span>Light preview</span></button>
+
 <!-- ============== HERO (Searce modular collage + heading) ============== -->
 <section class="hero" aria-labelledby="hero-heading">
   <!-- Full-bleed art-directed Searce composition: 3 healthcare visuals + modular shapes on a 1676x385 reference frame -->
@@ -440,6 +479,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         <linearGradient id="hgA" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#46b6ff"/><stop offset="0.5" stop-color="#1c1ac9"/><stop offset="1" stop-color="#0064ff"/></linearGradient>
         <linearGradient id="hgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0064ff"/><stop offset="0.55" stop-color="#1c1ac9"/><stop offset="1" stop-color="#46b6ff"/></linearGradient>
         <linearGradient id="hgC" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#46b6ff"/><stop offset="0.5" stop-color="#0064ff"/><stop offset="1" stop-color="#1c1ac9"/></linearGradient>
+        <linearGradient id="hgWl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient>
         <linearGradient id="hgW" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfdcf8"/></linearGradient>
         <linearGradient id="hgW2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b9cdf6"/></linearGradient>
         <linearGradient id="hgDarkBk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0051cb"/><stop offset="1" stop-color="#001630"/></linearGradient>
@@ -600,6 +640,43 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   </div>
 </section>
 
+<!-- ============== VALUE LEAKS (flow diagram) ============== -->
+<section class="leaks" aria-labelledby="leaks-h">
+  <span class="grid-motif" aria-hidden="true"></span>
+  <div class="wrap">
+    <div class="section-eyebrow">Where the value leaks</div>
+    <h2 id="leaks-h" class="section-h">Time bleeds between the clinical event and the decision that closes the case.</h2>
+    <div class="leaks-stack">
+      <div class="leak-card">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/></svg></div>
+        <div class="leak-card-title">Patient Intake to Clinical Charting <span class="leak-tag">Engineered</span></div>
+        <div class="leak-card-desc">How long physicians spend manually typing visit details into EHR systems instead of delivering patient care.</div>
+      </div>
+      <div class="leak-card">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg></div>
+        <div class="leak-card-title">Chart Review to Trial Eligibility Match <span class="leak-tag">Engineered</span></div>
+        <div class="leak-card-desc">Time required for research teams to manually read unstructured patient records to verify trial inclusion criteria.</div>
+      </div>
+      <div class="leak-card">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h4"/></svg></div>
+        <div class="leak-card-title">Claim Submission to Payer Decision <span class="leak-tag">Engineered</span></div>
+        <div class="leak-card-desc">Delays introduced by manual coding errors, missing clinical documentation, and claim rejection loops.</div>
+      </div>
+      <div class="leak-card">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div>
+        <div class="leak-card-title">Adverse Event Reporting Time <span class="leak-tag">Engineered</span></div>
+        <div class="leak-card-desc">Time elapsed between a recorded patient complaint or incident and its official pharmacovigilance safety log.</div>
+      </div>
+      <div class="leak-card" data-tone="commercial">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div class="leak-card-title">Prior Authorization Hold Time <span class="leak-tag">Commercial</span></div>
+        <div class="leak-card-desc">Mandated payer evaluation and review periods. Commercial, not engineered.</div>
+      </div>
+      <img class="leaks-motif" src="assets/leaks-shapes.svg" alt="" aria-hidden="true">
+    </div>
+  </div>
+</section>
+
 <!-- ============== PROCESSES (Autonomous RCM Architecture — V8) ============== -->
 <section class="processes" aria-labelledby="processes-h">
   <span class="grid-motif" aria-hidden="true"></span>
@@ -639,42 +716,6 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   </div>
 </section>
 
-<!-- ============== VALUE LEAKS (flow diagram) ============== -->
-<section class="leaks" aria-labelledby="leaks-h">
-  <span class="grid-motif" aria-hidden="true"></span>
-  <div class="wrap">
-    <div class="section-eyebrow">Where the value leaks</div>
-    <h2 id="leaks-h" class="section-h">Time bleeds between the clinical event and the decision that closes the case.</h2>
-    <div class="leaks-stack">
-      <div class="leak-card">
-        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/></svg></div>
-        <div class="leak-card-title">Patient Intake to Clinical Charting <span class="leak-tag">Engineered</span></div>
-        <div class="leak-card-desc">How long physicians spend manually typing visit details into EHR systems instead of delivering patient care.</div>
-      </div>
-      <div class="leak-card">
-        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg></div>
-        <div class="leak-card-title">Chart Review to Trial Eligibility Match <span class="leak-tag">Engineered</span></div>
-        <div class="leak-card-desc">Time required for research teams to manually read unstructured patient records to verify trial inclusion criteria.</div>
-      </div>
-      <div class="leak-card">
-        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h4"/></svg></div>
-        <div class="leak-card-title">Claim Submission to Payer Decision <span class="leak-tag">Engineered</span></div>
-        <div class="leak-card-desc">Delays introduced by manual coding errors, missing clinical documentation, and claim rejection loops.</div>
-      </div>
-      <div class="leak-card">
-        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div>
-        <div class="leak-card-title">Adverse Event Reporting Time <span class="leak-tag">Engineered</span></div>
-        <div class="leak-card-desc">Time elapsed between a recorded patient complaint or incident and its official pharmacovigilance safety log.</div>
-      </div>
-      <div class="leak-card" data-tone="commercial">
-        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-        <div class="leak-card-title">Prior Authorization Hold Time <span class="leak-tag">Commercial</span></div>
-        <div class="leak-card-desc">Mandated payer evaluation and review periods. Commercial, not engineered.</div>
-      </div>
-      <img class="leaks-motif" src="assets/leaks-shapes.svg" alt="" aria-hidden="true">
-    </div>
-  </div>
-</section>
 
 <!-- ============== OUTCOMES (compact tabs) ============== -->
 <section class="outcomes" id="outcomes" aria-labelledby="outcomes-h">
@@ -1212,5 +1253,16 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 });
 </script>
 
+<script>
+(function(){
+  var btn=document.getElementById('themeToggle'); if(!btn) return;
+  var label=btn.querySelector('span');
+  btn.addEventListener('click',function(){
+    var on=document.body.classList.toggle('hero-light');
+    btn.setAttribute('aria-pressed', on?'true':'false');
+    label.textContent = on ? 'Dark preview' : 'Light preview';
+  });
+})();
+</script>
 </body>
 </html>

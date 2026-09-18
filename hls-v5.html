@@ -133,7 +133,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .agentic-intro h2 span{color:#3b82ff;font-weight:400;}
 .agentic-intro p{color:#2b2f3a;font-size:16px;line-height:1.6;max-width:460px;}
 .agentic-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:28px;}
-.agentic-motif{position:absolute;right:0;bottom:-90px;width:520px;height:auto;opacity:0.2;pointer-events:none;z-index:0;}
+.agentic-motif{position:absolute;right:calc(max(0px,(100% - 1440px)/2) + 72px);bottom:0;width:520px;height:auto;opacity:0.2;pointer-events:none;z-index:0;}
 .agentic{overflow:hidden !important;}
 .agentic-path{position:absolute;left:-34px;top:-34px;width:calc(100% + 68px);height:calc(100% + 68px);pointer-events:none;overflow:visible;z-index:0;}
 .agentic-path path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;}
@@ -588,7 +588,6 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         <p>We reimagine how work gets done by unifying people, data, and AI agents across the healthcare value chain.</p>
       </div>
       <div class="agentic-grid">
-        <img class="agentic-motif" src="assets/perspective-shapes.svg" alt="" aria-hidden="true">
         <svg class="agentic-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <path class="dots" pathLength="400" d="M4 1H96Q99 1 99 4V96Q99 99 96 99H4Q1 99 1 96V4Q1 1 4 1Z"/>
           <path class="runner" pathLength="400" d="M4 1H96Q99 1 99 4V96Q99 99 96 99H4Q1 99 1 96V4Q1 1 4 1Z"/>
@@ -616,6 +615,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       </div>
     </div>
   </div>
+  <img class="agentic-motif" src="assets/perspective-shapes.svg" alt="" aria-hidden="true">
 </section>
 
 <!-- ============== VALUE LEAKS (flow diagram) ============== -->

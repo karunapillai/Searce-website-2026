@@ -226,24 +226,37 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .leak-tag{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:6px;background:var(--blue-06);color:var(--blue-strong);white-space:nowrap;border:1px solid var(--blue-12);}
 .leak-card[data-tone="commercial"] .leak-tag{background:var(--paper-dim);color:var(--ink-60);border-color:var(--paper-line);}
 @media (max-width:900px){.leaks-motif{display:none;}.leaks-stack{grid-template-columns:repeat(2,1fr);}.leak-card,.leak-card:nth-child(4),.leak-card:nth-child(5){grid-column:span 1;}}
-/* Leaks - dark theme */
-.leaks{background:#02061a;color:#fff;}
-.leaks .section-h{color:#fff;}
-.leaks .grid-motif{color:rgba(121,173,255,0.04);}
-.leaks-motif{opacity:0.08;}
-.leak-card{background:#061029;border:1px solid rgba(0,100,255,0.45);border-radius:20px;box-shadow:none;}
-.leak-card::before{background:radial-gradient(60% 40% at 50% 0%, rgba(0,100,255,0.16) 0%, transparent 70%);}
-.leak-card:hover{background:#08153a;border-color:rgba(121,173,255,0.8);box-shadow:none;}
+/* Leaks - light theme: white -> light blue gradient */
+.leaks{background:linear-gradient(180deg,#ffffff 0%,#f3f7ff 45%,#dbe9ff 100%);color:var(--ink);}
+.leaks .section-h{color:var(--ink);}
+.leaks .grid-motif{color:rgba(0,60,180,0.05);}
+.leaks-motif{opacity:0.35;}
+.leak-card{background:#fff;border:1px solid rgba(0,100,255,0.28);border-radius:20px;box-shadow:0 18px 50px -28px rgba(0,50,160,0.18);}
+.leak-card::before{background:radial-gradient(60% 40% at 50% 0%, rgba(0,100,255,0.06) 0%, transparent 70%);}
+.leak-card:hover{background:#fff;border-color:var(--blue);box-shadow:0 26px 60px -28px rgba(0,100,255,0.35);}
 .leaks{overflow:hidden !important;}
-.leaks::before{content:"";position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);background-size:64px 64px;mask-image:linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);-webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);pointer-events:none;}
-.leaks-motif{bottom:0;left:auto;right:calc(max(0px,(100% - 1280px)/2) + 48px);width:640px;}
+.leaks::before{content:"";position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(0,60,180,0.04) 1px, transparent 1px),linear-gradient(90deg, rgba(0,60,180,0.04) 1px, transparent 1px);background-size:64px 64px;mask-image:linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);-webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);pointer-events:none;}
 .leak-card-icon{color:var(--blue);}
-.leak-card:hover .leak-card-icon{color:#79adff;}
-.leak-card-title{color:#fff;}
-.leak-card-desc{color:rgba(255,255,255,0.62);}
-.leak-tag{background:rgba(0,100,255,0.16);color:#9cc3ff;border-color:rgba(121,173,255,0.3);}
-.leak-card[data-tone="commercial"] .leak-tag{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.14);}
+.leak-card:hover .leak-card-icon{color:var(--blue-strong);}
+.leak-card-title{color:var(--ink);}
+.leak-card-desc{color:var(--ink-60);}
+.leak-tag{background:var(--blue-06);color:var(--blue-strong);border-color:var(--blue-12);}
+.leak-card[data-tone="commercial"] .leak-tag{background:var(--paper-dim);color:var(--ink-60);border-color:var(--paper-line);}
+.leaks-motif{bottom:0;right:auto;left:calc(max(0px,(100% - 1280px)/2) + 48px);width:520px;}
 @media (max-width:560px){.leaks-stack{grid-template-columns:1fr;}}
+/* Leaks - icon animation: strokes draw in on scroll, lift + redraw on hover */
+.leak-card-icon svg *{stroke-dasharray:64;stroke-dashoffset:64;}
+.leaks.is-in .leak-card-icon svg *{animation:leakDraw 1.1s cubic-bezier(.2,.7,.2,1) forwards;}
+.leaks.is-in .leak-card:nth-child(1) .leak-card-icon svg *{animation-delay:.1s;}
+.leaks.is-in .leak-card:nth-child(2) .leak-card-icon svg *{animation-delay:.25s;}
+.leaks.is-in .leak-card:nth-child(3) .leak-card-icon svg *{animation-delay:.4s;}
+.leaks.is-in .leak-card:nth-child(4) .leak-card-icon svg *{animation-delay:.55s;}
+.leaks.is-in .leak-card:nth-child(5) .leak-card-icon svg *{animation-delay:.7s;}
+@keyframes leakDraw{to{stroke-dashoffset:0;}}
+.leak-card-icon{transition:color .25s,transform .35s cubic-bezier(.2,.7,.2,1);}
+.leak-card:hover .leak-card-icon{transform:translateY(-4px) scale(1.08);}
+.leaks.is-in .leak-card:hover .leak-card-icon svg *{animation:leakDraw .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:0s;}
+@media (prefers-reduced-motion:reduce){.leak-card-icon svg *{stroke-dasharray:none;stroke-dashoffset:0;animation:none !important;}.leak-card:hover .leak-card-icon{transform:none;}}
 
 /* ========== Outcomes - accordion left + baseline/intervention/result right ========== */
 .outcomes{background:#fff;color:var(--ink);position:relative;padding:100px 0 120px;border-bottom:none;}
@@ -319,8 +332,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 @media (max-width:600px){.pillars-grid{grid-template-columns:1fr;}}
 
 /* ========== Engagement - heading + paragraph left, circular step orbit right ========== */
-.engagement{padding:128px 0;background:#02061a;color:#fff;position:relative;overflow:hidden;}
-.engagement .wrap{position:relative;z-index:1;}
+.engagement{padding:0;min-height:210vh;background:#02061a;color:#fff;position:relative;overflow:visible;}
+.eng-sticky{position:sticky;top:0;min-height:100vh;display:flex;align-items:center;padding:96px 0 64px;}
+.engagement .wrap{position:relative;z-index:1;width:100%;}
 .engagement::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 78% 50%, #000 0%, transparent 60%);-webkit-mask-image:radial-gradient(ellipse at 78% 50%, #000 0%, transparent 60%);pointer-events:none;}
 .eng-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px 80px;align-items:center;}
 .engagement h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,4.2vw,56px);line-height:1.05;letter-spacing:-0.02em;color:#fff;margin:0 0 24px;}
@@ -331,26 +345,29 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .eng-cta:hover svg{transform:translateX(4px);}
 
 /* Orbit */
-.eng-orbit{position:relative;width:min(100%,520px);aspect-ratio:1;margin:0 auto;}
-.eng-orbit-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
-.eng-orbit-dash{fill:none;stroke:rgba(255,255,255,0.14);stroke-width:1;stroke-dasharray:3 9;transform-origin:200px 200px;animation:engSpin 60s linear infinite;}
-.eng-orbit-track{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1.5;}
-.eng-orbit-arc{fill:none;stroke:url(#engArcGrad);stroke-width:3;stroke-linecap:round;stroke-dasharray:314.16 628.32;transform:rotate(150deg);transform-origin:200px 200px;transition:transform 1.1s cubic-bezier(.4,.1,.2,1);}
-.eng-orbit-glow{fill:none;stroke:rgba(0,100,255,0.35);stroke-width:14;stroke-linecap:round;stroke-dasharray:314.16 628.32;transform:rotate(150deg);transform-origin:200px 200px;transition:transform 1.1s cubic-bezier(.4,.1,.2,1);filter:blur(8px);}
-@keyframes engSpin{to{transform:rotate(360deg);}}
-.eng-node{position:absolute;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:#02061a;border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.7);font-family:var(--display);font-size:12px;letter-spacing:.14em;display:grid;place-items:center;cursor:pointer;transition:border-color .3s,color .3s,box-shadow .3s,transform .3s cubic-bezier(.2,.7,.2,1),background .3s;}
-.eng-node:hover{transform:scale(1.08);border-color:rgba(121,173,255,0.7);color:#fff;}
-.eng-node.is-active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 0 8px rgba(0,100,255,0.18),0 12px 30px -10px rgba(0,100,255,0.8);}
-.eng-node.is-done{border-color:#79adff;color:#79adff;}
-.eng-center{position:absolute;left:50%;top:50%;width:62%;transform:translate(-50%,-50%);text-align:center;}
-.eng-panel{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;transform:translateY(10px) scale(.98);transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
-.eng-panel.is-active{opacity:1;transform:none;pointer-events:auto;}
-.eng-center{height:200px;}
-.eng-panel-meta{font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#79adff;margin-bottom:12px;}
-.eng-panel-title{font-family:var(--display);font-weight:400;font-size:clamp(20px,2vw,26px);line-height:1.15;letter-spacing:-0.015em;color:#fff;margin:0 0 12px;}
-.eng-panel-desc{color:rgba(255,255,255,0.62);font-size:14px;line-height:1.55;margin:0;}
-@media (prefers-reduced-motion:reduce){.eng-orbit-dash{animation:none;}.eng-orbit-arc,.eng-orbit-glow,.eng-panel{transition:none;}}
-@media (max-width:900px){.eng-layout{grid-template-columns:1fr;gap:56px;}.eng-orbit{width:min(100%,400px);}.eng-center{width:66%;}.eng-panel-desc{font-size:13px;}}
+/* Engagement — stacked card deck: active card in front, the other two peek out behind, front card recedes on advance */
+.eng-deck{position:relative;width:min(100%,520px);margin:0 auto;padding-top:56px;}
+.eng-deck-stage{position:relative;height:300px;}
+.eng-card{position:absolute;inset:0;background:linear-gradient(135deg,#0c1530 0%,#123a8f 100%);border:1px solid rgba(255,255,255,0.14);border-radius:20px;padding:34px 36px;display:flex;flex-direction:column;justify-content:center;text-align:left;cursor:pointer;
+  transform:translateY(calc(var(--pos) * -26px)) scale(calc(1 - var(--pos) * 0.06));opacity:calc(1 - var(--pos) * 0.32);
+  transition:transform .7s cubic-bezier(.4,.1,.2,1),opacity .6s ease,box-shadow .6s ease,border-color .6s ease;}
+.eng-card[data-step="1"]{background:linear-gradient(135deg,#123a8f 0%,#0064ff 100%);}
+.eng-card[data-step="2"]{background:linear-gradient(135deg,#0064ff 0%,#4d8cff 100%);}
+.eng-card[style*="--pos:0"]{border-color:rgba(255,255,255,0.35);box-shadow:0 30px 70px -20px rgba(0,100,255,0.55),0 0 0 1px rgba(0,100,255,0.15);}
+.eng-card.is-leaving{transform:translateY(38px) scale(.98);opacity:0;transition:transform .45s cubic-bezier(.4,0,.6,1),opacity .4s ease;}
+.eng-card-num{position:absolute;top:26px;right:28px;width:44px;height:44px;display:grid;place-items:center;background:#fff;color:var(--blue-deep);font-family:var(--display);font-size:12px;letter-spacing:.14em;}
+.eng-card-meta{font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#dbe9ff;margin-bottom:12px;}
+.eng-card-title{font-family:var(--display);font-weight:400;font-size:clamp(20px,2vw,26px);line-height:1.15;letter-spacing:-0.015em;color:#fff;margin:0 0 12px;padding-right:64px;}
+.eng-card-desc{color:rgba(255,255,255,0.82);font-size:14px;line-height:1.55;margin:0;}
+/* progress: three 1x1 squares, the active one fills with the hold timer */
+.eng-deck-dots{display:flex;gap:10px;margin-top:28px;}
+.eng-deck-dot{position:relative;width:32px;height:6px;background:rgba(255,255,255,0.14);overflow:hidden;cursor:pointer;border:none;padding:0;}
+.eng-deck-dot i{position:absolute;left:0;top:0;bottom:0;width:0;background:#79adff;}
+.eng-deck-dot.is-done i{width:100%;}
+.eng-deck-dot.is-active i{width:var(--p,0%);}
+@media (prefers-reduced-motion:reduce){.eng-card{transition:none;}}
+@media (max-width:900px){.eng-sticky{padding:80px 0 48px;}}
+@media (max-width:900px){.eng-layout{grid-template-columns:1fr;gap:56px;}.eng-deck{width:100%;}.eng-deck-stage{height:320px;}.eng-card{padding:28px 26px;}.eng-card-desc{font-size:13px;}}
 
 /* ========== FAQ - accordion + side visual ========== */
 .faq{padding:120px 0;background:#02061a;color:#fff;position:relative;overflow:hidden;}
@@ -556,7 +573,6 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         <span class="reality-media-quarter" aria-hidden="true"></span>
       </div>
       <div class="reality-content">
-        <span class="section-eyebrow">The operating reality</span>
         <h2 id="reality-h">Progress in healthcare is held <span>back by fragmented information.</span></h2>
         <div class="reality-stats">
           <div class="reality-stat">
@@ -583,7 +599,6 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <div class="wrap">
     <div class="agentic-layout">
       <div class="agentic-intro">
-        <span class="section-eyebrow">Our perspective</span>
         <h2 id="agentic-h">From fragmented operations to <span>agentic systems.</span></h2>
         <p>We reimagine how work gets done by unifying people, data, and AI agents across the healthcare value chain.</p>
       </div>
@@ -658,19 +673,18 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 <section class="processes" aria-labelledby="processes-h">
   <span class="grid-motif" aria-hidden="true"></span>
   <div class="wrap">
-    <div class="section-eyebrow">Pioneering the first AI-native RCM stack in dental</div>
     <h2 id="processes-h" class="section-h">The Autonomous RCM Architecture.</h2>
-    <p class="section-sub">Six connected workflows. Purpose-built AI agents run each stage. Shared intelligence learns across every claim. Humans oversee the exceptions that matter.</p>
+    <p class="section-sub">Six connected swarms. Purpose-built AI agents run each stage. Shared intelligence learns across every claim. Humans oversee the exceptions that matter.</p>
 
     <div class="rcm-arch">
       <div class="rcm-carousel">
         <div class="rcm-track" id="carTrack"></div>
       </div>
       <div class="car-controls">
-        <button class="car-btn" id="carPrev" aria-label="Previous workflow">
+        <button class="car-btn" id="carPrev" aria-label="Previous swarm">
           <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <button class="car-btn" id="carNext" aria-label="Next workflow">
+        <button class="car-btn" id="carNext" aria-label="Next swarm">
           <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
@@ -698,8 +712,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 <section class="outcomes" id="outcomes" aria-labelledby="outcomes-h">
   <div class="wrap">
     <div class="outcomes-intro">
-      <div class="section-eyebrow">What Searce has changed here</div>
-      <h2 id="outcomes-h" class="section-h">Four real outcomes.<br>Four locked metrics.</h2>
+      <h2 id="outcomes-h" class="section-h">Real Outcomes. Proven Impact.</h2>
     </div>
 
     <div class="outcomes-tabs2" id="outcomesAccordion" role="tablist">
@@ -756,7 +769,6 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <div class="wrap">
     <div class="pillars-layout">
       <div class="pillars-intro">
-        <div class="section-eyebrow">What Searce engineers in healthcare and life sciences</div>
         <h2 id="pillars-h" class="section-h">Four engineering practices, applied above your EHR and clinical systems of record.</h2>
       </div>
       <div class="pillars-cards">
@@ -800,6 +812,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 
 <!-- ============== ENGAGEMENT (centered, dark AI-Ops style) ============== -->
 <section class="engagement" aria-labelledby="engagement-h">
+  <div class="eng-sticky">
   <div class="wrap">
     <div class="eng-layout">
       <div class="eng-intro">
@@ -807,36 +820,35 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         <p class="eng-body">Outcome Discovery on one named process from the list above. Two to four weeks, fixed price, ending in a baseline metric assessment and a ranked opportunity matrix. Most healthcare and life sciences engagements start with clinical documentation, trial recruitment, or revenue cycle operations due to their high documentation volume and immediate ROI metrics.</p>
       </div>
 
-      <div class="eng-orbit" id="engOrbit" aria-label="Engagement path">
-        <svg class="eng-orbit-svg" viewBox="0 0 400 400" aria-hidden="true">
-          <defs><linearGradient id="engArcGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#79adff"/><stop offset="1" stop-color="#0064ff"/></linearGradient></defs>
-          <circle class="eng-orbit-dash" cx="200" cy="200" r="184"/>
-          <circle class="eng-orbit-track" cx="200" cy="200" r="150"/>
-          <circle class="eng-orbit-glow" cx="200" cy="200" r="150"/>
-          <circle class="eng-orbit-arc" cx="200" cy="200" r="150"/>
-        </svg>
-        <button class="eng-node is-active" type="button" style="left:50%;top:12.5%" data-step="0" aria-pressed="true">01</button>
-        <button class="eng-node" type="button" style="left:82.5%;top:68.75%" data-step="1" aria-pressed="false">02</button>
-        <button class="eng-node" type="button" style="left:17.5%;top:68.75%" data-step="2" aria-pressed="false">03</button>
-        <div class="eng-center" aria-live="polite">
-          <div class="eng-panel is-active">
-            <div class="eng-panel-meta">Day 0</div>
-            <h3 class="eng-panel-title">Name one process</h3>
-            <p class="eng-panel-desc">Pick a single process from the list above. We scope the systems it touches, the teams who run it, and the metric that defines it today.</p>
-          </div>
-          <div class="eng-panel">
-            <div class="eng-panel-meta">Two to four weeks &middot; fixed price</div>
-            <h3 class="eng-panel-title">Outcome Discovery</h3>
-            <p class="eng-panel-desc">Our engineers sit inside the workflow, trace where time and value leak, and instrument the baseline against your EHR and clinical systems of record.</p>
-          </div>
-          <div class="eng-panel">
-            <div class="eng-panel-meta">What you leave with</div>
-            <h3 class="eng-panel-title">Baseline and ranked matrix</h3>
-            <p class="eng-panel-desc">A baseline metric assessment and a ranked opportunity matrix: which interventions move the metric, in what order, and what each is worth.</p>
-          </div>
+      <div class="eng-deck" id="engDeck" aria-label="Engagement path">
+        <div class="eng-deck-stage">
+          <article class="eng-card" data-step="0" style="--pos:0" tabindex="0" aria-current="step">
+            <span class="eng-card-num" aria-hidden="true">01</span>
+            <div class="eng-card-meta">Day 0</div>
+            <h3 class="eng-card-title">Name one process</h3>
+            <p class="eng-card-desc">Pick a single process from the list above. We scope the systems it touches, the teams who run it, and the metric that defines it today.</p>
+          </article>
+          <article class="eng-card" data-step="1" style="--pos:1" tabindex="0" aria-current="false">
+            <span class="eng-card-num" aria-hidden="true">02</span>
+            <div class="eng-card-meta">Two to four weeks &middot; fixed price</div>
+            <h3 class="eng-card-title">Outcome Discovery</h3>
+            <p class="eng-card-desc">Our engineers sit inside the workflow, trace where time and value leak, and instrument the baseline against your EHR and clinical systems of record.</p>
+          </article>
+          <article class="eng-card" data-step="2" style="--pos:2" tabindex="0" aria-current="false">
+            <span class="eng-card-num" aria-hidden="true">03</span>
+            <div class="eng-card-meta">What you leave with</div>
+            <h3 class="eng-card-title">Baseline and ranked matrix</h3>
+            <p class="eng-card-desc">A baseline metric assessment and a ranked opportunity matrix: which interventions move the metric, in what order, and what each is worth.</p>
+          </article>
+        </div>
+        <div class="eng-deck-dots" aria-hidden="true">
+          <button type="button" class="eng-deck-dot is-active" data-step="0" aria-label="Step 01"><i></i></button>
+          <button type="button" class="eng-deck-dot" data-step="1" aria-label="Step 02"><i></i></button>
+          <button type="button" class="eng-deck-dot" data-step="2" aria-label="Step 03"><i></i></button>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
@@ -1135,7 +1147,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
     const num = String(idx+1).padStart(2,'0');
     return `
       <div class="rcm-slide" data-idx="${idx}">
-        <div class="wf-tag">Workflow ${num}</div>
+        <div class="wf-tag">Swarm ${num}</div>
         <svg class="svg-side"   viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(wf.key, PAL_SIDE_DARK)}</svg>
         <svg class="svg-center" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(wf.key, PAL_DARK)}</svg>
         <div class="wf-mini">${wf.name}</div>
@@ -1264,27 +1276,44 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 
 <script>
 (function(){
-  var orbit=document.getElementById('engOrbit'); if(!orbit) return;
-  var nodes=orbit.querySelectorAll('.eng-node'), panels=orbit.querySelectorAll('.eng-panel');
-  var arc=orbit.querySelector('.eng-orbit-arc'), glow=orbit.querySelector('.eng-orbit-glow');
-  var n=nodes.length, cur=0, turns=0, timer=null, started=false, first=true;
-  function show(i){
-    if(!first){turns+=(i-cur+n)%n;} first=false; cur=i;
-    nodes.forEach(function(b,k){b.classList.toggle('is-active',k===i);b.classList.toggle('is-done',k<i);b.setAttribute('aria-pressed',k===i?'true':'false');});
-    panels.forEach(function(p,k){p.classList.toggle('is-active',k===i);});
-    var rot='rotate('+(150+120*turns)+'deg)'; arc.style.transform=rot; glow.style.transform=rot;
+  var root=document.getElementById('engDeck'); if(!root) return;
+  var section=root.closest('.engagement'), cards=root.querySelectorAll('.eng-card'), dots=root.querySelectorAll('.eng-deck-dot'), n=cards.length, cur=-1;
+  function layout(i){
+    cur=i;
+    cards.forEach(function(c,k){ var pos=(k-i+n)%n; c.style.setProperty('--pos',pos); c.style.zIndex=String(3-pos); c.setAttribute('aria-current',pos===0?'step':'false'); c.style.pointerEvents=pos===0?'':'none'; });
+    dots.forEach(function(d,k){ d.classList.toggle('is-active',k===i); d.classList.toggle('is-done',k<i); if(k!==i) d.style.setProperty('--p','0%'); });
   }
-  function next(){show((cur+1)%n);}
-  function play(){stop(); timer=setInterval(next,4200);}
-  function stop(){if(timer){clearInterval(timer);timer=null;}}
-  nodes.forEach(function(b){b.addEventListener('click',function(){show(+b.dataset.step);play();});});
-  orbit.addEventListener('mouseenter',stop); orbit.addEventListener('mouseleave',play);
-  orbit.addEventListener('focusin',stop); orbit.addEventListener('focusout',play);
-  function start(){ if(started) return; started=true; show(0); play(); }
+  /* progress through the scroll track picks the card: 0-1/3 -> 01, 1/3-2/3 -> 02, 2/3-1 -> 03 */
+  function update(){
+    var r=section.getBoundingClientRect(), track=section.offsetHeight-window.innerHeight;
+    var p=track>0?Math.min(Math.max(-r.top/track,0),1):0;
+    var i=Math.min(Math.floor(p*n),n-1), local=Math.min(Math.max((p*n-i),0),1);
+    if(i!==cur) layout(i);
+    dots[i].style.setProperty('--p',(local*100).toFixed(1)+'%');
+  }
+  var ticking=false;
+  function onScroll(){ if(ticking) return; ticking=true; requestAnimationFrame(function(){ update(); ticking=false; }); }
+  window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll);
+  /* clicking a card or a progress bar scrolls to that step */
+  function scrollToStep(i){ var track=section.offsetHeight-window.innerHeight; var top=section.getBoundingClientRect().top+window.scrollY; window.scrollTo({top: top + track*((i+0.5)/n), behavior:'smooth'}); }
+  cards.forEach(function(c){ c.addEventListener('click',function(){ scrollToStep((cur+1)%n); }); c.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); scrollToStep((cur+1)%n); } }); });
+  dots.forEach(function(d){ d.addEventListener('click',function(){ scrollToStep(+d.dataset.step); }); });
+  layout(0); update();
+})();
+</script>
+<script>
+(function(){
+  var sec=document.querySelector('.leaks'); if(!sec) return;
   if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){start();io.disconnect();}});},{threshold:0.3});
-    io.observe(orbit);
-  } else start();
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){sec.classList.add('is-in');io.disconnect();}});},{threshold:0.2});
+    io.observe(sec);
+  } else sec.classList.add('is-in');
+  // re-trigger the draw on hover by restarting the animation
+  sec.querySelectorAll('.leak-card').forEach(function(card){
+    card.addEventListener('mouseenter',function(){
+      card.querySelectorAll('.leak-card-icon svg *').forEach(function(el){el.style.animation='none'; void el.getBoundingClientRect(); el.style.animation='';});
+    });
+  });
 })();
 </script>
 </body>

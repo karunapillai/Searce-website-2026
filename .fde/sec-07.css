@@ -1,0 +1,46 @@
+
+/* ======= §7 — who is accountable =======
+   Figma 427321000 / 427321001 / 427321002. The timeline runs
+   left->right while a semicircle forms right->left over the top;
+   both reach the midpoint together, then the line finishes as the
+   bottom half closes the circle.
+   Both are driven from ONE scalar in sec-07.js, so they cannot drift
+   at any scroll position — the brief's hardest requirement here. */
+.fde-own{background:var(--paper);}
+.fde-own h2{
+  font-family:var(--body);font-weight:400;
+  font-size:clamp(30px,3.9vw,56px);line-height:1.18;letter-spacing:-0.024em;
+  color:var(--ink);margin:0;max-width:16ch;
+}
+.fde-own-stage{
+  position:relative;width:100%;aspect-ratio:1440/430;margin-top:clamp(18px,3vw,40px);
+}
+.fde-own-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+.own-track{stroke:rgba(35,35,36,0.28);stroke-width:1;}
+.own-progress{stroke:var(--blue);stroke-width:1.4;}
+.own-start{fill:#fff;stroke:var(--blue);stroke-width:1.6;}
+.own-end{fill:var(--blue);}
+.own-top{fill:var(--blue);}
+.own-bot{fill:var(--blue-deep);}
+
+/* labels ride the same 1440x400 coordinate space as the viewBox */
+.fde-own-label{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:24%;text-align:center;color:#fff;pointer-events:none;
+}
+.own-label-top{bottom:50%;padding-bottom:10px;}
+.own-label-bot{top:50%;padding-top:12px;}
+.fde-own-kicker{
+  font-family:var(--body);font-weight:500;
+  font-size:clamp(9px,0.78vw,11px);letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,0.9);margin:0 0 8px;
+}
+.fde-own-name{
+  font-family:var(--body);font-weight:400;
+  font-size:clamp(13px,1.45vw,21px);line-height:1.2;color:#fff;margin:0 0 8px;
+}
+.fde-own-note{
+  font-family:var(--body);font-weight:400;
+  font-size:clamp(9.5px,0.92vw,14px);line-height:1.38;
+  color:rgba(255,255,255,0.95);margin:0;
+}

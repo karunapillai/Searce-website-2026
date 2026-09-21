@@ -1,0 +1,312 @@
+- generic [active] [ref=f6e1]:
+  - navigation "Primary navigation" [ref=f6e2]:
+    - generic [ref=f6e3]:
+      - link "Searce home" [ref=f6e4] [cursor=pointer]:
+        - /url: "#"
+        - img "Searce" [ref=f6e5]
+      - list [ref=f6e6]:
+        - listitem [ref=f6e7]:
+          - link "Outcomes" [ref=f6e8] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f6e9]:
+          - link "How we solve" [ref=f6e10] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f6e13]:
+          - link "Practices" [ref=f6e14] [cursor=pointer]:
+            - /url: ai-adoption-change-engineering.html
+        - listitem [ref=f6e15]:
+          - link "Problems" [ref=f6e16] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f6e17]:
+          - link "Industries" [ref=f6e18] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f6e19]:
+          - link "Insights" [ref=f6e20] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f6e21]:
+          - link "Company" [ref=f6e22] [cursor=pointer]:
+            - /url: "#"
+      - link "bring us a problem" [ref=f6e25] [cursor=pointer]:
+        - /url: "#connect"
+  - banner [ref=f6e28]:
+    - generic [ref=f6e29]:
+      - generic [ref=f6e30]: AI Adoption & Change Engineering
+      - heading [level=1] [ref=f6e32]:
+        - generic [ref=f6e34]:
+          - text: Turn AI spend into
+          - emphasis [ref=f6e35]: changed work
+          - text: ","
+        - generic [ref=f6e37]:
+          - text: and
+          - emphasis [ref=f6e38]: prove it
+          - text: .
+      - paragraph [ref=f6e39]: AI does not produce ROI. People working differently produces ROI. AI only makes it possible.
+      - link "See the offerings" [ref=f6e41] [cursor=pointer]:
+        - /url: "#offerings"
+  - main [ref=f6e44]:
+    - region [ref=f6e45]:
+      - generic [ref=f6e46]:
+        - generic [ref=f6e47]:
+          - heading [level=2] [ref=f6e49]:
+            - text: Most enterprises bought the licences. Far fewer can say what work is
+            - emphasis [ref=f6e50]: now done differently
+            - text: .
+          - generic [ref=f6e51]:
+            - paragraph [ref=f6e52]: The pilots ran. The programme was announced. But which work is now done differently, by whom, and what was it worth? That gap is not a training problem. It is an engineering and measurement problem, and it is where the return on the entire AI investment is won or lost.
+            - paragraph [ref=f6e53]: Searce measures adoption as tasks now done differently rather than as logins or licences issued, which puts adoption on the same metric ladder as the process itself. Where people revert to the old way, Searce fixes the workflow rather than the person, because most adoption failure is design failure.
+        - generic [ref=f6e54]:
+          - generic [ref=f6e55]:
+            - generic [ref=f6e56]: The question we used to ask
+            - generic [ref=f6e57]: The question that matters now
+          - generic [ref=f6e58]:
+            - paragraph [ref=f6e59]: How many licences did we issue?
+            - paragraph [ref=f6e60]:
+              - generic [aria-hidden] [ref=f6e61]: →
+              - generic [ref=f6e62]: Which tasks are now done differently?
+          - generic [ref=f6e63]:
+            - paragraph [ref=f6e64]: How many people logged in this week?
+            - paragraph [ref=f6e65]:
+              - generic [aria-hidden] [ref=f6e66]: →
+              - generic [ref=f6e67]: How many hours were returned to the business?
+          - generic [ref=f6e68]:
+            - paragraph [ref=f6e69]: Train people on the tool.
+            - paragraph [ref=f6e70]:
+              - generic [aria-hidden] [ref=f6e71]: →
+              - generic [ref=f6e72]: Redesign the role and the workflow around it.
+          - generic [ref=f6e73]:
+            - paragraph [ref=f6e74]: Fix the person who reverted.
+            - paragraph [ref=f6e75]:
+              - generic [aria-hidden] [ref=f6e76]: →
+              - generic [ref=f6e77]: Fix the workflow they reverted from.
+          - generic [ref=f6e78]:
+            - paragraph [ref=f6e79]: Did the pilot succeed?
+            - paragraph [ref=f6e80]:
+              - generic [aria-hidden] [ref=f6e81]: →
+              - generic [ref=f6e82]: What was the AI spend actually worth?
+    - region [ref=f6e83]:
+      - generic [ref=f6e84]:
+        - heading "Offerings" [level=2] [ref=f6e86]
+        - generic [ref=f6e87]:
+          - generic [ref=f6e88]:
+            - button "01 AI value realisation" [expanded] [ref=f6e89] [cursor=pointer]:
+              - generic [ref=f6e90]: "01"
+              - generic [ref=f6e91]: AI value realisation
+            - paragraph [ref=f6e94]: Turning AI spend into an accountable number. Baseline the work before the programme starts, then read hours returned, cycle time, quality and capacity against it.
+          - generic [ref=f6e95]:
+            - button "02 Workplace AI deployment and activation" [ref=f6e96] [cursor=pointer]:
+              - generic [ref=f6e97]: "02"
+              - generic [ref=f6e98]: Workplace AI deployment and activation
+            - paragraph [ref=f6e101]: The workplace AI layer, including Gemini Enterprise, Google Workspace, Claude and adjacent assistants, deployed, activated and governed around the redesigned work rather than the vendor's default template.
+          - generic [ref=f6e102]:
+            - button "03 Seat utilisation and licence recovery" [ref=f6e103] [cursor=pointer]:
+              - generic [ref=f6e104]: "03"
+              - generic [ref=f6e105]: Seat utilisation and licence recovery
+            - paragraph [ref=f6e108]: See which seats are earning their keep and which are quietly idle. Recover, redeploy or retire, and defend the renewal on evidence, not sentiment.
+          - generic [ref=f6e109]:
+            - button "04 Role and work redesign" [ref=f6e110] [cursor=pointer]:
+              - generic [ref=f6e111]: "04"
+              - generic [ref=f6e112]: Role and work redesign
+            - paragraph [ref=f6e115]: Redesign the role and the workflow around what the system now does. Where people revert to the old way, the workflow is fixed rather than the person.
+          - generic [ref=f6e116]:
+            - button "05 AI capability building" [ref=f6e117] [cursor=pointer]:
+              - generic [ref=f6e118]: "05"
+              - generic [ref=f6e119]: AI capability building
+            - paragraph [ref=f6e122]: Capability built in cohorts that can teach the next cohort, across role, function and seniority, including the people who will never write a prompt.
+          - generic [ref=f6e123]:
+            - button "06 Agent enablement for business teams" [ref=f6e124] [cursor=pointer]:
+              - generic [ref=f6e125]: "06"
+              - generic [ref=f6e126]: Agent enablement for business teams
+            - paragraph [ref=f6e129]: Business teams building and operating their own agents inside the working day, with approved patterns, guardrails and a clean handback at the moment a person is genuinely needed.
+          - generic [ref=f6e130]:
+            - button "07 Adoption engineering" [ref=f6e131] [cursor=pointer]:
+              - generic [ref=f6e132]: "07"
+              - generic [ref=f6e133]: Adoption engineering
+            - paragraph [ref=f6e136]: Adoption built as a system, with owners, instrumentation and gates. Measured as tasks now done differently, not as logins or licences issued.
+          - generic [ref=f6e137]:
+            - button "08 Knowledge and context enablement" [ref=f6e138] [cursor=pointer]:
+              - generic [ref=f6e139]: "08"
+              - generic [ref=f6e140]: Knowledge and context enablement
+            - paragraph [ref=f6e143]: The retrieval and context layer that people and agents both read from. Governed, current and answerable, so the answer is the same whoever asks it.
+    - region [ref=f6e144]:
+      - generic [ref=f6e145]:
+        - heading "Where the value shows up." [level=2] [ref=f6e147]
+        - region "Where the value shows up" [ref=f6e148]:
+          - generic [ref=f6e154]:
+            - heading "Hours returned to the business." [level=3] [ref=f6e155]
+            - paragraph [ref=f6e156]: Time that used to go into the task and now goes somewhere else, baselined before the programme starts.
+          - generic [ref=f6e157]:
+            - button "Reading 1" [ref=f6e158] [cursor=pointer]
+            - button "Reading 2" [ref=f6e160] [cursor=pointer]
+            - button "Reading 3" [ref=f6e162] [cursor=pointer]
+            - button "Reading 4" [ref=f6e164] [cursor=pointer]
+            - button "Reading 5" [ref=f6e166] [cursor=pointer]
+            - button "Pause" [ref=f6e168] [cursor=pointer]
+    - region "Verified Outcomes" [ref=f6e171]:
+      - generic [ref=f6e173]:
+        - generic [ref=f6e174]: Verified Outcomes
+        - list [ref=f6e178]:
+          - listitem [ref=f6e179]:
+            - generic [ref=f6e180]:
+              - generic [ref=f6e181]:
+                - generic [ref=f6e182]: "01"
+                - generic [ref=f6e183]: Document Processing
+              - paragraph [ref=f6e184]: “Accuracy plateaued at 70–85%.”
+            - generic [ref=f6e185]:
+              - paragraph [ref=f6e186]: 96% accuracy with Gemini 1.5 Flash on complex documents.
+              - paragraph [ref=f6e187]: Enterprise operations
+          - listitem [ref=f6e188]:
+            - generic [ref=f6e189]:
+              - generic [ref=f6e190]:
+                - generic [ref=f6e191]: "02"
+                - generic [ref=f6e192]: Throughput
+              - paragraph [ref=f6e193]: “The backlog would take days to clear.”
+            - generic [ref=f6e194]:
+              - paragraph [ref=f6e195]: 2,500 unstructured documents processed in 30 minutes.
+              - paragraph [ref=f6e196]: Operations at scale
+          - listitem [ref=f6e197]:
+            - generic [ref=f6e198]:
+              - generic [ref=f6e199]:
+                - generic [ref=f6e200]: "03"
+                - generic [ref=f6e201]: Multilingual Transcription
+              - paragraph [ref=f6e202]: “Language coverage costs more than the value.”
+            - generic [ref=f6e203]:
+              - paragraph [ref=f6e204]: ~93% confidence across 7 languages, 28% lower cost.
+              - paragraph [ref=f6e205]: Customer service
+          - listitem [ref=f6e206]:
+            - generic [ref=f6e207]:
+              - generic [ref=f6e208]:
+                - generic [ref=f6e209]: "04"
+                - generic [ref=f6e210]: Real-time Analytics
+              - paragraph [ref=f6e211]: “We only see the friction after the call.”
+            - generic [ref=f6e212]:
+              - paragraph [ref=f6e213]: AI-driven Anxiety Scoring live at 96% confidence.
+              - paragraph [ref=f6e214]: Customer service
+  - generic [ref=f6e218]:
+    - generic [ref=f6e219]:
+      - heading "let's connect" [level=2] [ref=f6e220]: let'sconnect
+      - paragraph [ref=f6e221]: Drop us an enquiry and we will get back in the next 24 hours.
+    - generic "Contact form" [ref=f6e222]:
+      - generic [ref=f6e223]:
+        - textbox "First name" [ref=f6e224]:
+          - /placeholder: first name*
+        - textbox "Last name" [ref=f6e225]:
+          - /placeholder: last name*
+      - generic [ref=f6e226]:
+        - textbox "Company name" [ref=f6e227]:
+          - /placeholder: company name
+        - textbox "Work email" [ref=f6e228]:
+          - /placeholder: work email*
+      - generic [ref=f6e229]:
+        - combobox "Country" [ref=f6e230] [cursor=pointer]:
+          - option "country" [disabled] [selected]
+          - option "India"
+          - option "United States"
+          - option "United Kingdom"
+          - option "Singapore"
+          - option "Australia"
+          - option "UAE"
+        - textbox "Phone number" [ref=f6e231]:
+          - /placeholder: phone number
+      - combobox "Your title" [ref=f6e232] [cursor=pointer]:
+        - option "your title*" [disabled] [selected]
+        - option "CXO / Executive"
+        - option "VP / Director"
+        - option "Manager"
+        - option "Engineer"
+        - option "Consultant"
+        - option "Other"
+      - textbox "Query" [ref=f6e233]:
+        - /placeholder: please describe your query here*
+      - generic [ref=f6e234]:
+        - checkbox "yes, i'd like Searce to contact me regarding cloud services and related offerings by email or telephone.*" [ref=f6e235] [cursor=pointer]
+        - text: yes, i'd like Searce to contact me regarding cloud services and related offerings by email or telephone.*
+      - button "Submit" [ref=f6e237] [cursor=pointer]
+  - contentinfo [ref=f6e238]:
+    - generic [ref=f6e239]:
+      - generic [ref=f6e240]:
+        - generic [ref=f6e241]:
+          - img "Searce" [ref=f6e242]
+          - paragraph [ref=f6e243]: Pushing the boundaries of tech innovation and designing end-to-end industry solutions for our clients at global scale
+        - generic [ref=f6e244]:
+          - generic [ref=f6e245]: practices
+          - list [ref=f6e246]:
+            - listitem [ref=f6e247]:
+              - link "business systems engineering" [ref=f6e248] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e249]:
+              - link "AI adoption & change engineering" [ref=f6e250] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e251]:
+              - link "AI-ready platform engineering" [ref=f6e252] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e253]:
+              - link "AI trust & resilience engineering" [ref=f6e254] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f6e255]:
+          - generic [ref=f6e256]: industries
+          - list [ref=f6e257]:
+            - listitem [ref=f6e258]:
+              - link "financial services & insurance" [ref=f6e259] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e260]:
+              - link "healthcare & life sciences" [ref=f6e261] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e262]:
+              - link "travel, transportation & logistics" [ref=f6e263] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e264]:
+              - link "retail, CPG & e-commerce" [ref=f6e265] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e266]:
+              - link "telecommunication, media, entertainment & gaming" [ref=f6e267] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e268]:
+              - link "manufacturing, industrials & construction" [ref=f6e269] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e270]:
+              - link "technology, software & services" [ref=f6e271] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e272]:
+              - link "natural resources, energy & utilities" [ref=f6e273] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e274]:
+              - link "public sector & education" [ref=f6e275] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f6e276]:
+          - generic [ref=f6e277]: insights
+          - list [ref=f6e278]:
+            - listitem [ref=f6e279]:
+              - link "case studies" [ref=f6e280] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e281]:
+              - link "events" [ref=f6e282] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e283]:
+              - link "articles" [ref=f6e284] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e285]:
+              - link "news" [ref=f6e286] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e287]:
+              - link "about us" [ref=f6e288] [cursor=pointer]:
+                - /url: who-we-are.html
+            - listitem [ref=f6e289]:
+              - link "careers" [ref=f6e290] [cursor=pointer]:
+                - /url: careers.html
+            - listitem [ref=f6e291]:
+              - link "let's connect" [ref=f6e292] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=f6e293]:
+        - generic [ref=f6e294]:
+          - button "LinkedIn" [ref=f6e295] [cursor=pointer]
+          - button "Twitter / X" [ref=f6e299] [cursor=pointer]
+        - generic [ref=f6e302]:
+          - link "terms of service" [ref=f6e303] [cursor=pointer]:
+            - /url: "#"
+          - generic [ref=f6e304]: ·
+          - link "privacy policy" [ref=f6e305] [cursor=pointer]:
+            - /url: "#"
+          - generic [ref=f6e306]: ·
+          - link "legal" [ref=f6e307] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=f6e308]: © 2026 Searce Technologies Inc. all rights reserved

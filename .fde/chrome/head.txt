@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Adoption &amp; Change Engineering | Searce</title>
+<meta name="description" content="Turn AI spend into changed work, and prove it. AI value realisation, workplace AI deployment, seat utilisation and licence recovery, role redesign, capability building, agent enablement, adoption engineering, and knowledge and context enablement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>

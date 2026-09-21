@@ -1,0 +1,172 @@
+- generic [active] [ref=f4e1]:
+  - navigation "Primary navigation" [ref=f4e2]:
+    - generic [ref=f4e3]:
+      - link "Searce home" [ref=f4e4] [cursor=pointer]:
+        - /url: "#"
+        - img "Searce" [ref=f4e5]
+      - list [ref=f4e6]:
+        - listitem [ref=f4e7]:
+          - link "Outcomes" [ref=f4e8] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f4e9]:
+          - link "How we solve" [ref=f4e10] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f4e13]:
+          - link "Practices" [ref=f4e14] [cursor=pointer]:
+            - /url: ai-adoption-change-engineering.html
+        - listitem [ref=f4e15]:
+          - link "Problems" [ref=f4e16] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f4e17]:
+          - link "Industries" [ref=f4e18] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f4e19]:
+          - link "Insights" [ref=f4e20] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f4e21]:
+          - link "Company" [ref=f4e22] [cursor=pointer]:
+            - /url: "#"
+      - link "bring us a problem" [ref=f4e25] [cursor=pointer]:
+        - /url: "#connect"
+  - banner [ref=f4e28]:
+    - generic [ref=f4e30]:
+      - generic [ref=f4e31]: how we solve
+      - heading "Forward-Deployed Solver Squads" [level=1] [ref=f4e32]:
+        - text: Forward-Deployed
+        - generic [ref=f4e33]: Solver Squads
+      - paragraph [ref=f4e34]:
+        - generic [ref=f4e35]: A cohesive team built to solve one business problem as a unit.
+        - generic [ref=f4e36]: Not staffed roles filled against a rate card.
+  - region "The traditional model, and what Searce does instead" [ref=f4e38]:
+    - generic [ref=f4e39]:
+      - paragraph [ref=f4e40]: The traditional professional services model ships resumes and counts hours.
+      - paragraph [ref=f4e41]: Searce ships squads and counts outcomes.
+  - generic [ref=f4e44]:
+    - generic [ref=f4e45]:
+      - heading "let's connect" [level=2] [ref=f4e46]: let'sconnect
+      - paragraph [ref=f4e47]: Drop us an enquiry and we will get back in the next 24 hours.
+    - generic "Contact form" [ref=f4e48]:
+      - generic [ref=f4e49]:
+        - textbox "First name" [ref=f4e50]:
+          - /placeholder: first name*
+        - textbox "Last name" [ref=f4e51]:
+          - /placeholder: last name*
+      - generic [ref=f4e52]:
+        - textbox "Company name" [ref=f4e53]:
+          - /placeholder: company name
+        - textbox "Work email" [ref=f4e54]:
+          - /placeholder: work email*
+      - generic [ref=f4e55]:
+        - combobox "Country" [ref=f4e56] [cursor=pointer]:
+          - option "country" [disabled] [selected]
+          - option "India"
+          - option "United States"
+          - option "United Kingdom"
+          - option "Singapore"
+          - option "Australia"
+          - option "UAE"
+        - textbox "Phone number" [ref=f4e57]:
+          - /placeholder: phone number
+      - combobox "Your title" [ref=f4e58] [cursor=pointer]:
+        - option "your title*" [disabled] [selected]
+        - option "CXO / Executive"
+        - option "VP / Director"
+        - option "Manager"
+        - option "Engineer"
+        - option "Consultant"
+        - option "Other"
+      - textbox "Query" [ref=f4e59]:
+        - /placeholder: please describe your query here*
+      - generic [ref=f4e60]:
+        - checkbox "yes, i'd like Searce to contact me regarding cloud services and related offerings by email or telephone.*" [ref=f4e61] [cursor=pointer]
+        - text: yes, i'd like Searce to contact me regarding cloud services and related offerings by email or telephone.*
+      - button "Submit" [ref=f4e63] [cursor=pointer]
+  - contentinfo [ref=f4e64]:
+    - generic [ref=f4e65]:
+      - generic [ref=f4e66]:
+        - generic [ref=f4e67]:
+          - img "Searce" [ref=f4e68]
+          - paragraph [ref=f4e69]: Pushing the boundaries of tech innovation and designing end-to-end industry solutions for our clients at global scale
+        - generic [ref=f4e70]:
+          - generic [ref=f4e71]: practices
+          - list [ref=f4e72]:
+            - listitem [ref=f4e73]:
+              - link "business systems engineering" [ref=f4e74] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e75]:
+              - link "AI adoption & change engineering" [ref=f4e76] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e77]:
+              - link "AI-ready platform engineering" [ref=f4e78] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e79]:
+              - link "AI trust & resilience engineering" [ref=f4e80] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f4e81]:
+          - generic [ref=f4e82]: industries
+          - list [ref=f4e83]:
+            - listitem [ref=f4e84]:
+              - link "financial services & insurance" [ref=f4e85] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e86]:
+              - link "healthcare & life sciences" [ref=f4e87] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e88]:
+              - link "travel, transportation & logistics" [ref=f4e89] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e90]:
+              - link "retail, CPG & e-commerce" [ref=f4e91] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e92]:
+              - link "telecommunication, media, entertainment & gaming" [ref=f4e93] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e94]:
+              - link "manufacturing, industrials & construction" [ref=f4e95] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e96]:
+              - link "technology, software & services" [ref=f4e97] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e98]:
+              - link "natural resources, energy & utilities" [ref=f4e99] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e100]:
+              - link "public sector & education" [ref=f4e101] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f4e102]:
+          - generic [ref=f4e103]: insights
+          - list [ref=f4e104]:
+            - listitem [ref=f4e105]:
+              - link "case studies" [ref=f4e106] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e107]:
+              - link "events" [ref=f4e108] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e109]:
+              - link "articles" [ref=f4e110] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e111]:
+              - link "news" [ref=f4e112] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f4e113]:
+              - link "about us" [ref=f4e114] [cursor=pointer]:
+                - /url: who-we-are.html
+            - listitem [ref=f4e115]:
+              - link "careers" [ref=f4e116] [cursor=pointer]:
+                - /url: careers.html
+            - listitem [ref=f4e117]:
+              - link "let's connect" [ref=f4e118] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=f4e119]:
+        - generic [ref=f4e120]:
+          - button "LinkedIn" [ref=f4e121] [cursor=pointer]
+          - button "Twitter / X" [ref=f4e125] [cursor=pointer]
+        - generic [ref=f4e128]:
+          - link "terms of service" [ref=f4e129] [cursor=pointer]:
+            - /url: "#"
+          - generic [ref=f4e130]: ·
+          - link "privacy policy" [ref=f4e131] [cursor=pointer]:
+            - /url: "#"
+          - generic [ref=f4e132]: ·
+          - link "legal" [ref=f4e133] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=f4e134]: © 2026 Searce Technologies Inc. all rights reserved

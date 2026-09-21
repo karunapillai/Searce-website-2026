@@ -1,0 +1,42 @@
+
+/* ======= §11 — how squads flex =======
+   Figma 427321011 / 427321012. Launch is a dot field running the full
+   height of the section down its right side; Stabilization is a square
+   the field CONTRACTS into — the dots travel inward and the surplus
+   collapses at the boundary, rather than simply fading out.
+   Figma pins no trigger point for the label swap, so it rides the same
+   progress as the field. */
+.fde-flex{background:var(--paper);overflow:hidden;}
+.fde-flex-inner{
+  display:grid;grid-template-columns:minmax(0,1fr) 34%;
+  gap:clamp(32px,5vw,72px);align-items:center;
+}
+.fde-flex h2{
+  font-family:var(--body);font-weight:400;
+  font-size:clamp(28px,3.5vw,50px);line-height:1.2;letter-spacing:-0.024em;
+  color:var(--ink);margin:0;max-width:15ch;
+}
+.fde-flex-note{
+  margin-top:18px;
+  font-family:var(--body);font-weight:400;font-size:clamp(13px,1.1vw,16px);
+  line-height:1.65;color:var(--ink-85);max-width:50ch;
+}
+/* the field is pinned to the section, not to the grid cell, so it can
+   run edge to edge top-to-bottom the way the reference does */
+.fde-field{
+  position:absolute;top:0;bottom:0;right:0;
+  width:34%;z-index:1;pointer-events:none;
+}
+#fde-flexdots{position:absolute;inset:0;width:100%;height:100%;display:block;}
+/* The label sits above the field rather than knocked out of it: a gap
+   through the middle would split the Stabilization square in two. */
+.fde-phase-label{
+  position:absolute;left:0;right:0;top:clamp(118px,15vh,158px);
+  height:32px;text-align:center;margin:0;z-index:2;
+}
+.fde-phase-label span{
+  position:absolute;left:50%;transform:translateX(-50%);top:0;
+  font-family:var(--body);font-weight:400;font-size:clamp(17px,1.6vw,23px);
+  color:var(--blue);white-space:nowrap;
+}
+html:not(.js) .fde-phase-label span + span{display:none;}

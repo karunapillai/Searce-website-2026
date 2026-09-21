@@ -1,0 +1,102 @@
+
+/* ===========================================================
+   FDE — Forward-Deployed Solver Squads
+   Built on the shared practice-page system above. Figma:
+   Frame 427321014 (8129:13217), 1440x810 folds.
+   The 23 Figma folds are animation keyframes of ~14 sections,
+   not 23 sections; each section below groups its keyframes.
+   =========================================================== */
+
+/* Figma insets content at 216px on a 1440 canvas. .wrap lands
+   it at 128px, so one modular cell (--mod, 88px) makes up the
+   difference exactly. Collapses with the grid below 1024. */
+.fde-inset{padding-left:var(--mod);}
+
+/* Every fold is a 16:9 viewport slide in Figma (1440x810), so
+   sections are viewport-height rather than padding-rhythm. */
+.fde-sec{
+  position:relative;
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  overflow:hidden;isolation:isolate;
+  padding:var(--sec) 0;
+}
+.fde-sec > .wrap{position:relative;z-index:2;width:100%;}
+
+/* section eyebrow — Figma sets this on nearly every fold */
+.fde-eyebrow{
+  font-family:var(--body);font-weight:500;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:22px;
+}
+.fde-sec.on-ink .fde-eyebrow{color:var(--blue-24);}
+
+.fde-h2{
+  font-family:var(--body);font-weight:400;
+  font-size:clamp(28px,3.4vw,46px);
+  line-height:1.16;letter-spacing:-0.022em;
+  color:var(--ink);max-width:19ch;
+}
+.fde-sec.on-ink .fde-h2{color:#fff;}
+.fde-h2 .accent{color:var(--blue);}
+.fde-sec.on-ink .fde-h2 .accent{color:var(--blue-24);}
+
+.fde-lede{
+  font-family:var(--body);font-weight:400;
+  font-size:15px;line-height:1.62;color:var(--ink-60);
+  max-width:62ch;margin-top:18px;
+}
+.fde-sec.on-ink .fde-lede{color:rgba(255,255,255,0.58);}
+
+/* ======= HERO ======= */
+.fde-hero{
+  position:relative;background:var(--ink);color:#fff;
+  min-height:calc(100vh - 76px);
+  display:flex;align-items:center;
+  overflow:hidden;isolation:isolate;
+  padding:96px 0 104px;
+}
+/* live dot field — replaces Figma's raster `image 242`.
+   Reference kept for density/hue/falloff; the wave is authored. */
+#fde-dots{
+  position:absolute;inset:0;z-index:0;
+  width:100%;height:100%;display:block;pointer-events:none;
+}
+.fde-hero .wrap{position:relative;z-index:2;width:100%;}
+
+.fde-hero-badge{
+  display:inline-flex;align-items:center;
+  background:#02163e;border:1px solid var(--blue);
+  border-radius:6px;padding:6px 10px;
+  font-family:var(--body);font-weight:500;
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--blue);
+  margin-bottom:30px;
+}
+.fde-hero h1{
+  font-family:var(--body);font-weight:400;
+  font-size:clamp(40px,5.3vw,76px);
+  line-height:1.03;letter-spacing:-0.028em;
+  margin:0;
+}
+.fde-hero h1 .l2{display:block;color:var(--blue);}
+.fde-hero-sub{
+  margin-top:26px;
+  font-family:var(--body);font-weight:400;
+  font-size:clamp(15px,1.25vw,18px);line-height:1.62;
+  color:#fff;
+}
+.fde-hero-sub span{display:block;}
+
+/* reveal: one authored entrance, hero only */
+.js .fde-hero-badge,
+.js .fde-hero h1 .l1,
+.js .fde-hero h1 .l2,
+.js .fde-hero-sub{
+  opacity:0;transform:translateY(14px);
+  animation:fdeRise .9s cubic-bezier(.16,1,.3,1) forwards;
+}
+.js .fde-hero h1 .l1{animation-delay:.08s;}
+.js .fde-hero h1 .l2{animation-delay:.17s;}
+.js .fde-hero-sub{animation-delay:.28s;}
+@keyframes fdeRise{to{opacity:1;transform:none;}}

@@ -1,0 +1,62 @@
+
+/* ======= §2+§3 — the traditional model / Searce ships squads =======
+   Figma folds 427320990 (8129:13244) and 427320992 (8129:13301).
+   Tanmay tagged the 2nd->3rd fold background as one continuous
+   scroll-linked effect, so these are ONE pinned, scrubbed block
+   rather than two independent sections. Scrub means scroll-up
+   reverses the same timeline — not a second animation. */
+.fde-shift{
+  position:relative;
+  height:100vh;
+  overflow:hidden;isolation:isolate;
+  /* Figma: radial, white at top-centre -> #BDD7FF at the edge */
+  background:radial-gradient(ellipse 100% 100% at 50% 0%, #ffffff 0%, #bdd7ff 100%);
+}
+/* the blue ground rides on top and is revealed by the timeline */
+.fde-shift-blue{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 100% 100% at 50% 0%, var(--blue) 0%, var(--blue-strong) 100%);
+  opacity:0;
+}
+.fde-shift .fan{
+  position:absolute;inset:0;z-index:2;
+  width:100%;height:100%;pointer-events:none;
+  opacity:.62;
+}
+/* each half is revealed top-down by its own clip front */
+.fde-shift .fan-conv,
+.fde-shift .fan-div{will-change:clip-path;}
+/* and fades out toward its vanishing point, as the reference does */
+.fde-shift .fan-conv{
+  -webkit-mask-image:linear-gradient(to bottom,#000 2%,#000 46%,rgba(0,0,0,0) 88%);
+          mask-image:linear-gradient(to bottom,#000 2%,#000 46%,rgba(0,0,0,0) 88%);
+}
+.fde-shift .fan-div{
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,0) 8%,#000 52%,#000 98%);
+          mask-image:linear-gradient(to bottom,rgba(0,0,0,0) 8%,#000 52%,#000 98%);
+}
+.fde-shift .fan line{
+  stroke:#123a7d;stroke-width:1.1;vector-effect:non-scaling-stroke;
+}
+/* fold 2 funnels in; fold 3 opens out. */
+.js .fde-shift .fan-conv{clip-path:inset(0 0 100% 0);}
+.js .fde-shift .fan-div{clip-path:inset(0 0 100% 0);}
+/* The fan is revealed by a clip front travelling down from the
+   origin: "lines animate from top to the middle", then out to full.
+   Without JS the fan is simply fully drawn. */
+.fde-shift-stage{
+  position:absolute;inset:0;z-index:3;
+  display:grid;place-items:center;
+  padding:0 48px;
+}
+.fde-shift-line{
+  grid-area:1/1;
+  max-width:690px;width:100%;
+  font-family:var(--body);font-weight:400;
+  font-size:clamp(26px,3.9vw,56px);
+  line-height:1.16;letter-spacing:-0.022em;
+  text-align:left;
+  margin:0;
+}
+.fde-shift-a{color:var(--ink);}
+.fde-shift-b{color:#fff;opacity:0;}

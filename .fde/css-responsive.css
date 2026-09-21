@@ -1,0 +1,94 @@
+
+/* ======= FDE responsive — matches the site's 1180/1024/768/640 ladder ======= */
+@media(max-width:1024px){
+  /* the extra modular inset only exists to hit Figma's 216px on a
+     1440 canvas; below that the wrap's own gutter is the grid */
+  .fde-inset{padding-left:0;}
+  .fde-hero{min-height:74vh;padding:72px 0 88px;}
+  .fde-shift{height:auto;min-height:100vh;}
+  .fde-shift-stage{position:relative;inset:auto;padding:120px 28px;min-height:100vh;}
+}
+@media(max-width:768px){
+  .fde-hero{min-height:68vh;padding:56px 0 72px;}
+  .fde-hero-sub span{display:inline;}
+  .fde-sec{min-height:0;padding:var(--sec) 0;}
+  .fde-shift .fan{opacity:.22;}
+}
+@media(max-width:640px){
+  .fde-hero-badge{font-size:11px;padding:5px 9px;margin-bottom:22px;}
+  .fde-shift-stage{padding:96px 20px;}
+}
+
+/* FDE motion opt-out. The shared block above already flattens CSS
+   animation; these are the scripted surfaces it cannot reach. */
+@media(prefers-reduced-motion:reduce){
+  .js .fde-hero-badge,
+  .js .fde-hero h1 .l1,
+  .js .fde-hero h1 .l2,
+  .js .fde-hero-sub{opacity:1;transform:none;animation:none;}
+  .js .fde-shift .fan{clip-path:none;}
+}
+
+/* ======= FDE below 1025: sections stack and show their end state =======
+   The pinned scroll choreography is desktop-only (see js-anim-head.js);
+   these rules give each section a static layout that still reads. */
+@media(max-width:1024px){
+  .fde-sec{min-height:0;padding:var(--sec) 0;display:block;}
+
+  /* §4 — card stack becomes a row/column of plain cards */
+  .fde-squad-inner{grid-template-columns:1fr;gap:40px;}
+  .fde-stack{height:auto;width:100%;display:flex;gap:16px;flex-wrap:wrap;}
+  .fde-card{position:relative;width:calc(33.333% - 11px);min-width:180px;min-height:0;
+            padding:26px 18px;filter:none!important;opacity:1!important;transform:none!important;}
+  .fde-card svg{width:64px;height:64px;}
+  .fde-card-label{font-size:17px;}
+
+  /* §5 — both practice panels shown, stacked */
+  .fde-comp-inner{grid-template-columns:1fr;gap:40px;}
+  .fde-panels{min-height:0;overflow:visible;}
+  .fde-panel{position:relative;inset:auto;margin-bottom:16px;
+             transform:none!important;opacity:1!important;filter:none!important;}
+
+  /* §6 — bands drop below the copy instead of overlaying it */
+  .fde-cap-bands{position:relative;width:auto;inset:auto;margin-top:36px;
+                 grid-template-rows:none;}
+  .fde-band{transform:none!important;opacity:1!important;padding:34px 28px;}
+  .fde-cap-inner{max-width:none;}
+
+  /* §7 — the SVG's preserveAspectRatio="none" only stays undistorted at
+     the desktop container ratio, so below 1025 the circle is replaced by
+     the same two roles as stacked colour blocks: same information, same
+     colour coding, legible at 390px. */
+  .fde-own-svg{display:none;}
+  .fde-own-stage{aspect-ratio:auto;margin-top:28px;
+                 border-radius:20px;overflow:hidden;}
+  .fde-own-label{position:relative;left:auto;transform:none;width:100%;
+                 text-align:left;padding:26px 24px;}
+  .own-label-top{bottom:auto;background:var(--blue);}
+  .own-label-bot{top:auto;background:var(--blue-deep);}
+  .fde-own-kicker{color:rgba(255,255,255,0.86);}
+  .fde-own-name{font-size:20px;color:#fff;}
+  .fde-own-note{font-size:14px;color:rgba(255,255,255,0.92);}
+
+  /* §8 — rail becomes a stacked column under the copy */
+  .fde-build-stage{min-height:0;display:block;}
+  .fde-build-copy{transform:none!important;opacity:1!important;filter:none!important;}
+  .fde-rail{position:relative;inset:auto;padding-left:0;margin-top:36px;
+            flex-wrap:wrap;gap:20px;transform:none!important;}
+  .fde-bcard{width:100%;min-height:0;transform:none!important;opacity:1!important;}
+  .fde-bcard::after{display:none;}
+
+  /* §10 / §11 */
+  .fde-meet-cards{grid-template-columns:1fr;}
+  .fde-mcard{transform:none!important;opacity:1!important;}
+  .fde-flex-inner{grid-template-columns:1fr;gap:36px;}
+  /* the field is a right-hand column on desktop; on narrow screens it
+     becomes a band under the copy so it is not squeezed to a sliver */
+  .fde-field{position:relative;inset:auto;width:100%;height:320px;
+             margin-top:32px;}
+  .fde-flex .wrap{order:-1;}
+}
+@media(max-width:640px){
+  .fde-card{width:100%;}
+  .fde-band{padding:28px 20px;}
+}

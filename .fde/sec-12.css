@@ -1,0 +1,21 @@
+
+/* ======= §12 — global by design =======
+   Figma 427321013. No scroll animation specified; the frame ships
+   as designed. The dotted world map is the design's own asset,
+   cropped from the frame export and alpha-stripped, rather than an
+   approximation drawn in code. */
+.fde-global{background:var(--paper);}
+.fde-global h2{
+  font-family:var(--body);font-weight:400;
+  font-size:clamp(30px,3.9vw,56px);line-height:1.2;letter-spacing:-0.024em;
+  color:var(--ink);margin:0;max-width:19ch;
+}
+.fde-global-note{
+  margin-top:18px;
+  font-family:var(--body);font-weight:400;font-size:clamp(13px,1.1vw,16px);
+  line-height:1.6;color:var(--ink-85);max-width:56ch;
+}
+.fde-map{
+  margin-top:clamp(28px,4vw,48px);
+  width:100%;max-width:1050px;height:auto;display:block;
+}

@@ -1,0 +1,331 @@
+- generic [active] [ref=f20e1]:
+  - navigation "Primary navigation" [ref=f20e2]:
+    - generic [ref=f20e3]:
+      - link "Searce home" [ref=f20e4] [cursor=pointer]:
+        - /url: "#"
+        - img "Searce" [ref=f20e5]
+      - list [ref=f20e6]:
+        - listitem [ref=f20e7]:
+          - link "Outcomes" [ref=f20e8] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f20e9]:
+          - link "How we solve" [ref=f20e10] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f20e13]:
+          - link "Practices" [ref=f20e14] [cursor=pointer]:
+            - /url: ai-adoption-change-engineering.html
+        - listitem [ref=f20e15]:
+          - link "Problems" [ref=f20e16] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f20e17]:
+          - link "Industries" [ref=f20e18] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f20e19]:
+          - link "Insights" [ref=f20e20] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=f20e21]:
+          - link "Company" [ref=f20e22] [cursor=pointer]:
+            - /url: "#"
+      - link "bring us a problem" [ref=f20e25] [cursor=pointer]:
+        - /url: "#connect"
+  - banner [ref=f20e28]:
+    - generic [ref=f20e30]:
+      - generic [ref=f20e31]: how we solve
+      - heading "Forward-Deployed Solver Squads" [level=1] [ref=f20e32]:
+        - text: Forward-Deployed
+        - generic [ref=f20e33]: Solver Squads
+      - paragraph [ref=f20e34]:
+        - generic [ref=f20e35]: A cohesive team built to solve one business problem as a unit.
+        - generic [ref=f20e36]: Not staffed roles filled against a rate card.
+  - region "The traditional model, and what Searce does instead" [ref=f20e38]:
+    - generic [ref=f20e39]:
+      - paragraph [ref=f20e40]: The traditional professional services model ships resumes and counts hours.
+      - paragraph [ref=f20e41]: Searce ships squads and counts outcomes.
+  - region [ref=f20e43]:
+    - generic [ref=f20e45]:
+      - generic [ref=f20e46]:
+        - paragraph [ref=f20e47]: What a squad is
+        - heading "A cohesive team built to solve one business problem as a unit, around a single accountable outcome." [level=2] [ref=f20e48]
+        - paragraph [ref=f20e49]:
+          - generic [ref=f20e50]: Squads are not staffed roles filled against a rate card. They are formed teams that
+          - generic [ref=f20e51]: integrate into the client’s operating model and work where the problem lives.
+      - list [ref=f20e52]:
+        - listitem [ref=f20e53]:
+          - paragraph [ref=f20e60]: Businessunderstanding
+        - listitem [ref=f20e61]:
+          - paragraph [ref=f20e69]: Hands-onengineering
+        - listitem [ref=f20e70]:
+          - paragraph [ref=f20e78]: A singleaccountableoutcome
+  - region [ref=f20e80]:
+    - generic [ref=f20e82]:
+      - generic [ref=f20e83]:
+        - paragraph [ref=f20e84]: Who is in a squad
+        - heading "Composition varies by practice." [level=2] [ref=f20e85]
+        - paragraph [ref=f20e86]: Rebuilding how work runs requires both the people who redesign the process and the people who build the system. Searce does not staff one craft without the other.
+      - generic [ref=f20e87]:
+        - generic [ref=f20e88]: Product engineering managers
+        - generic [ref=f20e90]:
+          - generic [ref=f20e91]:
+            - paragraph [ref=f20e92]: Redesign the process
+            - generic [ref=f20e94]: Business process engineers
+            - generic [ref=f20e95]: Industrial engineers
+          - generic [ref=f20e96]:
+            - paragraph [ref=f20e97]: Build the system
+            - generic [ref=f20e99]: Software engineers
+            - generic [ref=f20e100]: AI engineers
+  - region [ref=f20e102]:
+    - generic [ref=f20e104]:
+      - paragraph [ref=f20e105]: Three courses of capacity
+      - heading "Every squad draws on all three at once." [level=2] [ref=f20e106]
+    - generic [ref=f20e107]:
+      - article [ref=f20e108]:
+        - heading "Onsite solvers" [level=3] [ref=f20e113]
+        - paragraph [ref=f20e114]: Work inside the client’s operation.
+      - article [ref=f20e115]:
+        - heading "The engineering engine" [level=3] [ref=f20e121]
+        - paragraph [ref=f20e122]: Across eleven countries, building around the clock.
+      - article [ref=f20e123]:
+        - heading "AI-native agent coworkers" [level=3] [ref=f20e129]
+        - paragraph [ref=f20e130]: Trained on Searce’s pattern library, carrying capture, evaluation and monitoring.
+  - region [ref=f20e132]:
+    - generic [ref=f20e133]:
+      - generic [ref=f20e134]:
+        - paragraph [ref=f20e135]: Who is accountable
+        - heading "One initiative, one owner, no committees." [level=2] [ref=f20e136]
+      - generic [ref=f20e137]:
+        - generic:
+          - paragraph: One owner
+          - paragraph: Squad Lead
+          - paragraph: The directly responsible individual for the outcome
+        - generic:
+          - paragraph: Client Success
+          - paragraph: Runs the engagement, measures what changed, and presents it alongside the client
+  - region [ref=f20e141]:
+    - generic [ref=f20e143]:
+      - generic [ref=f20e144]:
+        - paragraph [ref=f20e145]: How Searce builds
+        - heading "Generation speed is a commodity now. Verified replacement of systems the business depends on is the actual craft." [level=2] [ref=f20e146]:
+          - text: Generation speed is a commodity now.
+          - generic [ref=f20e147]: Verified replacement of systems the business depends on is the actual craft.
+        - paragraph [ref=f20e148]: Searce builds AI-native. Agents do the generating; every step passes a gate.
+      - generic [aria-hidden]:
+        - article:
+          - paragraph: Agents generate
+          - list:
+            - listitem: Read the estate
+            - listitem: Generate migrations
+            - listitem: Draft code
+            - listitem: Write tests
+        - article:
+          - paragraph: Every step passes
+          - list:
+            - listitem: Evaluation suites
+            - listitem: Regression harnesses
+            - listitem: Human review
+        - article:
+          - paragraph: The craft
+          - paragraph: Verified Replacement
+  - region [ref=f20e150]:
+    - generic [ref=f20e152]:
+      - paragraph [ref=f20e153]: What happens after the build
+      - heading "Searce does not leave systems without owners." [level=2] [ref=f20e154]
+      - paragraph [ref=f20e155]: Where the operating owner is Searce, that is a managed operations contract rather than an informal expectation.
+      - generic [ref=f20e158]:
+        - generic [ref=f20e159]:
+          - paragraph [ref=f20e161]: At handover
+          - paragraph [ref=f20e162]: A namedoperating owner
+          - paragraph [ref=f20e163]: Every system ships with one.
+        - generic [ref=f20e164]:
+          - paragraph [ref=f20e165]: While it runs
+          - paragraph [ref=f20e166]: Documentedmaintenance economics
+          - paragraph [ref=f20e167]: What it costs to run, written down.
+        - generic [ref=f20e168]:
+          - paragraph [ref=f20e169]: At the end
+          - paragraph [ref=f20e170]: A definedexit path
+          - paragraph [ref=f20e171]: How it ends, agreed at the start
+  - region [ref=f20e173]:
+    - generic [ref=f20e175]:
+      - paragraph [ref=f20e176]: Evaluating a squad
+      - heading "You meet the squad before you commit to it." [level=2] [ref=f20e177]
+      - paragraph [ref=f20e178]: Searce shows the format during the pursuit.
+      - generic [ref=f20e179]:
+        - article [ref=f20e180]:
+          - heading "The squad that would do the work" [level=3] [ref=f20e188]
+          - paragraph [ref=f20e189]:
+            - generic [ref=f20e190]: Not a bench, not a proposal team.
+            - generic [ref=f20e191]: The people who would be on it.
+        - article [ref=f20e192]:
+          - heading "A real problem, solved in front of you" [level=3] [ref=f20e198]
+          - paragraph [ref=f20e199]:
+            - generic [ref=f20e200]: You watch them work it,
+            - generic [ref=f20e201]: not describe how they would.
+  - region [ref=f20e203]:
+    - generic:
+      - paragraph:
+        - generic: Launch
+        - generic: Stabilization
+    - generic [ref=f20e206]:
+      - paragraph [ref=f20e207]: How squads flex
+      - heading "The same squad, sized to the moment" [level=2] [ref=f20e208]
+      - paragraph [ref=f20e209]: "Allocation adjusts quarterly to match your delivery lifecycle: scale up for launch, streamline for stabilization. the squad stays consistent; knowledge compounds instead of walking out the door."
+  - region [ref=f20e210]:
+    - generic [ref=f20e212]:
+      - paragraph [ref=f20e213]: Global by design
+      - heading "Onsite where the problem lives. Follow-the-sun where the build never sleeps." [level=2] [ref=f20e214]
+      - paragraph [ref=f20e215]: "Allocation adjusts quarterly to match your delivery lifecycle: scale up"
+      - img "Searce delivery locations plotted across North America, Europe, the Middle East, South and South-East Asia, and Australia." [ref=f20e216]
+  - region [ref=f20e217]:
+    - generic [ref=f20e219]:
+      - generic [ref=f20e220]:
+        - paragraph [ref=f20e221]: Questions
+        - heading "Frequently Asked Questions" [level=2] [ref=f20e222]: Frequently AskedQuestions
+      - generic [ref=f20e223]:
+        - generic [ref=f20e224]:
+          - button "Is a solver squad the same as staff augmentation?" [ref=f20e225] [cursor=pointer]
+          - region "Is a solver squad the same as staff augmentation?":
+            - paragraph [ref=f20e227]: Answer copy pending — source from Website_content_2026.md.
+        - generic [ref=f20e228]:
+          - button "Does the squad change during the engagement?" [ref=f20e229] [cursor=pointer]
+          - region "Does the squad change during the engagement?":
+            - paragraph [ref=f20e231]: Answer copy pending — source from Website_content_2026.md.
+        - generic [ref=f20e232]:
+          - button "Where do squads work from?" [ref=f20e233] [cursor=pointer]
+          - region "Where do squads work from?":
+            - paragraph [ref=f20e235]: Answer copy pending — source from Website_content_2026.md.
+  - region [ref=f20e236]:
+    - generic [ref=f20e237]:
+      - paragraph [ref=f20e238]: Forward-Deployed Solver Squads
+      - heading "Ships squads. Counts outcomes." [level=2] [ref=f20e239]:
+        - text: Ships squads.
+        - generic [ref=f20e240]: Counts outcomes.
+      - link "bring us a problem" [ref=f20e241] [cursor=pointer]:
+        - /url: "#connect"
+  - generic [ref=f20e246]:
+    - generic [ref=f20e247]:
+      - heading "let's connect" [level=2] [ref=f20e248]: let'sconnect
+      - paragraph [ref=f20e249]: Drop us an enquiry and we will get back in the next 24 hours.
+    - generic "Contact form" [ref=f20e250]:
+      - generic [ref=f20e251]:
+        - textbox "First name" [ref=f20e252]:
+          - /placeholder: first name*
+        - textbox "Last name" [ref=f20e253]:
+          - /placeholder: last name*
+      - generic [ref=f20e254]:
+        - textbox "Company name" [ref=f20e255]:
+          - /placeholder: company name
+        - textbox "Work email" [ref=f20e256]:
+          - /placeholder: work email*
+      - generic [ref=f20e257]:
+        - combobox "Country" [ref=f20e258] [cursor=pointer]:
+          - option "country" [disabled] [selected]
+          - option "India"
+          - option "United States"
+          - option "United Kingdom"
+          - option "Singapore"
+          - option "Australia"
+          - option "UAE"
+        - textbox "Phone number" [ref=f20e259]:
+          - /placeholder: phone number
+      - combobox "Your title" [ref=f20e260] [cursor=pointer]:
+        - option "your title*" [disabled] [selected]
+        - option "CXO / Executive"
+        - option "VP / Director"
+        - option "Manager"
+        - option "Engineer"
+        - option "Consultant"
+        - option "Other"
+      - textbox "Query" [ref=f20e261]:
+        - /placeholder: please describe your query here*
+      - generic [ref=f20e262]:
+        - checkbox "yes, i'd like Searce to contact me regarding cloud services and related offerings by email or telephone.*" [ref=f20e263] [cursor=pointer]
+        - text: yes, i'd like Searce to contact me regarding cloud services and related offerings by email or telephone.*
+      - button "Submit" [ref=f20e265] [cursor=pointer]
+  - contentinfo [ref=f20e266]:
+    - generic [ref=f20e267]:
+      - generic [ref=f20e268]:
+        - generic [ref=f20e269]:
+          - img "Searce" [ref=f20e270]
+          - paragraph [ref=f20e271]: Pushing the boundaries of tech innovation and designing end-to-end industry solutions for our clients at global scale
+        - generic [ref=f20e272]:
+          - generic [ref=f20e273]: practices
+          - list [ref=f20e274]:
+            - listitem [ref=f20e275]:
+              - link "business systems engineering" [ref=f20e276] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e277]:
+              - link "AI adoption & change engineering" [ref=f20e278] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e279]:
+              - link "AI-ready platform engineering" [ref=f20e280] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e281]:
+              - link "AI trust & resilience engineering" [ref=f20e282] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f20e283]:
+          - generic [ref=f20e284]: industries
+          - list [ref=f20e285]:
+            - listitem [ref=f20e286]:
+              - link "financial services & insurance" [ref=f20e287] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e288]:
+              - link "healthcare & life sciences" [ref=f20e289] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e290]:
+              - link "travel, transportation & logistics" [ref=f20e291] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e292]:
+              - link "retail, CPG & e-commerce" [ref=f20e293] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e294]:
+              - link "telecommunication, media, entertainment & gaming" [ref=f20e295] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e296]:
+              - link "manufacturing, industrials & construction" [ref=f20e297] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e298]:
+              - link "technology, software & services" [ref=f20e299] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e300]:
+              - link "natural resources, energy & utilities" [ref=f20e301] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e302]:
+              - link "public sector & education" [ref=f20e303] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f20e304]:
+          - generic [ref=f20e305]: insights
+          - list [ref=f20e306]:
+            - listitem [ref=f20e307]:
+              - link "case studies" [ref=f20e308] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e309]:
+              - link "events" [ref=f20e310] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e311]:
+              - link "articles" [ref=f20e312] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e313]:
+              - link "news" [ref=f20e314] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f20e315]:
+              - link "about us" [ref=f20e316] [cursor=pointer]:
+                - /url: who-we-are.html
+            - listitem [ref=f20e317]:
+              - link "careers" [ref=f20e318] [cursor=pointer]:
+                - /url: careers.html
+            - listitem [ref=f20e319]:
+              - link "let's connect" [ref=f20e320] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=f20e321]:
+        - generic [ref=f20e322]:
+          - button "LinkedIn" [ref=f20e323] [cursor=pointer]
+          - button "Twitter / X" [ref=f20e327] [cursor=pointer]
+        - generic [ref=f20e330]:
+          - link "terms of service" [ref=f20e331] [cursor=pointer]:
+            - /url: "#"
+          - generic [ref=f20e332]: ·
+          - link "privacy policy" [ref=f20e333] [cursor=pointer]:
+            - /url: "#"
+          - generic [ref=f20e334]: ·
+          - link "legal" [ref=f20e335] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=f20e336]: © 2026 Searce Technologies Inc. all rights reserved

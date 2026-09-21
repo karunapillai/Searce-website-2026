@@ -1,0 +1,66 @@
+
+/* ======= §13 — Frequently Asked Questions =======
+   Figma carries this fold as a pasted raster (8115:4255), not a
+   designed frame, so it is rebuilt as a real accordion. Copy and
+   layout read off that capture; see .fde/ref/sec13-faq.png. */
+.fde-faq{background:var(--paper);padding:var(--sec) 0;}
+.fde-faq-inner{
+  display:grid;grid-template-columns:1fr 1.25fr;
+  gap:80px;align-items:start;
+}
+.fde-faq h2{
+  font-family:var(--body);font-weight:400;
+  font-size:clamp(30px,3.3vw,44px);
+  line-height:1.14;letter-spacing:-0.024em;
+  color:var(--ink);margin:0;
+}
+.fde-faq h2 .accent{color:var(--blue);}
+.fde-faq-list{display:flex;flex-direction:column;gap:12px;}
+.fde-q{
+  background:var(--paper-dim);
+  border:1px solid var(--paper-line);
+  border-radius:12px;
+  overflow:hidden;
+  transition:border-color .2s ease,background .2s ease;
+}
+.fde-q[open], .fde-q:hover{border-color:var(--blue-24);}
+.fde-q-btn{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  gap:24px;padding:20px 22px;text-align:left;
+  font-family:var(--body);font-weight:400;font-size:15.5px;
+  line-height:1.45;color:var(--ink-85);
+}
+.fde-q-btn:hover{color:var(--blue-strong);}
+.fde-q-sign{
+  position:relative;flex-shrink:0;width:14px;height:14px;
+}
+.fde-q-sign::before,.fde-q-sign::after{
+  content:"";position:absolute;background:var(--ink-60);
+  transition:transform .26s cubic-bezier(.16,1,.3,1),background .2s ease;
+}
+.fde-q-sign::before{left:0;top:6px;width:14px;height:1.5px;}
+.fde-q-sign::after{left:6px;top:0;width:1.5px;height:14px;}
+.fde-q-btn[aria-expanded="true"] .fde-q-sign::after{transform:scaleY(0);}
+.fde-q-btn[aria-expanded="true"] .fde-q-sign::before{background:var(--blue);}
+.fde-q-body{
+  display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .32s cubic-bezier(.16,1,.3,1);
+}
+.fde-q-btn[aria-expanded="true"] + .fde-q-body{grid-template-rows:1fr;}
+.fde-q-body > div{overflow:hidden;}
+.fde-q-body p{
+  font-family:var(--body);font-weight:400;font-size:14.5px;
+  line-height:1.62;color:var(--ink-60);
+  padding:0 22px 20px;margin:0;max-width:62ch;
+}
+/* no-JS: every answer is simply open */
+html:not(.js) .fde-q-body{grid-template-rows:1fr;}
+html:not(.js) .fde-q-sign{display:none;}
+
+/* Deliberately conspicuous: this is a copy slot, not content. */
+.fde-q-pending{
+  font-style:italic;color:var(--ink-40);
+  border-left:1px solid var(--blue-24);padding-left:12px;
+  margin-left:22px;
+}
+.fde-q-pending{padding-right:22px;}

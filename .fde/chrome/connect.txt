@@ -1,0 +1,51 @@
+<section class="connect" id="connect">
+  <div class="wrap">
+    <div class="connect-inner">
+      <div class="connect-left">
+        <h2>let's<br>connect</h2>
+        <p>Drop us an enquiry and we will get back in the next 24 hours.</p>
+      </div>
+      <div class="connect-form" aria-label="Contact form">
+        <div class="connect-row">
+          <input type="text" placeholder="first name*" aria-label="First name">
+          <input type="text" placeholder="last name*" aria-label="Last name">
+        </div>
+        <div class="connect-row">
+          <input type="text" placeholder="company name" aria-label="Company name">
+          <input type="email" placeholder="work email*" aria-label="Work email">
+        </div>
+        <div class="connect-row">
+          <select aria-label="Country">
+            <option value="" disabled selected>country</option>
+            <option>India</option>
+            <option>United States</option>
+            <option>United Kingdom</option>
+            <option>Singapore</option>
+            <option>Australia</option>
+            <option>UAE</option>
+          </select>
+          <input type="tel" placeholder="phone number" aria-label="Phone number">
+        </div>
+        <select aria-label="Your title">
+          <option value="" disabled selected>your title*</option>
+          <option>CXO / Executive</option>
+          <option>VP / Director</option>
+          <option>Manager</option>
+          <option>Engineer</option>
+          <option>Consultant</option>
+          <option>Other</option>
+        </select>
+        <textarea placeholder="please describe your query here*" aria-label="Query" rows="4"></textarea>
+        <label class="connect-check">
+          <input type="checkbox">
+          yes, i'd like Searce to contact me regarding cloud services and related offerings by email or telephone.*
+        </label>
+        <div class="connect-submit-row">
+          <button class="connect-submit" type="button">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER (shared) ================= -->

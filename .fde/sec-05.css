@@ -1,0 +1,68 @@
+
+/* ======= §5 — who is in a squad =======
+   Figma 427320996 / 427320997. Searce Blue ground, faint white grid.
+   A fixed "Product engineering managers" card sits above a slot that
+   two practice panels pass through, right to left; the inactive one
+   is blurred and pushed left. */
+.fde-comp{background:var(--blue);color:#fff;}
+.fde-comp .fde-grid-w{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.13) 1px, transparent 1px);
+  background-size:72px 72px;
+}
+.fde-comp-inner{
+  display:grid;grid-template-columns:minmax(0,1fr) 400px;
+  gap:64px;align-items:center;
+}
+.fde-comp h2{
+  font-family:var(--body);font-weight:400;
+  font-size:clamp(30px,3.4vw,48px);line-height:1.18;letter-spacing:-0.022em;
+  color:#fff;margin:0;max-width:14ch;
+}
+.fde-comp-body{
+  margin-top:18px;
+  font-family:var(--body);font-weight:400;
+  font-size:clamp(14px,1.1vw,16px);line-height:1.62;
+  color:rgba(255,255,255,0.92);max-width:52ch;
+}
+.fde-comp .fde-eyebrow{color:#fff;opacity:.85;}
+
+/* --- the org tree --- */
+.fde-tree{position:relative;}
+.fde-lead{
+  position:relative;z-index:2;
+  border-radius:14px;padding:22px 24px;text-align:center;
+  background:linear-gradient(180deg, rgba(0,44,140,0.55), rgba(0,58,170,0.38));
+  border:1px solid rgba(255,255,255,0.42);
+  font-family:var(--body);font-size:17px;color:#fff;
+}
+.fde-conn{
+  position:relative;z-index:1;
+  width:1px;height:26px;margin:0 auto;
+  background:rgba(255,255,255,0.55);
+}
+.fde-panels{position:relative;min-height:206px;overflow:hidden;}
+.fde-panel{
+  position:absolute;inset:0;
+  border-radius:22px;padding:18px 22px 22px;
+  border:1px solid rgba(255,255,255,0.45);
+  background:rgba(255,255,255,0.05);
+  will-change:transform,opacity;
+}
+.fde-panel-label{
+  font-family:var(--body);font-weight:500;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;text-align:center;margin-bottom:6px;
+}
+.fde-panel .fde-conn{height:18px;}
+.fde-role{
+  border-radius:12px;padding:15px 18px;text-align:center;
+  font-family:var(--body);font-size:16px;color:#fff;
+  background:rgba(255,255,255,0.16);
+  border:1px solid rgba(255,255,255,0.30);
+}
+.fde-role + .fde-role{margin-top:10px;background:rgba(255,255,255,0.24);}
+html:not(.js) .fde-panels{min-height:0;overflow:visible;}
+html:not(.js) .fde-panel{position:relative;inset:auto;margin-bottom:14px;}

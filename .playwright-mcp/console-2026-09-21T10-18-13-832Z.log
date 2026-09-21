@@ -1,0 +1,2 @@
+[     573ms] [ERROR] Failed to find a valid digest in the 'integrity' attribute for resource 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js' with computed SHA-512 integrity 'onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=='. The resource has been blocked. @ http://localhost:8731/fde.html:0
+[    1008ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8731/favicon.ico:0

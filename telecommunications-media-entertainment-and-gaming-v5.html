@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telecommunications, Media, Entertainment and Gaming - Searce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Google Sans Flex';font-style:normal;font-display:swap;font-weight:1 1000;src:url(https://cdn.jsdelivr.net/fontsource/fonts/google-sans-flex:vf@latest/latin-wght-normal.woff2) format('woff2-variations');}
+:root{
+  --ink:#000000; --ink-85:#1a1a1c; --ink-60:#54555a; --ink-40:#84868c;
+  --paper:#ffffff; --paper-dim:#f6f7f9; --paper-line:#e4e6ea;
+  --blue:#0064ff; --blue-strong:#004ecc; --blue-deep:#00337f;
+  --blue-06:#eef4ff; --blue-12:#dbe9ff; --blue-24:#b3d0ff;
+  --navy:#060c1a; --navy-card:#0c1530;
+  --display:'Poppins',system-ui,sans-serif;
+  --body:'Google Sans Flex',system-ui,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-variation-settings:'wght' 400;-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;background:none;border:none;cursor:pointer;}
+::selection{background:var(--blue);color:#fff;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px;}
+.wrap{max-width:1280px;margin:0 auto;padding:0 48px;}
+.nav .wrap,.hero .wrap,.reality > .wrap,.agentic > .wrap{max-width:1440px;padding:0 72px;}
+
+/* NAV */
+.nav{position:absolute;top:0;left:0;right:0;z-index:200;background:transparent;border-bottom:none;}
+.nav.nav-scrolled{position:fixed;background:rgba(6,12,26,0.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:96px;gap:32px;}
+.nav-logo{font-family:var(--display);font-weight:500;font-size:20px;color:#fff;letter-spacing:-.01em;}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none;font-size:14px;color:rgba(255,255,255,0.78);flex:1;justify-content:center;}
+.nav-links > li{position:relative;}
+.nav-links > li > a{position:relative;display:flex;align-items:center;gap:5px;padding:6px 2px;transition:color .2s ease;}
+.nav-links > li > a:hover, .nav-links > li > a.current{color:#fff;}
+.nav-links > li > a.current::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--blue-24);border-radius:2px;}
+.chev{width:9px;height:9px;flex-shrink:0;transition:transform .2s ease;}
+.has-dropdown:hover .chev{transform:rotate(180deg);}
+.mega-panel{position:absolute;top:100%;left:-14px;margin-top:16px;background:#fff;border:1px solid var(--paper-line);border-radius:16px;box-shadow:0 28px 56px rgba(10,20,40,0.12);padding:10px;min-width:230px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .18s ease, transform .18s ease, visibility .18s;}
+.has-dropdown:hover .mega-panel{opacity:1;visibility:visible;transform:translateY(0);}
+.mega-item{display:block;padding:11px 14px;border-radius:10px;transition:background .15s ease;}
+.mega-item:hover{background:var(--blue-06);}
+.mega-title{display:block;font-family:var(--display);font-weight:400;font-size:14.5px;color:var(--ink);}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-family:var(--display);font-size:13.5px;padding:10px 20px;border-radius:999px;white-space:nowrap;transition:background .2s ease,transform .15s ease;}
+.nav-cta:hover{background:var(--blue-strong);transform:translateY(-1px);}
+.nav-cta svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2;}
+
+/* ========== HERO (split editorial: text left, masked-media Searce geometry right) ========== */
+.hero{position:relative;height:100vh;min-height:760px;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;isolation:isolate;padding:96px 0 0;color:#fff;background:linear-gradient(165deg,#07204f 0%,#03102b 35%,#000 70%);}
+.hero .wrap{position:relative;z-index:3;width:100%;flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:24px;}
+.hero-text{position:relative;z-index:3;width:clamp(400px,56%,760px);}
+
+/* Right-side composition — Searce modular grid, 6 cols x 5 rows of 139.25u (frame 835.5 x 696.25). Column 0 reaches toward the centre. */
+.hero-composition{position:absolute;z-index:2;right:0;top:50%;transform:translateY(-50%);width:min(34%,calc((100vh - 170px) * 0.8168));aspect-ratio:1846/2260;pointer-events:none;}
+.hero-video-wrap{position:absolute;inset:0;z-index:1;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201846%202260'%20preserveAspectRatio='none'><path%20fill='%23fff'%20d='M758%20760H1846V1716C1846%202016.44%201602.44%202260%201302%202260H758V760Z'/><rect%20fill='%23fff'%20x='0'%20y='750'%20width='758'%20height='752'/></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201846%202260'%20preserveAspectRatio='none'><path%20fill='%23fff'%20d='M758%20760H1846V1716C1846%202016.44%201602.44%202260%201302%202260H758V760Z'/><rect%20fill='%23fff'%20x='0'%20y='750'%20width='758'%20height='752'/></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;--sx:-70px;--sy:360px;--sr:2.4deg;--ss:0.94;transform-origin:center;animation:hmEnter 1.685s cubic-bezier(0.2,0.7,0.2,1) both;}
+.hero-video-wrap video{position:absolute;left:0;top:33.19%;width:100%;height:66.81%;object-fit:cover;object-position:50% 50%;display:block;}
+.hero-svg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;overflow:visible;}
+.hero-svg .in{transform-box:fill-box;transform-origin:center;animation:hmEnter 1.685s cubic-bezier(0.2,0.7,0.2,1) both;}
+@keyframes hmEnter{from{opacity:0;transform:translate(var(--sx,0px),var(--sy,420px)) rotate(var(--sr,0deg)) scale(var(--ss,0.9));}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion:reduce){.hero-svg .in,.hero-video-wrap{animation:none;}}
+@media (max-width:900px){
+  .hero-text{width:100%;max-width:560px;}
+  .hero-opening br{display:none;}
+  .hero-composition{position:relative;right:auto;top:auto;transform:none;width:100%;max-width:560px;margin:56px auto 0;}
+}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(180deg, rgba(0,60,180,0.18) 0%, rgba(0,30,120,0.22) 100%);border:1px solid rgba(123,169,255,0.35);color:#fff;font-family:var(--display);font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:8px 17px 8px 14px;border-radius:999px;margin-bottom:36px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 6px 18px rgba(0,20,80,0.20), inset 0 1px 0 rgba(255,255,255,0.08);opacity:0;transform:translateY(20px);animation:heroTextIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;animation-delay:0.45s;}
+.hero-badge-icon{width:18px;height:18px;flex-shrink:0;display:block;}
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(1.9rem,4.8vw,4.6rem);line-height:1.05;letter-spacing:-0.025em;color:#fff;margin:0 0 52px;opacity:0;transform:translateY(20px);animation:heroTextIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;animation-delay:0.55s;}
+.hero h1 .line-blue{color:#fff;font-weight:300;}
+@keyframes heroTextIn{to{opacity:1;transform:translateY(0);}}
+.hero-opening{max-width:720px;color:#fff;font-size:20px;line-height:1.625;margin-bottom:56px;opacity:0;transform:translateY(20px);animation:heroTextIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;animation-delay:0.65s;}
+.hero-cta-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;opacity:0;transform:translateY(20px);animation:heroTextIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;animation-delay:0.75s;}
+.hero-cta-primary{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;font-family:var(--display);font-size:14.25px;padding:15px 26.5px;border-radius:999px;transition:background .2s,transform .2s;}
+.hero-cta-primary:hover{background:var(--blue-strong);transform:translateY(-1px);}
+.hero-cta-primary svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;}
+
+/* Geometric section dividers — the two motif SVGs reused at varied scale/crop/orientation, straddling section boundaries */
+.motif{position:absolute;pointer-events:none;z-index:1;opacity:0.3;height:auto;display:block;}
+@media (max-width:900px){.motif,.agentic-motif{display:none;}}
+
+/* ========== Section shared ========== */
+.section-eyebrow{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;display:inline-block;}
+.section-h{font-family:var(--display);font-weight:300;font-size:clamp(32px,4.2vw,56px);line-height:1.08;letter-spacing:-0.02em;color:var(--ink);max-width:900px;margin-bottom:32px;}
+
+/* Shared background transition shapes — Searce modular geometry, cropped/low-contrast */
+.bg-shapes{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-shapes .shape{position:absolute;display:block;}
+
+/* Shared recurring grid motif — echoes the hero, opacity varies per section */
+.grid-motif{position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(currentColor 1px, transparent 1px),linear-gradient(90deg, currentColor 1px, transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(ellipse at 50% 50%, #000 30%, transparent 85%);mask-image:radial-gradient(ellipse at 50% 50%, #000 30%, transparent 85%);}
+.reality, .leaks, .pillars, .agentic, .outcomes, .processes, .engagement, .faq, .connect{position:relative;overflow:hidden;}
+.reality > .wrap, .leaks > .wrap, .pillars > .wrap, .agentic > .wrap, .outcomes > .wrap, .processes > .wrap, .engagement > .wrap, .faq > .wrap, .connect > .wrap{position:relative;z-index:1;}
+.reality .grid-motif{color:rgba(0,50,150,0.045);}
+.leaks .grid-motif{color:rgba(0,60,180,0.06);}
+.processes .grid-motif{color:rgba(0,60,180,0.10);background-position:0 40px;}
+.pillars .grid-motif{color:rgba(179,208,255,0.07);}
+
+/* ========== Reality (dark, image-left + stats-right editorial) ========== */
+.reality{padding:64px 0 68px;background:linear-gradient(180deg,#000 0%,#03102b 55%,#07204f 100%);color:#fff;border-bottom:none;position:relative;overflow:hidden;}
+.reality > .wrap{position:relative;z-index:1;}
+.reality .grid-motif{color:rgba(255,255,255,0.07);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 22% 75% at 5% 30%, #000 0%, rgba(0,0,0,0.6) 50%, transparent 100%);mask-image:radial-gradient(ellipse 22% 75% at 5% 30%, #000 0%, rgba(0,0,0,0.6) 50%, transparent 100%);}
+.reality-layout{display:grid;grid-template-columns:1fr 1.22fr;gap:76px;align-items:center;}
+.reality-media{position:relative;margin-left:64px;}
+.reality-media-img{position:relative;z-index:1;aspect-ratio:600/490;overflow:hidden;background:#050a1e;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20600%20490'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%200H20A170%20170%200%200%201%20190%20170V490H0Z'/><path%20d='M360%200H450V370A120%20120%200%200%201%20330%20490H190V170A170%20170%200%200%201%20360%200Z'/><path%20d='M562%200H600V390A100%20100%200%200%201%20500%20490H462V100A100%20100%200%200%201%20562%200Z'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20600%20490'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%200H20A170%20170%200%200%201%20190%20170V490H0Z'/><path%20d='M360%200H450V370A120%20120%200%200%201%20330%20490H190V170A170%20170%200%200%201%20360%200Z'/><path%20d='M562%200H600V390A100%20100%200%200%201%20500%20490H462V100A100%20100%200%200%201%20562%200Z'/></g></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;}
+.reality-media-img img{width:100%;height:100%;object-fit:cover;object-position:0% 40%;display:block;filter:saturate(0.9) brightness(0.95);}
+.reality-media-img::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg, rgba(0,50,180,0.28) 0%, transparent 50%, rgba(2,4,10,0.25) 100%);pointer-events:none;}
+.reality-media-quarter{position:absolute;z-index:1;left:-112px;bottom:0;width:112px;height:150px;background:linear-gradient(160deg,#79adff 0%,var(--blue) 55%,#0038a8 100%);border-radius:0 0 0 100%;pointer-events:none;opacity:0.45;}
+.reality-content{max-width:740px;}
+.reality-content .section-eyebrow{color:#c5d2e8;letter-spacing:.24em;font-size:12px;text-transform:uppercase;margin-bottom:22px;display:block;font-weight:400;}
+.reality-content h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,3.3vw,46px);line-height:1.12;letter-spacing:-0.02em;color:#fff;margin-bottom:44px;}
+.reality-content h2 span{color:#9bbcff;display:block;}
+.reality-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:0 0 30px;border-bottom:1px solid rgba(255,255,255,0.32);margin-bottom:32px;}
+.reality-stat{padding:0 30px;border-right:1px solid rgba(255,255,255,0.22);}
+.reality-stat:first-child{padding-left:0;}
+.reality-stat:last-child{border-right:none;padding-right:0;}
+.reality-stat-value{font-family:var(--display);font-weight:400;font-size:clamp(28px,3vw,42px);line-height:1;letter-spacing:-0.01em;color:#5f9dff;margin-bottom:16px;}
+.reality-stat-text{color:rgba(255,255,255,0.92);font-size:15px;line-height:1.55;}
+.reality-closing{color:rgba(255,255,255,0.92);font-size:16px;line-height:1.6;max-width:720px;}
+@media (max-width:960px){.reality-layout{grid-template-columns:1fr;gap:56px;}.reality-media{margin-left:48px;}.reality-stats{grid-template-columns:1fr;gap:24px;}.reality-stat{padding:20px 0;border-right:none;border-bottom:1px solid rgba(255,255,255,0.14);}.reality-stat:last-child{border-bottom:none;}}
+
+/* ========== Our Perspective (white, intro left + 2x2 cards with dotted loop) ========== */
+.agentic{padding:130px 0 140px;background:#fff;color:var(--ink);border-bottom:none;position:relative;overflow:hidden;}
+.agentic > .wrap{position:relative;z-index:1;}
+.agentic-layout{display:grid;grid-template-columns:1fr 1.25fr;gap:80px;align-items:center;}
+.agentic-intro{max-width:520px;}
+.agentic-intro .section-eyebrow{color:#2b2f3a;font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:22px;display:block;}
+.agentic-intro h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,3.4vw,48px);line-height:1.08;letter-spacing:-0.02em;color:#0b1a3a;margin-bottom:22px;}
+.agentic-intro h2 span{color:#3b82ff;font-weight:400;}
+.agentic-intro p{color:#2b2f3a;font-size:16px;line-height:1.6;max-width:460px;}
+.agentic-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.agentic-motif{position:absolute;right:calc(max(0px,(100% - 1440px)/2) + 72px);bottom:0;width:520px;height:auto;opacity:0.2;pointer-events:none;z-index:0;}
+.agentic{overflow:hidden !important;}
+.agentic-path{position:absolute;left:-34px;top:-34px;width:calc(100% + 68px);height:calc(100% + 68px);pointer-events:none;overflow:visible;z-index:0;}
+.agentic-path path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;}
+.agentic-path .dots{stroke:#b3d0ff;stroke-width:2;stroke-dasharray:1 3.4;}
+.agentic-path .runner{stroke:var(--blue);stroke-width:2.5;stroke-dasharray:34 366;stroke-dashoffset:0;animation:agenticLoop 7s linear infinite;}
+@keyframes agenticLoop{to{stroke-dashoffset:-400;}}
+@media (prefers-reduced-motion:reduce){.agentic-path .runner{animation:none;}}
+.agentic-card{position:relative;z-index:1;background:#fff;border-radius:20px;box-shadow:0 18px 50px -22px rgba(10,20,60,0.22), 0 1px 3px rgba(10,20,60,0.06);padding:30px 30px 28px;min-height:240px;display:flex;flex-direction:column;transition:box-shadow .25s, transform .25s;}
+.agentic-card:hover{transform:translateY(-3px);box-shadow:0 26px 60px -22px rgba(0,100,255,0.28), 0 1px 3px rgba(10,20,60,0.06);}
+.agentic-card:nth-of-type(3){grid-column:2;grid-row:2;}
+.agentic-card:nth-of-type(4){grid-column:1;grid-row:2;}
+.agentic-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;}
+.agentic-card-icon{width:56px;height:56px;border-radius:14px;background:#f3f6fc;display:flex;align-items:center;justify-content:center;color:var(--blue);}
+.agentic-card-icon svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.agentic-card-label{font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:-0.01em;color:#0b1020;margin-bottom:10px;}
+.agentic-card-text{color:#5f6470;font-size:15.5px;line-height:1.55;}
+@media (max-width:1024px){.agentic-layout{grid-template-columns:1fr;gap:56px;}.agentic-intro{max-width:100%;}}
+@media (max-width:560px){.agentic-grid{grid-template-columns:1fr;}.agentic-card:nth-of-type(3),.agentic-card:nth-of-type(4){grid-column:1;grid-row:auto;}.agentic-path{display:none;}}
+
+.processes{padding:72px 0 64px;background:var(--paper);color:var(--ink);border-bottom:none;overflow:hidden;position:relative;}
+.processes .wrap{position:relative;z-index:1;}
+.processes .section-eyebrow{color:var(--blue);text-align:center;display:block;}
+.processes .section-h{color:var(--ink);text-align:center;margin-left:auto;margin-right:auto;}
+.processes .section-sub{color:var(--ink-60);max-width:640px;font-size:15.5px;margin:0 auto 56px;text-align:center;}
+
+.rcm-arch{--rcm-ink:#1a1a1c;--rcm-ink-40:#84868c;--rcm-ink-60:#54555a;--rcm-ink-80:#1a1a1c;--rcm-line:#e4e6ea;--rcm-blue-lit:#0064ff;--rcm-purple:#734bff;--rcm-paper-side:#f6f7f9;--rcm-paper-center:#ffffff;--rcm-card-ink:#1a1a1c;--rcm-card-ink-60:#54555a;--rcm-card-ink-40:#84868c;--rcm-card-line:#e4e6ea;--rcm-dark:#02061a;--rcm-dark-ink:#f2f7ff;--rcm-dark-ink-60:#a9b3c9;}
+.rcm-arch .rcm-carousel{position:relative;margin:0 auto 56px;max-width:1200px;height:385px;perspective:1500px;perspective-origin:50% 50%;}
+.rcm-arch .rcm-track{position:absolute;top:50%;left:50%;width:0;height:0;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.22,.61,.36,1);}
+.rcm-arch .rcm-slide{position:absolute;top:-159px;left:-158px;width:316px;height:318px;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid rgba(10,20,60,0.06);box-shadow:0 18px 50px -24px rgba(10,20,60,0.18), 0 1px 3px rgba(10,20,60,0.05);cursor:pointer;transform-origin:center center;backface-visibility:visible;transition:background .5s ease, border-color .5s ease, box-shadow .5s ease;}
+.rcm-arch .rcm-slide.pos-center{background:linear-gradient(160deg,#0a1c4a 0%,#050a1e 100%);border-color:rgba(179,208,255,0.22);box-shadow:0 30px 70px -24px rgba(0,0,0,0.7);cursor:default;}
+.rcm-arch .rcm-slide .wf-tag{position:absolute;top:18px;left:20px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--rcm-card-ink-40);transition:color .4s;z-index:3;}
+.rcm-arch .rcm-slide.pos-center .wf-tag{color:#7ba9ff;}
+.rcm-arch .rcm-slide .wf-mini{position:absolute;bottom:18px;left:20px;right:20px;font-family:var(--display);font-weight:400;font-size:13px;line-height:1.3;letter-spacing:-0.005em;color:var(--rcm-card-ink-60);transition:opacity .35s ease;z-index:2;}
+.rcm-arch .rcm-slide.pos-center .wf-mini{opacity:0;}
+.rcm-arch .rcm-slide svg{position:absolute;width:74%;height:66%;top:17%;left:13%;transition:opacity .4s;}
+.rcm-arch .rcm-slide .svg-center{opacity:0;}
+.rcm-arch .rcm-slide .svg-side{opacity:0.78;}
+.rcm-arch .rcm-slide.pos-center .svg-center{opacity:1;}
+.rcm-arch .rcm-slide.pos-center .svg-side{opacity:0;}
+.rcm-arch .wf-panel{position:absolute;inset:0;padding:22px 22px 22px;z-index:4;background:linear-gradient(180deg,rgba(2,6,26,0.75) 0%,rgba(2,6,26,0.83) 100%);color:#f2f7ff;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;pointer-events:none;transition:opacity .5s ease;}
+.rcm-arch .rcm-slide.pos-center.panel-visible .wf-panel,
+.rcm-arch .rcm-slide.pos-center:hover .wf-panel{opacity:1;pointer-events:auto;}
+.rcm-arch .wf-panel .wp-name{font-family:var(--display);font-weight:500;font-size:14px;letter-spacing:-0.01em;line-height:1.2;color:#f2f7ff;margin-bottom:3px;}
+.rcm-arch .wf-panel .wp-agent{font-family:var(--display);font-weight:500;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:#7ba9ff;margin-bottom:6px;}
+.rcm-arch .wf-panel .wp-desc{font-family:var(--body);font-size:11px;line-height:1.5;color:#a9b3c9;margin-bottom:10px;}
+.rcm-arch .wf-panel .wp-mode{display:inline-block;font-family:var(--display);font-weight:500;font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;padding:3px 9px;border-radius:4px;background:rgba(123,169,255,0.16);color:#7ba9ff;}
+.rcm-arch .car-controls{display:flex;justify-content:center;gap:14px;margin:0 auto 72px;}
+.rcm-arch .car-btn{width:42px;height:42px;border-radius:999px;border:1px solid var(--rcm-line);background:transparent;color:var(--rcm-ink);display:flex;align-items:center;justify-content:center;transition:all .18s;cursor:pointer;}
+.rcm-arch .car-btn:hover{background:var(--blue);border-color:var(--blue);color:#fff;}
+.rcm-arch .car-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.rcm-arch .arch-footer{max-width:1104px;margin:0 auto;}
+.rcm-arch .arch-row{display:flex;align-items:baseline;gap:28px;padding:14px 0;border-top:none;justify-content:center;text-align:center;}
+.rcm-arch .arch-label{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.26em;text-transform:uppercase;white-space:nowrap;}
+.rcm-arch .arch-row.intel     .arch-label{color:var(--rcm-blue-lit);}
+.rcm-arch .arch-row.oversight .arch-label{color:var(--rcm-purple);}
+.rcm-arch .arch-row.impact    .arch-label{color:var(--rcm-ink);}
+.rcm-arch .arch-content{font-family:var(--display);font-weight:400;font-size:13px;color:var(--rcm-ink-80);letter-spacing:-0.005em;line-height:1.5;}
+.rcm-arch .arch-content .sep{color:var(--rcm-ink-40);margin:0 10px;}
+.rcm-arch .arch-row.impact .arch-content{color:var(--rcm-ink);font-weight:500;}
+.rcm-arch .arch-row.impact .arch-content .arr{color:var(--rcm-blue-lit);margin-right:4px;font-weight:400;}
+@media (max-width:960px){
+  .rcm-arch .rcm-carousel{height:340px;}
+  .rcm-arch .rcm-slide{width:260px;height:260px;top:-130px;left:-130px;}
+  .rcm-arch .arch-row{flex-direction:column;gap:6px;padding:12px 0;}
+  .rcm-arch .arch-label{flex:0 0 auto;}
+  .rcm-arch .arch-content{font-size:12.5px;}
+}
+
+/* ========== Value leaks - deep navy with center glow ========== */
+.leaks{padding:120px 0;background:#fff;color:var(--ink);border-bottom:none;}
+.leaks .section-eyebrow{color:var(--blue);}
+.leaks .section-h{color:var(--ink);}
+.leaks .grid-motif{color:rgba(0,60,180,0.05);}
+.leaks-stack{margin-top:56px;display:grid;grid-template-columns:repeat(6,1fr);gap:20px;position:relative;z-index:1;}
+.leaks-stack > .leak-card{z-index:1;}
+.leaks-motif{position:absolute;left:-110px;bottom:-150px;width:390px;height:auto;opacity:0.13;pointer-events:none;z-index:0;}
+.leaks{overflow:visible;}
+.leak-card{grid-column:span 2;background:#fff;border:1px solid rgba(10,20,60,0.06);border-radius:20px;box-shadow:0 18px 50px -24px rgba(10,20,60,0.18), 0 1px 3px rgba(10,20,60,0.05);padding:32px 32px 28px;display:flex;flex-direction:column;min-height:280px;transition:background .25s, border-color .25s, transform .25s, box-shadow .25s;position:relative;overflow:hidden;}
+.leak-card::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 0%, rgba(0,100,255,0.05) 0%, transparent 70%);pointer-events:none;border-radius:inherit;}
+.leak-card:nth-child(4), .leak-card:nth-child(5){grid-column:span 3;}
+.leak-card:hover{background:#fff;border-color:rgba(0,100,255,0.28);transform:translateY(-3px);box-shadow:0 26px 60px -24px rgba(0,100,255,0.22), 0 1px 3px rgba(10,20,60,0.05);}
+.leak-card-icon{width:40px;height:40px;color:var(--blue);margin-bottom:32px;transition:color .25s;position:relative;z-index:1;}
+.leak-card:hover .leak-card-icon{color:var(--blue-strong);}
+.leak-card-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.leak-card-title{font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:-0.01em;line-height:1.25;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.leak-card-desc{color:var(--ink-60);font-size:15.5px;line-height:1.65;margin-bottom:0;position:relative;z-index:1;}
+.leak-card-link{margin-top:auto;font-family:var(--display);font-weight:500;font-size:14px;color:var(--blue);display:inline-flex;align-items:center;gap:8px;transition:gap .2s, color .2s;}
+.leak-card-link:hover{gap:12px;color:var(--blue-strong);}
+.leak-card-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.leak-tag{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:6px;background:var(--blue-06);color:var(--blue-strong);white-space:nowrap;border:1px solid var(--blue-12);}
+.leak-card[data-tone="commercial"] .leak-tag{background:var(--paper-dim);color:var(--ink-60);border-color:var(--paper-line);}
+@media (max-width:900px){.leaks-motif{display:none;}.leaks-stack{grid-template-columns:repeat(2,1fr);}.leak-card,.leak-card:nth-child(4),.leak-card:nth-child(5){grid-column:span 1;}}
+/* Leaks - light theme: white -> light blue gradient */
+.leaks{background:linear-gradient(180deg,#ffffff 0%,#f3f7ff 45%,#dbe9ff 100%);color:var(--ink);}
+.leaks .section-h{color:var(--ink);}
+.leaks .grid-motif{color:rgba(0,60,180,0.05);}
+.leaks-motif{opacity:0.35;}
+.leak-card{background:#fff;border:1px solid rgba(0,100,255,0.28);border-radius:20px;box-shadow:0 18px 50px -28px rgba(0,50,160,0.18);}
+.leak-card::before{background:radial-gradient(60% 40% at 50% 0%, rgba(0,100,255,0.06) 0%, transparent 70%);}
+.leak-card:hover{background:#fff;border-color:var(--blue);box-shadow:0 26px 60px -28px rgba(0,100,255,0.35);}
+.leaks{overflow:hidden !important;}
+.leaks::before{content:"";position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(0,60,180,0.04) 1px, transparent 1px),linear-gradient(90deg, rgba(0,60,180,0.04) 1px, transparent 1px);background-size:64px 64px;mask-image:linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);-webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);pointer-events:none;}
+.leak-card-icon{color:var(--blue);}
+.leak-card:hover .leak-card-icon{color:var(--blue-strong);}
+.leak-card-title{color:var(--ink);}
+.leak-card-desc{color:var(--ink-60);}
+.leak-tag{background:var(--blue-06);color:var(--blue-strong);border-color:var(--blue-12);}
+.leak-card[data-tone="commercial"] .leak-tag{background:var(--paper-dim);color:var(--ink-60);border-color:var(--paper-line);}
+.leaks-motif{bottom:0;right:auto;left:calc(max(0px,(100% - 1280px)/2) + 48px);width:520px;}
+@media (max-width:560px){.leaks-stack{grid-template-columns:1fr;}}
+/* Leaks - icon animation: strokes draw in on scroll, lift + redraw on hover */
+.leak-card-icon svg *{stroke-dasharray:64;stroke-dashoffset:64;}
+.leaks.is-in .leak-card-icon svg *{animation:leakDraw 1.1s cubic-bezier(.2,.7,.2,1) forwards;}
+.leaks.is-in .leak-card:nth-child(1) .leak-card-icon svg *{animation-delay:.1s;}
+.leaks.is-in .leak-card:nth-child(2) .leak-card-icon svg *{animation-delay:.25s;}
+.leaks.is-in .leak-card:nth-child(3) .leak-card-icon svg *{animation-delay:.4s;}
+.leaks.is-in .leak-card:nth-child(4) .leak-card-icon svg *{animation-delay:.55s;}
+.leaks.is-in .leak-card:nth-child(5) .leak-card-icon svg *{animation-delay:.7s;}
+@keyframes leakDraw{to{stroke-dashoffset:0;}}
+.leak-card-icon{transition:color .25s,transform .35s cubic-bezier(.2,.7,.2,1);}
+.leak-card:hover .leak-card-icon{transform:translateY(-4px) scale(1.08);}
+.leaks.is-in .leak-card:hover .leak-card-icon svg *{animation:leakDraw .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:0s;}
+@media (prefers-reduced-motion:reduce){.leak-card-icon svg *{stroke-dasharray:none;stroke-dashoffset:0;animation:none !important;}.leak-card:hover .leak-card-icon{transform:none;}}
+
+/* ========== Outcomes - accordion left + baseline/intervention/result right ========== */
+.outcomes{background:#fff;color:var(--ink);position:relative;padding:100px 0 120px;border-bottom:none;}
+.outcomes > .wrap{max-width:1296px;}
+.outcomes-intro{text-align:center;margin-bottom:48px;}
+.outcomes-intro .section-eyebrow{color:var(--blue);display:inline-block;margin-bottom:14px;}
+.outcomes-intro .section-h{color:var(--ink);margin:0 auto;text-align:center;font-size:clamp(30px,3.8vw,48px);}
+.outcomes-story{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.15fr;gap:72px;align-items:center;transition:opacity .3s ease, transform .3s ease;}
+.outcomes-story.swap{opacity:0;transform:translateY(4px);}
+.outcomes-copy{max-width:560px;}
+.outcomes-case{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-40);margin-bottom:34px;}
+.outcomes-detail-block{padding:18px 0;}
+.outcomes-detail-block:first-of-type{padding-top:0;}
+.outcomes-detail-label{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.outcomes-detail-text{color:var(--ink);font-size:17px;line-height:1.7;margin:0;}
+.outcomes-media{position:relative;aspect-ratio:3/2;}
+.outcomes-media.shape-2 .outcomes-media-shape img{object-position:72% 50%;}
+.outcomes-media-shape{position:absolute;inset:0;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;transition:opacity .3s ease;}
+.outcomes-media-shape img{width:100%;height:100%;object-fit:cover;display:block;}
+.outcomes-media.shape-1 .outcomes-media-shape{-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M33.35%200H66.7V66.7H0V33.35A33.35%2033.35%200%200%201%2033.35%200Z'/><circle%20cx='83.35'%20cy='16.675'%20r='16.675'/><path%20d='M100%2066.7H66.7V33.35A33.35%2033.35%200%200%201%20100%2066.7Z'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M33.35%200H66.7V66.7H0V33.35A33.35%2033.35%200%200%201%2033.35%200Z'/><circle%20cx='83.35'%20cy='16.675'%20r='16.675'/><path%20d='M100%2066.7H66.7V33.35A33.35%2033.35%200%200%201%20100%2066.7Z'/></g></svg>");}
+.outcomes-media.shape-2 .outcomes-media-shape{-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='33.35'%20cy='33.35'%20r='33.35'/><rect%20x='66.7'%20y='0'%20width='33.3'%20height='33.35'/><path%20d='M66.7%2033.35L100%2050L66.7%2066.7Z'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='33.35'%20cy='33.35'%20r='33.35'/><rect%20x='66.7'%20y='0'%20width='33.3'%20height='33.35'/><path%20d='M66.7%2033.35L100%2050L66.7%2066.7Z'/></g></svg>");}
+.outcomes-media.shape-3 .outcomes-media-shape{-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><rect%20x='0'%20y='0'%20width='33.35'%20height='33.35'/><circle%20cx='16.675'%20cy='50'%20r='16.675'/><path%20d='M33.35%200H100V33.35A33.35%2033.35%200%200%201%2066.7%2066.7H33.35Z'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><rect%20x='0'%20y='0'%20width='33.35'%20height='33.35'/><circle%20cx='16.675'%20cy='50'%20r='16.675'/><path%20d='M33.35%200H100V33.35A33.35%2033.35%200%200%201%2066.7%2066.7H33.35Z'/></g></svg>");}
+.outcomes-media.shape-4 .outcomes-media-shape{-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><rect%20x='0'%20y='0'%20width='66.7'%20height='33.35'/><circle%20cx='83.35'%20cy='16.675'%20r='16.675'/><rect%20x='33.35'%20y='33.35'%20width='66.65'%20height='33.35'%20rx='16.675'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><rect%20x='0'%20y='0'%20width='66.7'%20height='33.35'/><circle%20cx='83.35'%20cy='16.675'%20r='16.675'/><rect%20x='33.35'%20y='33.35'%20width='66.65'%20height='33.35'%20rx='16.675'/></g></svg>");}
+
+.outcomes-metric-box{position:absolute;right:22px;bottom:22px;min-width:240px;max-width:70%;background:linear-gradient(160deg,#eef4ff 0%,#dbe9ff 100%);border-radius:14px;padding:22px 26px 20px;box-shadow:0 14px 34px -18px rgba(0,40,140,0.35);}
+.outcomes-metric-value{font-family:var(--display);font-weight:500;font-size:clamp(30px,2.6vw,40px);line-height:1;letter-spacing:-0.02em;color:#0b1a3a;margin-bottom:8px;}
+.outcomes-metric-label{font-family:var(--body);font-size:15px;color:#1a1f2e;line-height:1.3;}
+.outcomes-tabs2{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:0 0 64px;padding-bottom:22px;}
+.outcomes-item{border:none;background:transparent;cursor:pointer;font-family:var(--display);color:var(--ink-40);display:flex;align-items:center;justify-content:flex-start;gap:14px;padding:12px 0;text-align:left;min-height:64px;transition:color .25s;}
+.outcomes-item:hover{color:var(--ink);}
+.outcomes-item.active{color:var(--ink);}
+.outcomes-item-icon{width:44px;height:44px;border-radius:12px;background:#f0f4ff;color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s;}
+.outcomes-item.active .outcomes-item-icon{background:linear-gradient(135deg, #0064ff 0%, #0051cb 100%);color:#fff;box-shadow:0 8px 18px -6px rgba(0,80,200,0.35);}
+.outcomes-item-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.outcomes-item-title{font-weight:500;font-size:14px;letter-spacing:-0.005em;line-height:1.3;white-space:nowrap;}
+.outcomes-tabs-line{position:absolute;left:0;right:0;bottom:0;height:1px;background:#e2e5eb;}
+.outcomes-tabs-line i{position:absolute;left:0;top:-1px;height:3px;width:25%;border-radius:2px;background:var(--blue);transition:transform .35s cubic-bezier(0.22,0.61,0.36,1);}
+@media (max-width:960px){.outcomes-story{grid-template-columns:1fr;gap:40px;}.outcomes-copy{max-width:100%;}.outcomes-tabs2{grid-template-columns:1fr 1fr;row-gap:8px;}.outcomes-tabs-line i{width:50%;}.outcomes-item{justify-content:flex-start;}}
+@media (max-width:560px){.outcomes-tabs2{grid-template-columns:1fr;}.outcomes-tabs-line{display:none;}.outcomes-metric-box{right:14px;bottom:14px;min-width:0;padding:16px 18px;}}
+@media (max-width:520px){.outcomes-tabs{grid-template-columns:1fr;}}
+
+/* ========== Pillars - split intro + staggered card grid (light) ========== */
+.pillars{padding:120px 0;background:var(--paper);color:var(--ink);border-bottom:none;}
+.pillars .section-eyebrow{color:var(--blue);}
+.pillars .section-h{color:var(--ink);}
+.pillars-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;margin-top:24px;align-items:start;position:relative;z-index:1;}
+.pillars-intro{padding-top:12px;}
+.pillars-intro .section-h{font-size:clamp(30px,3.6vw,48px);margin-bottom:24px;max-width:520px;}
+.pillars-motif{position:absolute;right:-110px;top:-170px;width:390px;height:auto;opacity:0.2;pointer-events:none;z-index:0;}
+.pillars{overflow:visible;}
+.pillars-intro-sub{color:var(--ink-60);font-size:16.5px;line-height:1.65;max-width:440px;}
+.pillars-cards{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:18px;grid-auto-rows:1fr;}
+.pillars-cards > .pillar-card{position:relative;z-index:1;}
+.pillars-cards > .pillar-card:nth-child(even){margin-top:56px;}
+.pillar-card{position:relative;background:#fff;border:1px solid rgba(10,20,60,0.06);border-radius:20px;box-shadow:0 18px 50px -24px rgba(10,20,60,0.18), 0 1px 3px rgba(10,20,60,0.05);padding:28px 28px 32px;display:flex;flex-direction:column;min-height:280px;height:100%;transition:border-color .25s, transform .25s, box-shadow .25s;}
+.pillar-card:hover{border-color:rgba(0,100,255,0.28);transform:translateY(-3px);box-shadow:0 26px 60px -24px rgba(0,100,255,0.22), 0 1px 3px rgba(10,20,60,0.05);}
+.pillar-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:44px;}
+.pillar-card-icon{width:36px;height:36px;color:var(--blue);transition:color .25s;}
+.pillar-card:hover .pillar-card-icon{color:var(--blue-strong);}
+.pillar-card-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.pillar-card-arrow{width:32px;height:32px;border-radius:50%;background:#f0f4ff;display:flex;align-items:center;justify-content:center;color:var(--ink-60);transition:background .2s, color .2s;}
+.pillar-card:hover .pillar-card-arrow{background:var(--blue);color:#fff;}
+.pillar-card-arrow svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.pillar-card .pillar-name{font-family:var(--display);font-weight:500;font-size:22px;color:var(--ink);letter-spacing:-0.01em;line-height:1.2;margin-bottom:14px;transition:color .25s;}
+.pillar-card:hover .pillar-name{color:var(--ink);}
+.pillar-card .pillar-desc{color:var(--ink-60);font-size:15.5px;line-height:1.65;margin:0;transition:color .25s;}
+.pillar-card:hover .pillar-desc{color:var(--ink-60);}
+@media (max-width:960px){.pillars-layout{grid-template-columns:1fr;gap:48px;}.pillars-cards > .pillar-card:nth-child(even){margin-top:0;}.pillars-motif{display:none;}}
+@media (max-width:560px){.pillars-cards{grid-template-columns:1fr;}}
+.pillars-manifesto,.pillars-grid{display:none;}
+/* legacy pillar-card/-icon rules removed — manifesto layout above owns Pillars */
+@media (max-width:1000px){.pillars-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:600px){.pillars-grid{grid-template-columns:1fr;}}
+
+/* ========== Engagement - heading + paragraph left, circular step orbit right ========== */
+.engagement{padding:0;min-height:210vh;background:#02061a;color:#fff;position:relative;overflow:visible;}
+.eng-sticky{position:sticky;top:0;min-height:100vh;display:flex;align-items:center;padding:96px 0 64px;}
+.engagement .wrap{position:relative;z-index:1;width:100%;}
+.engagement::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 78% 50%, #000 0%, transparent 60%);-webkit-mask-image:radial-gradient(ellipse at 78% 50%, #000 0%, transparent 60%);pointer-events:none;}
+.eng-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px 80px;align-items:center;}
+.engagement h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,4.2vw,56px);line-height:1.05;letter-spacing:-0.02em;color:#fff;margin:0 0 24px;}
+.eng-body{color:rgba(255,255,255,0.72);font-size:17px;line-height:1.65;max-width:540px;margin:0;}
+.eng-cta{display:inline-flex;align-items:center;gap:12px;background:var(--blue);color:#fff;font-family:var(--display);font-size:14.25px;padding:15px 26px;border-radius:999px;transition:background .2s,transform .2s,box-shadow .3s;}
+.eng-cta:hover{background:var(--blue-strong);transform:translateY(-1px);box-shadow:0 14px 40px -12px rgba(0,100,255,0.7);}
+.eng-cta svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .25s;}
+.eng-cta:hover svg{transform:translateX(4px);}
+
+/* Orbit */
+/* Engagement — stacked card deck: active card in front, the other two peek out behind, front card recedes on advance */
+.eng-deck{position:relative;width:min(100%,520px);margin:0 auto;padding-top:56px;}
+.eng-deck-stage{position:relative;height:300px;}
+.eng-card{position:absolute;inset:0;background:linear-gradient(135deg,#0c1530 0%,#123a8f 100%);border:1px solid rgba(255,255,255,0.14);border-radius:20px;padding:34px 36px;display:flex;flex-direction:column;justify-content:center;text-align:left;cursor:pointer;
+  transform:translateY(calc(var(--pos) * -26px)) scale(calc(1 - var(--pos) * 0.06));opacity:calc(1 - var(--pos) * 0.32);
+  transition:transform .7s cubic-bezier(.4,.1,.2,1),opacity .6s ease,box-shadow .6s ease,border-color .6s ease;}
+.eng-card[data-step="1"]{background:linear-gradient(135deg,#123a8f 0%,#0064ff 100%);}
+.eng-card[data-step="2"]{background:linear-gradient(135deg,#0064ff 0%,#4d8cff 100%);}
+.eng-card[style*="--pos:0"]{border-color:rgba(255,255,255,0.35);box-shadow:0 30px 70px -20px rgba(0,100,255,0.55),0 0 0 1px rgba(0,100,255,0.15);}
+.eng-card.is-leaving{transform:translateY(38px) scale(.98);opacity:0;transition:transform .45s cubic-bezier(.4,0,.6,1),opacity .4s ease;}
+.eng-card-num{position:absolute;top:26px;right:28px;width:44px;height:44px;display:grid;place-items:center;background:#fff;color:var(--blue-deep);font-family:var(--display);font-size:12px;letter-spacing:.14em;}
+.eng-card-meta{font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#dbe9ff;margin-bottom:12px;}
+.eng-card-title{font-family:var(--display);font-weight:400;font-size:clamp(20px,2vw,26px);line-height:1.15;letter-spacing:-0.015em;color:#fff;margin:0 0 12px;padding-right:64px;}
+.eng-card-desc{color:rgba(255,255,255,0.82);font-size:14px;line-height:1.55;margin:0;}
+/* progress: three 1x1 squares, the active one fills with the hold timer */
+.eng-deck-dots{display:flex;gap:10px;margin-top:28px;}
+.eng-deck-dot{position:relative;width:32px;height:6px;background:rgba(255,255,255,0.14);overflow:hidden;cursor:pointer;border:none;padding:0;}
+.eng-deck-dot i{position:absolute;left:0;top:0;bottom:0;width:0;background:#79adff;}
+.eng-deck-dot.is-done i{width:100%;}
+.eng-deck-dot.is-active i{width:var(--p,0%);}
+@media (prefers-reduced-motion:reduce){.eng-card{transition:none;}}
+@media (max-width:900px){.eng-sticky{padding:80px 0 48px;}}
+@media (max-width:900px){.eng-layout{grid-template-columns:1fr;gap:56px;}.eng-deck{width:100%;}.eng-deck-stage{height:320px;}.eng-card{padding:28px 26px;}.eng-card-desc{font-size:13px;}}
+
+/* ========== FAQ - accordion + side visual ========== */
+.faq{padding:120px 0;background:#02061a;color:#fff;position:relative;overflow:hidden;}
+.faq::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(179,208,255,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(179,208,255,0.05) 1px, transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 50% 40%, #000 0%, transparent 85%);-webkit-mask-image:radial-gradient(ellipse at 50% 40%, #000 0%, transparent 85%);pointer-events:none;}
+.faq .wrap{position:relative;z-index:1;}
+.faq-layout{display:grid;grid-template-columns:1fr 1.6fr;gap:80px;margin-top:24px;align-items:flex-start;}
+.faq-sidebar{position:sticky;top:120px;}
+.faq-title{font-family:var(--display);font-weight:300;font-size:clamp(36px,4.2vw,54px);line-height:1.05;color:#fff;letter-spacing:-0.02em;margin-bottom:20px;}
+.faq-title span{color:var(--blue-24);display:block;}
+.faq-side-text{color:rgba(255,255,255,0.65);font-size:15.5px;line-height:1.7;max-width:340px;}
+.faq-list{display:flex;flex-direction:column;gap:12px;}
+.faq-item{border:1px solid rgba(179,208,255,0.14);border-radius:16px;background:rgba(255,255,255,0.03);overflow:hidden;transition:all .25s;}
+.faq-item:hover{border-color:var(--blue-24);background:rgba(0,100,255,0.06);}
+.faq-item.open{border-color:var(--blue-24);background:rgba(0,100,255,0.10);box-shadow:0 20px 40px rgba(0,100,255,0.14);}
+.faq-q{width:100%;text-align:left;padding:24px 28px;display:flex;justify-content:space-between;align-items:center;gap:24px;cursor:pointer;font-family:var(--display);font-weight:400;font-size:18px;color:#fff;letter-spacing:-0.01em;transition:color .2s;}
+.faq-item.open .faq-q{color:#fff;font-weight:500;}
+.faq-icon{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.06);position:relative;transition:all .3s;}
+.faq-icon::before,.faq-icon::after{content:"";position:absolute;top:50%;left:50%;background:#fff;border-radius:2px;}
+.faq-icon::before{width:14px;height:2px;transform:translate(-50%,-50%);}
+.faq-icon::after{width:2px;height:14px;transform:translate(-50%,-50%);transition:transform .3s;}
+.faq-item.open .faq-icon{background:var(--blue);transform:rotate(180deg);}
+.faq-item.open .faq-icon::before,.faq-item.open .faq-icon::after{background:#fff;}
+.faq-item.open .faq-icon::after{transform:translate(-50%,-50%) scaleY(0);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.faq-a-inner{padding:0 28px 28px 28px;color:rgba(255,255,255,0.72);font-size:15.5px;line-height:1.75;max-width:640px;border-top:1px dashed rgba(179,208,255,0.24);padding-top:20px;margin-top:0;}
+.faq-item.open .faq-a{max-height:400px;}
+@media (max-width:900px){.faq-layout{grid-template-columns:1fr;gap:40px;}.faq-sidebar{position:static;}.faq-count{font-size:80px;}}
+
+/* ========== Connect (form) ========== */
+.connect{padding:120px 0;background:linear-gradient(135deg,#eef4ff 0%,#dbe9ff 100%);}
+.connect-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:flex-start;}
+.connect-heading{font-family:var(--display);font-weight:300;font-size:clamp(38px,4.6vw,64px);line-height:1.05;letter-spacing:-0.02em;color:var(--ink);margin-bottom:32px;}
+.connect-heading .accent{color:var(--blue);}
+.connect-sub{color:var(--ink);font-size:19px;line-height:1.55;max-width:340px;}
+.connect-form{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.connect-form .full{grid-column:1 / -1;}
+.form-field{background:#fff;border:1px solid transparent;border-radius:14px;padding:18px 22px;font-family:var(--body);font-size:15px;color:var(--ink);width:100%;transition:border-color .2s,box-shadow .2s;}
+.form-field::placeholder{color:var(--ink-40);}
+.form-field:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-12);}
+select.form-field{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2384868c' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 22px center;padding-right:48px;}
+textarea.form-field{resize:vertical;min-height:110px;font-family:var(--body);}
+.form-consent{grid-column:1 / -1;display:flex;align-items:flex-start;gap:12px;color:var(--ink-60);font-size:14px;line-height:1.55;padding:8px 4px;}
+.form-consent input{width:18px;height:18px;margin-top:2px;accent-color:var(--blue);flex-shrink:0;}
+.form-submit-row{grid-column:1 / -1;display:flex;justify-content:flex-end;margin-top:8px;}
+.form-submit{background:var(--blue);color:#fff;font-family:var(--body);font-size:15.5px;padding:14px 40px;border-radius:999px;border:none;cursor:pointer;transition:background .2s,transform .2s;}
+.form-submit:hover{background:var(--blue-strong);transform:translateY(-1px);}
+@media (max-width:900px){.connect-layout{grid-template-columns:1fr;gap:40px;}.connect-form{grid-template-columns:1fr;}}
+
+/* ========== Big Footer ========== */
+footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-size:14px;border-top:1px solid rgba(255,255,255,0.05);}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1.2fr 1fr;gap:48px;margin-bottom:56px;}
+.footer-brand{font-family:var(--display);font-weight:500;font-size:32px;color:#fff;letter-spacing:-0.02em;margin-bottom:20px;display:inline-flex;align-items:baseline;gap:2px;}
+.footer-brand .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block;transform:translateY(-14px);}
+.footer-tag{color:rgba(255,255,255,0.55);font-size:14.5px;line-height:1.65;max-width:280px;}
+.footer-col-title{font-family:var(--display);font-weight:500;font-size:17px;color:#fff;margin-bottom:20px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.footer-col a{color:rgba(255,255,255,0.55);transition:color .2s;font-size:14.5px;line-height:1.4;display:inline-block;}
+.footer-col a:hover{color:#fff;}
+.footer-divider{height:1px;background:rgba(255,255,255,0.08);margin:0 0 32px;}
+.footer-bottom{display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center;}
+.footer-social{display:flex;gap:12px;}
+.footer-social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.7);transition:all .2s;}
+.footer-social a:hover{background:var(--blue);color:#fff;}
+.footer-social svg{width:16px;height:16px;fill:currentColor;}
+.footer-legal{display:flex;gap:32px;color:rgba(255,255,255,0.55);font-size:13.5px;justify-content:center;}
+.footer-legal a{color:inherit;transition:color .2s;}
+.footer-legal a:hover{color:#fff;}
+.footer-copy{color:rgba(255,255,255,0.4);font-size:13px;text-align:right;line-height:1.5;}
+@media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px;}.footer-bottom{grid-template-columns:1fr;gap:20px;text-align:center;}.footer-legal{justify-content:center;flex-wrap:wrap;gap:20px;}.footer-copy{text-align:center;}}
+@media (max-width:560px){.footer-grid{grid-template-columns:1fr;}}
+
+@media (max-width:900px){
+  .wrap{padding:0 24px;}
+  .nav-links{display:none;}
+  .hero{padding:100px 0 80px;height:auto;min-height:auto;}
+  .reality,.processes,.leaks,.pillars,.engagement,.faq,.connect{padding:80px 0;}
+  .outcomes-intro{padding:80px 0 40px;}
+}
+.reality,.agentic,.processes,.leaks,.outcomes,.pillars,.engagement,.faq,.connect{overflow:visible;}
+
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary navigation">
+  <div class="wrap">
+    <a href="index.html" class="nav-logo" aria-label="Searce home">Searce</a>
+    <ul class="nav-links">
+      <li><a href="#">outcomes</a></li>
+      <li><a href="#">how we solve <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
+      <li><a href="business-systems-engineering.html">practices <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
+      <li><a href="#" class="current">industries <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
+      <li><a href="#">insights</a></li>
+      <li class="has-dropdown">
+        <a href="#" aria-haspopup="true">company
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <div class="mega-panel">
+          <a class="mega-item" href="who-we-are.html"><span class="mega-title">Who we are</span></a>
+          <a class="mega-item" href="#"><span class="mega-title">Partners</span></a>
+          <a class="mega-item" href="careers.html"><span class="mega-title">Careers</span></a>
+          <a class="mega-item" href="#"><span class="mega-title">futurify.ai</span></a>
+        </div>
+      </li>
+    </ul>
+    <a href="#connect" class="nav-cta">
+      bring us a problem
+      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ============== HERO (split editorial: text left, masked-media Searce geometry right) ============== -->
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="wrap">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true"><rect x="158" y="24" width="58" height="101" fill="#13377f"/><rect x="250" y="158" width="101" height="58" fill="#13377f"/><rect x="22" y="158" width="194" height="58" fill="#0064ff"/><rect x="158" y="250" width="58" height="101" fill="#0064ff"/></svg>
+        2030 Vision &middot; Real-Time Experience Ops
+      </div>
+      <h1 id="hero-heading">
+        telecommunications,<br>media, entertainment<br>and gaming
+      </h1>
+      <div class="hero-opening">
+        <p>Self-Healing Networks. Automated Asset Creation. Frictionless Streaming.</p>
+      </div>
+      <div class="hero-cta-row">
+        <a href="#outcomes" class="hero-cta-primary">
+          See what Searce has changed
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Composition on the 139.25u grid (6 cols x 5.5 rows, frame 835.5 x 765.9), per the approved sketch: video leaf (3x3) + video ring (2x2) on top; photo dome (3 wide) + photo square (2 wide) below with a row of three triangles + a circle between ring and square; blue triangle in the leaf; blue overlay on the square; crosshair top right; dot/line detailing -->
+    <div class="hero-composition" aria-hidden="true">
+      <div class="hero-video-wrap"><video src="assets/hero-tmeg-gaming.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+      <svg class="hero-svg" viewBox="0 0 1846 2260" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="hgA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0050e0"/><stop offset="1" stop-color="#6fa6ff"/></linearGradient>
+          <linearGradient id="hgB" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0064ff"/><stop offset="1" stop-color="#8fd4ff"/></linearGradient>
+          <linearGradient id="hgC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#79adff"/><stop offset="1" stop-color="#efefff"/></linearGradient>
+          <linearGradient id="hgD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b7df5"/><stop offset="1" stop-color="#a9c9ff"/></linearGradient>
+          <clipPath id="hcWedge"><path d="M3 1503.92L4.93287 2259.92L754.93 2258L386.024 1911.36L3 1503.92Z"/></clipPath>
+          <linearGradient id="hgWash" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#3b4fe0"/><stop offset="1" stop-color="#4a5be6"/></linearGradient>
+          <pattern id="hpDot" width="61.25" height="61.25" patternUnits="userSpaceOnUse"><circle cx="4.04" cy="4.04" r="4.04" fill="#8a8a8a"/></pattern>
+          <pattern id="hpGrid" width="119.4" height="119.4" patternUnits="userSpaceOnUse"><path d="M119.4 0H0V119.4" fill="none" stroke="#8fd4ff" stroke-width="2.9"/></pattern>
+          <radialGradient id="hmDots" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(720 1560) scale(640 640)"><stop offset="0.1" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          <mask id="hmDotsM"><rect x="0" y="1504" width="755" height="756" fill="url(#hmDots)"/></mask>
+          <radialGradient id="hmGrid" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(758 2260) scale(1250 1250)"><stop offset="0" stop-color="#fff"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          <mask id="hmGridM"><rect x="758" y="760" width="1088" height="1500" fill="url(#hmGrid)"/></mask>
+          <clipPath id="hcBlock"><path d="M758 760H1846V1716C1846 2016.44 1602.44 2260 1302 2260H758V760Z"/></clipPath>
+        </defs>
+
+        <!-- The large rounded-corner block is the masked video layer beneath this SVG -->
+
+        <!-- Play triangle, left of the pair -->
+        <g class="in" style="--sx:-40px;--sy:-60px;--sr:-2.4deg;--ss:0.9"><path d="M758 760V4L1262 382L758 760Z" fill="url(#hgA)"/></g>
+        <!-- Play triangle, right of the pair -->
+        <g class="in" style="--sx:60px;--sy:-60px;--sr:3.4deg;--ss:0.88"><path d="M1347 760V4L1846 382L1347 760Z" fill="url(#hgC)"/></g>
+        <!-- Ring -->
+        <g class="in" style="--sx:-80px;--sy:-40px;--sr:-3.4deg;--ss:0.9"><path fill-rule="evenodd" clip-rule="evenodd" d="M375 190.786C476.583 190.786 559.214 273.417 559.214 375C559.214 476.583 476.583 559.214 375 559.214C273.417 559.214 190.786 476.583 190.786 375C190.786 273.417 273.417 190.786 375 190.786ZM375 0C167.892 0 0 167.891 0 375C0 582.108 167.892 750 375 750C582.109 750 750 582.108 750 375C750 167.891 582.109 0 375 0Z" fill="url(#hgB)"/></g>
+
+        <!-- Photo square -->
+        <g class="in" style="--sx:-90px;--sy:320px;--sr:-3deg;--ss:0.94"><rect x="0" y="750" width="758" height="752" fill="url(#hgWash)" opacity="0.22"/></g>
+
+        <!-- Fine line grid over the large block, fading from its lower left -->
+        <g clip-path="url(#hcBlock)"><rect x="758" y="760" width="1088" height="1500" fill="url(#hpGrid)" mask="url(#hmGridM)" opacity="0.8"/></g>
+
+        <!-- Dot field, showing through the wedge's notch -->
+        <g class="in" style="--sx:-50px;--sy:400px;--sr:-2deg;--ss:0.93"><rect x="0" y="1504" width="755" height="756" fill="url(#hpDot)" mask="url(#hmDotsM)"/></g>
+
+        <!-- Wedge - photo over the gradient -->
+        <g class="in" style="--sx:-70px;--sy:440px;--sr:-2.6deg;--ss:0.9"><path d="M3 1503.92L4.93287 2259.92L754.93 2258L386.024 1911.36L3 1503.92Z" fill="url(#hgD)"/></g>
+        <g class="in" style="--sx:-70px;--sy:440px;--sr:-2.6deg;--ss:0.9"><g clip-path="url(#hcWedge)">
+          <image href="assets/hero-tmeg-broadcast.jpg" x="3" y="1659.92" width="752" height="600" preserveAspectRatio="xMidYMid slice"/>
+        </g></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============== REALITY (scannable) ============== -->
+<section class="reality" aria-labelledby="reality-h">
+  <span class="grid-motif" aria-hidden="true"></span>
+  <div class="wrap">
+    <div class="reality-layout">
+      <div class="reality-media">
+        <div class="reality-media-img"><img src="assets/reality-tmeg.jpg" alt="Operator working a broadcast control desk in front of live monitor feeds"></div>
+        <span class="reality-media-quarter" aria-hidden="true"></span>
+      </div>
+      <div class="reality-content">
+        <h2 id="reality-h">Progress in telecom, media and gaming is held back by <span>high-concurrency bottlenecks.</span></h2>
+        <div class="reality-stats">
+          <div class="reality-stat">
+            <div class="reality-stat-value">600ms</div>
+            <div class="reality-stat-text">of latency and heavy compute overhead in serving real-time media recommendations and dynamic in-game ads.</div>
+          </div>
+          <div class="reality-stat">
+            <div class="reality-stat-value">Hours</div>
+            <div class="reality-stat-text">lost manually translating, captioning, and rendering 3D assets, textures, and multi-region media files.</div>
+          </div>
+          <div class="reality-stat">
+            <div class="reality-stat-value">High risk</div>
+            <div class="reality-stat-text">of subscriber churn, network downtime, and uncollected royalties across fragmented global syndication channels.</div>
+          </div>
+        </div>
+        <p class="reality-closing">Every automated pipeline must guarantee edge-grade execution speed, zero-downtime scalability during live concurrent events, strict media IP protection, and complete audit lineage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== OUR PERSPECTIVE (white, intro + 4 circles) ============== -->
+<section class="agentic" aria-labelledby="agentic-h">
+  <div class="wrap">
+    <div class="agentic-layout">
+      <div class="agentic-intro">
+        <h2 id="agentic-h">From fragmented operations to <span>agentic systems.</span></h2>
+        <p>We reimagine how telecom, media, and gaming enterprises operate by unifying network engineers, content creators, and AI agents across the digital delivery lifecycle.</p>
+      </div>
+      <div class="agentic-grid">
+        <svg class="agentic-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <path class="dots" pathLength="400" d="M4 1H96Q99 1 99 4V96Q99 99 96 99H4Q1 99 1 96V4Q1 1 4 1Z"/>
+          <path class="runner" pathLength="400" d="M4 1H96Q99 1 99 4V96Q99 99 96 99H4Q1 99 1 96V4Q1 1 4 1Z"/>
+        </svg>
+        <article class="agentic-card">
+          <div class="agentic-card-top"><div class="agentic-card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg></div></div>
+          <div class="agentic-card-label">Understand</div>
+          <p class="agentic-card-text">Parse real-time network telemetry, media usage, player chat, and unstructured content archives.</p>
+        </article>
+        <article class="agentic-card">
+          <div class="agentic-card-top"><div class="agentic-card-icon"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7l3 8M16 7l-3 8"/></svg></div></div>
+          <div class="agentic-card-label">Coordinate</div>
+          <p class="agentic-card-text">Orchestrate NOC operators, game developers, media editors, and specialized agentic workflows.</p>
+        </article>
+        <article class="agentic-card">
+          <div class="agentic-card-top"><div class="agentic-card-icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 10-12h-7l1-8z"/></svg></div></div>
+          <div class="agentic-card-label">Act</div>
+          <p class="agentic-card-text">Automate network self-healing, dynamic ad insertion, toxicity moderation, and 3D asset generation.</p>
+        </article>
+        <article class="agentic-card">
+          <div class="agentic-card-top"><div class="agentic-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.4 8.5-8 9-4.6-.5-8-4.5-8-9V7l8-4z"/></svg></div></div>
+          <div class="agentic-card-label">Govern</div>
+          <p class="agentic-card-text">Ensure zero-trust media IP security, edge compliance, and resilience during peak traffic spikes.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+  <img class="agentic-motif" src="assets/perspective-shapes.svg" alt="" aria-hidden="true">
+</section>
+
+<!-- ============== VALUE LEAKS (flow diagram) ============== -->
+<section class="leaks" aria-labelledby="leaks-h">
+  <span class="grid-motif" aria-hidden="true"></span>
+  <div class="wrap">
+    <h2 id="leaks-h" class="section-h">Where the value leaks</h2>
+    <p class="section-sub">Margin and velocity bleed across cross-functional operations long before digital content or network signals reach the user.</p>
+    <div class="leaks-stack">
+      <div class="leak-card">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/></svg></div>
+        <div class="leak-card-title">Network Fault to Auto-Remediation <span class="leak-tag">Engineered</span></div>
+        <div class="leak-card-desc">Time spent by NOC engineers manually diagnosing, isolating, and rerouting failed RAN and core network nodes.</div>
+      </div>
+      <div class="leak-card">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/></svg></div>
+        <div class="leak-card-title">Content Asset Ingestion to Global Release <span class="leak-tag">Engineered</span></div>
+        <div class="leak-card-desc">Hours lost manually translating, captioning, formatting, and tagging multi-region media assets for global syndication.</div>
+      </div>
+      <div class="leak-card">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h4"/></svg></div>
+        <div class="leak-card-title">Player Toxicity Detection to Action <span class="leak-tag">Engineered</span></div>
+        <div class="leak-card-desc">Latency between abusive voice and chat activity and automated moderation enforcement in high-concurrency multiplayer games.</div>
+      </div>
+      <div class="leak-card">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div>
+        <div class="leak-card-title">Royalty Usage to Partner Payout <span class="leak-tag">Engineered</span></div>
+        <div class="leak-card-desc">Delays and revenue leakage caused by manual cross-platform log reconciliation and multi-party license attribution.</div>
+      </div>
+      <div class="leak-card" data-tone="commercial">
+        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div class="leak-card-title">Spectrum Licensing &amp; Municipal Permits <span class="leak-tag">Commercial</span></div>
+        <div class="leak-card-desc">Government regulatory approvals, physical cell tower site acquisitions, and municipal permit hold times. Commercial, not engineered.</div>
+      </div>
+    </div>
+  </div>
+  <img class="leaks-motif" src="assets/leaks-shapes-v5.svg" alt="" aria-hidden="true">
+</section>
+
+<!-- ============== PROCESSES (RCM architecture engine, TMEG workflows) ============== -->
+<section class="processes" aria-labelledby="processes-h">
+  <span class="grid-motif" aria-hidden="true"></span>
+  <div class="wrap">
+    <h2 id="processes-h" class="section-h">Pioneering AI-native platform and media delivery</h2>
+    <p class="section-sub">Six connected workflows. Purpose-built AI agents run each stage. Shared intelligence learns across every repository. Humans oversee the operational exceptions that matter.</p>
+
+    <div class="rcm-arch">
+      <div class="rcm-carousel">
+        <div class="rcm-track" id="carTrack"></div>
+      </div>
+      <div class="car-controls">
+        <button class="car-btn" id="carPrev" aria-label="Previous workflow">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="car-btn" id="carNext" aria-label="Next workflow">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div class="arch-footer">
+        <div class="arch-row intel">
+          <div class="arch-label">Shared Intelligence</div>
+          <div class="arch-content">Network Topology Graph<span class="sep">·</span>Churn &amp; Engagement Models<span class="sep">·</span>Media Rights Ledger<span class="sep">·</span>Self-Learning Feedback Loop</div>
+        </div>
+        <div class="arch-row oversight">
+          <div class="arch-label">Human Oversight</div>
+          <div class="arch-content">NOC Specialists<span class="sep">·</span>Content Ops Concierge<span class="sep">·</span>Continuous Optimization</div>
+        </div>
+        <div class="arch-row impact">
+          <div class="arch-label">Business Impact</div>
+          <div class="arch-content"><span class="arr">↑</span>Network Uptime<span class="sep">·</span><span class="arr">↓</span>Cost to Serve<span class="sep">·</span><span class="arr">↑</span>Watch Time &amp; Retention<span class="sep">·</span><span class="arr">↓</span>Mean Time to Repair</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============== OUTCOMES (compact tabs) ============== -->
+<section class="outcomes" id="outcomes" aria-labelledby="outcomes-h">
+  <div class="wrap">
+    <div class="outcomes-intro">
+      <h2 id="outcomes-h" class="section-h">Real Outcomes. Proven Impact.</h2>
+    </div>
+
+    <div class="outcomes-tabs2" id="outcomesAccordion" role="tablist">
+      <button class="outcomes-item active" data-index="0" role="tab" aria-selected="true">
+        <span class="outcomes-item-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+        <span class="outcomes-item-title">Media Platform<br>Infrastructure Spend</span>
+      </button>
+      <button class="outcomes-item" data-index="1" role="tab" aria-selected="false">
+        <span class="outcomes-item-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></span>
+        <span class="outcomes-item-title">Ad Delivery &amp;<br>Ad-Network Scale</span>
+      </button>
+      <button class="outcomes-item" data-index="2" role="tab" aria-selected="false">
+        <span class="outcomes-item-icon"><svg viewBox="0 0 24 24"><path d="M4 12h4l3-8 4 16 3-8h2"/></svg></span>
+        <span class="outcomes-item-title">Streaming Ingestion<br>&amp; Latency</span>
+      </button>
+      <button class="outcomes-item" data-index="3" role="tab" aria-selected="false">
+        <span class="outcomes-item-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>
+        <span class="outcomes-item-title">Application Modernization<br>&amp; Microservices</span>
+      </button>
+      <span class="outcomes-tabs-line" aria-hidden="true"><i></i></span>
+    </div>
+
+    <div class="outcomes-story" id="outcomesDetail">
+      <div class="outcomes-copy">
+        <div class="outcomes-case" data-field="heading">Media Platform Infrastructure Spend</div>
+        <div class="outcomes-detail-block">
+          <div class="outcomes-detail-label">Baseline</div>
+          <p class="outcomes-detail-text" data-field="baseline">High operational IT spend on data analytics ($100K/mo), heavy manual infrastructure maintenance, and 600ms latency on user requests.</p>
+        </div>
+        <div class="outcomes-detail-block">
+          <div class="outcomes-detail-label">Intervention</div>
+          <p class="outcomes-detail-text" data-field="intervention">Migrated to GCP using Firebase for rapid testing, Dataflow for real-time streaming recommendations, and Cloud Build/Deployment Manager to automate the DevOps burden.</p>
+        </div>
+        <div class="outcomes-detail-block">
+          <div class="outcomes-detail-label">Result</div>
+          <p class="outcomes-detail-text" data-field="result">Slashed monthly infrastructure spend down to $20K, improved user request latency from 600ms to 100ms, and saved up to 6 staff hours of daily work.</p>
+        </div>
+      </div>
+      <div class="outcomes-media shape-1" id="outcomesMedia">
+        <div class="outcomes-media-shape"><img data-field="image" src="assets/outcome-tmeg-infrastructure.jpg" alt="Data centre aisle with illuminated server racks and streaming fibre traces"></div>
+        <div class="outcomes-metric-box">
+          <div class="outcomes-metric-value" data-field="metric">$20K/mo</div>
+          <div class="outcomes-metric-label" data-field="metricLabel">Infrastructure Spend</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== PILLARS (white + light blue mix, icons) ============== -->
+<section class="pillars" aria-labelledby="pillars-h">
+  <span class="grid-motif" aria-hidden="true"></span>
+  <div class="wrap">
+    <div class="pillars-layout">
+      <div class="pillars-intro">
+        <h2 id="pillars-h" class="section-h">Four engineering practices, applied above your core OSS/BSS, CDN, and gaming infrastructure.</h2>
+      </div>
+      <div class="pillars-cards">
+        <img class="pillars-motif" src="assets/practices-shapes.svg" alt="" aria-hidden="true">
+        <div class="pillar-card">
+          <div class="pillar-card-top">
+            <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div>
+            <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+          </div>
+          <div class="pillar-name">AI Outcome Engineering</div>
+          <p class="pillar-desc">Rebuilds network ticketing, content ingestion, royalty tracking, and player moderation workflows, replacing legacy operational interfaces.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-card-top">
+            <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
+            <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+          </div>
+          <div class="pillar-name">Cloud and AI Platform Engineering</div>
+          <p class="pillar-desc">High-concurrency, low-latency data platforms that ingest real-time network telemetry, media logs, and gaming events into search-ready context lakes.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-card-top">
+            <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.4 8.5-8 9-4.6-.5-8-4.5-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+          </div>
+          <div class="pillar-name">AI Trust &amp; Resilience Engineering</div>
+          <p class="pillar-desc">Real-time content safety guardrails, media IP protection, and zero-downtime infrastructure frameworks built for massive concurrent streaming and gaming events.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-card-top">
+            <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+          </div>
+          <div class="pillar-name">AI Adoption &amp; Change Engineering</div>
+          <p class="pillar-desc">Redesigns NOC operator, content editor, and community manager roles around agentic tools. Success tracked by network uptime and media throughput, not system logins.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ENGAGEMENT (centered, dark AI-Ops style) ============== -->
+<section class="engagement" aria-labelledby="engagement-h">
+  <div class="eng-sticky">
+  <div class="wrap">
+    <div class="eng-layout">
+      <div class="eng-intro">
+        <h2 id="engagement-h">How an engagement starts</h2>
+        <p class="eng-body">Outcome Discovery on one named process from the list above. Two to four weeks, fixed price, ending in a baseline metric assessment and a ranked opportunity matrix. Most TMEG engagements start with content discovery optimization, network incident triage, or asset generation pipelines due to immediate cycle-time compression and direct retention impact.</p>
+      </div>
+
+      <div class="eng-deck" id="engDeck" aria-label="Engagement path">
+        <div class="eng-deck-stage">
+          <article class="eng-card" data-step="0" style="--pos:0" tabindex="0" aria-current="step">
+            <span class="eng-card-num" aria-hidden="true">01</span>
+            <div class="eng-card-meta">Day 0</div>
+            <h3 class="eng-card-title">Name one process</h3>
+            <p class="eng-card-desc">Pick a single process from the list above. We scope the systems it touches, the teams who run it, and the metric that defines it today.</p>
+          </article>
+          <article class="eng-card" data-step="1" style="--pos:1" tabindex="0" aria-current="false">
+            <span class="eng-card-num" aria-hidden="true">02</span>
+            <div class="eng-card-meta">Two to four weeks &middot; fixed price</div>
+            <h3 class="eng-card-title">Outcome Discovery</h3>
+            <p class="eng-card-desc">Our engineers sit inside the workflow, trace where time and value leak, and instrument the baseline against your OSS/BSS, CDN, and gaming platforms.</p>
+          </article>
+          <article class="eng-card" data-step="2" style="--pos:2" tabindex="0" aria-current="false">
+            <span class="eng-card-num" aria-hidden="true">03</span>
+            <div class="eng-card-meta">What you leave with</div>
+            <h3 class="eng-card-title">Baseline and ranked matrix</h3>
+            <p class="eng-card-desc">A baseline metric assessment and a ranked opportunity matrix: which interventions move the metric, in what order, and what each is worth.</p>
+          </article>
+        </div>
+        <div class="eng-deck-dots" aria-hidden="true">
+          <button type="button" class="eng-deck-dot is-active" data-step="0" aria-label="Step 01"><i></i></button>
+          <button type="button" class="eng-deck-dot" data-step="1" aria-label="Step 02"><i></i></button>
+          <button type="button" class="eng-deck-dot" data-step="2" aria-label="Step 03"><i></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
+<!-- ============== FAQ (interesting layout) ============== -->
+<section class="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="faq-layout">
+      <div class="faq-sidebar">
+        <div class="faq-title">Frequently<br>Asked<br><span>Questions</span></div>
+        <div class="faq-side-text">The four questions every network, content, and platform engineering function raises before an agentic workflow reaches live traffic.</div>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            How does Searce integrate with existing Telecommunications Operations Support Systems (OSS) and Business Support Systems (BSS)?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Searce operates in the orchestration layer directly above legacy OSS/BSS platforms. We connect via open APIs, TM Forum standards, and real-time streaming connectors to read telemetry and trigger workflows without requiring a core system overhaul.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Can these AI models operate within low-latency gaming and edge streaming environments?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Searce architects edge-based inference pipelines optimized for sub-millisecond execution, ensuring real-time toxicity filtering, ad insertion, and matchmaking run seamlessly without introducing stream buffering or gameplay lag.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            How is high-value media IP and user privacy protected during AI pipeline execution?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">We build zero-trust, media-grade compliance architectures where digital assets, proprietary game code, and user PII remain strictly within your enterprise perimeter. All extraction and generation models operate in permission-isolated sandboxes with full audit logging.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            How fast can a media studio or streaming provider expect to see measurable ROI?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Discovery and pipeline design take two to four weeks. High-impact automations, such as AI-driven asset generation or personalized content discovery, typically deploy to production within 6 to 10 weeks, driving immediate production savings and engagement lifts.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONNECT (form) ============== -->
+<section class="connect" id="connect">
+  <div class="wrap">
+    <div class="connect-layout">
+      <div>
+        <h2 class="connect-heading">what's the problem<br><span class="accent">worth solving?</span></h2>
+        <p class="connect-sub">Bring us a problem. We'll come back inside 24 hours.</p>
+      </div>
+      <form class="connect-form" onsubmit="event.preventDefault();">
+        <input class="form-field" type="text" placeholder="first name*" required>
+        <input class="form-field" type="text" placeholder="last name*" required>
+        <input class="form-field" type="text" placeholder="company name">
+        <input class="form-field" type="email" placeholder="work email*" required>
+        <select class="form-field" required>
+          <option value="IN">India (भारत)</option>
+          <option value="US">United States</option>
+          <option value="GB">United Kingdom</option>
+          <option value="SG">Singapore</option>
+          <option value="AE">United Arab Emirates</option>
+        </select>
+        <input class="form-field" type="tel" placeholder="+91" required>
+        <select class="form-field full" required>
+          <option value="">your title*</option>
+          <option>Chief Executive Officer</option>
+          <option>Chief Information Officer</option>
+          <option>Chief Technology Officer</option>
+          <option>Chief Digital Officer</option>
+          <option>Chief Content Officer</option>
+          <option>Head of Network Operations</option>
+          <option>Head of Content Engineering</option>
+          <option>Head of Streaming Platform</option>
+          <option>Head of Player Experience</option>
+          <option>Other</option>
+        </select>
+        <textarea class="form-field full" placeholder="please describe your query here*" required></textarea>
+        <label class="form-consent">
+          <input type="checkbox" required>
+          <span>yes, i'd like searce to contact me regarding cloud services and related offerings by email or telephone.*</span>
+        </label>
+        <div class="form-submit-row">
+          <button type="submit" class="form-submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">searce<span class="dot"></span></div>
+        <div class="footer-tag">Pushing the boundaries of tech innovation and designing end-to-end industry solutions for our clients at global scale</div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">services</div>
+        <ul>
+          <li><a href="#">cloud platform modernization</a></li>
+          <li><a href="#">cloud security &amp; reliability engineering</a></li>
+          <li><a href="#">modern work ops</a></li>
+          <li><a href="#">modern business ops</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">industries</div>
+        <ul>
+          <li><a href="financial-services-and-insurance.html">financial services &amp; insurance</a></li>
+          <li><a href="healthcare-and-life-sciences.html">healthcare &amp; life sciences</a></li>
+          <li><a href="#">travel, transportation &amp; logistics</a></li>
+          <li><a href="#">retail, CPG &amp; e-commerce</a></li>
+          <li><a href="telecommunications-media-entertainment-and-gaming-v5.html">telecommunication, media, entertainment &amp; gaming</a></li>
+          <li><a href="#">manufacturing, industrials &amp; construction</a></li>
+          <li><a href="#">technology, software &amp; services</a></li>
+          <li><a href="#">natural resources, energy &amp; utilities</a></li>
+          <li><a href="#">public sector &amp; education</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">insights</div>
+        <ul>
+          <li><a href="#">case studies</a></li>
+          <li><a href="#">events</a></li>
+          <li><a href="#">articles</a></li>
+          <li><a href="#">news</a></li>
+          <li><a href="who-we-are.html">about us</a></li>
+          <li><a href="careers.html">careers</a></li>
+          <li><a href="#connect">let's connect</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.5 0h4.37v1.92h.06c.61-1.16 2.1-2.38 4.32-2.38 4.62 0 5.48 3.04 5.48 6.99V22h-4.56v-6.28c0-1.5-.03-3.42-2.09-3.42-2.1 0-2.42 1.63-2.42 3.32V22H7.72V8z"/></svg></a>
+        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16.05 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.58-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 01-1.93.07 4.28 4.28 0 004 2.98 8.521 8.521 0 01-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16.05 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg></a>
+      </div>
+      <div class="footer-legal">
+        <a href="#">terms of service</a>
+        <a href="#">privacy policy</a>
+        <a href="#">legal</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Searce Technologies Inc.<br>all rights reserved</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Nav — solidify on scroll */
+(function(){
+  const nav = document.querySelector('.nav');
+  if(!nav) return;
+  const onScroll = () => nav.classList.toggle('nav-scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+/* Processes carousel — Autonomous RCM Architecture (V8) */
+(function(){
+  const WORKFLOWS = [
+    {key:"submit",      name:"Telemetry Ingest & Health Scoring", agent:"Sentinel Agent",  desc:"Streams RAN and core telemetry, scores network health and flags degradation before customers feel it."},
+    {key:"correct",     name:"Auto-Remediation & Rerouting",      agent:"Healer Agent",    desc:"Diagnoses faults, reroutes traffic and pushes self-healing fixes to the affected nodes."},
+    {key:"pursue",      name:"Asset Ingest & Localization",       agent:"Producer Agent",  desc:"Transcodes, captions, translates and tags media assets for every region and format."},
+    {key:"appeal",      name:"Content Safety & Moderation",       agent:"Guardian Agent",  desc:"Detects toxic voice and chat activity in session and enforces graded moderation actions."},
+    {key:"post",        name:"Usage Metering & Royalty Posting",  agent:"Ledger Agent",    desc:"Reconciles cross-platform play logs and posts royalty attribution to every rights holder."},
+    {key:"communicate", name:"Subscriber Engagement & Retention", agent:"Concierge Agent", desc:"Runs churn-risk outreach, personalised offers and subscriber communication."}
+  ];
+  let currentStage = 0;
+  const PAL_DARK      = {stroke:"#dbe9ff", dashed:"rgba(179,208,255,0.32)", fill:"rgba(179,208,255,0.06)", accent:"#7ba9ff", dark:"#02061a"};
+  const PAL_SIDE_DARK = {stroke:"#54555a", dashed:"rgba(84,86,92,0.35)", fill:"rgba(84,86,92,0.04)", accent:"#0064ff", dark:"#f2f7ff"};
+
+  function shapeSvg(key, S){
+    const st = S.stroke, ds = S.dashed, fl = S.fill, ac = S.accent, dk = S.dark;
+    const thin   = `stroke="${st}" stroke-width="1" fill="none"`;
+    const filled = `fill="${fl}" stroke="${st}" stroke-width="1.2"`;
+    switch(key){
+      case "submit": return `
+        <rect x="34" y="28" width="112" height="150" rx="4" ${filled}/>
+        <rect x="118" y="18" width="46" height="20" rx="4" fill="${ac}"/>
+        <text x="141" y="32" text-anchor="middle" font-family="Poppins" font-size="8" font-weight="700" fill="${dk}" letter-spacing="1.6">RAN</text>
+        <line x1="46" y1="52" x2="118" y2="52" ${thin} stroke="${ac}"/>
+        <line x1="46" y1="60" x2="96" y2="60" ${thin}/>
+        ${[80,98,116].map((y,i)=>`
+          <g transform="translate(52 ${y})">
+            <circle cx="0" cy="0" r="4.5" fill="${ac}"/>
+            <path d="M -2 0 L -0.4 1.7 L 2.5 -1.6" stroke="${dk}" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <line x1="62" y1="${y}" x2="${138-i*6}" y2="${y}" ${thin}/>
+        `).join('')}
+        <text x="46" y="138" font-family="Poppins" font-size="6" font-weight="500" fill="${st}" opacity="0.55" letter-spacing="1.2">NETWORK HEALTH SCORE</text>
+        <rect x="46" y="146" width="72" height="5" rx="2.5" fill="${ds}" opacity="0.6"/>
+        <rect x="46" y="146" width="66" height="5" rx="2.5" fill="${ac}"/>
+        <text x="134" y="151.5" text-anchor="end" font-family="Poppins" font-size="8.5" font-weight="600" fill="${ac}">98</text>
+        <path d="M 156 100 L 178 100 M 172 94 L 178 100 L 172 106" stroke="${ac}" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="182" cy="100" r="2.4" fill="${ac}"/>`;
+      case "correct": return `
+        <rect x="14" y="42" width="70" height="116" rx="3" ${filled}/>
+        <g transform="translate(49 62)"><circle cx="0" cy="0" r="10" ${thin} stroke="${ac}" stroke-width="1.4"/><path d="M -3.5 -3.5 L 3.5 3.5 M 3.5 -3.5 L -3.5 3.5" stroke="${ac}" stroke-width="1.6" stroke-linecap="round"/></g>
+        <line x1="24" y1="86" x2="74" y2="86" ${thin}/>
+        <rect x="20" y="94" width="58" height="10" fill="${ac}" fill-opacity="0.14"/>
+        <line x1="24" y1="99" x2="74" y2="99" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 2"/>
+        <line x1="24" y1="112" x2="70" y2="112" ${thin}/>
+        <line x1="24" y1="120" x2="76" y2="120" ${thin}/>
+        <line x1="24" y1="128" x2="66" y2="128" ${thin}/>
+        <text x="49" y="146" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6" opacity="0.85">DEGRADED</text>
+        <path d="M 88 100 L 112 100 M 106 94 L 112 100 L 106 106" stroke="${ac}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="116" y="42" width="70" height="116" rx="3" ${filled}/>
+        <g transform="translate(151 62)"><circle cx="0" cy="0" r="10" fill="${ac}"/><path d="M -3.5 0 L -1 2.5 L 4 -2.8" stroke="${dk}" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <line x1="126" y1="86" x2="176" y2="86" ${thin}/>
+        <line x1="126" y1="94" x2="172" y2="94" ${thin}/>
+        <rect x="122" y="102" width="58" height="10" fill="${ac}" fill-opacity="0.18"/>
+        <line x1="126" y1="107" x2="176" y2="107" stroke="${ac}" stroke-width="1.2"/>
+        <line x1="126" y1="118" x2="170" y2="118" ${thin}/>
+        <line x1="126" y1="126" x2="176" y2="126" ${thin}/>
+        <line x1="126" y1="134" x2="164" y2="134" ${thin}/>
+        <text x="151" y="150" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">REROUTED</text>`;
+      case "pursue": return `
+        ${[44,64,86].map((r,i)=>`<circle cx="100" cy="100" r="${r}" fill="none" stroke="${ac}" stroke-width="0.9" opacity="${0.55 - i*0.16}" stroke-dasharray="3 4"/>`).join('')}
+        <rect x="80" y="80" width="40" height="46" rx="3" ${filled}/>
+        <line x1="86" y1="92" x2="114" y2="92" ${thin}/>
+        <line x1="86" y1="100" x2="110" y2="100" ${thin}/>
+        <line x1="86" y1="108" x2="114" y2="108" ${thin}/>
+        <line x1="86" y1="116" x2="104" y2="116" ${thin}/>
+        <rect x="88" y="70" width="24" height="10" rx="1.5" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="0.8"/>
+        <text x="100" y="77.5" text-anchor="middle" font-family="Poppins" font-size="6" font-weight="600" fill="${ac}" letter-spacing="1.4">CDN</text>
+        <g transform="translate(24 32)"><rect x="0" y="0" width="30" height="22" rx="2" ${filled}/><line x1="0" y1="7" x2="30" y2="7" ${thin}/><circle cx="4" cy="3.5" r="1.2" fill="${ac}"/><circle cx="8" cy="3.5" r="1.2" fill="${ac}"/><circle cx="12" cy="3.5" r="1.2" fill="${ac}"/><line x1="5" y1="13" x2="20" y2="13" ${thin} stroke="${ac}"/><line x1="5" y1="17" x2="14" y2="17" ${thin}/></g>
+        <line x1="54" y1="54" x2="80" y2="82" ${thin} stroke="${ac}" stroke-dasharray="2 3"/>
+        <g transform="translate(146 32)"><rect x="0" y="0" width="24" height="34" rx="4" ${filled}/><rect x="4" y="6" width="16" height="20" fill="${ds}" opacity="0.55"/><circle cx="12" cy="30" r="1.6" fill="${ac}"/></g>
+        <line x1="146" y1="52" x2="120" y2="82" ${thin} stroke="${ac}" stroke-dasharray="2 3"/>
+        <g transform="translate(80 156)"><rect x="0" y="0" width="40" height="26" rx="2.5" ${filled}/><path d="M 0 0 L 20 16 L 40 0" ${thin} stroke="${ac}"/><circle cx="34" cy="20" r="3.5" fill="${ac}"/></g>
+        <line x1="100" y1="126" x2="100" y2="156" ${thin} stroke="${ac}" stroke-dasharray="2 3"/>`;
+      case "appeal": return `
+        <g transform="translate(100 30)"><rect x="-34" y="-14" width="68" height="26" rx="4" ${filled}/><path d="M -6 -5 L 6 5 M 6 -5 L -6 5" stroke="${ac}" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/></g>
+        <text x="100" y="60" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">TOXICITY</text>
+        ${[48,100,152].map(x=>`
+          <path d="M 100 66 Q 100 78 ${x} 88" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
+          <circle cx="${x}" cy="96" r="9" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1.1"/>
+          <circle cx="${x}" cy="96" r="2.5" fill="${ac}"/>`).join('')}
+        <path d="M 48 106 Q 48 118 100 128" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
+        <path d="M 100 106 L 100 128" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
+        <path d="M 152 106 Q 152 118 100 128" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
+        <circle cx="100" cy="132" r="5.5" fill="${ac}"/>
+        <path d="M 100 138 L 100 156 M 94 148 L 100 138 L 106 148" stroke="${ac}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <g transform="translate(100 174)"><rect x="-36" y="-14" width="72" height="26" rx="4" fill="${ac}"/><text x="0" y="3.5" text-anchor="middle" font-family="Poppins" font-size="8" font-weight="700" fill="${dk}" letter-spacing="1.6">ACTION</text></g>`;
+      case "post": return `
+        <text x="20" y="34" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">LOGS</text>
+        ${[56,80,104,128,152].map((y,i)=>`<circle cx="18" cy="${y}" r="2.4" fill="${ac}" opacity="${0.45+i*0.08}"/><path d="M 22 ${y} Q 44 ${y} 62 104" fill="none" stroke="${ac}" stroke-width="0.9" opacity="${0.35+i*0.08}"/>`).join('')}
+        <rect x="66" y="36" width="118" height="132" rx="4" ${filled}/>
+        <rect x="66" y="36" width="118" height="20" fill="${ac}" fill-opacity="0.14"/>
+        <text x="78" y="49" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">ROYALTY</text>
+        <line x1="118" y1="56" x2="118" y2="168" ${thin}/>
+        <line x1="152" y1="56" x2="152" y2="168" ${thin}/>
+        ${[74,92,110,128,146,164].map((y,i)=>{
+          const isVar = i===2;
+          if(isVar) return `
+            <rect x="66" y="${y-9}" width="118" height="18" fill="${ac}" fill-opacity="0.20"/>
+            <line x1="74" y1="${y}" x2="112" y2="${y}" stroke="${ac}" stroke-width="1.1"/>
+            <line x1="124" y1="${y}" x2="146" y2="${y}" stroke="${ac}" stroke-width="1.1"/>
+            <line x1="158" y1="${y}" x2="178" y2="${y}" stroke="${ac}" stroke-width="1.1"/>
+            <circle cx="60" cy="${y}" r="3.5" fill="${ac}"/>`;
+          return `
+            <line x1="74" y1="${y}" x2="112" y2="${y}" ${thin} opacity="0.7"/>
+            <line x1="124" y1="${y}" x2="146" y2="${y}" ${thin} opacity="0.7"/>
+            <line x1="158" y1="${y}" x2="178" y2="${y}" ${thin} opacity="0.7"/>`;
+        }).join('')}`;
+      case "communicate": return `
+        <rect x="16" y="36" width="88" height="128" rx="4" ${filled}/>
+        <rect x="16" y="36" width="88" height="20" fill="${ac}" fill-opacity="0.14"/>
+        <text x="26" y="49" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">SUBSCRIBER</text>
+        <line x1="26" y1="70" x2="94" y2="70" ${thin}/>
+        <line x1="26" y1="78" x2="82" y2="78" ${thin}/>
+        <line x1="26" y1="86" x2="90" y2="86" ${thin}/>
+        <line x1="26" y1="94" x2="76" y2="94" ${thin}/>
+        <line x1="26" y1="106" x2="94" y2="106" ${thin} opacity="0.6"/>
+        <text x="26" y="128" font-family="Poppins" font-size="6.5" font-weight="500" fill="${st}" opacity="0.55" letter-spacing="1.6">WATCH TIME</text>
+        <text x="94" y="150" text-anchor="end" font-family="Poppins" font-size="16" font-weight="600" fill="${ac}" letter-spacing="-0.02em">4.8h</text>
+        <path d="M 108 65 Q 122 65 128 50" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
+        <path d="M 108 100 Q 122 100 128 100" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
+        <path d="M 108 135 Q 122 135 128 156" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
+        <g transform="translate(132 32)"><rect x="0" y="0" width="52" height="32" rx="3" ${filled}/><path d="M 0 0 L 26 22 L 52 0" ${thin} stroke="${ac}"/></g>
+        <g transform="translate(132 80)"><path d="M 6 0 Q 0 0 0 6 L 0 26 Q 0 32 6 32 L 30 32 L 40 42 L 36 32 L 46 32 Q 52 32 52 26 L 52 6 Q 52 0 46 0 Z" ${filled}/><circle cx="16" cy="16" r="1.8" fill="${ac}"/><circle cx="26" cy="16" r="1.8" fill="${ac}"/><circle cx="36" cy="16" r="1.8" fill="${ac}"/></g>
+        <g transform="translate(140 140)"><rect x="0" y="0" width="30" height="40" rx="4" ${filled}/><rect x="4" y="6" width="22" height="24" fill="${ds}" opacity="0.5"/><circle cx="15" cy="35" r="1.8" fill="${ac}"/></g>`;
+      default: return `<circle cx="100" cy="100" r="60" ${filled}/>`;
+    }
+  }
+
+  function slideMarkup(wf, idx){
+    const num = String(idx+1).padStart(2,'0');
+    return `
+      <div class="rcm-slide" data-idx="${idx}">
+        <div class="wf-tag">Workflow ${num}</div>
+        <svg class="svg-side"   viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(wf.key, PAL_SIDE_DARK)}</svg>
+        <svg class="svg-center" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(wf.key, PAL_DARK)}</svg>
+        <div class="wf-mini">${wf.name}</div>
+        <div class="wf-panel">
+          <div class="wp-agent">${wf.agent}</div>
+          <div class="wp-name">${wf.name}</div>
+          <div class="wp-desc">${wf.desc}</div>
+          <span class="wp-mode">Autonomous</span>
+        </div>
+      </div>`;
+  }
+
+  const track = document.getElementById('carTrack');
+  if(!track) return;
+  track.innerHTML = WORKFLOWS.map((w,i)=>slideMarkup(w,i)).join('');
+  track.querySelectorAll('.rcm-slide').forEach(el=>el.addEventListener('click',()=>{
+    const idx = parseInt(el.dataset.idx,10);
+    if(idx !== currentStage){ currentStage = idx; updatePositions(); }
+  }));
+
+  const panelTimers = new Map();
+  function clearPanelTimers(el){
+    const t = panelTimers.get(el);
+    if(t){ clearTimeout(t.show); clearTimeout(t.hide); panelTimers.delete(el); }
+  }
+  function updatePositions(){
+    const n = WORKFLOWS.length;
+    const step = 360 / n;
+    const radius = Math.max(420, Math.round(160 / Math.tan(Math.PI/n)));
+    track.querySelectorAll('.rcm-slide').forEach((el,i)=>{
+      el.style.transform = `rotateY(${i*step}deg) translateZ(${radius}px)`;
+      const isCenter = (i===currentStage);
+      el.classList.toggle('pos-center', isCenter);
+      if(!isCenter){
+        el.classList.remove('panel-visible');
+        clearPanelTimers(el);
+      } else {
+        clearPanelTimers(el);
+        const show = setTimeout(()=>el.classList.add('panel-visible'), 1050);
+        const hide = setTimeout(()=>el.classList.remove('panel-visible'), 4200);
+        panelTimers.set(el, {show, hide});
+      }
+    });
+    track.style.transform = `rotateY(${-currentStage*step}deg)`;
+  }
+  updatePositions();
+
+  function stepFn(dir){
+    const n = WORKFLOWS.length;
+    currentStage = (currentStage + dir + n) % n;
+    updatePositions();
+  }
+  document.getElementById('carPrev').addEventListener('click', ()=>stepFn(-1));
+  document.getElementById('carNext').addEventListener('click', ()=>stepFn(1));
+})();
+
+/* Value-leaks stacked accordion */
+document.querySelectorAll('.leak-bar').forEach(bar => {
+  bar.addEventListener('click', () => {
+    const open = bar.classList.contains('open');
+    document.querySelectorAll('.leak-bar.open').forEach(b => b.classList.remove('open'));
+    if (!open) bar.classList.add('open');
+  });
+});
+
+/* Outcomes — accordion left + baseline/intervention/result right */
+(function(){
+  const items = document.querySelectorAll('.outcomes-item');
+  const detail = document.getElementById('outcomesDetail');
+  if(!items.length || !detail) return;
+  const data = [
+    {heading:"Media Platform Infrastructure Spend", image:"assets/outcome-tmeg-infrastructure.jpg", alt:"Analytics dashboards on a workstation surrounded by manual paperwork", metric:"$20K/mo", metricLabel:"Infrastructure Spend",
+      baseline:"High operational IT spend on data analytics ($100K/mo), heavy manual infrastructure maintenance, and 600ms latency on user requests.",
+      intervention:"Migrated to GCP using Firebase for rapid testing, Dataflow for real-time streaming recommendations, and Cloud Build/Deployment Manager to automate the DevOps burden.",
+      result:"Slashed monthly infrastructure spend down to $20K, improved user request latency from 600ms to 100ms, and saved up to 6 staff hours of daily work."},
+    {heading:"Ad Delivery & Ad-Network Scale", image:"assets/outcome-tmeg-adnetwork.jpg", alt:"Player at a desktop gaming rig with an in-game session on screen", metric:"70%", metricLabel:"Ad Fill Rate",
+      baseline:"Inability to scale for traffic spikes, handle image moderation, or deliver sub-second native in-game ads without driving up cloud spend.",
+      intervention:"Migrated to Compute Engine, BigQuery, and Cloud Vision API to dynamically filter undesirable image content and route high-concurrency ad requests.",
+      result:"Accommodated 3M daily ad requests, handled 10x traffic spikes with zero downtime, hit a 70% fill rate against a 50% industry standard, and delivered ads in an average of 500ms."},
+    {heading:"Streaming Ingestion & Latency", image:"assets/outcome-tmeg-streaming.jpg", alt:"Viewer browsing a streaming catalogue on a tablet", metric:"50%", metricLabel:"Platform Cost Reduction",
+      baseline:"Rigid one-to-one mapping of streamers to VMs caused low server utilization, inflated compute costs, and high ingestion latency.",
+      intervention:"Architected dynamic ingestor autoscaling across multiple GCP regions to match streamer demand elastically.",
+      result:"Cut platform costs by roughly 50% and achieved double-digit millisecond streaming latency globally."},
+    {heading:"Application Modernization & Microservices", image:"assets/outcome-tmeg-modernization.jpg", alt:"Engineer writing service code at a workstation in an open office", metric:"20%", metricLabel:"Operating Cost Reduction",
+      baseline:"Monolithic architecture on traditional compute created high technical debt, slow deployments, and elevated infrastructure overhead.",
+      intervention:"Migrated 50+ microservices to GKE using Horizontal and Vertical Pod Autoscaling, backed by automated CI/CD deployment pipelines.",
+      result:"Reduced operating costs by 20% through automation while increasing application scaling, performance, and release frequency."}
+  ];  const line = document.querySelector('.outcomes-tabs-line i');
+  function setActive(idx){
+    items.forEach((t,i) => { const on = i === idx; t.classList.toggle('active', on); t.setAttribute('aria-selected', on ? 'true' : 'false'); });
+    if(line) line.style.transform = 'translateX(' + (idx * 100) + '%)';
+    const d = data[idx];
+    detail.classList.add('swap');
+    setTimeout(() => {
+      detail.querySelector('[data-field="heading"]').textContent = d.heading;
+      const media = document.getElementById('outcomesMedia'); if(media) media.className = 'outcomes-media shape-' + (idx+1);
+      const img = detail.querySelector('[data-field="image"]'); img.src = d.image; img.alt = d.alt;
+      detail.querySelector('[data-field="metric"]').textContent = d.metric;
+      detail.querySelector('[data-field="metricLabel"]').textContent = d.metricLabel;
+      detail.querySelector('[data-field="baseline"]').textContent = d.baseline;
+      detail.querySelector('[data-field="intervention"]').textContent = d.intervention;
+      detail.querySelector('[data-field="result"]').textContent = d.result;
+      detail.classList.remove('swap');
+    }, 180);
+  }
+  items.forEach(t => t.addEventListener('click', () => setActive(parseInt(t.dataset.index,10))));
+})();
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded','false');
+    });
+    if (!open) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+});
+</script>
+
+<script>
+(function(){
+  var root=document.getElementById('engDeck'); if(!root) return;
+  var section=root.closest('.engagement'), cards=root.querySelectorAll('.eng-card'), dots=root.querySelectorAll('.eng-deck-dot'), n=cards.length, cur=-1;
+  function layout(i){
+    cur=i;
+    cards.forEach(function(c,k){ var pos=(k-i+n)%n; c.style.setProperty('--pos',pos); c.style.zIndex=String(3-pos); c.setAttribute('aria-current',pos===0?'step':'false'); c.style.pointerEvents=pos===0?'':'none'; });
+    dots.forEach(function(d,k){ d.classList.toggle('is-active',k===i); d.classList.toggle('is-done',k<i); if(k!==i) d.style.setProperty('--p','0%'); });
+  }
+  /* progress through the scroll track picks the card: 0-1/3 -> 01, 1/3-2/3 -> 02, 2/3-1 -> 03 */
+  function update(){
+    var r=section.getBoundingClientRect(), track=section.offsetHeight-window.innerHeight;
+    var p=track>0?Math.min(Math.max(-r.top/track,0),1):0;
+    var i=Math.min(Math.floor(p*n),n-1), local=Math.min(Math.max((p*n-i),0),1);
+    if(i!==cur) layout(i);
+    dots[i].style.setProperty('--p',(local*100).toFixed(1)+'%');
+  }
+  var ticking=false;
+  function onScroll(){ if(ticking) return; ticking=true; requestAnimationFrame(function(){ update(); ticking=false; }); }
+  window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll);
+  /* clicking a card or a progress bar scrolls to that step */
+  function scrollToStep(i){ var track=section.offsetHeight-window.innerHeight; var top=section.getBoundingClientRect().top+window.scrollY; window.scrollTo({top: top + track*((i+0.5)/n), behavior:'smooth'}); }
+  cards.forEach(function(c){ c.addEventListener('click',function(){ scrollToStep((cur+1)%n); }); c.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); scrollToStep((cur+1)%n); } }); });
+  dots.forEach(function(d){ d.addEventListener('click',function(){ scrollToStep(+d.dataset.step); }); });
+  layout(0); update();
+})();
+</script>
+<script>
+(function(){
+  var sec=document.querySelector('.leaks'); if(!sec) return;
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){sec.classList.add('is-in');io.disconnect();}});},{threshold:0.2});
+    io.observe(sec);
+  } else sec.classList.add('is-in');
+  // re-trigger the draw on hover by restarting the animation
+  sec.querySelectorAll('.leak-card').forEach(function(card){
+    card.addEventListener('mouseenter',function(){
+      card.querySelectorAll('.leak-card-icon svg *').forEach(function(el){el.style.animation='none'; void el.getBoundingClientRect(); el.style.animation='';});
+    });
+  });
+})();
+</script>
+</body>
+</html>

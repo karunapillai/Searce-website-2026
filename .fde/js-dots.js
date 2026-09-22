@@ -26,7 +26,23 @@
   var COL_DIR = [0.46, -0.89];
 
   var dpr = 1, W = 0, H = 0, dots = [], raf = 0, running = false;
+  var sprite = null, SPRITE_R = 64;   // pre-rendered soft dot, drawn scaled
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // Building a radial gradient per dot per frame pegs the CPU. The soft
+  // near-field dot is rendered once into an offscreen canvas and then
+  // stamped with drawImage, which is cheap.
+  function makeSprite() {
+    sprite = document.createElement('canvas');
+    sprite.width = sprite.height = SPRITE_R * 2;
+    var c = sprite.getContext('2d');
+    var g = c.createRadialGradient(SPRITE_R, SPRITE_R, 0, SPRITE_R, SPRITE_R, SPRITE_R);
+    g.addColorStop(0,    'rgba(140,190,255,1)');
+    g.addColorStop(0.45, 'rgba(60,130,245,0.42)');
+    g.addColorStop(1,    'rgba(20,60,160,0)');
+    c.fillStyle = g;
+    c.beginPath(); c.arc(SPRITE_R, SPRITE_R, SPRITE_R, 0, 6.2832); c.fill();
+  }
 
   function build() {
     dots = [];
@@ -81,13 +97,11 @@
       var r = 1.2 + 7.0 * d.s;             // near dots larger
 
       if (d.s > 0.58) {
-        // near field sits out of focus: a soft disc instead of a ring
-        var g = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, r * 2.1);
-        g.addColorStop(0, 'rgba(120,175,255,' + (a * 0.85).toFixed(4) + ')');
-        g.addColorStop(0.55, 'rgba(60,120,240,' + (a * 0.30).toFixed(4) + ')');
-        g.addColorStop(1, 'rgba(20,60,160,0)');
-        ctx.fillStyle = g;
-        ctx.beginPath(); ctx.arc(d.x, d.y, r * 2.1, 0, 6.2832); ctx.fill();
+        // near field sits out of focus: stamp the cached soft disc
+        var rr = r * 2.1;
+        ctx.globalAlpha = Math.min(1, a * 0.9);
+        ctx.drawImage(sprite, d.x - rr, d.y - rr, rr * 2, rr * 2);
+        ctx.globalAlpha = 1;
       } else {
         // far field is in focus: a crisp small ring
         ctx.strokeStyle = 'rgba(' + (95 + 75 * on).toFixed(0) + ','
@@ -102,6 +116,7 @@
   function start() { if (!running) { running = true; raf = requestAnimationFrame(frame); } }
   function stop()  { if (running) { running = false; cancelAnimationFrame(raf); } }
 
+  makeSprite();
   resize();
   if (reduce.matches) {
     draw(WAVE_SECONDS * 250);

@@ -8,7 +8,7 @@
    progress as the field. */
 .fde-flex{background:var(--paper);overflow:hidden;}
 .fde-flex-inner{
-  display:grid;grid-template-columns:minmax(0,1fr) 34%;
+  display:grid;grid-template-columns:minmax(0,1fr) 42%;
   gap:clamp(32px,5vw,72px);align-items:center;
 }
 .fde-flex h2{
@@ -25,18 +25,18 @@
    run edge to edge top-to-bottom the way the reference does */
 .fde-field{
   position:absolute;top:0;bottom:0;right:0;
-  width:34%;z-index:1;pointer-events:none;
+  width:42%;z-index:1;pointer-events:none;
 }
 #fde-flexdots{position:absolute;inset:0;width:100%;height:100%;display:block;}
-/* The label sits above the field rather than knocked out of it: a gap
-   through the middle would split the Stabilization square in two. */
+/* The label is knocked out of the middle of the field, dots above and
+   below it, as the reference shows. */
 .fde-phase-label{
-  position:absolute;left:0;right:0;top:clamp(118px,15vh,158px);
+  position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
   height:32px;text-align:center;margin:0;z-index:2;
 }
 .fde-phase-label span{
   position:absolute;left:50%;transform:translateX(-50%);top:0;
-  font-family:var(--body);font-weight:400;font-size:clamp(17px,1.6vw,23px);
+  font-family:var(--body);font-weight:400;font-size:clamp(14px,1.25vw,18px);
   color:var(--blue);white-space:nowrap;
 }
 html:not(.js) .fde-phase-label span + span{display:none;}

@@ -6,7 +6,9 @@
   position:relative;overflow:hidden;isolation:isolate;
   background:
     radial-gradient(ellipse 120% 150% at 50% 0%, #0a2f7a 0%, #071d4e 45%, #04102f 100%);
-  padding:calc(var(--sec) * 1.25) 0;
+  min-height:62vh;                    /* ~30% taller than before */
+  display:flex;align-items:center;
+  padding:calc(var(--sec) * 1.6) 0;
   text-align:center;
 }
 /* the same dot vocabulary as the hero, held still and quiet */
@@ -18,7 +20,7 @@
           mask-image:radial-gradient(ellipse 80% 90% at 50% 40%, #000 20%, transparent 78%);
   opacity:.5;
 }
-.fde-close .wrap{position:relative;z-index:1;}
+.fde-close .wrap{position:relative;z-index:1;width:100%;}
 .fde-close-eyebrow{
   font-family:var(--body);font-weight:500;
   font-size:11px;letter-spacing:.2em;text-transform:uppercase;

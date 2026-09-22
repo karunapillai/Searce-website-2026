@@ -1,47 +1,49 @@
 
-/* ======= FDE responsive — matches the site's 1180/1024/768/640 ladder ======= */
+/* =====================================================================
+   FDE responsive ladder — 1440+ / 1180 / 1024 / 768 / 480
+   Pinning and scrubbing are desktop-only (js-anim-head.js gates on
+   min-width 1025). At and below that, every section paints its resolved
+   end state and stacks, so the page reads without the choreography.
+   ===================================================================== */
+
+/* ---- large desktop: keep the deck from sprawling ---- */
+@media(min-width:1441px){
+  .fde-hero h1{font-size:76px;}
+  .fde-sec > .wrap,.fde-faq .wrap{max-width:1360px;}
+}
+
+/* ---- small desktop: pins still run, but the wide rows must fit ---- */
+@media(max-width:1180px){
+  .fde-inset{padding-left:calc(var(--mod) * 0.5);}
+  .fde-squad-inner{grid-template-columns:minmax(0,1fr) 210px;gap:40px;}
+  .fde-stack,.fde-card{width:210px;}
+  .fde-comp-inner{grid-template-columns:minmax(0,1fr) 340px;gap:40px;}
+  /* §8's trio is 3 cards + 2 rails; shrink both so it clears the gutters */
+  .fde-bcard{width:236px;min-height:300px;padding:24px 22px 28px;}
+  .fde-bcard li{font-size:17px;margin-bottom:16px;}
+  .fde-link{flex-basis:78px;}
+  .fde-bcard::after{right:-78px;width:78px;}
+  .fde-bcard-craft{font-size:26px;}
+  .fde-own-stage{height:clamp(320px,40vw,440px);}
+  .fde-field{width:38%;}
+}
+
+/* ---- tablet and below: no pinning; sections stack ---- */
 @media(max-width:1024px){
-  /* the extra modular inset only exists to hit Figma's 216px on a
-     1440 canvas; below that the wrap's own gutter is the grid */
   .fde-inset{padding-left:0;}
-  .fde-hero{min-height:74vh;padding:72px 0 88px;}
-  .fde-shift{height:auto;min-height:100vh;}
-  .fde-shift-stage{position:relative;inset:auto;padding:120px 28px;min-height:100vh;}
-}
-@media(max-width:768px){
-  .fde-hero{min-height:68vh;padding:56px 0 72px;}
-  .fde-hero-sub span{display:inline;}
-  .fde-sec{min-height:0;padding:var(--sec) 0;}
-  .fde-shift .fan{opacity:.22;}
-}
-@media(max-width:640px){
-  .fde-hero-badge{font-size:11px;padding:5px 9px;margin-bottom:22px;}
-  .fde-shift-stage{padding:96px 20px;}
-}
-
-/* FDE motion opt-out. The shared block above already flattens CSS
-   animation; these are the scripted surfaces it cannot reach. */
-@media(prefers-reduced-motion:reduce){
-  .js .fde-hero-badge,
-  .js .fde-hero h1 .l1,
-  .js .fde-hero h1 .l2,
-  .js .fde-hero-sub{opacity:1;transform:none;animation:none;}
-  .js .fde-shift .fan{clip-path:none;}
-}
-
-/* ======= FDE below 1025: sections stack and show their end state =======
-   The pinned scroll choreography is desktop-only (see js-anim-head.js);
-   these rules give each section a static layout that still reads. */
-@media(max-width:1024px){
   .fde-sec{min-height:0;padding:var(--sec) 0;display:block;}
+  .fde-hero{min-height:74vh;padding:72px 0 88px;}
+  .fde-shift{height:auto;min-height:88vh;}
+  .fde-shift-stage{position:relative;inset:auto;padding:110px 28px;min-height:78vh;}
 
-  /* §4 — card stack becomes a row/column of plain cards */
+  /* §4 — the stack becomes a plain row of cards */
   .fde-squad-inner{grid-template-columns:1fr;gap:40px;}
-  .fde-stack{height:auto;width:100%;display:flex;gap:16px;flex-wrap:wrap;}
-  .fde-card{position:relative;width:calc(33.333% - 11px);min-width:180px;min-height:0;
-            padding:26px 18px;filter:none!important;opacity:1!important;transform:none!important;}
-  .fde-card svg{width:64px;height:64px;}
-  .fde-card-label{font-size:17px;}
+  .fde-stack{height:auto;width:100%;display:grid;
+             grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
+  .fde-card{position:relative;width:auto;min-height:0;padding:26px 16px;
+            opacity:1!important;transform:none!important;filter:none!important;}
+  .fde-card svg{width:58px;height:58px;}
+  .fde-card-label{font-size:16px;}
 
   /* §5 — both practice panels shown, stacked */
   .fde-comp-inner{grid-template-columns:1fr;gap:40px;}
@@ -49,23 +51,20 @@
   .fde-panel{position:relative;inset:auto;margin-bottom:16px;
              transform:none!important;opacity:1!important;filter:none!important;}
 
-  /* §6 — bands drop below the copy instead of overlaying it */
+  /* §6 — bands drop below the copy rather than overlaying it */
   .fde-cap-bands{position:relative;width:auto;inset:auto;margin-top:36px;
                  grid-template-rows:none;}
-  .fde-band{transform:none!important;opacity:1!important;padding:34px 28px;}
+  .fde-band{transform:none!important;opacity:1!important;padding:32px 26px;}
   .fde-cap-inner{max-width:none;}
 
-  /* §7 — the SVG's preserveAspectRatio="none" only stays undistorted at
-     the desktop container ratio, so below 1025 the circle is replaced by
-     the same two roles as stacked colour blocks: same information, same
-     colour coding, legible at 390px. */
-  .fde-own-svg{display:none;}
-  .fde-own-stage{aspect-ratio:auto;margin-top:28px;
-                 border-radius:20px;overflow:hidden;}
+  /* §7 — the circle stays round at any width, but below 1025 there is no
+     room for copy inside it, so the two roles become stacked colour blocks */
+  .fde-own-circle,.own-rail{display:none;}
+  .fde-own-stage{height:auto;margin-top:28px;border-radius:20px;overflow:hidden;}
   .fde-own-label{position:relative;left:auto;transform:none;width:100%;
-                 text-align:left;padding:26px 24px;}
-  .own-label-top{bottom:auto;background:var(--blue);}
-  .own-label-bot{top:auto;background:var(--blue-deep);}
+                 text-align:left;padding:26px 24px;opacity:1!important;}
+  .own-label-top{bottom:auto;padding-bottom:26px;background:var(--blue);}
+  .own-label-bot{top:auto;padding-top:26px;background:var(--blue-deep);}
   .fde-own-kicker{color:rgba(255,255,255,0.86);}
   .fde-own-name{font-size:20px;color:#fff;}
   .fde-own-note{font-size:14px;color:rgba(255,255,255,0.92);}
@@ -73,22 +72,68 @@
   /* §8 — rail becomes a stacked column under the copy */
   .fde-build-stage{min-height:0;display:block;}
   .fde-build-copy{transform:none!important;opacity:1!important;filter:none!important;}
-  .fde-rail{position:relative;inset:auto;padding-left:0;margin-top:36px;
-            flex-wrap:wrap;gap:20px;transform:none!important;}
+  .fde-rail{position:relative;inset:auto;margin-top:36px;
+            flex-wrap:wrap;gap:20px;transform:none!important;justify-content:flex-start;}
   .fde-bcard{width:100%;min-height:0;transform:none!important;opacity:1!important;}
-  .fde-bcard::after{display:none;}
+  .fde-link{display:none;}
+
+  /* §9 */
+  .fde-rungs{margin-top:40px;}
 
   /* §10 / §11 */
   .fde-meet-cards{grid-template-columns:1fr;}
   .fde-mcard{transform:none!important;opacity:1!important;}
-  .fde-flex-inner{grid-template-columns:1fr;gap:36px;}
-  /* the field is a right-hand column on desktop; on narrow screens it
-     becomes a band under the copy so it is not squeezed to a sliver */
-  .fde-field{position:relative;inset:auto;width:100%;height:320px;
-             margin-top:32px;}
+  .fde-flex-inner{grid-template-columns:1fr;gap:32px;}
+  .fde-field{position:relative;inset:auto;width:100%;height:340px;margin-top:32px;}
   .fde-flex .wrap{order:-1;}
+
+  /* §13 / §14 */
+  .fde-faq-inner{grid-template-columns:1fr;gap:36px;}
+  .fde-faq h2 br{display:none;}
+  .fde-close{min-height:52vh;padding:calc(var(--sec) * 1.2) 0;}
 }
-@media(max-width:640px){
-  .fde-card{width:100%;}
-  .fde-band{padding:28px 20px;}
+
+/* ---- phone ---- */
+@media(max-width:768px){
+  .fde-hero{min-height:68vh;padding:56px 0 72px;}
+  .fde-hero-sub span{display:inline;}
+  .fde-shift .fan{opacity:.24;}
+  .fde-shift-stage{padding:88px 24px;min-height:70vh;}
+
+  .fde-stack{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+
+  /* §9 — three across is too tight; the rungs read as a list */
+  .fde-rung-line,.fde-rung-fill{display:none;}
+  .fde-rung-row{grid-template-columns:1fr;gap:26px;}
+  .fde-rung,.fde-rung:first-child,.fde-rung:last-child{text-align:left;padding:0;}
+  .fde-rung-dot{margin:0 0 12px!important;}
+  .fde-rung-what br{display:none;}
+
+  .fde-field{height:280px;}
+  .fde-q-btn{padding:20px 20px;gap:18px;}
+  .fde-q-body p{padding:0 20px 22px;}
+  .fde-close{min-height:46vh;}
+}
+
+/* ---- small phone ---- */
+@media(max-width:480px){
+  .fde-hero-badge{font-size:11px;padding:5px 9px;margin-bottom:22px;}
+  .fde-stack{grid-template-columns:1fr;}
+  .fde-card{padding:24px 18px;}
+  .fde-band{padding:26px 20px;}
+  .fde-mcard{padding:28px 24px 32px;}
+  .fde-bcard{padding:22px 20px 26px;}
+  .fde-own-label{padding:22px 20px;}
+  .fde-field{height:240px;}
+  .fde-q-sign{width:28px;height:28px;}
+}
+
+/* ---- motion opt-out: the scripted surfaces CSS alone cannot reach ---- */
+@media(prefers-reduced-motion:reduce){
+  .js .fde-hero-badge,
+  .js .fde-hero h1 .l1,
+  .js .fde-hero h1 .l2,
+  .js .fde-hero-sub{opacity:1;transform:none;animation:none;}
+  .js .fde-shift .fan-conv,
+  .js .fde-shift .fan-div{clip-path:none;}
 }

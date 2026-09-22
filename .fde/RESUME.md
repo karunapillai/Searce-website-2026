@@ -127,6 +127,81 @@ replaced by two stacked colour blocks carrying the same two roles.
   it is now a short beat plus a long `power1.inOut` glide, scrub 1.15.
   Off-cards dropped to 0.09-0.30 opacity so the focused card carries the frame.
 
+### Revision pass 4 (user feedback)
+
+1. **§11** — label knocked back out of the middle of the field (dots above and
+   below, per the reference); field widened 34% -> 42% and pitch 17 -> 15 for
+   more columns reaching toward centre.
+2. **§9** — the rail is now MEASURED off the first and last dot centres at
+   layout time rather than guessed from padding, so it cannot drift.
+3. **§7** — circle radius 196 -> 252, stage ratio 1440/540; the bottom half
+   now sweeps a hair past a full turn so the halves close with no seam;
+   label width 24% -> 20% so descriptions wrap to three lines.
+4. **§4 / §5 grids** — both flat at a 72px pitch with `background-position:0 0`;
+   the perspective transform on §4 was what made them fail to line up.
+5. **§13 FAQ** — redesigned to the reference (tinted open row with blue rule
+   and filled toggle, white closed rows) and the three real answers are in.
+6. **"Let's connect" section removed.** Its CSS was bundled with the footer's,
+   so that block was split — `chrome/footercss.txt` now carries the footer half.
+   The nav CTA repoints to `#fde-close`; the closing CTA has no destination on
+   this site yet and uses the footer's own `#` placeholder.
+7. **§14** — `min-height:62vh` and heavier padding (~30% taller).
+8. **Responsive** — full ladder rewritten: 1441+/1180/1024/768/480 plus
+   reduced-motion. 1180 is the important new one — §8's trio of cards and
+   rails did not fit the gutters between 1025 and 1180.
+
+Also: the hero was building a `createRadialGradient` per near-dot per frame,
+which pegged the CPU; the soft dot is now a cached offscreen sprite stamped
+with `drawImage`.
+
+**This pass is NOT visually verified** — Chrome would not launch for either
+Playwright or chrome-devtools (`initializeServer` timeout / frame detached).
+Verified statically only: composer checks, `node --check` on all three inline
+scripts, and a token audit of every item above.
+
+### Revision pass 5 (user feedback)
+
+- **§7 rebuilt.** The ellipse was structural, not a tuning error: the circle
+  lived in a 1440-wide viewBox with `preserveAspectRatio="none"`, so it was
+  stretched by whatever ratio the container happened to have. It now sits in
+  its own `aspect-ratio:1` box with a SQUARE `viewBox="0 0 100 100"`, which
+  makes it round by construction at any width. The rail is a separate
+  absolutely-positioned element, so it spans the stage and passes behind the
+  circle instead of being part of the stretched SVG. Copy is HTML inside the
+  circle at 72% width, sized with clamp() so it neither squashes nor shrinks.
+  Wedge geometry verified numerically (`/tmp/wedge-test.js`): the top half
+  reaches exactly PI at p=0.5, and the bottom closes 0.03 rad past 2PI with a
+  0.02 rad overlap at the 9 o'clock join — no seam at either.
+- **§11** scaled down: pitch 15 -> 13, dot radius 2.9 -> 2.35, square side
+  tightened, label max 23px -> 18px.
+
+**Verified visually** after a Chrome restart. Desktop 1440: circle measures
+470x470 (round), sits 81px clear of the heading, no text clipping, halves meet
+exactly on the rail, no horizontal overflow, zero console errors. Phone 390
+(loaded at that width, not resized into it): 0 ScrollTriggers, no horizontal
+scroll, canvas buffer matches its box, FAQ single column, circle swapped for
+the stacked colour blocks.
+
+Two defects the visual pass caught that static checks could not:
+- **§11's canvas kept a stale buffer** (504 wide against a 605 box), so CSS was
+  upscaling it ~20% — that, not the tuning, was why the dots still looked big.
+  `render()` now re-measures whenever the box and buffer disagree.
+- **The desktop/mobile gate was decided once at load**, so dragging a window
+  across 1025px left the page in the wrong mode. A `matchMedia` change listener
+  now reloads on an actual crossing.
+
+### Revision pass 6
+
+- Semicircle copy scaled up — kicker 11.5 -> 13px, name 24 -> 28px, note
+  14.5 -> 16.5px, with the label block widened 54% -> 60% so the bigger type
+  does not wrap into the curve. Fit checked against the circle's chord at the
+  text's furthest point: 141px half-width against 189/192px allowed.
+- **Seam fix.** The halves only closed at exactly p=1, and scrub lag leaves a
+  reader who stops scrolling fractionally short — which showed as a thin wedge
+  gap on the right. Each half now completes its sweep before its phase ends
+  (top at p1/0.92, bottom at p2/0.90), so it is closed from p=0.95 onward.
+  Verified numerically and at 4x zoom on the join.
+
 ### Still outstanding
 
 - **FAQ answers** — the three `.fde-q-pending` slots need real copy from

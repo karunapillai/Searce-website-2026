@@ -6,7 +6,6 @@
     Array.prototype.forEach.call(btns, function (b) {
       b.addEventListener('click', function () {
         var open = b.getAttribute('aria-expanded') === 'true';
-        // one open at a time, as the Figma frame shows
         Array.prototype.forEach.call(btns, function (o) {
           o.setAttribute('aria-expanded', 'false');
         });

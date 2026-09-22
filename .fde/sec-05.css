@@ -11,6 +11,7 @@
     linear-gradient(rgba(255,255,255,0.13) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.13) 1px, transparent 1px);
   background-size:72px 72px;
+  background-position:0 0;
 }
 .fde-comp-inner{
   display:grid;grid-template-columns:minmax(0,1fr) 400px;

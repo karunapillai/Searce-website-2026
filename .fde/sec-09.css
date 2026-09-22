@@ -20,11 +20,11 @@
 }
 .fde-rungs{position:relative;margin-top:clamp(40px,6vw,76px);padding-top:8px;}
 .fde-rung-line{
-  position:absolute;top:8px;left:24px;right:24px;height:2px;
+  position:absolute;top:8px;left:0;width:0;height:2px;
   background:rgba(255,255,255,0.18);border-radius:2px;
 }
 .fde-rung-fill{
-  position:absolute;top:8px;left:24px;right:24px;height:2px;
+  position:absolute;top:8px;left:0;width:0;height:2px;
   transform:scaleX(0);transform-origin:0 50%;
   background:var(--blue);border-radius:2px;
 }

@@ -8,7 +8,7 @@
     var launch = sec.querySelector('.ph-launch');
     var stable = sec.querySelector('.ph-stable');
 
-    var PITCH = 17, R = 3.1, TOP_PAD = 212;  // clearance for the nav + label
+    var PITCH = 13, R = 2.35, GAP_H = 80;    // label knockout band
     var dots = [], W = 0, H = 0, dpr = 1;
 
     function build() {
@@ -16,17 +16,15 @@
       var cols = Math.floor(W / PITCH), rows = Math.floor(H / PITCH);
       var ox = (W - (cols - 1) * PITCH) / 2, oy = (H - (rows - 1) * PITCH) / 2;
       // the square the field settles into, same pitch, centred
-      // a true square: same count of columns and rows, centred in the field
-      var usableRows = rows - Math.ceil(TOP_PAD / PITCH);
-      var side = Math.max(6, Math.min(cols, usableRows) - 2);
-      var c0 = Math.floor((cols - side) / 2);
-      var r0 = Math.ceil(TOP_PAD / PITCH) + Math.floor((usableRows - side) / 2);
+      // the square the field settles into: equal columns and rows, centred
+      var side = Math.max(8, Math.min(cols, rows) - 9);   // a tighter square
+      var c0 = Math.floor((cols - side) / 2), r0 = Math.floor((rows - side) / 2);
       var cx = W / 2, cy = H / 2;
 
       for (var r = 0; r < rows; r++) {
         for (var c = 0; c < cols; c++) {
           var x = ox + c * PITCH, y = oy + r * PITCH;
-          if (y < TOP_PAD) continue;                        // keep clear of the label
+          if (Math.abs(y - cy) < GAP_H / 2) continue;       // label band
           var inSq = c >= c0 && c < c0 + side && r >= r0 && r < r0 + side;
           var tx = x, ty = y;
           if (!inSq) {                                      // clamp onto the square
@@ -51,6 +49,10 @@
     function ease(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
 
     function render(p) {
+      // the field can be resized by pinning without a window resize event;
+      // if the box no longer matches the buffer, re-measure before drawing
+      var b = cv.getBoundingClientRect();
+      if (Math.abs(b.width - W) > 1 || Math.abs(b.height - H) > 1) resize();
       ctx.clearRect(0, 0, W, H);
       ctx.fillStyle = '#0064ff';
       for (var i = 0; i < dots.length; i++) {
@@ -93,6 +95,6 @@
     var rt;
     window.addEventListener('resize', function () {
       clearTimeout(rt);
-      rt = setTimeout(function () { remeasure(); ScrollTrigger.refresh(); }, 150);
+      rt = setTimeout(remeasure, 150);   // ScrollTrigger refreshes itself on resize
     });
   })();

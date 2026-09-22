@@ -29,7 +29,7 @@
         </div>
       </li>
     </ul>
-    <a href="#connect" class="nav-cta">
+    <a href="#fde-close" class="nav-cta">
       bring us a problem
       <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
     </a>

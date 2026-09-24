@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Business Systems Engineering - Searce</title>
+<title>AI Outcome Engineering - Searce</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -50,7 +50,7 @@ a{color:inherit;text-decoration:none;}
 button{font-family:inherit;background:none;border:none;cursor:pointer;}
 ::selection{background:var(--blue);color:#fff;}
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px;}
-.wrap{max-width:1280px;margin:0 auto;padding:0 48px;}
+.wrap{max-width:1440px;margin:0 auto;padding:0 var(--gut);}  /* matches searce.com: 1280px content + gutter */
 
 /* ======= NAV - shared global framework ======= */
 .nav{
@@ -124,18 +124,54 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 
 /* ======= HERO - concentric rings + word-reveal animation ======= */
 .hero{
-  position:relative;min-height:92vh;
+  position:relative;min-height:100vh;
   display:flex;align-items:center;
   background:var(--paper);
-  border-bottom:1px solid var(--paper-line);
   overflow:hidden;isolation:isolate;
-  padding:120px 0 100px;
+  padding:40px 0;
+}
+/* Hero + section 1 share one light-blue → white gradient and one continuous grid */
+.hero-zone{
+  position:relative;isolation:isolate;
+  background:linear-gradient(180deg,#f1f6ff 0%,#f8fbff 30%,#fdfeff 60%,#ffffff 100%);
+}
+.hero-zone::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,100,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,100,255,0.06) 1px, transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 82%,transparent 100%);
+          mask-image:linear-gradient(to bottom,#000 0%,#000 82%,transparent 100%);
+}
+.hero-zone > .hero,.hero-zone > .intro{background:transparent;position:relative;z-index:1;}
+.hero-zone .hero-grid,.hero-zone .hero-fade{display:none;}
+
+/* two-column layout — huge copy left, compact graph right */
+.hero-cols{
+  display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+  gap:56px;align-items:center;width:100%;
+}
+.hero-copy{min-width:0;}
+.hero-graph{
+  position:relative;width:100%;aspect-ratio:1/1;max-width:594px;
+  justify-self:end;
+  pointer-events:none;
+}
+#heroGraph{width:100%;height:100%;display:block;}
+@media (max-width:1024px){
+  .hero-cols{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;}
+  .hero-graph{max-width:462px;}
+}
+@media (max-width:768px){
+  .hero-cols{grid-template-columns:1fr;gap:40px;}
+  .hero-graph{max-width:418px;justify-self:center;}
 }
 .hero-grid{
   position:absolute;inset:0;z-index:0;pointer-events:none;
   background-image:
-    linear-gradient(rgba(0,100,255,0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,100,255,0.08) 1px, transparent 1px);
+    linear-gradient(rgba(0,100,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,100,255,0.04) 1px, transparent 1px);
   background-size:64px 64px;
 }
 /* Hero canvas fills the whole banner - hidden for now */
@@ -195,10 +231,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
 .hero h1{
   font-family:var(--display);font-weight:300;
-  font-size:clamp(48px,7.4vw,108px);
-  line-height:.97;letter-spacing:-0.025em;
+  font-size:clamp(42px,7vw,92px);
+  line-height:1.1;letter-spacing:-0.025em;
   color:var(--ink);
-  margin-bottom:clamp(40px,4.5vw,64px);
+  margin-bottom:32px;
 }
 .hero h1 .line-blue{color:var(--blue);}
 .hero h1 .line-ink{color:var(--ink);}
@@ -328,127 +364,77 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   background:var(--blue);margin-top:8px;
 }
 
-/* ======= OUTCOME STORIES - white BG ======= */
-.outcomes{
+/* ======= TRANSFORM ACROSS THE ENTERPRISE — split layout, sticky stacking cards ======= */
+.transform{
+  --tf-top:77px;                   /* sticky nav height */
+  --tf-strip:76px;                 /* visible title strip per stacked card */
   background:var(--paper);
-  padding:0;
-  position:relative;
 }
-.outcomes::before{
-  content:'';
-  position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(0,100,255,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,100,255,0.06) 1px, transparent 1px);
-  background-size:64px 64px;
-  pointer-events:none;z-index:0;
+.tf-split{display:grid;grid-template-columns:1fr 1fr;align-items:start;}
+.tf-left{
+  position:sticky;top:var(--tf-top);
+  height:calc(100vh - var(--tf-top));min-height:520px;
+  padding:56px clamp(24px,4vw,48px) 48px max(var(--gut), calc((var(--cw, 100vw) - 1440px) / 2 + var(--gut)));
+  display:flex;flex-direction:column;justify-content:space-between;gap:40px;
 }
-.outcomes .wrap,.stories-pin{position:relative;z-index:1;}
-.outcomes-header{
-  position:relative;
-  padding:0;
-  text-align:center;
-  flex-shrink:0;
-}
-.outcomes-header-inner{position:relative;z-index:2;}
-.outcomes-eyebrow{
-  display:block;
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(44px,6vw,90px);
-  letter-spacing:-0.03em;
-  line-height:1.02;
-  color:var(--ink);
-  margin-bottom:0;
-}
-.stories-pin{position:relative;}
-.stories-sticky{
-  position:sticky;
-  top:0;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:40px;
-  overflow:hidden;
-}
-.stories-viewport{
-  width:100%;
-  overflow:hidden;
-  flex-shrink:0;
-}
-.stories{
-  display:flex;
-  gap:24px;
-  will-change:transform;
-  padding:4px max(48px,calc((100vw - 1280px)/2 + 48px));
-  align-items:stretch;
-}
-.story{
-  flex:0 0 clamp(315px,27.3vw,400px);
-  background:#fff;
-  border:1px solid var(--paper-line);
-  border-radius:14px;
-  padding:34px 32px;
-  display:flex;
-  flex-direction:column;
-  transition:border-color .25s ease, box-shadow .25s ease;
-}
-.story:hover{
-  border-color:var(--blue-24);
-  box-shadow:0 8px 28px rgba(0,100,255,0.08);
-}
-.story-meta{
-  display:flex;align-items:baseline;gap:10px;
-  margin-bottom:20px;
-}
-.story-index{
-  font-family:var(--display);font-weight:300;
-  font-size:12.5px;letter-spacing:.06em;
-  color:var(--blue);
-}
-.story-context{
+.tf-left-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;}
+.transform h2{
   font-family:var(--display);font-weight:400;
-  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ink-40);
+  font-size:clamp(36px,4.2vw,64px);line-height:1.02;letter-spacing:-.035em;
+  color:var(--ink);max-width:12ch;
 }
-.story-quote{
-  font-family:var(--display);font-weight:300;
-  font-size:clamp(21px,1.9vw,27px);
-  line-height:1.22;letter-spacing:-0.02em;
-  color:var(--ink);
-  margin:0 0 28px 0;
+.transform-sub{
+  font-size:18px;line-height:1.5;color:var(--ink);
+  font-weight:400;max-width:34ch;
 }
-.story-proof{
-  margin-top:auto;
-  padding-top:22px;
-  border-top:1px solid var(--paper-line);
+.tf-stack{padding-bottom:12vh;}
+.tf-card{
+  position:sticky;top:calc(var(--tf-top) + var(--i) * var(--tf-strip));
+  height:max(440px, calc(100vh - var(--tf-top) - 5 * var(--tf-strip)));
+  padding:0 clamp(24px,3vw,44px) 36px;
+  display:flex;flex-direction:column;
+  background:var(--bg);color:#fff;
 }
-.story-changed{
-  display:block;
+.tf-card-top{
+  height:var(--tf-strip);flex:none;
+  display:flex;justify-content:space-between;align-items:center;gap:24px;
+}
+.tf-fn{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(22px,2.2vw,32px);letter-spacing:-.02em;line-height:1;
+}
+.tf-num{font-family:var(--display);font-size:15px;font-weight:500;opacity:.85;font-variant-numeric:tabular-nums;}
+.tf-body{margin-top:auto;max-width:560px;}
+.transform-headline{
   font-family:var(--display);font-weight:400;
-  font-size:clamp(18px,1.6vw,22px);
-  line-height:1.25;letter-spacing:-0.015em;
-  color:var(--blue);
-  margin-bottom:12px;
+  font-size:clamp(19px,1.5vw,23px);line-height:1.3;letter-spacing:-.01em;
 }
-.story-industry{
-  font-family:var(--display);font-weight:400;
-  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-40);
+.transform-desc{margin-top:14px;font-size:15px;line-height:1.55;color:rgba(255,255,255,.78);}
+.transform-list-label{
+  margin-top:26px;font-family:var(--display);font-size:11px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);
 }
-.stories-progress{
-  margin:0 auto;
-  width:min(420px,60vw);
-  height:2px;
-  background:var(--paper-line);
-  border-radius:999px;
-  overflow:hidden;
-  flex-shrink:0;
+.transform-list{list-style:none;padding:0;margin:10px 0 0;}
+.transform-list li{
+  padding:10px 0;border-top:1px solid rgba(255,255,255,.16);
+  font-size:15px;line-height:1.4;display:flex;gap:12px;align-items:baseline;
 }
-.stories-progress-bar{
-  height:100%;width:0%;
-  background:var(--blue);
-  border-radius:999px;
+.transform-list li::before{content:"";flex:none;width:6px;height:6px;background:var(--blue-24);transform:translateY(-2px);}
+.transform-core-cta{
+  margin-top:28px;align-self:flex-start;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 22px;background:var(--blue);color:#fff;
+  font-family:var(--display);font-size:15px;font-weight:500;text-decoration:none;
+  transition:background .2s ease,transform .2s ease;
+}
+.transform-core-cta:hover{background:var(--blue-strong);transform:translateY(-1px);}
+.transform-core-cta svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;}
+@media(max-width:900px){
+  .tf-split{grid-template-columns:1fr;}
+  .tf-left{position:static;height:auto;min-height:0;padding:72px var(--gut) 40px;}
+    .tf-stack{padding-bottom:0;}
+  .tf-card{position:static;height:auto;padding:0 24px 36px;}
+  .tf-body{margin-top:12px;}
 }
 
 /* ======= METRIC LADDER - ticker scroll ======= */
@@ -613,7 +599,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .milestone.revealed{opacity:1;transform:scale(1);}
 
 /* ======= HOW WE BUILD ======= */
-.how-build{padding:80px 0;border-bottom:1px solid var(--paper-line);background:linear-gradient(180deg,var(--blue-06) 0%,#f2f7ff 100%);}
+.how-build{padding:80px 0;background:linear-gradient(180deg,var(--blue-06) 0%,#f2f7ff 100%);}
 .how-build-grid{
   display:grid;grid-template-columns:1fr 1fr;
   gap:80px;align-items:center;
@@ -782,19 +768,11 @@ footer{background:#071028;padding:72px 0 0;}
   .nav-cta{font-size:13px;padding:10px 16px;}
 }
 @media(max-width:1024px){
-  .wrap{padding:0 28px;}
   .hero-opening{max-width:100%;}
   .hero-rings{opacity:.75;}
   .offer-top{grid-template-columns:1fr;gap:18px;}
   .offer-top p{text-align:left;max-width:44ch;}
   .acc-inner{grid-template-columns:1fr;gap:24px;}
-  .stories-pin{height:auto!important;}
-  .stories-sticky{position:static;height:auto;overflow:visible;display:block;}
-  .stories-viewport{overflow:visible;}
-  .outcomes-header{padding:48px 0 24px;}
-  .stories{flex-direction:column;padding:0 28px 48px;gap:16px;transform:none!important;}
-  .story{flex:1 1 auto;}
-  .stories-progress{display:none;}
   .how-build-grid{grid-template-columns:1fr;gap:32px;}
   .foot-main{grid-template-columns:1fr 1fr;gap:40px;}
   .connect-inner{grid-template-columns:1fr;gap:40px;}
@@ -802,12 +780,10 @@ footer{background:#071028;padding:72px 0 0;}
 @media(max-width:768px){
   .nav-links{display:none;}
   .hero-rings{opacity:.55;}
-  .story-quote{max-width:100%;}
   .acc-inner{padding-left:0;}
   .hero-cta-row{flex-direction:column;align-items:flex-start;gap:12px;}
   .foot-main{grid-template-columns:1fr;}
   .gap-tabs{gap:5px;}
-  .story{padding:28px 24px;}
   /* Hero heading - tighter on mobile */
   .hero h1{font-size:clamp(40px,10vw,64px);}
   .hero{padding:80px 0 64px;min-height:auto;}
@@ -832,7 +808,6 @@ footer{background:#071028;padding:72px 0 0;}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;}
-  .story{opacity:1;transform:none;}
   .hero h1 .hw{opacity:1;transform:none;}
   .hero-badge,.hero-opening,.hero-cta-row,.hero h1 .line2-wrap{opacity:1;transform:none;}
   .milestone{opacity:1;transform:scale(1);}
@@ -848,14 +823,7 @@ footer{background:#071028;padding:72px 0 0;}
     </a>
     <ul class="nav-links">
       <li><a href="#">Outcomes</a></li>
-      <li class="has-dropdown">
-        <a href="#" aria-haspopup="true">How we solve
-          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </a>
-        <div class="mega-panel">
-          <a class="mega-item" href="fde.html"><span class="mega-title">FDE</span></a>
-        </div>
-      </li>
+      <li><a href="#">How we solve</a></li>
       <li><a href="business-systems-engineering.html" class="current">Practices</a></li>
       <li><a href="#">Problems</a></li>
       <li><a href="#">Industries</a></li>
@@ -879,47 +847,57 @@ footer{background:#071028;padding:72px 0 0;}
   </div>
 </nav>
 
-<section class="hero" aria-labelledby="hero-heading">
+<div class="hero-zone">
+<section class="hero" id="top" aria-labelledby="hero-heading">
   <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-rings" aria-hidden="true">
-    <canvas id="heroCanvas"></canvas>
-  </div>
-  <div class="hero-fade" aria-hidden="true"></div>
-  <div class="hero-marks" aria-hidden="true">
-    <span class="m-tl">Business Systems Engineering</span>
-    <span class="m-tr">/ Searce</span>
-    <span class="m-bl">Ref · BSE-01</span>
-    <span class="m-br">System · running</span>
-  </div>
 
   <div class="wrap">
-    <div class="hero-badge">
-      <span class="hero-badge-dot" aria-hidden="true"></span>
-      Business Systems Engineering
-    </div>
+    <div class="hero-cols">
+      <div class="hero-copy">
+        <div class="hero-badge">
+          <span class="hero-badge-dot" aria-hidden="true"></span>
+          AI Outcome Engineering
+        </div>
 
-    <h1 id="hero-heading">
-      <span class="line-blue" id="heroLine1">Rebuild the systems.</span><br>
-      <span class="line2-wrap" id="heroLine2"><span class="line-ink">Redesign the work.</span></span>
-    </h1>
+        <h1 id="hero-heading">
+          <span class="line-blue" id="heroLine1">Rebuild<br>the systems.</span><br>
+          <span class="line2-wrap" id="heroLine2"><span class="line-ink">Redesign<br>the work.</span></span>
+        </h1>
 
-    <div class="hero-opening">
-      <p>The buy-versus-build line has moved. Workflow tooling that once required eighteen months and a licence can now be built in weeks, and the enterprises acting on that are rebuilding the software layer around how their business actually runs rather than configuring someone else's product around it.</p>
-    </div>
+        <div class="hero-cta-row">
+          <a href="#offerings" class="hero-cta-primary">
+            See what we engineer
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
 
-    <div class="hero-cta-row">
-      <a href="#offerings" class="hero-cta-primary">
-        See what we engineer
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </a>
+      <div class="hero-graph" aria-hidden="true">
+        <canvas id="heroGraph"></canvas>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
+/* ============ Intro — buy-vs-build statement ============ */
+.intro{padding:72px 0 120px;}
+.intro-statement{
+  max-width:1040px;margin:0;
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(26px,2.6vw,38px);
+  line-height:1.35;letter-spacing:-.02em;
+  color:var(--ink);text-align:left;
+}
+.intro-statement em{font-style:normal;font-weight:400;color:var(--blue);}
+@media (max-width:768px){
+  .intro{padding:56px 0 88px;}
+  .intro-statement{font-size:clamp(21px,5.4vw,26px);line-height:1.42;}
+}
+
 /* ============ One squad - dark, breathable ============ */
 .squad{
-  padding:96px 0 140px;
+  padding:clamp(36px,6vh,72px) 0;
   background:radial-gradient(120% 90% at 15% 0%, #0b1f52 0%, transparent 60%),
              radial-gradient(80% 60% at 100% 100%, #051033 0%, transparent 60%),
              linear-gradient(180deg,#040814 0%, #000 100%);
@@ -960,6 +938,19 @@ footer{background:#071028;padding:72px 0 0;}
 
 .squad .squad-head{max-width:1120px;margin:0 auto;text-align:center;padding:0 24px;}
 .squad .lede{margin-left:auto;margin-right:auto;max-width:820px;text-align:center;}
+/* Apple-style: full-width headline on top, 2-col paragraphs below */
+.squad-headline{max-width:none;}
+.squad .chap{margin-bottom:20px;}
+.squad .squad-headline h2{margin:0;text-align:left;max-width:none;font-size:clamp(26px,min(2.35vw,4.2vh),36px);line-height:1.22;}
+.squad-body-cols{
+  margin-top:clamp(20px,3.5vh,40px);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:64px;align-items:start;
+}
+.squad-body-cols .lede{margin:0;max-width:none;text-align:left;}
+@media (max-width:900px){
+  .squad-body-cols{grid-template-columns:1fr;gap:24px;margin-top:48px;}
+}
 .squad-eyebrow{
   font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--blue-24);display:inline-flex;align-items:center;gap:12px;
@@ -970,7 +961,7 @@ footer{background:#071028;padding:72px 0 0;}
   font-size:clamp(34px,3.54vw,49px);line-height:1.18;letter-spacing:-.025em;color:#fff;
 }
 .squad h2 em{font-style:normal;color:var(--blue-24);}
-.squad .lede{margin-top:28px;font-size:20px;line-height:1.55;color:#c9d0e0;max-width:60ch;font-weight:300;}
+.squad .lede{margin-top:28px;font-size:clamp(15px,min(1.2vw,2.1vh),18px);line-height:1.6;color:#c9d0e0;max-width:60ch;font-weight:300;}
 
 /* Diagram + caption stack */
 .squad-diagram-row{margin-top:64px;}
@@ -1114,7 +1105,6 @@ footer{background:#071028;padding:72px 0 0;}
 .after{
   padding:140px 0;
   background:var(--paper);
-  border-top:1px solid var(--paper-line);
   position:relative;overflow:hidden;
 }
 /* Subtle engineering grid, faded at the edges */
@@ -1170,155 +1160,59 @@ footer{background:#071028;padding:72px 0 0;}
 }
 </style>
 
-<section class="squad" id="squad" aria-labelledby="squad-h">
+<section class="intro" id="intro" aria-label="Buy versus build">
   <div class="wrap">
-    <div class="squad-head">
-      <h2 id="squad-h">Searce Business Systems Engineering rebuilds both halves, the process and the system that runs it, <em>in one squad.</em></h2>
-      <p class="lede">Process redesign without build authority produces a recommendation. Building without process authority produces a faster version of work that should not exist. Both halves belong on the same team.</p>
+    <div class="chap" aria-hidden="true"></div>
+    <p class="intro-statement">
+      The buy-versus-build line has moved. Workflow tooling that once required eighteen months and a licence <em>can now be built in weeks,</em> and the enterprises acting on that are rebuilding the software layer around how their business actually runs rather than configuring someone else's product around it.
+    </p>
+  </div>
+</section>
+</div><!-- /.hero-zone -->
+
+<section class="squad" id="squad" aria-labelledby="squad-h">
+  <div class="squad-spot" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="chap" aria-hidden="true"></div>
+    <div class="squad-visual" aria-hidden="true">
+      <svg viewBox="0 0 560 560" role="presentation">
+        <defs>
+          <path id="orbI" d="M150,280 a130,130 0 1,1 260,0 a130,130 0 1,1 -260,0"/><path id="orbI2" d="M410,280 a130,130 0 1,1 -260,0 a130,130 0 1,1 260,0"/>
+          <path id="orbO" d="M70,280 a210,210 0 1,0 420,0 a210,210 0 1,0 -420,0"/><path id="orbO2" d="M490,280 a210,210 0 1,0 -420,0 a210,210 0 1,0 420,0"/>
+          <path id="arcI" d="M150,280 A130,130 0 0 1 410,280"/>
+          <path id="arcO" d="M70,280 A210,210 0 0 1 490,280"/>
+          <radialGradient id="orbGlow"><stop offset="0" stop-color="#0064ff" stop-opacity=".35"/><stop offset="1" stop-color="#0064ff" stop-opacity="0"/></radialGradient>
+        </defs>
+        <circle cx="280" cy="280" r="170" fill="url(#orbGlow)"/>
+        <g class="orb-spokes"><line x1="280" y1="280" x2="280" y2="162" transform="rotate(0 280 280)"/><line x1="280" y1="280" x2="280" y2="162" transform="rotate(45 280 280)"/><line x1="280" y1="280" x2="280" y2="162" transform="rotate(90 280 280)"/><line x1="280" y1="280" x2="280" y2="162" transform="rotate(135 280 280)"/><line x1="280" y1="280" x2="280" y2="162" transform="rotate(180 280 280)"/><line x1="280" y1="280" x2="280" y2="162" transform="rotate(225 280 280)"/><line x1="280" y1="280" x2="280" y2="162" transform="rotate(270 280 280)"/><line x1="280" y1="280" x2="280" y2="162" transform="rotate(315 280 280)"/></g>
+        <circle class="orb orb-o" cx="280" cy="280" r="210"/>
+        <circle class="orb-dash o" cx="280" cy="280" r="210"/>
+        <circle class="orb orb-i" cx="280" cy="280" r="130"/>
+        <circle class="orb-dash i" cx="280" cy="280" r="130"/>
+        <text class="orb-t o" dy="-12"><textPath href="#arcO" startOffset="50%">BUILD THE SYSTEM</textPath></text>
+        <text class="orb-t i" dy="-12"><textPath href="#arcI" startOffset="50%">RE-ENGINEER THE PROCESS</textPath></text>
+        <circle r="7" class="orb-dot w"><animateMotion dur="16s" repeatCount="indefinite"><mpath href="#orbI"/></animateMotion></circle>
+        <circle r="7" class="orb-dot w"><animateMotion dur="16s" repeatCount="indefinite"><mpath href="#orbI2"/></animateMotion></circle>
+        <circle r="8" class="orb-dot b"><animateMotion dur="24s" repeatCount="indefinite"><mpath href="#orbO"/></animateMotion></circle>
+        <circle r="8" class="orb-dot b"><animateMotion dur="24s" repeatCount="indefinite"><mpath href="#orbO2"/></animateMotion></circle>
+        <circle class="sq-pulse" cx="280" cy="280" r="22"/>
+        <circle class="sq-core" cx="280" cy="280" r="20"/>
+        <text class="sq-core-lab" x="280" y="330">ONE SQUAD</text>
+      </svg>
+      <div class="sq-legend">
+        <div class="sq-key"><span class="k-dot w"></span><div><b>Re-engineer the process</b><span>Business process engineers<br>Industrial engineers</span></div></div>
+        <div class="sq-key"><span class="k-dot b"></span><div><b>Build the system</b><span>Product engineers<br>Software &amp; AI engineers</span></div></div>
+      </div>
     </div>
-
-    <div class="squad-diagram-row">
-      <div class="squad-diagram">
-        <svg class="diag diag-desktop" viewBox="0 0 1100 420" xmlns="http://www.w3.org/2000/svg" aria-label="Where Searce works in the enterprise stack">
-          <defs>
-            <linearGradient id="focusSweepGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-              <stop offset="50%" stop-color="rgba(255,255,255,.18)"/>
-              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-            </linearGradient>
-            <clipPath id="focusClip">
-              <rect x="20" y="40" width="620" height="360" rx="12"/>
-            </clipPath>
-          </defs>
-
-          <!-- LEFT: The workflow layer (focal) -->
-          <g>
-            <rect class="layer-rect focus" x="20" y="40" width="620" height="360" rx="12"/>
-            <g clip-path="url(#focusClip)">
-              <rect class="focus-sweep" x="20" y="40" width="620" height="360"/>
-            </g>
-
-            <!-- Header row -->
-            <text class="layer-tag on-blue" x="46" y="86">The workflow layer</text>
-            <rect class="tick-pill" x="440" y="64" width="180" height="26" rx="13"/>
-            <text class="tick-text"  x="530" y="81" text-anchor="middle">One squad. One system.</text>
-
-            <!-- PROCESS / BUILD group labels -->
-            <text class="layer-tag on-blue" x="180" y="136" text-anchor="middle" style="opacity:.7;">Process</text>
-            <text class="layer-tag on-blue" x="480" y="136" text-anchor="middle" style="opacity:.7;">Build</text>
-
-            <!-- Chip row 1 -->
-            <g class="chip" transform="translate(66, 152)">
-              <rect width="228" height="34" rx="17"/>
-              <text x="114" y="22" text-anchor="middle">Business process engineers</text>
-            </g>
-            <g class="chip" transform="translate(388, 152)">
-              <rect width="184" height="34" rx="17"/>
-              <text x="92" y="22" text-anchor="middle">Product engineers</text>
-            </g>
-
-            <!-- Union "+" -->
-            <text x="330" y="209" text-anchor="middle" style="fill:rgba(255,255,255,.5);font-family:var(--display);font-size:26px;font-weight:300;">+</text>
-
-            <!-- Chip row 2 -->
-            <g class="chip" transform="translate(90, 206)">
-              <rect width="180" height="34" rx="17"/>
-              <text x="90" y="22" text-anchor="middle">Industrial engineers</text>
-            </g>
-            <g class="chip" transform="translate(370, 206)">
-              <rect width="218" height="34" rx="17"/>
-              <text x="109" y="22" text-anchor="middle">Software &amp; AI engineers</text>
-            </g>
-
-            <!-- Descriptive lines inside band -->
-            <text class="layer-name on-blue" x="46" y="304">Workflows · Internal tooling · Orchestration</text>
-            <text class="layer-name on-blue" x="46" y="332">Custom systems</text>
-            <text class="layer-caption on-blue" x="46" y="368">Process re-engineering and system build, in one squad.</text>
-          </g>
-
-          <!-- Arrow: workflow → outcomes (top branch, dotted animated) -->
-          <line class="arrow-line" x1="640" y1="125" x2="754" y2="125"/>
-          <path class="arrow-head" d="M750,120 L760,125 L750,130 Z"/>
-
-          <!-- RIGHT-TOP: Outcomes card -->
-          <g>
-            <rect class="layer-rect" x="760" y="60" width="320" height="130" rx="12"/>
-            <text class="layer-tag"  x="782" y="94">Outcomes</text>
-            <text class="layer-name" x="782" y="124">Revenue · Cost</text>
-            <text class="layer-name" x="782" y="152">Speed · Risk</text>
-            <text class="layer-caption" x="782" y="176" style="fill:#a9b3c9;">Produced by the workflow.</text>
-          </g>
-
-          <!-- Arrow: workflow → systems of record (bottom branch, dotted animated) -->
-          <line class="arrow-line" x1="640" y1="315" x2="754" y2="315"/>
-          <path class="arrow-head" d="M750,310 L760,315 L750,320 Z"/>
-
-          <!-- RIGHT-BOTTOM: Systems of record (muted tag) -->
-          <g>
-            <rect class="layer-rect" x="760" y="250" width="320" height="130" rx="12"/>
-            <text class="layer-tag" style="fill:rgba(255,255,255,.55);" x="782" y="284">Systems of record</text>
-            <text class="layer-name" x="782" y="312">ERP · CRM · Core</text>
-            <text class="layer-caption" x="782" y="338" style="fill:#a9b3c9;">Stay where they are.</text>
-            <text class="layer-caption" x="782" y="356" style="fill:#a9b3c9;">Not replaced.</text>
-          </g>
-        </svg>
-
-        <!-- Mobile stacked diagram - replaces the SVG on <=768px -->
-        <div class="diag-mobile" aria-hidden="true">
-          <div class="dm-layer dm-focus">
-            <div class="dm-tag">The workflow layer</div>
-            <span class="dm-pill">One squad. One system.</span>
-            <div class="dm-halves">
-              <div class="dm-half">
-                <div class="dm-half-label">Process</div>
-                <div class="dm-chip">Business process engineers</div>
-                <div class="dm-chip">Industrial engineers</div>
-              </div>
-              <div class="dm-plus">+</div>
-              <div class="dm-half">
-                <div class="dm-half-label">Build</div>
-                <div class="dm-chip">Product engineers</div>
-                <div class="dm-chip">Software &amp; AI engineers</div>
-              </div>
-            </div>
-            <div class="dm-name">Workflows · Internal tooling · Orchestration · Custom systems</div>
-            <div class="dm-caption">Process re-engineering and system build, in one squad.</div>
-          </div>
-
-          <div class="dm-arrow"></div>
-
-          <div class="dm-layer">
-            <div class="dm-tag">Outcomes</div>
-            <div class="dm-name">Revenue · Cost · Speed · Risk</div>
-            <div class="dm-caption">Produced by the workflow.</div>
-          </div>
-
-          <div class="dm-arrow"></div>
-
-          <div class="dm-layer">
-            <div class="dm-tag dm-tag-muted">Systems of record</div>
-            <div class="dm-name">ERP · CRM · Core</div>
-            <div class="dm-caption">Stay where they are. Not replaced.</div>
-          </div>
-        </div>
-
-        <script>
-          (function(){
-            document.querySelectorAll('#squad .diag .chip').forEach(function(c){
-              c.setAttribute('tabindex','0');
-              c.setAttribute('role','button');
-              c.addEventListener('click', function(){ c.classList.toggle('active'); });
-              c.addEventListener('keydown', function(e){
-                if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); c.classList.toggle('active'); }
-              });
-            });
-          })();
-        </script>
-      </div>
-
-      <div class="squad-fineprint">
-        <p><b>Systems of record stay where they are.</b> Searce works the layer above them - the workflows, the internal tooling, the orchestration, and the custom systems that carry competitive advantage.</p>
-      </div>
+    <div class="squad-copy">
+    <div class="squad-headline">
+      <h2 id="squad-h">AI Outcome Engineering does both halves of that work <em>in one squad:</em> <span class="nowrap">re-engineering</span> the process and building the system that runs it.</h2>
+    </div>
+    
+    <div class="squad-body-cols">
+      <p class="lede">Product engineers, software and AI engineers, business process engineers and industrial engineers work together, because process redesign without build authority produces a recommendation, and building without process authority produces a faster version of work that should not exist.</p>
+      <p class="lede">Systems of record stay where they are. Searce works the layer above them: the workflows, the internal tooling, the orchestration, and the custom systems that carry competitive advantage.</p>
+    </div>
     </div>
   </div>
 </section>
@@ -1326,435 +1220,221 @@ footer{background:#071028;padding:72px 0 0;}
 <section class="offer" id="offerings" aria-labelledby="offer-h">
   <div class="wrap">
     <div class="offer-top">
-      <h2 id="offer-h">Offerings</h2>
+      <div><div class="chap" aria-hidden="true"></div>
+      <h2 id="offer-h">Offerings</h2></div>
     </div>
 
-    <div class="acc" id="acc">
-
-      <div class="acc-item open">
-        <button class="acc-btn" aria-expanded="true" aria-controls="a1">
-          <span class="acc-num">01</span>
-          <span class="acc-name">Process re-engineering and work redesign</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a1">
-          <div class="acc-inner">
-            <p class="acc-desc">Process discovery as work actually runs. Metric ladder construction and baseline lock. Target process design.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Task-level human and agent allocation</li>
-                <li>Decision rights and human-in-the-loop placement</li>
-                <li>Industrial engineering for AI-era operations</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false" aria-controls="a2">
-          <span class="acc-num">02</span>
-          <span class="acc-name">Enterprise systems rebuild</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a2">
-          <div class="acc-inner">
-            <p class="acc-desc">Workflow tooling replacement. Legacy and SaaS replacement at the workflow layer.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Build-versus-buy assessment and custom operations systems</li>
-                <li>Data migration and cutover</li>
-                <li>Parallel run, reconciliation and decommissioning</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false" aria-controls="a3">
-          <span class="acc-num">03</span>
-          <span class="acc-name">Agentic workflow engineering</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a3">
-          <div class="acc-inner">
-            <p class="acc-desc">Agent design for a named process. Multi-agent orchestration and handoff design.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Tool and system connection with scoped permissions</li>
-                <li>Evaluation harnesses and regression suites</li>
-                <li>Graduation from assisted to supervised to autonomous</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false" aria-controls="a4">
-          <span class="acc-num">04</span>
-          <span class="acc-name">Application and product engineering</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a4">
-          <div class="acc-inner">
-            <p class="acc-desc">Custom enterprise application build. Customer-facing product engineering.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Product management, design, front-end and mobile engineering</li>
-                <li>API and integration engineering</li>
-                <li>Quality engineering and eval-backed release gates</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false" aria-controls="a5">
-          <span class="acc-num">05</span>
-          <span class="acc-name">Process intelligence and dependency mapping</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a5">
-          <div class="acc-inner">
-            <p class="acc-desc">Process mining and variant analysis. Cross-functional dependency and handoff mapping.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Exception taxonomy and root-cause analysis</li>
-                <li>Opportunity sizing against the metric ladder</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-btn" aria-expanded="false" aria-controls="a6">
-          <span class="acc-num">06</span>
-          <span class="acc-name">Systems consolidation and rationalisation</span>
-          <span class="acc-sign" aria-hidden="true"></span>
-        </button>
-        <div class="acc-body" id="a6">
-          <div class="acc-inner">
-            <p class="acc-desc">Application portfolio rationalisation. Duplicate systems consolidation.</p>
-            <div>
-              <div class="acc-what">What you get</div>
-              <ul class="acc-list">
-                <li>Process harmonisation across entities</li>
-                <li>Separation and carve-out engineering</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div class="oc-grid">
+      <article class="oc" tabindex="0">
+        <div class="oc-art" aria-hidden="true"><svg viewBox="20 30 260 160" preserveAspectRatio="xMidYMid meet"><path class="wr-wind" d="M40 60 H250 Q270 60 270 80 V90 Q270 110 250 110 H60 Q40 110 40 130 V140 Q40 160 60 160 H260"/><rect class="wr-st" x="71" y="51" width="18" height="18" rx="5" style="--k:0"/><rect class="wr-st" x="141" y="51" width="18" height="18" rx="5" style="--k:1"/><rect class="wr-st" x="211" y="51" width="18" height="18" rx="5" style="--k:2"/><rect class="wr-st" x="221" y="101" width="18" height="18" rx="5" style="--k:3"/><rect class="wr-st" x="151" y="101" width="18" height="18" rx="5" style="--k:4"/><rect class="wr-st" x="81" y="101" width="18" height="18" rx="5" style="--k:5"/><rect class="wr-st" x="81" y="151" width="18" height="18" rx="5" style="--k:6"/><rect class="wr-st" x="161" y="151" width="18" height="18" rx="5" style="--k:7"/><rect class="wr-st" x="231" y="151" width="18" height="18" rx="5" style="--k:8"/><circle class="wr-a" cx="40" cy="60" r="7"/><circle class="wr-b" cx="260" cy="160" r="7"/><path class="wr-direct" d="M40 60 C 120 60, 180 160, 260 160"/><g class="wr-new"><rect x="98" y="88" width="22" height="22" rx="7"/><rect x="170" y="118" width="22" height="22" rx="7"/></g><circle class="wr-run" r="4.5"><animateMotion dur="1.6s" repeatCount="indefinite" path="M40 60 C 120 60, 180 160, 260 160"/></circle><g class="wr-chip"><rect x="196" y="40" width="72" height="24" rx="8"/><text x="232" y="56">9 → 2 steps</text></g></svg></div>
+        <div class="oc-head"><span class="oc-num">01</span><span class="oc-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
+        <h3 class="oc-title">Work Redesign</h3>
+        <div class="oc-body"><div class="oc-body-in">
+          <p class="oc-q">Name one process that should work dramatically better than it does.</p>
+          <p class="oc-d">Process <span class="nowrap">re-engineering</span> and work redesign, with the build authority to make it real. Process intelligence and dependency mapping to find where the work actually breaks, then agentic workflow engineering to rebuild it - not a recommendation deck, a running system.</p>
+          <a href="work-redesign.html" class="oc-cta">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </div></div>
+      </article>
+      <article class="oc" tabindex="0">
+        <div class="oc-art" aria-hidden="true"><svg viewBox="30 20 240 180" preserveAspectRatio="xMidYMid meet"><g class="a2-g l1"><path class="a2-l base" d="M150 96 L230 130 L150 164 L70 130 Z"/></g><g class="a2-g l2"><path class="a2-l mid" d="M150 72 L230 106 L150 140 L70 106 Z"/></g><g class="a2-g l3"><path class="a2-l top" d="M150 48 L230 82 L150 116 L70 82 Z"/></g></svg></div>
+        <div class="oc-head"><span class="oc-num">02</span><span class="oc-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
+        <h3 class="oc-title">Systems Rebuild</h3>
+        <div class="oc-body"><div class="oc-body-in">
+          <p class="oc-q">Which system are you working around rather than working with?</p>
+          <p class="oc-d">Enterprise systems rebuild at the workflow layer replacing legacy and SaaS where configuration has become contortion. Includes systems consolidation and rationalisation, and application and product engineering for the custom systems that carry competitive advantage.</p>
+          <a href="#" class="oc-cta">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </div></div>
+      </article>
+      <article class="oc" tabindex="0">
+        <div class="oc-art" aria-hidden="true"><svg viewBox="40 40 220 150" preserveAspectRatio="xMidYMid meet"><path class="g-seg" style="--k:0" d="M68.1 147.1 A82 82 0 0 1 72.0 124.7"/><path class="g-seg" style="--k:1" d="M74.0 119.3 A82 82 0 0 1 85.4 99.5"/><path class="g-seg" style="--k:2" d="M89.1 95.1 A82 82 0 0 1 106.5 80.5"/><path class="g-seg" style="--k:3" d="M111.5 77.6 A82 82 0 0 1 132.9 69.8"/><path class="g-seg" style="--k:4" d="M138.6 68.8 A82 82 0 0 1 161.4 68.8"/><path class="g-seg" style="--k:5" d="M167.1 69.8 A82 82 0 0 1 188.5 77.6"/><path class="g-seg" style="--k:6" d="M193.5 80.5 A82 82 0 0 1 210.9 95.1"/><path class="g-seg" style="--k:7" d="M214.6 99.5 A82 82 0 0 1 226.0 119.3"/><path class="g-seg" style="--k:8" d="M228.0 124.7 A82 82 0 0 1 231.9 147.1"/><g class="g-needle"><line x1="150" y1="150" x2="88" y2="150"/></g><circle class="g-hub" cx="150" cy="150" r="9"/><text class="g-lab l" x="68" y="172">BEFORE</text><text class="g-lab r" x="232" y="172">AFTER</text><g class="g-chip"><rect x="110" y="92" width="80" height="24" rx="8"/><text x="150" y="108">Measured</text></g></svg></div>
+        <div class="oc-head"><span class="oc-num">03</span><span class="oc-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
+        <h3 class="oc-title">Operate &amp; Rebuild</h3>
+        <div class="oc-body"><div class="oc-body-in">
+          <p class="oc-q">Is there a process you would hand to someone else if they could prove they would improve it?</p>
+          <p class="oc-d">Searce takes operational ownership of a process and rebuilds it while running it. Improvement is measured, not promised. The process comes back better than it left, with the economics to show it.</p>
+          <a href="#" class="oc-cta">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </div></div>
+      </article>
+      <article class="oc" tabindex="0">
+        <div class="oc-art" aria-hidden="true"><svg viewBox="30 30 240 160" preserveAspectRatio="xMidYMid meet"><circle class="dn-track" cx="108" cy="110" r="52"/><circle class="dn-ai" cx="108" cy="110" r="52" style="--c:326.7"/><text class="dn-v" x="108" y="108">AI</text><text class="dn-s" x="108" y="126">attributed</text><g class="dn-leg"><rect x="178" y="84" width="12" height="12" rx="4" class="a"/><text x="196" y="94">AI-driven</text><rect x="178" y="110" width="12" height="12" rx="4" class="b"/><text x="196" y="120">Baseline</text></g><g class="dn-coins"><circle cx="186" cy="150" r="7"/><circle cx="202" cy="150" r="7"/><circle cx="218" cy="150" r="7"/></g></svg></div>
+        <div class="oc-head"><span class="oc-num">04</span><span class="oc-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
+        <h3 class="oc-title">Revenue &amp; Customer AI</h3>
+        <div class="oc-body"><div class="oc-body-in">
+          <p class="oc-q">What would you do differently if you could prove which revenue came from the AI?</p>
+          <p class="oc-d">AI engineered into revenue and customer workflows with attribution built in from the start, so every system answers not just "did it run" but "what did it earn."</p>
+          <a href="#" class="oc-cta">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </div></div>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="outcomes" id="outcomes" aria-labelledby="outcomes-heading">
-  <div class="stories-pin" id="storiesPin">
-    <div class="stories-sticky">
-      <div class="outcomes-header">
-        <div class="outcomes-header-inner">
-          <span class="outcomes-eyebrow" id="outcomes-heading">Verified Outcomes</span>
-        </div>
-      </div>
-      <div class="stories-viewport">
-      <div class="stories" id="storiesTrack" role="list">
-
-    <article class="story" role="listitem">
+<section class="transform" id="transform" aria-labelledby="transform-h">
+  <div class="tf-split">
+    <div class="tf-left">
       <div>
-        <div class="story-meta">
-          <span class="story-index">01</span>
-          <span class="story-context">Claims</span>
-        </div>
-        <p class="story-quote">&ldquo;This takes forty-one steps and four teams.&rdquo;</p>
+      <div class="chap" aria-hidden="true"></div>
+      <div class="tf-left-top">
+        <h2 id="transform-h">Start with one function or work across multiple parts of the enterprise.</h2>
       </div>
-      <div class="story-proof">
-        <p class="story-changed">Claims journey from 41 steps to 12.</p>
-        <p class="story-industry">Insurance</p>
       </div>
-    </article>
+      <p class="transform-sub">AI Outcome Engineering redesigns workflows, decisions, and operations around AI to create measurable business outcomes.</p>
+    </div>
 
-    <article class="story" role="listitem">
-      <div>
-        <div class="story-meta">
-          <span class="story-index">02</span>
-          <span class="story-context">Underwriting</span>
+    <div class="tf-stack">
+      <article class="tf-card" style="--i:0;--bg:#0064ff" data-fn="Finance">
+        <div class="tf-card-top"><h3 class="tf-fn">Finance</h3><span class="tf-num">01</span></div>
+        <div class="tf-body">
+          <p class="transform-headline">From manual financial operations to continuous, AI-assisted decision-making.</p>
+          <p class="transform-desc">Redesign how finance teams plan, analyze, reconcile, report, and make decisions by embedding AI into high-volume workflows and critical financial processes.</p>
+          <div class="transform-list-label">What you can reimagine</div>
+          <ul class="transform-list">
+          <li>Intelligent forecasting and scenario planning</li>
+          <li>Automated reconciliation, reporting, and financial operations</li>
+          <li>AI-assisted analysis and decision intelligence</li>
+          </ul>
         </div>
-        <p class="story-quote">&ldquo;Underwriting decisions take hours we do not have.&rdquo;</p>
-      </div>
-      <div class="story-proof">
-        <p class="story-changed">6.5 hours to 22 minutes.</p>
-        <p class="story-industry">Financial services</p>
-      </div>
-    </article>
-
-    <article class="story" role="listitem">
-      <div>
-        <div class="story-meta">
-          <span class="story-index">03</span>
-          <span class="story-context">Prior Authorizations</span>
+      </article>
+      <article class="tf-card" style="--i:1;--bg:#004ecc" data-fn="Human Resources">
+        <div class="tf-card-top"><h3 class="tf-fn">Human Resources</h3><span class="tf-num">02</span></div>
+        <div class="tf-body">
+          <p class="transform-headline">From fragmented people processes to intelligent workforce operations.</p>
+          <p class="transform-desc">Reimagine how employees and HR teams access knowledge, complete tasks, manage talent, and navigate everyday workforce processes.</p>
+          <div class="transform-list-label">What you can reimagine</div>
+          <ul class="transform-list">
+          <li>AI-powered employee service and knowledge</li>
+          <li>Talent acquisition and workforce planning</li>
+          <li>Automated HR operations and employee workflows</li>
+          </ul>
         </div>
-        <p class="story-quote">&ldquo;Approvals sit in a queue nobody owns.&rdquo;</p>
-      </div>
-      <div class="story-proof">
-        <p class="story-changed">83% of prior authorizations touchless.</p>
-        <p class="story-industry">Healthcare</p>
-      </div>
-    </article>
-
-    <article class="story" role="listitem">
-      <div>
-        <div class="story-meta">
-          <span class="story-index">04</span>
-          <span class="story-context">Financial Close</span>
+      </article>
+      <article class="tf-card" style="--i:2;--bg:#00337f" data-fn="IT">
+        <div class="tf-card-top"><h3 class="tf-fn">IT</h3><span class="tf-num">03</span></div>
+        <div class="tf-body">
+          <p class="transform-headline">From reactive IT operations to autonomous, resilient systems.</p>
+          <p class="transform-desc">Embed AI across IT service management, engineering, support, and operations to resolve issues faster and reduce repetitive work.</p>
+          <div class="transform-list-label">What you can reimagine</div>
+          <ul class="transform-list">
+          <li>Intelligent service management and support</li>
+          <li>AI-assisted engineering and development</li>
+          <li>Automated incident detection, diagnosis, and resolution</li>
+          </ul>
         </div>
-        <p class="story-quote">&ldquo;The close takes so long the numbers are stale.&rdquo;</p>
-      </div>
-      <div class="story-proof">
-        <p class="story-changed">11 days to 2.</p>
-        <p class="story-industry">Enterprise finance</p>
-      </div>
-    </article>
-
-    <article class="story" role="listitem">
-      <div>
-        <div class="story-meta">
-          <span class="story-index">05</span>
-          <span class="story-context">Freight Exceptions</span>
+      </article>
+      <article class="tf-card" style="--i:3;--bg:#0c1530" data-fn="Marketing">
+        <div class="tf-card-top"><h3 class="tf-fn">Marketing</h3><span class="tf-num">04</span></div>
+        <div class="tf-body">
+          <p class="transform-headline">From disconnected marketing activities to intelligent customer engagement.</p>
+          <p class="transform-desc">Connect customer intelligence, content, campaigns, and marketing operations with AI, helping teams move from insight to execution faster.</p>
+          <div class="transform-list-label">What you can reimagine</div>
+          <ul class="transform-list">
+          <li>AI-assisted content and campaign operations</li>
+          <li>Customer intelligence and personalization</li>
+          <li>Marketing performance and decision intelligence</li>
+          </ul>
         </div>
-        <p class="story-quote">&ldquo;Exceptions eat the team's week.&rdquo;</p>
-      </div>
-      <div class="story-proof">
-        <p class="story-changed">Freight exception handling 8x faster.</p>
-        <p class="story-industry">Logistics</p>
-      </div>
-    </article>
-
-    <article class="story" role="listitem">
-      <div>
-        <div class="story-meta">
-          <span class="story-index">06</span>
-          <span class="story-context">Customer Support</span>
+      </article>
+      <article class="tf-card" style="--i:4;--bg:#060c1a" data-fn="Legal">
+        <div class="tf-card-top"><h3 class="tf-fn">Legal</h3><span class="tf-num">05</span></div>
+        <div class="tf-body">
+          <p class="transform-headline">From manual legal workflows to AI-enabled legal operations.</p>
+          <p class="transform-desc">Bring AI into contracts, research, compliance, knowledge, and review workflows to reduce repetitive work and accelerate legal operations.</p>
+          <div class="transform-list-label">What you can reimagine</div>
+          <ul class="transform-list">
+          <li>Contract analysis and lifecycle workflows</li>
+          <li>Legal research and knowledge intelligence</li>
+          <li>Compliance, review, and document operations</li>
+          </ul>
         </div>
-        <p class="story-quote">&ldquo;Our support costs scale with our customers.&rdquo;</p>
-      </div>
-      <div class="story-proof">
-        <p class="story-changed">71% of conversations resolved end to end.</p>
-        <p class="story-industry">Telecom</p>
-      </div>
-    </article>
-
-      </div>
-      </div>
-      <div class="stories-progress" aria-hidden="true">
-        <div class="stories-progress-bar" id="storiesProgress"></div>
-      </div>
+      </article>
+      <article class="tf-card" style="--i:5;--bg:#000000" data-fn="Core Business Processes">
+        <div class="tf-card-top"><h3 class="tf-fn">Core Business Processes</h3><span class="tf-num">06</span><button type="button" class="ti-back" id="indBack">Back <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+        <div class="tf-body tf-core-body">
+          <p class="transform-headline">Reimagine the processes at the heart of your industry.</p>
+          <p class="transform-desc">Apply AI Outcome Engineering to the mission-critical workflows unique to your business, from patient care and claims to manufacturing, commerce, logistics, and other industry-specific operations.</p>
+          <button type="button" class="transform-core-cta" id="indOpen" aria-expanded="false" aria-controls="tfInd">Explore by Industry <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+        </div>
+              <div class="tf-ind" id="tfInd" hidden>
+          <p class="ti-k">Explore by industry</p>
+          <nav class="ti-grid" aria-label="Industries"><a class="ti-tile" href="financial-services-and-insurance-v5.html" style="--i:0"><span class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="ti-name">Financial services &amp; insurance</span><span class="ti-arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a><a class="ti-tile" href="hls-v5.html" style="--i:1"><span class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="6"/><path d="M12 8v8M8 12h8"/></svg></span><span class="ti-name">Healthcare &amp; life sciences</span><span class="ti-arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a><a class="ti-tile" href="#" style="--i:2"><span class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H14a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h5.5" stroke-dasharray="2 2.5"/></svg></span><span class="ti-name">Travel, transportation &amp; logistics</span><span class="ti-arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a><a class="ti-tile" href="#" style="--i:3"><span class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span><span class="ti-name">Retail, CPG &amp; e-commerce</span><span class="ti-arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a><a class="ti-tile" href="telecommunications-media-entertainment-and-gaming-v5.html" style="--i:4"><span class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z"/></svg></span><span class="ti-name">Telecommuni&shy;cations, media, entertainment &amp; gaming</span><span class="ti-arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a><a class="ti-tile" href="manufacturing-industrials-and-construction-v5.html" style="--i:5"><span class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/><rect x="8" y="3" width="8" height="8" rx="2"/></svg></span><span class="ti-name">Manufacturing, industrials &amp; construction</span><span class="ti-arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a><a class="ti-tile" href="technology-software-and-services%20V5.html" style="--i:6"><span class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"/></svg></span><span class="ti-name">Technology, software &amp; services</span><span class="ti-arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a><a class="ti-tile" href="#" style="--i:7"><span class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/></svg></span><span class="ti-name">Natural resources, energy &amp; utilities</span><span class="ti-arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a><a class="ti-tile" href="#" style="--i:8"><span class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11.5V16c0 1.5 2.5 3 5 3s5-1.5 5-3v-4.5"/></svg></span><span class="ti-name">Public sector &amp; education</span><span class="ti-arr" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span></a>
+          </nav>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="metric-ladder" id="metric-ladder" aria-labelledby="metric-heading">
+
+
+
+<section class="outcomes" id="outcomes" aria-labelledby="out-h">
   <div class="wrap">
-    <div class="metric-header">
-      <h2 id="metric-heading">The Metric Ladder.</h2>
-      <p class="metric-sub">Work happening &rarr; gaps &rarr; value arriving. Each interval is a measurable operational gap. Click a gap to see what is engineered inside it.</p>
+    <div class="out-head">
+      <div><div class="chap" aria-hidden="true"></div>
+      <h2 id="out-h" class="outcomes-h">Verified <span>outcomes.</span></h2></div>
+      <p class="out-sub">Five processes re-engineered and rebuilt, each measured against the baseline it started from.</p>
     </div>
-
-    <div class="ladder-track-outer">
-      <div class="ladder-viewport">
-      <div class="ladder-track" role="list" aria-label="Order-to-cash milestones">
-
-        <div class="milestone" role="listitem" data-gap="0" tabindex="0">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label">Ship Date</div>
+    <div class="bento">
+      <article class="bt bt-1 bc" style="--ar:360/390">
+        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 200 338" preserveAspectRatio="xMaxYMid slice"><defs><linearGradient id="mg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset="1" stop-color="#8fbaff"/></linearGradient><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b3d0ff"/><stop offset="1" stop-color="#5a98ff"/></linearGradient><linearGradient id="mg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#7aabff"/></linearGradient><linearGradient id="mg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef4ff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient><linearGradient id="mg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fbaff"/><stop offset="1" stop-color="#4d8fff"/></linearGradient></defs><path class="mz" style="--k:0" d="M0 0H100V50.0A50.0 50.0 0 0 1 50.0 100H0Z" fill="url(#mg1)"/><path class="mz" style="--k:1" d="M0 100H100V200Z" fill="url(#mg0)"/><path class="mz" style="--k:2" d="M0 300V200A100 100 0 0 1 100 300Z" fill="url(#mg3)"/><path class="mz" style="--k:3" d="M0 300H100V400H0Z" fill="url(#mg2)"/><path class="mz" style="--k:4" d="M100 100V50.0A50.0 50.0 0 0 1 200 50.0V100Z" fill="url(#mg3)"/><path class="mz" style="--k:5" d="M100 100H200V200H100Z" fill="url(#mg2)"/><path class="mz" style="--k:6" d="M100 250.0A50.0 50.0 0 1 1 200 250.0A50.0 50.0 0 1 1 100 250.0Z" fill="url(#mg1)"/><path class="mz" style="--k:7" d="M100 300H200V350.0A50.0 50.0 0 0 1 100 350.0Z" fill="url(#mg0)"/></svg></div>
+        <div class="bt-txt">
+          <div class="bt-top"><span class="bt-n">01</span><span class="bt-ctx">Claims</span><span class="bt-ind">Insurance</span></div>
+          <div class="bt-body">
+          <p class="bt-quote">&ldquo;This takes forty-one steps and four teams.&rdquo;</p>
+          <span class="bt-before">was <s>41 steps</s></span>
+          <p class="bt-big" aria-hidden="true"><span class="ct" data-from="41" data-to="12">12</span><small>steps</small></p>
+          <p class="bt-changed">Claims journey from 41 steps to 12.</p>
         </div>
-
-        <div class="gap-segment" data-idx="0">
-          <div class="gap-line"></div>
-          <div class="gap-capsule" data-tab="0">Billing lag</div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">Ship Date &rarr; Invoice Date</div>
-              <div class="gap-expand-title">Days the work sits unbilled</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Engineered by</div>
-                <div class="gap-expand-val">Auto-invoicing triggered by shipment confirmation.</div>
-              </div>
-            </div>
-          </div>
         </div>
-
-        <div class="milestone" role="listitem" data-gap="1" tabindex="0">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label">Invoice Date</div>
+      </article>
+      <article class="bt bt-2 bc" style="--ar:195/390">
+        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 790 1836" preserveAspectRatio="xMaxYMid slice"><defs><linearGradient id="mg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset="1" stop-color="#8fbaff"/></linearGradient><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b3d0ff"/><stop offset="1" stop-color="#5a98ff"/></linearGradient><linearGradient id="mg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#7aabff"/></linearGradient><linearGradient id="mg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef4ff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient><linearGradient id="mg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fbaff"/><stop offset="1" stop-color="#4d8fff"/></linearGradient></defs><path class="mz" style="--k:0" d="M0 530L540 0H790V530Z" fill="url(#mg3)" fill-rule="evenodd"/><path class="mz" style="--k:1" d="M0 530H790V1297H0Z" fill="url(#mg0)" fill-rule="evenodd"/><path class="mz" style="--k:2" d="M5 1685A390 390 0 1 1 785 1685A390 390 0 1 1 5 1685Z" fill="url(#mg1)" fill-rule="evenodd"/></svg></div>
+        <div class="bt-txt">
+          <div class="bt-top"><span class="bt-n">02</span><span class="bt-ctx">Underwriting</span><span class="bt-ind">Financial services</span></div>
+          <div class="bt-body">
+          <p class="bt-quote">&ldquo;Underwriting decisions take hours we do not have.&rdquo;</p>
+          <span class="bt-before">was <s>6.5 hours</s></span>
+          <p class="bt-big" aria-hidden="true"><span class="ct" data-from="390" data-to="22">22</span><small>min</small></p>
+          <p class="bt-changed">6.5 hours to 22 minutes.</p>
         </div>
-
-        <div class="gap-segment" data-idx="1">
-          <div class="gap-line"></div>
-          <div class="gap-capsule" data-tab="1">Delivery lag</div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">Invoice Date &rarr; Invoice Delivery</div>
-              <div class="gap-expand-title">Days the invoice sits before reaching the customer</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Engineered by</div>
-                <div class="gap-expand-val">Same-day billing agents reading the shipment file.</div>
-              </div>
-            </div>
-          </div>
         </div>
-
-        <div class="milestone" role="listitem" data-gap="2" tabindex="0">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label">Invoice Delivery Date</div>
+      </article>
+      <article class="bt bt-3 bc" style="--ar:157/325">
+        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 790 1836" preserveAspectRatio="xMaxYMid slice"><defs><linearGradient id="mg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset="1" stop-color="#8fbaff"/></linearGradient><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b3d0ff"/><stop offset="1" stop-color="#5a98ff"/></linearGradient><linearGradient id="mg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#7aabff"/></linearGradient><linearGradient id="mg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef4ff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient><linearGradient id="mg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fbaff"/><stop offset="1" stop-color="#4d8fff"/></linearGradient></defs><path class="mz" style="--k:0" d="M0 0H790V550H0Z" fill="url(#mg3)" fill-rule="evenodd"/><path class="mz" style="--k:1" d="M0 1305A790 755 0 0 1 790 550V1305Z" fill="url(#mg0)" fill-rule="evenodd"/><path class="mz" style="--k:2" d="M0 1305L560 1836H0Z" fill="url(#mg2)" fill-rule="evenodd"/></svg></div>
+        <div class="bt-txt">
+          <div class="bt-top"><span class="bt-n">03</span><span class="bt-ctx">Prior Authorizations</span><span class="bt-ind">Healthcare</span></div>
+          <div class="bt-body">
+          <p class="bt-quote">&ldquo;Approvals sit in a queue nobody owns.&rdquo;</p>
+          <span class="bt-before">&nbsp;</span>
+          <p class="bt-big" aria-hidden="true"><span class="ct" data-from="0" data-to="83">83</span><small>%</small></p>
+          <p class="bt-changed">83% of prior authorizations touchless.</p>
         </div>
-
-        <div class="gap-segment" data-idx="2">
-          <div class="gap-line"></div>
-          <div class="gap-capsule" data-tab="2">Receipt</div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">Invoice Delivery &rarr; Invoice Receipt</div>
-              <div class="gap-expand-title">Days before the customer confirms receipt</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Engineered by</div>
-                <div class="gap-expand-val">Portal submission, delivery proof, rejection handling.</div>
-              </div>
-            </div>
-          </div>
         </div>
-
-        <div class="milestone" role="listitem" data-gap="3" tabindex="0">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label">Invoice Receipt Date</div>
+      </article>
+      <article class="bt bt-4 bc" style="--ar:177/325">
+        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 790 1836" preserveAspectRatio="xMaxYMid slice"><defs><linearGradient id="mg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset="1" stop-color="#8fbaff"/></linearGradient><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b3d0ff"/><stop offset="1" stop-color="#5a98ff"/></linearGradient><linearGradient id="mg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#7aabff"/></linearGradient><linearGradient id="mg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef4ff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient><linearGradient id="mg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fbaff"/><stop offset="1" stop-color="#4d8fff"/></linearGradient></defs><path class="mz" style="--k:0" d="M0 392A393 393 0 1 1 786 392A393 393 0 1 1 0 392ZM200 392A193 193 0 1 0 586 392A193 193 0 1 0 200 392Z" fill="url(#mg0)" fill-rule="evenodd"/><path class="mz" style="--k:1" d="M0 785H790A790 790 0 0 1 0 1575Z" fill="url(#mg2)" fill-rule="evenodd"/><path class="mz" style="--k:2" d="M0 1575H790V1836H0Z" fill="url(#mg3)" fill-rule="evenodd"/></svg></div>
+        <div class="bt-txt">
+          <div class="bt-top"><span class="bt-n">04</span><span class="bt-ctx">Financial Close</span><span class="bt-ind">Enterprise finance</span></div>
+          <div class="bt-body">
+          <p class="bt-quote">&ldquo;The close takes so long the numbers are stale.&rdquo;</p>
+          <span class="bt-before">was <s>11 days</s></span>
+          <p class="bt-big" aria-hidden="true"><span class="ct" data-from="11" data-to="2">2</span><small>days</small></p>
+          <p class="bt-changed">11 days to 2.</p>
         </div>
-
-        <div class="gap-segment" data-idx="3">
-          <div class="gap-line"></div>
-          <div class="gap-capsule" data-tab="3">Dispute &amp; resolution</div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">Invoice Receipt &rarr; Invoice Approval</div>
-              <div class="gap-expand-title">Dispute, follow-up &amp; resolution cycle</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Engineered by</div>
-                <div class="gap-expand-val">Right-first-time invoicing, dispute prevention.</div>
-              </div>
-            </div>
-          </div>
         </div>
-
-        <div class="milestone" role="listitem" data-gap="4" tabindex="0">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label">Invoice Approval Date</div>
+      </article>
+      <article class="bt bt-5 bc" style="--ar:182/325">
+        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 790 1836" preserveAspectRatio="xMaxYMid slice"><defs><linearGradient id="mg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset="1" stop-color="#8fbaff"/></linearGradient><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b3d0ff"/><stop offset="1" stop-color="#5a98ff"/></linearGradient><linearGradient id="mg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#7aabff"/></linearGradient><linearGradient id="mg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef4ff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient><linearGradient id="mg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fbaff"/><stop offset="1" stop-color="#4d8fff"/></linearGradient></defs><path class="mz" style="--k:0" d="M0 0A790 795 0 0 0 790 795V0Z" fill="url(#mg3)" fill-rule="evenodd"/><path class="mz" style="--k:1" d="M0 800L790 795L0 1590Z" fill="url(#mg0)" fill-rule="evenodd"/><path class="mz" style="--k:2" d="M-5 1770A465 465 0 1 1 925 1770A465 465 0 1 1 -5 1770ZM230 1770A230 230 0 1 0 690 1770A230 230 0 1 0 230 1770Z" fill="url(#mg1)" fill-rule="evenodd"/></svg></div>
+        <div class="bt-txt">
+          <div class="bt-top"><span class="bt-n">05</span><span class="bt-ctx">Freight Exceptions</span><span class="bt-ind">Logistics</span></div>
+          <div class="bt-body">
+          <p class="bt-quote">&ldquo;Exceptions eat the team's week.&rdquo;</p>
+          <span class="bt-before">&nbsp;</span>
+          <p class="bt-big" aria-hidden="true"><span class="ct" data-from="1" data-to="8">8</span><small>× faster</small></p>
+          <p class="bt-changed">Freight exception handling 8x faster.</p>
         </div>
-
-        <div class="gap-segment" data-idx="4">
-          <div class="gap-line"></div>
-          <div class="gap-capsule" data-tab="4">Pay term</div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">Approval &rarr; Pay Term</div>
-              <div class="gap-expand-title">The contractual pay term</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Commercial, not engineered</div>
-                <div class="gap-expand-val commercial">Contract term. Engineering sits in the gaps around it.</div>
-              </div>
-            </div>
-          </div>
         </div>
-
-        <div class="milestone pay-term" role="listitem" data-gap="5" tabindex="0">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label" style="color:#e63946;">Pay Term</div>
-        </div>
-
-        <div class="gap-segment" data-idx="5">
-          <div class="gap-line"></div>
-          <div class="gap-capsule" data-tab="5">Collections</div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">Pay Term &rarr; Payment Issue</div>
-              <div class="gap-expand-title">Days overdue past the contractual term</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Engineered by</div>
-                <div class="gap-expand-val">Prioritised collections, proactive follow-up.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="milestone" role="listitem" data-gap="6" tabindex="0">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label">Payment Issue Date</div>
-        </div>
-
-        <div class="gap-segment" data-idx="6">
-          <div class="gap-line"></div>
-          <div class="gap-capsule" data-tab="6">Transit</div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">Payment Issue &rarr; Payment Receipt</div>
-              <div class="gap-expand-title">Payment processing and transit time</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Engineered by</div>
-                <div class="gap-expand-val">Payment tracking and exception alerting.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="milestone" role="listitem" data-gap="7" tabindex="0">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label">Payment Receipt Date</div>
-        </div>
-
-        <div class="gap-segment" data-idx="7">
-          <div class="gap-line"></div>
-          <div class="gap-capsule" data-tab="7">Matching</div>
-          <div class="gap-expand">
-            <div class="gap-expand-inner">
-              <div class="gap-expand-route">Payment Receipt &rarr; Cash Application</div>
-              <div class="gap-expand-title">Days before cash is matched and applied</div>
-              <div class="gap-expand-row">
-                <div class="gap-expand-label">Engineered by</div>
-                <div class="gap-expand-val">Automated matching, remittance parsing, exception handling.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="milestone" role="listitem" data-gap="7" tabindex="0">
-          <div class="milestone-dot"></div>
-          <div class="milestone-label" style="color:var(--blue);">Cash Application Date</div>
-        </div>
-
-      </div>
-      </div>
-
-      <div class="gap-panel-wrap">
-        <div class="gap-panel" id="gapPanel" role="region" aria-live="polite"></div>
-      </div>
-
-      <p class="ticker-hint">Hover to explore each gap</p>
-
-      <div class="ladder-resolve">
-        <div class="ladder-arrow" aria-hidden="true">&rarr;</div>
-        <div>
-          <div class="ladder-resolve-label">Order-to-Cash Days</div>
-          <div class="ladder-resolve-sub">The individual gaps above resolve into this single business outcome.</div>
-        </div>
-      </div>
+      </article>
     </div>
   </div>
 </section>
@@ -1763,11 +1443,14 @@ footer{background:#071028;padding:72px 0 0;}
   <div class="wrap">
     <div class="how-build-grid">
       <div class="how-build-left">
+        <div><div class="chap" aria-hidden="true"></div></div>
         <h2 id="how-build-heading">How Searce<br><span class="how-build-blue">builds.</span></h2>
         <p class="how-build-body-text">AI-native engineering with evaluation suites, regression harnesses and human review at every gate.</p>
+
       </div>
       <div class="how-build-right" aria-label="Engineering methodology">
         <div class="build-stack" id="buildStack">
+          <div class="build-line" aria-hidden="true"><i id="buildFill"></i></div>
           <div class="build-row active"><span class="build-row-num">01</span><span class="build-row-text">AI-accelerated build</span><span class="build-row-bar"></span></div>
           <div class="build-row"><span class="build-row-num">02</span><span class="build-row-text">Eval suites at every gate</span><span class="build-row-bar"></span></div>
           <div class="build-row"><span class="build-row-num">03</span><span class="build-row-text">Regression tested</span><span class="build-row-bar"></span></div>
@@ -1775,6 +1458,7 @@ footer{background:#071028;padding:72px 0 0;}
           <div class="build-row"><span class="build-row-num">05</span><span class="build-row-text">Baselined before we start</span><span class="build-row-bar"></span></div>
           <div class="build-row"><span class="build-row-num">06</span><span class="build-row-text">Verified when we finish</span><span class="build-row-bar"></span></div>
         </div>
+        <div class="build-out" aria-hidden="true"><span></span>Then it ships</div>
       </div>
     </div>
   </div>
@@ -1784,13 +1468,20 @@ footer{background:#071028;padding:72px 0 0;}
 <section class="after" id="after" aria-labelledby="after-h">
   <div class="wrap">
     <div class="after-center">
-      <div class="after-eyebrow">What happens after</div>
       <h2 id="after-h" class="after-headline">
         Every rebuilt system ships with a <em>named operating owner</em>,
         <em>documented maintenance economics</em>
         and a <em>defined exit path</em>.
       </h2>
     </div>
+      <div class="ship">
+        <div class="ship-top"><span class="ship-k">Ships with</span></div>
+        <ol class="ship-list">
+          <li class="ship-item"><span class="ship-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><span class="ship-lab">Ownership</span><p>A named operating owner</p></div></li>
+          <li class="ship-item"><span class="ship-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><span class="ship-lab">Economics</span><p>Documented maintenance economics</p></div></li>
+          <li class="ship-item"><span class="ship-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><span class="ship-lab">Exit</span><p>A defined exit path</p></div></li>
+        </ol>
+      </div>
   </div>
 </section>
 
@@ -1798,6 +1489,7 @@ footer{background:#071028;padding:72px 0 0;}
   <div class="wrap">
     <div class="connect-inner">
       <div class="connect-left">
+        <div class="chap" aria-hidden="true"></div>
         <h2>let's<br>connect</h2>
         <p>Drop us an enquiry and we will get back in the next 24 hours.</p>
       </div>
@@ -1854,7 +1546,7 @@ footer{background:#071028;padding:72px 0 0;}
       <div>
         <div class="foot-col-head">practices</div>
         <ul class="foot-col-links">
-          <li><a href="business-systems-engineering.html" class="current" aria-current="page">business systems engineering</a></li>
+          <li><a href="business-systems-engineering.html" class="current" aria-current="page">AI outcome engineering</a></li>
           <li><a href="human-ai-work-engineering.html">human + AI work engineering</a></li>
           <li><a href="#">AI-ready platform engineering</a></li>
           <li><a href="#">AI trust &amp; resilience engineering</a></li>
@@ -2177,64 +1869,282 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 })();
 
+/* ===== HERO GRAPH — chaos → radial loop ===== */
+(function(){
+  const cv = document.getElementById('heroGraph');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  let W = 0, H = 0, dpr = 1;
+
+  const N = 70;                    // node count
+  const nodes = [];
+  const scatterEdges = [];
+
+  function rand(a, b){ return a + Math.random()*(b-a); }
+  function easeIO(t){ return t<0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2; }
+  function smooth(a, b, x){ return Math.max(0, Math.min(1, (x-a)/(b-a))); }
+
+  function build(){
+    nodes.length = 0; scatterEdges.length = 0;
+    const cx = W * 0.5;
+    const cy = H * 0.5;
+    const maxR = Math.min(W, H) * 0.48;
+
+    /* Colour palette: mostly ink, with blue accents (kept in Searce range) */
+    const palette = [
+      'rgba(11,11,11,ALPHA)', 'rgba(11,11,11,ALPHA)', 'rgba(11,11,11,ALPHA)',
+      'rgba(11,11,11,ALPHA)',
+      'rgba(0,100,255,ALPHA)', 'rgba(0,100,255,ALPHA)',
+      'rgba(0,78,204,ALPHA)',
+      'rgba(179,208,255,ALPHA)'
+    ];
+
+    for (let i = 0; i < N; i++){
+      /* Scattered — bounded within the graph container */
+      const sx = rand(W*0.05, W*0.95);
+      const sy = rand(H*0.05, H*0.95);
+      /* Sizes: mostly small, occasional larger for hierarchy */
+      const size = rand(2, 8) + (Math.random() < 0.12 ? rand(3, 6) : 0);
+
+      /* Radial fan around centre */
+      const angle = (i / N) * Math.PI * 2 + rand(-0.06, 0.06);
+      const dist = rand(maxR*0.32, maxR*0.98);
+      const rx = cx + Math.cos(angle) * dist;
+      const ry = cy + Math.sin(angle) * dist;
+
+      nodes.push({
+        sx, sy, rx, ry, size,
+        color: palette[Math.floor(Math.random()*palette.length)],
+        cx, cy,
+        drift: rand(0, Math.PI*2)
+      });
+    }
+
+    rebuildScatterEdges();
+  }
+
+  /* Called once per cycle to give each scattered state a different shape.
+     Only the scatter positions and their edges change — radial layout and
+     colours stay put so the ordered state remains stable. */
+  function reshuffleScatter(){
+    for (const n of nodes){
+      n.sx = rand(W*0.05, W*0.95);
+      n.sy = rand(H*0.05, H*0.95);
+      n.drift = rand(0, Math.PI*2);
+    }
+    rebuildScatterEdges();
+  }
+
+  function rebuildScatterEdges(){
+    scatterEdges.length = 0;
+    for (let i = 0; i < N; i++){
+      for (let j = i+1; j < N; j++){
+        const dx = nodes[i].sx - nodes[j].sx;
+        const dy = nodes[i].sy - nodes[j].sy;
+        if (Math.hypot(dx, dy) < 90 && Math.random() < 0.28) scatterEdges.push([i, j]);
+      }
+    }
+  }
+
+  function resize(){
+    const r = cv.parentElement.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height;
+    cv.width = W * dpr; cv.height = H * dpr;
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+  }
+
+  /* Loop — scattered ↔ radial with holds. */
+  const CYCLE = 9000;
+  function progress(t){
+    if (t < 0.12) return 0;
+    if (t < 0.46) return easeIO(smooth(0.12, 0.46, t));
+    if (t < 0.72) return 1;
+    if (t < 0.98) return 1 - easeIO(smooth(0.72, 0.98, t));
+    return 0;
+  }
+
+  let lastShuffleCycle = 0;
+  function frame(now){
+    ctx.clearRect(0, 0, W, H);
+    const t = (now % CYCLE) / CYCLE;
+    const p = progress(t);
+    const pInv = 1 - p;
+    const driftAmp = 3 + 5 * pInv;
+
+    /* Reshuffle scatter positions once per cycle while we're at peak radial.
+       Nodes are all converged to the fan then, so changing their scatter
+       targets is invisible — but the NEXT return-to-chaos morphs to the
+       fresh positions, so every scattered state looks different. */
+    const cycleN = Math.floor(now / CYCLE);
+    if (cycleN !== lastShuffleCycle && t > 0.55 && t < 0.7){
+      lastShuffleCycle = cycleN;
+      reshuffleScatter();
+    }
+
+    /* Scattered near-neighbour edges (fade as we go radial) */
+    if (pInv > 0.02){
+      ctx.strokeStyle = 'rgba(11,11,11,' + (0.28 * pInv) + ')';
+      ctx.lineWidth = 0.75;
+      ctx.beginPath();
+      for (const [a, b] of scatterEdges){
+        const na = nodes[a], nb = nodes[b];
+        const ax = (na.sx + (na.rx - na.sx) * p) + Math.sin(now*0.00028 + na.drift) * driftAmp;
+        const ay = (na.sy + (na.ry - na.sy) * p) + Math.cos(now*0.00025 + na.drift) * driftAmp;
+        const bx = (nb.sx + (nb.rx - nb.sx) * p) + Math.sin(now*0.00028 + nb.drift) * driftAmp;
+        const by = (nb.sy + (nb.ry - nb.sy) * p) + Math.cos(now*0.00025 + nb.drift) * driftAmp;
+        ctx.moveTo(ax, ay); ctx.lineTo(bx, by);
+      }
+      ctx.stroke();
+    }
+
+    /* Radial spokes to centre (fade in as we go radial) */
+    if (p > 0.05){
+      ctx.strokeStyle = 'rgba(11,11,11,' + (0.22 * p) + ')';
+      ctx.lineWidth = 0.6;
+      ctx.beginPath();
+      for (const n of nodes){
+        const x = n.sx + (n.rx - n.sx) * p;
+        const y = n.sy + (n.ry - n.sy) * p;
+        ctx.moveTo(n.cx, n.cy);
+        ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+
+    /* Nodes */
+    for (const n of nodes){
+      const dx = Math.sin(now*0.00028 + n.drift) * driftAmp;
+      const dy = Math.cos(now*0.00025 + n.drift) * driftAmp;
+      const x = (n.sx + (n.rx - n.sx) * p) + dx * pInv;
+      const y = (n.sy + (n.ry - n.sy) * p) + dy * pInv;
+      const alpha = 0.85 + 0.15 * (n.size / 14);
+      ctx.fillStyle = n.color.replace('ALPHA', alpha.toFixed(2));
+      ctx.beginPath();
+      ctx.arc(x, y, n.size, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    /* Tiny centre marker at peak radial */
+    if (p > 0.5){
+      ctx.beginPath();
+      ctx.arc(nodes[0].cx, nodes[0].cy, 2.4, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,100,255,' + (0.9 * p) + ')';
+      ctx.fill();
+    }
+
+    /* Label — ONE per loop (Antimetal-style). Each time the graph converges
+       into the radial state a single label appears, then fades before the
+       graph scatters again; the next convergence shows the next label.
+       Flat tag: coloured dot + monospace caps text, faint dotted connector. */
+    {
+      const LABELS = ['revenue', 'cost', 'agents', 'orchestration', 'custom systems'];
+      const IDX    = [0, 14, 28, 42, 56];
+      const li = cycleN % LABELS.length;
+      /* visible only during the radial hold (t 0.46 → 0.72) */
+      const a = smooth(0.44, 0.49, t) * (1 - smooth(0.72, 0.77, t));
+      const n = nodes[IDX[li]];
+
+      if (n && a > 0.02){
+        const dx = n.rx - n.cx, dy = n.ry - n.cy;
+        const len = Math.hypot(dx, dy) || 1;
+        const ux = dx / len, uy = dy / len;
+        const right = ux >= 0;
+
+        ctx.font = "600 11.5px ui-monospace, 'SF Mono', Menlo, Consolas, monospace";
+        if ('letterSpacing' in ctx) ctx.letterSpacing = '1.2px';
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'left';
+        const text = LABELS[li].toUpperCase();
+        const textW = ctx.measureText(text).width;
+        const padX = 12, dotW = 16;
+        const boxW = textW + padX * 2 + dotW;
+        const boxH = 29;
+
+        /* Tag sits beside the node, on its outer side */
+        const gap = n.size + 44;
+        let boxX = right ? n.rx + gap : n.rx - gap - boxW;
+        let boxY = n.ry + uy * 10 - boxH / 2;
+        boxX = Math.max(4, Math.min(W - boxW - 4, boxX));
+        boxY = Math.max(4, Math.min(H - boxH - 4, boxY));
+        const edgeX = right ? boxX : boxX + boxW;
+
+        /* Faint dotted connector node → tag */
+        ctx.setLineDash([2, 3]);
+        ctx.strokeStyle = 'rgba(0,100,255,' + (0.7 * a) + ')';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(n.rx + (right ? n.size + 3 : -(n.size + 3)), n.ry);
+        ctx.lineTo(edgeX, boxY + boxH / 2);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        /* Flat tag box, near-square corners */
+        ctx.shadowColor = 'rgba(0,40,120,' + (0.25 * a) + ')'; ctx.shadowBlur = 16; ctx.shadowOffsetY = 6;
+        ctx.fillStyle = 'rgba(11,11,11,' + a + ')';
+        ctx.strokeStyle = 'rgba(11,11,11,0)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(boxX + 0.5, boxY + 0.5, boxW, boxH, 6);
+        else ctx.rect(boxX + 0.5, boxY + 0.5, boxW, boxH);
+        ctx.fill();
+        ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+
+        /* Dot in the node's own colour */
+        ctx.beginPath();
+        ctx.arc(boxX + padX + 4, boxY + boxH / 2, 4, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0,100,255,' + a + ')';
+        ctx.fill();
+
+        ctx.fillStyle = 'rgba(255,255,255,' + a + ')';
+        ctx.fillText(text, boxX + padX + dotW, boxY + boxH / 2 + 0.5);
+        if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  if (REDUCED){
+    /* Static radial view for reduced-motion users */
+    ctx.strokeStyle = 'rgba(11,11,11,0.22)'; ctx.lineWidth = 0.6;
+    ctx.beginPath();
+    for (const n of nodes){ ctx.moveTo(n.cx, n.cy); ctx.lineTo(n.rx, n.ry); }
+    ctx.stroke();
+    for (const n of nodes){
+      ctx.beginPath();
+      ctx.arc(n.rx, n.ry, n.size, 0, Math.PI*2);
+      ctx.fillStyle = n.color.replace('ALPHA','0.9');
+      ctx.fill();
+    }
+  } else {
+    requestAnimationFrame(frame);
+  }
+})();
+
 /* ===== HERO WORD REVEAL ===== */
 (function(){
   const line1 = document.getElementById('heroLine1');
   const line2 = document.getElementById('heroLine2');
   if(!line1) return;
-  const words = line1.textContent.split(' ');
-  line1.innerHTML = words.map((w,i) =>
-    '<span class="hw" style="animation-delay:'+( 0.3 + i*0.12)+'s">'+w+'</span>'
-  ).join(' ');
-  if(line2) line2.style.animationDelay = (0.3 + words.length * 0.12 + 0.1) + 's';
-})();
-
-/* ===== OUTCOME STORIES - scroll-driven carousel ===== */
-(function(){
-  const pin=document.getElementById('storiesPin');
-  const track=document.getElementById('storiesTrack');
-  const bar=document.getElementById('storiesProgress');
-  if(!pin||!track)return;
-
-  const vp=track.parentElement;
-  let maxShift=0;
-  let ticking=false;
-
-  function measure(){
-    if(window.innerWidth<=1024){
-      pin.style.height='';
-      track.style.transform='';
-      maxShift=0;
-      return;
-    }
-    track.style.transform='none';
-    maxShift=Math.max(0, track.scrollWidth - vp.clientWidth);
-    pin.style.height=(window.innerHeight + maxShift)+'px';
-    apply();
-  }
-
-  function apply(){
-    if(maxShift<=0){track.style.transform='';return;}
-    const total=pin.offsetHeight - window.innerHeight;
-    if(total<=0){track.style.transform='';return;}
-    const top=pin.getBoundingClientRect().top;
-    let p=(-top)/total;
-    p=p<0?0:(p>1?1:p);
-    track.style.transform='translate3d('+(-(p*maxShift).toFixed(2))+'px,0,0)';
-    if(bar) bar.style.width=(p*100).toFixed(2)+'%';
-  }
-
-  function onScroll(){
-    if(ticking)return;
-    ticking=true;
-    requestAnimationFrame(()=>{apply();ticking=false;});
-  }
-
-  measure();
-  window.addEventListener('scroll',onScroll,{passive:true});
-  window.addEventListener('resize',measure);
-  window.addEventListener('load',measure);
-  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(measure);}
+  /* Preserve <br> tags inside heroLine1 (e.g. "Rebuild<br>the systems.") so
+     the authored line breaks survive the word-reveal rewrite. */
+  const segments = line1.innerHTML.split(/<br\s*\/?>/i);
+  let idx = 0;
+  const rebuilt = segments.map(seg =>
+    seg.trim().split(/\s+/).filter(Boolean).map(w => {
+      const span = '<span class="hw" style="animation-delay:'+(0.3 + idx*0.12)+'s">'+w+'</span>';
+      idx++;
+      return span;
+    }).join(' ')
+  ).join('<br>');
+  line1.innerHTML = rebuilt;
+  if(line2) line2.style.animationDelay = (0.3 + idx * 0.12 + 0.1) + 's';
 })();
 
 /* ===== METRIC LADDER - ticker scroll + detail panels ===== */
@@ -2442,5 +2352,698 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 })();
 
 </script>
+<!-- ===================== CONTINUITY LAYER =====================
+     Chapter labels + drawn thread, section rail, scroll reveals,
+     rounded-panel treatment, vectors and micro-interactions.
+     Loaded last so it refines (not replaces) the section styles above. -->
+<style>
+:root{--gut:80px;--r-card:20px;--r-panel:32px;}
+/* gutters mirror searce.com breakpoints */
+@media(max-width:1279.98px){:root{--gut:40px;}}
+@media(max-width:1023.98px){:root{--gut:24px;}}
+@media(max-width:639.98px){:root{--gut:16px;}}
+
+/* ---------- Chapter label + thread ---------- */
+.chap{
+  position:relative;display:block;width:10px;height:10px;
+  margin-bottom:28px;
+  font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);
+}
+.chap-n{color:var(--blue);font-variant-numeric:tabular-nums;}
+.chap-n::after{content:"";display:inline-block;width:20px;height:1px;background:currentColor;opacity:.5;vertical-align:middle;margin-left:12px;}
+/* node */
+.chap::after{
+  content:"";position:absolute;left:0;top:50%;
+  width:10px;height:10px;margin-top:-5px;border-radius:50%;
+  background:var(--blue);box-shadow:0 0 0 4px rgba(0,100,255,.14);
+  transform:scale(0);transition:transform .5s cubic-bezier(.3,1.6,.5,1) .9s;
+}
+/* thread drawn down from the top of the section into the node */
+.chap::before{
+  content:"";position:absolute;left:4.5px;bottom:50%;
+  width:1px;height:var(--reach,0px);
+  background:linear-gradient(to bottom, rgba(0,100,255,0) 0%, rgba(0,100,255,.55) 40%, var(--blue) 100%);
+  transform-origin:top;transform:scaleY(0);
+  transition:transform 1s cubic-bezier(.6,.05,.3,1);
+  pointer-events:none;
+}
+.chap.lit::before{transform:scaleY(1);}
+.chap.lit::after{transform:scale(1);}
+.squad .chap,.how-build .chap{color:#fff;}
+.squad .chap-n,.how-build .chap-n{color:var(--blue-24);}
+.squad .chap::before,.how-build .chap::before{background:linear-gradient(to bottom, rgba(179,208,255,0) 0%, rgba(179,208,255,.5) 40%, var(--blue-24) 100%);}
+.squad .chap::after,.how-build .chap::after{background:var(--blue-24);box-shadow:0 0 0 4px rgba(179,208,255,.16);}
+html:not(.cx) .chap::before{transform:scaleY(1);}
+html:not(.cx) .chap::after{transform:scale(1);}
+
+/* ---------- Scroll reveal ---------- */
+.cx [data-rv]{opacity:0;transform:translateY(28px);transition:opacity .8s ease var(--d,0s),transform .9s cubic-bezier(.2,.7,.2,1) var(--d,0s);}
+.cx [data-rv].in{opacity:1;transform:none;}
+
+/* ---------- Section rail ---------- */
+.rail{
+  position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:150;
+  display:flex;flex-direction:column;gap:6px;padding:12px 8px;
+  background:rgba(255,255,255,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(0,0,0,.06);border-radius:999px;
+  box-shadow:0 6px 24px rgba(0,20,60,.08);
+  opacity:0;transition:opacity .4s ease;
+}
+.rail.show{opacity:1;}
+.rail a{position:relative;display:block;width:8px;height:8px;border-radius:999px;background:rgba(0,0,0,.18);transition:height .35s ease,background .35s ease;}
+.rail a:hover{background:rgba(0,100,255,.5);}
+.rail a.on{height:22px;background:var(--blue);}
+.rail a span{
+  position:absolute;right:22px;top:50%;transform:translate(6px,-50%);
+  white-space:nowrap;padding:6px 12px;border-radius:999px;
+  background:var(--ink);color:#fff;
+  font-family:var(--display);font-size:12px;font-weight:500;letter-spacing:.02em;
+  opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;
+}
+.rail a:hover span,.rail a:focus-visible span{opacity:1;transform:translate(0,-50%);}
+@media(max-width:1180px){.rail{display:none;}}
+
+/* ---------- Rounded everything ---------- */
+.hero-badge{border-radius:999px;}
+.connect-form input,.connect-form select,.connect-form textarea{border-radius:12px;}
+.connect-check input[type="checkbox"]{border-radius:6px;}
+.transform-core-cta{border-radius:999px;}
+.transform-list li::before{border-radius:2px;}
+.tf-stack{padding-right:16px;}
+.tf-card{border-radius:24px;}
+@media(max-width:900px){.tf-stack{padding:0 var(--gut);}.tf-card{margin-bottom:12px;}}
+
+/* Dark / tinted sections become inset rounded panels */
+.outcomes,.how-build{margin:0 16px;border-radius:var(--r-panel);overflow:hidden;}
+.squad{margin:0;border-radius:0;overflow:hidden;}  /* full-bleed, like let's connect */
+.connect{margin:0;border-radius:0;overflow:hidden;}  /* full-bleed, sits flush on the footer */
+.outcomes + .how-build{margin-top:16px;}
+/* panels are inset 16px, so trim their inner gutter to keep content on the shared edge */
+@media(max-width:1471.98px){
+  .outcomes > .wrap,.how-build > .wrap,.after > .wrap{padding-left:max(16px,calc(var(--gut) - 16px));padding-right:max(16px,calc(var(--gut) - 16px));}
+}
+@media(max-width:1023.98px){
+  .outcomes,.how-build{margin:0 8px;border-radius:24px;}
+  .how-build{border-radius:24px 24px 0 0;}.after{margin:0 8px 8px;border-radius:0 0 24px 24px;}
+  .outcomes > .wrap,.how-build > .wrap,.after > .wrap{padding-left:max(16px,calc(var(--gut) - 8px));padding-right:max(16px,calc(var(--gut) - 8px));}
+}
+
+/* ---------- Squad: cursor spotlight + two-halves vector ---------- */
+.squad-spot{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(420px circle at var(--mx,70%) var(--my,20%), rgba(0,100,255,.20), transparent 65%);
+  transition:background .1s linear;
+}
+/* section 2 · two columns: animation left, copy right */
+.squad > .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);column-gap:clamp(40px,5vw,96px);align-items:center;}
+.squad > .wrap > .chap{grid-column:1 / -1;grid-row:1;}
+.squad > .wrap > .squad-visual{grid-column:1;grid-row:2;align-self:center;}
+.squad > .wrap > .squad-copy{grid-column:2;grid-row:2;align-self:center;}
+.squad .squad-body-cols{grid-template-columns:1fr;gap:18px;margin-top:clamp(20px,3vh,32px);}
+.squad .squad-body-cols .lede{margin:0;}
+.squad-visual{margin:0;display:flex;flex-direction:column;align-items:center;gap:clamp(12px,2vh,24px);}
+.squad-visual svg{width:100%;height:auto;max-width:min(100%,54vh,480px);display:block;overflow:visible;}
+.orb{fill:none;stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.8s cubic-bezier(.6,.05,.3,1);}
+.orb-o{stroke:rgba(0,100,255,.55);stroke-width:1.5;}
+.orb-i{stroke:rgba(255,255,255,.3);stroke-width:1.3;transition-delay:.25s;}
+.squad-visual.in .orb,html:not(.cx) .squad-visual .orb{stroke-dashoffset:0;}
+.orb-dash{fill:none;stroke-width:1;transform-origin:280px 280px;}
+.orb-dash.o{stroke:rgba(179,208,255,.35);stroke-dasharray:2 12;animation:orbSpin 60s linear infinite;}
+.orb-dash.i{stroke:rgba(255,255,255,.28);stroke-dasharray:2 10;animation:orbSpin 40s linear infinite reverse;}
+@keyframes orbSpin{to{transform:rotate(360deg);}}
+.orb-spokes line{stroke:rgba(179,208,255,.1);stroke-width:1;}
+.orb-t{font-family:var(--display);font-size:12px;font-weight:500;letter-spacing:.22em;text-anchor:middle;}
+.orb-t.o{fill:var(--blue-24);}
+.orb-t.i{fill:rgba(255,255,255,.75);}
+.orb-dot.w{fill:#fff;filter:drop-shadow(0 0 6px rgba(255,255,255,.6));}
+.orb-dot.b{fill:var(--blue);filter:drop-shadow(0 0 8px rgba(0,100,255,.9));}
+.sq-core{fill:#030712;stroke:var(--blue);stroke-width:7;}
+.sq-pulse{fill:none;stroke:var(--blue);stroke-width:2;transform-origin:280px 280px;animation:sqPulse 2.6s ease-out infinite;}
+.sq-core-lab{fill:var(--blue-24);font-family:var(--display);font-size:12px;letter-spacing:.22em;text-anchor:middle;font-weight:500;}
+@keyframes sqPulse{0%{transform:scale(1);opacity:.9;}100%{transform:scale(3);opacity:0;}}
+.sq-legend{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:520px;}
+.sq-key{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
+.sq-key b{display:block;font-family:var(--display);font-weight:500;font-size:14px;color:#fff;margin-bottom:4px;}
+.sq-key span{font-size:13px;line-height:1.45;color:#aeb8cc;}
+.k-dot{flex:none;width:10px;height:10px;border-radius:50%;margin-top:5px;}
+.k-dot.w{background:#fff;box-shadow:0 0 8px rgba(255,255,255,.6);}
+.k-dot.b{background:var(--blue);box-shadow:0 0 8px rgba(0,100,255,.9);}
+.nowrap{white-space:nowrap;}
+@media(max-width:900px){
+  .squad > .wrap{grid-template-columns:1fr;}
+  .squad > .wrap > .chap{grid-column:1;grid-row:1;}
+  .squad > .wrap > .squad-copy{grid-column:1;grid-row:2;}
+  .squad > .wrap > .squad-visual{grid-column:1;grid-row:3;margin-top:36px;}
+  .squad-visual svg{max-width:380px;}
+}
+@media(max-width:560px){.sq-legend{grid-template-columns:1fr;}}
+@media (prefers-reduced-motion:reduce){.orb-dash,.sq-pulse{animation:none;}}
+
+/* ---------- Sections 6 + 7 · one continuous panel: build pipeline → what ships ---------- */
+.how-build{
+  border-radius:var(--r-panel) var(--r-panel) 0 0;padding:96px 0 40px;position:relative;color:#fff;
+  background:radial-gradient(90% 70% at 0% 0%,#0b1f52 0%,transparent 60%),linear-gradient(180deg,#040814 0%,#02050d 100%);
+}
+.how-build::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 18%,#000 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 18%,#000 100%);
+}
+.how-build .how-build-left h2{color:#fff;}
+.how-build .how-build-blue{color:var(--blue-24);}
+.how-build .how-build-body-text{color:#aeb8cc;}
+.how-build .build-line{background:rgba(255,255,255,.12);}
+.how-build .build-row-num{color:#7f8aa3;}
+.how-build .build-row-text{color:#c9d3e6;}
+.how-build .build-row::before{background:#0a1226;border-color:rgba(179,208,255,.3);}
+.how-build .build-row.done::before{background:var(--blue-24);border-color:var(--blue-24);}
+.how-build .build-row.active{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(179,208,255,.18);}
+.how-build .build-row.active .build-row-num{color:var(--blue-24);}
+.how-build .build-row.active .build-row-text{color:#fff;}
+.how-build .build-row.active::before{background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 6px rgba(0,100,255,.25);}
+.how-build .build-row-bar{background:var(--blue-24);}
+.how-build > .wrap{position:relative;z-index:1;}
+.how-build-grid{align-items:start;}
+.how-build-right{flex-direction:column;align-items:stretch;}
+.build-stack{position:relative;padding-left:44px;}
+.build-line{position:absolute;left:11px;top:30px;bottom:30px;width:2px;border-radius:2px;background:var(--blue-12);}
+.build-line i{position:absolute;left:0;top:0;width:100%;height:0;border-radius:2px;background:var(--blue);transition:height .9s cubic-bezier(.4,0,.2,1);}
+.build-row{position:relative;border-radius:14px;padding:16px 16px;border-bottom:none;opacity:.55;transition:opacity .35s ease,background .35s ease,box-shadow .35s ease;}
+.build-row:first-child{border-top:none;}
+.build-row::before{
+  content:"";position:absolute;left:-39px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;
+  background:#fff;border:2px solid var(--blue-12);transition:background .35s ease,border-color .35s ease,box-shadow .35s ease;
+}
+.build-row.done{opacity:.85;}
+.build-row.done::before{background:var(--blue-24);border-color:var(--blue-24);}
+.build-row.active{opacity:1;background:#fff;box-shadow:0 10px 30px rgba(0,60,160,.08);}
+.build-row.active::before{background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 6px rgba(0,100,255,.15);}
+.build-out{
+  margin:18px 0 0 44px;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;
+  padding:8px 16px 8px 12px;border-radius:999px;background:var(--blue);color:#fff;
+  font-family:var(--display);font-size:13px;font-weight:500;
+}
+.build-out span{width:8px;height:8px;border-radius:50%;background:#fff;animation:blink 2s ease-in-out infinite;}
+
+/* sections 6 + 7 read as one dark panel: how-build is the top half, after the bottom */
+.after{
+  margin:0 16px 16px;border-radius:0 0 var(--r-panel) var(--r-panel);padding:56px 0 112px;color:#fff;
+  background:radial-gradient(70% 60% at 100% 100%,#0b1f52 0%,transparent 60%),linear-gradient(180deg,#02050d 0%,#000 100%);
+}
+.after::before{
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:64px 64px;
+  background-position:0 var(--gy,0px);  /* continues the how-build grid across the join */
+  mask-image:linear-gradient(to bottom,#000 0%,#000 82%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 82%,transparent 100%);
+}
+.after::after{background:radial-gradient(circle at center,rgba(0,100,255,.35) 0%,rgba(0,100,255,.12) 30%,rgba(0,100,255,0) 62%);}
+.after .after-headline{color:#fff;}
+.after .after-headline em{color:var(--blue-24);}
+.after .chap::before{background:linear-gradient(to bottom, rgba(179,208,255,0) 0%, rgba(179,208,255,.5) 40%, var(--blue-24) 100%);}
+.after .chap::after{background:var(--blue-24);box-shadow:0 0 0 4px rgba(179,208,255,.16);}
+
+/* "Ships with" checklist — the three commitments tick off in sequence */
+.ship{
+  margin-top:64px;border-radius:24px;padding:10px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.ship-top{display:flex;justify-content:space-between;align-items:center;padding:14px 18px 18px;font-family:var(--display);}
+.ship-k{font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#aeb8cc;}
+.ship-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+.ship-item{
+  display:flex;gap:18px;align-items:flex-start;padding:26px 24px 28px;border-radius:18px;
+  background:rgba(255,255,255,.03);transition:background .5s ease;
+}
+.ship-item.ok{background:rgba(0,100,255,.14);}
+.ship-check{
+  flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  border:2px solid rgba(179,208,255,.35);transition:background .4s ease,border-color .4s ease,transform .5s cubic-bezier(.3,1.6,.5,1);
+}
+.ship-check svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;}
+.ship-check path{stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .45s ease .15s;}
+.ship-item.ok .ship-check{background:var(--blue);border-color:var(--blue);transform:scale(1.06);}
+.ship-item.ok .ship-check path{stroke-dashoffset:0;}
+.ship-lab{display:block;font-family:var(--display);font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-24);margin:4px 0 8px;}
+.ship-item p{font-family:var(--display);font-size:clamp(18px,1.6vw,22px);line-height:1.3;letter-spacing:-.01em;color:#fff;}
+@media(max-width:900px){.ship-list{grid-template-columns:1fr;}}
+
+/* ---------- After: left-aligned + commitment cards ---------- */
+.after-center{max-width:none;margin:0;text-align:left;}
+.after-headline{margin-top:0;max-width:1180px;}
+.after .after-headline{font-size:clamp(28px,3.1vw,46px);}
+.after .after-center{padding-top:40px;}
+
+/* ---------- Connect: soft approved-shape backdrop ---------- */
+.connect{position:relative;}
+.connect::before{
+  content:"";position:absolute;left:-120px;bottom:-160px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle, rgba(0,100,255,.14), rgba(0,100,255,0) 70%);pointer-events:none;
+}
+.connect::after{
+  content:"";position:absolute;right:-90px;top:-90px;width:260px;height:260px;border-radius:50%;
+  border:1px solid rgba(0,100,255,.18);pointer-events:none;
+}
+.connect > .wrap{position:relative;z-index:1;}
+
+/* ---------- Section 3 · Offerings: four white cards with live illustrations ---------- */
+.offer{background:var(--paper);border-bottom:none;padding:96px 0 176px;}
+.oc-grid{margin-top:48px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;}
+.oc{
+  position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;
+  height:528px;padding:12px 12px 20px;
+  background:#fff;border:1px solid var(--paper-line);border-radius:24px;
+  box-shadow:0 1px 0 rgba(0,0,0,.02),0 14px 34px -20px rgba(0,40,120,.22);
+  transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s ease,border-color .4s ease;outline:none;
+}
+.oc::after{ /* cursor-follow glow */
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .4s ease;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,30%),rgba(0,100,255,.08),transparent 70%);
+}
+.oc:hover,.oc:focus-within{transform:translateY(-10px);border-color:var(--blue-24);box-shadow:0 34px 64px -26px rgba(0,60,160,.32);}
+.oc:hover::after,.oc:focus-within::after{opacity:1;}
+.oc-art{
+  position:relative;flex:1 1 0;min-height:88px;border-radius:16px;overflow:hidden;
+  background:linear-gradient(160deg,#e8f1ff 0%,#f4f8ff 60%,#fbfdff 100%);
+  transition:flex .6s cubic-bezier(.2,.7,.2,1);
+}
+.oc-art::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,100,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,255,.07) 1px,transparent 1px);background-size:24px 24px;}
+.oc-art svg{position:relative;width:100%;height:100%;display:block;}
+.oc:hover .oc-art,.oc:focus-within .oc-art{flex:0 0 0px;min-height:0;opacity:0;}
+.oc-art{transition:flex .6s cubic-bezier(.2,.7,.2,1),opacity .3s ease,min-height .6s cubic-bezier(.2,.7,.2,1);}
+.oc:hover .oc-head,.oc:focus-within .oc-head{padding-top:6px;}
+.oc-head{transition:padding .5s ease;}
+.oc-head{display:flex;justify-content:space-between;align-items:center;padding:16px 14px 0;}
+.oc-num{font-family:var(--display);font-size:13px;font-weight:500;letter-spacing:.14em;color:var(--blue);}
+.oc-go{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--paper-line);transition:background .35s ease,border-color .35s ease,transform .45s cubic-bezier(.3,1.4,.5,1);}
+.oc-go svg{width:14px;height:14px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s ease;}
+.oc:hover .oc-go,.oc:focus-within .oc-go{background:var(--blue);border-color:var(--blue);transform:rotate(45deg);}
+.oc:hover .oc-go svg,.oc:focus-within .oc-go svg{stroke:#fff;}
+.oc-title{flex:none;box-sizing:content-box;height:2.4em;padding:10px 14px 0;font-family:var(--display);font-weight:400;font-size:clamp(21px,1.75vw,26px);line-height:1.2;letter-spacing:-.02em;color:var(--ink);}
+.oc-body{flex:0 1 auto;padding:0 14px;display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s cubic-bezier(.2,.7,.2,1);}
+.oc-body-in{min-height:0;overflow:hidden;opacity:0;transform:translateY(24px);transition:opacity .35s ease,transform .6s cubic-bezier(.2,.7,.2,1);}
+.oc:hover .oc-body,.oc:focus-within .oc-body{grid-template-rows:1fr;flex:1 1 auto;}
+.oc-body-in{display:flex;flex-direction:column;}
+.oc-cta{margin-top:auto;align-self:flex-start;}
+.oc:hover .oc-body-in,.oc:focus-within .oc-body-in{opacity:1;transform:none;transition-delay:.1s;}
+.oc-q{padding-top:8px;font-family:var(--display);font-weight:500;font-size:16px;line-height:1.36;color:var(--blue);margin-bottom:8px;}
+.oc-d{font-size:14.5px;line-height:1.5;color:var(--ink-85);margin-bottom:16px;}
+.oc-cta{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-family:var(--display);font-size:13px;font-weight:500;transition:background .25s ease;}
+.oc-cta:hover{background:var(--blue);}
+.oc-cta svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .2s ease;}
+.oc-cta:hover svg{transform:translateX(3px);}
+
+/* 01 · Work Redesign — a winding nine-step process becomes one direct path */
+.wr-wind{fill:none;stroke:#b9c3d3;stroke-width:1.6;stroke-dasharray:4 5;transition:opacity .4s ease;}
+.wr-st{fill:#fff;stroke:#b9c3d3;stroke-width:1.5;transform-box:fill-box;transform-origin:center;transition:transform .45s ease calc(var(--k) * .03s),opacity .35s ease calc(var(--k) * .03s);}
+.wr-st:nth-of-type(3n){animation:wrBob 4s ease-in-out infinite;}
+@keyframes wrBob{50%{transform:translateY(-3px);}}
+.wr-a{fill:#0b0b0b;} .wr-b{fill:var(--blue);}
+.wr-direct{fill:none;stroke:var(--blue);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:260;stroke-dashoffset:260;transition:stroke-dashoffset .8s ease .35s;}
+.wr-new rect{fill:var(--blue);transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .5s cubic-bezier(.3,1.6,.5,1) .8s;}
+.wr-run{fill:#fff;stroke:var(--blue);stroke-width:2;opacity:0;transition:opacity .3s ease 1s;}
+.wr-chip{opacity:0;transform:translateY(6px);transition:opacity .4s ease .9s,transform .5s ease .9s;}
+.wr-chip rect{fill:var(--blue);} .wr-chip text{fill:#fff;font-family:var(--display);font-size:11px;font-weight:600;text-anchor:middle;}
+.oc:hover .wr-wind{opacity:0;}
+.oc:hover .wr-st{animation:none;opacity:0;transform:scale(.3);}
+.oc:hover .wr-direct{stroke-dashoffset:0;}
+.oc:hover .wr-new rect{transform:none;}
+.oc:hover .wr-run{opacity:1;}
+.oc:hover .wr-chip{opacity:1;transform:none;}
+
+/* 02 · Systems Rebuild — the workflow layer lifts off the stack */
+.a2-l{stroke-width:1.5;}
+.a2-l.base{fill:#e3e8f0;stroke:#c7cfdc;}
+.a2-l.mid{fill:#d6e5ff;stroke:var(--blue-24);}
+.a2-l.top{fill:var(--blue);stroke:var(--blue-strong);}
+.a2-g{transition:transform .7s cubic-bezier(.3,1.3,.5,1);}
+.a2-g.l3{animation:a2Bob 4s ease-in-out infinite;}
+@keyframes a2Bob{50%{transform:translateY(-4px);}}
+.oc:hover .a2-g.l3{animation:none;transform:translateY(-26px);}
+.oc:hover .a2-g.l2{transform:translateY(-10px);}
+.oc:hover .a2-l.top{filter:drop-shadow(0 10px 14px rgba(0,100,255,.35));}
+
+/* 03 · Operate & Rebuild — a performance gauge: improvement is measured, not promised */
+.g-seg{fill:none;stroke:#dfe4ec;stroke-width:14;stroke-linecap:round;transition:stroke .3s ease calc(var(--k) * .06s + .1s);}
+.g-seg:nth-of-type(-n+3){stroke:var(--blue-24);}
+.oc:hover .g-seg{stroke:var(--blue);}
+.g-needle{transform-origin:150px 150px;transform:rotate(38deg);animation:gIdle 3.5s ease-in-out infinite;transition:transform .9s cubic-bezier(.3,1.3,.5,1);}
+@keyframes gIdle{50%{transform:rotate(46deg);}}
+.g-needle line{stroke:#0b0b0b;stroke-width:4;stroke-linecap:round;}
+.oc:hover .g-needle{animation:none;transform:rotate(158deg);}
+.oc:hover .g-needle line{stroke:var(--blue-strong);}
+.g-hub{fill:#0b0b0b;transition:fill .4s ease;} .oc:hover .g-hub{fill:var(--blue);}
+.g-lab{font-family:var(--display);font-size:10px;font-weight:500;letter-spacing:.16em;fill:#84868c;text-anchor:middle;}
+.oc:hover .g-lab.r{fill:var(--blue);}
+.g-chip{opacity:0;transform:translateY(6px);transition:opacity .4s ease .7s,transform .5s ease .7s;}
+.g-chip rect{fill:var(--blue);} .g-chip text{fill:#fff;font-family:var(--display);font-size:11px;font-weight:600;text-anchor:middle;}
+.oc:hover .g-chip{opacity:1;transform:none;}
+
+/* 04 · Revenue & Customer AI — the AI-attributed share of revenue grows */
+.dn-track{fill:none;stroke:#dfe4ec;stroke-width:18;}
+.dn-ai{fill:none;stroke:var(--blue);stroke-width:18;stroke-linecap:round;transform-origin:108px 110px;transform:rotate(-90deg);stroke-dasharray:var(--c);stroke-dashoffset:calc(var(--c) * .8);transition:stroke-dashoffset 1s cubic-bezier(.4,0,.2,1);}
+.oc:hover .dn-ai{stroke-dashoffset:calc(var(--c) * .32);}
+.dn-v{font-family:var(--display);font-size:22px;font-weight:600;fill:#0b0b0b;text-anchor:middle;transition:fill .4s ease;}
+.oc:hover .dn-v{fill:var(--blue);}
+.dn-s{font-family:var(--display);font-size:10px;fill:#84868c;text-anchor:middle;letter-spacing:.06em;}
+.dn-leg text{font-family:var(--display);font-size:11px;fill:#0b0b0b;}
+.dn-leg .a{fill:var(--blue);} .dn-leg .b{fill:#dfe4ec;}
+.dn-coins circle{fill:#fff;stroke:#c7cfdc;stroke-width:2;transform-box:fill-box;transform-origin:center;transition:fill .3s ease,stroke .3s ease,transform .45s cubic-bezier(.3,1.6,.5,1);}
+.dn-coins circle:nth-child(2){transition-delay:.1s;} .dn-coins circle:nth-child(3){transition-delay:.2s;}
+.oc:hover .dn-coins circle{fill:var(--blue);stroke:var(--blue);transform:translateY(-6px);}
+
+/* hover sequence: illustration plays first, then the card lifts and the text slides up */
+.oc:hover,.oc:focus-within{transition-delay:1.6s,1.6s,1.6s;}
+.oc:hover .oc-art,.oc:focus-within .oc-art{transition-delay:1.6s;transition-duration:.8s;}
+.oc:hover .oc-head,.oc:focus-within .oc-head{transition-delay:1.6s;}
+.oc:hover .oc-body,.oc:focus-within .oc-body{transition-delay:1.6s;transition-duration:.8s;}
+.oc:hover .oc-body-in,.oc:focus-within .oc-body-in{transition-delay:1.85s;transition-duration:.5s,.8s;}
+@media(max-width:1100px){.oc-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.oc{height:456px;}}
+@media(max-width:600px){.oc-grid{grid-template-columns:1fr;}}
+@media(hover:none){
+  .oc{height:auto;}
+  .oc-art{flex:0 0 180px;}
+  .oc-body{grid-template-rows:1fr;}.oc-body-in{opacity:1;transform:none;}
+}
+@media (prefers-reduced-motion:reduce){
+  .oc,.oc-body,.oc-body-in,.oc-art{transition:none;}.oc:hover{transform:none;}
+  .wr-st,.a2-g.l3,.g-needle{animation:none;}
+}
+
+/* ---------- Section 5 · Outcomes: dark bento with live metrics ---------- */
+.outcomes{
+  padding:96px 0;position:relative;color:var(--ink);
+  background:linear-gradient(180deg,#ffffff 0%,#f3f7ff 55%,#e9f1ff 100%);
+}
+.outcomes::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(0,100,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,255,.05) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 30%,transparent 85%);mask-image:radial-gradient(ellipse at 50% 30%,#000 30%,transparent 85%);
+}
+.outcomes > .wrap{position:relative;z-index:1;}
+.out-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:48px;}
+.outcomes .outcomes-h{font-family:var(--display);font-weight:300;font-size:clamp(40px,4.6vw,68px);line-height:1.02;letter-spacing:-.03em;color:var(--ink);}
+.outcomes .outcomes-h span{color:var(--blue);}
+.out-sub{max-width:36ch;font-size:17px;line-height:1.55;color:var(--ink-60);font-weight:300;}
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:minmax(300px,auto);gap:16px;}
+.bt{
+  position:relative;isolation:isolate;overflow:hidden;border-radius:24px;color:#fff;box-shadow:0 24px 50px -28px rgba(0,30,90,.45);
+  padding:26px 28px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;
+  border:1px solid rgba(255,255,255,.08);
+  transition:transform .45s cubic-bezier(.2,.7,.2,1),border-color .45s ease;
+}
+.bt-1{grid-column:span 4;grid-row:span 1;min-height:380px;}
+.bt-2{grid-column:span 2;min-height:380px;}
+.bt-3,.bt-4,.bt-5{grid-column:span 2;}
+.bt-bg{
+  position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(4,8,20,.45) 0%,rgba(4,8,20,.78) 45%,rgba(4,8,20,.96) 100%),var(--img) center/cover;
+  transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .6s ease;filter:saturate(.7);
+}
+.bt::after{ /* blue wash that lifts on hover */
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(120% 80% at 0% 100%,rgba(0,100,255,.35),transparent 60%);opacity:.6;transition:opacity .5s ease;
+}
+.bt:hover{transform:translateY(-4px);border-color:rgba(179,208,255,.35);}
+.bt:hover .bt-bg{transform:scale(1.06);filter:saturate(1);}
+.bt:hover::after{opacity:1;}
+.bt-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--display);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;}
+.bt-n{color:var(--blue-24);font-weight:500;}
+.bt-ctx{color:#fff;font-weight:500;}
+.bt-ind{margin-left:auto;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.1);color:#cfd8ea;letter-spacing:.1em;}
+.bt-quote{font-family:var(--display);font-weight:300;font-size:clamp(17px,1.4vw,21px);line-height:1.3;color:#e6ecf7;max-width:30ch;margin-bottom:18px;}
+.bt-1 .bt-quote{font-size:clamp(22px,2vw,30px);max-width:24ch;}
+.bt-before{display:block;font-family:var(--display);font-size:clamp(16px,1.3vw,19px);color:#c9d3e6;margin-bottom:6px;}
+.bt-before s{color:#fff;}
+.bt-before s{text-decoration-color:var(--blue-24);text-decoration-thickness:2px;}
+.bt-big{display:flex;align-items:baseline;gap:8px;font-family:var(--display);font-weight:300;letter-spacing:-.04em;line-height:1;color:#fff;font-size:clamp(52px,5vw,76px);font-variant-numeric:tabular-nums;}
+.bt-1 .bt-big{font-size:clamp(72px,8vw,120px);}
+.bt-big small{font-size:.3em;letter-spacing:0;color:var(--blue-24);font-weight:400;}
+.bt-changed{margin-top:12px;font-size:16px;line-height:1.5;color:#d3dbea;}
+/* ---- Outcome cards · white cards, photo + Searce-blue shapes stacked edge to edge on the right ---- */
+.bt.bc{position:relative;display:block;padding:0;color:var(--ink);border:1px solid var(--paper-line);box-shadow:0 24px 50px -30px rgba(0,30,90,.3);
+  background:#fff;}
+/* faint grid patches in a different spot on each card */
+.bt.bc::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:inherit;
+  background-image:linear-gradient(rgba(0,100,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,255,.08) 1px,transparent 1px);background-size:32px 32px;
+  -webkit-mask-image:radial-gradient(var(--gr,240px) circle at var(--gx,20%) var(--gy,80%),#000 0%,transparent 100%);mask-image:radial-gradient(var(--gr,240px) circle at var(--gx,20%) var(--gy,80%),#000 0%,transparent 100%);}
+.bt-1.bc{--gx:62%;--gy:30%;--gr:300px;}
+.bt-2.bc{--gx:10%;--gy:95%;}
+.bt-3.bc{--gx:95%;--gy:5%;--gr:220px;}
+.bt-4.bc{--gx:0%;--gy:10%;}
+.bt-5.bc{--gx:70%;--gy:100%;--gr:260px;}
+.bc-art{z-index:1;}
+.bt.bc::after{display:none;}
+.bt.bc:hover{border-color:var(--blue-24);}
+.bc-art{position:absolute;top:0;right:0;height:100%;width:min(var(--aw),var(--awmax,40%));}
+.bt-1.bc{--awmax:44%;}
+.bt-1.bc{height:380px;--aw:225px;}
+.bt-2.bc{height:380px;--aw:164px;}
+.bt-3.bc,.bt-4.bc,.bt-5.bc{--aw:159px;}
+.bt-3.bc,.bt-4.bc,.bt-5.bc{height:370px;min-height:0;}
+.bc-art svg{width:100%;height:100%;display:block;}
+.mz{transform-box:fill-box;transform-origin:center;transition:transform .6s cubic-bezier(.3,1.4,.5,1) calc(var(--k) * .035s);}
+.bc-acc{transform-box:fill-box;transform-origin:center;transition:transform .7s cubic-bezier(.3,1.4,.5,1);}
+.bt.bc:hover .mz:nth-child(3n+1){transform:scale(.92);}
+.bt.bc:hover .mz:nth-child(3n+2){transform:translateY(-4px);}
+
+.bc .bt-txt{position:relative;z-index:1;height:100%;padding:24px calc(min(var(--aw),var(--awmax,40%)) + 18px) 24px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:16px;}
+.bc .bt-top{flex-wrap:wrap;row-gap:8px;}
+.bc .bt-n{color:var(--blue);}
+.bc .bt-ctx{color:var(--ink);}
+.bc .bt-ind{margin-left:0;background:#fff;color:#0b0b0b;border:1px solid #c7cfdc;border-radius:8px;letter-spacing:.08em;}
+.bc .bt-quote{color:var(--ink);max-width:22ch;}
+.bc .bt-before{color:var(--ink-60);}
+.bc .bt-before s{color:var(--ink);text-decoration-color:var(--blue);}
+.bc .bt-big{color:var(--ink);}
+.bc .bt-big small{color:var(--blue);}
+.bc .bt-changed{color:var(--ink-60);}
+.bt-2.bc .bt-quote,.bt-3.bc .bt-quote,.bt-4.bc .bt-quote,.bt-5.bc .bt-quote{font-size:clamp(15px,1.15vw,18px);margin-bottom:10px;}
+.bt-2.bc .bt-top,.bt-3.bc .bt-top,.bt-4.bc .bt-top,.bt-5.bc .bt-top{font-size:11px;gap:6px 8px;}
+.bt-2.bc .bt-ind,.bt-3.bc .bt-ind,.bt-4.bc .bt-ind,.bt-5.bc .bt-ind{padding:4px 8px;}
+.bt-2.bc .bt-changed,.bt-3.bc .bt-changed,.bt-4.bc .bt-changed,.bt-5.bc .bt-changed{font-size:14px;margin-top:6px;}
+.bt-2.bc .bt-before,.bt-3.bc .bt-before,.bt-4.bc .bt-before,.bt-5.bc .bt-before{font-size:15px;}
+.bt-2.bc .bt-big,.bt-3.bc .bt-big,.bt-4.bc .bt-big,.bt-5.bc .bt-big{font-size:clamp(42px,3.6vw,58px);}
+@media(max-width:1100px){.bt.bc{height:auto!important;min-height:340px;}}
+@media(max-width:640px){.bt.bc{--aw:34%!important;}}
+@media(max-width:1100px){
+  .bento{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .bt-1{grid-column:span 2;}
+  .bt-2,.bt-3,.bt-4,.bt-5{grid-column:span 1;min-height:320px;}
+}
+@media(max-width:640px){
+  .out-head{flex-direction:column;align-items:flex-start;}
+  .bento{grid-template-columns:1fr;}
+  .bt-1,.bt-2,.bt-3,.bt-4,.bt-5{grid-column:span 1;min-height:300px;}
+}
+
+/* ---------- Section 4 · industries open inside the Core card ---------- */
+/* expanded Core card: copy shrinks to the top, industries fill the rest */
+.tf-card .ti-back{display:none;}
+.tf-card.show-ind .ti-back{display:inline-flex;}
+.tf-card.show-ind .tf-num{display:none;}
+.tf-card.show-ind .tf-core-body{display:none;}
+.tf-card.show-ind .tf-core-body .transform-headline{font-size:clamp(15px,1.15vw,17px);line-height:1.3;}
+.tf-card.show-ind .tf-core-body .transform-desc{margin-top:4px;font-size:12.5px;line-height:1.45;max-width:none;}
+.tf-card.show-ind .tf-core-body .transform-core-cta{display:none;}
+.tf-core-body .transform-headline,.tf-core-body .transform-desc{transition:font-size .35s ease,margin .35s ease;}
+.tf-card.show-ind .tf-ind{flex:1 1 auto;min-height:0;margin-top:18px;gap:16px;}
+.tf-card.show-ind .ti-k{font-size:11px;}
+.tf-card.show-ind .ti-grid{flex:1 1 auto;gap:14px 12px;grid-auto-rows:minmax(68px,1fr);}
+.tf-card.show-ind .ti-tile{padding:6px 18px 6px 10px;gap:10px;border-radius:14px;}
+.tf-card.show-ind .ti-ico{width:30px;height:30px;border-radius:9px;}
+.tf-card.show-ind .ti-ico svg{width:17px;height:17px;}
+.tf-card.show-ind .ti-name{font-size:12px;line-height:1.2;}
+
+button.transform-core-cta{border:0;cursor:pointer;font:inherit;font-family:var(--display);font-size:15px;font-weight:500;}
+.tf-ind{flex:1;min-height:0;margin-top:4px;display:flex;flex-direction:column;gap:14px;}
+.tf-ind[hidden]{display:none;}
+.ti-head{display:flex;justify-content:space-between;align-items:center;}
+.ti-k{font-family:var(--display);font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-24);}
+.ti-back{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;cursor:pointer;font-family:var(--display);font-size:13px;transition:background .2s ease;}
+.ti-back:hover{background:rgba(255,255,255,.1);}
+.ti-back svg{width:12px;height:12px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;}
+.ti-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(64px,1fr);gap:10px;}
+.ti-tile{
+  position:relative;display:flex;align-items:center;gap:10px;padding:12px 22px 12px 12px;border-radius:16px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:#fff;text-decoration:none;
+  transition:background .25s ease,border-color .25s ease,transform .25s ease;
+}
+.tf-card.show-ind .ti-tile{animation:tiIn .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i) * .04s);}
+@keyframes tiIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.ti-ico{flex:none;width:36px;height:36px;border-radius:11px;background:rgba(0,100,255,.2);display:grid;place-items:center;transition:background .25s ease;}
+.ti-ico svg{width:20px;height:20px;fill:none;stroke:var(--blue-24);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .25s ease;}
+.ti-name{flex:1;min-width:0;font-family:var(--display);font-size:clamp(12.5px,.95vw,14px);font-weight:500;line-height:1.3;overflow-wrap:break-word;}
+.ti-arr{position:absolute;top:10px;right:10px;opacity:0;transform:translateX(-4px);transition:opacity .25s ease,transform .25s ease;}
+.ti-arr svg{width:13px;height:13px;fill:none;stroke:#fff;stroke-width:2;}
+.ti-tile:hover,.ti-tile:focus-visible{background:var(--blue);border-color:var(--blue);outline:none;}
+.ti-tile:hover .ti-ico,.ti-tile:focus-visible .ti-ico{background:rgba(255,255,255,.18);}
+.ti-tile:hover .ti-ico svg,.ti-tile:focus-visible .ti-ico svg{stroke:#fff;}
+.ti-tile:hover .ti-arr,.ti-tile:focus-visible .ti-arr{opacity:1;transform:none;}
+@media(max-width:900px){.ti-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:560px){.ti-grid{grid-template-columns:1fr;}}
+@media (prefers-reduced-motion:reduce){.tf-card.show-ind .ti-tile{animation:none;}}
+
+@media (prefers-reduced-motion:reduce){
+  .cx [data-rv]{opacity:1;transform:none;transition:none;}
+  .chap::before,.chap::after{transition:none;}
+  .sq-pulse,.outcomes-hint svg{animation:none;}
+}
+</style>
+
+<nav class="rail" id="rail" aria-label="Page sections"></nav>
+
+<script>
+(function(){
+  const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+  /* viewport width without the scrollbar, for edge maths that must match .wrap */
+  const setCW=()=>root.style.setProperty('--cw', root.clientWidth+'px');
+  setCW(); addEventListener('resize',setCW);
+  if(!REDUCE && 'IntersectionObserver' in window) root.classList.add('cx');
+
+  /* ---- chapter threads: length = distance from section top to node ---- */
+  const chaps=[...document.querySelectorAll('.chap')];
+  function measureThreads(){
+    chaps.forEach(c=>{
+      const sec=c.closest('section'); if(!sec) return;
+      const reach=c.getBoundingClientRect().top - sec.getBoundingClientRect().top + c.offsetHeight/2;
+      c.style.setProperty('--reach', Math.max(0,reach)+'px');
+    });
+  }
+  measureThreads();
+  addEventListener('resize',measureThreads);
+  addEventListener('load',measureThreads);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(measureThreads);
+  if('ResizeObserver' in window) new ResizeObserver(()=>measureThreads()).observe(document.body);
+
+  /* ---- reveal targets (auto-tagged, markup stays clean) ---- */
+  const groups=[
+    ['.intro-statement',0],['.squad-headline',0],['.squad-visual',0],['.squad-body-cols .lede',.12],
+    ['.offer-top h2',0],['.oc',.09],['.transform-sub',0],
+    ['.outcomes-h',0],['.out-sub',0],['.bt',.08],['.how-build-left h2',0],['.how-build-body-text',0],['.build-stack',0],['.build-out',0],
+    ['.after-headline',0],['.ship',0],['.connect-left h2',0],['.connect-left p',0],['.connect-form',.1]
+  ];
+  const targets=[];
+  groups.forEach(([sel,step])=>document.querySelectorAll(sel).forEach((el,i)=>{
+    el.setAttribute('data-rv','');el.style.setProperty('--d',(i*step)+'s');targets.push(el);
+  }));
+  if(root.classList.contains('cx')){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const el=e.target; io.unobserve(el);
+      el.classList.add('in');
+      if(el.hasAttribute('data-rv')){
+        /* hand transitions back to the component once revealed */
+        setTimeout(()=>{el.removeAttribute('data-rv');el.style.removeProperty('--d');},1400);
+      }
+    }),{threshold:.18,rootMargin:'0px 0px -8% 0px'});
+    targets.forEach(t=>io.observe(t));
+    const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('lit');io2.unobserve(e.target);}}),{threshold:1,rootMargin:'0px 0px -12% 0px'});
+    chaps.forEach(c=>io2.observe(c));
+    const sv=document.querySelector('.squad-visual'); if(sv) io.observe(sv);
+  }
+
+  /* ---- section rail ---- */
+  const rail=document.getElementById('rail');
+  const secs=[['top','Overview'],['intro','Buy vs build'],['squad','One squad'],['offerings','What we do'],['transform','Across the enterprise'],['outcomes','Outcomes'],['how-build','How we build'],['after','What ships'],['connect','Connect']]
+    .map(([id,l])=>[document.getElementById(id),l]).filter(x=>x[0]);
+  secs.forEach(([el,l])=>{
+    const a=document.createElement('a');a.href='#'+el.id;a.innerHTML='<span>'+l+'</span>';a.setAttribute('aria-label',l);
+    a.addEventListener('click',ev=>{ev.preventDefault();el.scrollIntoView({behavior:REDUCE?'auto':'smooth'});});
+    rail.appendChild(a);
+  });
+  const links=[...rail.children];
+  let tk=false;
+  function railUpdate(){
+    tk=false;
+    const mid=innerHeight*.4; let on=0;
+    secs.forEach(([el],i)=>{ if(el.getBoundingClientRect().top<=mid) on=i; });
+    links.forEach((a,i)=>a.classList.toggle('on',i===on));
+    rail.classList.toggle('show', scrollY>innerHeight*.5);
+  }
+  addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(railUpdate);}},{passive:true});
+  railUpdate();
+
+  /* ---- squad spotlight follows cursor ---- */
+  const sq=document.getElementById('squad');
+  if(sq && !REDUCE){
+    sq.addEventListener('pointermove',e=>{
+      const r=sq.getBoundingClientRect();
+      sq.style.setProperty('--mx',(e.clientX-r.left)+'px');
+      sq.style.setProperty('--my',(e.clientY-r.top)+'px');
+    });
+  }
+
+  /* ---- Section 3: soft glow follows the cursor inside each offering card ---- */
+  document.querySelectorAll('.oc').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');}));
+
+  /* ---- Section 5: count metrics from their baseline to the verified result ---- */
+  const cts=[...document.querySelectorAll('.bt .ct')];
+  function runCount(el){
+    const a=+el.dataset.from, b=+el.dataset.to, t0=performance.now(), D=1600;
+    const tick=now=>{
+      const p=Math.max(0,Math.min(1,(now-t0)/D)), e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(a+(b-a)*e);
+      if(p<1) requestAnimationFrame(tick);
+    };
+    el.textContent=a; requestAnimationFrame(tick);
+  }
+  if(cts.length && !REDUCE && 'IntersectionObserver' in window){
+    const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cio.unobserve(e.target);runCount(e.target);}}),{threshold:.6});
+    cts.forEach(c=>cio.observe(c));
+  }
+
+  /* ---- Section 4: industries open inside the Core card ---- */
+  const indO=document.getElementById('indOpen'), indB=document.getElementById('indBack'), tfInd=document.getElementById('tfInd');
+  if(indO&&indB&&tfInd){
+    const coreCard=tfInd.closest('.tf-card');
+    const setInd=on=>{coreCard.classList.toggle('show-ind',on);tfInd.hidden=!on;indO.setAttribute('aria-expanded',on?'true':'false');(on?tfInd.querySelector('.ti-tile'):indO).focus({preventScroll:true});};
+    indO.addEventListener('click',()=>setInd(true));
+    indB.addEventListener('click',()=>setInd(false));
+  }
+
+  /* ---- merged 6+7 panel: offset the lower grid so its lines continue the upper one ---- */
+  const hbSec=document.getElementById('how-build'), afSec=document.getElementById('after');
+  function alignGrid(){ if(hbSec&&afSec) afSec.style.setProperty('--gy', (-(hbSec.offsetHeight % 64))+'px'); }
+  alignGrid(); addEventListener('resize',alignGrid); addEventListener('load',alignGrid);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(alignGrid);
+
+  /* ---- how-build pipeline: fill + done states follow the active row ---- */
+  const rows=[...document.querySelectorAll('.build-row')];
+  const bfill=document.getElementById('buildFill');
+  function syncPipe(){
+    const i=Math.max(0,rows.findIndex(r=>r.classList.contains('active')));
+    rows.forEach((r,k)=>r.classList.toggle('done',k<i));
+    if(bfill&&rows[i]){
+      const line=bfill.parentElement.getBoundingClientRect(), rr=rows[i].getBoundingClientRect();
+      bfill.style.height=Math.max(0,rr.top+rr.height/2-line.top)+'px';
+    }
+  }
+  if(rows.length){
+    const mo=new MutationObserver(syncPipe);
+    rows.forEach(r=>mo.observe(r,{attributes:true,attributeFilter:['class']}));
+    syncPipe(); addEventListener('resize',syncPipe);
+  }
+
+  /* ---- 07: "ships with" checklist ticks off each commitment in turn ---- */
+  const ship=document.querySelector('.ship'), shipItems=[...document.querySelectorAll('.ship-item')], shipN=document.getElementById('shipN');
+  function shipAll(){shipItems.forEach(it=>it.classList.add('ok'));ship.classList.add('done');if(shipN)shipN.textContent=shipItems.length;}
+  if(ship){
+    if(root.classList.contains('cx')){
+      if(shipN) shipN.textContent='0';
+      const sio=new IntersectionObserver(es=>es.forEach(e=>{
+        if(!e.isIntersecting) return; sio.disconnect();
+        shipItems.forEach((it,k)=>setTimeout(()=>{it.classList.add('ok');if(shipN)shipN.textContent=k+1;if(k===shipItems.length-1)ship.classList.add('done');},500+k*550));
+      }),{threshold:.45});
+      sio.observe(ship);
+    } else shipAll();
+  }
+})();
+</script>
+
 </body>
 </html>

@@ -47,11 +47,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .nav-links > li > a:hover, .nav-links > li > a.current{color:var(--ink);}
 .nav-links > li > a.current::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--blue);border-radius:2px;}
 .chev{width:9px;height:9px;flex-shrink:0;transition:transform .2s ease;}
-.has-dropdown:hover .chev,
-.has-dropdown:focus-within .chev{transform:rotate(180deg);}
+.has-dropdown:hover .chev{transform:rotate(180deg);}
 .mega-panel{position:absolute;top:100%;left:-14px;margin-top:16px;background:#fff;border:1px solid var(--paper-line);border-radius:16px;box-shadow:0 28px 56px rgba(10,20,40,0.12);padding:10px;min-width:230px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .18s ease, transform .18s ease, visibility .18s;}
-.has-dropdown:hover .mega-panel,
-.has-dropdown:focus-within .mega-panel{opacity:1;visibility:visible;transform:translateY(0);}
+.has-dropdown:hover .mega-panel{opacity:1;visibility:visible;transform:translateY(0);}
 .mega-item{display:block;padding:11px 14px;border-radius:10px;transition:background .15s ease;}
 .mega-item:hover{background:var(--blue-06);}
 .mega-title{display:block;font-family:var(--display);font-weight:400;font-size:14.5px;color:var(--ink);}
@@ -70,12 +68,21 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 
 /* Right-side composition — Searce modular grid, 6 cols x 5 rows of 139.25u (frame 835.5 x 696.25). Column 0 reaches toward the centre. */
 .hero-composition{position:absolute;z-index:2;right:0;top:50%;transform:translateY(-50%);width:min(50%,calc((100vh - 220px) * 1.75));aspect-ratio:4557/2421;pointer-events:none;}
-.hero-video-wrap{position:absolute;inset:0;z-index:1;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204557%202421'%20preserveAspectRatio='none'><path%20fill='%23fff'%20fill-rule='evenodd'%20d='M1776%20310.345C1941.24%20310.345%202075.66%20444.759%202075.66%20610C2075.66%20775.241%201941.24%20909.655%201776%20909.655C1610.76%20909.655%201476.34%20775.241%201476.34%20610C1476.34%20444.759%201610.76%20310.345%201776%20310.345ZM1776%200C1439.1%200%201166%20273.103%201166%20610C1166%20946.896%201439.1%201220%201776%201220C2112.9%201220%202386%20946.896%202386%20610C2386%20273.103%202112.9%200%201776%200Z'/><path%20fill='%23fff'%20d='M1166%201220H2341V2386H1166Z'/><path%20fill='%23fff'%20d='M3539%202418C2877.36%202418%202341%201881.64%202341%201220C2341%20558.363%202877.36%2022.0001%203539%2022.0001Z'/></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204557%202421'%20preserveAspectRatio='none'><path%20fill='%23fff'%20fill-rule='evenodd'%20d='M1776%20310.345C1941.24%20310.345%202075.66%20444.759%202075.66%20610C2075.66%20775.241%201941.24%20909.655%201776%20909.655C1610.76%20909.655%201476.34%20775.241%201476.34%20610C1476.34%20444.759%201610.76%20310.345%201776%20310.345ZM1776%200C1439.1%200%201166%20273.103%201166%20610C1166%20946.896%201439.1%201220%201776%201220C2112.9%201220%202386%20946.896%202386%20610C2386%20273.103%202112.9%200%201776%200Z'/><path%20fill='%23fff'%20d='M1166%201220H2341V2386H1166Z'/><path%20fill='%23fff'%20d='M3539%202418C2877.36%202418%202341%201881.64%202341%201220C2341%20558.363%202877.36%2022.0001%203539%2022.0001Z'/></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;--sx:-70px;--sy:360px;--sr:2.4deg;--ss:0.94;transform-origin:center;animation:hmEnter 1.685s cubic-bezier(0.2,0.7,0.2,1) both;}
-.hero-video-wrap video{position:absolute;left:25.587%;top:0;width:52.074%;height:99.876%;object-fit:cover;object-position:50% 50%;display:block;}
 .hero-svg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;overflow:visible;}
 .hero-svg .in{transform-box:fill-box;transform-origin:center;animation:hmEnter 1.685s cubic-bezier(0.2,0.7,0.2,1) both;}
 @keyframes hmEnter{from{opacity:0;transform:translate(var(--sx,0px),var(--sy,420px)) rotate(var(--sr,0deg)) scale(var(--ss,0.9));}to{opacity:1;transform:none;}}
-@media (prefers-reduced-motion:reduce){.hero-svg .in,.hero-video-wrap{animation:none;}}
+/* continuous motion once the entrance settles: slow push-in on the photo, shapes drift and breathe, dots twinkle */
+@keyframes heroKen{from{transform:scale(1);}to{transform:scale(1.08) translate(-1.2%,.6%);}}
+.hero-svg .ken{transform-box:fill-box;transform-origin:62% 30%;animation:heroKen 22s ease-in-out 1.8s infinite alternate;}
+.hero-svg .drift{transform-box:fill-box;transform-origin:center;animation:heroFloat var(--dur,7s) ease-in-out var(--delay,1.8s) infinite alternate;}
+@keyframes heroFloat{from{transform:translate(0,0) rotate(0deg);}to{transform:translate(var(--dx,0px),var(--dy,-10px)) rotate(var(--dr,0deg));}}
+.hero-svg .breathe{transform-box:fill-box;transform-origin:0% 100%;animation:heroBreathe 8s ease-in-out 1.8s infinite alternate;}
+@keyframes heroBreathe{from{transform:scale(1);}to{transform:scale(1.045);}}
+.hero-svg .twinkle{animation:heroTwinkle 5s ease-in-out 1.8s infinite alternate;}
+.hero-svg .grow{transform-box:fill-box;transform-origin:50% 100%;animation:heroGrow var(--dur,3.2s) ease-in-out var(--delay,1.8s) infinite alternate;}
+@keyframes heroGrow{from{transform:scaleY(var(--from,.55));}to{transform:scaleY(1);}}
+@keyframes heroTwinkle{from{opacity:1;}to{opacity:.45;}}
+@media (prefers-reduced-motion:reduce){.hero-svg .in,.hero-svg .ken,.hero-svg .drift,.hero-svg .breathe,.hero-svg .twinkle,.hero-svg .grow{animation:none;}}
 @media (max-width:900px){
   .hero-text{width:100%;max-width:560px;}
   .hero-opening br{display:none;}
@@ -605,14 +612,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
     <a href="index.html" class="nav-logo" aria-label="Searce home">Searce</a>
     <ul class="nav-links">
       <li><a href="#">outcomes</a></li>
-      <li class="has-dropdown">
-        <a href="#" aria-haspopup="true">how we solve
-          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </a>
-        <div class="mega-panel">
-          <a class="mega-item" href="fde.html"><span class="mega-title">FDE</span></a>
-        </div>
-      </li>
+      <li><a href="#">how we solve <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
       <li><a href="business-systems-engineering.html">practices <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
       <li><a href="#" class="current">industries <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
       <li><a href="#">insights</a></li>
@@ -658,43 +658,48 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       </div>
     </div>
 
-    <!-- Composition taken from the supplied "Group 6 (3)" SVG (4557 x 2421): video in the ring, the square below it and the large left-facing half-disc; photo in the bottom-right triangle; blue quarter-disc bottom left; indigo square top right -->
+    <!-- Composition taken from the supplied "Group 6 (3)" SVG (4557 x 2421): analyst photo in one large panel with a quarter-circle top-left; four rising blue bars bottom left; sky square top right; blue gradient triangle bottom right; drift, breathe, twinkle and slow push-in motion -->
     <div class="hero-composition" aria-hidden="true">
-      <div class="hero-video-wrap"><video src="assets/hero-fsi-dashboard.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
       <svg class="hero-svg" viewBox="0 0 4557 2421" preserveAspectRatio="none">
         <defs>
           <linearGradient id="hgIndigo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b2fd6"/><stop offset="1" stop-color="#0c2ea5"/></linearGradient>
+          <linearGradient id="hgBars" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#79adff"/><stop offset="1" stop-color="#0064ff"/></linearGradient>
           <linearGradient id="hgSky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0064ff"/><stop offset="1" stop-color="#79adff"/></linearGradient>
-          <linearGradient id="hgLightTri" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#4d8cff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient>
+          <linearGradient id="hgLightTri" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0064ff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient>
           <!-- Detailing: dot field (top left, beside the ring) and fine line grid (over the left side of the video square), each fading out -->
           <pattern id="hpDot" width="136" height="136" patternUnits="userSpaceOnUse"><circle cx="9" cy="9" r="9" fill="#8a8a8a"/></pattern>
           <radialGradient id="hmDots" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 200) scale(1000 1000)"><stop offset="0.2" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
           <mask id="hmDotsM"><rect x="0" y="0" width="1166" height="1220" fill="url(#hmDots)"/></mask>
           <pattern id="hpGrid" width="216" height="216" patternUnits="userSpaceOnUse"><path d="M216 0H0V216" fill="none" stroke="#dbe9ff" stroke-width="8"/></pattern>
-          <radialGradient id="hmGrid" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1166 2386) rotate(-50) scale(900 1000)"><stop offset="0" stop-color="#fff"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-          <mask id="hmGridM"><rect x="1166" y="1220" width="700" height="1166" fill="url(#hmGrid)"/></mask>
-          <clipPath id="hcPanel"><path d="M1166 1220H2341V2386H1166Z"/></clipPath>
-          <clipPath id="hcTri"><path d="M4556.01 1384.66L4553.94 2420.03L3539 2418L4037.97 1942.97L4556.01 1384.66Z"/></clipPath>
+          <radialGradient id="hmGrid" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1166 2418) rotate(-50) scale(1000 1100)"><stop offset="0" stop-color="#fff"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          <mask id="hmGridM"><rect x="1166" y="1100" width="900" height="1318" fill="url(#hmGrid)"/></mask>
+          <clipPath id="hcPhoto"><path d="M1166 1208A1186 1186 0 0 1 2352 22H3539V2418H1166Z"/></clipPath>
+          <clipPath id="hcPanel"><path d="M1166 1208A1186 1186 0 0 1 2352 22H3539V2418H1166Z"/></clipPath>
         </defs>
 
         <!-- Dot field top left, in the open area beside the ring -->
-        <g class="in" style="--sx:-60px;--sy:320px;--sr:-2deg;--ss:0.93"><rect x="0" y="0" width="1166" height="1220" fill="url(#hpDot)" mask="url(#hmDotsM)"/></g>
+        <g class="in" style="--sx:-60px;--sy:320px;--sr:-2deg;--ss:0.93"><g class="twinkle"><rect x="0" y="0" width="1166" height="1220" fill="url(#hpDot)" mask="url(#hmDotsM)" opacity="0.7"/></g></g>
 
-        <!-- Video plays in the ring, the square below it and the large half-disc: masked video layer beneath this SVG -->
+        <!-- Photo fills one large panel (full height, quarter-circle top-left), with a very slow push-in -->
+        <g class="in" style="--sx:-70px;--sy:360px;--sr:2.4deg;--ss:0.94"><g clip-path="url(#hcPhoto)"><image class="ken" href="assets/hero-fsi-analyst.jpg" x="521" y="22" width="3590" height="2396" preserveAspectRatio="xMidYMid slice"/></g></g>
 
-        <!-- Fine line grid laid over the left side of the video square, fading from its bottom-left corner -->
-        <g class="in" style="--sx:-40px;--sy:380px;--sr:-1deg;--ss:0.91"><g clip-path="url(#hcPanel)"><rect x="1166" y="1220" width="700" height="1166" fill="url(#hpGrid)" mask="url(#hmGridM)" opacity="0.85"/></g></g>
 
-        <!-- Blue quarter-disc bottom left, against the video square -->
-        <g class="in" style="--sx:-60px;--sy:340px;--sr:-3deg;--ss:0.9"><path d="M0 2386L0 1220C644.001 1220 1166 1742.07 1166 2386H0Z" fill="url(#hgSky)"/></g>
 
-        <!-- Video also plays in the large left-facing half-disc (part of the masked video layer) -->
+        <!-- Fine line grid laid over the bottom-left of the photo panel, fading from its corner -->
+        <g class="in" style="--sx:-40px;--sy:380px;--sr:-1deg;--ss:0.91"><g clip-path="url(#hcPanel)"><rect x="1166" y="1100" width="900" height="1318" fill="url(#hpGrid)" mask="url(#hmGridM)" opacity="0.85"/></g></g>
 
-        <!-- Indigo square top right, and the photo through the triangle below it -->
-        <g class="in" style="--sx:80px;--sy:300px;--sr:4deg;--ss:0.88"><path d="M3539 22H4556V1031H3539Z" fill="url(#hgIndigo)"/></g>
-        <g class="in" style="--sx:90px;--sy:360px;--sr:-2deg;--ss:0.9"><g clip-path="url(#hcTri)">
-          <image href="assets/hero-fsi-contract.jpg" x="3539" y="1384" width="1017" height="1036" preserveAspectRatio="xMidYMid slice"/>
-        </g></g>
+        <!-- Four blue vertical bars bottom left (visual-language stripes), rising and falling like a live chart -->
+        <g class="in" style="--sx:-60px;--sy:340px;--sr:-3deg;--ss:0.9">
+          <rect class="grow" style="--from:0.55;--dur:3.0s;--delay:1.8s" x="0" y="1695" width="230" height="723" fill="url(#hgBars)"/>
+          <rect class="grow" style="--from:0.4;--dur:3.6s;--delay:2.1s" x="312" y="1509" width="230" height="909" fill="url(#hgBars)"/>
+          <rect class="grow" style="--from:0.5;--dur:2.8s;--delay:2.4s" x="624" y="1369" width="230" height="1049" fill="url(#hgBars)"/>
+          <rect class="grow" style="--from:0.6;--dur:3.4s;--delay:2.0s" x="936" y="1252" width="230" height="1166" fill="url(#hgBars)"/>
+        </g>
+
+
+        <!-- Sky-blue square top right, flush with the photo panel's top and right edges (sharp corners, no drift); blue gradient triangle below it drifts gently -->
+        <g class="in" style="--sx:80px;--sy:300px;--sr:4deg;--ss:0.88"><rect x="3539" y="22" width="1017" height="1009" fill="url(#hgSky)"/></g>
+        <g class="in" style="--sx:90px;--sy:360px;--sr:-2deg;--ss:0.9"><g class="drift" style="--dur:9s;--delay:2.4s;--dy:10px"><path d="M4556.01 1384.66L4553.94 2420.03L3539 2418L4037.97 1942.97L4556.01 1384.66Z" fill="url(#hgLightTri)"/></g></g>
       </svg>
     </div>
   </div>

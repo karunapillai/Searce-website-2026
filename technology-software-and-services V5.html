@@ -41,11 +41,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .nav-links > li > a:hover, .nav-links > li > a.current{color:#fff;}
 .nav-links > li > a.current::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--blue-24);border-radius:2px;}
 .chev{width:9px;height:9px;flex-shrink:0;transition:transform .2s ease;}
-.has-dropdown:hover .chev,
-.has-dropdown:focus-within .chev{transform:rotate(180deg);}
+.has-dropdown:hover .chev{transform:rotate(180deg);}
 .mega-panel{position:absolute;top:100%;left:-14px;margin-top:16px;background:#fff;border:1px solid var(--paper-line);border-radius:16px;box-shadow:0 28px 56px rgba(10,20,40,0.12);padding:10px;min-width:230px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .18s ease, transform .18s ease, visibility .18s;}
-.has-dropdown:hover .mega-panel,
-.has-dropdown:focus-within .mega-panel{opacity:1;visibility:visible;transform:translateY(0);}
+.has-dropdown:hover .mega-panel{opacity:1;visibility:visible;transform:translateY(0);}
 .mega-item{display:block;padding:11px 14px;border-radius:10px;transition:background .15s ease;}
 .mega-item:hover{background:var(--blue-06);}
 .mega-title{display:block;font-family:var(--display);font-weight:400;font-size:14.5px;color:var(--ink);}
@@ -60,11 +58,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 
 /* Right-side composition — Searce modular grid, 6 cols x 5 rows of 139.25u (frame 835.5 x 696.25). Column 0 reaches toward the centre. */
 .hero-composition{position:absolute;z-index:2;right:0;top:50%;transform:translateY(-50%);width:min(48%,calc((100vh - 200px) * 1.2));aspect-ratio:2824/2349;pointer-events:none;}
-.hero-video-wrap{position:absolute;inset:0;z-index:1;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%202824%202349'%20preserveAspectRatio='none'><g%20fill='%23fff'><rect%20x='274'%20y='685'%20width='944'%20height='944'/><circle%20cx='1929'%20cy='918'%20r='711'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%202824%202349'%20preserveAspectRatio='none'><g%20fill='%23fff'><rect%20x='274'%20y='685'%20width='944'%20height='944'/><circle%20cx='1929'%20cy='918'%20r='711'/></g></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;}
-.hero-video-wrap video{position:absolute;left:9.702%;top:8.812%;width:83.782%;height:60.536%;object-fit:cover;object-position:50% 50%;display:block;}
+.hero-video-wrap{position:absolute;inset:0;z-index:1;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%202824%202349'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='895'%20cy='918'%20r='711'/><rect%20x='1606'%20y='685'%20width='944'%20height='944'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%202824%202349'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='895'%20cy='918'%20r='711'/><rect%20x='1606'%20y='685'%20width='944'%20height='944'/></g></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;}
+/* one continuous photo: 2366 x 1577 units at (184, 207) covering circle + square; face lands in the circle */
+.hero-video-wrap::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(160deg,rgba(0,38,130,0.22) 0%,rgba(3,14,48,0.38) 100%);}
+.hero-video-wrap img{position:absolute;left:6.516%;top:8.812%;width:83.782%;height:67.135%;object-fit:cover;display:block;max-width:none;}
 .hero-svg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;overflow:visible;}
-.hero-svg .in{transform-box:fill-box;transform-origin:center;animation:hmEnter 1.685s cubic-bezier(0.2,0.7,0.2,1) both;}
-@keyframes hmEnter{from{opacity:0;transform:translate(var(--sx,0px),var(--sy,420px)) rotate(var(--sr,0deg)) scale(var(--ss,0.9));}to{opacity:1;transform:none;}}
+.hero-svg .in{transform-box:fill-box;transform-origin:center;animation:hmEnter 1s cubic-bezier(0.2,0.7,0.2,1) both;}
+@keyframes hmEnter{from{opacity:0;transform:scale(0.97);}to{opacity:1;transform:none;}}
 @media (prefers-reduced-motion:reduce){.hero-svg .in,.hero-video-wrap{animation:none;}}
 @media (max-width:900px){
   .hero-text{width:100%;max-width:560px;}
@@ -109,7 +109,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .reality-layout{display:grid;grid-template-columns:1fr 1.22fr;gap:76px;align-items:center;}
 .reality-media{position:relative;margin-left:64px;}
 .reality-media-img{position:relative;z-index:1;aspect-ratio:600/490;overflow:hidden;background:#050a1e;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20600%20490'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='190'%20cy='190'%20r='190'/><rect%20x='0'%20y='380'%20width='380'%20height='110'%20rx='55'/><path%20d='M380%200H500A100%20100%200%200%201%20600%20100V490H380Z'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20600%20490'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='190'%20cy='190'%20r='190'/><rect%20x='0'%20y='380'%20width='380'%20height='110'%20rx='55'/><path%20d='M380%200H500A100%20100%200%200%201%20600%20100V490H380Z'/></g></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;}
-.reality-media-img img{width:100%;height:100%;object-fit:cover;object-position:90% 45%;display:block;filter:saturate(0.9) brightness(0.95);}
+.reality-media-img img{position:absolute;left:-73%;top:-12.245%;width:191.667%;height:123.878%;max-width:none;object-fit:cover;display:block;filter:saturate(0.9) brightness(0.95);}
 .reality-media-img::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg, rgba(0,50,180,0.28) 0%, transparent 50%, rgba(2,4,10,0.25) 100%);pointer-events:none;}
 .reality-media-quarter{position:absolute;z-index:1;left:-64px;top:calc(100% - 64px);width:64px;height:64px;background:linear-gradient(160deg,#79adff 0%,var(--blue) 55%,#0038a8 100%);border-radius:50%;pointer-events:none;opacity:0.7;}
 .reality-content{max-width:740px;}
@@ -161,7 +161,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .devops::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right, rgba(0,51,127,0.045) 1px, transparent 1px),linear-gradient(to bottom, rgba(0,51,127,0.045) 1px, transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 80% 70% at 50% 45%, #000 40%, transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 45%, #000 40%, transparent 100%);}
 .devops .wrap{position:relative;z-index:1;}
 /* Process picker — editorial underline tabs */
-.p-tabs{position:relative;display:flex;gap:40px;margin-bottom:56px;overflow-x:auto;scrollbar-width:none;}
+.p-tabs{position:relative;display:flex;gap:32px;margin-bottom:56px;overflow-x:auto;scrollbar-width:none;}
 .p-tabs::-webkit-scrollbar{display:none;}
 .p-tab{position:relative;padding:14px 0 18px;font-family:var(--display);font-weight:400;font-size:16px;color:var(--ink-60);white-space:nowrap;transition:color .2s;display:flex;align-items:center;gap:10px;}
 .p-tab small{font-size:11px;letter-spacing:.14em;color:var(--ink-40);font-weight:500;transition:color .2s;}
@@ -351,24 +351,39 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .leak-tag{font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:6px;background:var(--blue-06);color:var(--blue-strong);white-space:nowrap;border:1px solid var(--blue-12);}
 .leak-card[data-tone="commercial"] .leak-tag{background:var(--paper-dim);color:var(--ink-60);border-color:var(--paper-line);}
 @media (max-width:900px){.leaks-motif{display:none;}.leaks-stack{grid-template-columns:repeat(2,1fr);}.leak-card,.leak-card:nth-child(4),.leak-card:nth-child(5){grid-column:span 1;}}
-/* Leaks - dark theme */
-.leaks{background:#02061a;color:#fff;}
-.leaks .section-h{color:#fff;}
-.leaks .grid-motif{color:rgba(121,173,255,0.04);}
-.leaks-motif{opacity:0.08;}
-.leak-card{background:#061029;border:1px solid rgba(0,100,255,0.45);border-radius:20px;box-shadow:none;}
-.leak-card::before{background:radial-gradient(60% 40% at 50% 0%, rgba(0,100,255,0.16) 0%, transparent 70%);}
-.leak-card:hover{background:#08153a;border-color:rgba(121,173,255,0.8);box-shadow:none;}
+/* Leaks - light theme: white -> light blue gradient */
+.leaks{background:linear-gradient(180deg,#ffffff 0%,#f3f7ff 45%,#dbe9ff 100%);color:var(--ink);}
+.leaks .section-h{color:var(--ink);}
+.leaks .grid-motif{color:rgba(0,60,180,0.05);}
+.leaks-motif{opacity:0.35;}
+.leak-card{background:#fff;border:1px solid rgba(0,100,255,0.28);border-radius:20px;box-shadow:0 18px 50px -28px rgba(0,50,160,0.18);}
+.leak-card::before{background:radial-gradient(60% 40% at 50% 0%, rgba(0,100,255,0.06) 0%, transparent 70%);}
+.leak-card:hover{background:#fff;border-color:var(--blue);box-shadow:0 26px 60px -28px rgba(0,100,255,0.35);}
 .leaks{overflow:hidden !important;}
-.leaks::before{content:"";position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);background-size:64px 64px;mask-image:linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);-webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);pointer-events:none;}
-.leaks-motif{bottom:0;left:auto;right:calc(max(0px,(100% - 1280px)/2) + 48px);width:640px;}
+.leaks::before{content:"";position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(0,60,180,0.04) 1px, transparent 1px),linear-gradient(90deg, rgba(0,60,180,0.04) 1px, transparent 1px);background-size:64px 64px;mask-image:linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);-webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);pointer-events:none;}
 .leak-card-icon{color:var(--blue);}
-.leak-card:hover .leak-card-icon{color:#79adff;}
-.leak-card-title{color:#fff;}
-.leak-card-desc{color:rgba(255,255,255,0.62);}
-.leak-tag{background:rgba(0,100,255,0.16);color:#9cc3ff;border-color:rgba(121,173,255,0.3);}
-.leak-card[data-tone="commercial"] .leak-tag{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.14);}
+.leak-card:hover .leak-card-icon{color:var(--blue-strong);}
+.leak-card-title{color:var(--ink);}
+.leak-card-desc{color:var(--ink-60);}
+.leak-tag{background:var(--blue-06);color:var(--blue-strong);border-color:var(--blue-12);}
+.leak-card[data-tone="commercial"] .leak-tag{background:var(--paper-dim);color:var(--ink-60);border-color:var(--paper-line);}
+.leaks-motif{bottom:0;right:auto;left:calc(max(0px,(100% - 1280px)/2) + 48px);width:520px;}
+.econ .leaks-motif{left:auto;right:calc(max(0px,(100% - 1280px)/2) + 48px);bottom:0;width:520px;}
+@media (min-width:901px){.leaks.econ{padding-bottom:260px;}}
 @media (max-width:560px){.leaks-stack{grid-template-columns:1fr;}}
+/* Leaks - icon animation: strokes draw in on scroll, lift + redraw on hover */
+.leak-card-icon svg *{stroke-dasharray:64;stroke-dashoffset:64;}
+.leaks.is-in .leak-card-icon svg *{animation:leakDraw 1.1s cubic-bezier(.2,.7,.2,1) forwards;}
+.leaks.is-in .leak-card:nth-child(1) .leak-card-icon svg *{animation-delay:.1s;}
+.leaks.is-in .leak-card:nth-child(2) .leak-card-icon svg *{animation-delay:.25s;}
+.leaks.is-in .leak-card:nth-child(3) .leak-card-icon svg *{animation-delay:.4s;}
+.leaks.is-in .leak-card:nth-child(4) .leak-card-icon svg *{animation-delay:.55s;}
+.leaks.is-in .leak-card:nth-child(5) .leak-card-icon svg *{animation-delay:.7s;}
+@keyframes leakDraw{to{stroke-dashoffset:0;}}
+.leak-card-icon{transition:color .25s,transform .35s cubic-bezier(.2,.7,.2,1);}
+.leak-card:hover .leak-card-icon{transform:translateY(-4px) scale(1.08);}
+.leaks.is-in .leak-card:hover .leak-card-icon svg *{animation:leakDraw .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:0s;}
+@media (prefers-reduced-motion:reduce){.leak-card-icon svg *{stroke-dasharray:none;stroke-dashoffset:0;animation:none !important;}.leak-card:hover .leak-card-icon{transform:none;}}
 
 /* ========== Outcomes - accordion left + baseline/intervention/result right ========== */
 .outcomes{background:#fff;color:var(--ink);position:relative;padding:100px 0 120px;border-bottom:none;}
@@ -392,7 +407,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .outcomes-media.shape-2 .outcomes-media-shape{-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%2066.7V4H30A28%2028%200%200%201%2058%2032V66.7Z'/><path%20d='M66%2030A17%2017%200%200%201%20100%2030V66.7H66Z'/><circle%20cx='83'%20cy='9'%20r='7'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%2066.7V4H30A28%2028%200%200%201%2058%2032V66.7Z'/><path%20d='M66%2030A17%2017%200%200%201%20100%2030V66.7H66Z'/><circle%20cx='83'%20cy='9'%20r='7'/></g></svg>");}
 .outcomes-media.shape-3 .outcomes-media-shape{-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%207H45A45%2045%200%200%201%2060%2045V66.7H0Z'/><path%20d='M74%2011H100V58H66V19Q66%2011%2074%2011Z'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%207H45A45%2045%200%200%201%2060%2045V66.7H0Z'/><path%20d='M74%2011H100V58H66V19Q66%2011%2074%2011Z'/></g></svg>");}
 .outcomes-media.shape-4 .outcomes-media-shape{-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='64'%20cy='27'%20r='27'/><rect%20x='0'%20y='7'%20width='28'%20height='39'/><path%20d='M40%2066.7A24%2024%200%200%201%2088%2066.7Z'/><rect%20x='72'%20y='50'%20width='28'%20height='16.7'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='64'%20cy='27'%20r='27'/><rect%20x='0'%20y='7'%20width='28'%20height='39'/><path%20d='M40%2066.7A24%2024%200%200%201%2088%2066.7Z'/><rect%20x='72'%20y='50'%20width='28'%20height='16.7'/></g></svg>");}
+.outcomes-media.shape-5 .outcomes-media-shape{-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%200H50A20%2020%200%200%201%2070%2020V66.7H20A20%2020%200%200%201%200%2046.7Z'/><rect%20x='74'%20y='0'%20width='26'%20height='44'%20rx='13'/><circle%20cx='87'%20cy='56'%20r='10.7'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2066.7'%20preserveAspectRatio='none'><g%20fill='%23fff'><path%20d='M0%200H50A20%2020%200%200%201%2070%2020V66.7H20A20%2020%200%200%201%200%2046.7Z'/><rect%20x='74'%20y='0'%20width='26'%20height='44'%20rx='13'/><circle%20cx='87'%20cy='56'%20r='10.7'/></g></svg>");}
 
+.outcomes-media.fit-gpu .outcomes-media-shape img{position:absolute;left:-19.8%;top:0;width:155%;height:155%;max-width:none;object-fit:cover;object-position:0 0;}
 .outcomes-metric-box{position:absolute;right:22px;bottom:22px;min-width:240px;max-width:70%;background:linear-gradient(160deg,#eef4ff 0%,#dbe9ff 100%);border-radius:14px;padding:22px 26px 20px;box-shadow:0 14px 34px -18px rgba(0,40,140,0.35);}
 .outcomes-metric-value{font-family:var(--display);font-weight:500;font-size:clamp(30px,2.6vw,40px);line-height:1;letter-spacing:-0.02em;color:#0b1a3a;margin-bottom:8px;}
 .outcomes-metric-label{font-family:var(--body);font-size:15px;color:#1a1f2e;line-height:1.3;}
@@ -444,8 +461,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 @media (max-width:600px){.pillars-grid{grid-template-columns:1fr;}}
 
 /* ========== Engagement - heading + paragraph left, circular step orbit right ========== */
-.engagement{padding:128px 0;background:#02061a;color:#fff;position:relative;overflow:hidden;}
-.engagement .wrap{position:relative;z-index:1;}
+.engagement{padding:0;min-height:210vh;background:#02061a;color:#fff;position:relative;overflow:visible;}
+.eng-sticky{position:sticky;top:0;min-height:100vh;display:flex;align-items:center;padding:96px 0 64px;}
+.engagement .wrap{position:relative;z-index:1;width:100%;}
 .engagement::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 78% 50%, #000 0%, transparent 60%);-webkit-mask-image:radial-gradient(ellipse at 78% 50%, #000 0%, transparent 60%);pointer-events:none;}
 .eng-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px 80px;align-items:center;}
 .engagement h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,4.2vw,56px);line-height:1.05;letter-spacing:-0.02em;color:#fff;margin:0 0 24px;}
@@ -456,26 +474,29 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .eng-cta:hover svg{transform:translateX(4px);}
 
 /* Orbit */
-.eng-orbit{position:relative;width:min(100%,520px);aspect-ratio:1;margin:0 auto;}
-.eng-orbit-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
-.eng-orbit-dash{fill:none;stroke:rgba(255,255,255,0.14);stroke-width:1;stroke-dasharray:3 9;transform-origin:200px 200px;animation:engSpin 60s linear infinite;}
-.eng-orbit-track{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:1.5;}
-.eng-orbit-arc{fill:none;stroke:url(#engArcGrad);stroke-width:3;stroke-linecap:round;stroke-dasharray:314.16 628.32;transform:rotate(150deg);transform-origin:200px 200px;transition:transform 1.1s cubic-bezier(.4,.1,.2,1);}
-.eng-orbit-glow{fill:none;stroke:rgba(0,100,255,0.35);stroke-width:14;stroke-linecap:round;stroke-dasharray:314.16 628.32;transform:rotate(150deg);transform-origin:200px 200px;transition:transform 1.1s cubic-bezier(.4,.1,.2,1);filter:blur(8px);}
-@keyframes engSpin{to{transform:rotate(360deg);}}
-.eng-node{position:absolute;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:#02061a;border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.7);font-family:var(--display);font-size:12px;letter-spacing:.14em;display:grid;place-items:center;cursor:pointer;transition:border-color .3s,color .3s,box-shadow .3s,transform .3s cubic-bezier(.2,.7,.2,1),background .3s;}
-.eng-node:hover{transform:scale(1.08);border-color:rgba(121,173,255,0.7);color:#fff;}
-.eng-node.is-active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 0 8px rgba(0,100,255,0.18),0 12px 30px -10px rgba(0,100,255,0.8);}
-.eng-node.is-done{border-color:#79adff;color:#79adff;}
-.eng-center{position:absolute;left:50%;top:50%;width:62%;transform:translate(-50%,-50%);text-align:center;}
-.eng-panel{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;transform:translateY(10px) scale(.98);transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1);pointer-events:none;}
-.eng-panel.is-active{opacity:1;transform:none;pointer-events:auto;}
-.eng-center{height:200px;}
-.eng-panel-meta{font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#79adff;margin-bottom:12px;}
-.eng-panel-title{font-family:var(--display);font-weight:400;font-size:clamp(20px,2vw,26px);line-height:1.15;letter-spacing:-0.015em;color:#fff;margin:0 0 12px;}
-.eng-panel-desc{color:rgba(255,255,255,0.62);font-size:14px;line-height:1.55;margin:0;}
-@media (prefers-reduced-motion:reduce){.eng-orbit-dash{animation:none;}.eng-orbit-arc,.eng-orbit-glow,.eng-panel{transition:none;}}
-@media (max-width:900px){.eng-layout{grid-template-columns:1fr;gap:56px;}.eng-orbit{width:min(100%,400px);}.eng-center{width:66%;}.eng-panel-desc{font-size:13px;}}
+/* Engagement — stacked card deck: active card in front, the other two peek out behind, front card recedes on advance */
+.eng-deck{position:relative;width:min(100%,520px);margin:0 auto;padding-top:56px;}
+.eng-deck-stage{position:relative;height:300px;}
+.eng-card{position:absolute;inset:0;background:linear-gradient(135deg,#0c1530 0%,#123a8f 100%);border:1px solid rgba(255,255,255,0.14);border-radius:20px;padding:34px 36px;display:flex;flex-direction:column;justify-content:center;text-align:left;cursor:pointer;
+  transform:translateY(calc(var(--pos) * -26px)) scale(calc(1 - var(--pos) * 0.06));opacity:calc(1 - var(--pos) * 0.32);
+  transition:transform .7s cubic-bezier(.4,.1,.2,1),opacity .6s ease,box-shadow .6s ease,border-color .6s ease;}
+.eng-card[data-step="1"]{background:linear-gradient(135deg,#123a8f 0%,#0064ff 100%);}
+.eng-card[data-step="2"]{background:linear-gradient(135deg,#0064ff 0%,#4d8cff 100%);}
+.eng-card[style*="--pos:0"]{border-color:rgba(255,255,255,0.35);box-shadow:0 30px 70px -20px rgba(0,100,255,0.55),0 0 0 1px rgba(0,100,255,0.15);}
+.eng-card.is-leaving{transform:translateY(38px) scale(.98);opacity:0;transition:transform .45s cubic-bezier(.4,0,.6,1),opacity .4s ease;}
+.eng-card-num{position:absolute;top:26px;right:28px;width:44px;height:44px;display:grid;place-items:center;background:#fff;color:var(--blue-deep);font-family:var(--display);font-size:12px;letter-spacing:.14em;}
+.eng-card-meta{font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#dbe9ff;margin-bottom:12px;}
+.eng-card-title{font-family:var(--display);font-weight:400;font-size:clamp(20px,2vw,26px);line-height:1.15;letter-spacing:-0.015em;color:#fff;margin:0 0 12px;padding-right:64px;}
+.eng-card-desc{color:rgba(255,255,255,0.82);font-size:14px;line-height:1.55;margin:0;}
+/* progress: three 1x1 squares, the active one fills with the hold timer */
+.eng-deck-dots{display:flex;gap:10px;margin-top:28px;}
+.eng-deck-dot{position:relative;width:32px;height:6px;background:rgba(255,255,255,0.14);overflow:hidden;cursor:pointer;border:none;padding:0;}
+.eng-deck-dot i{position:absolute;left:0;top:0;bottom:0;width:0;background:#79adff;}
+.eng-deck-dot.is-done i{width:100%;}
+.eng-deck-dot.is-active i{width:var(--p,0%);}
+@media (prefers-reduced-motion:reduce){.eng-card{transition:none;}}
+@media (max-width:900px){.eng-sticky{padding:80px 0 48px;}}
+@media (max-width:900px){.eng-layout{grid-template-columns:1fr;gap:56px;}.eng-deck{width:100%;}.eng-deck-stage{height:320px;}.eng-card{padding:28px 26px;}.eng-card-desc{font-size:13px;}}
 
 /* ========== FAQ - accordion + side visual ========== */
 .faq{padding:120px 0;background:#02061a;color:#fff;position:relative;overflow:hidden;}
@@ -556,6 +577,119 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 }
 .reality,.agentic,.processes,.leaks,.outcomes,.pillars,.engagement,.faq,.connect{overflow:visible;}
 
+
+/* ========== TSS · section 1 · software is being rewritten (single-column reading flow) ========== */
+.reality-content h2{margin-bottom:26px;}
+.reality-content h2 span{display:inline;}
+@media (min-width:961px){.reality-content h2{font-size:clamp(26px,3vw,46px);white-space:nowrap;}}
+.reality-lede{font-family:var(--display);font-weight:300;font-size:clamp(19px,1.6vw,23px);line-height:1.45;color:#fff;letter-spacing:-0.005em;margin:0 0 34px;max-width:620px;}
+.rflow{list-style:none;margin:0;padding:0;position:relative;max-width:620px;}
+.rflow::before{content:"";position:absolute;left:7px;top:10px;bottom:14px;width:2px;border-radius:2px;background:linear-gradient(180deg,#5f9dff 0%,rgba(95,157,255,0.35) 70%,rgba(95,157,255,0) 100%);transform-origin:top;}
+.rflow-step{position:relative;padding-left:42px;margin:0 0 22px;}
+.rflow-step:last-child{margin-bottom:0;}
+.rflow-step p{margin:0;color:rgba(255,255,255,0.86);font-size:16px;line-height:1.6;}
+.rflow-mark{position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;background:#03102b;border:2px solid #5f9dff;}
+.rflow-step--key .rflow-mark{top:24px;background:#5f9dff;box-shadow:0 0 0 6px rgba(95,157,255,0.18);}
+.rflow-step--key p{padding:20px 24px;border-radius:18px;background:linear-gradient(135deg,rgba(0,100,255,0.22) 0%,rgba(255,255,255,0.05) 100%);border:1px solid rgba(155,188,255,0.32);color:#fff;}
+.rflow-step--key strong{display:block;margin-top:8px;font-family:var(--display);font-weight:400;font-size:clamp(18px,1.5vw,21px);line-height:1.35;color:#9bbcff;}
+.reality.will-reveal .rflow::before{transform:scaleY(0);transition:transform 1.2s var(--ease);}
+.reality.will-reveal .rflow-step{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.reality.will-reveal.is-in .rflow::before{transform:scaleY(1);}
+.reality.will-reveal.is-in .rflow-step{opacity:1;transform:none;}
+.reality.will-reveal.is-in .rflow-step:nth-child(2){transition-delay:.25s;}
+.reality.will-reveal.is-in .rflow-step:nth-child(3){transition-delay:.5s;}
+@media (max-width:900px){.reality > .wrap,.agentic > .wrap{padding:0 24px;}}
+
+/* ========== TSS · section 2 · the new software equation (accordion left, animated illustration right) ========== */
+.shift{padding:120px 0 128px;background:linear-gradient(180deg,#ffffff 0%,#fafcff 100%);}
+.shift-head{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:end;margin-bottom:56px;}
+.shift-head h2{font-family:var(--display);font-weight:300;font-size:clamp(34px,3.6vw,52px);line-height:1.06;letter-spacing:-0.02em;color:#0b1a3a;margin:0;}
+.shift-head h2 span{color:#3b82ff;}
+.shift-head p{color:#54555a;font-size:17px;line-height:1.6;margin:0;max-width:460px;justify-self:end;}
+.shift-head p strong{font-weight:500;font-variation-settings:'wght' 500;color:#2b2f3a;}
+.shift-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:72px;align-items:start;}
+.shift-list{border-top:1px solid #dfe6f2;}
+.shift-item{position:relative;border-bottom:1px solid #dfe6f2;}
+.shift-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 0;text-align:left;color:inherit;cursor:pointer;}
+.shift-btn:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:8px;}
+.shift-terms{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;}
+.shift-old{font-family:var(--display);font-size:15px;color:#84868c;text-decoration:line-through;text-decoration-color:rgba(132,134,140,0.55);}
+.shift-arrow{font-family:var(--display);font-size:15px;color:#79adff;}
+.shift-new{font-family:var(--display);font-weight:300;font-size:clamp(22px,2vw,30px);line-height:1.1;letter-spacing:-0.015em;color:#1a1f2e;transition:color .3s;}
+.shift-item.is-open .shift-new,.shift-btn:hover .shift-new{color:#0b1a3a;}
+.shift-toggle{position:relative;flex-shrink:0;width:28px;height:28px;}
+.shift-toggle::before,.shift-toggle::after{content:"";position:absolute;left:50%;top:50%;width:22px;height:2px;margin:-1px 0 0 -11px;border-radius:2px;background:#1a1f2e;transition:transform .35s var(--ease);}
+.shift-toggle::after{transform:rotate(90deg);}
+.shift-item.is-open .shift-toggle::after{transform:rotate(0deg);}
+/* progress line under the open item (fills while auto-advancing) */
+.shift-item.is-open .shift-btn{padding-bottom:18px;}
+.shift-item .shift-bar{position:relative;display:block;height:3px;border-radius:3px;background:transparent;opacity:0;margin-top:-1px;}
+.shift-item.is-open .shift-bar{opacity:1;background:#dfe6f2;}
+.shift-bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:3px;background:var(--blue);}
+.shift-layout.is-auto .shift-item.is-open .shift-bar i{animation:shiftBar var(--shift-dur,6s) linear forwards;}
+.shift-layout.is-paused .shift-item.is-open .shift-bar i{animation-play-state:paused;}
+.shift-layout:not(.is-auto) .shift-item.is-open .shift-bar i{width:32%;}
+@keyframes shiftBar{to{width:100%;}}
+.shift-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease);}
+.shift-body-inner{overflow:hidden;min-height:0;}
+.shift-item.is-open .shift-body{grid-template-rows:1fr;}
+.shift-lead{margin:22px 0 8px;color:#0b1a3a;font-size:17px;line-height:1.45;font-variation-settings:'wght' 500;}
+.shift-text{margin:20px 0 28px;color:#5f6470;font-size:16px;line-height:1.6;max-width:520px;}
+/* illustration panel */
+.shift-stage{position:relative;aspect-ratio:1 / 0.92;border-radius:28px;background:radial-gradient(120% 90% at 20% 10%,#ffffff 0%,#f1f6ff 45%,#e3edff 100%);border:1px solid #e3ebfa;overflow:hidden;position:sticky;top:120px;}
+.shift-stage::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,60,180,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,60,180,0.05) 1px,transparent 1px);background-size:40px 40px;-webkit-mask-image:radial-gradient(ellipse at 50% 50%,#000 30%,transparent 80%);mask-image:radial-gradient(ellipse at 50% 50%,#000 30%,transparent 80%);}
+.shift-scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:4%;opacity:0;transform:scale(.97);transition:opacity .5s var(--ease),transform .6s var(--ease);}
+.shift-scene.is-active{opacity:1;transform:none;}
+.shift-scene svg{width:100%;height:100%;overflow:visible;}
+.shift-stage-tag{position:absolute;left:24px;top:22px;display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #e3ebfa;font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#54555a;}
+.shift-stage-tag b{width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px rgba(0,100,255,0.14);}
+.il-t{font-family:var(--display);}
+@media (prefers-reduced-motion:reduce){.shift-scene,.shift-body{transition:none;}}
+@media (max-width:900px){
+  .shift{padding:88px 0 96px;}
+  .shift-head{grid-template-columns:1fr;gap:18px;margin-bottom:32px;}
+  .shift-head p{justify-self:start;}
+  .shift-layout{grid-template-columns:1fr;gap:28px;}
+  .shift-stage{order:-1;position:relative;top:auto;aspect-ratio:16 / 10;}
+}
+
+/* ========== TSS · section 3 · the economics (sticky intro + rail, question-led cards) ========== */
+.leaks.econ{overflow:clip !important;}
+.econ-layout{display:grid;grid-template-columns:minmax(0,0.95fr) minmax(0,1.1fr);gap:72px;align-items:start;}
+.econ-intro{position:sticky;top:120px;}
+.econ .section-h{max-width:none;margin-bottom:0;font-size:clamp(32px,3.4vw,50px);}
+.econ .section-h span{color:#3b82ff;}
+.econ .section-sub{color:var(--ink-60);max-width:480px;font-size:17px;line-height:1.65;margin:22px 0 0;}
+.econ .section-sub strong{font-weight:500;font-variation-settings:'wght' 500;color:#2b2f3a;}
+.econ-list{display:flex;flex-direction:column;gap:20px;}
+.econ-card{position:relative;background:#fff;border:1px solid rgba(0,100,255,0.16);border-radius:24px;padding:34px 38px 36px;min-height:280px;display:flex;flex-direction:column;box-shadow:0 18px 50px -34px rgba(0,50,160,0.25);transition:border-color .4s,box-shadow .4s,transform .4s var(--ease);scroll-margin-top:140px;}
+.econ-card.is-active{border-color:var(--blue);box-shadow:0 30px 64px -34px rgba(0,100,255,0.45);}
+.econ-card-top{display:flex;align-items:center;gap:14px;}
+.econ-icon{width:46px;height:46px;border-radius:14px;background:var(--blue-06);color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .4s,color .4s;}
+.econ-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.econ-card.is-active .econ-icon{background:var(--blue);color:#fff;}
+.econ-num{margin-left:auto;font-family:var(--display);font-size:12px;letter-spacing:.16em;color:var(--ink-40);}
+.econ-q{margin:auto 0 0;padding-top:34px;font-family:var(--display);font-weight:400;font-size:clamp(24px,2.3vw,34px);line-height:1.22;letter-spacing:-0.015em;color:#0b1a3a;}
+.econ-desc{margin:16px 0 0;color:var(--ink-60);font-size:16px;line-height:1.6;max-width:520px;}
+@media (max-width:900px){
+  .econ-layout{grid-template-columns:1fr;gap:36px;}
+  .econ-intro{position:static;}
+  .econ-card{min-height:0;padding:26px 24px 28px;}
+  .econ-q{padding-top:24px;}
+}
+
+/* Hero idle motion on the existing shapes (starts after the entry animation) */
+.hero-video-wrap img{animation:hsZoom 12s ease-in-out 1s infinite alternate;transform-origin:32% 38%;}
+@keyframes hsZoom{from{transform:scale(1);}to{transform:scale(1.06);}}
+.hero-svg .hs-float{transform-box:fill-box;transform-origin:center;animation:hsPulse 4.5s ease-in-out 1s infinite;}
+@keyframes hsPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.14);}}
+.hero-svg .hs-spin{transform-box:fill-box;transform-origin:center;animation:hsSpin 16s linear 1s infinite;}
+@keyframes hsSpin{to{transform:rotate(360deg);}}
+.hero-svg .hs-twinkle{animation:hsTwinkle 6s ease-in-out 1s infinite;}
+@keyframes hsTwinkle{0%,100%{opacity:1;}50%{opacity:.55;}}
+.hero-svg .hs-breathe{transform-box:fill-box;transform-origin:center;animation:hsBreathe 5.5s ease-in-out 1s infinite;}
+@keyframes hsBreathe{0%,100%{transform:scale(1);}50%{transform:scale(1.035);}}
+@media (prefers-reduced-motion:reduce){.hero-video-wrap img,.hero-svg .hs-float,.hero-svg .hs-spin,.hero-svg .hs-twinkle,.hero-svg .hs-breathe{animation:none;}}
 </style>
 </head>
 <body>
@@ -565,14 +699,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
     <a href="index.html" class="nav-logo" aria-label="Searce home">Searce</a>
     <ul class="nav-links">
       <li><a href="#">outcomes</a></li>
-      <li class="has-dropdown">
-        <a href="#" aria-haspopup="true">how we solve
-          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </a>
-        <div class="mega-panel">
-          <a class="mega-item" href="fde.html"><span class="mega-title">FDE</span></a>
-        </div>
-      </li>
+      <li><a href="#">how we solve <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
       <li><a href="business-systems-engineering.html">practices <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
       <li><a href="#" class="current">industries <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
       <li><a href="#">insights</a></li>
@@ -607,7 +734,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         technology, software<br>&amp; services
       </h1>
       <div class="hero-opening">
-        <p>Agentic systems engineered above your codebase, cloud estate, and<br>support stack, with every release continuously verified.</p>
+        <p>Build Faster. Scale Smarter. Spend Less.</p>
       </div>
       <div class="hero-cta-row">
         <a href="#outcomes" class="hero-cta-primary">
@@ -619,43 +746,43 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 
     <!-- Composition from the approved sketch (Group 6.svg, 2824 x 2349): video through the big square + big circle (tangent at the square's right edge); photo through the leaf under the circle; blue pill under the square; small octagon against the pill; small ring top right -->
     <div class="hero-composition" aria-hidden="true">
-      <div class="hero-video-wrap"><video src="assets/hero-tss.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+      <div class="hero-video-wrap"><img src="assets/hero-tss.jpg" alt="" fetchpriority="high"></div>
       <svg class="hero-svg" viewBox="0 0 2824 2349" preserveAspectRatio="none">
         <defs>
           <linearGradient id="hgLight" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#79adff"/><stop offset="1" stop-color="#efefff"/></linearGradient>
           <linearGradient id="hgBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c2ea5"/><stop offset="1" stop-color="#2f6df6"/></linearGradient>
-          <linearGradient id="hgLeafOv" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0038a8"/><stop offset="1" stop-color="#4a5be6" stop-opacity="0"/></linearGradient>
+          <linearGradient id="hgLeaf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0038a8"/><stop offset="0.55" stop-color="#0064ff"><animate class="hs-anim" attributeName="offset" values="0.45;0.68;0.45" dur="9s" begin="1s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1"/></stop><stop offset="1" stop-color="#79adff"/></linearGradient>
           <clipPath id="hcLeaf"><path d="M1218 1629H2396C2530.76 1629 2640 1738.24 2640 1873V2349H1718C1441.86 2349 1218 2125.14 1218 1849V1629Z"/></clipPath>
           <!-- Dots + fine line grid, faded, as on the HLS hero -->
           <pattern id="hpDot" width="93.7" height="93.7" patternUnits="userSpaceOnUse"><circle cx="6.2" cy="6.2" r="6.2" fill="#8a8a8a"/></pattern>
-          <pattern id="hpGrid" width="182.6" height="182.6" patternUnits="userSpaceOnUse"><path d="M182.6 0H0V182.6" fill="none" stroke="#3b7df5" stroke-width="4"/></pattern>
+          <pattern id="hpGrid" width="182.6" height="182.6" patternUnits="userSpaceOnUse"><path d="M182.6 0H0V182.6" fill="none" stroke="#ffffff" stroke-width="3"/></pattern>
           <radialGradient id="hmDots" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(203 406) scale(946 1014)"><stop offset="0.15" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
           <mask id="hmDotsM"><rect x="0" y="0" width="1150" height="1420" fill="url(#hmDots)"/></mask>
-          <radialGradient id="hmGrid" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1360 2300) rotate(-50) scale(880 1010)"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          <radialGradient id="hmGrid" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1300 2320) rotate(-30) scale(1500 1100)"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
           <mask id="hmGridM"><rect x="1218" y="1629" width="1422" height="720" fill="url(#hmGrid)"/></mask>
         </defs>
 
         <!-- Detailing: dot field top left -->
-        <g class="in" style="--sx:-60px;--sy:420px;--sr:-2.2deg;--ss:0.93"><rect x="0" y="0" width="1150" height="1420" fill="url(#hpDot)" mask="url(#hmDotsM)"/></g>
+        <g class="in" style="--sx:-60px;--sy:420px;--sr:-2.2deg;--ss:0.93"><rect class="hs-twinkle" x="0" y="0" width="1150" height="1420" fill="url(#hpDot)" mask="url(#hmDotsM)"/></g>
 
-        <!-- Video square (274,685 · 944) and video circle (1929,918 · r711) are the masked video layer beneath this SVG -->
+        <!-- Photo circle (895,918 · r711) + sharp square (1606,685 · 944) are the masked photo layer beneath this SVG.
+             The sketch is mirrored left-right so the circle sits where the face falls in the photo. -->
+        <g transform="translate(2824 0) scale(-1 1)">
 
-        <!-- Photo leaf under the circle -->
-        <g class="in" style="--sx:-120px;--sy:520px;--sr:3deg;--ss:0.9"><g clip-path="url(#hcLeaf)">
-          <image href="assets/hero-code.jpg" x="1218" y="1629" width="1422" height="720" preserveAspectRatio="xMidYMid slice"/>
-          <path d="M1218 1629H2396C2530.76 1629 2640 1738.24 2640 1873V2349H1718C1441.86 2349 1218 2125.14 1218 1849V1629Z" fill="url(#hgLeafOv)" opacity="0.14"/>
-        </g></g>
+        <!-- Leaf under the circle: Searce blue gradient -->
+        <g class="in" style="--sx:-120px;--sy:520px;--sr:3deg;--ss:0.9"><path d="M1218 1629H2396C2530.76 1629 2640 1738.24 2640 1873V2349H1718C1441.86 2349 1218 2125.14 1218 1849V1629Z" fill="url(#hgLeaf)"/></g>
         <!-- Fine line grid laid over the photo leaf, fading from its bottom-left -->
-        <g class="in" style="--sx:46px;--sy:380px;--sr:0.5deg;--ss:0.91"><rect x="1218" y="1629" width="1422" height="720" fill="url(#hpGrid)" mask="url(#hmGridM)" opacity="0.55" clip-path="url(#hcLeaf)"/></g>
+        <g class="in" style="--sx:46px;--sy:380px;--sr:0.5deg;--ss:0.91"><rect x="1218" y="1629" width="1422" height="720" fill="url(#hpGrid)" mask="url(#hmGridM)" opacity="0.32" clip-path="url(#hcLeaf)"/></g>
 
         <!-- Blue pill under the square -->
-        <g class="in" style="--sx:-160px;--sy:420px;--sr:-3deg;--ss:0.9"><rect x="274" y="1632" width="944" height="355" rx="177.5" fill="url(#hgBlue)"/></g>
+        <g class="in" style="--sx:-160px;--sy:420px;--sr:-3deg;--ss:0.9"><rect class="hs-breathe" x="274" y="1632" width="944" height="355" rx="177.5" fill="url(#hgBlue)"/></g>
 
-        <!-- Small octagon against the pill's left end -->
-        <g class="in" style="--sx:-120px;--sy:320px;--sr:8deg;--ss:0.8"><path d="M255.646 1741.25L274 1809.5L255.646 1877.75L205.496 1927.71L137 1946L68.5037 1927.71L18.3539 1877.75L0 1809.49L18.3539 1741.25L68.4963 1691.29L137 1673L205.504 1691.29L255.646 1741.25Z" fill="url(#hgLight)"/></g>
+        <!-- Small octagon against the pill's outer end -->
+        <g class="in" style="--sx:-120px;--sy:320px;--sr:8deg;--ss:0.8"><path class="hs-spin" d="M255.646 1741.25L274 1809.5L255.646 1877.75L205.496 1927.71L137 1946L68.5037 1927.71L18.3539 1877.75L0 1809.49L18.3539 1741.25L68.4963 1691.29L137 1673L205.504 1691.29L255.646 1741.25Z" fill="url(#hgLight)"/></g>
 
-        <!-- Small ring top right -->
-        <g class="in" style="--sx:180px;--sy:300px;--sr:6deg;--ss:0.85"><path d="M2640 93.6123C2689.84 93.6123 2730.39 134.157 2730.39 184C2730.39 233.843 2689.84 274.388 2640 274.388C2590.16 274.388 2549.61 233.843 2549.61 184C2549.61 134.157 2590.16 93.6123 2640 93.6123ZM2640 0C2538.38 0 2456 82.3787 2456 184C2456 285.621 2538.38 368 2640 368C2741.62 368 2824 285.621 2824 184C2824 82.3787 2741.62 0 2640 0Z" fill="url(#hgLight)"/></g>
+        <!-- Small ring (top left once mirrored) -->
+        <g class="in" style="--sx:180px;--sy:300px;--sr:6deg;--ss:0.85"><path class="hs-float" d="M2640 93.6123C2689.84 93.6123 2730.39 134.157 2730.39 184C2730.39 233.843 2689.84 274.388 2640 274.388C2590.16 274.388 2549.61 233.843 2549.61 184C2549.61 134.157 2590.16 93.6123 2640 93.6123ZM2640 0C2538.38 0 2456 82.3787 2456 184C2456 285.621 2538.38 368 2640 368C2741.62 368 2824 285.621 2824 184C2824 82.3787 2741.62 0 2640 0Z" fill="url(#hgLight)"/></g>
+        </g>
       </svg>
     </div>
   </div>
@@ -667,102 +794,161 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <div class="wrap">
     <div class="reality-layout">
       <div class="reality-media">
-        <div class="reality-media-img"><img src="assets/reality-tss.webp" alt="Engineering team working across code, dashboards and a cloud architecture wall at dusk"></div>
+        <div class="reality-media-img"><img src="assets/reality-tss-2.jpg" alt="Two colleagues reviewing a dashboard together on a large monitor"></div>
         <span class="reality-media-quarter" aria-hidden="true"></span>
       </div>
       <div class="reality-content">
-        <span class="section-eyebrow">The operating reality</span>
-        <h2 id="reality-h">Engineering velocity, availability, and retention <span>dictate enterprise valuation.</span></h2>
-        <div class="reality-stats">
-          <div class="reality-stat">
-            <div class="reality-stat-value">Sprints</div>
-            <div class="reality-stat-text">lost to manual code migrations, test generation, and incident triage.</div>
-          </div>
-          <div class="reality-stat">
-            <div class="reality-stat-value">Overspend</div>
-            <div class="reality-stat-text">on cloud infrastructure and API billing while release cycles must shrink.</div>
-          </div>
-          <div class="reality-stat">
-            <div class="reality-stat-value">Backlogs</div>
-            <div class="reality-stat-text">in onboarding, documentation, and support triage across multi-product ecosystems.</div>
-          </div>
-        </div>
-        <p class="reality-closing">Digital products cannot afford downtime, latency, or breaches, so every automated path must run with continuous verification and zero-downtime availability.</p>
+        <h2 id="reality-h">Software is being <span>rewritten.</span></h2>
+        <p class="reality-lede">The SaaS playbook was built for people using software. The next one is being built for software doing the work.</p>
+        <ol class="rflow">
+          <li class="rflow-step"><span class="rflow-mark" aria-hidden="true"></span><p>AI is compressing development cycles, changing what customers expect, and making features easier to replicate.</p></li>
+          <li class="rflow-step rflow-step--key"><span class="rflow-mark" aria-hidden="true"></span><p>The question is no longer where to add AI. <strong>It is what remains defensible when intelligence becomes abundant.</strong></p></li>
+          <li class="rflow-step"><span class="rflow-mark" aria-hidden="true"></span><p>The next generation of software companies will rethink the product, the engineering system, and the business model around autonomous execution and measurable outcomes.</p></li>
+        </ol>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============== OUR PERSPECTIVE (white, intro + 4 circles) ============== -->
-<section class="agentic" aria-labelledby="agentic-h">
-  <img class="agentic-motif" src="assets/perspective-shapes.svg" alt="" aria-hidden="true">
+<!-- ============== THE NEW SOFTWARE EQUATION (accordion left, animated illustration right; auto-advances with a progress line, pauses on hover) ============== -->
+<section class="agentic shift" aria-labelledby="agentic-h">
   <div class="wrap">
-    <div class="agentic-layout">
-      <div class="agentic-intro">
-        <span class="section-eyebrow">Our perspective</span>
-        <h2 id="agentic-h">From manual delivery to <span>agentic systems.</span></h2>
-        <p>We reimagine how software is built, shipped, and supported by unifying people, data, and AI agents across the product lifecycle.</p>
+    <div class="shift-head">
+      <h2 id="agentic-h">The new software <span>equation</span></h2>
+      <p><strong>AI is changing where software creates value, how that value is delivered, and how technology companies compete.</strong></p>
+    </div>
+    <div class="shift-layout" id="shiftLayout">
+      <div class="shift-list">
+        <div class="shift-item is-open">
+          <button class="shift-btn" type="button" id="shift-h0" aria-expanded="true" aria-controls="shift-b0">
+            <span class="shift-terms"><span class="shift-new">Value tied to outcomes</span></span>
+            <span class="shift-toggle" aria-hidden="true"></span>
+          </button>
+          <span class="shift-bar" aria-hidden="true"><i></i></span>
+          <div class="shift-body" id="shift-b0" role="region" aria-labelledby="shift-h0"><div class="shift-body-inner">
+            <p class="shift-text">As agents perform more of the work, value is increasingly measured by what the software accomplishes, not simply how many people access it.</p>
+          </div></div>
+        </div>
+        <div class="shift-item">
+          <button class="shift-btn" type="button" id="shift-h1" aria-expanded="false" aria-controls="shift-b1">
+            <span class="shift-terms"><span class="shift-new">Software that acts</span></span>
+            <span class="shift-toggle" aria-hidden="true"></span>
+          </button>
+          <span class="shift-bar" aria-hidden="true"><i></i></span>
+          <div class="shift-body" id="shift-b1" role="region" aria-labelledby="shift-h1"><div class="shift-body-inner">
+            <p class="shift-text">Products are evolving beyond interfaces that help users complete tasks into systems that can reason, act, and execute work.</p>
+          </div></div>
+        </div>
+        <div class="shift-item">
+          <button class="shift-btn" type="button" id="shift-h2" aria-expanded="false" aria-controls="shift-b2">
+            <span class="shift-terms"><span class="shift-new">Workflow-level differentiation</span></span>
+            <span class="shift-toggle" aria-hidden="true"></span>
+          </button>
+          <span class="shift-bar" aria-hidden="true"><i></i></span>
+          <div class="shift-body" id="shift-b2" role="region" aria-labelledby="shift-h2"><div class="shift-body-inner">
+            <p class="shift-text">As individual AI capabilities become easier to replicate, differentiation increasingly comes from proprietary context, data, and ownership of critical workflows.</p>
+          </div></div>
+        </div>
+        <div class="shift-item">
+          <button class="shift-btn" type="button" id="shift-h3" aria-expanded="false" aria-controls="shift-b3">
+            <span class="shift-terms"><span class="shift-new">End-to-end engineering velocity</span></span>
+            <span class="shift-toggle" aria-hidden="true"></span>
+          </button>
+          <span class="shift-bar" aria-hidden="true"><i></i></span>
+          <div class="shift-body" id="shift-b3" role="region" aria-labelledby="shift-h3"><div class="shift-body-inner">
+            <p class="shift-text">AI can accelerate coding, but real speed depends on the entire engineering system, from architecture and testing to security, governance, and deployment.</p>
+          </div></div>
+        </div>
+        <div class="shift-item">
+          <button class="shift-btn" type="button" id="shift-h4" aria-expanded="false" aria-controls="shift-b4">
+            <span class="shift-terms"><span class="shift-new">Intelligent orchestration</span></span>
+            <span class="shift-toggle" aria-hidden="true"></span>
+          </button>
+          <span class="shift-bar" aria-hidden="true"><i></i></span>
+          <div class="shift-body" id="shift-b4" role="region" aria-labelledby="shift-h4"><div class="shift-body-inner">
+            <p class="shift-text">As agents operate across applications, models, APIs, and data, the ability to coordinate these systems securely and reliably becomes a core product capability.</p>
+          </div></div>
+        </div>
       </div>
-      <div class="agentic-grid">
-        <svg class="agentic-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <path class="dots" pathLength="400" d="M4 1H96Q99 1 99 4V96Q99 99 96 99H4Q1 99 1 96V4Q1 1 4 1Z"/>
-          <path class="runner" pathLength="400" d="M4 1H96Q99 1 99 4V96Q99 99 96 99H4Q1 99 1 96V4Q1 1 4 1Z"/>
-        </svg>
-        <article class="agentic-card">
-          <div class="agentic-card-top"><div class="agentic-card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg></div></div>
-          <div class="agentic-card-label">Understand</div>
-          <p class="agentic-card-text">Make sense of codebases, logs, and telemetry at scale.</p>
-        </article>
-        <article class="agentic-card">
-          <div class="agentic-card-top"><div class="agentic-card-icon"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7l3 8M16 7l-3 8"/></svg></div></div>
-          <div class="agentic-card-label">Coordinate</div>
-          <p class="agentic-card-text">Orchestrate engineers, pipelines, and specialized agents.</p>
-        </article>
-        <article class="agentic-card">
-          <div class="agentic-card-top"><div class="agentic-card-icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 10-12h-7l1-8z"/></svg></div></div>
-          <div class="agentic-card-label">Act</div>
-          <p class="agentic-card-text">Automate build, migration, and support workflows with confidence.</p>
-        </article>
-        <article class="agentic-card">
-          <div class="agentic-card-top"><div class="agentic-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.4 8.5-8 9-4.6-.5-8-4.5-8-9V7l8-4z"/></svg></div></div>
-          <div class="agentic-card-label">Govern</div>
-          <p class="agentic-card-text">Ensure security, IP protection, and measurable outcomes.</p>
-        </article>
+      <div class="shift-stage" aria-hidden="true">
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+          <filter id="ilShadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0a2a6a" flood-opacity="0.10"/></filter>
+          <linearGradient id="ilGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b3d0ff"/><stop offset="1" stop-color="#0064ff"/></linearGradient>
+          <linearGradient id="ilHub" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a2a8a"/><stop offset="1" stop-color="#0064ff"/></linearGradient>
+        </defs></svg>
+        <div class="shift-scene is-active"><svg viewBox="0 0 600 520"><rect x="36" y="70" width="236" height="230" rx="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" />
+<text x="60" y="104" font-size="13" fill="#84868c" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Licensed seats</text><g opacity="0.9"><circle cx="78" cy="128" r="9" fill="#c9d6ee"/><path d="M64 150 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="122" cy="128" r="9" fill="#c9d6ee"/><path d="M108 150 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="166" cy="128" r="9" fill="#c9d6ee"/><path d="M152 150 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="210" cy="128" r="9" fill="#c9d6ee"/><path d="M196 150 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="78" cy="168" r="9" fill="#c9d6ee"/><path d="M64 190 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="122" cy="168" r="9" fill="#c9d6ee"/><path d="M108 190 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="166" cy="168" r="9" fill="#c9d6ee"/><path d="M152 190 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="210" cy="168" r="9" fill="#c9d6ee"/><path d="M196 190 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="78" cy="208" r="9" fill="#c9d6ee"/><path d="M64 230 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="122" cy="208" r="9" fill="#c9d6ee"/><path d="M108 230 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="166" cy="208" r="9" fill="#c9d6ee"/><path d="M152 230 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="210" cy="208" r="9" fill="#c9d6ee"/><path d="M196 230 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g>
+<rect x="60" y="272" width="120" height="8" rx="4.0" fill="#e3ebfa"/><text x="60" y="292" font-size="11" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Measured by access</text>
+<path d="M276 186 C 292 186, 292 150, 306 150" fill="none" stroke="#b3d0ff" stroke-width="2.5" stroke-dasharray="4 5" stroke-linecap="round"/><path d="M300 144 l7 6 -7 6" fill="none" stroke="#b3d0ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="310" y="36" width="254" height="316" rx="22" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" />
+<text x="334" y="70" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Outcomes delivered</text>
+<circle cx="437" cy="154" r="54" fill="none" stroke="#e6effd" stroke-width="14"/><path d="M437 100 A54 54 0 1 1 384.0 143.9" fill="none" stroke="#0064ff" stroke-width="14" stroke-linecap="round"/>
+<text x="437" y="160" font-size="24" fill="#0b1a3a" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">78%</text><text x="437" y="178" font-size="10" fill="#84868c" font-weight="400" text-anchor="middle" letter-spacing="0" class="il-t">tasks resolved</text>
+<rect x="330" y="308" width="22" height="22" rx="6" fill="#b3d0ff"/><rect x="364" y="296" width="22" height="34" rx="6" fill="#b3d0ff"/><rect x="398" y="284" width="22" height="46" rx="6" fill="#b3d0ff"/><rect x="432" y="272" width="22" height="58" rx="6" fill="#b3d0ff"/><rect x="466" y="256" width="22" height="74" rx="6" fill="#b3d0ff"/><rect x="500" y="234" width="22" height="96" rx="6" fill="#0064ff"/><rect x="330" y="334" width="210" height="2" rx="1" fill="#e3ebfa"/>
+<rect x="36" y="380" width="528" height="104" rx="20" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" />
+<circle cx="76" cy="432" r="12" fill="#b3d0ff"/><path d="M71 432 l3.5 3.5 l6.5 -7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="98" y="428" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Usage</text><text x="98" y="446" font-size="10.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">per task</text><circle cx="248" cy="432" r="12" fill="#b3d0ff"/><path d="M243 432 l3.5 3.5 l6.5 -7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="270" y="428" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Execution</text><text x="270" y="446" font-size="10.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">per workflow</text><circle cx="420" cy="432" r="12" fill="#0064ff"/><path d="M415 432 l3.5 3.5 l6.5 -7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="442" y="428" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Outcomes</text><text x="442" y="446" font-size="10.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">per result</text></svg></div>
+        <div class="shift-scene"><svg viewBox="0 0 600 520"><rect x="36" y="40" width="528" height="440" rx="24" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" />
+<circle cx="64" cy="68" r="5" fill="#c9d6ee"/><circle cx="82" cy="68" r="5" fill="#c9d6ee"/><circle cx="100" cy="68" r="5" fill="#c9d6ee"/><text x="300" y="72" font-size="12" fill="#84868c" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">Agent workspace</text>
+<rect x="36" y="92" width="528" height="1" fill="#e3ebfa"/>
+<rect x="210" y="116" width="320" height="50" rx="25" fill="#e6effd"/><text x="234" y="146" font-size="13.5" fill="#0b1a3a" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Reconcile this month&#8217;s invoices</text>
+<rect x="66" y="190" width="468" height="196" rx="18" fill="#f7faff" stroke="#e3ebfa"/>
+<rect x="86" y="208" width="30" height="30" rx="9" fill="#0064ff"/><path d="M101 214 l2.4 6.6 6.6 2.4 -6.6 2.4 -2.4 6.6 -2.4 -6.6 -6.6 -2.4 6.6 -2.4 z" fill="#fff"/>
+<text x="126" y="228" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Agent</text><rect x="176" y="213" width="84" height="22" rx="11" fill="#fff" stroke="#b3d0ff"/><text x="218" y="228" font-size="10.5" fill="#0064ff" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">executing</text>
+<circle cx="98" cy="262" r="10" fill="#0064ff"/><path d="M93 262 l3.5 3.5 l6.5 -7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="118" y="266" font-size="13" fill="#0b1a3a" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Read the request</text><circle cx="98" cy="296" r="10" fill="#0064ff"/><path d="M93 296 l3.5 3.5 l6.5 -7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="118" y="300" font-size="13" fill="#0b1a3a" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Pulled the records it needs</text><circle cx="98" cy="330" r="10" fill="#0064ff"/><path d="M93 330 l3.5 3.5 l6.5 -7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="118" y="334" font-size="13" fill="#0b1a3a" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Matched and flagged exceptions</text><circle cx="98" cy="364" r="10" fill="none" stroke="#e6effd" stroke-width="3"/><path d="M98 354 A10 10 0 1 1 91.2 371.3" fill="none" stroke="#0064ff" stroke-width="3" stroke-linecap="round"/><text x="118" y="368" font-size="13" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Posting updates for approval</text>
+<rect x="440" y="208" width="74" height="24" rx="12" fill="#fff" stroke="#e3ebfa"/><text x="477" y="224" font-size="11" fill="#84868c" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">3 of 4</text>
+<rect x="330" y="400" width="250" height="72" rx="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><circle cx="362" cy="436" r="14" fill="#0064ff"/><path d="M357 436 l3.5 3.5 l6.5 -7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="386" y="432" font-size="13.5" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Action taken</text><text x="386" y="450" font-size="11" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Awaiting one approval</text></svg></div>
+        <div class="shift-scene"><svg viewBox="0 0 600 520"><rect x="56" y="92" width="107.8" height="34" rx="17" fill="#fff" stroke="#c9d6ee" stroke-dasharray="3 4"/><text x="73" y="114" font-size="12.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Summarize</text><rect x="150" y="138" width="66.8" height="34" rx="17" fill="#fff" stroke="#c9d6ee" stroke-dasharray="3 4"/><text x="167" y="160" font-size="12.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Chat</text><rect x="70" y="188" width="83.19999999999999" height="34" rx="17" fill="#fff" stroke="#c9d6ee" stroke-dasharray="3 4"/><text x="87" y="210" font-size="12.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Search</text><rect x="118" y="236" width="132.39999999999998" height="34" rx="17" fill="#fff" stroke="#c9d6ee" stroke-dasharray="3 4"/><text x="135" y="258" font-size="12.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Autocomplete</text><rect x="52" y="284" width="107.8" height="34" rx="17" fill="#fff" stroke="#c9d6ee" stroke-dasharray="3 4"/><text x="69" y="306" font-size="12.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Translate</text><text x="56" y="350" font-size="12" fill="#84868c" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Features</text><text x="56" y="368" font-size="11" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Easy to replicate</text>
+<path d="M250 210 C 280 210, 282 250, 306 250" fill="none" stroke="#b3d0ff" stroke-width="2.5" stroke-dasharray="4 5" stroke-linecap="round"/><path d="M300 244 l7 6 -7 6" fill="none" stroke="#b3d0ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="312" y="44" width="252" height="436" rx="24" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><text x="336" y="80" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Your workflow</text>
+<path d="M358 156 V 420" stroke="#b3d0ff" stroke-width="2.5" stroke-dasharray="3 5"/><rect x="336" y="112" width="44" height="44" rx="13" fill="#e6effd"/><ellipse cx="358" cy="126" rx="10" ry="4" fill="none" stroke="#0064ff" stroke-width="2"/><path d="M348 126 v14 c0 2.2 4.5 4 10 4 s10 -1.8 10 -4 v-14" fill="none" stroke="#0064ff" stroke-width="2"/><text x="394" y="132" font-size="13.5" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Proprietary context</text><text x="394" y="149" font-size="10.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Only you hold this</text><rect x="336" y="200" width="44" height="44" rx="13" fill="#e6effd"/><ellipse cx="358" cy="214" rx="10" ry="4" fill="none" stroke="#0064ff" stroke-width="2"/><path d="M348 214 v14 c0 2.2 4.5 4 10 4 s10 -1.8 10 -4 v-14" fill="none" stroke="#0064ff" stroke-width="2"/><text x="394" y="220" font-size="13.5" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Customer data</text><text x="394" y="237" font-size="10.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Signals from your platform</text><rect x="336" y="288" width="44" height="44" rx="13" fill="#0064ff"/><path d="M358 298 l12 12 -12 12 -12 -12 z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><text x="394" y="308" font-size="13.5" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Decision</text><text x="394" y="325" font-size="10.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Reasoned on your context</text><rect x="336" y="376" width="44" height="44" rx="13" fill="#0064ff"/><path d="M349 398 l6 6 12 -13" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><text x="394" y="396" font-size="13.5" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Action</text><text x="394" y="413" font-size="10.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Owned end to end</text></svg></div>
+        <div class="shift-scene"><svg viewBox="0 0 600 520"><rect x="40" y="52" width="236" height="152" rx="20" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><text x="62" y="90" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Coding</text><rect x="170" y="74" width="86" height="24" rx="12" fill="#e6effd"/><path d="M186 79 l-5 8 h5 l-1.5 6 6 -9 h-5 l1.5 -5 z" fill="#0064ff"/><text x="221" y="90" font-size="10.5" fill="#0064ff" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">AI-fast</text><rect x="66" y="108" width="60" height="7" rx="3.5" fill="#0064ff"/><rect x="66" y="124" width="110" height="7" rx="3.5" fill="#b3d0ff"/><rect x="78" y="140" width="80" height="7" rx="3.5" fill="#79adff"/><rect x="78" y="156" width="130" height="7" rx="3.5" fill="#b3d0ff"/><rect x="66" y="172" width="50" height="7" rx="3.5" fill="#0064ff"/><rect x="66" y="188" width="96" height="7" rx="3.5" fill="#dbe7fb"/>
+<text x="318" y="94" font-size="13" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Real speed is</text><text x="318" y="116" font-size="20" fill="#0b1a3a" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">the whole system</text><text x="318" y="140" font-size="13" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">from first commit</text><text x="318" y="158" font-size="13" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">to production</text>
+<path d="M158 204 V 226" stroke="#b3d0ff" stroke-width="2.5" stroke-dasharray="3 4" stroke-linecap="round"/>
+<rect x="40" y="236" width="94" height="104" rx="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><rect x="75" y="258" width="10" height="10" rx="2.5" fill="none" stroke="#0064ff" stroke-width="2"/><rect x="89" y="258" width="10" height="10" rx="2.5" fill="none" stroke="#0064ff" stroke-width="2"/><rect x="82" y="272" width="10" height="10" rx="2.5" fill="none" stroke="#0064ff" stroke-width="2"/><text x="87" y="318" font-size="11.5" fill="#0b1a3a" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">Architecture</text><path d="M134 288 h12" stroke="#b3d0ff" stroke-width="2.5" stroke-linecap="round"/><rect x="146" y="236" width="94" height="104" rx="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><path d="M183 270 l6 6 13 -14" fill="none" stroke="#0064ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><text x="193" y="318" font-size="11.5" fill="#0b1a3a" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">Testing</text><path d="M240 288 h12" stroke="#b3d0ff" stroke-width="2.5" stroke-linecap="round"/><rect x="252" y="236" width="94" height="104" rx="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><path d="M299 256 l11 4.5 v7 c0 6.5 -4.7 11.5 -11 13 -6.3 -1.5 -11 -6.5 -11 -13 v-7 z" fill="none" stroke="#0064ff" stroke-width="2.2" stroke-linejoin="round"/><text x="299" y="318" font-size="11.5" fill="#0b1a3a" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">Security</text><path d="M346 288 h12" stroke="#b3d0ff" stroke-width="2.5" stroke-linecap="round"/><rect x="358" y="236" width="94" height="104" rx="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><rect x="395" y="256" width="20" height="25" rx="4" fill="none" stroke="#0064ff" stroke-width="2.2"/><path d="M400 264 h10 M400 270 h10 M400 276 h6" stroke="#0064ff" stroke-width="2" stroke-linecap="round"/><text x="405" y="318" font-size="11.5" fill="#0b1a3a" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">Governance</text><path d="M452 288 h12" stroke="#b3d0ff" stroke-width="2.5" stroke-linecap="round"/><rect x="464" y="236" width="94" height="104" rx="18" fill="#0064ff" stroke="#e3ebfa" filter="url(#ilShadow)" /><path d="M511 256 c7 5 9 12 7 20 l-7 5 -7 -5 c-2 -8 0 -15 7 -20 z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><circle cx="511" cy="268" r="2.6" fill="#fff"/><text x="511" y="318" font-size="11.5" fill="#fff" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">Deploy</text>
+<rect x="40" y="392" width="520" height="12" rx="6" fill="#e6effd"/><rect x="40" y="392" width="520" height="12" rx="6" fill="url(#ilGrad)"/>
+<circle cx="560" cy="398" r="11" fill="#fff" stroke="#0064ff" stroke-width="3"/>
+<text x="40" y="432" font-size="12" fill="#84868c" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Idea</text><text x="560" y="432" font-size="12" fill="#0064ff" font-weight="500" text-anchor="end" letter-spacing="0" class="il-t">Production</text></svg></div>
+        <div class="shift-scene"><svg viewBox="0 0 600 520"><path d="M300 260 C 250 230, 210 200, 194 148" fill="none" stroke="#b3d0ff" stroke-width="2.5" stroke-dasharray="4 5" stroke-linecap="round"/><circle cx="194" cy="148" r="4" fill="#0064ff"/><path d="M300 260 C 350 230, 390 200, 406 148" fill="none" stroke="#b3d0ff" stroke-width="2.5" stroke-dasharray="4 5" stroke-linecap="round"/><circle cx="406" cy="148" r="4" fill="#0064ff"/><path d="M300 260 C 250 290, 210 320, 194 372" fill="none" stroke="#b3d0ff" stroke-width="2.5" stroke-dasharray="4 5" stroke-linecap="round"/><circle cx="194" cy="372" r="4" fill="#0064ff"/><path d="M300 260 C 350 290, 390 320, 406 372" fill="none" stroke="#b3d0ff" stroke-width="2.5" stroke-dasharray="4 5" stroke-linecap="round"/><circle cx="406" cy="372" r="4" fill="#0064ff"/><rect x="44" y="56" width="150" height="92" rx="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><rect x="60" y="74" width="32" height="32" rx="10" fill="#e6effd"/><rect x="68" y="82" width="7" height="7" rx="2" fill="#0064ff"/><rect x="77" y="82" width="7" height="7" rx="2" fill="#0064ff"/><rect x="68" y="91" width="7" height="7" rx="2" fill="#0064ff"/><rect x="77" y="91" width="7" height="7" rx="2" fill="#b3d0ff"/><text x="104" y="88" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Applications</text><rect x="104" y="100" width="64" height="6" rx="3.0" fill="#e3ebfa"/><rect x="60" y="122" width="110" height="6" rx="3.0" fill="#e3ebfa"/><rect x="406" y="56" width="150" height="92" rx="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><rect x="422" y="74" width="32" height="32" rx="10" fill="#e6effd"/><circle cx="438" cy="90" r="7" fill="none" stroke="#0064ff" stroke-width="2"/><circle cx="438" cy="90" r="2.5" fill="#0064ff"/><text x="466" y="88" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Models</text><rect x="466" y="100" width="64" height="6" rx="3.0" fill="#e3ebfa"/><rect x="422" y="122" width="110" height="6" rx="3.0" fill="#e3ebfa"/><rect x="44" y="372" width="150" height="92" rx="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><rect x="60" y="390" width="32" height="32" rx="10" fill="#e6effd"/><path d="M72 399 l-6 7 6 7 M80 399 l6 7 -6 7" fill="none" stroke="#0064ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="104" y="404" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">APIs</text><rect x="104" y="416" width="64" height="6" rx="3.0" fill="#e3ebfa"/><rect x="60" y="438" width="110" height="6" rx="3.0" fill="#e3ebfa"/><rect x="406" y="372" width="150" height="92" rx="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><rect x="422" y="390" width="32" height="32" rx="10" fill="#e6effd"/><ellipse cx="438" cy="401" rx="8" ry="3" fill="none" stroke="#0064ff" stroke-width="2"/><path d="M430 401 v10 c0 1.7 3.6 3 8 3 s8 -1.3 8 -3 v-10" fill="none" stroke="#0064ff" stroke-width="2"/><text x="466" y="404" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Data</text><rect x="466" y="416" width="64" height="6" rx="3.0" fill="#e3ebfa"/><rect x="422" y="438" width="110" height="6" rx="3.0" fill="#e3ebfa"/>
+<rect x="232" y="192" width="136" height="136" rx="34" fill="url(#ilHub)" filter="url(#ilShadow)"/>
+<circle cx="300" cy="244" r="9" fill="#fff"/><circle cx="276" cy="276" r="6" fill="#fff" opacity=".85"/><circle cx="324" cy="276" r="6" fill="#fff" opacity=".85"/><path d="M300 244 L276 276 M300 244 L324 276 M276 276 H324" stroke="#fff" stroke-width="2" opacity=".7"/>
+<text x="300" y="310" font-size="12" fill="#fff" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">Orchestration</text>
+<circle cx="366" cy="194" r="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)"/><path d="M366 184 l8 3.2 v5 c0 4.6 -3.4 8.2 -8 9.3 -4.6 -1.1 -8 -4.7 -8 -9.3 v-5 z" fill="none" stroke="#0064ff" stroke-width="2" stroke-linejoin="round"/>
+<text x="300" y="500" font-size="12" fill="#84868c" font-weight="400" text-anchor="middle" letter-spacing="0" class="il-t">Secure, reliable coordination across the stack</text></svg></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============== VALUE LEAKS (flow diagram) ============== -->
-<section class="leaks" aria-labelledby="leaks-h">
+<section class="leaks econ" aria-labelledby="leaks-h">
   <span class="grid-motif" aria-hidden="true"></span>
   <div class="wrap">
-    <h2 id="leaks-h" class="section-h">Where the value leaks</h2>
-    <div class="leaks-stack">
-      <div class="leak-card">
-        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/><path d="M14 4l-4 16"/></svg></div>
-        <div class="leak-card-title">Engineering Debt &amp; Friction <span class="leak-tag">Engineered</span></div>
-        <div class="leak-card-desc">Technical teams spend hundreds of hours maintaining legacy codebases, updating dependencies, and handling routine platform maintenance instead of building core features.</div>
+    <div class="econ-layout">
+      <div class="econ-intro">
+        <h2 id="leaks-h" class="section-h">AI changes<br> the product.<br> <span>The economics<br> have to follow.</span></h2>
+        <p class="section-sub"><strong>Software companies now have to ship faster, prove more value, and manage a new class of variable costs while protecting margin and growth.</strong></p>
       </div>
-      <div class="leak-card">
-        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
-        <div class="leak-card-title">Data &amp; Telemetry Silos <span class="leak-tag">Engineered</span></div>
-        <div class="leak-card-desc">Product, security, and operational decisions stall when system logs, performance metrics, and application usage data remain locked in disconnected monitoring tools.</div>
-      </div>
-      <div class="leak-card">
-        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h4"/></svg></div>
-        <div class="leak-card-title">Cross-Functional Hand-offs <span class="leak-tag">Engineered</span></div>
-        <div class="leak-card-desc">Context and speed are lost as customer features, bug fixes, and security patches move between Product, Engineering, QA, DevOps, and Customer Success.</div>
-      </div>
-      <div class="leak-card">
-        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div>
-        <div class="leak-card-title">Defect &amp; Rollback Loops <span class="leak-tag">Engineered</span></div>
-        <div class="leak-card-desc">Manual test execution, configuration drift, and unverified code deployments trigger expensive bug-fix cycles and emergency production rollbacks.</div>
-      </div>
-      <div class="leak-card" data-tone="commercial">
-        <div class="leak-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-        <div class="leak-card-title">Vendor &amp; Infrastructure Dependencies <span class="leak-tag">Commercial</span></div>
-        <div class="leak-card-desc">Third-party API rate limits, upstream platform outages, DNS propagation delays, and external vendor SLAs introduce friction outside the core product architecture.</div>
+      <div class="econ-list">
+        <article class="econ-card is-active" id="econ-0" data-i="0">
+          <div class="econ-card-top"><span class="econ-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19L19 5"/><path d="M9 5h10v10"/></svg></span><span class="econ-num" aria-hidden="true">01</span></div>
+          <h3 class="econ-q">Release velocity</h3>
+          <p class="econ-desc">AI is accelerating development, but architecture, testing, security, governance, and deployment still determine how quickly software reaches customers.</p>
+        </article>
+        <article class="econ-card" id="econ-1" data-i="1">
+          <div class="econ-card-top"><span class="econ-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg></span><span class="econ-num" aria-hidden="true">02</span></div>
+          <h3 class="econ-q">AI unit economics</h3>
+          <p class="econ-desc">Inference, compute, and agent execution introduce variable costs that traditional SaaS economics were not designed around. Growth now depends on balancing intelligence with sustainable cost to serve.</p>
+        </article>
+        <article class="econ-card" id="econ-2" data-i="2">
+          <div class="econ-card-top"><span class="econ-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg></span><span class="econ-num" aria-hidden="true">03</span></div>
+          <h3 class="econ-q">Retention + expansion</h3>
+          <p class="econ-desc">Customers are moving from paying for access to expecting measurable impact. Products that demonstrate outcomes create stronger reasons to renew, expand, and consolidate.</p>
+        </article>
+        <article class="econ-card" id="econ-3" data-i="3">
+          <div class="econ-card-top"><span class="econ-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><path d="M2.5 19v-1a4.5 4.5 0 0 1 4.5-4.5h2"/><path d="M13 19l3.5-4 2.5 2 3-4"/></svg></span><span class="econ-num" aria-hidden="true">04</span></div>
+          <h3 class="econ-q">Revenue per employee</h3>
+          <p class="econ-desc">AI creates new operating leverage across product, engineering, sales, and operations, allowing software companies to scale output without scaling headcount at the same rate.</p>
+        </article>
       </div>
     </div>
   </div>
@@ -773,7 +959,6 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 <section class="devops" id="processes" data-theme="light" aria-labelledby="devops-h">
   <div class="wrap">
     <div class="devops-head">
-      <span class="section-eyebrow">Pioneering AI-native platform and software delivery</span>
       <h2 id="devops-h" class="section-h">Real business outcomes.</h2>
       <p class="section-sub">Six connected workflows. Purpose-built AI agents run each stage. Shared intelligence learns across every repository. Humans oversee the architectural exceptions.</p>
     </div>
@@ -781,7 +966,8 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
     <div class="p-tabs" role="tablist" aria-label="Processes">
       <button class="p-tab active" role="tab" aria-selected="true" data-p="0"><small>01</small>Autonomous DevOps</button>
       <button class="p-tab" role="tab" aria-selected="false" data-p="1"><small>02</small>Agentic Creative Ad Insights</button>
-      <button class="p-tab" role="tab" aria-selected="false" aria-disabled="true" title="Coming next"><small>03</small>Process 3</button>
+      <button class="p-tab" role="tab" aria-selected="false" data-p="2"><small>03</small>Autonomous Document Processing</button>
+      <button class="p-tab" role="tab" aria-selected="false" data-p="3"><small>04</small>Autonomous Subscription Lifecycle</button>
       <span class="p-ind" aria-hidden="true"></span>
     </div>
 
@@ -814,8 +1000,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 <section class="outcomes" id="outcomes" aria-labelledby="outcomes-h">
   <div class="wrap">
     <div class="outcomes-intro">
-      <div class="section-eyebrow">What Searce has changed here</div>
-      <h2 id="outcomes-h" class="section-h">Four real outcomes.<br>Four locked metrics.</h2>
+      <h2 id="outcomes-h" class="section-h">Real Outcomes. Proven Impact.</h2>
     </div>
 
     <div class="outcomes-tabs2" id="outcomesAccordion" role="tablist">
@@ -855,7 +1040,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         </div>
       </div>
       <div class="outcomes-media shape-1" id="outcomesMedia">
-        <div class="outcomes-media-shape"><img data-field="image" src="assets/outcome-cloud.jpg" alt="Engineer working across a laptop and tablet on a data platform"></div>
+        <div class="outcomes-media-shape"><img data-field="image" src="assets/outcome-bigdata.jpg" alt="Engineer monitoring data pipelines across multiple screens"></div>
         <div class="outcomes-metric-box">
           <div class="outcomes-metric-value" data-field="metric">95%</div>
           <div class="outcomes-metric-label" data-field="metricLabel">Maintenance Overhead Cut</div>
@@ -872,7 +1057,6 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <div class="wrap">
     <div class="pillars-layout">
       <div class="pillars-intro">
-        <div class="section-eyebrow">What Searce engineers in technology, software and services</div>
         <h2 id="pillars-h" class="section-h">Four engineering practices, applied above your codebase, cloud estate, and delivery pipelines.</h2>
       </div>
       <div class="pillars-cards">
@@ -882,16 +1066,16 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
             <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div>
             <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
           </div>
-          <div class="pillar-name">Business Systems Engineering</div>
+          <div class="pillar-name">AI Outcome Engineering</div>
           <p class="pillar-desc">Rebuilds developer portals, support ticketing, partner onboarding, and service delivery workflows, replacing rigid legacy tooling.</p>
         </div>
         <div class="pillar-card">
           <div class="pillar-card-top">
-            <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
+            <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
           </div>
-          <div class="pillar-name">AI-Ready Platform Engineering</div>
-          <p class="pillar-desc">Constructs modern cloud estates, automated MLOps pipelines, high-throughput data platforms, and context layers for AI-native software applications.</p>
+          <div class="pillar-name">AI Adoption &amp; Change Engineering</div>
+          <p class="pillar-desc">Redesigns software developer, QA engineer, and technical support roles around agentic workflows, measuring impact by shipped code and resolved tasks rather than software logins.</p>
         </div>
         <div class="pillar-card">
           <div class="pillar-card-top">
@@ -903,11 +1087,11 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         </div>
         <div class="pillar-card">
           <div class="pillar-card-top">
-            <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
             <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
           </div>
-          <div class="pillar-name">AI Adoption &amp; Change Engineering</div>
-          <p class="pillar-desc">Redesigns software developer, QA engineer, and technical support roles around agentic workflows, measuring impact by shipped code and resolved tasks rather than software logins.</p>
+          <div class="pillar-name">Cloud &amp; AI Platform Engineering</div>
+          <p class="pillar-desc">Constructs modern cloud estates, automated MLOps pipelines, high-throughput data platforms, and context layers for AI-native software applications.</p>
         </div>
       </div>
     </div>
@@ -916,6 +1100,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 
 <!-- ============== ENGAGEMENT (centered, dark AI-Ops style) ============== -->
 <section class="engagement" aria-labelledby="engagement-h">
+  <div class="eng-sticky">
   <div class="wrap">
     <div class="eng-layout">
       <div class="eng-intro">
@@ -923,36 +1108,35 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         <p class="eng-body">Outcome Discovery on one named process from the list above. Two to four weeks, fixed price, ending in a locked baseline metric assessment and a ranked opportunity matrix. Most technology and software engagements start with CI/CD pipeline modernization, cloud cost optimization, or MLOps acceleration due to immediate developer productivity gains and direct OpEx reductions.</p>
       </div>
 
-      <div class="eng-orbit" id="engOrbit" aria-label="Engagement path">
-        <svg class="eng-orbit-svg" viewBox="0 0 400 400" aria-hidden="true">
-          <defs><linearGradient id="engArcGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#79adff"/><stop offset="1" stop-color="#0064ff"/></linearGradient></defs>
-          <circle class="eng-orbit-dash" cx="200" cy="200" r="184"/>
-          <circle class="eng-orbit-track" cx="200" cy="200" r="150"/>
-          <circle class="eng-orbit-glow" cx="200" cy="200" r="150"/>
-          <circle class="eng-orbit-arc" cx="200" cy="200" r="150"/>
-        </svg>
-        <button class="eng-node is-active" type="button" style="left:50%;top:12.5%" data-step="0" aria-pressed="true">01</button>
-        <button class="eng-node" type="button" style="left:82.5%;top:68.75%" data-step="1" aria-pressed="false">02</button>
-        <button class="eng-node" type="button" style="left:17.5%;top:68.75%" data-step="2" aria-pressed="false">03</button>
-        <div class="eng-center" aria-live="polite">
-          <div class="eng-panel is-active">
-            <div class="eng-panel-meta">Day 0</div>
-            <h3 class="eng-panel-title">Name one process</h3>
-            <p class="eng-panel-desc">Pick a single process from the list above. We scope the systems it touches, the teams who run it, and the metric that defines it today.</p>
-          </div>
-          <div class="eng-panel">
-            <div class="eng-panel-meta">Two to four weeks &middot; fixed price</div>
-            <h3 class="eng-panel-title">Outcome Discovery</h3>
-            <p class="eng-panel-desc">Our engineers sit inside the workflow, trace where time and value leak, and instrument the baseline against your repositories, pipelines, and cloud estate.</p>
-          </div>
-          <div class="eng-panel">
-            <div class="eng-panel-meta">What you leave with</div>
-            <h3 class="eng-panel-title">Locked baseline and ranked matrix</h3>
-            <p class="eng-panel-desc">A locked baseline metric assessment and a ranked opportunity matrix: which interventions move the metric, in what order, and what each is worth.</p>
-          </div>
+      <div class="eng-deck" id="engDeck" aria-label="Engagement path">
+        <div class="eng-deck-stage">
+          <article class="eng-card" data-step="0" style="--pos:0" tabindex="0" aria-current="step">
+            <span class="eng-card-num" aria-hidden="true">01</span>
+            <div class="eng-card-meta">Day 0</div>
+            <h3 class="eng-card-title">Name one process</h3>
+            <p class="eng-card-desc">Pick a single process from the list above. We scope the systems it touches, the teams who run it, and the metric that defines it today.</p>
+          </article>
+          <article class="eng-card" data-step="1" style="--pos:1" tabindex="0" aria-current="false">
+            <span class="eng-card-num" aria-hidden="true">02</span>
+            <div class="eng-card-meta">Two to four weeks &middot; fixed price</div>
+            <h3 class="eng-card-title">Outcome Discovery</h3>
+            <p class="eng-card-desc">Our engineers sit inside the workflow, trace where time and value leak, and instrument the baseline against your repositories, pipelines, and cloud estate.</p>
+          </article>
+          <article class="eng-card" data-step="2" style="--pos:2" tabindex="0" aria-current="false">
+            <span class="eng-card-num" aria-hidden="true">03</span>
+            <div class="eng-card-meta">What you leave with</div>
+            <h3 class="eng-card-title">Locked baseline and ranked matrix</h3>
+            <p class="eng-card-desc">A locked baseline metric assessment and a ranked opportunity matrix: which interventions move the metric, in what order, and what each is worth.</p>
+          </article>
+        </div>
+        <div class="eng-deck-dots" aria-hidden="true">
+          <button type="button" class="eng-deck-dot is-active" data-step="0" aria-label="Step 01"><i></i></button>
+          <button type="button" class="eng-deck-dot" data-step="1" aria-label="Step 02"><i></i></button>
+          <button type="button" class="eng-deck-dot" data-step="2" aria-label="Step 03"><i></i></button>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
@@ -1345,7 +1529,152 @@ const SCENES3_2=[
   ${tag([-1.3,-1.3,0],'NEXT RUN',{side:'left',y:64})}
   ${caption('EVERY RUN SCORED, EVERY SCORE LEARNED FROM')}
 `)];
-const SCENES3_ALL=[SCENES3,SCENES3_2];
+const SCENES3_3=[
+/* 01 Document Intake — documents arrive from two channels and settle into one processing queue */
+()=>wrap(`
+  ${shadow(-1.7,-1.4,3.4,2.8)}${plane(-1.7,-1.4,0,3.4,2.8,{cls:'fade'})}
+  ${plane(-1.6,-1.3,0.01,1.0,1.0,{fill:'rgba(0,100,255,0.06)',stroke:C.line,cls:'fade'})}${plane(-1.6,0.3,0.01,1.0,1.0,{fill:'rgba(0,100,255,0.06)',stroke:C.line,cls:'fade'})}
+  ${isoLine([-0.6,-0.8,0],[0.5,-0.1,0],{dash:'2 3'})}${isoLine([-0.6,0.8,0],[0.5,0.1,0],{dash:'2 3'})}
+  ${[0,1,2].map(i=>mover([-1.35,-1.05,0],[0.55,-0.25,0.05],.35,{dur:3.6,begin:i*1.2})).join('')}
+  ${[0,1,2].map(i=>mover([-1.35,0.55,0],[0.55,0.05,0.05],.35,{dur:3.6,begin:.6+i*1.2})).join('')}
+  ${[0,1,2].map(i=>slab(0.5,-0.45,0.1+i*.22,1.0,1.0,.1,{cls:'fade',extra:`style="animation-delay:${.2+i*.15}s"`})).join('')}
+  <g class="breathe">${cube(0.75,-0.2,0.8,.5,{accent:true})}</g>
+  ${tag([-1.1,-1.3,0],'EMAIL',{side:'left',y:58})}
+  ${tag([-1.1,1.3,0],'UPLOADS',{side:'left',y:140})}
+  ${tag([1.25,0.05,1.3],'QUEUE',{side:'right',y:60,accent:true})}
+  ${caption('EVERY CHANNEL INTO ONE PROCESSING QUEUE')}
+`),
+/* 02 Extraction & Validation — the document stack is scanned; extracted fields lift off and are scored */
+()=>wrap(`
+  ${shadow(-1.3,-1.3,2.6,2.6)}
+  ${[0,1,2].map(i=>slab(-1.1,-1.1,0.15+i*.3,2.2,2.2,.1,{cls:'fade',extra:`style="animation-delay:${i*.15}s"`})).join('')}
+  ${scanPlane(-1.0,-1.0,0.35,2.0)}
+  ${[[-0.8,-0.6],[-0.1,-0.6],[0.6,-0.6]].map(([x,y],i)=>`<g class="stackloop" style="animation-delay:${.6+i*.35}s">${cube(x,y,1.25,.35,{accent:i===2})}</g>`).join('')}
+  ${tag([-1.1,1.1,0.75],'OCR + LLM',{side:'left',y:120,accent:true})}
+  ${tag([0.95,-0.6,1.6],'CONFIDENCE',{side:'right',y:52})}
+  ${caption('FIELDS EXTRACTED, VALIDATED AND SCORED')}
+`),
+/* 03 Exception Resolution — one low-confidence cell is flagged; a resolved block drops into its place */
+()=>wrap(`
+  ${shadow(-1.6,-1.6,3.2,3.2)}${plane(-1.6,-1.6,0,3.2,3.2,{cls:'fade'})}
+  ${[0,1,2].flatMap(r=>[0,1,2].map(c=>(r===1&&c===1)?'':cube(-1.4+c*1.0,-1.4+r*1.0,0,.6,{cls:'fade',extra:`style="animation-delay:${(r*3+c)*.05}s"`}))).join('')}
+  ${wire(-0.4,-0.4,0,.6,{dash:'3 3',stroke:C.blue})}
+  <g class="pulse">${node([-0.1,-0.1,0.9],3.5)}</g>${rays([-0.1,-0.1,0.9],{r1:9,r2:16})}
+  ${mover([-0.4,-0.4,1.6],[-0.4,-0.4,0],.6,{dur:3.4,accent:true})}
+  ${tag([-0.4,0.2,0.6],'LOW CONFIDENCE',{side:'left',y:66,accent:true})}
+  ${tag([1.2,1.2,0.6],'RESOLVED',{side:'right',y:140})}
+  ${caption('EXCEPTIONS CAUGHT AND RESOLVED IN FLOW')}
+`),
+/* 04 Classification & Routing — a classified document fans out to three workflow lanes */
+()=>wrap(`
+  ${shadow(-1.7,-1.7,3.4,3.4)}${plane(-1.7,-1.7,0,3.4,3.4,{cls:'fade'})}
+  ${plane(0.6,-1.6,0.01,1.0,0.9,{fill:'rgba(0,100,255,0.06)',stroke:C.line,cls:'fade'})}${plane(0.6,-0.45,0.01,1.0,0.9,{fill:'rgba(0,100,255,0.06)',stroke:C.line,cls:'fade'})}${plane(0.6,0.7,0.01,1.0,0.9,{fill:'rgba(0,100,255,0.06)',stroke:C.line,cls:'fade'})}
+  ${isoLine([-0.6,0,0],[0.6,-1.15,0],{dash:'2 3',stroke:C.blue})}${isoLine([-0.6,0,0],[0.6,0,0],{dash:'2 3',stroke:C.blue})}${isoLine([-0.6,0,0],[0.6,1.15,0],{dash:'2 3',stroke:C.blue})}
+  ${runner(pathIso([-0.6,0,0],[0.6,1.15,0]),2.6)}${runner(pathIso([-0.6,0,0],[0.6,-1.15,0]),2.6,1.3)}
+  <g class="float">${cube(-1.3,-0.35,0.3,.7,{accent:true})}</g>
+  ${cube(0.85,-1.4,0,.45,{cls:'fade'})}${cube(0.85,-0.25,0,.45,{cls:'fade'})}${cube(0.85,0.9,0,.45,{cls:'fade'})}
+  ${tag([-1.3,0.35,1.0],'DOCUMENT TYPE',{side:'left',y:70,accent:true})}
+  ${tag([1.6,-1.15,0],'WORKFLOW ROUTES',{side:'right',y:58})}
+  ${caption('EACH DOCUMENT ROUTED TO ITS WORKFLOW')}
+`),
+/* 05 Structured Integration — extracted pages pass through a schema frame into the system-of-record stack */
+()=>wrap(`
+  ${shadow(-1.7,-1.4,3.4,2.8)}${plane(-1.7,-1.4,0,3.4,2.8,{cls:'fade'})}
+  ${[0,1,2].map(i=>slab(-1.55,-0.9,0.05+i*.2,0.9,1.4,.08,{cls:'fade',extra:`style="animation-delay:${i*.12}s"`})).join('')}
+  ${wire(-0.35,-0.5,0.05,0.8,{dash:'3 3',stroke:C.blue})}
+  ${[0,1,2,3].map(i=>slab(0.75,-0.55,0.05+i*.32,0.9,0.9,.22,{accent:i===3,cls:'fade',extra:`style="animation-delay:${.3+i*.12}s"`})).join('')}
+  ${[0,1,2].map(i=>mover([-1.2,-0.3,0.7],[0.95,-0.35,1.45],.3,{dur:3.2,begin:i*1.05,accent:true})).join('')}
+  ${tag([-1.55,0.5,0.6],'EXTRACTED',{side:'left',y:120})}
+  ${tag([0.05,-0.1,0.85],'SCHEMA',{side:'left',y:56,accent:true})}
+  ${tag([1.65,0.35,1.3],'SYSTEM OF RECORD',{side:'right',y:70})}
+  ${caption('MAPPED TO SCHEMA, POSTED TO RECORD')}
+`),
+/* 06 Reporting & Audit Trail — a ledger loop logs every event; reporting bars rise beside it */
+()=>wrap(`
+  ${shadow(-1.7,-1.5,3.4,3)}${plane(-1.7,-1.5,0,3.4,3,{cls:'fade'})}
+  ${[[-0.4,0.3,.6],[0.2,0.3,.9],[0.8,0.3,1.3]].map(([x,y,h],i)=>growBar(x,y,.42,h,{dur:5,begin:i*.35,accent:i===2})).join('')}
+  <path d="${pathIso([-1.5,-1.3,0],[-0.3,-1.3,0],[-0.3,-0.3,0],[-1.5,-0.3,0],[-1.5,-1.3,0])}" fill="none" stroke="${C.blue}" stroke-width="1" stroke-dasharray="2 3" class="flow"/>
+  ${[[-1.5,-1.3,0],[-0.3,-1.3,0],[-0.3,-0.3,0],[-1.5,-0.3,0]].map(g=>node(g,1.8)).join('')}
+  ${runner(pathIso([-1.5,-1.3,0],[-0.3,-1.3,0],[-0.3,-0.3,0],[-1.5,-0.3,0],[-1.5,-1.3,0]),4.5)}
+  ${[0,1,2].map(i=>slab(-1.2,-1.0,0.1+i*.14,0.6,0.4,.08,{cls:'fade',extra:`style="animation-delay:${.2+i*.12}s"`})).join('')}
+  ${tag([-1.5,-0.3,0],'AUDIT LOG',{side:'left',y:120})}
+  ${tag([1.0,0.3,1.3],'REPORTING',{side:'right',y:56,accent:true})}
+  ${caption('EVERY STEP LOGGED FOR AUDIT AND REPORTING')}
+`)];
+const SCENES3_4=[
+/* 01 Quote & Order Capture — configuration blocks assemble on the quote and become an order */
+()=>wrap(`
+  ${shadow(-1.7,-1.4,3.4,2.8)}${plane(-1.7,-1.4,0,3.4,2.8,{cls:'fade'})}
+  ${slab(-1.5,-1.2,0.05,1.5,2.0,.1,{cls:'fade'})}
+  ${[0,1,2].map(i=>plane(-1.35,-1.05+i*.55,0.16,1.2,.35,{fill:'rgba(0,100,255,0.07)',stroke:C.line,cls:'fade',extra:`style="animation-delay:${.15+i*.1}s"`})).join('')}
+  ${[0,1,2].map(i=>mover([-0.9,-0.9+i*.55,0.16],[0.75,-0.25,0.05+i*.32],.3,{dur:3.6,begin:i*1.2})).join('')}
+  ${isoLine([0.0,0,0],[0.6,0,0],{dash:'2 3',stroke:C.blue})}
+  <g class="float">${cube(0.6,-0.4,0,.9,{accent:true})}</g>
+  ${tag([-1.5,0.8,0.15],'CONFIGURE &middot; PRICE',{side:'left',y:132})}
+  ${tag([1.5,0.05,0.9],'ORDER',{side:'right',y:60,accent:true})}
+  ${caption('QUOTES CONFIGURED, ORDERS CAPTURED')}
+`),
+/* 02 Provisioning Errors & Fixes — entitlements build into an active subscription; a faulty block is flagged and corrected */
+()=>wrap(`
+  ${shadow(-1.6,-1.4,3.2,2.8)}${plane(-1.6,-1.4,0,3.2,2.8,{cls:'fade'})}
+  ${[0,1,2].map(i=>slab(-1.3,-1.0,0.1+i*.36,1.5,1.5,.14,{cls:'stackloop',extra:`style="animation-delay:${i*.45}s"`})).join('')}
+  <g class="stackloop" style="animation-delay:1.5s">${cube(-0.85,-0.55,1.25,.6,{accent:true})}</g>
+  ${wire(0.75,0.15,0,.7,{dash:'3 3',stroke:C.blue})}
+  <g class="pulse">${node([1.1,0.5,0.95],3.2)}</g>
+  ${mover([0.75,0.15,1.4],[0.75,0.15,0],.7,{dur:3.4,accent:true,begin:.6})}
+  ${tag([-1.3,0.5,0.9],'ENTITLEMENTS',{side:'left',y:126})}
+  ${tag([-0.55,-0.25,1.85],'ACTIVE',{side:'left',y:52,accent:true})}
+  ${tag([1.45,0.5,0.7],'ERROR FIXED',{side:'right',y:120})}
+  ${caption('PROVISIONED CLEANLY, ERRORS CORRECTED')}
+`),
+/* 03 Usage & Entitlement Watch — usage bars rise across accounts; the quiet one raises an alert */
+()=>wrap(`
+  ${shadow(-1.7,-1.5,3.4,3)}${plane(-1.7,-1.5,0,3.4,3,{cls:'fade'})}
+  ${[[-1.3,-0.2,1.0],[-0.7,-0.2,1.4],[-0.1,-0.2,.25],[0.5,-0.2,1.2],[1.1,-0.2,.9]].map(([x,y,h],i)=>growBar(x,y,.45,h,{dur:5,begin:i*.3,accent:i===2})).join('')}
+  <g class="pulse">${node([0.12,0.02,0.95],3.5)}</g>${rays([0.12,0.02,0.95],{r1:9,r2:16})}
+  ${isoLine([-1.5,0.6,0],[1.6,0.6,0],{dash:'2 3'})}${runner(pathIso([-1.5,0.6,0],[1.6,0.6,0]),3.4)}
+  ${tag([-1.3,0.25,0],'USAGE SIGNALS',{side:'left',y:132})}
+  ${tag([0.12,0.02,0.95],'INACTIVITY',{side:'right',y:54,accent:true})}
+  ${caption('EVERY ACCOUNT WATCHED, GAPS SURFACED')}
+`),
+/* 04 Renewal Risk & Win-back — the account-health line dips into risk, then recovers after the play */
+()=>wrap(`
+  ${shadow(-1.7,-1.4,3.4,2.8)}${plane(-1.7,-1.4,0,3.4,2.8,{cls:'fade'})}
+  ${isoLine([-1.5,0,0],[1.5,0,0],{dash:'2 3'})}
+  <path d="${pathIso([-1.5,0,1.0],[-0.9,0,1.1],[-0.4,0,0.7],[0,0,0.25],[0.4,0,0.75],[0.9,0,1.45],[1.5,0,2.0])}" fill="none" stroke="${C.blue}" stroke-width="1.2" stroke-linejoin="round" class="redraw"/>
+  <g class="pulse">${node([0,0,0.25],3.5)}</g>
+  ${node([1.5,0,2.0],3)}
+  ${cube(-1.4,1.05,0,.45,{cls:'fade'})}${cube(-0.75,1.05,0,.45,{cls:'fade'})}${cube(-0.1,1.05,0,.45,{accent:true,cls:'fade'})}
+  ${tag([0,0,0.25],'RISK SCORE',{side:'left',y:132,accent:true})}
+  ${tag([1.5,0,2.0],'WIN-BACK',{side:'right',y:44})}
+  ${caption('RISK SPOTTED EARLY, ACCOUNTS WON BACK')}
+`),
+/* 05 Billing & Revenue Recognition — invoices post into the revenue ledger; a variance is caught by the check */
+()=>wrap(`
+  ${shadow(-1.7,-1.4,3.4,2.8)}${plane(-1.7,-1.4,0,3.4,2.8,{cls:'fade'})}
+  ${[0,1,2].map(i=>slab(-1.55,-1.1,0.05+i*.18,0.9,1.2,.08,{cls:'fade',extra:`style="animation-delay:${i*.12}s"`})).join('')}
+  ${[0,1,2,3,4].map(i=>slab(0.3,-1.1+i*.44,0.05,1.2,.34,.12,{accent:i===2,cls:'fade',extra:`style="animation-delay:${.25+i*.08}s"`})).join('')}
+  ${[0,1,2].map(i=>mover([-1.1,-0.5,0.6],[0.8,-0.2,0.2],.3,{dur:3.2,begin:i*1.05})).join('')}
+  ${scanPlane(0.3,-1.1,0.2,1.2)}
+  ${tag([-1.55,0.1,0.4],'INVOICES',{side:'left',y:122})}
+  ${tag([1.5,-0.05,0.17],'VARIANCE CHECK',{side:'right',y:132,accent:true})}
+  ${tag([1.5,-1.1,0.17],'REV-REC LEDGER',{side:'right',y:56})}
+  ${caption('BILLED, RECOGNISED, RECONCILED')}
+`),
+/* 06 Renewal Communications — reminders travel the renewal timeline and reach the customer on time */
+()=>wrap(`
+  ${shadow(-1.5,-1.5,3,3)}${plane(-1.5,-1.5,0,3,3,{cls:'fade'})}
+  <path d="${pathIso([-1.2,1.2,0],[1.2,1.2,0],[1.2,-1.2,0],[-1.2,-1.2,0],[-1.2,1.2,0])}" fill="none" stroke="${C.blue}" stroke-width="1" stroke-dasharray="2 3" class="flow"/>
+  ${[[-1.2,1.2,0],[1.2,1.2,0],[1.2,-1.2,0],[-1.2,-1.2,0]].map(g=>node(g,1.8)).join('')}
+  ${runner(pathIso([-1.2,1.2,0],[1.2,1.2,0],[1.2,-1.2,0],[-1.2,-1.2,0],[-1.2,1.2,0]),4.5)}
+  ${[0,1].map(i=>slab(-0.8,-0.8,0.1+i*.4,1.6,1.6,.12,{cls:'fade',extra:`style="animation-delay:${.15+i*.2}s"`})).join('')}
+  ${[0,1,2].map(i=>mover([-0.6,-0.6,0.95],[0.45,0.45,0.95],.3,{dur:3,begin:i*1})).join('')}
+  <g class="breathe">${cube(0.35,0.35,0.64,.55,{accent:true})}</g>
+  ${tag([-1.2,-1.2,0],'RENEWAL DATE',{side:'left',y:64})}
+  ${tag([0.9,0.9,1.2],'CUSTOMER',{side:'right',y:96,accent:true})}
+  ${caption('EVERY RENEWAL VISIBLE, EVERY ACTION ON TIME')}
+`)];
+const SCENES3_ALL=[SCENES3,SCENES3_2,SCENES3_3,SCENES3_4];
 
 const STAGES2=[
   {title:"Creative Brief Intake", agent:"Interpreter",
@@ -1368,6 +1697,48 @@ const STAGES2=[
    flow:"Agent run → Observer → Evaluation signals → Learning loop"}
 ];
 
+const STAGES3=[
+  {title:"Document Intake", agent:"Ingestor",
+   desc:"Captures documents across multiple channels and prepares them for automated processing.",
+   flow:"Document → Ingestor → Pre-processing → Processing queue"},
+  {title:"Extraction & Validation", agent:"Extractor",
+   desc:"Uses OCR and LLMs to extract required fields, validate values, and assign confidence scores.",
+   flow:"Document → Extractor → Extracted fields → Confidence score"},
+  {title:"Exception Resolution", agent:"Resolver",
+   desc:"Identifies low-confidence or incomplete data and initiates clarification or exception workflows.",
+   flow:"Low-confidence data → Resolver → Exception check → Resolved input"},
+  {title:"Classification & Routing", agent:"Classifier",
+   desc:"Detects document type and routes validated information into the appropriate business workflow.",
+   flow:"Validated input → Classifier → Document type → Workflow route"},
+  {title:"Structured Integration", agent:"Integrator",
+   desc:"Maps extracted information to target schemas and posts validated data into systems of record.",
+   flow:"Structured data → Integrator → Schema mapping → System of record"},
+  {title:"Reporting & Audit Trail", agent:"Reporter",
+   desc:"Logs processing activity and produces the audit, compliance, and operational data required for reporting.",
+   flow:"Processing events → Reporter → Audit log → Reporting & analytics"}
+];
+
+const STAGES4=[
+  {title:"Quote & Order Capture", agent:"Quoter",
+   desc:"Automates configure-price-quote workflows and captures approved subscription orders for fulfillment.",
+   flow:"Customer request → Quoter → Configured quote → Order"},
+  {title:"Provisioning Errors & Fixes", agent:"Provisioner",
+   desc:"Sets up licenses and entitlements while detecting and correcting provisioning errors.",
+   flow:"Order → Provisioner → Entitlement setup → Active subscription"},
+  {title:"Usage & Entitlement Watch", agent:"Monitor",
+   desc:"Continuously tracks product usage and entitlements to identify inactivity, gaps, and account signals.",
+   flow:"Usage signals → Monitor → Entitlement check → Alerts & actions"},
+  {title:"Renewal Risk & Win-back", agent:"Retention",
+   desc:"Scores churn and renewal risk and triggers targeted interventions and automated win-back plays.",
+   flow:"Account signals → Retention → Risk score → Win-back action"},
+  {title:"Billing & Revenue Recognition", agent:"Biller",
+   desc:"Generates invoices, supports revenue recognition, and identifies billing variances requiring resolution.",
+   flow:"Subscription data → Biller → Invoice & rev-rec → Variance check"},
+  {title:"Renewal Communications", agent:"Communicator",
+   desc:"Coordinates renewal reminders and entitlement notices so upcoming renewals and required actions stay visible.",
+   flow:"Renewal event → Communicator → Reminder or notice → Customer"}
+];
+
 const SCENES=SCENES3, SCENES2=SCENES3_2;
 
 const PROCESSES=[
@@ -1378,7 +1749,15 @@ const PROCESSES=[
   {title:"The Agentic Creative Ad Insights Architecture",
    lede:"Six AI-powered workflows that turn creative briefs and performance data into governed, actionable recommendations.",
    stages:STAGES2, scenes:SCENES2,
-   rail:["Creative Knowledge Graph","Evaluation &amp; Guardrail Standards","Session &amp; Data Ledger","Self-Learning Feedback Loop"]}
+   rail:["Creative Knowledge Graph","Evaluation &amp; Guardrail Standards","Session &amp; Data Ledger","Self-Learning Feedback Loop"]},
+  {title:"The Autonomous Document Processing Architecture",
+   lede:"Six AI-powered workflows that ingest, extract, validate, route, integrate, and audit documents with minimal manual intervention.",
+   stages:STAGES3, scenes:SCENES3_3,
+   rail:["Document Taxonomy Graph","Extraction Models","Processing Ledger","Self-Learning Feedback Loop"]},
+  {title:"The Autonomous Subscription Lifecycle Architecture",
+   lede:"Six AI-powered workflows that manage subscription operations from quote and provisioning through usage, billing, retention, and renewal.",
+   stages:STAGES4, scenes:SCENES3_4,
+   rail:["Customer Usage Graph","Churn &amp; Renewal Models","Entitlement Ledger","Self-Learning Feedback Loop"]}
 ];
 
 /* ---------------------------------------------------------------------------
@@ -1459,19 +1838,19 @@ document.querySelectorAll('.leak-bar').forEach(bar => {
   const detail = document.getElementById('outcomesDetail');
   if(!items.length || !detail) return;
   const data = [
-    {heading:"On-Premise Big Data Migration", image:"assets/outcome-cloud.jpg", alt:"Engineer working across a laptop and tablet on a data platform", metric:"95%", metricLabel:"Maintenance Overhead Cut",
+    {heading:"On-Premise Big Data Migration", image:"assets/outcome-bigdata.jpg", alt:"Engineer monitoring data pipelines across multiple screens", metric:"95%", metricLabel:"Maintenance Overhead Cut",
       baseline:"Legacy on-premise Cloudera/Hive clusters restricted data access speeds for conversational AI models, while 100 TB of volatile tables caused severe ingestion bottlenecks.",
       intervention:"Migrated a 60 TB Hive database into BigQuery in under 5 days using distcp scripts, moved 40 TB of HBase tables into GCS via multi-threaded Python pipelines, and deployed Terraform Landing Zones.",
       result:"Slashed platform maintenance overhead by 95%, compressed pipeline ingestion windows from 10 minutes to under 3.5 minutes, and doubled baseline data and compute processing capacity."},
-    {heading:"Model Training Velocity & GPU Acceleration", image:"assets/outcome-protein.jpg", alt:"Close-up of high-performance compute hardware", metric:"50%", metricLabel:"Training Time Compression",
+    {heading:"Model Training Velocity & GPU Acceleration", image:"assets/outcome-gpu.jpg", alt:"Two engineers reviewing a tablet in a data center", shape:1, fit:"gpu", metric:"50%", metricLabel:"Training Time Compression",
       baseline:"Computer vision models running on legacy NVIDIA P100 GPUs suffered severe memory restrictions, causing long 70-minute training cycles that delayed inspection turnarounds.",
       intervention:"Refactored Fastai-Resnet34 models for NVIDIA A100 GPUs on GCP, unlocking multi-machine distributed training, multi-worker loading, and mixed precision layers.",
       result:"Cut model training time by nearly 50%, from 70 minutes down to 38 minutes, with a 46% compilation speedup while maintaining 97% classification accuracy."},
-    {heading:"Data Warehouse Migration", image:"assets/outcome-forms.jpg", alt:"Analyst reviewing dashboards on screen", metric:"45%", metricLabel:"Query Performance Lift",
+    {heading:"Data Warehouse Migration", image:"assets/outcome-warehouse.jpg", alt:"Engineer working on a laptop beside server racks in a data center", metric:"45%", metricLabel:"Query Performance Lift",
       baseline:"Classplus suffered massive management strain and high operational costs running Amazon Redshift clusters, requiring permanent vacant capacity to maintain query speed.",
       intervention:"Deployed a proprietary migration accelerator tool to move 7 TB across 850+ tables into serverless BigQuery in 3 weeks, backed by automated Cloud Composer ETL pipelines.",
       result:"Reduced operational infrastructure management overhead by 30%, accelerated reporting speeds, and achieved a 45% query execution performance lift."},
-    {heading:"Enterprise SaaS Migration & Hybrid Coexistence", image:"assets/outcome-docs.jpg", alt:"Employees collaborating across devices in an office", metric:"100,000", metricLabel:"Users Switched, 50% Cost Cut",
+    {heading:"Enterprise SaaS Migration & Hybrid Coexistence", image:"assets/outcome-saas.jpg", alt:"Teams working on laptops across a large open-plan office", shape:5, metric:"100,000", metricLabel:"Users Switched, 50% Cost Cut",
       baseline:"TCS needed to migrate 100,000 active employees from Office 365 to Google Workspace while ensuring flawless messaging and calendar interop with 450,000 remaining O365 users.",
       intervention:"Deployed Google Workspace using Google Cloud Directory Sync (GCDS) and Password Sync, implementing mail routing and calendar interop controls for seamless sync with zero mail drops.",
       result:"Captured an immediate 50% reduction in licensing and admin costs while boosting daily platform operational turnaround times by 80%."}
@@ -1484,7 +1863,7 @@ document.querySelectorAll('.leak-bar').forEach(bar => {
     detail.classList.add('swap');
     setTimeout(() => {
       detail.querySelector('[data-field="heading"]').textContent = d.heading;
-      const media = document.getElementById('outcomesMedia'); if(media) media.className = 'outcomes-media shape-' + (idx+1);
+      const media = document.getElementById('outcomesMedia'); if(media) media.className = 'outcomes-media shape-' + (d.shape || idx+1) + (d.fit ? ' fit-' + d.fit : '');
       const img = detail.querySelector('[data-field="image"]'); img.src = d.image; img.alt = d.alt;
       detail.querySelector('[data-field="metric"]').textContent = d.metric;
       detail.querySelector('[data-field="metricLabel"]').textContent = d.metricLabel;
@@ -1516,28 +1895,94 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 
 <script>
 (function(){
-  var orbit=document.getElementById('engOrbit'); if(!orbit) return;
-  var nodes=orbit.querySelectorAll('.eng-node'), panels=orbit.querySelectorAll('.eng-panel');
-  var arc=orbit.querySelector('.eng-orbit-arc'), glow=orbit.querySelector('.eng-orbit-glow');
-  var n=nodes.length, cur=0, turns=0, timer=null, started=false, first=true;
-  function show(i){
-    if(!first){turns+=(i-cur+n)%n;} first=false; cur=i;
-    nodes.forEach(function(b,k){b.classList.toggle('is-active',k===i);b.classList.toggle('is-done',k<i);b.setAttribute('aria-pressed',k===i?'true':'false');});
-    panels.forEach(function(p,k){p.classList.toggle('is-active',k===i);});
-    var rot='rotate('+(150+120*turns)+'deg)'; arc.style.transform=rot; glow.style.transform=rot;
+  var root=document.getElementById('engDeck'); if(!root) return;
+  var section=root.closest('.engagement'), cards=root.querySelectorAll('.eng-card'), dots=root.querySelectorAll('.eng-deck-dot'), n=cards.length, cur=-1;
+  function layout(i){
+    cur=i;
+    cards.forEach(function(c,k){ var pos=(k-i+n)%n; c.style.setProperty('--pos',pos); c.style.zIndex=String(3-pos); c.setAttribute('aria-current',pos===0?'step':'false'); c.style.pointerEvents=pos===0?'':'none'; });
+    dots.forEach(function(d,k){ d.classList.toggle('is-active',k===i); d.classList.toggle('is-done',k<i); if(k!==i) d.style.setProperty('--p','0%'); });
   }
-  function next(){show((cur+1)%n);}
-  function play(){stop(); timer=setInterval(next,4200);}
-  function stop(){if(timer){clearInterval(timer);timer=null;}}
-  nodes.forEach(function(b){b.addEventListener('click',function(){show(+b.dataset.step);play();});});
-  orbit.addEventListener('mouseenter',stop); orbit.addEventListener('mouseleave',play);
-  orbit.addEventListener('focusin',stop); orbit.addEventListener('focusout',play);
-  function start(){ if(started) return; started=true; show(0); play(); }
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){start();io.disconnect();}});},{threshold:0.3});
-    io.observe(orbit);
-  } else start();
+  /* progress through the scroll track picks the card: 0-1/3 -> 01, 1/3-2/3 -> 02, 2/3-1 -> 03 */
+  function update(){
+    var r=section.getBoundingClientRect(), track=section.offsetHeight-window.innerHeight;
+    var p=track>0?Math.min(Math.max(-r.top/track,0),1):0;
+    var i=Math.min(Math.floor(p*n),n-1), local=Math.min(Math.max((p*n-i),0),1);
+    if(i!==cur) layout(i);
+    dots[i].style.setProperty('--p',(local*100).toFixed(1)+'%');
+  }
+  var ticking=false;
+  function onScroll(){ if(ticking) return; ticking=true; requestAnimationFrame(function(){ update(); ticking=false; }); }
+  window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll);
+  /* clicking a card or a progress bar scrolls to that step */
+  function scrollToStep(i){ var track=section.offsetHeight-window.innerHeight; var top=section.getBoundingClientRect().top+window.scrollY; window.scrollTo({top: top + track*((i+0.5)/n), behavior:'smooth'}); }
+  cards.forEach(function(c){ c.addEventListener('click',function(){ scrollToStep((cur+1)%n); }); c.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); scrollToStep((cur+1)%n); } }); });
+  dots.forEach(function(d){ d.addEventListener('click',function(){ scrollToStep(+d.dataset.step); }); });
+  layout(0); update();
 })();
+</script>
+<script>
+(function(){
+  var sec=document.querySelector('.leaks'); if(!sec) return;
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){sec.classList.add('is-in');io.disconnect();}});},{threshold:0.2});
+    io.observe(sec);
+  } else sec.classList.add('is-in');
+  // re-trigger the draw on hover by restarting the animation
+  sec.querySelectorAll('.leak-card').forEach(function(card){
+    card.addEventListener('mouseenter',function(){
+      card.querySelectorAll('.leak-card-icon svg *').forEach(function(el){el.style.animation='none'; void el.getBoundingClientRect(); el.style.animation='';});
+    });
+  });
+})();
+</script>
+<script>
+/* Section 1: reveal the reading flow when it scrolls into view */
+(function(){
+  var sec=document.querySelector('.reality'); if(!sec||!('IntersectionObserver' in window)) return;
+  sec.classList.add('will-reveal');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){sec.classList.add('is-in');io.disconnect();}});},{threshold:0.25});
+  io.observe(sec);
+})();
+/* Section 2: accordion drives the illustration; auto-advances with a progress line while in view, pauses on hover/focus */
+(function(){
+  var root=document.getElementById('shiftLayout'); if(!root) return;
+  var items=[].slice.call(root.querySelectorAll('.shift-item')), scenes=[].slice.call(root.querySelectorAll('.shift-scene'));
+  var DUR=6000, cur=0, timer=null, inView=false, paused=false;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.style.setProperty('--shift-dur',DUR+'ms');
+  function restart(el){ el.style.animation='none'; void el.getBoundingClientRect(); el.style.animation=''; }
+  function show(i){
+    cur=i;
+    items.forEach(function(it,k){var on=k===i; it.classList.toggle('is-open',on); it.querySelector('.shift-btn').setAttribute('aria-expanded',on?'true':'false'); restart(it.querySelector('.shift-bar i'));});
+    scenes.forEach(function(sc,k){ sc.classList.toggle('is-active',k===i); });
+  }
+  function stop(){ if(timer){clearTimeout(timer);timer=null;} }
+  function schedule(){ stop(); if(reduce||!inView||paused) return; root.classList.add('is-auto'); timer=setTimeout(function(){ show((cur+1)%items.length); schedule(); },DUR); }
+  items.forEach(function(it,k){ it.querySelector('.shift-btn').addEventListener('click',function(){ show(k); schedule(); }); });
+  root.addEventListener('mouseenter',function(){ paused=true; stop(); root.classList.add('is-paused'); });
+  root.addEventListener('mouseleave',function(){ paused=false; root.classList.remove('is-paused'); show(cur); schedule(); });
+  root.addEventListener('focusin',function(){ paused=true; stop(); root.classList.add('is-paused'); });
+  root.addEventListener('focusout',function(e){ if(!root.contains(e.relatedTarget)){ paused=false; root.classList.remove('is-paused'); schedule(); } });
+  if(reduce){ root.classList.remove('is-auto'); }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){ var was=inView; inView=e.isIntersecting; if(inView&&!was){ show(cur); schedule(); } else if(!inView) stop(); });},{threshold:0.3}).observe(root);
+  }
+})();
+/* Section 3: the rail tracks the card in view; rail links scroll to their card */
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('.econ-card')), links=[].slice.call(document.querySelectorAll('.econ-rail-link'));
+  if(!cards.length) return;
+  function activate(i){cards.forEach(function(c,k){c.classList.toggle('is-active',k===i);});links.forEach(function(l,k){l.classList.toggle('is-active',k===i);if(k===i)l.setAttribute('aria-current','step');else l.removeAttribute('aria-current');});}
+  links.forEach(function(l){l.addEventListener('click',function(e){e.preventDefault();var c=cards[+l.dataset.i];c.scrollIntoView({behavior:'smooth',block:'center'});activate(+l.dataset.i);});});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)activate(+e.target.dataset.i);});},{rootMargin:'-45% 0px -45% 0px',threshold:0});
+    cards.forEach(function(c){io.observe(c);});
+  }
+})();
+</script>
+<script>
+/* Hero: honour reduced motion for the SVG-native leaf animation too */
+(function(){ if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){ document.querySelectorAll('.hs-anim').forEach(function(a){a.remove();}); } })();
 </script>
 </body>
 </html>

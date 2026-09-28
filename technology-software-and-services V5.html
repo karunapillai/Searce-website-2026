@@ -58,14 +58,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 
 /* Right-side composition — Searce modular grid, 6 cols x 5 rows of 139.25u (frame 835.5 x 696.25). Column 0 reaches toward the centre. */
 .hero-composition{position:absolute;z-index:2;right:0;top:50%;transform:translateY(-50%);width:min(48%,calc((100vh - 200px) * 1.2));aspect-ratio:2824/2349;pointer-events:none;}
-.hero-video-wrap{position:absolute;inset:0;z-index:1;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%202824%202349'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='895'%20cy='918'%20r='711'/><rect%20x='1606'%20y='685'%20width='944'%20height='944'/></g></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%202824%202349'%20preserveAspectRatio='none'><g%20fill='%23fff'><circle%20cx='895'%20cy='918'%20r='711'/><rect%20x='1606'%20y='685'%20width='944'%20height='944'/></g></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;}
 /* one continuous photo: 2366 x 1577 units at (184, 207) covering circle + square; face lands in the circle */
-.hero-video-wrap::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(160deg,rgba(0,38,130,0.22) 0%,rgba(3,14,48,0.38) 100%);}
-.hero-video-wrap img{position:absolute;left:6.516%;top:8.812%;width:83.782%;height:67.135%;object-fit:cover;display:block;max-width:none;}
 .hero-svg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;overflow:visible;}
-.hero-svg .in{transform-box:fill-box;transform-origin:center;animation:hmEnter 1s cubic-bezier(0.2,0.7,0.2,1) both;}
-@keyframes hmEnter{from{opacity:0;transform:scale(0.97);}to{opacity:1;transform:none;}}
-@media (prefers-reduced-motion:reduce){.hero-svg .in,.hero-video-wrap{animation:none;}}
+.hero-svg .in{transform-box:fill-box;transform-origin:center;animation:hmEnter 1.15s cubic-bezier(0.07,0.97,0.58,1) var(--d,0s) both;}
+@keyframes hmEnter{0%{opacity:0;transform:translate(var(--ex,0px),var(--ey,0px)) rotate(var(--er,0deg)) scale(.8);}100%{opacity:1;transform:none;}}
+@media (prefers-reduced-motion:reduce){.hero-svg .in,.hero-svg .vp-photo{animation:none;}}
 @media (max-width:900px){
   .hero-text{width:100%;max-width:560px;}
   .hero-opening br{display:none;}
@@ -678,18 +675,8 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   .econ-q{padding-top:24px;}
 }
 
-/* Hero idle motion on the existing shapes (starts after the entry animation) */
-.hero-video-wrap img{animation:hsZoom 12s ease-in-out 1s infinite alternate;transform-origin:32% 38%;}
-@keyframes hsZoom{from{transform:scale(1);}to{transform:scale(1.06);}}
-.hero-svg .hs-float{transform-box:fill-box;transform-origin:center;animation:hsPulse 4.5s ease-in-out 1s infinite;}
-@keyframes hsPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.14);}}
-.hero-svg .hs-spin{transform-box:fill-box;transform-origin:center;animation:hsSpin 16s linear 1s infinite;}
-@keyframes hsSpin{to{transform:rotate(360deg);}}
-.hero-svg .hs-twinkle{animation:hsTwinkle 6s ease-in-out 1s infinite;}
-@keyframes hsTwinkle{0%,100%{opacity:1;}50%{opacity:.55;}}
-.hero-svg .hs-breathe{transform-box:fill-box;transform-origin:center;animation:hsBreathe 5.5s ease-in-out 1s infinite;}
-@keyframes hsBreathe{0%,100%{transform:scale(1);}50%{transform:scale(1.035);}}
-@media (prefers-reduced-motion:reduce){.hero-video-wrap img,.hero-svg .hs-float,.hero-svg .hs-spin,.hero-svg .hs-twinkle,.hero-svg .hs-breathe{animation:none;}}
+.hero-svg .vp-photo{transform-box:fill-box;transform-origin:32% 38%;animation:vpSettle 2s cubic-bezier(.215,.61,.35,1) both;}
+@keyframes vpSettle{0%,6%{transform:scale(1.12);}100%{transform:scale(1.06);}}
 
 /* Process picker: four prominent selectable cards (replaces the thin underline tabs) */
 .devops .p-picker{margin-bottom:44px;}
@@ -767,12 +754,11 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 
     <!-- Composition from the approved sketch (Group 6.svg, 2824 x 2349): video through the big square + big circle (tangent at the square's right edge); photo through the leaf under the circle; blue pill under the square; small octagon against the pill; small ring top right -->
     <div class="hero-composition" aria-hidden="true">
-      <div class="hero-video-wrap"><img src="assets/hero-tss.jpg" alt="" fetchpriority="high"></div>
       <svg class="hero-svg" viewBox="0 0 2824 2349" preserveAspectRatio="none">
         <defs>
           <linearGradient id="hgLight" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#79adff"/><stop offset="1" stop-color="#efefff"/></linearGradient>
           <linearGradient id="hgBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c2ea5"/><stop offset="1" stop-color="#2f6df6"/></linearGradient>
-          <linearGradient id="hgLeaf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0038a8"/><stop offset="0.55" stop-color="#0064ff"><animate class="hs-anim" attributeName="offset" values="0.45;0.68;0.45" dur="9s" begin="1s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1"/></stop><stop offset="1" stop-color="#79adff"/></linearGradient>
+          <linearGradient id="hgLeaf" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0038a8"/><stop offset="0.55" stop-color="#0064ff"></stop><stop offset="1" stop-color="#79adff"/></linearGradient>
           <clipPath id="hcLeaf"><path d="M1218 1629H2396C2530.76 1629 2640 1738.24 2640 1873V2349H1718C1441.86 2349 1218 2125.14 1218 1849V1629Z"/></clipPath>
           <!-- Dots + fine line grid, faded, as on the HLS hero -->
           <pattern id="hpDot" width="93.7" height="93.7" patternUnits="userSpaceOnUse"><circle cx="6.2" cy="6.2" r="6.2" fill="#8a8a8a"/></pattern>
@@ -781,28 +767,36 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
           <mask id="hmDotsM"><rect x="0" y="0" width="1150" height="1420" fill="url(#hmDots)"/></mask>
           <radialGradient id="hmGrid" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1300 2320) rotate(-30) scale(1500 1100)"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
           <mask id="hmGridM"><rect x="1218" y="1629" width="1422" height="720" fill="url(#hmGrid)"/></mask>
+          <!-- Photo mask: the circle and the sharp square arrive one by one, revealing the photo as they land -->
+          <mask id="hmPhoto" maskUnits="userSpaceOnUse" x="0" y="0" width="2824" height="2349">
+            <rect class="in" style="--ey:330px;--er:-90deg;--d:0s" x="1606" y="685" width="944" height="944" fill="#fff"/>
+            <circle class="in" style="--ey:330px;--er:90deg;--d:.08s" cx="895" cy="918" r="711" fill="#fff"/>
+          </mask>
+          <linearGradient id="hgPhotoOv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#002682" stop-opacity="0.22"/><stop offset="1" stop-color="#030e30" stop-opacity="0.38"/></linearGradient>
         </defs>
 
         <!-- Detailing: dot field top left -->
-        <g class="in" style="--sx:-60px;--sy:420px;--sr:-2.2deg;--ss:0.93"><rect class="hs-twinkle" x="0" y="0" width="1150" height="1420" fill="url(#hpDot)" mask="url(#hmDotsM)"/></g>
+        <g class="in" style="--ey:-220px;--d:.12s"><rect x="0" y="0" width="1150" height="1420" fill="url(#hpDot)" mask="url(#hmDotsM)"/></g>
 
-        <!-- Photo circle (895,918 · r711) + sharp square (1606,685 · 944) are the masked photo layer beneath this SVG.
+        <!-- Photo through the circle (895,918 · r711) + sharp square (1606,685 · 944), with a light dark-blue wash -->
+        <g mask="url(#hmPhoto)"><image class="vp-photo" href="assets/hero-tss.jpg" x="184" y="207" width="2366" height="1577" preserveAspectRatio="xMidYMid slice"/><rect x="0" y="0" width="2824" height="2349" fill="url(#hgPhotoOv)"/></g>
+        <!-- The shapes below are the sketch mirrored left-right.
              The sketch is mirrored left-right so the circle sits where the face falls in the photo. -->
         <g transform="translate(2824 0) scale(-1 1)">
 
         <!-- Leaf under the circle: Searce blue gradient -->
-        <g class="in" style="--sx:-120px;--sy:520px;--sr:3deg;--ss:0.9"><path d="M1218 1629H2396C2530.76 1629 2640 1738.24 2640 1873V2349H1718C1441.86 2349 1218 2125.14 1218 1849V1629Z" fill="url(#hgLeaf)"/></g>
+        <g class="in" style="--ey:330px;--er:90deg;--d:.16s"><path d="M1218 1629H2396C2530.76 1629 2640 1738.24 2640 1873V2349H1718C1441.86 2349 1218 2125.14 1218 1849V1629Z" fill="url(#hgLeaf)"/></g>
         <!-- Fine line grid laid over the photo leaf, fading from its bottom-left -->
-        <g class="in" style="--sx:46px;--sy:380px;--sr:0.5deg;--ss:0.91"><rect x="1218" y="1629" width="1422" height="720" fill="url(#hpGrid)" mask="url(#hmGridM)" opacity="0.32" clip-path="url(#hcLeaf)"/></g>
+        <g class="in" style="--ey:330px;--er:90deg;--d:.16s"><rect x="1218" y="1629" width="1422" height="720" fill="url(#hpGrid)" mask="url(#hmGridM)" opacity="0.32" clip-path="url(#hcLeaf)"/></g>
 
         <!-- Blue pill under the square -->
-        <g class="in" style="--sx:-160px;--sy:420px;--sr:-3deg;--ss:0.9"><rect class="hs-breathe" x="274" y="1632" width="944" height="355" rx="177.5" fill="url(#hgBlue)"/></g>
+        <g class="in" style="--ex:-510px;--d:.24s"><rect x="274" y="1632" width="944" height="355" rx="177.5" fill="url(#hgBlue)"/></g>
 
         <!-- Small octagon against the pill's outer end -->
-        <g class="in" style="--sx:-120px;--sy:320px;--sr:8deg;--ss:0.8"><path class="hs-spin" d="M255.646 1741.25L274 1809.5L255.646 1877.75L205.496 1927.71L137 1946L68.5037 1927.71L18.3539 1877.75L0 1809.49L18.3539 1741.25L68.4963 1691.29L137 1673L205.504 1691.29L255.646 1741.25Z" fill="url(#hgLight)"/></g>
+        <g class="in" style="--ey:330px;--er:-90deg;--d:.34s"><path d="M255.646 1741.25L274 1809.5L255.646 1877.75L205.496 1927.71L137 1946L68.5037 1927.71L18.3539 1877.75L0 1809.49L18.3539 1741.25L68.4963 1691.29L137 1673L205.504 1691.29L255.646 1741.25Z" fill="url(#hgLight)"/></g>
 
         <!-- Small ring (top left once mirrored) -->
-        <g class="in" style="--sx:180px;--sy:300px;--sr:6deg;--ss:0.85"><path class="hs-float" d="M2640 93.6123C2689.84 93.6123 2730.39 134.157 2730.39 184C2730.39 233.843 2689.84 274.388 2640 274.388C2590.16 274.388 2549.61 233.843 2549.61 184C2549.61 134.157 2590.16 93.6123 2640 93.6123ZM2640 0C2538.38 0 2456 82.3787 2456 184C2456 285.621 2538.38 368 2640 368C2741.62 368 2824 285.621 2824 184C2824 82.3787 2741.62 0 2640 0Z" fill="url(#hgLight)"/></g>
+        <g class="in" style="--ex:560px;--d:.46s"><path d="M2640 93.6123C2689.84 93.6123 2730.39 134.157 2730.39 184C2730.39 233.843 2689.84 274.388 2640 274.388C2590.16 274.388 2549.61 233.843 2549.61 184C2549.61 134.157 2590.16 93.6123 2640 93.6123ZM2640 0C2538.38 0 2456 82.3787 2456 184C2456 285.621 2538.38 368 2640 368C2741.62 368 2824 285.621 2824 184C2824 82.3787 2741.62 0 2640 0Z" fill="url(#hgLight)"/></g>
         </g>
       </svg>
     </div>
@@ -2018,10 +2012,6 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     cards.forEach(function(c){io.observe(c);});
   }
 })();
-</script>
-<script>
-/* Hero: honour reduced motion for the SVG-native leaf animation too */
-(function(){ if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){ document.querySelectorAll('.hs-anim').forEach(function(a){a.remove();}); } })();
 </script>
 </body>
 </html>

@@ -690,6 +690,27 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 .hero-svg .hs-breathe{transform-box:fill-box;transform-origin:center;animation:hsBreathe 5.5s ease-in-out 1s infinite;}
 @keyframes hsBreathe{0%,100%{transform:scale(1);}50%{transform:scale(1.035);}}
 @media (prefers-reduced-motion:reduce){.hero-video-wrap img,.hero-svg .hs-float,.hero-svg .hs-spin,.hero-svg .hs-twinkle,.hero-svg .hs-breathe{animation:none;}}
+
+/* Process picker: four prominent selectable cards (replaces the thin underline tabs) */
+.devops .p-picker{margin-bottom:44px;}
+.devops .p-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:0;overflow:visible;}
+.devops .p-ind{display:none;}
+.devops .p-tab{position:relative;display:flex;flex-direction:row;align-items:center;gap:12px;padding:14px 44px 14px 18px;border-radius:14px;background:#fff;border:1px solid var(--paper-line);box-shadow:0 12px 30px -24px rgba(10,20,60,0.3);text-align:left;white-space:normal;color:var(--ink);cursor:pointer;transition:transform .3s var(--ease),border-color .3s,box-shadow .3s,background .3s,color .3s;}
+.devops .p-tab:hover{transform:translateY(-3px);border-color:var(--blue-24);box-shadow:0 22px 44px -26px rgba(0,100,255,0.35);color:var(--ink);}
+.devops .p-tab:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+.devops .p-tab small{font-family:var(--display);font-size:12px;letter-spacing:.16em;color:var(--ink-40);font-weight:500;}
+.devops .p-tab-name{font-family:var(--display);font-weight:500;font-size:15px;line-height:1.3;letter-spacing:-0.005em;color:var(--ink);}
+.devops .p-tab-go{position:absolute;right:16px;top:50%;margin-top:-8px;width:16px;height:16px;color:var(--ink-40);transition:transform .3s var(--ease),color .3s;}
+.devops .p-tab-go svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.devops .p-tab:hover .p-tab-go{transform:translateX(3px);color:var(--blue);}
+.devops .p-tab.active{background:linear-gradient(140deg,#0a2a8a 0%,#0050d8 60%,#0064ff 100%);border-color:transparent;box-shadow:0 26px 50px -26px rgba(0,80,220,0.6);transform:none;}
+.devops .p-tab.active small{color:#9bbcff;}
+.devops .p-tab.active .p-tab-name{color:#fff;}
+.devops .p-tab.active .p-tab-go{color:#fff;}
+.devops .p-tab.active::after{content:"";position:absolute;left:50%;bottom:-8px;width:16px;height:16px;margin-left:-8px;background:#0050d8;border-radius:3px;transform:rotate(45deg);}
+@media (prefers-reduced-motion:reduce){.devops .p-tab{transition:none;}}
+@media (max-width:1000px){.devops .p-tabs{grid-template-columns:repeat(2,minmax(0,1fr));}.devops .p-tab.active::after{display:none;}}
+@media (max-width:520px){.devops .p-tab{padding:12px 36px 12px 14px;gap:8px;}.devops .p-tab-name{font-size:13.5px;}.devops .p-tab-go{right:12px;}}
 </style>
 </head>
 <body>
@@ -963,12 +984,30 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       <p class="section-sub">Six connected workflows. Purpose-built AI agents run each stage. Shared intelligence learns across every repository. Humans oversee the architectural exceptions.</p>
     </div>
 
-    <div class="p-tabs" role="tablist" aria-label="Processes">
-      <button class="p-tab active" role="tab" aria-selected="true" data-p="0"><small>01</small>Autonomous DevOps</button>
-      <button class="p-tab" role="tab" aria-selected="false" data-p="1"><small>02</small>Agentic Creative Ad Insights</button>
-      <button class="p-tab" role="tab" aria-selected="false" data-p="2"><small>03</small>Autonomous Document Processing</button>
-      <button class="p-tab" role="tab" aria-selected="false" data-p="3"><small>04</small>Autonomous Subscription Lifecycle</button>
-      <span class="p-ind" aria-hidden="true"></span>
+    <div class="p-picker">
+      <div class="p-tabs" role="tablist" aria-label="Processes">
+        <button class="p-tab active" role="tab" aria-selected="true" data-p="0">
+          <small>01</small>
+          <span class="p-tab-name">Autonomous DevOps</span>
+          <span class="p-tab-go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </button>
+        <button class="p-tab" role="tab" aria-selected="false" data-p="1">
+          <small>02</small>
+          <span class="p-tab-name">Agentic Creative Ad Insights</span>
+          <span class="p-tab-go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </button>
+        <button class="p-tab" role="tab" aria-selected="false" data-p="2">
+          <small>03</small>
+          <span class="p-tab-name">Autonomous Document Processing</span>
+          <span class="p-tab-go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </button>
+        <button class="p-tab" role="tab" aria-selected="false" data-p="3">
+          <small>04</small>
+          <span class="p-tab-name">Autonomous Subscription Lifecycle</span>
+          <span class="p-tab-go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </button>
+        <span class="p-ind" aria-hidden="true"></span>
+      </div>
     </div>
 
     <div class="proc-head">

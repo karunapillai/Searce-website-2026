@@ -57,12 +57,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 
 /* Right-side composition — Searce modular grid, 6 cols x 5 rows of 139.25u (frame 835.5 x 696.25). Column 0 reaches toward the centre. */
 .hero-composition{position:absolute;z-index:2;right:0;top:50%;transform:translateY(-50%);width:min(34%,calc((100vh - 170px) * 0.8168));aspect-ratio:1846/2260;pointer-events:none;}
-.hero-video-wrap{position:absolute;inset:0;z-index:1;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201846%202260'%20preserveAspectRatio='none'><path%20fill='%23fff'%20d='M758%20760H1846V1716C1846%202016.44%201602.44%202260%201302%202260H758V760Z'/><rect%20fill='%23fff'%20x='0'%20y='750'%20width='758'%20height='752'/></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201846%202260'%20preserveAspectRatio='none'><path%20fill='%23fff'%20d='M758%20760H1846V1716C1846%202016.44%201602.44%202260%201302%202260H758V760Z'/><rect%20fill='%23fff'%20x='0'%20y='750'%20width='758'%20height='752'/></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;--sx:-70px;--sy:360px;--sr:2.4deg;--ss:0.94;transform-origin:center;animation:hmEnter 1.685s cubic-bezier(0.2,0.7,0.2,1) both;}
-.hero-video-wrap video{position:absolute;left:0;top:33.19%;width:100%;height:66.81%;object-fit:cover;object-position:50% 50%;display:block;}
+.hero-video-wrap{position:absolute;inset:0;z-index:1;overflow:hidden;-webkit-mask-image:url(#hmMedia);mask-image:url(#hmMedia);-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;}
+.hero-video-wrap video{position:absolute;left:-4%;top:31%;width:108%;height:72%;object-fit:cover;object-position:62% 45%;display:block;transform-origin:50% 40%;animation:vpSettle 2s cubic-bezier(.215,.61,.35,1) both;}
+@keyframes vpSettle{0%,6%{transform:scale(1.14);}100%{transform:scale(1.06);}}
 .hero-svg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;overflow:visible;}
-.hero-svg .in{transform-box:fill-box;transform-origin:center;animation:hmEnter 1.685s cubic-bezier(0.2,0.7,0.2,1) both;}
-@keyframes hmEnter{from{opacity:0;transform:translate(var(--sx,0px),var(--sy,420px)) rotate(var(--sr,0deg)) scale(var(--ss,0.9));}to{opacity:1;transform:none;}}
-@media (prefers-reduced-motion:reduce){.hero-svg .in,.hero-video-wrap{animation:none;}}
+.hero-svg .in,.hero-mask .in{transform-box:fill-box;transform-origin:center;animation:hmEnter 1.15s cubic-bezier(0.07,0.97,0.58,1) var(--d,0s) both;}
+@keyframes hmEnter{0%{opacity:0;transform:translate(var(--ex,0px),var(--ey,0px)) rotate(var(--er,0deg)) scale(.8);}100%{opacity:1;transform:none;}}
+@media (prefers-reduced-motion:reduce){.hero-svg .in,.hero-mask .in,.hero-video-wrap video{animation:none;}}
 @media (max-width:900px){
   .hero-text{width:100%;max-width:560px;}
   .hero-opening br{display:none;}
@@ -504,47 +505,53 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 
     <!-- Composition on the 139.25u grid (6 cols x 5.5 rows, frame 835.5 x 765.9), per the approved sketch: video leaf (3x3) + video ring (2x2) on top; photo dome (3 wide) + photo square (2 wide) below with a row of three triangles + a circle between ring and square; blue triangle in the leaf; blue overlay on the square; crosshair top right; dot/line detailing -->
     <div class="hero-composition" aria-hidden="true">
-      <div class="hero-video-wrap"><video src="assets/hero-tmeg-gaming.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+      <svg class="hero-mask" width="0" height="0" aria-hidden="true" focusable="false">
+        <defs>
+          <mask id="hmMedia" maskContentUnits="objectBoundingBox">
+            <g transform="scale(0.000541712,0.000442478)">
+              <g class="in" style="--ey:330px;--er:90deg;--d:0s"><path d="M758 760H1846V1716C1846 2016.44 1602.44 2260 1302 2260H758V760Z" fill="#fff"/></g>
+              <g class="in" style="--ey:330px;--er:-90deg;--d:.08s"><path d="M0 760H758V1503.92H0Z" fill="#fff"/></g>
+            </g>
+          </mask>
+        </defs>
+      </svg>
+      <div class="hero-video-wrap"><video src="assets/hero-tmeg-viewer.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
       <svg class="hero-svg" viewBox="0 0 1846 2260" preserveAspectRatio="none">
         <defs>
           <linearGradient id="hgA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0050e0"/><stop offset="1" stop-color="#6fa6ff"/></linearGradient>
           <linearGradient id="hgB" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#0064ff"/><stop offset="1" stop-color="#8fd4ff"/></linearGradient>
           <linearGradient id="hgC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#79adff"/><stop offset="1" stop-color="#efefff"/></linearGradient>
-          <linearGradient id="hgD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b7df5"/><stop offset="1" stop-color="#a9c9ff"/></linearGradient>
-          <clipPath id="hcWedge"><path d="M3 1503.92L4.93287 2259.92L754.93 2258L386.024 1911.36L3 1503.92Z"/></clipPath>
           <linearGradient id="hgWash" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#3b4fe0"/><stop offset="1" stop-color="#4a5be6"/></linearGradient>
+          <linearGradient id="hgD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b7df5"/><stop offset="1" stop-color="#a9c9ff"/></linearGradient>
           <pattern id="hpDot" width="61.25" height="61.25" patternUnits="userSpaceOnUse"><circle cx="4.04" cy="4.04" r="4.04" fill="#8a8a8a"/></pattern>
           <pattern id="hpGrid" width="119.4" height="119.4" patternUnits="userSpaceOnUse"><path d="M119.4 0H0V119.4" fill="none" stroke="#8fd4ff" stroke-width="2.9"/></pattern>
           <radialGradient id="hmDots" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(720 1560) scale(640 640)"><stop offset="0.1" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-          <mask id="hmDotsM"><rect x="0" y="1504" width="755" height="756" fill="url(#hmDots)"/></mask>
+          <mask id="hmDotsM"><rect x="0" y="1503.92" width="758" height="756.08" fill="url(#hmDots)"/></mask>
           <radialGradient id="hmGrid" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(758 2260) scale(1250 1250)"><stop offset="0" stop-color="#fff"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
           <mask id="hmGridM"><rect x="758" y="760" width="1088" height="1500" fill="url(#hmGrid)"/></mask>
           <clipPath id="hcBlock"><path d="M758 760H1846V1716C1846 2016.44 1602.44 2260 1302 2260H758V760Z"/></clipPath>
         </defs>
 
-        <!-- The large rounded-corner block is the masked video layer beneath this SVG -->
+        <!-- The large rounded-corner block and the square are the masked video layers beneath this SVG -->
 
-        <!-- Play triangle, left of the pair -->
-        <g class="in" style="--sx:-40px;--sy:-60px;--sr:-2.4deg;--ss:0.9"><path d="M758 760V4L1262 382L758 760Z" fill="url(#hgA)"/></g>
-        <!-- Play triangle, right of the pair -->
-        <g class="in" style="--sx:60px;--sy:-60px;--sr:3.4deg;--ss:0.88"><path d="M1347 760V4L1846 382L1347 760Z" fill="url(#hgC)"/></g>
-        <!-- Ring -->
-        <g class="in" style="--sx:-80px;--sy:-40px;--sr:-3.4deg;--ss:0.9"><path fill-rule="evenodd" clip-rule="evenodd" d="M375 190.786C476.583 190.786 559.214 273.417 559.214 375C559.214 476.583 476.583 559.214 375 559.214C273.417 559.214 190.786 476.583 190.786 375C190.786 273.417 273.417 190.786 375 190.786ZM375 0C167.892 0 0 167.891 0 375C0 582.108 167.892 750 375 750C582.109 750 750 582.108 750 375C750 167.891 582.109 0 375 0Z" fill="url(#hgB)"/></g>
+        <!-- Blue wash over the square, arriving with it -->
+        <g class="in" style="--ey:330px;--er:-90deg;--d:.08s"><path d="M0 760H758V1503.92H0Z" fill="url(#hgWash)" opacity="0.22"/></g>
 
-        <!-- Photo square -->
-        <g class="in" style="--sx:-90px;--sy:320px;--sr:-3deg;--ss:0.94"><rect x="0" y="750" width="758" height="752" fill="url(#hgWash)" opacity="0.22"/></g>
+        <!-- Fine line grid over the block, fading from its lower left -->
+        <g class="in" style="--ey:330px;--er:90deg;--d:0s"><g clip-path="url(#hcBlock)"><rect x="758" y="760" width="1088" height="1500" fill="url(#hpGrid)" mask="url(#hmGridM)" opacity="0.8"/></g></g>
 
-        <!-- Fine line grid over the large block, fading from its lower left -->
-        <g clip-path="url(#hcBlock)"><rect x="758" y="760" width="1088" height="1500" fill="url(#hpGrid)" mask="url(#hmGridM)" opacity="0.8"/></g>
+        <!-- Play triangles (reduced) -->
+        <g class="in" style="--ex:260px;--ey:-200px;--er:-40deg;--d:.20s"><path transform="translate(1301.87 506.25) scale(0.6713) translate(-1010 -382)" d="M758 760V4L1262 382L758 760Z" fill="url(#hgA)"/></g>
+        <g class="in" style="--ex:320px;--ey:-200px;--er:40deg;--d:.26s"><path transform="translate(1678.51 506.25) scale(0.6713) translate(-1596.5 -382)" d="M1347 760V4L1846 382L1347 760Z" fill="url(#hgC)"/></g>
+
+        <!-- Ring (reduced) -->
+        <g class="in" style="--ex:200px;--ey:-200px;--er:-60deg;--d:.14s"><path transform="translate(864.92 532.2) scale(0.6075) translate(-375 -375)" fill-rule="evenodd" clip-rule="evenodd" d="M375 190.786C476.583 190.786 559.214 273.417 559.214 375C559.214 476.583 476.583 559.214 375 559.214C273.417 559.214 190.786 476.583 190.786 375C190.786 273.417 273.417 190.786 375 190.786ZM375 0C167.892 0 0 167.891 0 375C0 582.108 167.892 750 375 750C582.109 750 750 582.108 750 375C750 167.891 582.109 0 375 0Z" fill="url(#hgB)"/></g>
 
         <!-- Dot field, showing through the wedge's notch -->
-        <g class="in" style="--sx:-50px;--sy:400px;--sr:-2deg;--ss:0.93"><rect x="0" y="1504" width="755" height="756" fill="url(#hpDot)" mask="url(#hmDotsM)"/></g>
+        <g class="in" style="--ey:300px;--d:.32s"><rect x="0" y="1503.92" width="758" height="756.08" fill="url(#hpDot)" mask="url(#hmDotsM)"/></g>
 
-        <!-- Wedge - photo over the gradient -->
-        <g class="in" style="--sx:-70px;--sy:440px;--sr:-2.6deg;--ss:0.9"><path d="M3 1503.92L4.93287 2259.92L754.93 2258L386.024 1911.36L3 1503.92Z" fill="url(#hgD)"/></g>
-        <g class="in" style="--sx:-70px;--sy:440px;--sr:-2.6deg;--ss:0.9"><g clip-path="url(#hcWedge)">
-          <image href="assets/hero-tmeg-broadcast.jpg" x="3" y="1659.92" width="752" height="600" preserveAspectRatio="xMidYMid slice"/>
-        </g></g>
+        <!-- Wedge -->
+        <g class="in" style="--ex:-380px;--d:.38s"><path d="M0 1503.92L0 2260L758 2260L386.024 1911.36Z" fill="url(#hgD)"/></g>
       </svg>
     </div>
   </div>

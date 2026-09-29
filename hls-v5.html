@@ -40,11 +40,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .nav-links > li > a:hover, .nav-links > li > a.current{color:#fff;}
 .nav-links > li > a.current::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--blue-24);border-radius:2px;}
 .chev{width:9px;height:9px;flex-shrink:0;transition:transform .2s ease;}
-.has-dropdown:hover .chev,
-.has-dropdown:focus-within .chev{transform:rotate(180deg);}
+.has-dropdown:hover .chev{transform:rotate(180deg);}
 .mega-panel{position:absolute;top:100%;left:-14px;margin-top:16px;background:#fff;border:1px solid var(--paper-line);border-radius:16px;box-shadow:0 28px 56px rgba(10,20,40,0.12);padding:10px;min-width:230px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .18s ease, transform .18s ease, visibility .18s;}
-.has-dropdown:hover .mega-panel,
-.has-dropdown:focus-within .mega-panel{opacity:1;visibility:visible;transform:translateY(0);}
+.has-dropdown:hover .mega-panel{opacity:1;visibility:visible;transform:translateY(0);}
 .mega-item{display:block;padding:11px 14px;border-radius:10px;transition:background .15s ease;}
 .mega-item:hover{background:var(--blue-06);}
 .mega-title{display:block;font-family:var(--display);font-weight:400;font-size:14.5px;color:var(--ink);}
@@ -59,10 +57,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 
 /* Right-side composition — Searce modular grid, 6 cols x 5 rows of 139.25u (frame 835.5 x 696.25). Column 0 reaches toward the centre. */
 .hero-composition{position:absolute;z-index:2;right:0;top:50%;transform:translateY(-50%);width:min(46%,calc((100vh - 200px) * 1.09));aspect-ratio:835.5/765.9;pointer-events:none;}
-.hero-video-wrap{position:absolute;inset:0;z-index:1;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20835.5%20765.9'%20preserveAspectRatio='none'><path%20fill='%23fff'%20d='M313.25%20139.25H557V383A174%20174%200%200%201%20383%20557H139.25V313.25A174%20174%200%200%201%20313.25%20139.25Z'/><path%20fill='%23fff'%20fill-rule='evenodd'%20d='M696.25%20139.25A139.25%20139.25%200%201%201%20696.25%20417.75A139.25%20139.25%200%201%201%20696.25%20139.25ZM696.25%20213.1A65.4%2065.4%200%201%200%20696.25%20343.9A65.4%2065.4%200%201%200%20696.25%20213.1Z'/></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20835.5%20765.9'%20preserveAspectRatio='none'><path%20fill='%23fff'%20d='M313.25%20139.25H557V383A174%20174%200%200%201%20383%20557H139.25V313.25A174%20174%200%200%201%20313.25%20139.25Z'/><path%20fill='%23fff'%20fill-rule='evenodd'%20d='M696.25%20139.25A139.25%20139.25%200%201%201%20696.25%20417.75A139.25%20139.25%200%201%201%20696.25%20139.25ZM696.25%20213.1A65.4%2065.4%200%201%200%20696.25%20343.9A65.4%2065.4%200%201%200%20696.25%20213.1Z'/></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;--sx:-70px;--sy:360px;--sr:2.4deg;--ss:0.94;transform-origin:center;animation:hmEnter 1.685s cubic-bezier(0.2,0.7,0.2,1) both;}
+.hero-video-wrap{position:absolute;inset:0;z-index:1;-webkit-mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20835.5%20765.9'%20preserveAspectRatio='none'><path%20fill='%23fff'%20d='M313.25%20139.25H557V383A174%20174%200%200%201%20383%20557H139.25V313.25A174%20174%200%200%201%20313.25%20139.25Z'/><path%20fill='%23fff'%20fill-rule='evenodd'%20d='M696.25%20139.25A139.25%20139.25%200%201%201%20696.25%20417.75A139.25%20139.25%200%201%201%20696.25%20139.25ZM696.25%20213.1A65.4%2065.4%200%201%200%20696.25%20343.9A65.4%2065.4%200%201%200%20696.25%20213.1Z'/></svg>");mask-image:url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20835.5%20765.9'%20preserveAspectRatio='none'><path%20fill='%23fff'%20d='M313.25%20139.25H557V383A174%20174%200%200%201%20383%20557H139.25V313.25A174%20174%200%200%201%20313.25%20139.25Z'/><path%20fill='%23fff'%20fill-rule='evenodd'%20d='M696.25%20139.25A139.25%20139.25%200%201%201%20696.25%20417.75A139.25%20139.25%200%201%201%20696.25%20139.25ZM696.25%20213.1A65.4%2065.4%200%201%200%20696.25%20343.9A65.4%2065.4%200%201%200%20696.25%20213.1Z'/></svg>");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;--sx:-70px;--sy:360px;--sr:2.4deg;--ss:0.94;transform-origin:center;animation:hmEnter 1.4s cubic-bezier(0.2,0.7,0.2,1) both;animation-delay:.05s;}
 .hero-video-wrap video{position:absolute;left:16.667%;top:18.18%;width:83.333%;height:54.55%;object-fit:cover;object-position:50% 50%;display:block;}
 .hero-svg{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;overflow:visible;}
-.hero-svg .in{transform-box:fill-box;transform-origin:center;animation:hmEnter 1.685s cubic-bezier(0.2,0.7,0.2,1) both;}
+.hero-svg .in{transform-box:fill-box;transform-origin:center;animation:hmEnter 1.4s cubic-bezier(0.2,0.7,0.2,1) both;animation-delay:var(--d,0s);}
 @keyframes hmEnter{from{opacity:0;transform:translate(var(--sx,0px),var(--sy,420px)) rotate(var(--sr,0deg)) scale(var(--ss,0.9));}to{opacity:1;transform:none;}}
 @media (prefers-reduced-motion:reduce){.hero-svg .in,.hero-video-wrap{animation:none;}}
 @media (max-width:900px){
@@ -99,7 +97,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .reality > .wrap, .leaks > .wrap, .pillars > .wrap, .agentic > .wrap, .outcomes > .wrap, .processes > .wrap, .engagement > .wrap, .faq > .wrap, .connect > .wrap{position:relative;z-index:1;}
 .reality .grid-motif{color:rgba(0,50,150,0.045);}
 .leaks .grid-motif{color:rgba(0,60,180,0.06);}
-.processes .grid-motif{color:rgba(0,60,180,0.10);background-position:0 40px;}
+.processes .grid-motif{color:rgba(0,60,180,0.05);background-position:0 40px;}
 .pillars .grid-motif{color:rgba(179,208,255,0.07);}
 
 /* ========== Reality (dark, image-left + stats-right editorial) ========== */
@@ -203,6 +201,33 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   .rcm-arch .arch-label{flex:0 0 auto;}
   .rcm-arch .arch-content{font-size:12.5px;}
 }
+
+/* Process architecture switcher (01 RCM · 02 Clinical · 03 Regulatory · 04 Manufacturing) — same hairline + sliding blue indicator as the outcomes tabs */
+.processes .section-h + .proc-switch-wrap{margin-top:8px;}
+.processes #processes-h{text-wrap:balance;max-width:none;}
+@media (min-width:1100px){.processes #processes-h{white-space:nowrap;}}
+.processes .is-swapping{opacity:0;transform:translateY(4px);}
+.proc-switch-wrap{overflow-x:auto;scrollbar-width:none;margin:0 auto 48px;}
+.proc-switch-wrap::-webkit-scrollbar{display:none;}
+.proc-switch{position:relative;display:flex;gap:12px;width:max-content;margin:0 auto;padding:2px;}
+.proc-tab{appearance:none;cursor:pointer;display:flex;align-items:baseline;gap:9px;padding:13px 22px;border:1px solid var(--paper-line);border-radius:14px;background:#fff;font-family:var(--display);font-weight:500;font-size:14px;letter-spacing:-0.005em;color:var(--ink-60);white-space:nowrap;box-shadow:0 1px 2px rgba(10,20,60,0.04);transition:color .25s,background .25s,border-color .25s,box-shadow .25s,transform .25s;}
+.proc-tab .n{font-size:10px;letter-spacing:.22em;color:var(--ink-40);transition:color .25s;}
+.proc-tab:hover{color:var(--ink);border-color:rgba(0,100,255,0.35);transform:translateY(-1px);}
+.proc-tab.active{color:#fff;background:linear-gradient(135deg,#0064ff 0%,#0051cb 100%);border-color:transparent;box-shadow:0 10px 24px -10px rgba(0,80,200,0.55);}
+.proc-tab.active .n{color:rgba(255,255,255,0.72);}
+.proc-tab.active:hover{transform:none;}
+.proc-tab:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+.proc-switch-line{display:none;}
+.proc-panel[hidden]{display:none;}
+.proc-head{text-align:center;margin:0 auto 64px;max-width:1040px;}
+.proc-title{font-family:var(--display);font-weight:400;font-size:clamp(24px,2.4vw,34px);line-height:1.15;letter-spacing:-0.015em;color:var(--ink);margin:0 0 14px;text-wrap:balance;}
+.proc-sub{color:var(--ink-60);font-size:15.5px;line-height:1.6;max-width:640px;margin:0 auto;text-wrap:pretty;}
+@media (max-width:720px){.proc-head{margin-bottom:44px;}}
+.proc-panel:not(#proc-rcm) .arch-footer{max-width:1200px;}
+.proc-panel.is-entering{animation:procIn .5s cubic-bezier(.22,.61,.36,1) both;}
+@keyframes procIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion:reduce){.proc-panel.is-entering{animation:none;}.proc-switch-line i{transition:none;}}
+@media (max-width:720px){.proc-switch{margin:0;gap:10px;}.proc-tab{padding:11px 18px;}.proc-switch-wrap{margin-bottom:36px;}}
 
 /* ========== Value leaks - deep navy with center glow ========== */
 .leaks{padding:120px 0;background:#fff;color:var(--ink);border-bottom:none;}
@@ -459,14 +484,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
     <a href="index.html" class="nav-logo" aria-label="Searce home">Searce</a>
     <ul class="nav-links">
       <li><a href="#">outcomes</a></li>
-      <li class="has-dropdown">
-        <a href="#" aria-haspopup="true">how we solve
-          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </a>
-        <div class="mega-panel">
-          <a class="mega-item" href="fde.html"><span class="mega-title">FDE</span></a>
-        </div>
-      </li>
+      <li><a href="#">how we solve <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
       <li><a href="business-systems-engineering.html">practices <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
       <li><a href="#" class="current">industries <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
       <li><a href="#">insights</a></li>
@@ -536,37 +554,35 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         </defs>
 
         <!-- Detailing: dot field top left -->
-        <g class="in" style="--sx:-60px;--sy:420px;--sr:-2.2deg;--ss:0.93"><rect x="0" y="0" width="340" height="420" fill="url(#hpDot)" mask="url(#hmDotsM)"/></g>
+        <g class="in" style="--sx:-60px;--sy:420px;--sr:-2.2deg;--ss:0.93;--d:1.18s"><rect x="0" y="0" width="340" height="420" fill="url(#hpDot)" mask="url(#hmDotsM)"/></g>
 
         <!-- Video leaf (3x3, cols 1-3, rows 1-3) and video ring (2x2, cols 4-5, rows 1-2) are the masked video layer beneath this SVG -->
 
         <!-- Blue -> dark blue triangle inside the leaf, base on the leaf's left edge from its bottom-left corner, apex pointing right -->
-        <g class="in" style="--sx:84px;--sy:323px;--sr:-4.7deg;--ss:0.93"><path d="M139.25 557V334.25L334.25 445.6Z" fill="url(#hgTri)"/></g>
+        <g class="in" style="--sx:84px;--sy:323px;--sr:-4.7deg;--ss:0.93;--d:.46s"><path d="M139.25 557V334.25L334.25 445.6Z" fill="url(#hgTri)"/></g>
 
         <!-- Photo: dome + square -->
-        <g class="in" style="--sx:-97px;--sy:545px;--sr:4.9deg;--ss:0.97"><g clip-path="url(#hcDome)">
+        <g class="in" style="--sx:-97px;--sy:545px;--sr:4.9deg;--ss:0.97;--d:.18s"><g clip-path="url(#hcDome)">
           <image href="assets/hero-brain.jpg" x="139" y="505" width="880" height="531" preserveAspectRatio="xMidYMid slice"/>
         </g></g>
-        <g class="in" style="--sx:-45px;--sy:477px;--sr:2.7deg;--ss:0.87"><g clip-path="url(#hcSquare)">
+        <g class="in" style="--sx:-45px;--sy:477px;--sr:2.7deg;--ss:0.87;--d:.3s"><g clip-path="url(#hcSquare)">
           <image href="assets/hero-brain.jpg" x="139" y="505" width="880" height="531" preserveAspectRatio="xMidYMid slice"/>
         </g></g>
 
         <!-- Row under the ring: three right-pointing triangles (light gradient) + small circle (blue gradient) -->
-        <g class="in" style="--sx:40px;--sy:360px;--sr:-3deg;--ss:0.9">
-          <path d="M557 417.75L609 459.75L557 501.75Z" fill="url(#hgLight)"/>
-          <path d="M623 417.75L675 459.75L623 501.75Z" fill="url(#hgLight)"/>
-          <path d="M689 417.75L741 459.75L689 501.75Z" fill="url(#hgLight)"/>
-        </g>
-        <g class="in" style="--sx:70px;--sy:330px;--sr:4deg;--ss:0.86"><circle cx="795.5" cy="459.75" r="40" fill="url(#hgCirc)"/></g>
+        <g class="in" style="--sx:40px;--sy:360px;--sr:-3deg;--ss:0.9;--d:.62s"><path d="M557 417.75L609 459.75L557 501.75Z" fill="url(#hgLight)"/></g>
+        <g class="in" style="--sx:52px;--sy:380px;--sr:-4deg;--ss:0.9;--d:.72s"><path d="M623 417.75L675 459.75L623 501.75Z" fill="url(#hgLight)"/></g>
+        <g class="in" style="--sx:64px;--sy:400px;--sr:-5deg;--ss:0.9;--d:.82s"><path d="M689 417.75L741 459.75L689 501.75Z" fill="url(#hgLight)"/></g>
+        <g class="in" style="--sx:70px;--sy:330px;--sr:4deg;--ss:0.86;--d:.92s"><circle cx="795.5" cy="459.75" r="40" fill="url(#hgCirc)"/></g>
 
         <!-- Blue overlay on the photo square -->
-        <g class="in" style="--sx:-45px;--sy:477px;--sr:2.7deg;--ss:0.87"><rect x="557" y="501.75" width="278.5" height="264.15" fill="url(#hgSqOv)" opacity="0.35"/></g>
+        <g class="in" style="--sx:-45px;--sy:477px;--sr:2.7deg;--ss:0.87;--d:.3s"><rect x="557" y="501.75" width="278.5" height="264.15" fill="url(#hgSqOv)" opacity="0.35"/></g>
 
         <!-- Fine line grid laid over the photo square, fading from its bottom-left -->
-        <g class="in" style="--sx:46px;--sy:380px;--sr:0.5deg;--ss:0.91"><rect x="557" y="501.75" width="278.5" height="264.15" fill="url(#hpGrid)" mask="url(#hmGridM)" opacity="0.55"/></g>
+        <g class="in" style="--sx:46px;--sy:380px;--sr:0.5deg;--ss:0.91;--d:1.1s"><rect x="557" y="501.75" width="278.5" height="264.15" fill="url(#hpGrid)" mask="url(#hmGridM)" opacity="0.55"/></g>
 
         <!-- Crosshair plus (1x1, col 5, row 0), white / light-blue gradient -->
-        <g class="in" style="--sx:64px;--sy:300px;--sr:5deg;--ss:0.86"><path transform="translate(765.875 69.625)" d="M-13 -44H13V-13H44V13H13V44H-13V13H-44V-13H-13Z" fill="url(#hgLight)"/></g>
+        <g class="in" style="--sx:64px;--sy:300px;--sr:5deg;--ss:0.86;--d:1.02s"><path transform="translate(765.875 69.625)" d="M-13 -44H13V-13H44V13H13V44H-13V13H-44V-13H-13Z" fill="url(#hgLight)"/></g>
       </svg>
     </div>
   </div>
@@ -682,10 +698,23 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 <section class="processes" aria-labelledby="processes-h">
   <span class="grid-motif" aria-hidden="true"></span>
   <div class="wrap">
-    <h2 id="processes-h" class="section-h">The Autonomous RCM Architecture.</h2>
-    <p class="section-sub">Six connected swarms. Purpose-built AI agents run each stage. Shared intelligence learns across every claim. Humans oversee the exceptions that matter.</p>
+    <h2 id="processes-h" class="section-h">The processes this industry runs on.</h2>
 
-    <div class="rcm-arch">
+    <div class="proc-switch-wrap">
+      <div class="proc-switch" role="tablist" aria-label="Autonomous process architectures">
+        <button class="proc-tab active" type="button" role="tab" id="ptab-rcm" aria-controls="proc-rcm" aria-selected="true" tabindex="0"><span class="n">01</span>Revenue Cycle</button>
+        <button class="proc-tab" type="button" role="tab" id="ptab-clinical" aria-controls="proc-clinical" aria-selected="false" tabindex="-1"><span class="n">02</span>Clinical Development</button>
+        <button class="proc-tab" type="button" role="tab" id="ptab-regulatory" aria-controls="proc-regulatory" aria-selected="false" tabindex="-1"><span class="n">03</span>Regulatory &amp; GxP</button>
+        <button class="proc-tab" type="button" role="tab" id="ptab-manufacturing" aria-controls="proc-manufacturing" aria-selected="false" tabindex="-1"><span class="n">04</span>Manufacturing &amp; Supply</button>
+        <span class="proc-switch-line" aria-hidden="true"><i></i></span>
+      </div>
+    </div>
+
+    <div class="rcm-arch proc-panel" id="proc-rcm" data-proc="rcm" role="tabpanel" aria-labelledby="ptab-rcm">
+      <div class="proc-head">
+        <h3 class="proc-title">The Autonomous RCM Architecture.</h3>
+        <p class="proc-sub">Six connected swarms. Purpose-built AI agents run each stage. Shared intelligence learns across every claim. Humans oversee the exceptions that matter.</p>
+      </div>
       <div class="rcm-carousel">
         <div class="rcm-track" id="carTrack"></div>
       </div>
@@ -710,6 +739,105 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         <div class="arch-row impact">
           <div class="arch-label">Business Impact</div>
           <div class="arch-content"><span class="arr">↑</span>First-Pass Yield<span class="sep">·</span><span class="arr">↓</span>Cost to Collect<span class="sep">·</span><span class="arr">↑</span>Net Collection %<span class="sep">·</span><span class="arr">↓</span>Days in A/R</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rcm-arch proc-panel" id="proc-clinical" data-proc="clinical" role="tabpanel" aria-labelledby="ptab-clinical" hidden>
+      <div class="proc-head">
+        <h3 class="proc-title">The Autonomous Clinical Development Architecture.</h3>
+        <p class="proc-sub">Six connected swarms from protocol to database lock. Purpose-built AI agents run each stage. Shared intelligence learns across every trial. Humans own every regulated decision.</p>
+      </div>
+      <div class="rcm-carousel">
+        <div class="rcm-track"></div>
+      </div>
+      <div class="car-controls">
+        <button class="car-btn" aria-label="Previous swarm">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="car-btn" aria-label="Next swarm">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div class="arch-footer">
+        <div class="arch-row intel">
+          <div class="arch-label">Shared Intelligence</div>
+          <div class="arch-content">Protocol &amp; CRF Library<span class="sep">·</span>Historical Site Performance<span class="sep">·</span>CDISC Standards Engine<span class="sep">·</span>Anonymisation Service<span class="sep">·</span>Self-Learning Feedback Loop</div>
+        </div>
+        <div class="arch-row oversight">
+          <div class="arch-label">Human Oversight</div>
+          <div class="arch-content">Medical &amp; Clinical Operations<span class="sep">·</span>Data Management &amp; Biostatistics<span class="sep">·</span>GCP Quality &amp; RBQM</div>
+        </div>
+        <div class="arch-row impact">
+          <div class="arch-label">Business Impact</div>
+          <div class="arch-content"><span class="arr">↓</span>Days LPLV to Lock<span class="sep">·</span><span class="arr">↓</span>Protocol Amendments<span class="sep">·</span><span class="arr">↑</span>Enrolling Sites<span class="sep">·</span><span class="arr">↓</span>Monitoring Cost per Patient</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rcm-arch proc-panel" id="proc-regulatory" data-proc="regulatory" role="tabpanel" aria-labelledby="ptab-regulatory" hidden>
+      <div class="proc-head">
+        <h3 class="proc-title">The Autonomous Regulatory &amp; GxP Architecture.</h3>
+        <p class="proc-sub">Six connected swarms where documentation is the product. Purpose-built AI agents run each stage. Every generated sentence links back to its source. Humans sign every decision.</p>
+      </div>
+      <div class="rcm-carousel">
+        <div class="rcm-track"></div>
+      </div>
+      <div class="car-controls">
+        <button class="car-btn" aria-label="Previous swarm">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="car-btn" aria-label="Next swarm">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div class="arch-footer">
+        <div class="arch-row intel">
+          <div class="arch-label">Shared Intelligence</div>
+          <div class="arch-content">Regulatory Precedent Corpus<span class="sep">·</span>RIM Registration Graph<span class="sep">·</span>IDMP &amp; Controlled Vocabulary<span class="sep">·</span>Validation Evidence Store<span class="sep">·</span>Self-Learning Feedback Loop</div>
+        </div>
+        <div class="arch-row oversight">
+          <div class="arch-label">Human Oversight</div>
+          <div class="arch-content">Regulatory Affairs Leads<span class="sep">·</span>Quality &amp; Computer Software Assurance<span class="sep">·</span>Signatories &amp; Data Integrity</div>
+        </div>
+        <div class="arch-row impact">
+          <div class="arch-label">Business Impact</div>
+          <div class="arch-content"><span class="arr">↓</span>Days to Assemble a Submission<span class="sep">·</span><span class="arr">↓</span>Query Response Time<span class="sep">·</span><span class="arr">↑</span>First-Cycle Approval<span class="sep">·</span><span class="arr">↓</span>Inspection Findings</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rcm-arch proc-panel" id="proc-manufacturing" data-proc="manufacturing" role="tabpanel" aria-labelledby="ptab-manufacturing" hidden>
+      <div class="proc-head">
+        <h3 class="proc-title">The Autonomous Manufacturing &amp; Supply Architecture.</h3>
+        <p class="proc-sub">Six connected swarms across plants and the CDMO network. Purpose-built AI agents run each stage. Shared intelligence learns across every batch. Humans release every lot.</p>
+      </div>
+      <div class="rcm-carousel">
+        <div class="rcm-track"></div>
+      </div>
+      <div class="car-controls">
+        <button class="car-btn" aria-label="Previous swarm">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="car-btn" aria-label="Next swarm">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div class="arch-footer">
+        <div class="arch-row intel">
+          <div class="arch-label">Shared Intelligence</div>
+          <div class="arch-content">Batch Genealogy Graph<span class="sep">·</span>Process Knowledge &amp; CPV Models<span class="sep">·</span>Stability Budget Ledger<span class="sep">·</span>Serialisation Event Store<span class="sep">·</span>Self-Learning Feedback Loop</div>
+        </div>
+        <div class="arch-row oversight">
+          <div class="arch-label">Human Oversight</div>
+          <div class="arch-content">Qualified Person &amp; Quality Unit<span class="sep">·</span>Manufacturing Science &amp; Technology<span class="sep">·</span>Continuous Optimisation</div>
+        </div>
+        <div class="arch-row impact">
+          <div class="arch-label">Business Impact</div>
+          <div class="arch-content"><span class="arr">↓</span>Batch Release Days<span class="sep">·</span><span class="arr">↓</span>Deviations per Batch<span class="sep">·</span><span class="arr">↑</span>Right First Time<span class="sep">·</span><span class="arr">↓</span>Cold Chain Write-Offs</div>
         </div>
       </div>
     </div>
@@ -1022,8 +1150,12 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   onScroll();
 })();
 
-/* Processes carousel — Autonomous RCM Architecture (V8) */
+/* Processes carousel — Autonomous process architectures.
+   01 RCM (approved, V8: data, vectors and slide markup unchanged) plus 02 Clinical Development,
+   03 Regulatory & GxP and 04 Manufacturing & Supply, all mounted by one shared engine so the
+   four read as a single system. */
 (function(){
+  /* ---------- 01 · RCM (approved) ---------- */
   const WORKFLOWS = [
     {key:"submit",      name:"Claim Submission",           agent:"Submitter Agent",    desc:"Cleans and validates claims, scores readiness and prepares 837 submission."},
     {key:"correct",     name:"Edits & Rejections",         agent:"Corrector Agent",    desc:"Identifies rejection issues, corrects them and prepares claims for resubmission."},
@@ -1033,7 +1165,6 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
     {key:"communicate", name:"Patient Statements",         agent:"Communicator Agent", desc:"Manages patient balance communication and outreach."}
   ];
 
-  let currentStage = 0;
   const PAL_DARK      = {stroke:"#dbe9ff", dashed:"rgba(179,208,255,0.32)", fill:"rgba(179,208,255,0.06)", accent:"#7ba9ff", dark:"#02061a"};
   const PAL_SIDE_DARK = {stroke:"#54555a", dashed:"rgba(84,86,92,0.35)", fill:"rgba(84,86,92,0.04)", accent:"#0064ff", dark:"#f2f7ff"};
 
@@ -1152,6 +1283,479 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
     }
   }
 
+  /* ---- Life-sciences process vectors (Processes 02-04). Same 200x200 canvas, palettes and primitives as the RCM set. ---- */
+  function shapeLS(key, S){
+    const st = S.stroke, ds = S.dashed, fl = S.fill, ac = S.accent, dk = S.dark;
+    const thin   = `stroke="${st}" stroke-width="1" fill="none"`;
+    const filled = `fill="${fl}" stroke="${st}" stroke-width="1.2"`;
+    const tag = (x,y,t,a='middle',c=ac,w=600,sz=7,ls=1.6,op=1)=>`<text x="${x}" y="${y}" text-anchor="${a}" font-family="Poppins" font-size="${sz}" font-weight="${w}" fill="${c}" letter-spacing="${ls}" opacity="${op}">${t}</text>`;
+    const mute = (x,y,t,a='start',sz=6)=>tag(x,y,t,a,st,500,sz,1.2,0.55);
+    const dash = (d,op=1)=>`<path d="${d}" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3" opacity="${op}"/>`;
+    const link = (d,op=0.75)=>`<path d="${d}" fill="none" stroke="${ac}" stroke-width="0.9" opacity="${op}"/>`;
+    const check = (x,y,sc=1)=>`<g transform="translate(${x} ${y}) scale(${sc})"><circle cx="0" cy="0" r="4.5" fill="${ac}"/><path d="M -2 0 L -0.4 1.7 L 2.5 -1.6" stroke="${dk}" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+    const bang = (x,y,r=5)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${ac}"/><text x="${x}" y="${y+2.6}" text-anchor="middle" font-family="Poppins" font-size="7.5" font-weight="700" fill="${dk}">!</text>`;
+    const hot = (x,y)=>`<circle cx="${x}" cy="${y}" r="9" fill="none" stroke="${ac}" stroke-width="0.9" opacity="0.6"/><circle cx="${x}" cy="${y}" r="4" fill="${ac}"/>`;
+    const arrowR = (x1,y,x2)=>`<path d="M ${x1} ${y} L ${x2} ${y} M ${x2-5} ${y-5} L ${x2} ${y} L ${x2-5} ${y+5}" stroke="${ac}" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+    const arrowD = (x,y1,y2)=>`<path d="M ${x} ${y1} L ${x} ${y2} M ${x-5} ${y2-5} L ${x} ${y2} L ${x+5} ${y2-5}" stroke="${ac}" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+    const band = (x,y,w,h,op=0.14)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${ac}" fill-opacity="${op}"/>`;
+    const lines = (x,ys,ends,op=1)=>ys.map((y,i)=>`<line x1="${x}" y1="${y}" x2="${ends[i]}" y2="${y}" ${thin} opacity="${op}"/>`).join('');
+
+    switch(key){
+
+      /* ===== PROCESS 02 · CLINICAL DEVELOPMENT ===== */
+
+      /* Protocol Design & Feasibility: a structured protocol whose sections wire out to decision parameters, scored for burden */
+      case "protocol": {
+        const secs = [58,86,114,142];
+        const chips = [{y:50,t:"ENDPOINTS"},{y:84,t:"VISITS"},{y:118,t:"ELIGIBILITY"}];
+        return `
+        <rect x="18" y="26" width="84" height="148" rx="4" ${filled}/>
+        ${band(18,26,84,20)}
+        ${tag(28,39.5,"PROTOCOL","start")}
+        ${secs.map((y,i)=>`
+          <rect x="26" y="${y}" width="7" height="7" rx="1.5" fill="${ac}" opacity="${i===3?0.45:1}"/>
+          <line x1="38" y1="${y+2}" x2="${[92,86,90,82][i]}" y2="${y+2}" ${thin}/>
+          <line x1="38" y1="${y+9}" x2="${[76,80,72,78][i]}" y2="${y+9}" ${thin} opacity="0.6"/>`).join('')}
+        ${chips.map((c,i)=>link(`M 102 ${secs[i]+3.5} C 113 ${secs[i]+3.5} 113 ${c.y} 124 ${c.y}`)).join('')}
+        ${chips.map((c,i)=> i===1
+          ? `<rect x="124" y="${c.y-10}" width="60" height="20" rx="3" fill="${ac}"/>${tag(154,c.y+2.4,c.t,"middle",dk,700,6,1.2)}`
+          : `<rect x="124" y="${c.y-10}" width="60" height="20" rx="3" ${filled}/>${tag(154,c.y+2.4,c.t,"middle",ac,600,6,1.2)}`).join('')}
+        ${dash("M 102 145.5 C 116 145.5 120 152 132 158")}
+        <path d="M 132 166 A 22 22 0 0 1 176 166" fill="none" stroke="${ds}" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 132 166 A 22 22 0 0 1 143 146.95" fill="none" stroke="${ac}" stroke-width="5" stroke-linecap="round"/>
+        <line x1="154" y1="166" x2="146" y2="152.1" stroke="${ac}" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="154" cy="166" r="2.5" fill="${ac}"/>
+        ${mute(154,180,"BURDEN","middle")}`;
+      }
+
+      /* Site Selection & Activation: candidate sites evenly ringed around the evaluator, one selected */
+      case "sites": {
+        const cx = 100, cy = 86, R = 58, ring = 26;
+        const scores = [8,11,6,10,12,7,9,5];
+        const nodes = scores.map((w,k)=>{ const a=(22.5+45*k)*Math.PI/180; return {x:+(cx+R*Math.cos(a)).toFixed(1), y:+(cy+R*Math.sin(a)).toFixed(1), c:Math.cos(a), s:Math.sin(a), w}; });
+        return `
+        ${nodes.map(n=>`<line x1="${n.x}" y1="${n.y}" x2="${(cx+ring*n.c).toFixed(1)}" y2="${(cy+ring*n.s).toFixed(1)}" stroke="${ac}" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.45"/>`).join('')}
+        ${nodes.map(n=>{ const by = n.s>0 ? n.y+11 : n.y-14; return `
+          <circle cx="${n.x}" cy="${n.y}" r="7" ${filled}/>
+          <circle cx="${n.x}" cy="${n.y}" r="2" fill="${st}" opacity="0.6"/>
+          <rect x="${(n.x-9).toFixed(1)}" y="${by.toFixed(1)}" width="18" height="3" rx="1.5" fill="${ds}"/>
+          <rect x="${(n.x-9).toFixed(1)}" y="${by.toFixed(1)}" width="${n.w}" height="3" rx="1.5" fill="${st}" opacity="0.55"/>`; }).join('')}
+        <circle cx="${cx}" cy="${cy}" r="24" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="3 4" opacity="0.6"/>
+        <circle cx="${cx}" cy="${cy}" r="13" fill="${ac}"/>
+        <path d="M -4.5 0 L -1.3 3.2 L 5 -3.4" transform="translate(${cx} ${cy})" stroke="${dk}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        ${dash(`M ${cx} ${cy+ring} L ${cx} 164`)}
+        <rect x="68" y="164" width="64" height="18" rx="3" fill="${ac}"/>
+        ${tag(100,175.5,"SELECTED","middle",dk,700,6.5,1.4)}`;
+      }
+
+      /* Recruitment & Enrolment: a patient population filtered through eligibility criteria into enrolment */
+      case "recruit": {
+        const rows = [28,38,48], cols = [...Array(9)].map((_,j)=>44+j*14);
+        const edgeL = y=>28+(y-60)*(50/68), edgeR = y=>172-(y-60)*(50/68);
+        const gates = [{y:78,t:"AGE"},{y:96,t:"DX"},{y:114,t:"LABS"}];
+        return `
+        ${rows.map((y,r)=>cols.map((x,j)=>`<circle cx="${x}" cy="${y}" r="2.2" fill="${(r===1 && j%3===1)||(r===2 && j===4)?ac:st}" opacity="${(r===1 && j%3===1)||(r===2 && j===4)?1:0.5}"/>`).join('')).join('')}
+        <path d="M 28 60 L 172 60 L 122 128 L 78 128 Z" ${filled}/>
+        ${gates.map(g=>`
+          <line x1="${edgeL(g.y).toFixed(1)}" y1="${g.y}" x2="${edgeR(g.y).toFixed(1)}" y2="${g.y}" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
+          <circle cx="100" cy="${g.y}" r="2" fill="${ac}"/>
+          ${mute((edgeL(g.y)-5).toFixed(1),g.y+2,g.t,"end",5.5)}`).join('')}
+        ${dash(`M ${edgeR(96).toFixed(1)} 96 C 156 96 160 104 166 110`)}
+        <circle cx="170" cy="113" r="5" ${filled}/>
+        <path d="M 168 111 L 172 115 M 172 111 L 168 115" stroke="${ac}" stroke-width="1.2" stroke-linecap="round"/>
+        ${[90,100,110].map(x=>`<circle cx="${x}" cy="138" r="3" fill="${ac}"/>`).join('')}
+        ${arrowD(100,145,157)}
+        <rect x="68" y="161" width="64" height="18" rx="3" fill="${ac}"/>
+        ${tag(100,172.5,"ENROLLED","middle",dk,700,6.5,1.4)}`;
+      }
+
+      /* Data Capture & Cleaning: CDASH records cleaned, queried and mapped column-to-column into SDTM */
+      case "clean": {
+        const rowsC = [65,87,109,131,153];
+        const table = (x,label)=>`
+          <rect x="${x}" y="34" width="72" height="132" rx="3" ${filled}/>
+          ${band(x,34,72,20)}
+          ${tag(x+10,47.5,label,"start")}
+          <line x1="${x+36}" y1="54" x2="${x+36}" y2="166" ${thin} opacity="0.6"/>
+          ${[76,98,120,142].map(y=>`<line x1="${x}" y1="${y}" x2="${x+72}" y2="${y}" ${thin} opacity="0.6"/>`).join('')}`;
+        return `
+        ${table(14,"CDASH")}
+        ${table(114,"SDTM")}
+        <rect x="50" y="98" width="36" height="22" fill="${ac}" fill-opacity="0.2"/>
+        ${rowsC.map((y,i)=>`
+          <line x1="20" y1="${y}" x2="${[44,40,42,38,44][i]}" y2="${y}" ${thin} opacity="0.7"/>
+          <line x1="56" y1="${y}" x2="${[80,76,80,78,74][i]}" y2="${y}" stroke="${i===2?ac:st}" stroke-width="${i===2?1.2:1}" opacity="${i===2?1:0.7}"/>
+          <line x1="120" y1="${y}" x2="${[144,140,142,146,138][i]}" y2="${y}" ${thin} opacity="0.7"/>
+          <line x1="156" y1="${y}" x2="${[180,176,178,180,174][i]}" y2="${y}" ${thin} opacity="0.7"/>`).join('')}
+        ${[[65,87],[87,65],[131,153],[153,131]].map(([a,b])=>link(`M 86 ${a} C 100 ${a} 100 ${b} 114 ${b}`)).join('')}
+        ${dash("M 86 109 L 114 109")}
+        <circle cx="94" cy="96" r="7" fill="${ac}"/>
+        <text x="94" y="99.2" text-anchor="middle" font-family="Poppins" font-size="9" font-weight="700" fill="${dk}">?</text>
+        ${mute(100,184,"MEDDRA · WHODRUG","middle")}`;
+      }
+
+      /* Risk-Based Monitoring: KRI signal across sites inside an expected band, one site breaching the QTL */
+      case "monitor": {
+        const xs = [26,42,58,74,90,106,122,138,154,170];
+        const ys = [98,90,100,86,96,102,52,94,88,96];
+        const hs = [10,14,8,16,12,9,22,11,13,10];
+        return `
+        <rect x="16" y="30" width="168" height="116" rx="4" ${filled}/>
+        <rect x="16" y="74" width="168" height="38" fill="${ds}" opacity="0.5"/>
+        <line x1="16" y1="62" x2="184" y2="62" stroke="${ac}" stroke-width="0.9" stroke-dasharray="3 3"/>
+        ${tag(26,44,"KRI","start")}
+        ${tag(178,58,"QTL","end",ac,600,6,1.2)}
+        <polyline points="${xs.map((x,i)=>x+','+ys[i]).join(' ')}" fill="none" stroke="${st}" stroke-width="1.1" stroke-linejoin="round"/>
+        ${xs.map((x,i)=> i===6 ? '' : `<circle cx="${x}" cy="${ys[i]}" r="1.8" fill="${st}"/>`).join('')}
+        ${hot(122,52)}
+        ${tag(134,44,"BREACH","start",ac,600,6,1.2)}
+        <line x1="16" y1="176" x2="184" y2="176" ${thin} opacity="0.5"/>
+        ${xs.map((x,i)=>`<rect x="${x-4}" y="${176-hs[i]}" width="8" height="${hs[i]}" fill="${i===6?ac:st}" opacity="${i===6?1:0.35}"/>`).join('')}`;
+      }
+
+      /* Lock, CSR & Datasets: checked tables, listings and figures converge into a locked CSR / Module 5 */
+      case "lock": {
+        const cards = [{y:30,t:"TABLES"},{y:80,t:"LISTINGS"},{y:130,t:"FIGURES"}];
+        const body = (i,y)=> i===0
+          ? `<rect x="24" y="${y+17}" width="46" height="17" ${thin} opacity="0.7"/><line x1="24" y1="${y+22.5}" x2="70" y2="${y+22.5}" ${thin} opacity="0.7"/><line x1="24" y1="${y+28.5}" x2="70" y2="${y+28.5}" ${thin} opacity="0.7"/><line x1="39" y1="${y+17}" x2="39" y2="${y+34}" ${thin} opacity="0.7"/><line x1="55" y1="${y+17}" x2="55" y2="${y+34}" ${thin} opacity="0.7"/>`
+          : i===1
+          ? lines(24,[y+19,y+25,y+31],[66,58,62],0.7)
+          : [8,12,6,14,10].map((h,k)=>`<rect x="${26+k*9}" y="${y+34-h}" width="5" height="${h}" fill="${k===3?ac:st}" opacity="${k===3?1:0.45}"/>`).join('');
+        return `
+        ${cards.map((c,i)=>`
+          <rect x="16" y="${c.y}" width="62" height="40" rx="3" ${filled}/>
+          ${tag(24,c.y+11,c.t,"start",ac,600,6,1.2)}
+          ${check(70,c.y+9,0.8)}
+          ${body(i,c.y)}`).join('')}
+        ${cards.map(c=>dash(`M 78 ${c.y+20} C 98 ${c.y+20} 98 104 118 104`)).join('')}
+        <rect x="118" y="40" width="66" height="130" rx="4" ${filled}/>
+        ${band(118,40,66,20)}
+        ${tag(128,53.5,"CSR","start")}
+        ${lines(128,[74,82,90,98,112,120,128],[174,166,172,160,174,168,158],0.8)}
+        <rect x="126" y="146" width="50" height="16" rx="3" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="0.8"/>
+        ${tag(151,156.5,"MODULE 5","middle",ac,600,6,1.2)}
+        <path d="M 168 31 L 168 26 A 4 4 0 0 1 176 26 L 176 31" stroke="${ac}" stroke-width="1.6" fill="none"/>
+        <rect x="164" y="31" width="16" height="13" rx="2" fill="${ac}"/>
+        <circle cx="172" cy="37.5" r="1.6" fill="${dk}"/>`;
+      }
+
+      /* ===== PROCESS 03 · REGULATORY & GxP ===== */
+
+      /* Source Evidence Assembly: CSR, CMC and nonclinical sources converge into an evidence package, every claim linked */
+      case "harvest": {
+        const cyl = (x,y,w,h,t)=>`
+          <path d="M ${x} ${y} L ${x} ${y+h} A ${w/2} 5 0 0 0 ${x+w} ${y+h} L ${x+w} ${y} Z" ${filled}/>
+          <ellipse cx="${x+w/2}" cy="${y}" rx="${w/2}" ry="5" ${filled}/>
+          <path d="M ${x} ${y+h/2} A ${w/2} 5 0 0 0 ${x+w} ${y+h/2}" ${thin} opacity="0.5"/>
+          ${tag(x+w/2,y+h/2+11,t,"middle",ac,600,6,1)}`;
+        const rowsE = [80,100,120,140];
+        return `
+        ${cyl(18,30,42,26,"CSR")}${cyl(18,84,42,26,"CMC")}${cyl(18,138,42,26,"NONCLIN")}
+        ${[[43,80],[97,100],[97,120],[151,140]].map(([a,b])=>dash(`M 60 ${a} C 86 ${a} 86 ${b} 108 ${b}`)).join('')}
+        <rect x="104" y="46" width="82" height="112" rx="4" ${filled}/>
+        ${band(104,46,82,20)}
+        ${tag(114,59.5,"EVIDENCE","start")}
+        ${rowsE.map((y,i)=>`
+          <rect x="110" y="${y-3}" width="9" height="6" rx="3" fill="none" stroke="${ac}" stroke-width="1.1"/>
+          <rect x="115.5" y="${y-3}" width="9" height="6" rx="3" fill="none" stroke="${ac}" stroke-width="1.1"/>
+          <line x1="130" y1="${y}" x2="${[176,168,174,162][i]}" y2="${y}" stroke="${i===1?ac:st}" stroke-width="${i===1?1.2:1}" opacity="${i===1?1:0.8}"/>`).join('')}`;
+      }
+
+      /* Document Authoring: a Module 2 draft being written, each reference marker traced back to its source */
+      case "author": {
+        const ls = [60,70,80,92,102,112,124,134,144];
+        const ends = [108,96,112,104,90,110,100,94,106];
+        const marks = {1:57, 4:101, 7:145};
+        return `
+        <rect x="18" y="26" width="104" height="148" rx="4" ${filled}/>
+        ${band(18,26,104,20)}
+        ${tag(28,39.5,"MODULE 2","start")}
+        ${ls.map((y,i)=>`<line x1="28" y1="${y}" x2="${ends[i]}" y2="${y}" ${thin} opacity="${marks[i]?1:0.75}"/>${marks[i]?`<rect x="${ends[i]+3}" y="${y-2}" width="4" height="4" fill="${ac}"/>`:''}`).join('')}
+        <line x1="28" y1="156" x2="64" y2="156" ${thin}/>
+        <rect x="67" y="150" width="2.4" height="11" fill="${ac}"/>
+        ${mute(165,38,"SOURCE","middle")}
+        ${[44,88,132].map(y=>`
+          <rect x="146" y="${y}" width="38" height="26" rx="3" ${filled}/>
+          <line x1="152" y1="${y+9}" x2="178" y2="${y+9}" ${thin} opacity="0.7"/>
+          <line x1="152" y1="${y+16}" x2="170" y2="${y+16}" ${thin} opacity="0.7"/>`).join('')}
+        ${Object.entries(marks).map(([i,ty])=>{ const y=ls[i], x=ends[i]+7; return dash(`M ${x} ${y} C ${x+22} ${y} 124 ${ty} 146 ${ty}`); }).join('')}`;
+      }
+
+      /* Dossier Build & Publishing: modular documents slotting into the CTD pyramid, hyperlinked and validated */
+      case "publish": {
+        return `
+        ${[54,82,110].map(y=>`
+          <rect x="14" y="${y}" width="24" height="18" rx="2" ${filled}/>
+          <line x1="19" y1="${y+7}" x2="33" y2="${y+7}" ${thin} opacity="0.7"/>
+          <line x1="19" y1="${y+12}" x2="29" y2="${y+12}" ${thin} opacity="0.7"/>`).join('')}
+        ${[[63,78],[91,106],[119,118]].map(([a,b])=>dash(`M 38 ${a} C 60 ${a} 64 ${b} ${b===78?100:b===106?90:84} ${b}`)).join('')}
+        <rect x="104" y="24" width="40" height="18" rx="2" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="0.8"/>
+        ${tag(124,35.8,"M1")}
+        <path d="M 124 50 L 152.4 92 L 95.6 92 Z" ${filled}/>
+        ${tag(124,84,"M2")}
+        <path d="M 91.6 98 L 111.7 98 L 105.4 126 L 72.7 126 Z" ${filled}/>
+        <path d="M 114.7 98 L 133.3 98 L 139.6 126 L 108.4 126 Z" ${filled}/>
+        <path d="M 136.3 98 L 156.4 98 L 175.3 126 L 142.6 126 Z" fill="${ac}"/>
+        ${tag(95.5,115,"M3")}${tag(124,115,"M4")}${tag(152.8,115,"M5","middle",dk,700)}
+        ${dash("M 142 72 Q 182 84 162 104")}
+        <circle cx="142" cy="72" r="2" fill="${ac}"/>
+        <rect x="72" y="140" width="104" height="20" rx="3" ${filled}/>
+        ${check(84,150,0.85)}
+        ${tag(94,152.5,"eCTD v4.0 VALID","start",ac,600,6.5,1.2)}`;
+      }
+
+      /* Health Authority Queries: an incoming query triaged against precedent into a drafted response */
+      case "query": {
+        return `
+        <rect x="16" y="28" width="68" height="50" rx="3" ${filled}/>
+        <rect x="16" y="28" width="68" height="16" rx="3" fill="${ac}"/>
+        ${tag(24,38.8,"HA QUERY","start",dk,700,6,1.2)}
+        <circle cx="34" cy="61" r="8" fill="none" stroke="${ac}" stroke-width="1.2"/>
+        <text x="34" y="64.5" text-anchor="middle" font-family="Poppins" font-size="10" font-weight="600" fill="${ac}">?</text>
+        <line x1="48" y1="57" x2="78" y2="57" ${thin}/>
+        <line x1="48" y1="65" x2="70" y2="65" ${thin} opacity="0.7"/>
+        ${dash("M 50 78 L 50 114")}
+        <path d="M 30 128 L 30 119 Q 30 116 33 116 L 83 116 Q 86 116 86 119 L 86 151 Q 86 154 83 154 L 78 154" fill="none" stroke="${st}" stroke-width="1.2" opacity="0.5"/>
+        <path d="M 26 128 L 26 125 Q 26 122 29 122 L 79 122 Q 82 122 82 125 L 82 157 Q 82 160 79 160 L 78 160" fill="none" stroke="${st}" stroke-width="1.2" opacity="0.75"/>
+        <rect x="22" y="128" width="56" height="38" rx="3" ${filled}/>
+        ${tag(28,139.5,"PRECEDENT","start",ac,600,5.5,1)}
+        ${lines(28,[149,157],[70,62],0.7)}
+        <path d="M 84 53 C 104 53 104 80 118 80" fill="none" stroke="${ac}" stroke-width="1.2"/>
+        <path d="M 113 75.5 L 118 80 L 113 84.5" fill="none" stroke="${ac}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        ${dash("M 78 146 C 100 146 100 124 118 124")}
+        <rect x="118" y="50" width="66" height="120" rx="4" ${filled}/>
+        ${band(118,50,66,18)}
+        ${tag(128,62.5,"RESPONSE","start")}
+        ${lines(128,[82,90,98,108],[174,166,170,160],0.8)}
+        <rect x="118" y="118" width="66" height="12" fill="${ac}" fill-opacity="0.18"/>
+        <line x1="128" y1="124" x2="172" y2="124" stroke="${ac}" stroke-width="1.2"/>
+        ${lines(128,[140,148],[168,156],0.8)}
+        ${check(174,160,0.9)}`;
+      }
+
+      /* Label & Variation Lifecycle: one change in the core data sheet traced to its impact on each local label */
+      case "label": {
+        const mk = [{y:24,c:"US",hit:false},{y:62,c:"EU",hit:true},{y:100,c:"JP",hit:true},{y:138,c:"BR",hit:false}];
+        return `
+        <rect x="16" y="56" width="60" height="94" rx="3" ${filled}/>
+        ${band(16,56,60,18)}
+        ${tag(24,68.5,"CCDS","start")}
+        ${lines(24,[86,96],[68,60],0.7)}
+        <rect x="16" y="101" width="60" height="10" fill="${ac}" fill-opacity="0.18"/>
+        <line x1="24" y1="106" x2="66" y2="106" stroke="${ac}" stroke-width="1.2"/>
+        ${lines(24,[118,128,138],[62,68,56],0.7)}
+        ${mk.map(m=> m.hit
+          ? link(`M 76 106 C 100 106 102 ${m.y+13} 126 ${m.y+13}`,1)
+          : dash(`M 76 106 C 100 106 102 ${m.y+13} 126 ${m.y+13}`,0.5)).join('')}
+        ${mk.map(m=>`
+          <rect x="126" y="${m.y}" width="56" height="26" rx="3" ${filled}/>
+          ${m.hit?`<rect x="126" y="${m.y}" width="56" height="26" rx="3" fill="none" stroke="${ac}" stroke-width="1.2"/>`:''}
+          ${tag(134,m.y+16.5,m.c,"start",m.hit?ac:st,600,7,1.2,m.hit?1:0.7)}
+          <line x1="152" y1="${m.y+10}" x2="174" y2="${m.y+10}" ${thin} opacity="0.7"/>
+          <line x1="152" y1="${m.y+17}" x2="168" y2="${m.y+17}" ${thin} opacity="0.7"/>
+          ${m.hit?`<circle cx="182" cy="${m.y}" r="6" fill="${ac}"/><text x="182" y="${m.y+2.5}" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="700" fill="${dk}">Δ</text>`:''}`).join('')}`;
+      }
+
+      /* Inspection Readiness: the audit trail scanned entry by entry, one gap surfaced; TMF completeness alongside */
+      case "inspect": {
+        const ys = [36,60,84,108,132,156];
+        return `
+        <line x1="40" y1="24" x2="40" y2="178" ${thin} opacity="0.7"/>
+        <rect x="30" y="96" width="126" height="24" fill="${ac}" fill-opacity="0.10"/>
+        <line x1="30" y1="96" x2="156" y2="96" stroke="${ac}" stroke-width="0.8" opacity="0.7"/>
+        <line x1="30" y1="120" x2="156" y2="120" stroke="${ac}" stroke-width="0.8" opacity="0.7"/>
+        ${ys.map((y,i)=> i===3
+          ? `<circle cx="40" cy="${y}" r="4" fill="none" stroke="${ac}" stroke-width="1" stroke-dasharray="2 2"/>
+             <rect x="52" y="${y-7}" width="98" height="14" rx="2" fill="none" stroke="${ac}" stroke-width="1" stroke-dasharray="3 3"/>
+             ${bang(144,y)}`
+          : `<circle cx="40" cy="${y}" r="4" ${filled}/>
+             <rect x="52" y="${y-7}" width="98" height="14" rx="2" ${filled}/>
+             <line x1="60" y1="${y}" x2="${[118,110,122,0,106,116][i]}" y2="${y}" ${thin} opacity="0.75"/>
+             <line x1="130" y1="${y}" x2="144" y2="${y}" ${thin} opacity="0.5"/>`).join('')}
+        ${tag(173,30,"TMF")}
+        <rect x="166" y="36" width="14" height="128" rx="3" ${filled}/>
+        <rect x="166" y="62" width="14" height="102" rx="3" fill="${ac}" fill-opacity="0.22"/>
+        <line x1="166" y1="62" x2="180" y2="62" stroke="${ac}" stroke-width="1.2"/>`;
+      }
+
+      /* ===== PROCESS 04 · MANUFACTURING & SUPPLY ===== */
+
+      /* Tech Transfer & Scale-Up: process parameters mapped from a small-scale site to a larger one */
+      case "transfer": {
+        const tank = (x,y,w,h,lv)=>{
+          const r=w/2, b=y+h-r;
+          return `
+          <path d="M ${x} ${lv} L ${x} ${b} A ${r} ${r} 0 0 0 ${x+w} ${b} L ${x+w} ${lv} Z" fill="${ac}" fill-opacity="0.16"/>
+          <path d="M ${x} ${y} L ${x} ${b} A ${r} ${r} 0 0 0 ${x+w} ${b} L ${x+w} ${y}" fill="none" stroke="${st}" stroke-width="1.2"/>
+          <rect x="${x-3}" y="${y-4}" width="${w+6}" height="5" rx="1.5" ${filled}/>
+          <line x1="${x}" y1="${lv}" x2="${x+w}" y2="${lv}" stroke="${ac}" stroke-width="1.1"/>
+          <line x1="${x+r}" y1="${y}" x2="${x+r}" y2="${b+r*0.35}" ${thin}/>
+          <path d="M ${x+r-7} ${b+r*0.35} L ${x+r+7} ${b+r*0.35}" stroke="${st}" stroke-width="1.6" stroke-linecap="round"/>`;
+        };
+        const par = [{y:78,t:"pH"},{y:100,t:"TEMP"},{y:122,t:"RPM"}];
+        return `
+        ${tank(18,72,40,64,96)}
+        ${tank(132,40,52,104,70)}
+        ${par.map((p,i)=>`
+          ${dash(`M 60 ${p.y} L 72 ${p.y}`)}
+          <rect x="72" y="${p.y-8}" width="46" height="16" rx="3" ${filled}/>
+          ${tag(78,p.y+2.2,p.t,"start",ac,600,6,1.2)}
+          <rect x="100" y="${p.y-1.5}" width="12" height="3" rx="1.5" fill="${ac}" opacity="${0.5+i*0.2}"/>
+          ${arrowR(118,p.y,128)}`).join('')}
+        ${mute(38,154,"SITE A","middle")}
+        ${mute(158,162,"SITE B","middle")}
+        <rect x="70" y="160" width="60" height="16" rx="3" fill="${ac}"/>
+        ${tag(100,170.5,"COMPARABLE","middle",dk,700,5.5,1)}`;
+      }
+
+      /* Batch Execution & EBR: unit operations in sequence, an in-process signal anomaly, EBR reviewed by exception */
+      case "batch": {
+        const xs = [14,51,88,125,162];
+        const tr = [[14,104],[32,100],[50,106],[68,98],[86,103],[104,99],[122,102],[130,101],[138,78],[146,110],[156,101],[172,104],[188,100]];
+        return `
+        ${xs.map((x,i)=>`
+          <rect x="${x}" y="32" width="26" height="22" rx="3" ${filled}/>
+          ${i===3?`<rect x="${x}" y="32" width="26" height="22" rx="3" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1.3"/>`:''}
+          ${tag(x+13,45.5,String(i+1).padStart(2,'0'),"middle",i===3?ac:st,600,6.5,1,i===3?1:0.7)}
+          ${i<4?`<path d="M ${x+27} 43 L ${x+35} 43 M ${x+31.5} 39.5 L ${x+35} 43 L ${x+31.5} 46.5" stroke="${ac}" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>`:''}`).join('')}
+        ${dash("M 138 54 L 138 70",0.7)}
+        ${mute(14,76,"SIGNAL")}
+        <line x1="14" y1="124" x2="188" y2="124" ${thin} opacity="0.4"/>
+        <polyline points="${tr.map(p=>p.join(',')).join(' ')}" fill="none" stroke="${st}" stroke-width="1.1" stroke-linejoin="round"/>
+        ${hot(138,78)}
+        <rect x="14" y="136" width="174" height="44" rx="3" ${filled}/>
+        ${mute(182,147,"EBR","end")}
+        ${check(24,147,0.7)}<line x1="34" y1="147" x2="104" y2="147" ${thin} opacity="0.75"/>
+        <rect x="14" y="152" width="174" height="14" fill="${ac}" fill-opacity="0.18"/>
+        ${bang(24,159,4)}<line x1="34" y1="159" x2="116" y2="159" stroke="${ac}" stroke-width="1.2"/>
+        ${tag(182,161.3,"EXCEPTION","end",ac,600,5.5,1)}
+        ${check(24,171,0.7)}<line x1="34" y1="171" x2="96" y2="171" ${thin} opacity="0.75"/>`;
+      }
+
+      /* QC Testing & Release: passing test results converge on the specification check and a release decision */
+      case "release": {
+        const tests = [{y:30,t:"ASSAY"},{y:60,t:"PURITY"},{y:90,t:"STERILITY"},{y:120,t:"CoA"}];
+        return `
+        ${tests.map(r=>`
+          <rect x="14" y="${r.y}" width="78" height="22" rx="3" ${filled}/>
+          ${tag(22,r.y+13.8,r.t,"start",st,600,6,1.2,0.75)}
+          ${check(83,r.y+11,0.8)}`).join('')}
+        ${tests.map(r=>link(`M 92 ${r.y+11} C 104 ${r.y+11} 104 88 116 88`)).join('')}
+        <rect x="152" y="30" width="34" height="28" rx="3" ${filled}/>
+        ${tag(169,46.8,"LOT","middle",ac,600,6.5,1.2)}
+        ${dash("M 152 44 C 140 44 132 56 132 72")}
+        <path d="M 116 88 L 132 72 L 148 88 L 132 104 Z" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1.2"/>
+        ${tag(132,90.4,"SPEC","middle",ac,600,5.5,1)}
+        ${arrowD(132,104,132)}
+        <rect x="96" y="138" width="72" height="22" rx="4" fill="${ac}"/>
+        ${tag(132,152,"RELEASED","middle",dk,700,7.5,1.6)}`;
+      }
+
+      /* Deviation & CAPA: a deviation broken down fishbone-style into root-cause candidates, one driving CAPA, with a recurrence loop */
+      case "capa": {
+        const bx = [48,84,120];
+        return `
+        <line x1="20" y1="78" x2="148" y2="78" stroke="${st}" stroke-width="1.2"/>
+        ${bx.map(x=>`
+          <line x1="${x}" y1="78" x2="${x-14}" y2="42" ${thin} opacity="0.7"/>
+          <line x1="${x}" y1="78" x2="${x-14}" y2="114" ${thin} opacity="0.7"/>`).join('')}
+        ${bx.map(x=>`<circle cx="${x-14}" cy="42" r="5" ${filled}/>`).join('')}
+        ${bx.map(x=> x===84 ? '' : `<circle cx="${x-14}" cy="114" r="5" ${filled}/>`).join('')}
+        <circle cx="70" cy="114" r="10" fill="none" stroke="${ac}" stroke-width="0.9" opacity="0.6"/>
+        <circle cx="70" cy="114" r="5" fill="${ac}"/>
+        <path d="M 148 60 L 184 78 L 148 96 Z" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1.3"/>
+        ${tag(161,80.6,"DEV","middle",ac,600,6.5,1.2)}
+        ${mute(62,134,"ROOT CAUSE","end")}
+        ${arrowD(70,124,138)}
+        <rect x="40" y="142" width="60" height="22" rx="4" fill="${ac}"/>
+        ${tag(70,156.6,"CAPA","middle",dk,700,8,1.8)}
+        ${dash("M 100 153 L 122 153")}
+        <path d="M 124 153 A 16 16 0 1 1 140 169" fill="none" stroke="${ac}" stroke-width="1.3"/>
+        <path d="M 146 164 L 140 169 L 146 174" fill="none" stroke="${ac}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        ${mute(140,188,"RECURRENCE","middle",5.5)}`;
+      }
+
+      /* Cold Chain & Distribution: a shipment lane with a 2-8°C band, one excursion pinned to the leg where it happened */
+      case "coldchain": {
+        const tr = [[20,74],[40,70],[60,76],[80,68],[100,73],[116,72],[124,40],[132,66],[150,72],[166,70],[180,74]];
+        const wp = [[62,132],[94,154],[124,140],[150,156]];
+        return `
+        <rect x="20" y="56" width="160" height="32" rx="2" fill="${ds}" opacity="0.5"/>
+        <line x1="20" y1="56" x2="180" y2="56" stroke="${ac}" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.6"/>
+        <line x1="20" y1="88" x2="180" y2="88" stroke="${ac}" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.6"/>
+        ${tag(20,49,"2–8°C","start",ac,600,6.5,1.2)}
+        <polyline points="${tr.map(p=>p.join(',')).join(' ')}" fill="none" stroke="${st}" stroke-width="1.1" stroke-linejoin="round"/>
+        ${hot(124,40)}
+        ${tag(135,36,"EXCURSION","start",ac,600,5.5,1)}
+        <line x1="124" y1="49" x2="124" y2="136" stroke="${ac}" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.6"/>
+        <rect x="14" y="138" width="20" height="20" rx="3" ${filled}/>
+        <rect x="166" y="138" width="20" height="20" rx="3" ${filled}/>
+        ${check(176,148,0.8)}
+        ${dash("M 34 148 L 62 132 L 94 154 L 124 140 L 150 156 L 166 148")}
+        ${wp.map(([x,y],i)=> i===2 ? hot(x,y) : `<circle cx="${x}" cy="${y}" r="3.5" ${filled}/>`).join('')}
+        ${mute(24,172,"LOT","middle",5.5)}
+        ${mute(176,172,"SITE","middle",5.5)}`;
+      }
+
+      /* Serialisation & Traceability: a unique product code moving through the EPCIS network, one partner exception */
+      case "serial": {
+        const bits = "1010101 1011010 1100111 1010010 1111001 1001101 1111111".split(' ');
+        const cell = 6, ox = 16, oy = 79;
+        const code = bits.map((row,r)=>[...row].map((b,c)=>{
+          if(b!=='1') return '';
+          const finder = c===0 || r===6;
+          return `<rect x="${ox+c*cell}" y="${oy+r*cell}" width="${cell-0.6}" height="${cell-0.6}" fill="${finder?ac:st}" opacity="${finder?1:0.75}"/>`;
+        }).join('')).join('');
+        const N = {M:[92,100], W1:[132,58], W2:[132,142], P1:[174,34], P2:[174,86], P3:[174,160]};
+        const edge = (a,b,hitE=false)=>`<line x1="${N[a][0]}" y1="${N[a][1]}" x2="${N[b][0]}" y2="${N[b][1]}" stroke="${ac}" stroke-width="${hitE?1:0.9}" ${hitE?'stroke-dasharray="2 3"':''} opacity="${hitE?1:0.6}"/>`;
+        const node = (k,hitN=false)=>{ const [x,y]=N[k]; return hitN
+          ? `<rect x="${x-8}" y="${y-8}" width="16" height="16" rx="3" fill="${ac}"/><text x="${x}" y="${y+2.8}" text-anchor="middle" font-family="Poppins" font-size="8" font-weight="700" fill="${dk}">!</text>`
+          : `<rect x="${x-8}" y="${y-8}" width="16" height="16" rx="3" ${filled}/><circle cx="${x}" cy="${y}" r="2" fill="${ac}"/>`; };
+        return `
+        ${code}
+        ${dash("M 60 100 L 82 100")}
+        ${edge('M','W1')}${edge('M','W2')}${edge('W1','P1')}${edge('W1','P2')}${edge('W2','P3',true)}
+        <circle cx="112" cy="79" r="2.2" fill="${ac}"/>
+        <circle cx="153" cy="72" r="2.2" fill="${ac}"/>
+        ${node('M')}${node('W1')}${node('W2')}${node('P1')}${node('P2')}${node('P3',true)}
+        ${mute(132,103,"EPCIS","middle")}`;
+      }
+
+      default: return `<circle cx="100" cy="100" r="60" ${filled}/>`;
+    }
+  }
+
+  /* ---------- 02-04 · Life sciences workflows (source: hcls-autonomous-architecture) ---------- */
+  const LS_WORKFLOWS = {
+    clinical: [
+      {key:"protocol", name:"Protocol Design & Feasibility", agent:"Designer Agent", desc:"Protocol drafting, complexity and burden scoring, digital protocol structuring."},
+      {key:"sites", name:"Site Selection & Activation", agent:"Activator Agent", desc:"Site feasibility from claims and EHR, start-up document QC, budget drafting."},
+      {key:"recruit", name:"Recruitment & Enrolment", agent:"Matcher Agent", desc:"Eligible-patient identification, pre-screen triage, retention risk flags."},
+      {key:"clean", name:"Data Capture & Cleaning", agent:"Curator Agent", desc:"Query generation, MedDRA and WHODrug coding, CDASH-to-SDTM mapping."},
+      {key:"monitor", name:"Risk-Based Monitoring", agent:"Watcher Agent", desc:"Central statistical monitoring, KRI and QTL breach detection, deviation triage."},
+      {key:"lock", name:"Lock, CSR & Datasets", agent:"Assembler Agent", desc:"TLF checks, patient narratives, CSR and Module 5 assembly."}
+    ],
+    regulatory: [
+      {key:"harvest", name:"Source Evidence Assembly", agent:"Harvester Agent", desc:"Pulls from CSR, CMC and nonclinical sources and links every claim to evidence."},
+      {key:"author", name:"Document Authoring", agent:"Author Agent", desc:"Module 2 summaries, briefing books and first drafts with full traceability."},
+      {key:"publish", name:"Dossier Build & Publishing", agent:"Publisher Agent", desc:"eCTD sequence assembly, validation checks, hyperlinking and v4.0 readiness."},
+      {key:"query", name:"Health Authority Queries", agent:"Responder Agent", desc:"Query triage, precedent retrieval from prior correspondence and draft responses."},
+      {key:"label", name:"Label & Variation Lifecycle", agent:"Maintainer Agent", desc:"Core data sheet-to-local-label impact and variation planning across markets."},
+      {key:"inspect", name:"Inspection Readiness", agent:"Auditor Agent", desc:"Audit-trail anomaly detection, TMF completeness and inspection dry-runs."}
+    ],
+    manufacturing: [
+      {key:"transfer", name:"Tech Transfer & Scale-Up", agent:"Scaler Agent", desc:"Tech-transfer gap analysis, parameter mapping and comparability evidence packs."},
+      {key:"batch", name:"Batch Execution & EBR", agent:"Executor Agent", desc:"In-process anomaly detection and electronic batch-record review by exception."},
+      {key:"release", name:"QC Testing & Release", agent:"Releaser Agent", desc:"CoA reconciliation, specification checks and release-package assembly."},
+      {key:"capa", name:"Deviation & CAPA", agent:"Investigator Agent", desc:"Root-cause candidates from history, CAPA drafting and recurrence detection."},
+      {key:"coldchain", name:"Cold Chain & Distribution", agent:"Guardian Agent", desc:"Lane risk, live excursion alerts and stability-budget disposition packs."},
+      {key:"serial", name:"Serialisation & Traceability", agent:"Tracer Agent", desc:"EPCIS exception management, DSCSA/FMD data quality and partner follow-up."}
+    ]
+  };
+
+  /* ---------- shared carousel engine (RCM behaviour, per panel) ---------- */
+  function mountArch(root, WORKFLOWS, shapeSvg){
+    let currentStage = 0;
   function slideMarkup(wf, idx){
     const num = String(idx+1).padStart(2,'0');
     return `
@@ -1169,48 +1773,116 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       </div>`;
   }
 
-  const track = document.getElementById('carTrack');
-  if(!track) return;
-  track.innerHTML = WORKFLOWS.map((w,i)=>slideMarkup(w,i)).join('');
-  track.querySelectorAll('.rcm-slide').forEach(el=>el.addEventListener('click',()=>{
-    const idx = parseInt(el.dataset.idx,10);
-    if(idx !== currentStage){ currentStage = idx; updatePositions(); }
-  }));
+    const track = root.querySelector('.rcm-track');
+    if(!track) return null;
+    track.innerHTML = WORKFLOWS.map((w,i)=>slideMarkup(w,i)).join('');
+    track.querySelectorAll('.rcm-slide').forEach(el=>el.addEventListener('click',()=>{
+      const idx = parseInt(el.dataset.idx,10);
+      if(idx !== currentStage){ currentStage = idx; updatePositions(); }
+    }));
 
-  const panelTimers = new Map();
-  function clearPanelTimers(el){
-    const t = panelTimers.get(el);
-    if(t){ clearTimeout(t.show); clearTimeout(t.hide); panelTimers.delete(el); }
-  }
-  function updatePositions(){
-    const n = WORKFLOWS.length;
-    const step = 360 / n;
-    const radius = Math.max(420, Math.round(160 / Math.tan(Math.PI/n)));
-    track.querySelectorAll('.rcm-slide').forEach((el,i)=>{
-      el.style.transform = `rotateY(${i*step}deg) translateZ(${radius}px)`;
-      const isCenter = (i===currentStage);
-      el.classList.toggle('pos-center', isCenter);
-      if(!isCenter){
-        el.classList.remove('panel-visible');
-        clearPanelTimers(el);
-      } else {
-        clearPanelTimers(el);
-        const show = setTimeout(()=>el.classList.add('panel-visible'), 1050);
-        const hide = setTimeout(()=>el.classList.remove('panel-visible'), 4200);
-        panelTimers.set(el, {show, hide});
-      }
-    });
-    track.style.transform = `rotateY(${-currentStage*step}deg)`;
-  }
-  updatePositions();
-
-  function stepFn(dir){
-    const n = WORKFLOWS.length;
-    currentStage = (currentStage + dir + n) % n;
+    const panelTimers = new Map();
+    function clearPanelTimers(el){
+      const t = panelTimers.get(el);
+      if(t){ clearTimeout(t.show); clearTimeout(t.hide); panelTimers.delete(el); }
+    }
+    function updatePositions(){
+      const n = WORKFLOWS.length;
+      const step = 360 / n;
+      const radius = Math.max(420, Math.round(160 / Math.tan(Math.PI/n)));
+      track.querySelectorAll('.rcm-slide').forEach((el,i)=>{
+        el.style.transform = `rotateY(${i*step}deg) translateZ(${radius}px)`;
+        const isCenter = (i===currentStage);
+        el.classList.toggle('pos-center', isCenter);
+        if(!isCenter){
+          el.classList.remove('panel-visible');
+          clearPanelTimers(el);
+        } else {
+          clearPanelTimers(el);
+          const show = setTimeout(()=>el.classList.add('panel-visible'), 1050);
+          const hide = setTimeout(()=>el.classList.remove('panel-visible'), 4200);
+          panelTimers.set(el, {show, hide});
+        }
+      });
+      track.style.transform = `rotateY(${-currentStage*step}deg)`;
+    }
     updatePositions();
+
+    function stepFn(dir){
+      const n = WORKFLOWS.length;
+      currentStage = (currentStage + dir + n) % n;
+      updatePositions();
+    }
+    const btns = root.querySelectorAll('.car-controls .car-btn');
+    if(btns[0]) btns[0].addEventListener('click', ()=>stepFn(-1));
+    if(btns[1]) btns[1].addEventListener('click', ()=>stepFn(1));
+    return {replay: updatePositions};
   }
-  document.getElementById('carPrev').addEventListener('click', ()=>stepFn(-1));
-  document.getElementById('carNext').addEventListener('click', ()=>stepFn(1));
+
+  const archs = {};
+  document.querySelectorAll('.processes .proc-panel').forEach(p=>{
+    const id = p.dataset.proc;
+    archs[id] = id === 'rcm' ? mountArch(p, WORKFLOWS, shapeSvg) : mountArch(p, LS_WORKFLOWS[id], shapeLS);
+  });
+
+  /* ---------- process switcher ---------- */
+  const tabs = [...document.querySelectorAll('.processes .proc-tab')];
+  const ind = document.querySelector('.processes .proc-switch-line i');
+  let active = 0;
+  function moveInd(){
+    const t = tabs[active]; if(!t || !ind) return;
+    ind.style.width = t.offsetWidth + 'px';
+    ind.style.transform = `translateX(${t.offsetLeft}px)`;
+  }
+  function select(i, focus){
+    if(i === active){ if(focus) tabs[i].focus(); return; }
+    const prev = document.getElementById(tabs[active].getAttribute('aria-controls'));
+    const next = document.getElementById(tabs[i].getAttribute('aria-controls'));
+    active = i;
+    tabs.forEach((t,k)=>{
+      const on = k === i;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+    if(focus) tabs[i].focus({preventScroll:true});
+    moveInd();
+    const strip = document.querySelector('.processes .proc-switch-wrap');
+    if(strip && strip.scrollWidth > strip.clientWidth){
+      strip.scrollTo({left: Math.max(0, tabs[i].offsetLeft - (strip.clientWidth - tabs[i].offsetWidth)/2), behavior:'smooth'});
+    }
+    if(prev) prev.hidden = true;
+    if(next){
+      next.hidden = false;
+      next.classList.remove('is-entering'); void next.offsetWidth; next.classList.add('is-entering');
+      const a = archs[next.dataset.proc]; if(a) a.replay();
+    }
+  }
+  tabs.forEach((t,i)=>{
+    t.addEventListener('click', ()=>select(i,false));
+    t.addEventListener('keydown', e=>{
+      const n = tabs.length;
+      if(e.key==='ArrowRight'){ e.preventDefault(); select((active+1)%n,true); }
+      else if(e.key==='ArrowLeft'){ e.preventDefault(); select((active-1+n)%n,true); }
+      else if(e.key==='Home'){ e.preventDefault(); select(0,true); }
+      else if(e.key==='End'){ e.preventDefault(); select(n-1,true); }
+    });
+  });
+  /* equal panel heights so switching process never shifts the page below */
+  const panels = [...document.querySelectorAll('.processes .proc-panel')];
+  function equalize(){
+    panels.forEach(p=>p.style.minHeight='');
+    let max = 0;
+    const hiddenNow = panels.filter(p=>p.hidden);
+    hiddenNow.forEach(p=>p.hidden = false);
+    panels.forEach(p=>{ max = Math.max(max, p.offsetHeight); });
+    hiddenNow.forEach(p=>p.hidden = true);
+    panels.forEach(p=>p.style.minHeight = max + 'px');
+  }
+  function relayout(){ moveInd(); equalize(); }
+  relayout();
+  window.addEventListener('resize', relayout);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
 })();
 
 /* Value-leaks stacked accordion */

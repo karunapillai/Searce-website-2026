@@ -153,7 +153,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 @media (max-width:1024px){.agentic-layout{grid-template-columns:1fr;gap:56px;}.agentic-intro{max-width:100%;}}
 @media (max-width:560px){.agentic-grid{grid-template-columns:1fr;}.agentic-card:nth-of-type(3),.agentic-card:nth-of-type(4){grid-column:1;grid-row:auto;}.agentic-path{display:none;}}
 
-.processes{padding:72px 0 64px;background:var(--paper);color:var(--ink);border-bottom:none;overflow:hidden;position:relative;}
+.processes{padding:72px 0 24px;background:var(--paper);color:var(--ink);border-bottom:none;overflow:hidden;position:relative;}
 .processes .wrap{position:relative;z-index:1;}
 .processes .section-eyebrow{color:var(--blue);text-align:center;display:block;}
 .processes .section-h{color:var(--ink);text-align:center;margin-left:auto;margin-right:auto;}
@@ -286,7 +286,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 @media (prefers-reduced-motion:reduce){.leak-card-icon svg *{stroke-dasharray:none;stroke-dashoffset:0;animation:none !important;}.leak-card:hover .leak-card-icon{transform:none;}}
 
 /* ========== Outcomes - accordion left + baseline/intervention/result right ========== */
-.outcomes{background:#fff;color:var(--ink);position:relative;padding:100px 0 120px;border-bottom:none;}
+.outcomes{background:#fff;color:var(--ink);position:relative;padding:64px 0 56px;border-bottom:none;}
 .outcomes > .wrap{max-width:1296px;}
 .outcomes-intro{text-align:center;margin-bottom:48px;}
 .outcomes-intro .section-eyebrow{color:var(--blue);display:inline-block;margin-bottom:14px;}
@@ -326,7 +326,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 @media (max-width:520px){.outcomes-tabs{grid-template-columns:1fr;}}
 
 /* ========== Pillars - split intro + staggered card grid (light) ========== */
-.pillars{padding:120px 0;background:var(--paper);color:var(--ink);border-bottom:none;}
+.pillars{padding:80px 0 120px;background:var(--paper);color:var(--ink);border-bottom:none;}
 .pillars .section-eyebrow{color:var(--blue);}
 .pillars .section-h{color:var(--ink);}
 .pillars-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;margin-top:24px;align-items:start;position:relative;z-index:1;}
@@ -475,6 +475,114 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 }
 .reality,.agentic,.processes,.leaks,.outcomes,.pillars,.engagement,.faq,.connect{overflow:visible;}
 
+/* ========== MOBILE (≤720px) — modelled on verily.com: 24px gutters, single column, left-aligned type ========== */
+html{overflow-x:clip;}
+.processes{overflow:clip;}
+
+/* hamburger + drawer (shown wherever the desktop links are hidden, ≤900px) */
+.nav-burger{display:none;width:44px;height:44px;margin-right:-10px;border:none;background:transparent;cursor:pointer;align-items:center;justify-content:center;color:#fff;}
+.nav-burger span{position:relative;display:block;width:22px;height:1.6px;background:currentColor;border-radius:2px;transition:background .2s;}
+.nav-burger span::before,.nav-burger span::after{content:"";position:absolute;left:0;width:22px;height:1.6px;background:currentColor;border-radius:2px;transition:transform .25s ease,top .25s ease;}
+.nav-burger span::before{top:-7px;}
+.nav-burger span::after{top:7px;}
+.nav.nav-open .nav-burger span{background:transparent;}
+.nav.nav-open .nav-burger span::before{top:0;transform:rotate(45deg);}
+.nav.nav-open .nav-burger span::after{top:0;transform:rotate(-45deg);}
+.nav-drawer{display:none;}
+@media (max-width:900px){
+  .nav .wrap{height:72px;gap:16px;}
+  .nav-cta{display:none;}
+  .nav-burger{display:inline-flex;}
+  .nav.nav-open{position:fixed;background:#02061a;backdrop-filter:none;-webkit-backdrop-filter:none;}
+  .nav-drawer{display:block;position:fixed;top:72px;left:0;right:0;bottom:0;background:#02061a;padding:16px 24px 40px;overflow-y:auto;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s ease,transform .25s ease,visibility 0s linear .25s;}
+  .nav.nav-open .nav-drawer{opacity:1;visibility:visible;transform:none;transition:opacity .25s ease,transform .25s ease;}
+  .nav-drawer ul{list-style:none;margin:0;padding:0;border-top:1px solid rgba(255,255,255,0.1);}
+  .nav-drawer li a{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-family:var(--display);font-size:20px;letter-spacing:-0.01em;color:#fff;}
+  .nav-drawer li a.current{color:#79adff;}
+  .nav-drawer .nav-drawer-cta{display:inline-flex;align-items:center;gap:10px;margin-top:32px;background:var(--blue);color:#fff;font-family:var(--display);font-size:15px;padding:15px 26px;border-radius:999px;}
+  .nav-drawer .nav-drawer-cta svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;}
+  body.nav-locked{overflow:hidden;}
+
+  /* 24px gutters everywhere (desktop uses 72px on these) */
+  .nav .wrap,.hero .wrap,.reality > .wrap,.agentic > .wrap{padding:0 24px;}
+}
+@media (max-width:720px){
+  /* hero: collage first, full-bleed and cropped at the edges (Verily), then left-aligned type */
+  .hero{padding:72px 0 64px;}
+  .hero .wrap{justify-content:flex-start;padding-bottom:0;}
+  .hero-composition{order:-1;width:calc(100% + 96px);max-width:none;margin:12px 0 36px calc(((100% + 48px) - (100% + 96px) * 5 / 6) / 2 - (100% + 96px) / 6 - 24px);}
+  .hero-text{max-width:none;}
+  .hero-badge{font-size:9.5px;letter-spacing:.12em;padding:7px 14px 7px 11px;gap:8px;margin-bottom:22px;white-space:nowrap;}
+  .hero-badge-icon{width:15px;height:15px;}
+  .hero h1{font-size:42px;line-height:1.1;margin-bottom:20px;}
+  .hero-opening{font-size:17px;line-height:1.6;margin-bottom:32px;}
+  .hero-cta-primary{white-space:nowrap;}
+
+  /* type scale: 32px section headings, left-aligned */
+  .section-h,.reality-content h2,.agentic-intro h2,.engagement h2{font-size:32px;line-height:1.15;letter-spacing:-0.02em;}
+  .connect-heading{font-size:36px;line-height:1.1;}
+  .processes .section-h,.processes #processes-h,.outcomes-intro,.outcomes-intro .section-h{text-align:left;margin-left:0;}
+  .proc-head{text-align:left;margin-bottom:40px;}
+  .proc-title{font-size:24px;}
+  .proc-sub{margin:0;}
+  .proc-switch-wrap{margin:0 -24px 32px;padding:0 24px;}
+  .outcomes-intro{margin-bottom:32px;}
+  .outcomes-media{order:-1;}
+
+  /* tighter vertical rhythm between sections */
+  .agentic,.leaks,.processes,.outcomes,.pillars,.faq,.connect{padding:64px 0;}
+  .reality{padding:48px 0 64px;}
+  .outcomes-intro{padding:0;}
+  .leaks-stack{margin-top:32px;}
+
+  /* section 1 heading flows as one sentence */
+  .reality-content h2 span{display:inline;}
+  .reality-content h2{text-wrap:balance;margin-bottom:32px;}
+
+  /* FAQ: smaller boxes */
+  .faq-layout{gap:32px;}
+  .faq-title{font-size:32px;line-height:1.1;margin-bottom:14px;}
+  .faq-list{gap:8px;}
+  .faq-item{border-radius:12px;}
+  .faq-q{padding:14px 16px;font-size:15px;line-height:1.4;gap:14px;}
+  .faq-icon{width:28px;height:28px;}
+  .faq-a-inner{padding:14px 16px 16px;font-size:14.5px;line-height:1.65;}
+
+  /* shared intelligence / human oversight / business impact: centred */
+  .rcm-arch .arch-row{align-items:center;text-align:center;}
+  .rcm-arch .car-controls{margin-bottom:36px;}
+  .rcm-arch .rcm-carousel{margin-bottom:32px;}
+
+  /* engagement: no scroll-driven track on phones; the three steps stack as a list */
+  .engagement{min-height:0;padding:0;}
+  .eng-sticky{position:static;min-height:0;padding:40px 0 64px;}
+  .eng-layout{gap:32px;}
+  .eng-deck{padding-top:0;}
+  .eng-deck-stage{height:auto;display:grid;gap:12px;}
+  .eng-card{position:relative;inset:auto;transform:none !important;opacity:1 !important;pointer-events:auto !important;cursor:default;}
+  .eng-deck-dots{display:none;}
+  .eng-card-meta{padding-right:64px;line-height:1.5;}
+
+  /* outcomes: balanced heading, case tabs as a swipeable row */
+  .outcomes-intro .section-h,.outcomes-intro #outcomes-h{font-size:min(32px, calc((100vw - 48px) / 15.2));white-space:nowrap;}
+  .outcomes-tabs2{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -24px 32px;padding:0 24px 4px;}
+  .outcomes-tabs2::-webkit-scrollbar{display:none;}
+  .outcomes-item{flex:0 0 auto;min-height:0;padding:10px 16px 10px 10px;border:1px solid var(--paper-line);border-radius:14px;background:#fff;}
+  .outcomes-item.active{border-color:rgba(0,100,255,0.35);box-shadow:0 8px 20px -12px rgba(0,80,200,0.35);}
+  .outcomes-item-icon{width:36px;height:36px;border-radius:10px;}
+  .outcomes-item-icon svg{width:18px;height:18px;}
+  .outcomes-item-title{font-size:13px;}
+  .outcomes-item-title{line-height:1.25;}
+  .outcomes-story{gap:28px;}
+  .outcomes-case{margin-bottom:18px;}
+  .outcomes-detail-text{font-size:16px;line-height:1.65;}
+  .outcomes-metric-box{padding:14px 16px;right:12px;bottom:12px;}
+  .outcomes-metric-value{font-size:28px;margin-bottom:4px;}
+  .outcomes-metric-label{font-size:13px;}
+}
+
+#outcomes-h{max-width:none;}
+@media(min-width:700px){#outcomes-h{white-space:nowrap;}}
 </style>
 </head>
 <body>
@@ -504,6 +612,21 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       bring us a problem
       <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
     </a>
+    <button class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer"><span></span></button>
+  </div>
+
+  <div class="nav-drawer" id="navDrawer" aria-label="Mobile menu">
+    <ul>
+      <li><a href="#">outcomes</a></li>
+      <li><a href="#">how we solve</a></li>
+      <li><a href="business-systems-engineering.html">practices</a></li>
+      <li><a href="#" class="current">industries</a></li>
+      <li><a href="#">insights</a></li>
+      <li><a href="who-we-are.html">who we are</a></li>
+      <li><a href="#">partners</a></li>
+      <li><a href="careers.html">careers</a></li>
+    </ul>
+    <a href="#connect" class="nav-drawer-cta">bring us a problem <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
   </div>
 </nav>
 
@@ -698,7 +821,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 <section class="processes" aria-labelledby="processes-h">
   <span class="grid-motif" aria-hidden="true"></span>
   <div class="wrap">
-    <h2 id="processes-h" class="section-h">The processes this industry runs on.</h2>
+    <h2 id="processes-h" class="section-h">Real business outcomes.</h2>
 
     <div class="proc-switch-wrap">
       <div class="proc-switch" role="tablist" aria-label="Autonomous process architectures">
@@ -1995,6 +2118,20 @@ document.querySelectorAll('.faq-q').forEach(btn => {
       card.querySelectorAll('.leak-card-icon svg *').forEach(function(el){el.style.animation='none'; void el.getBoundingClientRect(); el.style.animation='';});
     });
   });
+})();
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('.nav'), btn=nav&&nav.querySelector('.nav-burger'), drawer=document.getElementById('navDrawer');
+  if(!btn||!drawer) return;
+  function set(open){
+    nav.classList.toggle('nav-open',open); document.body.classList.toggle('nav-locked',open);
+    btn.setAttribute('aria-expanded',open?'true':'false'); btn.setAttribute('aria-label',open?'Close menu':'Open menu');
+  }
+  btn.addEventListener('click',function(){ set(!nav.classList.contains('nav-open')); });
+  drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ set(false); }); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && nav.classList.contains('nav-open')){ set(false); btn.focus(); } });
+  window.addEventListener('resize',function(){ if(window.innerWidth>900) set(false); });
 })();
 </script>
 </body>

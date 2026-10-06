@@ -774,6 +774,18 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 @media (max-width:900px){.hero-composition.nr-comp{width:100%;max-width:560px;right:auto;}}
 /* NREU hero: "natural resources," is the longest first line of the industry pages, so a smaller clamp (~76px at 1440, in line with MIC 75 / TTL 80) */
 .hero h1{font-size:clamp(2.4rem,5.3vw,4.75rem);}
+
+/* NREU processes: heading and tabs centred; tabs styled as pill CTAs (active = filled Searce blue, others = outlined) */
+.devops .devops-head{justify-content:center;text-align:center;}
+.devops .p-tabs{justify-content:center;flex-wrap:wrap;gap:12px;overflow:visible;}
+.devops .p-tab{padding:13px 24px;border-radius:999px;border:1px solid rgba(0,100,255,0.35);background:#fff;color:var(--ink);font-size:14.25px;font-weight:400;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s;}
+.devops .p-tab small{color:var(--blue);}
+.devops .p-tab:hover{background:#eef4ff;border-color:var(--blue);color:var(--ink);}
+.devops .p-tab.active{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:400;}
+.devops .p-tab.active small{color:rgba(255,255,255,0.75);}
+.devops .p-tab:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+.devops .p-ind{display:none;}
+@media (max-width:900px){.devops .devops-head{align-items:center;}.devops .p-tabs{gap:10px;}.devops .p-tab{padding:11px 18px;font-size:13.5px;}}
 </style>
 </head>
 <body>
@@ -1027,16 +1039,17 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
     </div>
 
     <div class="p-tabs" role="tablist" aria-label="Processes">
-      <button class="p-tab active" role="tab" aria-selected="true" data-p="0"><small>01</small>Predictive Asset Maintenance</button>
-      <button class="p-tab" role="tab" aria-selected="false" data-p="1"><small>02</small>Grid Integrity &amp; Load Balancing</button>
-      <button class="p-tab" role="tab" aria-selected="false" data-p="2"><small>03</small>Revenue Cycle Reconciliation</button>
+      <button class="p-tab active" role="tab" aria-selected="true" data-p="0"><small>01</small>Grid Safety</button>
+      <button class="p-tab" role="tab" aria-selected="false" data-p="1"><small>02</small>Demand Forecasting</button>
+      <button class="p-tab" role="tab" aria-selected="false" data-p="2"><small>03</small>Asset Site</button>
+      <button class="p-tab" role="tab" aria-selected="false" data-p="3"><small>04</small>Demand Flexibility</button>
       <span class="p-ind" aria-hidden="true"></span>
     </div>
 
     <div class="proc-head">
       <div>
-        <h3 id="procTitle">The Predictive Asset Maintenance Architecture</h3>
-        <p class="section-lede" id="procLede">Six AI-powered workflows that turn live sensor data into prioritised, dispatched maintenance before assets fail.</p>
+        <h3 id="procTitle">The Autonomous Grid Safety Architecture</h3>
+        <p class="section-lede" id="procLede">From manual inspection to a digital field workforce: agentic AI that reads photos and sound, with humans in the loop.</p>
       </div>
       <div class="ctl">
         <span class="count" id="count"><b>01</b> / 06</span>
@@ -1366,82 +1379,108 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 /* Processes · Layout 3 sliding card carousel */
 (function(){
 /* ---- stage data (titles, agents, descriptions) copied from Layout 2 ---- */
-const STAGES = [
-  {title:"Sensor & SCADA Ingestion", agent:"Collector",
-   desc:"Streams vibration, temperature, pressure and SCADA readings from plants, substations and remote sites into one normalised asset record.",
-   flow:"Field sensors + SCADA → Collector → Normalised telemetry → Asset record"},
-  {title:"Asset Health Modelling", agent:"Modeler",
-   desc:"Combines live telemetry with maintenance history, manuals and operating conditions to score the health of every critical asset.",
-   flow:"Asset record + History → Modeler → Health score → Risk register"},
-  {title:"Anomaly Detection", agent:"Detector",
-   desc:"Watches every signal against learned operating envelopes and flags early degradation before it becomes a failure, outage or safety event.",
-   flow:"Live telemetry → Detector → Operating envelope check → Early warning"},
-  {title:"Maintenance Prioritisation", agent:"Planner",
-   desc:"Ranks at-risk assets by consequence, safety exposure and available crews so the highest-impact work is scheduled first.",
-   flow:"Early warnings → Planner → Risk + Consequence ranking → Maintenance plan"},
-  {title:"Work Order & Crew Dispatch", agent:"Dispatcher",
-   desc:"Creates work orders with the right parts, procedures and location context, and routes them to the nearest qualified crew.",
-   flow:"Maintenance plan → Dispatcher → Work order + Parts → Field crew"},
-  {title:"Failure Analysis & Learning", agent:"Analyst",
-   desc:"Captures what the crew found and fixed, confirms the root cause, and feeds it back into the health and failure models.",
-   flow:"Completed work → Analyst → Root cause → Model update"}
+/* ---- NREU stage data: the four architectures the user supplied (2026-10-06) ---- */
+const NR_STAGES0=[
+  {title:"Field Capture", agent:"Receiver",
+   desc:"Takes technician photos and sound recordings, even blurry or noisy ones.",
+   flow:"Technician photo + sound → Receiver → Usable capture"},
+  {title:"Hazard Detection", agent:"Detector",
+   desc:"Runs six checks: cabins, power boxes, poles, transformers, substations and pole sound.",
+   flow:"Capture → Detector → Six hazard checks → Flags"},
+  {title:"Hazard Judgment", agent:"Judge",
+   desc:"Decides whether a flag is a real hazard, including rare failures.",
+   flow:"Flags → Judge → Real hazard"},
+  {title:"Ticket Creation", agent:"Dispatcher",
+   desc:"Opens the repair ticket automatically, in seconds.",
+   flow:"Real hazard → Dispatcher → Repair ticket → Crew"},
+  {title:"Failure Prediction", agent:"Forecaster",
+   desc:"Scores failure risk so fixes happen before outages.",
+   flow:"Asset history → Forecaster → Failure risk score"},
+  {title:"Records Sync", agent:"Reconciler",
+   desc:"Keeps field reality and company systems in sync.",
+   flow:"Field updates → Reconciler → Asset records"}
 ];
 
-const STAGES2=[
-  {title:"Grid State Assembly", agent:"Observer",
-   desc:"Joins SCADA, GIS, meter and weather data into one live picture of loads, flows and conditions across the network.",
-   flow:"SCADA + GIS + Meters → Observer → Live grid state → Operations view"},
-  {title:"Demand & Generation Forecasting", agent:"Forecaster",
-   desc:"Forecasts demand alongside variable renewable output and storage levels to project net load hour by hour.",
-   flow:"Demand + Generation signals → Forecaster → Net load forecast → Balancing plan"},
-  {title:"Constraint Detection", agent:"Analyzer",
-   desc:"Scans feeders, transformers and lines for emerging overloads, voltage issues and congestion before they limit the network.",
-   flow:"Grid state → Analyzer → Constraint scan → Flagged risk"},
-  {title:"Operating Limit Check", agent:"Guardian",
-   desc:"Tests every proposed action against safety, reliability and regulatory operating limits before it can be executed.",
-   flow:"Proposed action → Guardian → Limits + Safety checks → Cleared action"},
-  {title:"Load Balancing & Switching", agent:"Coordinator",
-   desc:"Recommends load shifts, storage dispatch and switching orders to control-room operators, who approve and execute them.",
-   flow:"Cleared action → Coordinator → Operator approval → Grid response"},
-  {title:"Event Review & Learning", agent:"Reviewer",
-   desc:"Reviews every grid event and response, measures the outcome, and improves forecasts and constraint models for the next one.",
-   flow:"Grid event → Reviewer → Outcome analysis → Learning loop"}
+const NR_STAGES1=[
+  {title:"Signal Collection", agent:"Harvester",
+   desc:"Gathers macro factors (weather, economy, calendar) and micro load signals.",
+   flow:"Weather + Economy + Load → Harvester → Signals"},
+  {title:"Knowledge Base Building", agent:"Curator",
+   desc:"Builds the knowledge base that links macro and micro factors.",
+   flow:"Signals → Curator → Energy knowledge base"},
+  {title:"Model Training", agent:"Modeler",
+   desc:"Creates and trains different ML algorithms for each demand pattern.",
+   flow:"Knowledge base → Modeler → Model library"},
+  {title:"Demand Prediction", agent:"Forecaster",
+   desc:"Predicts power demand across short, medium and long horizons.",
+   flow:"Models → Forecaster → Demand forecast"},
+  {title:"Forecast Validation", agent:"Validator",
+   desc:"Backtests models, tracks drift and picks the best performer.",
+   flow:"Forecasts → Validator → Best model"},
+  {title:"Operational Planning", agent:"Planner",
+   desc:"Turns forecasts into generation, fuel and dispatch plans.",
+   flow:"Forecast → Planner → Generation + Dispatch plan"}
 ];
 
-const STAGES3=[
-  {title:"Meter Data Ingestion", agent:"Collector",
-   desc:"Collects interval and smart-meter reads, validates them and fills gaps before they reach billing.",
-   flow:"Meter reads → Collector → Validation + Gap fill → Clean usage data"},
-  {title:"Usage-to-Tariff Matching", agent:"Rater",
-   desc:"Matches validated usage to the correct tariffs, rate classes and contract terms for every customer account.",
-   flow:"Usage + Tariffs → Rater → Bill determinants → Draft bill"},
-  {title:"Billing Exception Detection", agent:"Auditor",
-   desc:"Scans every draft bill for estimated reads, rate mismatches, unusual consumption and possible meter faults.",
-   flow:"Draft bills → Auditor → Exception scan → Clean bills + Flags"},
-  {title:"Rate & Compliance Check", agent:"Guardian",
-   desc:"Confirms charges follow approved rate schedules and regulatory billing rules before any bill is issued.",
-   flow:"Bills → Guardian → Rate + Regulatory checks → Approved bills"},
-  {title:"Bill Delivery & Resolution", agent:"Resolver",
-   desc:"Issues approved bills and resolves routine customer queries and adjustments, routing complex cases to a specialist.",
-   flow:"Approved bills → Resolver → Customer channels → Resolved account"},
-  {title:"Leakage Analysis & Learning", agent:"Analyst",
-   desc:"Reconciles energy delivered with revenue collected, traces the source of every gap, and tightens the next billing cycle.",
-   flow:"Delivered vs Billed → Analyst → Leakage source → Next cycle"}
+const NR_STAGES2=[
+  {title:"Site Discovery", agent:"Scout",
+   desc:"Finds candidate sites from location, traffic, demand and grid data.",
+   flow:"Location + Grid data → Scout → Candidate sites"},
+  {title:"Feasibility Screening", agent:"Assessor",
+   desc:"Checks grid capacity, land, civil and regulatory feasibility.",
+   flow:"Candidates → Assessor → Feasible sites"},
+  {title:"Business Case & Ranking", agent:"Underwriter",
+   desc:"Builds the business case and ranks sites by expected return.",
+   flow:"Feasible sites → Underwriter → Ranked shortlist"},
+  {title:"Permits & Approvals", agent:"Coordinator",
+   desc:"Runs legal, land, engineering and finance steps together, not in handoffs.",
+   flow:"Shortlist → Coordinator → Approvals"},
+  {title:"Build & Commission", agent:"Commissioner",
+   desc:"Tracks vendors, installation and go-live milestones.",
+   flow:"Approved site → Commissioner → Live site"},
+  {title:"Operate & Optimize", agent:"Optimizer",
+   desc:"Monitors utilization, uptime and cost per asset.",
+   flow:"Live site → Optimizer → Utilization + Uptime"}
+];
+
+const NR_STAGES3=[
+  {title:"Peak Load Forecasting", agent:"Forecaster",
+   desc:"Predicts peak load by feeder and time using weather and usage signals.",
+   flow:"Weather + Usage → Forecaster → Peak by feeder"},
+  {title:"Cohort Identification", agent:"Segmenter",
+   desc:"Finds the consumer cohorts most able and willing to shift load.",
+   flow:"Consumers → Segmenter → Flexible cohorts"},
+  {title:"Flexibility Planning", agent:"Planner",
+   desc:"Sizes the flexibility needed and picks the cheapest mix of levers.",
+   flow:"Peak + Cohorts → Planner → Flexibility plan"},
+  {title:"Consumer Engagement", agent:"Engager",
+   desc:"Sends the right offer, channel and timing to each cohort.",
+   flow:"Plan → Engager → Offers to cohorts"},
+  {title:"DER Orchestration", agent:"Orchestrator",
+   desc:"Dispatches batteries, EVs, solar and smart loads in real time.",
+   flow:"Plan → Orchestrator → Batteries + EVs + Solar"},
+  {title:"Impact Verification", agent:"Verifier",
+   desc:"Measures actual load shift, savings and consumer rewards.",
+   flow:"Load shift → Verifier → Savings + Rewards"}
 ];
 
 const PROCESSES=[
-  {title:"The Predictive Asset Maintenance Architecture",
-   lede:"Six AI-powered workflows that turn live sensor data into prioritised, dispatched maintenance before assets fail.",
-   stages:STAGES,
-   rail:["Asset &amp; Network Graph","Failure &amp; Degradation Models","Maintenance Ledger","Self-Learning Feedback Loop"]},
-  {title:"The Grid Integrity & Load Balancing Architecture",
-   lede:"Six AI-powered workflows that keep supply, demand and network conditions in balance, inside operating limits.",
-   stages:STAGES2,
-   rail:["Network Topology Graph","Operating Limits &amp; Safety Standards","Switching &amp; Event Ledger","Self-Learning Feedback Loop"]},
-  {title:"The Revenue Cycle Reconciliation Architecture",
-   lede:"Six AI-powered workflows that close the gap between energy delivered and revenue collected.",
-   stages:STAGES3,
-   rail:["Customer &amp; Meter Graph","Tariff &amp; Rate Models","Billing &amp; Settlement Ledger","Self-Learning Feedback Loop"]}
+  {title:"The Autonomous Grid Safety Architecture",
+   lede:"From manual inspection to a digital field workforce: agentic AI that reads photos and sound, with humans in the loop.",
+   stages:NR_STAGES0,
+   rail:["Asset Registry (626,868)", "Hazard Detection Models", "Failure Risk Scores", "Passwordless Secure Environment"]},
+  {title:"The Autonomous Demand Forecasting Architecture",
+   lede:"Predicting power demand from macro and micro signals: multi-model ML and knowledge-building agents, with humans in the loop.",
+   stages:NR_STAGES1,
+   rail:["Energy Knowledge Base", "ML Model Library", "Demand History", "Self-Learning Feedback Loop"]},
+  {title:"The Autonomous Asset Site Architecture",
+   lede:"Identifying the right sites with fewer operational processes: site intelligence and cross-department agents, with humans in the loop.",
+   stages:NR_STAGES2,
+   rail:["Site Knowledge Graph", "Site Scoring Models", "Unified Asset Ledger", "Self-Learning Feedback Loop"]},
+  {title:"The Autonomous Demand Flexibility Architecture",
+   lede:"An AI-driven platform with humans in the loop: peak forecasting, cohort targeting and DER orchestration.",
+   stages:NR_STAGES3,
+   rail:["Consumer Cohort Graph", "Peak Load Models", "DER Registry", "Self-Learning Feedback Loop"]}
 ];
 
 /* ---------------------------------------------------------------------------
@@ -1645,37 +1684,11 @@ const SCENES3_2=[
   ${tag([-1.3,-1.3,0],'NEXT RUN',{side:'left',y:64})}
   ${caption('EVERY RUN SCORED, EVERY SCORE LEARNED FROM')}
 `)];
-/* NREU: relabel the isometric scenes for each architecture (tab 3 reuses geometry from both sets) */
+/* NREU: relabel the isometric scenes for each architecture (geometry reused from the two Layout 3 sets) */
 const relabel=(fn,map)=>()=>{let s=fn();for(const [a,b] of map){s=s.split('>'+a+'<').join('>'+b+'<');}return s;};
-const NR1=[
-  [['COMMITS','SENSOR FEEDS'],['IN REVIEW','NORMALISED'],['EVERY COMMIT REVIEWED BEFORE IT BUILDS','EVERY SENSOR, ONE ASSET RECORD']],
-  [['BUILD LAYERS','HISTORY + LIVE'],['TESTED ARTIFACT','HEALTH SCORE'],['BUILD · TEST · ASSEMBLE, ON REPEAT','HISTORY + TELEMETRY, ONE HEALTH SCORE']],
-  [['SCAN','ENVELOPE CHECK'],['CLEARED','NORMAL'],['SECURITY + COMPLIANCE SWEEP EVERY BUILD','EVERY SIGNAL CHECKED AGAINST ITS ENVELOPE']],
-  [['CANARY','AT RISK'],['FLEET','ASSET FLEET'],['PROGRESSIVE ROLLOUT, ROLLBACK ON RISK','HIGHEST-RISK ASSETS WORKED FIRST']],
-  [['ANOMALY','WORK ORDER'],['TELEMETRY','WARNINGS'],['SIGNALS CORRELATED INTO ONE INCIDENT','WARNINGS BECOME ONE WORK ORDER']],
-  [['ROOT CAUSE','ROOT CAUSE'],['NEXT COMMIT','NEXT FORECAST'],['LEARNINGS FEED THE NEXT RELEASE','EVERY REPAIR SHARPENS THE MODEL']]
-];
-const NR2=[
-  [['BRIEF','LIVE FEEDS'],['STRUCTURED','LIVE GRID STATE'],['THE BRIEF BECOMES STRUCTURED INPUT','EVERY FEED, ONE LIVE GRID STATE']],
-  [['CREATIVE ASSETS','DEMAND'],['PERFORMANCE','GENERATION'],['CONTEXT','NET LOAD'],['ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT','DEMAND + GENERATION, ONE NET-LOAD VIEW']],
-  [['SIGNALS','FEEDER LOADS'],['PATTERN FOUND','CONSTRAINT'],['GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN','EVERY FEEDER SCANNED, THE CONSTRAINT SURFACED']],
-  [['GUARDRAILS','OPERATING LIMITS'],['APPROVED','CLEARED'],['SAFETY + EVALUATION CHECKS BEFORE DELIVERY','SAFETY + REGULATORY LIMITS BEFORE ACTION']],
-  [['INSIGHTS','ACTIONS'],['THE USER','OPERATOR'],['STREAMED LIVE INTO THE CONVERSATION','OPERATORS APPROVE EVERY SWITCH']],
-  [['EVALUATED RUN','SCORED EVENT'],['NEXT RUN','NEXT EVENT'],['EVERY RUN SCORED, EVERY SCORE LEARNED FROM','EVERY GRID EVENT SCORED AND LEARNED FROM']]
-];
-const NR3=[
-  [0,[['BRIEF','METER READS'],['STRUCTURED','VALIDATED'],['THE BRIEF BECOMES STRUCTURED INPUT','EVERY READ VALIDATED BEFORE BILLING']]],
-  [1,[['CREATIVE ASSETS','USAGE'],['PERFORMANCE','TARIFFS'],['CONTEXT','DRAFT BILL'],['ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT','USAGE + TARIFFS, ONE ACCURATE BILL']]],
-  [2,[['SCAN','EXCEPTION SCAN'],['CLEARED','CLEAN BILLS'],['SECURITY + COMPLIANCE SWEEP EVERY BUILD','EVERY BILL SWEPT FOR EXCEPTIONS']],'A'],
-  [3,[['GUARDRAILS','RATE RULES'],['APPROVED','APPROVED'],['SAFETY + EVALUATION CHECKS BEFORE DELIVERY','RATE + REGULATORY CHECKS BEFORE ISSUE']]],
-  [4,[['INSIGHTS','BILLS'],['THE USER','CUSTOMER'],['STREAMED LIVE INTO THE CONVERSATION','ROUTINE QUERIES RESOLVED, COMPLEX ONES ROUTED']]],
-  [5,[['ROOT CAUSE','LEAKAGE SOURCE'],['NEXT COMMIT','NEXT CYCLE'],['LEARNINGS FEED THE NEXT RELEASE','EVERY GAP TRACED, THE NEXT CYCLE TIGHTER']],'A']
-];
-const SCENES3_ALL=[
-  SCENES3.map((fn,i)=>relabel(fn,NR1[i])),
-  SCENES3_2.map((fn,i)=>relabel(fn,NR2[i])),
-  NR3.map(([i,map,set])=>relabel((set==='A'?SCENES3:SCENES3_2)[i],map))
-];
+const NR_SET={A:SCENES3,B:SCENES3_2};
+const NRT=[[["B", 0, [["BRIEF", "PHOTO + SOUND"], ["STRUCTURED", "CAPTURED"], ["THE BRIEF BECOMES STRUCTURED INPUT", "EVERY PHOTO AND SOUND, READY TO READ"]]], ["A", 2, [["SCAN", "SIX CHECKS"], ["CLEARED", "CHECKED"], ["SECURITY + COMPLIANCE SWEEP EVERY BUILD", "SIX HAZARD CHECKS ON EVERY CAPTURE"]]], ["B", 2, [["SIGNALS", "FLAGS"], ["PATTERN FOUND", "REAL HAZARD"], ["GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN", "REAL HAZARDS SEPARATED FROM NOISE"]]], ["B", 4, [["INSIGHTS", "TICKET"], ["THE USER", "REPAIR CREW"], ["STREAMED LIVE INTO THE CONVERSATION", "REPAIR TICKET OPENED IN SECONDS"]]], ["A", 4, [["ANOMALY", "RISK SCORE"], ["TELEMETRY", "ASSETS"], ["SIGNALS CORRELATED INTO ONE INCIDENT", "FAILURE RISK SCORED BEFORE OUTAGES"]]], ["A", 5, [["ROOT CAUSE", "RECORDS"], ["NEXT COMMIT", "FIELD"], ["LEARNINGS FEED THE NEXT RELEASE", "FIELD AND RECORDS KEPT IN SYNC"]]]], [["B", 1, [["CREATIVE ASSETS", "MACRO"], ["PERFORMANCE", "MICRO"], ["CONTEXT", "SIGNALS"], ["ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT", "MACRO + MICRO SIGNALS GATHERED"]]], ["A", 1, [["BUILD LAYERS", "FACTORS"], ["TESTED ARTIFACT", "KNOWLEDGE BASE"], ["BUILD · TEST · ASSEMBLE, ON REPEAT", "FACTORS LINKED INTO ONE KNOWLEDGE BASE"]]], ["A", 0, [["COMMITS", "PATTERNS"], ["IN REVIEW", "TRAINING"], ["EVERY COMMIT REVIEWED BEFORE IT BUILDS", "A MODEL FOR EVERY DEMAND PATTERN"]]], ["B", 2, [["SIGNALS", "HORIZONS"], ["PATTERN FOUND", "DEMAND PEAK"], ["GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN", "SHORT, MEDIUM AND LONG HORIZONS"]]], ["B", 3, [["GUARDRAILS", "BACKTEST"], ["APPROVED", "BEST MODEL"], ["SAFETY + EVALUATION CHECKS BEFORE DELIVERY", "BACKTESTED, DRIFT TRACKED, BEST PICKED"]]], ["A", 3, [["CANARY", "DISPATCH"], ["FLEET", "GENERATION"], ["PROGRESSIVE ROLLOUT, ROLLBACK ON RISK", "FORECASTS BECOME DISPATCH PLANS"]]]], [["B", 1, [["CREATIVE ASSETS", "LOCATION"], ["PERFORMANCE", "GRID DATA"], ["CONTEXT", "CANDIDATES"], ["ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT", "CANDIDATE SITES FROM EVERY SIGNAL"]]], ["A", 2, [["SCAN", "SCREEN"], ["CLEARED", "FEASIBLE"], ["SECURITY + COMPLIANCE SWEEP EVERY BUILD", "CAPACITY, LAND AND REGULATORY CHECKS"]]], ["B", 2, [["SIGNALS", "SITES"], ["PATTERN FOUND", "TOP RETURN"], ["GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN", "SITES RANKED BY EXPECTED RETURN"]]], ["B", 3, [["GUARDRAILS", "APPROVALS"], ["APPROVED", "APPROVED"], ["SAFETY + EVALUATION CHECKS BEFORE DELIVERY", "LEGAL, LAND AND FINANCE IN ONE FLOW"]]], ["A", 1, [["BUILD LAYERS", "MILESTONES"], ["TESTED ARTIFACT", "LIVE SITE"], ["BUILD · TEST · ASSEMBLE, ON REPEAT", "VENDORS AND MILESTONES TO GO-LIVE"]]], ["A", 5, [["ROOT CAUSE", "UPTIME"], ["NEXT COMMIT", "NEXT SITE"], ["LEARNINGS FEED THE NEXT RELEASE", "EVERY SITE IMPROVES THE NEXT"]]]], [["A", 4, [["ANOMALY", "PEAK"], ["TELEMETRY", "FEEDERS"], ["SIGNALS CORRELATED INTO ONE INCIDENT", "PEAK LOAD BY FEEDER AND TIME"]]], ["B", 1, [["CREATIVE ASSETS", "USAGE"], ["PERFORMANCE", "WILLINGNESS"], ["CONTEXT", "COHORT"], ["ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT", "COHORTS MOST ABLE TO SHIFT LOAD"]]], ["B", 2, [["SIGNALS", "LEVERS"], ["PATTERN FOUND", "CHEAPEST MIX"], ["GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN", "THE CHEAPEST MIX OF LEVERS"]]], ["B", 4, [["INSIGHTS", "OFFERS"], ["THE USER", "CONSUMER"], ["STREAMED LIVE INTO THE CONVERSATION", "RIGHT OFFER, CHANNEL AND TIMING"]]], ["A", 3, [["CANARY", "DISPATCH"], ["FLEET", "DER FLEET"], ["PROGRESSIVE ROLLOUT, ROLLBACK ON RISK", "BATTERIES, EVS AND SOLAR AS ONE FLEET"]]], ["B", 5, [["EVALUATED RUN", "VERIFIED SHIFT"], ["NEXT RUN", "NEXT EVENT"], ["EVERY RUN SCORED, EVERY SCORE LEARNED FROM", "EVERY LOAD SHIFT MEASURED AND REWARDED"]]]]];
+const SCENES3_ALL=NRT.map(tab=>tab.map(([set,i,map])=>relabel(NR_SET[set][i],map)));
 
 /* ---------------------------------------------------------------------------
    RENDER + INTERACTION — sliding card carousel

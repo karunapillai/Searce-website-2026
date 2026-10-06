@@ -658,15 +658,15 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 .econ .section-h span{color:#3b82ff;}
 .econ .section-sub{color:var(--ink-60);max-width:480px;font-size:17px;line-height:1.65;margin:22px 0 0;}
 .econ .section-sub strong{font-weight:500;font-variation-settings:'wght' 500;color:#2b2f3a;}
-.econ-list{display:flex;flex-direction:column;gap:20px;}
-.econ-card{position:relative;background:#fff;border:1px solid rgba(0,100,255,0.16);border-radius:24px;padding:34px 38px 36px;min-height:280px;display:flex;flex-direction:column;box-shadow:0 18px 50px -34px rgba(0,50,160,0.25);transition:border-color .4s,box-shadow .4s,transform .4s var(--ease);scroll-margin-top:140px;}
+.econ-list{display:flex;flex-direction:column;gap:16px;}
+.econ-card{position:relative;background:#fff;border:1px solid rgba(0,100,255,0.16);border-radius:22px;padding:28px 32px 30px;min-height:220px;display:flex;flex-direction:column;box-shadow:0 18px 50px -34px rgba(0,50,160,0.25);transition:border-color .4s,box-shadow .4s,transform .4s var(--ease);scroll-margin-top:140px;}
 .econ-card.is-active{border-color:var(--blue);box-shadow:0 30px 64px -34px rgba(0,100,255,0.45);}
 .econ-card-top{display:flex;align-items:center;gap:14px;}
-.econ-icon{width:46px;height:46px;border-radius:14px;background:var(--blue-06);color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .4s,color .4s;}
+.econ-icon{width:42px;height:42px;border-radius:13px;background:var(--blue-06);color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .4s,color .4s;}
 .econ-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 .econ-card.is-active .econ-icon{background:var(--blue);color:#fff;}
 .econ-num{margin-left:auto;font-family:var(--display);font-size:12px;letter-spacing:.16em;color:var(--ink-40);}
-.econ-q{margin:auto 0 0;padding-top:34px;font-family:var(--display);font-weight:400;font-size:clamp(24px,2.3vw,34px);line-height:1.22;letter-spacing:-0.015em;color:#0b1a3a;}
+.econ-q{margin:auto 0 0;padding-top:24px;font-family:var(--display);font-weight:400;font-size:clamp(24px,2.3vw,34px);line-height:1.22;letter-spacing:-0.015em;color:#0b1a3a;}
 .econ-desc{margin:16px 0 0;color:var(--ink-60);font-size:16px;line-height:1.6;max-width:520px;}
 @media (max-width:900px){
   .econ-layout{grid-template-columns:1fr;gap:36px;}
@@ -674,9 +674,6 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   .econ-card{min-height:0;padding:26px 24px 28px;}
   .econ-q{padding-top:24px;}
 }
-
-.hero-svg .vp-photo{transform-box:fill-box;transform-origin:32% 38%;animation:vpSettle 2s cubic-bezier(.215,.61,.35,1) both;}
-@keyframes vpSettle{0%,6%{transform:scale(1.12);}100%{transform:scale(1.06);}}
 
 /* Process picker: four prominent selectable cards (replaces the thin underline tabs) */
 .devops .p-picker{margin-bottom:44px;}
@@ -698,6 +695,20 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 @media (prefers-reduced-motion:reduce){.devops .p-tab{transition:none;}}
 @media (max-width:1000px){.devops .p-tabs{grid-template-columns:repeat(2,minmax(0,1fr));}.devops .p-tab.active::after{display:none;}}
 @media (max-width:520px){.devops .p-tab{padding:12px 36px 12px 14px;gap:8px;}.devops .p-tab-name{font-size:13.5px;}.devops .p-tab-go{right:12px;}}
+
+/* ========== Type scale · one set of sizes for the whole page (hero headline and metric figures excepted) ========== */
+:root{--fs-h2:clamp(32px,3.3vw,48px);--fs-h3:24px;--fs-h4:18px;--fs-lead:17px;--fs-body:16px;--fs-ui:15px;}
+#reality-h,#agentic-h,#leaks-h,#devops-h,#outcomes-h,#pillars-h,#engagement-h,.faq .faq-title,.connect .connect-heading{font-family:var(--display);font-size:var(--fs-h2);font-weight:300;line-height:1.08;letter-spacing:-0.02em;}
+@media (min-width:1100px){#reality-h{white-space:nowrap;}}
+@media (max-width:1099px){#reality-h{white-space:normal;}}
+.shift .shift-new,.econ .econ-q,#procTitle,#strip .body h3,.eng-card-title,.pillars .pillar-name{font-family:var(--display);font-size:var(--fs-h3);font-weight:400;line-height:1.25;letter-spacing:-0.01em;}
+.faq .faq-q{font-size:var(--fs-h4);}
+.hero-opening p,.shift-head p,.econ .section-sub,.devops .section-sub,.devops-head p,#procLede,.eng-body,.connect .connect-sub{font-size:var(--fs-lead);line-height:1.65;}
+.reality-lede{font-size:20px;}
+.rflow-step--key strong{font-size:20px;}
+.rflow-step p,.shift .shift-text,.econ .econ-desc,#strip .body p,.pillars .pillar-desc,.eng-card-desc,.faq .faq-a-inner,.faq .faq-side-text,.outcomes .outcomes-detail-text{font-size:var(--fs-body);line-height:1.6;}
+.devops .p-tab-name,.outcomes .outcomes-item-title{font-size:var(--fs-ui);}
+@media (max-width:600px){:root{--fs-h3:21px;--fs-lead:16px;--fs-body:15.5px;}}
 </style>
 </head>
 <body>
@@ -1039,37 +1050,37 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
     <div class="outcomes-tabs2" id="outcomesAccordion" role="tablist">
       <button class="outcomes-item active" data-index="0" role="tab" aria-selected="true">
         <span class="outcomes-item-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>
-        <span class="outcomes-item-title">On-Premise Big Data<br>Migration</span>
+        <span class="outcomes-item-title">100 TB Big Data<br>Cloud Migration</span>
       </button>
       <button class="outcomes-item" data-index="1" role="tab" aria-selected="false">
         <span class="outcomes-item-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M4 10h-2M4 14h-2M22 10h-2M22 14h-2M10 4V2M14 4V2M10 22v-2M14 22v-2"/></svg></span>
-        <span class="outcomes-item-title">Model Training Velocity<br>&amp; GPU Acceleration</span>
+        <span class="outcomes-item-title">Model Training &amp;<br>GPU Acceleration</span>
       </button>
       <button class="outcomes-item" data-index="2" role="tab" aria-selected="false">
         <span class="outcomes-item-icon"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></span>
-        <span class="outcomes-item-title">Data Warehouse<br>Migration</span>
+        <span class="outcomes-item-title">Data Warehouse<br>Modernization</span>
       </button>
       <button class="outcomes-item" data-index="3" role="tab" aria-selected="false">
         <span class="outcomes-item-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-        <span class="outcomes-item-title">Enterprise SaaS Migration<br>&amp; Hybrid Coexistence</span>
+        <span class="outcomes-item-title">100k-User Enterprise<br>SaaS Migration</span>
       </button>
       <span class="outcomes-tabs-line" aria-hidden="true"><i></i></span>
     </div>
 
     <div class="outcomes-story" id="outcomesDetail">
       <div class="outcomes-copy">
-        <div class="outcomes-case" data-field="heading">On-Premise Big Data Migration</div>
+        <div class="outcomes-case" data-field="heading">100 TB Big Data Cloud Migration</div>
         <div class="outcomes-detail-block">
           <div class="outcomes-detail-label">Baseline</div>
-          <p class="outcomes-detail-text" data-field="baseline">Legacy on-premise Cloudera/Hive clusters restricted data access speeds for conversational AI models, while 100 TB of volatile tables caused severe ingestion bottlenecks.</p>
+          <p class="outcomes-detail-text" data-field="baseline">Legacy on-premise Cloudera and Hive clusters restricted data access speeds for conversational AI models, while 100 TB of volatile tables caused severe ingestion bottlenecks.</p>
         </div>
         <div class="outcomes-detail-block">
           <div class="outcomes-detail-label">Intervention</div>
-          <p class="outcomes-detail-text" data-field="intervention">Migrated a 60 TB Hive database into BigQuery in under 5 days using distcp scripts, moved 40 TB of HBase tables into GCS via multi-threaded Python pipelines, and deployed Terraform Landing Zones.</p>
+          <p class="outcomes-detail-text" data-field="intervention">Searce migrated a 60 TB Hive database to BigQuery in under 5 days using distcp scripts, moved 40 TB of HBase tables into Cloud Storage, and deployed Terraform Landing Zones.</p>
         </div>
         <div class="outcomes-detail-block">
           <div class="outcomes-detail-label">Result</div>
-          <p class="outcomes-detail-text" data-field="result">Slashed platform maintenance overhead by 95%, compressed pipeline ingestion windows from 10 minutes to under 3.5 minutes, and doubled baseline data and compute processing capacity.</p>
+          <p class="outcomes-detail-text" data-field="result">Slashed platform maintenance overhead by 95%, compressed pipeline ingestion windows from 10 minutes to under 3.5 minutes, and doubled compute processing capacity.</p>
         </div>
       </div>
       <div class="outcomes-media shape-1" id="outcomesMedia">
@@ -1871,22 +1882,22 @@ document.querySelectorAll('.leak-bar').forEach(bar => {
   const detail = document.getElementById('outcomesDetail');
   if(!items.length || !detail) return;
   const data = [
-    {heading:"On-Premise Big Data Migration", image:"assets/outcome-bigdata.jpg", alt:"Engineer monitoring data pipelines across multiple screens", metric:"95%", metricLabel:"Maintenance Overhead Cut",
-      baseline:"Legacy on-premise Cloudera/Hive clusters restricted data access speeds for conversational AI models, while 100 TB of volatile tables caused severe ingestion bottlenecks.",
-      intervention:"Migrated a 60 TB Hive database into BigQuery in under 5 days using distcp scripts, moved 40 TB of HBase tables into GCS via multi-threaded Python pipelines, and deployed Terraform Landing Zones.",
-      result:"Slashed platform maintenance overhead by 95%, compressed pipeline ingestion windows from 10 minutes to under 3.5 minutes, and doubled baseline data and compute processing capacity."},
-    {heading:"Model Training Velocity & GPU Acceleration", image:"assets/outcome-gpu.jpg", alt:"Two engineers reviewing a tablet in a data center", shape:1, fit:"gpu", metric:"50%", metricLabel:"Training Time Compression",
-      baseline:"Computer vision models running on legacy NVIDIA P100 GPUs suffered severe memory restrictions, causing long 70-minute training cycles that delayed inspection turnarounds.",
-      intervention:"Refactored Fastai-Resnet34 models for NVIDIA A100 GPUs on GCP, unlocking multi-machine distributed training, multi-worker loading, and mixed precision layers.",
-      result:"Cut model training time by nearly 50%, from 70 minutes down to 38 minutes, with a 46% compilation speedup while maintaining 97% classification accuracy."},
-    {heading:"Data Warehouse Migration", image:"assets/outcome-warehouse.jpg", alt:"Engineer working on a laptop beside server racks in a data center", metric:"45%", metricLabel:"Query Performance Lift",
-      baseline:"Classplus suffered massive management strain and high operational costs running Amazon Redshift clusters, requiring permanent vacant capacity to maintain query speed.",
-      intervention:"Deployed a proprietary migration accelerator tool to move 7 TB across 850+ tables into serverless BigQuery in 3 weeks, backed by automated Cloud Composer ETL pipelines.",
-      result:"Reduced operational infrastructure management overhead by 30%, accelerated reporting speeds, and achieved a 45% query execution performance lift."},
-    {heading:"Enterprise SaaS Migration & Hybrid Coexistence", image:"assets/outcome-saas.jpg", alt:"Teams working on laptops across a large open-plan office", shape:5, metric:"100,000", metricLabel:"Users Switched, 50% Cost Cut",
-      baseline:"TCS needed to migrate 100,000 active employees from Office 365 to Google Workspace while ensuring flawless messaging and calendar interop with 450,000 remaining O365 users.",
-      intervention:"Deployed Google Workspace using Google Cloud Directory Sync (GCDS) and Password Sync, implementing mail routing and calendar interop controls for seamless sync with zero mail drops.",
-      result:"Captured an immediate 50% reduction in licensing and admin costs while boosting daily platform operational turnaround times by 80%."}
+    {heading:"100 TB Big Data Cloud Migration", image:"assets/outcome-bigdata.jpg", alt:"Engineer monitoring data pipelines across multiple screens", metric:"95%", metricLabel:"Maintenance Overhead Cut",
+      baseline:"Legacy on-premise Cloudera and Hive clusters restricted data access speeds for conversational AI models, while 100 TB of volatile tables caused severe ingestion bottlenecks.",
+      intervention:"Searce migrated a 60 TB Hive database to BigQuery in under 5 days using distcp scripts, moved 40 TB of HBase tables into Cloud Storage, and deployed Terraform Landing Zones.",
+      result:"Slashed platform maintenance overhead by 95%, compressed pipeline ingestion windows from 10 minutes to under 3.5 minutes, and doubled compute processing capacity."},
+    {heading:"Model Training & GPU Acceleration", image:"assets/outcome-gpu.jpg", alt:"Two engineers reviewing a tablet in a data center", shape:1, fit:"gpu", metric:"50%", metricLabel:"Training Time Compression",
+      baseline:"Computer vision models running on legacy GPUs suffered memory bottlenecks, causing long 70-minute training cycles that delayed inspection turnarounds.",
+      intervention:"Refactored machine learning models on Google Cloud, unlocking multi-machine distributed training, multi-worker loading, and mixed-precision layers.",
+      result:"Cut model training time down to 38 minutes—a 46% compilation speedup—while maintaining 97% classification accuracy."},
+    {heading:"Data Warehouse Modernization", image:"assets/outcome-warehouse.jpg", alt:"Engineer working on a laptop beside server racks in a data center", metric:"45%", metricLabel:"Query Performance Lift",
+      baseline:"A fast-growing SaaS platform faced massive operational strain and high cloud infrastructure spend running legacy Redshift clusters to maintain query speed.",
+      intervention:"Deployed a proprietary migration accelerator tool to move 7 TB across 850+ tables into serverless BigQuery in 3 weeks, backed by automated ETL pipelines.",
+      result:"Reduced operational management overhead by 30%, accelerated reporting speeds, and achieved a 45% query execution performance lift."},
+    {heading:"100k-User Enterprise SaaS Migration", image:"assets/outcome-saas.jpg", alt:"Teams working on laptops across a large open-plan office", shape:5, metric:"50%", metricLabel:"Licensing Cost Reduction",
+      baseline:"An enterprise tech provider needed to migrate 100,000 active employees from Office 365 to Google Workspace while ensuring flawless calendar/mail interop with 450,000 remaining users.",
+      intervention:"Implemented Google Cloud Directory Sync and Password Sync, configuring custom mail routing and calendar interop controls for a seamless migration with zero data drops.",
+      result:"Captured an immediate 50% reduction in licensing and administration costs while boosting daily platform operational turnaround times by 80%."}
   ];
   const line = document.querySelector('.outcomes-tabs-line i');
   function setActive(idx){

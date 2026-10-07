@@ -650,44 +650,51 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 
 /* Section 5b: practices sub line */
 .pillars-intro .section-h{margin-bottom:20px;}
+
+/* Hero background line grid (2026-10-07): faint white lines, strongest behind the collage, fading out to the edges */
+.hero .grid-motif{z-index:0;color:rgba(255,255,255,0.12);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 70% 82% at 70% 52%, #000 0%, rgba(0,0,0,0.7) 50%, transparent 90%);mask-image:radial-gradient(ellipse 70% 82% at 70% 52%, #000 0%, rgba(0,0,0,0.7) 50%, transparent 90%);}
+.proc-src{max-width:1104px;margin:18px auto 0;text-align:center;font-family:var(--display);font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-40);}
+
+/* ===== Mobile responsive pass (2026-10-07) ===== */
+@media (max-width:900px){.hero .grid-motif{display:none;}}
+@media (max-width:900px){
+  .wrap{padding-left:24px !important;padding-right:24px !important;}
+  .reality,.shift,.leaks,.processes,.outcomes,.pillars,.faq,.connect{padding-top:72px !important;padding-bottom:72px !important;}
+  .reality-media{margin-left:0 !important;max-width:520px;}
+  .reality-layout{gap:40px !important;}
+  .leak-card{min-height:0 !important;padding:24px 22px 22px !important;}
+  .leak-card-icon{margin-bottom:18px !important;}
+  .leaks-stack{margin-top:32px !important;gap:14px !important;}
+  .pillar-card{min-height:0 !important;}
+  .processes .proc-panel{min-height:0 !important;}
+  .rcm-arch .car-controls{margin-bottom:40px !important;}
+  .outcomes-intro{margin-bottom:24px !important;}
+  .outcomes-tabs2{margin-bottom:24px !important;}
+  .faq-q{font-size:17px !important;}
+  .hero .hero-composition{margin-top:40px !important;}
+  /* process footer rows: label and content centred on mobile */
+  .rcm-arch .arch-row{align-items:center !important;text-align:center !important;}
+  .rcm-arch .arch-label,.rcm-arch .arch-content{text-align:center !important;justify-content:center !important;}
+  .proc-src{text-align:center !important;}
+}
+@media (max-width:560px){
+  .reality-content h2,.shift-head h2,.leaks .section-h,.processes .section-h,.outcomes .section-h,.pillars-intro .section-h{font-size:30px !important;line-height:1.15 !important;}
+}
 </style>
+<link rel="stylesheet" href="assets/searce-nav.css">
+<link rel="stylesheet" href="assets/industry-mobile.css">
 </head>
 <body>
 
-<nav class="nav" aria-label="Primary navigation">
-  <div class="wrap">
-    <a href="index.html" class="nav-logo" aria-label="Searce home">Searce</a>
-    <ul class="nav-links">
-      <li><a href="#">outcomes</a></li>
-      <li><a href="#">how we solve <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="business-systems-engineering.html">practices <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="#" class="current">industries <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="#">insights</a></li>
-      <li class="has-dropdown">
-        <a href="#" aria-haspopup="true">company
-          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </a>
-        <div class="mega-panel">
-          <a class="mega-item" href="who-we-are.html"><span class="mega-title">Who we are</span></a>
-          <a class="mega-item" href="#"><span class="mega-title">Partners</span></a>
-          <a class="mega-item" href="careers.html"><span class="mega-title">Careers</span></a>
-          <a class="mega-item" href="#"><span class="mega-title">futurify.ai</span></a>
-        </div>
-      </li>
-    </ul>
-    <a href="#connect" class="nav-cta">
-      bring us a problem
-      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-    </a>
-  </div>
-</nav>
+<script src="assets/searce-nav.js" data-theme="dark" data-current="rcpg"></script>
 
 <!-- ============== HERO (split editorial: text left, masked-media Searce geometry right) ============== -->
 <section class="hero" aria-labelledby="hero-heading">
+  <span class="grid-motif" aria-hidden="true"></span>
   <div class="wrap">
     <div class="hero-text">
       <div class="hero-badge">
-        <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true"><rect x="158" y="24" width="58" height="101" fill="#13377f"/><rect x="250" y="158" width="101" height="58" fill="#13377f"/><rect x="22" y="158" width="194" height="58" fill="#0064ff"/><rect x="158" y="250" width="58" height="101" fill="#0064ff"/></svg>
+        <svg class="hero-badge-icon" viewBox="0 0 384 384" aria-hidden="true"><rect x="25" y="69" width="144" height="144" fill="#0064ff"/><rect x="205" y="69" width="145" height="54" fill="#13377f"/><rect x="205" y="160" width="145" height="54" fill="#13377f"/><rect x="25" y="250" width="144" height="54" fill="#13377f"/><circle cx="241" cy="287" r="36" fill="#0064ff"/></svg>
         2030 Vision &middot; Touchless Commerce
       </div>
       <h1 id="hero-heading">
@@ -704,7 +711,8 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       </div>
     </div>
 
-    <!-- Retail hero = the user's Group 16.svg (frame 1262 x 952), shapes touching edge to edge; the two quarter-discs are straightened to the grid.
+    <!-- Colours: Searce secondary palette only (#001630 #002659 #003583 #0051CB #0064FF #3685FF #79ADFF #6DA6FF #C9DEFF #E4EFFF #F2F7FF), 2026-10-07.
+         Retail hero = the user's Group 16.svg (frame 1262 x 952), shapes touching edge to edge; the two quarter-discs are straightened to the grid.
          ONE video runs through: quarter-disc (row 1, col 1) + wide window (row 1, cols 2-3) = the bot chat and the shopper's whole face,
          then the quarter-disc (row 2, col 2) and the circle (row 2, right) below.
          Solids (Searce gradient blues): arch on the wide window, square (row 2, col 0), triangle (row 2, col 1). -->
@@ -725,9 +733,9 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       <div class="hero-video-wrap"><video src="assets/hero-rcpg-shopper.mp4" poster="assets/hero-rcpg-shopper.jpg" autoplay muted loop playsinline preload="metadata"></video></div>
       <svg class="hero-svg" viewBox="0 0 1262 952" preserveAspectRatio="xMidYMid meet">
         <defs>
-          <linearGradient id="hgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#79adff"/><stop offset="1" stop-color="#efefff"/></linearGradient>
-          <linearGradient id="hgE" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b3d0ff"/><stop offset="1" stop-color="#0064ff"/></linearGradient>
-          <linearGradient id="hgF" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c1ac9"/><stop offset="1" stop-color="#46b6ff"/></linearGradient>
+          <linearGradient id="hgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#79ADFF"/><stop offset="1" stop-color="#E4EFFF"/></linearGradient>
+          <linearGradient id="hgE" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C9DEFF"/><stop offset="1" stop-color="#0064FF"/></linearGradient>
+          <linearGradient id="hgF" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#003583"/><stop offset="1" stop-color="#3685FF"/></linearGradient>
           <!-- Dot field on the arch, fading from its base -->
           <pattern id="hpDot" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2.6" fill="#0064ff"/></pattern>
           <radialGradient id="hmDotG" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(623 317) scale(520 520)"><stop offset="0" stop-color="#fff"/><stop offset="0.55" stop-color="#fff" stop-opacity="0.6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
@@ -902,7 +910,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <img class="leaks-motif" src="assets/leaks-shapes-v5.svg" alt="" aria-hidden="true">
 </section>
 
-<!-- ============== PROCESSES (four autonomous architectures — HLS tab switcher + carousel UI) ============== -->
+<!-- ============== PROCESSES (four case-study architectures, from the user's Searce case slides, 2026-10-07) ============== -->
 <section class="processes" aria-labelledby="processes-h">
   <span class="grid-motif" aria-hidden="true"></span>
   <div class="wrap">
@@ -910,27 +918,27 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 
     <div class="proc-switch-wrap">
       <div class="proc-switch" role="tablist" aria-label="Autonomous process architectures">
-        <button class="proc-tab active" type="button" role="tab" id="ptab-digital" aria-controls="proc-digital" aria-selected="true" tabindex="0"><span class="n">01</span>Digital Commerce</button>
-        <button class="proc-tab" type="button" role="tab" id="ptab-merchandising" aria-controls="proc-merchandising" aria-selected="false" tabindex="-1"><span class="n">02</span>Merchandising &amp; Pricing</button>
-        <button class="proc-tab" type="button" role="tab" id="ptab-supply" aria-controls="proc-supply" aria-selected="false" tabindex="-1"><span class="n">03</span>Supply Chain &amp; Fulfilment</button>
-        <button class="proc-tab" type="button" role="tab" id="ptab-cpg" aria-controls="proc-cpg" aria-selected="false" tabindex="-1"><span class="n">04</span>CPG Brand &amp; Revenue</button>
+        <button class="proc-tab active" type="button" role="tab" id="ptab-localization" aria-controls="proc-localization" aria-selected="true" tabindex="0"><span class="n">01</span>Video Localization</button>
+        <button class="proc-tab" type="button" role="tab" id="ptab-trendspotting" aria-controls="proc-trendspotting" aria-selected="false" tabindex="-1"><span class="n">02</span>Trendspotting</button>
+        <button class="proc-tab" type="button" role="tab" id="ptab-instore" aria-controls="proc-instore" aria-selected="false" tabindex="-1"><span class="n">03</span>In-Store Intelligence</button>
+        <button class="proc-tab" type="button" role="tab" id="ptab-workplace" aria-controls="proc-workplace" aria-selected="false" tabindex="-1"><span class="n">04</span>AI-Native Workplace</button>
         <span class="proc-switch-line" aria-hidden="true"><i></i></span>
       </div>
     </div>
 
-    <div class="rcm-arch proc-panel" id="proc-digital" data-proc="digital" role="tabpanel" aria-labelledby="ptab-digital">
+    <div class="rcm-arch proc-panel" id="proc-localization" data-proc="localization" role="tabpanel" aria-labelledby="ptab-localization">
       <div class="proc-head">
-        <h3 class="proc-title">The Autonomous Digital Commerce Architecture.</h3>
-        <p class="proc-sub">Six connected workflows. Purpose-built AI agents run each stage. Shared intelligence learns across every repository. Humans oversee the operational exceptions that matter.</p>
+        <h3 class="proc-title">The Autonomous Video Localization Architecture.</h3>
+        <p class="proc-sub">Gemini · Serverless Pipeline · Human-in-the-Loop: one English training video, many regional languages.</p>
       </div>
       <div class="rcm-carousel">
         <div class="rcm-track" id="carTrack"></div>
       </div>
       <div class="car-controls">
-        <button class="car-btn" aria-label="Previous workflow">
+        <button class="car-btn" aria-label="Previous swarm">
           <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <button class="car-btn" aria-label="Next workflow">
+        <button class="car-btn" aria-label="Next swarm">
           <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
@@ -938,32 +946,33 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       <div class="arch-footer">
         <div class="arch-row intel">
           <div class="arch-label">Shared Intelligence</div>
-          <div class="arch-content">Product Knowledge Graph<span class="sep">·</span>Customer Context<span class="sep">·</span>Search &amp; Intent Signals<span class="sep">·</span>Self-Learning Feedback Loop</div>
+          <div class="arch-content">Retail Glossary<span class="sep">·</span>Gemini Models<span class="sep">·</span>Pipeline State Tracker<span class="sep">·</span>Zero-Trust Access (IAP &amp; Cloud Armor)</div>
         </div>
         <div class="arch-row oversight">
           <div class="arch-label">Human Oversight</div>
-          <div class="arch-content">E-commerce &amp; CX Leads<span class="sep">·</span>Trust &amp; Safety<span class="sep">·</span>Continuous Optimisation</div>
+          <div class="arch-content">Retail Subject-Matter Experts<span class="sep">·</span>Training &amp; Content Teams<span class="sep">·</span>Continuous Optimization</div>
         </div>
         <div class="arch-row impact">
           <div class="arch-label">Business Impact</div>
-          <div class="arch-content"><span class="arr">↑</span>Conversion<span class="sep">·</span><span class="arr">↑</span>Average Order Value<span class="sep">·</span><span class="arr">↓</span>Cost per Contact<span class="sep">·</span><span class="arr">↓</span>Refund Cycle Time</div>
+          <div class="arch-content"><span class="arr">↓</span>Time to Regional Dub<span class="sep">·</span><span class="arr">↓</span>Manual Steps<span class="sep">·</span><span class="arr">↑</span>Audio-Video Sync<span class="sep">·</span><span class="arr">↑</span>Term Consistency</div>
         </div>
       </div>
+      <p class="proc-src">One Video, Many Languages · Retail · Corporate Training · Searce case study CS-162 (PolySync) · 6 weeks to production</p>
     </div>
 
-    <div class="rcm-arch proc-panel" id="proc-merchandising" data-proc="merchandising" role="tabpanel" aria-labelledby="ptab-merchandising" hidden>
+    <div class="rcm-arch proc-panel" id="proc-trendspotting" data-proc="trendspotting" role="tabpanel" aria-labelledby="ptab-trendspotting" hidden>
       <div class="proc-head">
-        <h3 class="proc-title">The Autonomous Merchandising &amp; Pricing Architecture.</h3>
-        <p class="proc-sub">Six connected workflows from range to markdown. Purpose-built AI agents run each stage. Shared intelligence learns across every season. Merchants approve every price that goes live.</p>
+        <h3 class="proc-title">The Autonomous Trendspotting Architecture.</h3>
+        <p class="proc-sub">Global Signals · Agentic AI · Human-in-the-Loop: spotting emerging trends and markets beyond India to power product innovation.</p>
       </div>
       <div class="rcm-carousel">
         <div class="rcm-track"></div>
       </div>
       <div class="car-controls">
-        <button class="car-btn" aria-label="Previous workflow">
+        <button class="car-btn" aria-label="Previous swarm">
           <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <button class="car-btn" aria-label="Next workflow">
+        <button class="car-btn" aria-label="Next swarm">
           <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
@@ -971,32 +980,33 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       <div class="arch-footer">
         <div class="arch-row intel">
           <div class="arch-label">Shared Intelligence</div>
-          <div class="arch-content">Demand &amp; Elasticity Models<span class="sep">·</span>Competitor Price Feed<span class="sep">·</span>Assortment History<span class="sep">·</span>Self-Learning Feedback Loop</div>
+          <div class="arch-content">Trend Knowledge Graph<span class="sep">·</span>Market Opportunity Models<span class="sep">·</span>Category &amp; Consumer Ledger<span class="sep">·</span>Self-Learning Feedback Loop</div>
         </div>
         <div class="arch-row oversight">
           <div class="arch-label">Human Oversight</div>
-          <div class="arch-content">Merchandising &amp; Buying Teams<span class="sep">·</span>Pricing Governance<span class="sep">·</span>Category Management</div>
+          <div class="arch-content">Insights &amp; Innovation Leads<span class="sep">·</span>Marketing, Sales &amp; Supply Chain<span class="sep">·</span>Continuous Optimization</div>
         </div>
         <div class="arch-row impact">
           <div class="arch-label">Business Impact</div>
-          <div class="arch-content"><span class="arr">↑</span>Gross Margin<span class="sep">·</span><span class="arr">↑</span>Full-Price Sell-Through<span class="sep">·</span><span class="arr">↓</span>Markdown Spend<span class="sep">·</span><span class="arr">↑</span>Promotion ROI</div>
+          <div class="arch-content"><span class="arr">↑</span>Trend Lead Time<span class="sep">·</span><span class="arr">↑</span>Innovation Hit Rate<span class="sep">·</span><span class="arr">↓</span>Time to Concept<span class="sep">·</span><span class="arr">↑</span>New-Market Reach</div>
         </div>
       </div>
+      <p class="proc-src">See It Early, Launch It First · Marketing · Sales · Supply Chain · Innovation · FMCG / CPG / Retail</p>
     </div>
 
-    <div class="rcm-arch proc-panel" id="proc-supply" data-proc="supply" role="tabpanel" aria-labelledby="ptab-supply" hidden>
+    <div class="rcm-arch proc-panel" id="proc-instore" data-proc="instore" role="tabpanel" aria-labelledby="ptab-instore" hidden>
       <div class="proc-head">
-        <h3 class="proc-title">The Autonomous Supply Chain &amp; Fulfilment Architecture.</h3>
-        <p class="proc-sub">Six connected workflows from forecast to doorstep and back. Purpose-built AI agents run each stage. Shared intelligence learns across every order. Planners own the exceptions.</p>
+        <h3 class="proc-title">The Autonomous In-Store Intelligence Architecture.</h3>
+        <p class="proc-sub">Multi-Camera Vision · AI Reasoning · Human-in-the-Loop: turning CCTV footage into store insights.</p>
       </div>
       <div class="rcm-carousel">
         <div class="rcm-track"></div>
       </div>
       <div class="car-controls">
-        <button class="car-btn" aria-label="Previous workflow">
+        <button class="car-btn" aria-label="Previous swarm">
           <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <button class="car-btn" aria-label="Next workflow">
+        <button class="car-btn" aria-label="Next swarm">
           <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
@@ -1004,32 +1014,33 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       <div class="arch-footer">
         <div class="arch-row intel">
           <div class="arch-label">Shared Intelligence</div>
-          <div class="arch-content">Unified Inventory Ledger<span class="sep">·</span>Demand Forecasts<span class="sep">·</span>Node Capacity Graph<span class="sep">·</span>Carrier Performance<span class="sep">·</span>Self-Learning Feedback Loop</div>
+          <div class="arch-content">Unified People-Tracking Engine<span class="sep">·</span>AI Reasoning Layer<span class="sep">·</span>SOP Playbook Library<span class="sep">·</span>Self-Verification Checks</div>
         </div>
         <div class="arch-row oversight">
           <div class="arch-label">Human Oversight</div>
-          <div class="arch-content">Supply Chain Planners<span class="sep">·</span>DC &amp; Store Operations<span class="sep">·</span>Continuous Optimisation</div>
+          <div class="arch-content">Store Operations &amp; Managers<span class="sep">·</span>Retail Insights &amp; Standards Team<span class="sep">·</span>Continuous Optimization</div>
         </div>
         <div class="arch-row impact">
           <div class="arch-label">Business Impact</div>
-          <div class="arch-content"><span class="arr">↑</span>On-Shelf Availability<span class="sep">·</span><span class="arr">↑</span>Inventory Turns<span class="sep">·</span><span class="arr">↓</span>Cost per Order<span class="sep">·</span><span class="arr">↓</span>Split Shipments</div>
+          <div class="arch-content"><span class="arr">↑</span>Count Precision<span class="sep">·</span><span class="arr">↓</span>Analysis Time<span class="sep">·</span><span class="arr">↓</span>Cost per Clip<span class="sep">·</span><span class="arr">↑</span>Parallel Footage</div>
         </div>
       </div>
+      <p class="proc-src">Every Person Counted Once · APAC · Retail, CPG &amp; E-commerce · 7River (Seven River Systems) · AI-native on GCP</p>
     </div>
 
-    <div class="rcm-arch proc-panel" id="proc-cpg" data-proc="cpg" role="tabpanel" aria-labelledby="ptab-cpg" hidden>
+    <div class="rcm-arch proc-panel" id="proc-workplace" data-proc="workplace" role="tabpanel" aria-labelledby="ptab-workplace" hidden>
       <div class="proc-head">
-        <h3 class="proc-title">The Autonomous CPG Brand &amp; Revenue Growth Architecture.</h3>
-        <p class="proc-sub">Six connected workflows from demand signal to shelf. Purpose-built AI agents run each stage. Shared intelligence learns across every retailer. Brand and sales teams sign off every investment.</p>
+        <h3 class="proc-title">The AI-Native Workplace Architecture.</h3>
+        <p class="proc-sub">Secure Collaboration · Gemini Agents · Human-in-the-Loop: turning ideas into execution in minutes.</p>
       </div>
       <div class="rcm-carousel">
         <div class="rcm-track"></div>
       </div>
       <div class="car-controls">
-        <button class="car-btn" aria-label="Previous workflow">
+        <button class="car-btn" aria-label="Previous swarm">
           <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <button class="car-btn" aria-label="Next workflow">
+        <button class="car-btn" aria-label="Next swarm">
           <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
@@ -1037,17 +1048,18 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       <div class="arch-footer">
         <div class="arch-row intel">
           <div class="arch-label">Shared Intelligence</div>
-          <div class="arch-content">Retailer POS &amp; Syndicated Data<span class="sep">·</span>Price-Pack Elasticity Models<span class="sep">·</span>Trade Spend Ledger<span class="sep">·</span>Self-Learning Feedback Loop</div>
+          <div class="arch-content">Single Source of Truth<span class="sep">·</span>Gemini in Workspace<span class="sep">·</span>Admin Console Control Plane<span class="sep">·</span>Zero-Trust Security</div>
         </div>
         <div class="arch-row oversight">
           <div class="arch-label">Human Oversight</div>
-          <div class="arch-content">Revenue Growth Management<span class="sep">·</span>Key Account &amp; Sales Teams<span class="sep">·</span>Brand Marketing</div>
+          <div class="arch-content">IT &amp; Security Team<span class="sep">·</span>Business Teams &amp; Store Staff<span class="sep">·</span>Change &amp; Adoption Leads</div>
         </div>
         <div class="arch-row impact">
           <div class="arch-label">Business Impact</div>
-          <div class="arch-content"><span class="arr">↑</span>Net Revenue per Unit<span class="sep">·</span><span class="arr">↑</span>Trade ROI<span class="sep">·</span><span class="arr">↑</span>Share of Shelf<span class="sep">·</span><span class="arr">↓</span>Out-of-Stocks</div>
+          <div class="arch-content"><span class="arr">↓</span>Content Cycle<span class="sep">·</span><span class="arr">↓</span>Analysis Time<span class="sep">·</span><span class="arr">↓</span>Issue Resolution<span class="sep">·</span><span class="arr">↑</span>Employees Unified</div>
         </div>
       </div>
+      <p class="proc-src">Idea to Execution in Minutes · Raymond Group · 100-year legacy · 55 countries · Searce case study CS-157</p>
     </div>
   </div>
 </section>
@@ -1124,7 +1136,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
             <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg></div>
             <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
           </div>
-          <div class="pillar-name">Business Systems Engineering</div>
+          <div class="pillar-name">AI Outcome Engineering</div>
           <p class="pillar-desc">Rebuilds catalog management, vendor onboarding, returns processing, and customer support workflows, replacing rigid legacy PIM and ERP interfaces.</p>
         </div>
         <div class="pillar-card">
@@ -1132,7 +1144,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
             <div class="pillar-card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
             <div class="pillar-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
           </div>
-          <div class="pillar-name">AI-Ready Platform Engineering</div>
+          <div class="pillar-name">Cloud &amp; AI Platform Engineering</div>
           <p class="pillar-desc">Constructs high-throughput data platforms, unifying real-time point-of-sale (POS) data, web telemetry, and supply chain inventory into search-ready context lakes.</p>
         </div>
         <div class="pillar-card">
@@ -1836,42 +1848,471 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         ${mute(148,190,"PDP CONTENT SCORE","middle",5.5)}`;
       }
 
+      /* ===== CASE STUDY ARCHITECTURES v2 (2026-10-07): one dominant object per diagram, HLS RCM grammar ===== */
+
+      /* Extractor: the source video, speech and on-screen text lifted out (audio muted before OCR) */
+      case "extract": {
+        const wave=[5,9,6,12,8,14,7,10,13,6,11,8,12,5,9,7,11,6];
+        return `
+        <rect x="22" y="30" width="156" height="98" rx="5" ${filled}/>
+        ${band(22,30,156,16,0.18)}
+        ${tag(32,41,"SOURCE VIDEO","start",ac,600,6,1.4)}
+        <rect x="146" y="22" width="34" height="18" rx="4" fill="${ac}"/>${tag(163,34,"EN","middle",dk,700,7,1.4)}
+        <circle cx="100" cy="76" r="14" fill="none" stroke="${ac}" stroke-width="1.4"/>
+        <path d="M 95 69 L 107 76 L 95 83 Z" fill="${ac}"/>
+        <rect x="56" y="100" width="88" height="10" rx="2" fill="${ac}" fill-opacity="0.22" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 2"/>
+        <line x1="62" y1="105" x2="128" y2="105" stroke="${ac}" stroke-width="1.2"/>
+        ${wave.map((h,i)=>`<rect x="${32+i*7.6}" y="${120-h/2}" width="2.6" height="${h}" rx="1.3" fill="${st}" opacity="0.35"/>`).join('')}
+        ${dash("M 60 128 L 60 146")}${dash("M 140 128 L 140 146")}
+        <rect x="22" y="146" width="76" height="34" rx="4" ${filled}/>
+        ${tag(30,157,"SPEECH","start",ac,600,5.5,1.2)}
+        <line x1="30" y1="166" x2="88" y2="166" ${thin}/><line x1="30" y1="173" x2="74" y2="173" ${thin} opacity="0.6"/>
+        <rect x="102" y="146" width="76" height="34" rx="4" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1.2"/>
+        ${tag(110,157,"ON-SCREEN","start",ac,600,5.5,1.2)}
+        <line x1="110" y1="166" x2="168" y2="166" stroke="${ac}" stroke-width="1"/><line x1="110" y1="173" x2="152" y2="173" stroke="${ac}" stroke-width="1" opacity="0.6"/>`;
+      }
+
+      /* Linguist: one English script, a strict retail glossary, a stack of regional versions */
+      case "translate": {
+        return `
+        <rect x="16" y="42" width="66" height="116" rx="4" ${filled}/>
+        <rect x="16" y="42" width="66" height="16" fill="${ac}" fill-opacity="0.14"/>
+        ${tag(23,53,"SCRIPT","start",ac,600,5.2,1)}
+        <rect x="58" y="44" width="20" height="11" rx="3" fill="${ac}"/>${tag(68,52,"EN","middle",dk,700,5.5,0.6)}
+        ${[70,80,90,104,114,124,138].map((y,i)=>`<line x1="24" y1="${y}" x2="${[72,64,70,74,60,68,66][i]}" y2="${y}" ${thin} opacity="${i===3?1:0.65}" ${i===3?`stroke="${ac}"`:''}/>`).join('')}
+        <rect x="22" y="99" width="54" height="10" rx="2" fill="${ac}" fill-opacity="0.2"/>
+        ${arrowR(88,100,106)}
+        ${[[124,28,0.4],[117,34,0.65]].map(([x,y,o])=>`<rect x="${x}" y="${y}" width="66" height="116" rx="4" fill="${dk}" stroke="${st}" stroke-width="1" opacity="${o}"/>`).join('')}
+        <rect x="110" y="40" width="66" height="116" rx="4" fill="${dk}"/>
+        <rect x="110" y="40" width="66" height="116" rx="4" ${filled}/>
+        <rect x="110" y="40" width="66" height="16" fill="${ac}" fill-opacity="0.14"/>
+        ${tag(117,51,"OUTPUT","start",ac,600,5.2,1)}
+        <rect x="152" y="42" width="20" height="11" rx="3" fill="${ac}"/>${tag(162,50,"HI","middle",dk,700,5.5,0.6)}
+        ${[68,78,88,102,112,122,136].map((y,i)=>`<line x1="118" y1="${y}" x2="${[166,158,164,168,154,162,160][i]}" y2="${y}" ${thin} opacity="${i===3?1:0.65}" ${i===3?`stroke="${ac}"`:''}/>`).join('')}
+        <rect x="116" y="97" width="54" height="10" rx="2" fill="${ac}" fill-opacity="0.2"/>
+        ${check(170,102,0.9)}
+        ${tag(100,182,"GLOSSARY TERM LOCKED","middle",ac,600,6,1.4)}`;
+      }
+
+      /* Advisor (localization): rewrite suggestions keep retail terms accurate; the expert signs off */
+      case "review": {
+        return `
+        <rect x="26" y="24" width="112" height="152" rx="5" ${filled}/>
+        <rect x="26" y="24" width="112" height="18" fill="${ac}" fill-opacity="0.14"/>
+        ${tag(36,36,"DRAFT TRANSCRIPT","start",ac,600,6,1.4)}
+        ${[56,66,76].map((y,i)=>`<line x1="36" y1="${y}" x2="${[126,116,122][i]}" y2="${y}" ${thin} opacity="0.65"/>`).join('')}
+        <rect x="32" y="86" width="100" height="22" rx="3" fill="${ac}" fill-opacity="0.18"/>
+        <line x1="38" y1="93" x2="96" y2="93" stroke="${st}" stroke-width="1.2" opacity="0.4"/>
+        <line x1="36" y1="90" x2="98" y2="96" stroke="${st}" stroke-width="0.8" opacity="0.6"/>
+        <line x1="38" y1="101" x2="112" y2="101" stroke="${ac}" stroke-width="1.4"/>
+        ${[122,132,142,152,162].map((y,i)=>`<line x1="36" y1="${y}" x2="${[120,110,126,104,116][i]}" y2="${y}" ${thin} opacity="0.65"/>`).join('')}
+        ${link("M 138 97 L 150 97",1)}
+        <rect x="150" y="70" width="40" height="54" rx="6" fill="${ac}"/>
+        ${tag(170,86,"TERM","middle",dk,700,6,1.2)}
+        <line x1="158" y1="96" x2="182" y2="96" stroke="${dk}" stroke-width="1.2" opacity="0.6"/>
+        <line x1="158" y1="104" x2="176" y2="104" stroke="${dk}" stroke-width="1.2" opacity="0.4"/>
+        ${check(170,146,1.6)}
+        ${tag(170,168,"APPROVED","middle",ac,600,6,1.4)}`;
+      }
+
+      /* Painter: on-screen text tracked to the pixel and re-baked in the new language */
+      case "overlay": {
+        return `
+        ${[0,1,2,3,4,5,6,7,8].map(i=>`<rect x="${22+i*17.6}" y="24" width="13" height="10" rx="1.5" fill="${ac}" opacity="${i===4?1:0.3}"/>`).join('')}
+        <rect x="22" y="42" width="156" height="104" rx="5" ${filled}/>
+        <path d="M 22 120 L 70 82 L 104 108 L 132 90 L 178 124 V 146 H 22 Z" fill="${ds}" opacity="0.35"/>
+        <circle cx="146" cy="68" r="9" fill="${st}" opacity="0.25"/>
+        <rect x="46" y="94" width="108" height="22" rx="3" fill="${ac}"/>
+        <line x1="56" y1="102" x2="128" y2="102" stroke="${dk}" stroke-width="1.6"/>
+        <line x1="56" y1="109" x2="110" y2="109" stroke="${dk}" stroke-width="1.2" opacity="0.6"/>
+        <path d="M 40 88 h10 M 40 88 v10 M 160 122 h-10 M 160 122 v-10 M 160 88 h-10 M 160 88 v10 M 40 122 h10 M 40 122 v-10" stroke="${ac}" stroke-width="1.3" fill="none"/>
+        ${tag(46,86,"TRACKED PIXELS","start",ac,600,5.2,1.2)}
+        ${tag(100,168,"2-10 FPS · CONTRAST-SAFE","middle",ac,600,6,1.4)}`;
+      }
+
+      /* Synchronizer: dubbed voice matched to the speaker and aligned to the picture */
+      case "sync": {
+        const a=[8,14,6,18,10,16,7,12,15,9,13,6,17,10,8,14];
+        return `
+        <rect x="18" y="36" width="164" height="118" rx="5" ${filled}/>
+        <rect x="18" y="36" width="164" height="18" fill="${ac}" fill-opacity="0.14"/>
+        ${tag(28,48,"TIMELINE","start",ac,600,6,1.4)}
+        ${[0,1,2,3,4,5,6,7].map(i=>`<line x1="${40+i*18}" y1="54" x2="${40+i*18}" y2="58" ${thin} opacity="0.6"/>`).join('')}
+        ${mute(28,74,"SOURCE")}
+        ${a.map((h,i)=>`<rect x="${62+i*7}" y="${84-h/2}" width="3.4" height="${h}" rx="1.7" fill="${st}" opacity="0.5"/>`).join('')}
+        ${mute(28,112,"DUB")}
+        ${a.map((h,i)=>`<rect x="${62+i*7}" y="${122-h*0.9/2}" width="3.4" height="${h*0.9}" rx="1.7" fill="${ac}"/>`).join('')}
+        <line x1="118" y1="60" x2="118" y2="146" stroke="${ac}" stroke-width="1.4"/>
+        <path d="M 112 60 h12 l -6 7 Z" fill="${ac}"/>
+        <rect x="132" y="160" width="50" height="20" rx="4" fill="${ac}"/>${tag(157,173,"1.0x","middle",dk,700,7.5,0.6)}
+        ${mute(18,173,"0.85x - 1.15x SPEED")}`;
+      }
+
+      /* Courier: finished versions filed in Drive, Chat alerts, status tracked in Firestore */
+      case "deliver": {
+        const R=[{t:"HINDI",s:2},{t:"TAMIL",s:2},{t:"BENGALI",s:1}];
+        return `
+        <path d="M 20 40 H 62 L 72 50 H 164 V 166 H 20 Z" ${filled} stroke-linejoin="round"/>
+        ${band(20,50,144,16,0.18)}
+        ${tag(30,61,"DRIVE · TRAINING VIDEOS","start",ac,600,5.5,1.2)}
+        ${R.map((r,i)=>`
+          <rect x="30" y="${78+i*28}" width="26" height="18" rx="3" ${i===0?`fill="${ac}"`:filled}/>
+          <path d="M ${40} ${83+i*28} L ${47} ${87+i*28} L ${40} ${91+i*28} Z" fill="${i===0?dk:ac}"/>
+          ${tag(64,90+i*28,r.t,"start",st,500,6,1.2,0.75)}
+          ${r.s===2?check(148,87+i*28,0.9):`<circle cx="148" cy="${87+i*28}" r="4" fill="none" stroke="${ac}" stroke-width="1.2" stroke-dasharray="3 2"/>`}`).join('')}
+        <rect x="140" y="20" width="44" height="30" rx="9" fill="${ac}"/>
+        <path d="M 150 50 L 147 58 L 158 50" fill="${ac}"/>
+        ${tag(162,39,"READY","middle",dk,700,6,1.2)}
+        ${tag(92,184,"STATUS TRACKED END TO END","middle",ac,600,6,1.4)}`;
+      }
+
+      /* Scanner: social, search, retail, news and research signals swept continuously */
+      case "scan": {
+        const src=[{a:-60,t:"SOCIAL"},{a:0,t:"SEARCH"},{a:60,t:"RETAIL"},{a:120,t:"NEWS"},{a:180,t:"RESEARCH"},{a:240,t:"MARKETS"}];
+        return `
+        ${[30,52,74].map((r,i)=>`<circle cx="100" cy="98" r="${r}" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="3 4" opacity="${0.6-i*0.15}"/>`).join('')}
+        <path d="M 100 98 L 100 24 A 74 74 0 0 1 164 61 Z" fill="${ac}" fill-opacity="0.16"/>
+        <line x1="100" y1="98" x2="164" y2="61" stroke="${ac}" stroke-width="1.4"/>
+        ${src.map(s=>{const r=74,x=100+r*Math.cos(s.a*Math.PI/180),y=98+r*Math.sin(s.a*Math.PI/180);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="${s.a===-60?ac:fl}" stroke="${ac}" stroke-width="1.2"/>`}).join('')}
+        <circle cx="100" cy="98" r="14" fill="${ac}"/>
+        <circle cx="100" cy="98" r="5" fill="${dk}" opacity="0.5"/>
+        ${tag(100,190,"GLOBAL SIGNALS, ALWAYS ON","middle",ac,600,6,1.4)}`;
+      }
+
+      /* Detector: real emerging trends separated from short-lived fads */
+      case "detect": {
+        const fads=[[40,30],[62,46],[84,24],[118,40],[142,30]];
+        return `
+        <rect x="18" y="30" width="164" height="128" rx="5" ${filled}/>
+        <rect x="18" y="30" width="164" height="18" fill="${ac}" fill-opacity="0.14"/>
+        ${tag(28,42,"CATEGORY SIGNALS","start",ac,600,6,1.4)}
+        ${[76,100,124].map(y=>`<line x1="26" y1="${y}" x2="174" y2="${y}" stroke="${st}" stroke-width="0.6" opacity="0.25"/>`).join('')}
+        ${fads.map(([x,h])=>`<path d="M ${x-9} 146 L ${x} ${146-h} L ${x+9} 146" fill="none" stroke="${st}" stroke-width="1" opacity="0.45"/>`).join('')}
+        <path d="M 26 140 C 70 136 96 124 124 98 S 160 64 174 58" fill="none" stroke="${ac}" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="174" cy="58" r="5" fill="${ac}"/>
+        <circle cx="174" cy="58" r="10" fill="none" stroke="${ac}" stroke-width="1" opacity="0.5"/>
+        <rect x="118" y="164" width="64" height="20" rx="4" fill="${ac}"/>${tag(150,177,"TREND","middle",dk,700,6.5,1.4)}
+        ${tag(22,177,"FADS FILTERED","start",st,500,6,1.2,0.55)}`;
+      }
+
+      /* Mapper: markets beyond India ranked by size, momentum and brand fit */
+      case "map": {
+        const R=[{w:104,on:1},{w:80},{w:64},{w:46}];
+        return `
+        <rect x="18" y="28" width="164" height="144" rx="5" ${filled}/>
+        <rect x="18" y="28" width="164" height="18" fill="${ac}" fill-opacity="0.14"/>
+        ${tag(28,40,"MARKETS BEYOND INDIA","start",ac,600,6,1.4)}
+        ${R.map((r,i)=>{const y=66+i*27;return `
+          ${r.on?`<rect x="18" y="${y-12}" width="164" height="24" fill="${ac}" fill-opacity="0.2"/>`:''}
+          ${tag(30,y+3,"0"+(i+1),"start",r.on?ac:st,700,7,0.4,r.on?1:0.55)}
+          <circle cx="54" cy="${y}" r="${7-i}" ${r.on?`fill="${ac}"`:filled}/>
+          <rect x="68" y="${y-3}" width="104" height="6" rx="3" fill="${ds}" opacity="0.5"/>
+          <rect x="68" y="${y-3}" width="${r.w}" height="6" rx="3" fill="${ac}" opacity="${r.on?1:0.55}"/>`}).join('')}
+        ${tag(100,188,"SIZE · MOMENTUM · BRAND FIT","middle",ac,600,6,1.4)}`;
+      }
+
+      /* Validator: demand tested and the prize sized with sales and consumer data */
+      case "validate": {
+        return `
+        <rect x="18" y="30" width="104" height="140" rx="5" ${filled}/>
+        <rect x="18" y="30" width="104" height="18" fill="${ac}" fill-opacity="0.14"/>
+        ${tag(28,42,"DEMAND TEST","start",ac,600,6,1.4)}
+        <line x1="28" y1="150" x2="112" y2="150" ${thin}/>
+        <rect x="38" y="108" width="26" height="42" rx="2" ${filled}/>
+        <rect x="76" y="64" width="26" height="86" rx="2" fill="${ac}"/>
+        ${tag(51,162,"CONTROL","middle",st,500,5.2,1,0.55)}${tag(89,162,"TEST","middle",ac,600,5.2,1.2)}
+        ${dash("M 64 108 L 76 64")}
+        ${link("M 122 100 L 136 100",1)}
+        <rect x="136" y="56" width="48" height="88" rx="6" fill="${ac}"/>
+        ${tag(160,76,"PRIZE","middle",dk,700,6.5,1.4)}
+        ${tag(160,104,"$","middle",dk,700,18,0)}
+        <line x1="146" y1="118" x2="174" y2="118" stroke="${dk}" stroke-width="1.2" opacity="0.5"/>
+        ${check(160,132,1)}`;
+      }
+
+      /* Innovator: trends turned into product, pack and ingredient concepts */
+      case "innovate": {
+        return `
+        <rect x="18" y="26" width="164" height="148" rx="5" ${filled}/>
+        <rect x="18" y="26" width="164" height="18" fill="${ac}" fill-opacity="0.14"/>
+        ${tag(28,38,"CONCEPT BOARD","start",ac,600,6,1.4)}
+        <line x1="30" y1="132" x2="170" y2="132" stroke="${st}" stroke-width="1.2"/>
+        <rect x="38" y="92" width="26" height="40" rx="5" ${filled}/>
+        <rect x="76" y="70" width="34" height="62" rx="6" fill="${ac}"/>
+        <rect x="83" y="84" width="20" height="16" rx="2" fill="${dk}" opacity="0.3"/>
+        <path d="M 86 70 V 62 H 100 V 70" fill="none" stroke="${ac}" stroke-width="1.4"/>
+        <rect x="122" y="82" width="40" height="50" rx="6" ${filled}/>
+        ${['PRODUCT','PACK','INGREDIENT'].map((t,i)=>chip(26+i*52,144,48,t,i===1,18)).join('')}
+        ${check(93,56,0.9)}`;
+      }
+
+      /* Activator: supply-chain readiness checked, then the launch plan built */
+      case "activate": {
+        const rows=[{x:56,w:44},{x:78,w:52},{x:100,w:46},{x:128,w:34}];
+        return `
+        <rect x="18" y="30" width="164" height="132" rx="5" ${filled}/>
+        <rect x="18" y="30" width="164" height="18" fill="${ac}" fill-opacity="0.14"/>
+        ${tag(28,42,"LAUNCH PLAN","start",ac,600,6,1.4)}
+        ${['SUPPLY','CAPACITY','CHANNEL','LAUNCH'].map((t,i)=>{const y=66+i*24;return `
+          ${i<3?check(32,y,0.75):`<circle cx="32" cy="${y}" r="3.4" fill="${ac}"/>`}
+          ${tag(40,y+2,t,"start",st,500,5,1,0.6)}
+          <rect x="${rows[i].x}" y="${y-5}" width="${rows[i].w}" height="10" rx="3" fill="${ac}" opacity="${i===3?1:0.5}"/>`}).join('')}
+        <line x1="162" y1="54" x2="162" y2="152" stroke="${ac}" stroke-width="1" stroke-dasharray="2 3"/>
+        <path d="M 162 54 V 40 L 178 45 L 162 50" fill="${ac}"/>
+        <rect x="126" y="168" width="56" height="18" rx="4" fill="${ac}"/>${tag(154,180,"GO LIVE","middle",dk,700,6,1.4)}`;
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+      /* ===== IN-STORE INTELLIGENCE + AI-NATIVE WORKPLACE v3 (2026-10-07): product-like scenes ===== */
+
+      /* Ingestor: a full day of CCTV cut into clips and processed up to 15x in parallel */
+      case "ingest": {
+        let tiles=''; for(let r=0;r<3;r++) for(let c=0;c<5;c++){const on=r===1&&c===2; tiles+=`<rect x="${28+c*30}" y="${118+r*18}" width="26" height="14" rx="2" ${on?`fill="${ac}"`:`fill="${fl}" stroke="${st}" stroke-width="0.9"`}/>`;}
+        return `
+        <rect x="22" y="24" width="156" height="72" rx="5" ${filled}/>
+        <path d="M 22 96 L 70 52 H 130 L 178 96 Z" fill="${st}" opacity="0.08"/>
+        <path d="M 46 96 L 78 60 M 154 96 L 122 60 M 70 52 V 96 M 130 52 V 96" stroke="${st}" stroke-width="0.8" opacity="0.35"/>
+        <rect x="62" y="64" width="12" height="26" rx="2" fill="${st}" opacity="0.25"/><rect x="126" y="64" width="12" height="26" rx="2" fill="${st}" opacity="0.25"/>
+        <circle cx="34" cy="36" r="3.4" fill="${ac}"/>${tag(42,38.5,"CAM 04 · 09:00-21:00","start",st,500,5.2,1,0.7)}
+        <path d="M 30 104 H 170" stroke="${ac}" stroke-width="1" stroke-dasharray="2 3"/>
+        <path d="M 100 96 V 104" stroke="${ac}" stroke-width="1"/>
+        ${tiles}
+        <rect x="64" y="174" width="72" height="18" rx="4" fill="${ac}"/>${tag(100,186,"15 CLIPS AT ONCE","middle",dk,700,5.5,1)}`;
+      }
+
+      /* Tracker: one shopper followed across three cameras on the floor plan, counted once */
+      case "track": {
+        const shelves=[[46,62,22,70],[86,62,22,70],[126,62,22,70]];
+        return `
+        <clipPath id="cpFloor"><rect x="18" y="28" width="164" height="136" rx="5"/></clipPath>
+        <rect x="18" y="28" width="164" height="136" rx="5" ${filled}/>
+        <g clip-path="url(#cpFloor)">
+          <path d="M 18 28 L 96 56 L 50 110 Z" fill="${ac}" fill-opacity="0.13"/>
+          <path d="M 182 28 L 110 70 L 160 116 Z" fill="${ac}" fill-opacity="0.13"/>
+          <path d="M 182 164 L 112 110 L 150 84 Z" fill="${ac}" fill-opacity="0.13"/>
+        </g>
+        ${shelves.map(([x,y,w,h])=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="${st}" opacity="0.16"/>`).join('')}
+        ${[[18,28],[182,28],[182,164]].map(([x,y])=>`<rect x="${x-5}" y="${y-5}" width="10" height="10" rx="2" fill="${ac}"/>`).join('')}
+        <path d="M 30 150 C 34 120 66 140 74 112 S 112 120 116 94 S 152 72 164 48" fill="none" stroke="${ac}" stroke-width="1.5" stroke-dasharray="1 4" stroke-linecap="round"/>
+        ${[[60,150],[96,46],[160,140],[36,60]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" fill="${st}" opacity="0.35"/>`).join('')}
+        <circle cx="116" cy="94" r="5.5" fill="${ac}"/>
+        <rect x="124" y="84" width="36" height="16" rx="8" fill="${ac}"/>${tag(142,95,"ID 07","middle",dk,700,6,1)}
+        ${tag(100,184,"3 CAMERAS · 1 COUNT","middle",ac,600,6,1.4)}`;
+      }
+
+      /* Classifier: detection boxes label staff vs customer, then a second pass verifies each verdict */
+      case "classify": {
+        const fig=(x,y,s)=>`<circle cx="${x}" cy="${y}" r="7" fill="${st}" opacity="${s?0.55:0.35}"/><rect x="${x-10}" y="${y+9}" width="20" height="30" rx="8" fill="${st}" opacity="${s?0.55:0.35}"/>`;
+        const box=(x,y,label,on)=>`<rect x="${x-16}" y="${y-12}" width="32" height="56" rx="2" fill="none" stroke="${ac}" stroke-width="${on?1.4:1}" ${on?'':'stroke-dasharray="3 2"'}/>
+          <rect x="${x-16}" y="${y-22}" width="${on?40:44}" height="10" rx="1.5" fill="${on?ac:fl}" stroke="${ac}" stroke-width="0.8"/>${tag(x-13,y-14.5,label,"start",on?dk:ac,700,4.8,0.6)}`;
+        return `
+        <rect x="16" y="26" width="168" height="118" rx="5" ${filled}/>
+        <path d="M 16 144 L 70 96 H 130 L 184 144 Z" fill="${st}" opacity="0.07"/>
+        ${fig(50,70,1)}${box(50,70,"STAFF .98",1)}
+        ${fig(100,78,0)}${box(100,78,"CUST .95",0)}
+        ${fig(150,70,0)}${box(150,70,"CUST .97",0)}
+        <rect x="16" y="152" width="168" height="30" rx="5" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1.1"/>
+        ${check(32,167,1)}${check(46,167,1)}
+        ${tag(58,170,"SECOND PASS VERIFIED","start",ac,600,6,1.2)}`;
+      }
+
+      /* Auditor: one visit on a timeline, greeting inside the SLA window, playbook checks below */
+      case "audit": {
+        return `
+        <rect x="16" y="26" width="168" height="74" rx="5" ${filled}/>
+        ${tag(26,40,"VISIT · ENTRANCE ZONE","start",ac,600,5.5,1.2)}
+        <rect x="40" y="56" width="58" height="24" rx="3" fill="${ac}" fill-opacity="0.18"/>
+        ${tag(69,52,"SLA 10s","middle",ac,600,5,1)}
+        <line x1="28" y1="68" x2="172" y2="68" stroke="${st}" stroke-width="1.2" opacity="0.6"/>
+        ${[[40,"IN",0],[78,"8s",1],[124,"",0],[164,"OUT",0]].map(([x,t,on])=>`<circle cx="${x}" cy="68" r="${on?6:4}" fill="${on?ac:dk}" stroke="${ac}" stroke-width="1.3"/>${t?tag(x,90,t,"middle",on?ac:st,on?700:500,5.5,0.8,on?1:0.6):''}`).join('')}
+        <rect x="16" y="108" width="168" height="72" rx="5" ${filled}/>
+        ${[["GREETED WITHIN SLA",1],["ENGAGED SHOPPER",1],["CHILD ENGAGEMENT",0]].map(([t,ok],i)=>{const y=124+i*20;return `${!ok?`<rect x="16" y="${y-9}" width="168" height="18" fill="${ac}" fill-opacity="0.18"/>`:''}${ok?check(30,y,0.85):bang(30,y,4.5)}${tag(42,y+2,t,"start",ok?st:ac,ok?500:600,5.5,1,ok?0.75:1)}`}).join('')}`;
+      }
+
+      /* Reporter: footfall by hour, staff-to-customer ratio and SOP compliance, ready for the morning huddle */
+      case "report": {
+        const pts=[[26,128],[42,120],[58,112],[74,98],[90,104],[106,86],[122,80],[138,90],[154,74],[170,82]];
+        const line=pts.map((p,i)=>(i?'L':'M')+p.join(' ')).join(' ');
+        return `
+        <rect x="14" y="24" width="172" height="152" rx="5" ${filled}/>
+        ${[["FOOTFALL","1,284",0],["STAFF : CUST","1 : 12",0],["SOP","92%",1]].map(([l,v,on],i)=>`<rect x="${22+i*54}" y="32" width="48" height="36" rx="4" ${on?`fill="${ac}"`:`fill="${fl}" stroke="${st}" stroke-width="0.9"`}/>${tag(28+i*54,44,l,"start",on?dk:st,600,4.6,0.8,on?0.8:0.6)}${tag(28+i*54,61,v,"start",on?dk:ac,700,10,0)}`).join('')}
+        <path d="${line} L 170 150 L 26 150 Z" fill="${ac}" fill-opacity="0.16"/>
+        <path d="${line}" fill="none" stroke="${ac}" stroke-width="1.6" stroke-linejoin="round"/>
+        <line x1="26" y1="150" x2="170" y2="150" ${thin} opacity="0.6"/>
+        ${['9','12','15','18','21'].map((t,i)=>tag(26+i*36,162,t,"middle",st,500,5,0,0.5)).join('')}
+        <circle cx="154" cy="74" r="4" fill="${ac}"/>`;
+      }
+
+      /* Advisor (in-store): the gap shows on the zone heatmap and lands on the manager's phone as a coaching nudge */
+      case "coach": {
+        let heat=''; for(let r=0;r<4;r++) for(let c=0;c<5;c++){const v=(r===3&&c<2)?1:(r===2&&c<2)?0.5:(r===3&&c===2)?0.3:0.1; heat+=`<rect x="${20+c*14}" y="${44+r*14}" width="12" height="12" rx="2" fill="${ac}" opacity="${v}"/>`;}
+        return `
+        <rect x="14" y="30" width="88" height="110" rx="5" ${filled}/>
+        ${tag(22,40,"ZONE HEATMAP","start",ac,600,5,1)}
+        ${heat}
+        ${tag(22,118,"ENTRANCE","start",ac,600,5,1)}
+        ${tag(22,128,"4-6 PM","start",st,500,5,1,0.6)}
+        ${link("M 102 90 L 116 90",1)}
+        <rect x="116" y="22" width="70" height="156" rx="12" ${filled}/>
+        <rect x="140" y="28" width="22" height="4" rx="2" fill="${st}" opacity="0.4"/>
+        <rect x="122" y="44" width="58" height="62" rx="6" fill="${ac}"/>
+        ${tag(128,56,"COACH","start",dk,700,6,1.2)}
+        <line x1="128" y1="66" x2="174" y2="66" stroke="${dk}" stroke-width="1.2" opacity="0.6"/>
+        <line x1="128" y1="74" x2="166" y2="74" stroke="${dk}" stroke-width="1.2" opacity="0.45"/>
+        <line x1="128" y1="82" x2="170" y2="82" stroke="${dk}" stroke-width="1.2" opacity="0.45"/>
+        <rect x="128" y="90" width="30" height="10" rx="5" fill="${dk}" opacity="0.35"/>
+        <rect x="122" y="114" width="58" height="26" rx="6" fill="${fl}" stroke="${st}" stroke-width="0.9"/>
+        <line x1="128" y1="124" x2="170" y2="124" ${thin} opacity="0.5"/><line x1="128" y1="131" x2="158" y2="131" ${thin} opacity="0.4"/>`;
+      }
+
+      /* Guardian: one admin console, zero-trust access, DLP and encryption switched on */
+      case "guard": {
+        const T=[["ZERO-TRUST ACCESS",1],["DATA LOSS PREVENTION",1],["ENCRYPTION",1],["EXTERNAL SHARING",0]];
+        return `
+        <rect x="18" y="24" width="164" height="152" rx="6" ${filled}/>
+        <rect x="18" y="24" width="164" height="22" fill="${ac}" fill-opacity="0.14"/>
+        <path d="M 30 30 L 38 27 L 46 30 V 36 C 46 40 42 43 38 44 C 34 43 30 40 30 36 Z" fill="${ac}"/>
+        ${tag(52,38.5,"ADMIN CONSOLE","start",ac,600,6,1.4)}
+        ${T.map(([t,on],i)=>{const y=66+i*26;return `
+          ${tag(30,y+2,t,"start",st,500,5.5,1,0.75)}
+          <rect x="140" y="${y-7}" width="28" height="14" rx="7" fill="${on?ac:ds}"/>
+          <circle cx="${on?161:147}" cy="${y}" r="5" fill="${on?dk:st}" opacity="${on?0.85:0.6}"/>
+          ${i<3?`<line x1="30" y1="${y+13}" x2="170" y2="${y+13}" stroke="${st}" stroke-width="0.6" opacity="0.2"/>`:''}`}).join('')}
+        <rect x="30" y="160" width="140" height="8" rx="4" fill="${ds}" opacity="0.5"/>
+        <rect x="30" y="160" width="128" height="8" rx="4" fill="${ac}"/>`;
+      }
+
+      /* Collaborator: one always-current sheet, three people editing live, no version drift */
+      case "collab": {
+        let cells=''; for(let r=0;r<6;r++) for(let c=0;c<4;c++){ cells+=`<rect x="${26+c*37}" y="${58+r*17}" width="37" height="17" fill="none" stroke="${st}" stroke-width="0.6" opacity="0.35"/>`; if(r&&c) cells+=`<line x1="${31+c*37}" y1="${67+r*17}" x2="${(c===3?52:56)+c*37}" y2="${67+r*17}" stroke="${st}" stroke-width="1" opacity="0.4"/>`;}
+        const sel=[[63,75,1],[100,109,0.75],[137,143,0.5]];
+        return `
+        <rect x="18" y="26" width="164" height="150" rx="5" ${filled}/>
+        <rect x="18" y="26" width="164" height="22" fill="${ac}" fill-opacity="0.14"/>
+        ${tag(28,40,"Q3 STORE PLAN","start",ac,600,6,1.4)}
+        ${[0,1,2].map(i=>`<circle cx="${146+i*12}" cy="37" r="5.5" fill="${ac}" opacity="${1-i*0.25}" stroke="${dk}" stroke-width="1"/>`).join('')}
+        ${cells}
+        <rect x="26" y="58" width="148" height="17" fill="${ac}" fill-opacity="0.12"/>
+        ${sel.map(([x,y,o])=>`<rect x="${x}" y="${y}" width="37" height="17" fill="${ac}" fill-opacity="${0.18*o}" stroke="${ac}" stroke-width="1.6" opacity="${o}"/><rect x="${x+25}" y="${y-6}" width="12" height="6" rx="1.5" fill="${ac}" opacity="${o}"/>`).join('')}
+        <rect x="26" y="164" width="60" height="16" rx="8" fill="${ac}"/>${tag(56,175,"1 VERSION","middle",dk,700,5.5,1)}`;
+      }
+
+      /* Responder: a store's chat thread pulls the CRM record in and resolves the issue while the customer waits */
+      case "respond": {
+        return `
+        <rect x="40" y="18" width="120" height="164" rx="14" ${filled}/>
+        <rect x="88" y="24" width="24" height="4" rx="2" fill="${st}" opacity="0.4"/>
+        ${tag(52,42,"STORE 214 · CHAT","start",ac,600,5.5,1.2)}
+        <rect x="50" y="50" width="78" height="22" rx="8" fill="${st}" fill-opacity="0.14" stroke="${st}" stroke-width="0.8"/>
+        <line x1="58" y1="58" x2="118" y2="58" ${thin} opacity="0.6"/><line x1="58" y1="65" x2="100" y2="65" ${thin} opacity="0.4"/>
+        <rect x="64" y="80" width="86" height="54" rx="8" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1"/>
+        <rect x="72" y="88" width="70" height="30" rx="4" fill="${fl}" stroke="${ac}" stroke-width="0.9"/>
+        ${tag(78,98,"CRM · ORDER 5531","start",ac,700,4.8,0.6)}
+        <line x1="78" y1="106" x2="134" y2="106" stroke="${ac}" stroke-width="1" opacity="0.7"/>
+        <line x1="78" y1="112" x2="120" y2="112" stroke="${ac}" stroke-width="1" opacity="0.5"/>
+        <line x1="72" y1="126" x2="128" y2="126" stroke="${ac}" stroke-width="1" opacity="0.7"/>
+        <rect x="64" y="142" width="86" height="22" rx="8" fill="${ac}"/>
+        ${check(78,153,0.9)}${tag(88,156,"RESOLVED · 2 MIN","start",dk,700,5.5,0.8)}`;
+      }
+
+      /* Analyst: peer disclosures loaded as sources; the notebook returns the key signals in minutes */
+      case "analyse": {
+        return `
+        ${[0,1,2].map(i=>`<g transform="translate(${18+i*7} ${40+i*10})"><rect width="44" height="56" rx="3" fill="${dk}"/><rect width="44" height="56" rx="3" ${filled}/><rect x="0" y="0" width="16" height="9" rx="2" fill="${ac}" opacity="${0.4+i*0.3}"/>${[18,26,34,42].map(y=>`<line x1="6" y1="${y}" x2="36" y2="${y}" ${thin} opacity="0.5"/>`).join('')}</g>`).join('')}
+        ${tag(46,130,"3 DISCLOSURES","middle",st,500,5,1,0.6)}
+        ${arrowR(78,84,94)}
+        <rect x="98" y="26" width="86" height="148" rx="5" ${filled}/>
+        <rect x="98" y="26" width="86" height="20" fill="${ac}" fill-opacity="0.14"/>
+        ${tag(106,39,"KEY SIGNALS","start",ac,600,5.5,1.2)}
+        <rect x="104" y="54" width="74" height="40" rx="4" fill="${ac}"/>
+        <rect x="110" y="62" width="4" height="24" rx="2" fill="${dk}" opacity="0.5"/>
+        <line x1="120" y1="66" x2="170" y2="66" stroke="${dk}" stroke-width="1.3" opacity="0.65"/>
+        <line x1="120" y1="74" x2="164" y2="74" stroke="${dk}" stroke-width="1.3" opacity="0.5"/>
+        <line x1="120" y1="82" x2="156" y2="82" stroke="${dk}" stroke-width="1.3" opacity="0.5"/>
+        ${[0,1,2].map(i=>`<circle cx="110" cy="${110+i*18}" r="3" fill="${ac}" opacity="${0.9-i*0.2}"/><line x1="118" y1="${110+i*18}" x2="${172-i*8}" y2="${110+i*18}" ${thin} opacity="0.55"/>`).join('')}
+        <rect x="104" y="154" width="74" height="14" rx="4" fill="${ac}" fill-opacity="0.2" stroke="${ac}" stroke-width="0.8"/>${tag(141,164,"HOURS → MINUTES","middle",ac,700,5,0.8)}`;
+      }
+
+      /* Creator: one prompt, campaign image, video and social post generated by Gemini, Nano Banana and Veo */
+      case "create": {
+        return `
+        <rect x="16" y="22" width="168" height="24" rx="12" ${filled}/>
+        <path d="M 30 34 l 3 -6 l 3 6 l 6 3 l -6 3 l -3 6 l -3 -6 l -6 -3 Z" fill="${ac}" transform="translate(-2 -3) scale(0.9)"/>
+        <line x1="44" y1="34" x2="140" y2="34" stroke="${st}" stroke-width="1.2" opacity="0.6"/>
+        <rect x="150" y="27" width="28" height="14" rx="7" fill="${ac}"/>${tag(164,37,"GO","middle",dk,700,6,1)}
+        ${dash("M 100 46 L 100 58")}
+        <rect x="16" y="58" width="78" height="96" rx="4" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1"/>
+        <path d="M 16 132 L 40 106 L 58 122 L 72 110 L 94 128 V 154 H 16 Z" fill="${ac}" opacity="0.75"/>
+        <circle cx="76" cy="76" r="7" fill="${ac}"/>
+        <rect x="24" y="68" width="34" height="6" rx="3" fill="${st}" opacity="0.5"/>
+        <rect x="102" y="58" width="82" height="50" rx="4" fill="${ac}"/>
+        <path d="M 136 72 L 152 82 L 136 92 Z" fill="${dk}" opacity="0.6"/>
+        <rect x="108" y="100" width="70" height="3" rx="1.5" fill="${dk}" opacity="0.3"/><rect x="108" y="100" width="30" height="3" rx="1.5" fill="${dk}" opacity="0.7"/>
+        <rect x="102" y="114" width="82" height="40" rx="4" ${filled}/>
+        <rect x="108" y="120" width="28" height="28" rx="3" fill="${ac}" opacity="0.45"/>
+        <line x1="142" y1="126" x2="176" y2="126" ${thin} opacity="0.6"/><line x1="142" y1="134" x2="168" y2="134" ${thin} opacity="0.45"/>
+        ${['GEMINI','NANO BANANA','VEO'].map((t,i)=>chip([16,64,138][i],164,[44,70,46][i],t,i===2,18)).join('')}`;
+      }
+
+      /* Automator: a no-code flow: form submitted, rule checked, approval, visitor pass and booking handled */
+      case "automate": {
+        const node=(x,y,w,t,on,sub)=>`<rect x="${x}" y="${y}" width="${w}" height="26" rx="6" ${on?`fill="${ac}"`:filled}/>${tag(x+10,y+11,t,"start",on?dk:ac,700,5.2,1)}<line x1="${x+10}" y1="${y+18}" x2="${x+w-14}" y2="${y+18}" stroke="${on?dk:st}" stroke-width="1" opacity="${on?0.45:0.45}"/>`;
+        return `
+        ${node(54,20,92,"FORM SUBMITTED",0)}
+        ${arrowD(100,48,60)}
+        ${node(54,64,92,"RULE CHECK",1)}
+        <path d="M 100 92 V 104 M 36 104 H 164 M 36 104 V 116 M 100 104 V 116 M 164 104 V 116" fill="none" stroke="${ac}" stroke-width="1.2" opacity="0.8"/>
+        ${[[10,"APPROVE"],[74,"VISITOR PASS"],[138,"BOOK ROOM"]].map(([x,t])=>`<rect x="${x}" y="118" width="52" height="30" rx="6" ${filled}/>${tag(x+26,131,t,"middle",ac,700,4.6,0.6)}${check(x+26,141,0.7)}`).join('')}
+        <rect x="56" y="164" width="88" height="20" rx="10" fill="${ac}" fill-opacity="0.18" stroke="${ac}" stroke-width="0.9"/>${tag(100,177,"APPSHEET · APPS SCRIPT","middle",ac,600,5,1)}`;
+      }
+
       default: return `<circle cx="100" cy="100" r="60" ${filled}/>`;
     }
   }
 
   const RETAIL_WORKFLOWS = {
-    digital: [
-      {key:"catalog",     name:"Catalog & Product Data",    agent:"Enricher Agent",     desc:"SKU onboarding, attribute tagging and agent-readable product feeds."},
-      {key:"search",      name:"Search & Agentic Discovery",agent:"Finder Agent",       desc:"Natural-language and agent queries resolved to the best-fit, in-stock product."},
-      {key:"personalise", name:"Personalised Content",      agent:"Curator Agent",      desc:"Banners, recommendations and copy chosen per customer, per moment."},
-      {key:"checkout",    name:"Checkout & Payments",       agent:"Checkout Agent",     desc:"One-pass checkout with payment risk scoring and failed-payment recovery."},
-      {key:"service",     name:"Order Support & WISMO",     agent:"Tracker Agent",      desc:"Order status, changes and delivery questions answered from live tracking."},
-      {key:"returns",     name:"Returns & Refunds",         agent:"Resolver Agent",     desc:"Returns checked against policy and refunded inside the same interaction."}
+    localization: [
+      {key:"extract",   name:"Dialogue & Text Extraction", agent:"Extractor Agent",    desc:"Gemini pulls speech and on-screen text, audio muted before OCR."},
+      {key:"translate", name:"Translation & Glossary",     agent:"Linguist Agent",     desc:"Translates with a strict, file-specific retail glossary."},
+      {key:"review",    name:"Expert Review",              agent:"Advisor Agent",      desc:"Context-aware rewrite suggestions keep retail terms accurate."},
+      {key:"overlay",   name:"On-Screen Text Overlay",     agent:"Painter Agent",      desc:"Tracks exact text pixels, scans 2 to 10 FPS, bakes contrast-safe text."},
+      {key:"sync",      name:"Voice & Smart Sync",         agent:"Synchronizer Agent", desc:"Matched-voice dubbing, audio and video aligned without distortion."},
+      {key:"deliver",   name:"Delivery & Tracking",        agent:"Courier Agent",      desc:"Files video in Drive, alerts via Chat, tracks status in Firestore."}
     ],
-    merchandising: [
-      {key:"assort",   name:"Assortment Planning",     agent:"Planner Agent",      desc:"Ranges built per store cluster from local demand, space and margin."},
-      {key:"merch",    name:"Dynamic Merchandising",   agent:"Merchandiser Agent", desc:"Assortments, recommendations and content re-ranked by demand and intent."},
-      {key:"pricing",  name:"Pricing & Promotions",    agent:"Pricer Agent",       desc:"Price moves held inside floors, discount caps and approval gates."},
-      {key:"promo",    name:"Promotion Planning",      agent:"Promoter Agent",     desc:"Promotions scheduled where forecast uplift beats cannibalisation and cost."},
-      {key:"markdown", name:"Markdown Optimisation",   agent:"Clearance Agent",    desc:"Markdown depth and timing set to sell through with the least margin given up."},
-      {key:"space",    name:"Space & Planogram",       agent:"Space Agent",        desc:"Shelf facings and planograms resized to demand, store by store."}
+    trendspotting: [
+      {key:"scan",      name:"Global Signal Scanning",     agent:"Scanner Agent",      desc:"Monitors social, search, retail, news & research across global markets."},
+      {key:"detect",    name:"Trend Detection",            agent:"Detector Agent",     desc:"Separates real emerging trends from fads in our categories."},
+      {key:"map",       name:"Market Prioritization",      agent:"Mapper Agent",       desc:"Ranks markets beyond India by size, momentum & fit to our brands."},
+      {key:"validate",  name:"Opportunity Validation",     agent:"Validator Agent",    desc:"Tests demand and sizes the prize with sales & consumer data."},
+      {key:"innovate",  name:"Product Innovation",         agent:"Innovator Agent",    desc:"Turns trends into product, pack & ingredient concepts."},
+      {key:"activate",  name:"Go-to-Market Activation",    agent:"Activator Agent",    desc:"Checks supply chain readiness and builds launch plans."}
     ],
-    supply: [
-      {key:"inventory", name:"Demand & Inventory",       agent:"Forecaster Agent", desc:"Demand forecasting and real-time availability across every node."},
-      {key:"replen",    name:"Replenishment & Allocation",agent:"Allocator Agent", desc:"Stock allocated from DCs to stores and web by forecast and constraint."},
-      {key:"warehouse", name:"Warehouse Operations",     agent:"Picker Agent",     desc:"Picks batched and sequenced into the shortest path through the racks."},
-      {key:"fulfil",    name:"Order Orchestration",      agent:"Router Agent",     desc:"Each order routed across stores, warehouses and carriers by cost, capacity and promise."},
-      {key:"lastmile",  name:"Last-Mile Delivery",       agent:"Dispatcher Agent", desc:"Stops sequenced into routes with live ETAs and failed-delivery recovery."},
-      {key:"reverse",   name:"Reverse Logistics",        agent:"Grader Agent",     desc:"Returned items graded and sent to resell, refurbish or recycle for the most value."}
+    instore: [
+      {key:"ingest",    name:"Footage Ingestion",          agent:"Ingestor Agent",     desc:"Splits CCTV into clips, up to 15x in parallel, 70-80% fewer AI calls."},
+      {key:"track",     name:"People Tracking & Re-ID",    agent:"Tracker Agent",      desc:"Counts each person once across cameras, despite glare, helmets & crowds."},
+      {key:"classify",  name:"Staff vs Customer Reasoning",agent:"Classifier Agent",   desc:"Labels staff vs customer, then double-checks its own verdicts."},
+      {key:"audit",     name:"Service Standards Audit",    agent:"Auditor Agent",      desc:"Checks greeting SLA and child engagement from easy-to-update playbooks."},
+      {key:"report",    name:"Insight Generation",         agent:"Reporter Agent",     desc:"Footfall, staff-customer split & SOP compliance, ready to use."},
+      {key:"coach",     name:"Review & Action",            agent:"Advisor Agent",      desc:"Surfaces service gaps and coaching moments to store managers."}
     ],
-    cpg: [
-      {key:"sensing",     name:"Demand Sensing",              agent:"Sensor Agent",    desc:"POS, weather and social signals fused into a short-horizon forecast."},
-      {key:"rgm",         name:"Revenue Growth Management",   agent:"Strategist Agent",desc:"Price-pack architecture and mix tuned for net revenue per unit."},
-      {key:"trade",       name:"Trade Promotion",             agent:"Auditor Agent",   desc:"Every trade event scored on ROI, loss-makers cut before the next cycle."},
-      {key:"retailmedia", name:"Retail Media",                agent:"Media Agent",     desc:"Sponsored placements bought and optimised on incremental sales."},
-      {key:"shelf",       name:"Shelf & Store Execution",     agent:"Vision Agent",    desc:"Shelf images read for gaps, compliance and share of shelf."},
-      {key:"content",     name:"Brand Content Syndication",   agent:"Publisher Agent", desc:"One master product record published and scored across every retailer."}
+    workplace: [
+      {key:"guard",       name:"Secure Foundation",        agent:"Guardian Agent",     desc:"Zero-trust access, data loss prevention & encryption on one control plane."},
+      {key:"collab",      name:"Live Collaboration",       agent:"Collaborator Agent", desc:"Live co-editing in one always-current Doc or Sheet, no version drift."},
+      {key:"respond",     name:"Store-to-Backend Action",  agent:"Responder Agent",    desc:"Chat spaces linked to CRM resolve store issues while customers wait."},
+      {key:"analyse",     name:"AI Analysis & Insight",    agent:"Analyst Agent",      desc:"NotebookLM pulls key signals from peer disclosures in minutes."},
+      {key:"create",      name:"Content Creation",         agent:"Creator Agent",      desc:"Gemini, Nano Banana & Veo make campaign images and video."},
+      {key:"automate",    name:"Workflow Automation",      agent:"Automator Agent",    desc:"AppSheet & Apps Script handle approvals, visitors & bookings."}
     ]
   };
 
@@ -1882,7 +2323,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
     const num = String(idx+1).padStart(2,'0');
     return `
       <div class="rcm-slide" data-idx="${idx}">
-        <div class="wf-tag">Workflow ${num}</div>
+        <div class="wf-tag">Swarm ${num}</div>
         <svg class="svg-side"   viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(wf.key, PAL_SIDE_DARK)}</svg>
         <svg class="svg-center" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(wf.key, PAL_DARK)}</svg>
         <div class="wf-mini">${wf.name}</div>

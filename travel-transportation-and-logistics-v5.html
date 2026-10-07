@@ -747,37 +747,75 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 
 /* TTL hero: the long industry name needs a smaller clamp to clear the composition */
 .hero h1{font-size:clamp(2.6rem,5.6vw,5.4rem);}
+/* TTL processes (same as NREU): heading and tabs centred; tabs styled as pill CTAs (active = filled Searce blue, others = outlined) */
+.devops .devops-head{justify-content:center;text-align:center;}
+.devops .p-tabs{justify-content:center;flex-wrap:wrap;gap:12px;overflow:visible;}
+.devops .p-tab{padding:13px 24px;border-radius:999px;border:1px solid rgba(0,100,255,0.35);background:#fff;color:var(--ink);font-size:14.25px;font-weight:400;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s;}
+.devops .p-tab small{color:var(--blue);}
+.devops .p-tab:hover{background:#eef4ff;border-color:var(--blue);color:var(--ink);}
+.devops .p-tab.active{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:400;}
+.devops .p-tab.active small{color:rgba(255,255,255,0.75);}
+.devops .p-tab:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+.devops .p-ind{display:none;}
+@media (max-width:900px){.devops .devops-head{align-items:center;}.devops .p-tabs{gap:10px;}.devops .p-tab{padding:11px 18px;font-size:13.5px;}}
+
+/* ========== MOBILE · TTL sections (≤720px) — same sizes and rhythm as the TSS page on phones (measured 2026-10-07) ========== */
+@media (max-width:720px){
+  /* section 1 */
+  .reality-content h2 span.reality-lede{font-size:18px;margin-top:14px;}
+  .reality-copy{padding-bottom:24px;margin-bottom:22px;}
+  .reality-closing.ttl-closing{font-size:16px;}
+  /* section 2: accordion like TSS (illustration panel above the list) */
+  .shift .shift-new{font-size:21px;}
+  .shift-btn{padding:18px 0;}
+  .shift-stage{aspect-ratio:1 / 0.9;border-radius:20px;}
+  .shift-text{margin-bottom:22px;}
+  .shift-head{gap:16px;margin-bottom:28px;}
+  /* section 3: smaller clock, cards tighter (TSS card padding and title size) */
+  .cost-side p{margin-bottom:24px;}
+  .cost-clock{width:180px;}
+  .cost-layout{gap:32px;}
+  .cost-list{gap:12px;}
+  .cost .cost-item{padding:18px 18px 20px;grid-template-columns:36px 1fr;gap:14px;}
+  .cost-icon{width:36px;height:36px;border-radius:10px;}
+  .cost-icon svg{width:18px;height:18px;}
+  .cost-num{margin-bottom:4px;}
+  .cost-title{font-size:19px;line-height:1.2;margin-bottom:6px;}
+  .cost-desc{font-size:14.5px;line-height:1.45;}
+  .cost-side h2{margin-bottom:14px;}
+  .cost-side p{line-height:1.5;}
+  .cost-list{gap:10px;}
+  /* processes: left-aligned head; tabs as one compact full-width row per process (TSS picker) */
+  .devops .devops-head{justify-content:flex-start;text-align:left;margin-bottom:20px;}
+  .devops .p-tabs{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:8px;margin-bottom:28px;}
+  .devops .p-tab{justify-content:flex-start;padding:12px 16px;border-radius:14px;font-size:15px;}
+  .proc-head{margin-bottom:24px;}
+  .proc-head h3{font-size:21px;}
+  #procLede{font-size:16px;}
+  /* process cards: zoom the diagram on phones; the tiny side labels and caption are dropped (the stage description sits under the card) */
+  .tile .full .panel .vector svg{transform:scale(1.5);transform-origin:50% 58%;}
+  .tile .full .panel .vector .lead,.tile .full .panel .vector svg > text{display:none;}
+  /* practices: cards size to their content */
+  .pillars .pillar-card{min-height:0;height:auto;padding:24px 24px 26px;}
+  .pillars .pillars-cards{gap:12px;grid-auto-rows:auto;align-items:start;}
+  .pillar-card .pillar-name{font-size:21px;}
+  /* engagement copy */
+  .engagement .eng-body{font-size:16px;}
+  /* FAQ: compact boxes like the healthcare/TSS pages */
+  .faq .faq-title{font-size:32px;line-height:1.1;margin-bottom:14px;}
+  .faq .faq-list{gap:8px;}
+  .faq .faq-item{border-radius:12px;}
+  .faq .faq-q{padding:14px 16px;gap:14px;box-sizing:border-box;font-size:15px !important;line-height:1.4;}
+  .faq .faq-icon{width:28px;height:28px;}
+  .faq .faq-a-inner{padding:14px 16px 16px;font-size:14.5px;line-height:1.65;}
+}
 </style>
+<link rel="stylesheet" href="assets/searce-nav.css">
+<link rel="stylesheet" href="assets/industry-mobile.css">
 </head>
 <body>
 
-<nav class="nav" aria-label="Primary navigation">
-  <div class="wrap">
-    <a href="index.html" class="nav-logo" aria-label="Searce home">Searce</a>
-    <ul class="nav-links">
-      <li><a href="#">outcomes</a></li>
-      <li><a href="#">how we solve <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="business-systems-engineering.html">practices <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="#" class="current">industries <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="#">insights</a></li>
-      <li class="has-dropdown">
-        <a href="#" aria-haspopup="true">company
-          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </a>
-        <div class="mega-panel">
-          <a class="mega-item" href="who-we-are.html"><span class="mega-title">Who we are</span></a>
-          <a class="mega-item" href="#"><span class="mega-title">Partners</span></a>
-          <a class="mega-item" href="careers.html"><span class="mega-title">Careers</span></a>
-          <a class="mega-item" href="#"><span class="mega-title">futurify.ai</span></a>
-        </div>
-      </li>
-    </ul>
-    <a href="#connect" class="nav-cta">
-      bring us a problem
-      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-    </a>
-  </div>
-</nav>
+<script src="assets/searce-nav.js" data-theme="light" data-current="ttl"></script>
 
 <!-- ============== HERO + REALITY (one shared white -> light blue background) ============== -->
 <div class="hero-reality">
@@ -785,11 +823,11 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <div class="wrap">
     <div class="hero-text">
       <div class="hero-badge">
-        <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true"><rect x="158" y="24" width="58" height="101" fill="#13377f"/><rect x="250" y="158" width="101" height="58" fill="#13377f"/><rect x="22" y="158" width="194" height="58" fill="#0064ff"/><rect x="158" y="250" width="58" height="101" fill="#0064ff"/></svg>
+        <svg class="hero-badge-icon" viewBox="0 0 384 384" aria-hidden="true"><rect x="30" y="24" width="145" height="36" fill="#13377f"/><rect x="211" y="24" width="145" height="36" fill="#2a6bff"/><rect x="30" y="88" width="145" height="81" fill="#13377f"/><rect x="211" y="88" width="145" height="81" fill="#2a6bff"/><rect x="30" y="205" width="145" height="37" fill="#13377f"/><rect x="211" y="205" width="145" height="37" fill="#13377f"/><rect x="30" y="269" width="145" height="81" fill="#13377f"/><rect x="211" y="269" width="145" height="81" fill="#13377f"/></svg>
         2030 Vision &middot; Autonomous Networks
       </div>
       <h1 id="hero-heading">
-        travel,<br>transportation<br>&amp; logistics
+        travel, <br>transportation<br>&amp; logistics
       </h1>
       <div class="hero-opening">
         <p>Real-Time Execution. Autonomous Operations. End-to-End Visibility.</p>
@@ -963,7 +1001,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <div class="wrap">
     <div class="cost-layout">
       <div class="cost-side">
-        <h2 id="cost-h">Every minute<br>has a cost.</h2>
+        <h2 id="cost-h">Every minute <br>has a cost.</h2>
         <p>In transportation and logistics, operational friction becomes financial friction almost immediately.</p>
         <div class="cost-clock" aria-hidden="true">
           <svg viewBox="0 0 300 300">
@@ -1008,20 +1046,21 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 <section class="devops" id="processes" aria-labelledby="devops-h">
   <div class="wrap">
     <div class="devops-head">
-      <h2 id="devops-h" class="section-h">The processes this industry runs on.</h2>
+      <h2 id="devops-h" class="section-h">Real business outcomes.</h2>
     </div>
 
     <div class="p-tabs" role="tablist" aria-label="Processes">
-      <button class="p-tab active" role="tab" aria-selected="true" data-p="0"><small>01</small>Autonomous DevOps</button>
-      <button class="p-tab" role="tab" aria-selected="false" data-p="1"><small>02</small>Agentic Creative Ad Insights</button>
-      <button class="p-tab" role="tab" aria-selected="false" aria-disabled="true" title="Coming next"><small>03</small>Process 3</button>
+      <button class="p-tab active" role="tab" aria-selected="true" data-p="0"><small>01</small>Office Productivity</button>
+      <button class="p-tab" role="tab" aria-selected="false" data-p="1"><small>02</small>Fleet Intelligence</button>
+      <button class="p-tab" role="tab" aria-selected="false" data-p="2"><small>03</small>Mobility Navigation</button>
+      <button class="p-tab" role="tab" aria-selected="false" data-p="3"><small>04</small>Supply Chain Analytics</button>
       <span class="p-ind" aria-hidden="true"></span>
     </div>
 
     <div class="proc-head">
       <div>
-        <h3 id="procTitle">The Autonomous DevOps Architecture</h3>
-        <p class="section-lede" id="procLede">Six AI-powered workflows that continuously build, secure, deploy, monitor, and improve software delivery.</p>
+        <h3 id="procTitle">The Autonomous Office Productivity Architecture</h3>
+        <p class="section-lede" id="procLede">Email automation, OCR to agentic AI and humans in the loop: from inbox overload to triggered action.</p>
       </div>
       <div class="ctl">
         <span class="count" id="count"><b>01</b> / 06</span>
@@ -1475,57 +1514,16 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 /* Processes · Layout 3 sliding card carousel */
 (function(){
 /* ---- stage data (titles, agents, descriptions) copied from Layout 2 ---- */
-const STAGES = [
-  {title:"Code Commit & Review", agent:"Reviewer",
-   desc:"Reviews pull requests, analyzes code quality, and flags issues before they enter the build pipeline.",
-   flow:"Developer commit → Pull request → Reviewer → Approved code"},
-  {title:"Build & Test", agent:"Builder",
-   desc:"Orchestrates CI builds, runs automated tests, and identifies failures for rapid resolution.",
-   flow:"Approved code → Build pipeline → Builder → Test results"},
-  {title:"Security & Compliance Scan", agent:"Scanner",
-   desc:"Runs security, dependency, and compliance checks to detect vulnerabilities before release.",
-   flow:"Build → Scanner → Security + Compliance checks → Cleared release"},
-  {title:"Deployment & Release", agent:"Releaser",
-   desc:"Manages progressive rollouts, canary releases, and automated rollback when risk is detected.",
-   flow:"Release candidate → Releaser → Canary → Production"},
-  {title:"Monitoring & Incident Detection", agent:"Watcher",
-   desc:"Monitors production continuously, detects anomalies, and correlates alerts to surface incidents faster.",
-   flow:"Production → Signals / Telemetry → Watcher → Incident alert"},
-  {title:"Postmortem & Feedback", agent:"Analyst",
-   desc:"Analyzes incidents, identifies root causes, and feeds learnings back into the delivery lifecycle.",
-   flow:"Incident → Analyst → Root cause → Feedback loop"}
-];
-
-const STAGES2=[
-  {title:"Creative Brief Intake", agent:"Interpreter",
-   desc:"Translates plain-language creative briefs into structured inputs the agentic workflow can understand and act on.",
-   flow:"Creative brief → Interpreter → Structured intent → Analysis request"},
-  {title:"Creative Data Retrieval", agent:"Retriever",
-   desc:"Pulls relevant creative and performance data from the client’s analytics engine to build the context for analysis.",
-   flow:"Analysis request → Retriever → Creative + Performance data → Context"},
-  {title:"Insight Reasoning", agent:"Reasoner",
-   desc:"Uses Gemini 2.5 Flash to reason across creative signals, identify patterns, and generate evidence-backed recommendations.",
-   flow:"Creative signals → Reasoner → Pattern analysis → Recommendation"},
-  {title:"Guardrail & Compliance Check", agent:"Guardian",
-   desc:"Evaluates recommendations against AgentOps safety guardrails and defined evaluation standards before delivery.",
-   flow:"Recommendation → Guardian → Guardrail + Evaluation checks → Approved insight"},
-  {title:"Recommendation Delivery", agent:"Responder",
-   desc:"Streams governed recommendations back to users through a conversational SSE experience for immediate action.",
-   flow:"Approved insight → Responder → Conversational response → User"},
-  {title:"Feedback & Continuous Learning", agent:"Observer",
-   desc:"Tracks and evaluates every run, feeding performance signals back into the system for continuous improvement.",
-   flow:"Agent run → Observer → Evaluation signals → Learning loop"}
-];
-
+/* ---- TTL stage data: the four logistics architectures the user supplied (2026-10-07) ---- */
+const TT_STAGES0=[{"title": "Email Triage", "agent": "Filter", "desc": "Sorts the inbox, removes noise and flags what needs action.", "flow": "Inbox → Filter → Flagged emails"}, {"title": "Attachment Scanning (OCR)", "agent": "Reader", "desc": "OCR reads invoices, bills of lading and POs, then understands them.", "flow": "Attachments → Reader → Structured document data"}, {"title": "Workflow Creation", "agent": "Architect", "desc": "Builds the right workflow for each email and document type.", "flow": "Document type → Architect → Workflow"}, {"title": "Task Assignment", "agent": "Assigner", "desc": "Auto-assigns tasks and owners by role, workload and urgency.", "flow": "Workflow → Assigner → Task owner"}, {"title": "Action Triggering", "agent": "Trigger", "desc": "Fires actions in ERP, TMS and WMS, then replies to senders.", "flow": "Task → Trigger → ERP + TMS + WMS → Reply"}, {"title": "Tracking & Closure", "agent": "Tracker", "desc": "Chases open items, escalates delays and closes the loop.", "flow": "Open item → Tracker → Escalation → Closed"}];
+const TT_STAGES1=[{"title": "Data Consolidation", "agent": "Unifier", "desc": "Syncs RDS, MongoDB and S3 into one data lake with live change capture.", "flow": "RDS + MongoDB + S3 → Unifier → One data lake"}, {"title": "Knowledge Retrieval", "agent": "Retriever", "desc": "Kendra-powered RAG fetches the right data and documents first.", "flow": "Question → Retriever → Data + Documents"}, {"title": "Conversational Fleet Q&A", "agent": "Responder", "desc": "Bedrock answers on location, shipment status, ETAs and delays.", "flow": "Question → Responder → Location + Status + ETA"}, {"title": "Self-Service Analytics", "agent": "Analyst", "desc": "Amazon Q turns plain questions into dashboards and KPI summaries.", "flow": "Plain question → Analyst → Dashboard + KPIs"}, {"title": "Freight Rate Prediction", "agent": "Predictor", "desc": "A SageMaker pipeline predicts benchmark freight rates.", "flow": "Rate history → Predictor → Benchmark freight rate"}, {"title": "Scale & Governance", "agent": "Sentinel", "desc": "Lambda, CloudWatch and IAM keep it observable, secure and scalable.", "flow": "Platform → Sentinel → Observable + Secure + Scalable"}];
+const TT_STAGES2=[{"title": "Pickup Accuracy", "agent": "Locator", "desc": "Keeps pickup points current as roads and landmarks change.", "flow": "Map changes → Locator → Accurate pickup point"}, {"title": "Live Route Planning", "agent": "Router", "desc": "Routes API plans the best path from live traffic and road conditions.", "flow": "Live traffic → Router → Best path"}, {"title": "Turn-by-Turn Navigation", "agent": "Navigator", "desc": "Navigation SDK guides riders and drivers turn by turn in-app.", "flow": "Route → Navigator → Rider + Driver guidance"}, {"title": "Fare Transparency", "agent": "Guardian", "desc": "Matches routes to distance-based fares and regulatory models.", "flow": "Route → Guardian → Distance-based fare"}, {"title": "Driver Efficiency", "agent": "Optimizer", "desc": "Cuts idle time with efficient routes drivers instinctively trust.", "flow": "Trips → Optimizer → Less idle time"}, {"title": "City Expansion", "agent": "Expander", "desc": "One geospatial framework from metros to Tier 2 and 3 cities.", "flow": "Framework → Expander → New cities"}];
+const TT_STAGES3=[{"title": "Data Unification", "agent": "Unifier", "desc": "Brings equipment and client data into one S3 data lake view.", "flow": "Equipment + Client data → Unifier → One data lake"}, {"title": "Fast Querying", "agent": "Accelerator", "desc": "Athena serverless queries return insights faster.", "flow": "Data lake → Accelerator → Faster insights"}, {"title": "Dashboard Intelligence", "agent": "Visualizer", "desc": "QuickSight dashboards show real-time supply chain status.", "flow": "Live data → Visualizer → Real-time dashboard"}, {"title": "Conversational Insights", "agent": "Assistant", "desc": "An LLM chatbot answers in natural language with live insights.", "flow": "Question → Assistant → Live insight"}, {"title": "Predictive Maintenance", "agent": "Predictor", "desc": "Predicts equipment failures before they cause downtime.", "flow": "Equipment data → Predictor → Failure alert"}, {"title": "Personalized Recommendations", "agent": "Recommender", "desc": "Sends timely, personalized recommendations with no manual effort.", "flow": "Insight → Recommender → Next action"}];
 const PROCESSES=[
-  {title:"The Autonomous DevOps Architecture",
-   lede:"Six AI-powered workflows that continuously build, secure, deploy, monitor, and improve software delivery.",
-   stages:STAGES,
-   rail:["Service &amp; Dependency Graph","Failure &amp; Risk Models","Deployment Ledger","Self-Learning Feedback Loop"]},
-  {title:"The Agentic Creative Ad Insights Architecture",
-   lede:"Six AI-powered workflows that turn creative briefs and performance data into governed, actionable recommendations.",
-   stages:STAGES2,
-   rail:["Creative Knowledge Graph","Evaluation &amp; Guardrail Standards","Session &amp; Data Ledger","Self-Learning Feedback Loop"]}
+  {title:"The Autonomous Office Productivity Architecture", lede:"Email automation, OCR to agentic AI and humans in the loop: from inbox overload to triggered action.", kind:"AI agent", stages:TT_STAGES0, rail:["Document Knowledge Base", "Workflow Playbooks", "Task &amp; Owner Ledger", "Self-Learning Feedback Loop"]},
+  {title:"The Autonomous Fleet Intelligence Architecture", lede:"Unified data, generative AI agents and humans in the loop: from fragmented fleet data to conversational logistics intelligence.", kind:"AI agent", stages:TT_STAGES1, rail:["Unified Data Lake", "RAG Knowledge Layer", "Freight Rate Models", "Serverless Athena Querying"]},
+  {title:"The Trusted Mobility Navigation Architecture", lede:"Google Maps Platform, real-time navigation and humans in the loop: building trust through accurate, transparent routes.", kind:"Maps capability", stages:TT_STAGES2, rail:["Geospatial Intelligence Layer", "Live Traffic &amp; Road Data", "Distance-Based Fare Model", "Unified City Framework"]},
+  {title:"The Autonomous Supply Chain Analytics Architecture", lede:"A data lakehouse, a Gen AI chatbot and humans in the loop: turning fragmented logistics data into real-time, proactive decisions.", kind:"AI agent", stages:TT_STAGES3, rail:["Data Lakehouse", "Language Understanding Models", "Predictive Failure Models", "Secure Controls (IAM, CloudTrail, CloudWatch)"]}
 ];
 
 /* ---------------------------------------------------------------------------
@@ -1729,7 +1727,401 @@ const SCENES3_2=[
   ${tag([-1.3,-1.3,0],'NEXT RUN',{side:'left',y:64})}
   ${caption('EVERY RUN SCORED, EVERY SCORE LEARNED FROM')}
 `)];
-const SCENES3_ALL=[SCENES3,SCENES3_2];
+/* relabel the isometric scenes for each architecture (geometry reused from the two Layout 3 sets) */
+const relabel=(fn,map)=>()=>{let s=fn();for(const [a,b] of map){s=s.split('>'+a+'<').join('>'+b+'<');}return s;};
+const NR_SET={A:SCENES3,B:SCENES3_2};
+const NRT=[[["B", 0, [["BRIEF", "INBOX"], ["STRUCTURED", "FLAGGED"], ["THE BRIEF BECOMES STRUCTURED INPUT", "NOISE REMOVED, ACTION FLAGGED"]]], ["A", 2, [["SCAN", "OCR"], ["CLEARED", "READ"], ["SECURITY + COMPLIANCE SWEEP EVERY BUILD", "INVOICES, BOLS AND POS READ"]]], ["A", 1, [["BUILD LAYERS", "STEPS"], ["TESTED ARTIFACT", "WORKFLOW"], ["BUILD · TEST · ASSEMBLE, ON REPEAT", "THE RIGHT WORKFLOW FOR EACH DOCUMENT"]]], ["B", 4, [["INSIGHTS", "TASKS"], ["THE USER", "OWNER"], ["STREAMED LIVE INTO THE CONVERSATION", "BY ROLE, WORKLOAD AND URGENCY"]]], ["A", 3, [["CANARY", "ACTION"], ["FLEET", "ERP · TMS · WMS"], ["PROGRESSIVE ROLLOUT, ROLLBACK ON RISK", "ACTIONS FIRED, SENDERS ANSWERED"]]], ["B", 5, [["EVALUATED RUN", "OPEN ITEM"], ["NEXT RUN", "CLOSED"], ["EVERY RUN SCORED, EVERY SCORE LEARNED FROM", "DELAYS ESCALATED, LOOPS CLOSED"]]]], [["B", 1, [["CREATIVE ASSETS", "RDS + MONGODB"], ["PERFORMANCE", "S3"], ["CONTEXT", "DATA LAKE"], ["ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT", "THREE SOURCES, ONE LIVE DATA LAKE"]]], ["A", 0, [["COMMITS", "DOCUMENTS"], ["IN REVIEW", "RETRIEVED"], ["EVERY COMMIT REVIEWED BEFORE IT BUILDS", "THE RIGHT DATA AND DOCUMENTS FIRST"]]], ["B", 4, [["INSIGHTS", "ANSWERS"], ["STREAMED LIVE INTO THE CONVERSATION", "LOCATION, STATUS AND ETAS, ON ASK"]]], ["B", 2, [["SIGNALS", "KPIS"], ["PATTERN FOUND", "DASHBOARD"], ["GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN", "PLAIN QUESTIONS BECOME DASHBOARDS"]]], ["A", 4, [["ANOMALY", "RATE"], ["TELEMETRY", "HISTORY"], ["SIGNALS CORRELATED INTO ONE INCIDENT", "BENCHMARK FREIGHT RATES PREDICTED"]]], ["B", 3, [["GUARDRAILS", "GOVERNANCE"], ["APPROVED", "SECURE"], ["SAFETY + EVALUATION CHECKS BEFORE DELIVERY", "OBSERVABLE, SECURE AND SCALABLE"]]]], [["A", 0, [["COMMITS", "PICKUPS"], ["IN REVIEW", "VERIFIED"], ["EVERY COMMIT REVIEWED BEFORE IT BUILDS", "PICKUP POINTS KEPT CURRENT"]]], ["B", 2, [["SIGNALS", "TRAFFIC"], ["PATTERN FOUND", "BEST PATH"], ["GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN", "BEST PATH FROM LIVE TRAFFIC"]]], ["B", 4, [["INSIGHTS", "TURNS"], ["THE USER", "THE RIDER"], ["STREAMED LIVE INTO THE CONVERSATION", "GUIDED TURN BY TURN, IN-APP"]]], ["B", 3, [["GUARDRAILS", "FARE RULES"], ["APPROVED", "FAIR FARE"], ["SAFETY + EVALUATION CHECKS BEFORE DELIVERY", "FARES MATCHED TO DISTANCE AND RULES"]]], ["A", 4, [["ANOMALY", "IDLE TIME"], ["TELEMETRY", "TRIPS"], ["SIGNALS CORRELATED INTO ONE INCIDENT", "LESS IDLE TIME, ROUTES DRIVERS TRUST"]]], ["A", 3, [["CANARY", "NEW CITY"], ["FLEET", "CITIES"], ["PROGRESSIVE ROLLOUT, ROLLBACK ON RISK", "ONE FRAMEWORK, METROS TO TIER 2 AND 3"]]]], [["B", 1, [["CREATIVE ASSETS", "EQUIPMENT"], ["PERFORMANCE", "CLIENTS"], ["CONTEXT", "DATA LAKE"], ["ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT", "EQUIPMENT AND CLIENT DATA, ONE VIEW"]]], ["A", 1, [["BUILD LAYERS", "QUERIES"], ["TESTED ARTIFACT", "INSIGHT"], ["BUILD · TEST · ASSEMBLE, ON REPEAT", "SERVERLESS QUERIES, FASTER ANSWERS"]]], ["B", 2, [["SIGNALS", "STATUS"], ["PATTERN FOUND", "DASHBOARD"], ["GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN", "REAL-TIME SUPPLY CHAIN STATUS"]]], ["B", 4, [["INSIGHTS", "ANSWERS"], ["STREAMED LIVE INTO THE CONVERSATION", "PLAIN QUESTIONS, LIVE ANSWERS"]]], ["A", 4, [["ANOMALY", "FAILURE RISK"], ["TELEMETRY", "EQUIPMENT"], ["SIGNALS CORRELATED INTO ONE INCIDENT", "FAILURES SPOTTED BEFORE DOWNTIME"]]], ["A", 5, [["ROOT CAUSE", "INSIGHT"], ["NEXT COMMIT", "NEXT ACTION"], ["LEARNINGS FEED THE NEXT RELEASE", "TIMELY, PERSONAL, NO MANUAL EFFORT"]]]]];
+/* ---------------------------------------------------------------------------
+   TTL LOGISTICS SCENES (2026-10-07) — same isometric line-art language as the
+   Layout 3 set (pale outlined faces, one solid Searce-blue element, dotted
+   connectors, quiet motion), but drawn from travel, transport & logistics
+   objects: containers, trucks, parcels, pallets, warehouse dock doors, waybills,
+   roads, map pins and a container ship.
+--------------------------------------------------------------------------- */
+/* generic cuboid w x d x h */
+const box=(gx,gy,gz,w,d,h,{accent=false,cls='',extra=''}={})=>{
+  const t=[iso(gx,gy,gz+h),iso(gx+w,gy,gz+h),iso(gx+w,gy+d,gz+h),iso(gx,gy+d,gz+h)];
+  const l=[iso(gx,gy+d,gz),iso(gx+w,gy+d,gz),iso(gx+w,gy+d,gz+h),iso(gx,gy+d,gz+h)];
+  const r=[iso(gx+w,gy,gz),iso(gx+w,gy+d,gz),iso(gx+w,gy+d,gz+h),iso(gx+w,gy,gz+h)];
+  const st=accent?'none':C.line;
+  return `<g class="${cls}" ${extra}>${face(l,accent?C.aLeft:C.left,{stroke:st})}${face(r,accent?C.aRight:C.right,{stroke:st})}${face(t,accent?C.aTop:C.top,{stroke:st})}</g>`;};
+const seg=(a,b,{stroke=C.line,sw=.7,op=1}={})=>{const p=iso(...a),q=iso(...b);return `<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${q[0].toFixed(1)}" y2="${q[1].toFixed(1)}" stroke="${stroke}" stroke-width="${sw}" opacity="${op}" stroke-linecap="round"/>`;};
+/* shipping container: cuboid + corrugation ribs on its long front face */
+const container=(gx,gy,gz,{w=1.5,d=.62,h=.62,accent=false,cls='',extra=''}={})=>{
+  const n=Math.round(w/.18), rib=accent?'rgba(255,255,255,.35)':C.lineSoft; let ribs='';
+  for(let i=1;i<n;i++){const x=gx+i*w/n; ribs+=seg([x,gy+d,gz+.07],[x,gy+d,gz+h-.07],{stroke:rib,sw:.6});}
+  return `<g class="${cls}" ${extra}>${box(gx,gy,gz,w,d,h,{accent})}${ribs}</g>`;};
+/* semi truck facing +x: trailer, cab with windscreen, wheels */
+const truck=(gx,gy,{accent=false,cls='',extra=''}={})=>{
+  const win=[iso(gx+2.0,gy+.1,.36),iso(gx+2.0,gy+.5,.36),iso(gx+2.0,gy+.5,.56),iso(gx+2.0,gy+.1,.56)];
+  const wheel=x=>{const p=iso(x,gy+.62,.07);return `<ellipse cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" rx="2.6" ry="2.2" fill="#8f9bb3"/>`;};
+  return `<g class="${cls}" ${extra}>${container(gx,gy,.12,{w:1.45,d:.62,h:.6,accent})}${box(gx+1.55,gy,.12,.45,.62,.5,{accent:false})}${face(win,'#dbe7ff',{stroke:C.line,sw:.6})}${wheel(gx+.3)}${wheel(gx+1.15)}${wheel(gx+1.8)}</g>`;};
+/* parcel with a shipping label + barcode on its front-left face */
+const parcel=(gx,gy,gz,s=.5,{accent=false,cls='',extra=''}={})=>{
+  const lab=[iso(gx+s*.18,gy+s,gz+s*.2),iso(gx+s*.72,gy+s,gz+s*.2),iso(gx+s*.72,gy+s,gz+s*.72),iso(gx+s*.18,gy+s,gz+s*.72)];
+  let bars=''; for(let i=0;i<4;i++){const x=gx+s*(.26+i*.11); bars+=seg([x,gy+s,gz+s*.28],[x,gy+s,gz+s*.5],{stroke:accent?C.blue:'#9aa6bd',sw:.6});}
+  return `<g class="${cls}" ${extra}>${box(gx,gy,gz,s,s,s,{accent})}${face(lab,'#fff',{stroke:accent?'none':C.line,sw:.5})}${bars}</g>`;};
+const pallet=(gx,gy,w=1.1,d=1.1)=>slab(gx,gy,0,w,d,.1);
+/* warehouse with three dock doors on the front face; one door can be lit */
+const warehouse=(gx,gy,{w=2.4,d=1.3,h=1.0,lit=-1,cls=''}={})=>{
+  let doors='';
+  for(let i=0;i<3;i++){const x0=gx+.25+i*.72, x1=x0+.5, on=i===lit;
+    doors+=face([iso(x0,gy+d,0),iso(x1,gy+d,0),iso(x1,gy+d,.6),iso(x0,gy+d,.6)],on?C.aLeft:'#e9eef8',{stroke:on?'none':C.line,sw:.6});
+    for(let k=1;k<4;k++) doors+=seg([x0,gy+d,k*.15],[x1,gy+d,k*.15],{stroke:on?'rgba(255,255,255,.4)':C.lineSoft,sw:.5});}
+  return `<g class="${cls}">${box(gx,gy,0,w,d,h)}${doors}</g>`;};
+/* waybill / document sheet lying flat, with text lines */
+const sheet=(gx,gy,gz,{w=.9,d=1.15,accent=false,cls='',extra=''}={})=>{
+  let lines=''; for(let i=0;i<4;i++){const y=gy+.22+i*.22; lines+=seg([gx+.15,y,gz],[gx+w-(i%2?.35:.15),y,gz],{stroke:accent?'rgba(255,255,255,.55)':'#c6cfdf',sw:.7});}
+  return `<g class="${cls}" ${extra}>${plane(gx,gy,gz,w,d,{fill:accent?C.aTop:'#fff',stroke:accent?'none':C.line})}${lines}</g>`;};
+/* map pin standing on a grid point */
+const pin=(g,{accent=true,s=1,cls='',extra=''}={})=>{const [x,y]=iso(...g),h=15*s,r=5.6*s;
+  return `<g class="${cls}" ${extra}><ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${(3.4*s).toFixed(1)}" ry="${(1.4*s).toFixed(1)}" fill="${C.shadow}"/><path d="M${x.toFixed(1)} ${y.toFixed(1)} C${(x-r).toFixed(1)} ${(y-h*.55).toFixed(1)} ${(x-r).toFixed(1)} ${(y-h).toFixed(1)} ${x.toFixed(1)} ${(y-h).toFixed(1)} C${(x+r).toFixed(1)} ${(y-h).toFixed(1)} ${(x+r).toFixed(1)} ${(y-h*.55).toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}Z" fill="${accent?C.blue:'#fff'}" stroke="${accent?'none':C.line}" stroke-width=".8"/><circle cx="${x.toFixed(1)}" cy="${(y-h*.68).toFixed(1)}" r="${(1.9*s).toFixed(1)}" fill="${accent?'#fff':C.line}"/></g>`;};
+/* road strip along x with a dashed centre line */
+const roadX=(gx,gy,len,{wid=.9}={})=>plane(gx,gy,0,len,wid,{fill:'#eef2f9'})+isoLine([gx+.1,gy+wid/2,0],[gx+len-.1,gy+wid/2,0],{dash:'3 3',stroke:'#c6cfdf'});
+const roadY=(gx,gy,len,{wid=.9}={})=>plane(gx,gy,0,wid,len,{fill:'#eef2f9'})+isoLine([gx+wid/2,gy+.1,0],[gx+wid/2,gy+len-.1,0],{dash:'3 3',stroke:'#c6cfdf'});
+/* any svg group that glides from grid point a to b and fades — loops */
+const glide=(a,b,content,{dur=3.2,begin=0}={})=>{const [ax,ay]=iso(...a),[bx,by]=iso(...b);
+  return `<g opacity="0">${content}<animateMotion dur="${dur}s" begin="${begin}s" repeatCount="indefinite" path="M 0 0 L ${(bx-ax).toFixed(1)} ${(by-ay).toFixed(1)}" calcMode="spline" keySplines=".4 0 .2 1" keyTimes="0;1"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/></g>`;};
+const checkMark=(g)=>{const [x,y]=iso(...g);return `<g class="fade" style="animation-delay:1.2s"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="${C.blue}"/><path d="M${(x-2.6).toFixed(1)} ${y.toFixed(1)} l1.8 1.9 l3.6 -3.8" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></g>`;};
+
+/* envelope: thin slab with a flap drawn on its top face */
+const envelope=(gx,gy,gz,{w=1.0,d=.7,accent=false,cls='',extra=''}={})=>{const h=.09,c=accent?'rgba(255,255,255,.6)':'#c6cfdf';
+  return `<g class="${cls}" ${extra}>${slab(gx,gy,gz,w,d,h,{accent})}${seg([gx,gy,gz+h],[gx+w/2,gy+d*.58,gz+h],{stroke:c,sw:.7})}${seg([gx+w,gy,gz+h],[gx+w/2,gy+d*.58,gz+h],{stroke:c,sw:.7})}</g>`;};
+/* upright card standing on the plane (faces front-left), with text lines */
+const card=(gx,gy,gz,w,h,{accent=false,lines=3,cls='',extra=''}={})=>{const c=accent?'rgba(255,255,255,.6)':'#c6cfdf';let L='';
+  for(let i=0;i<lines;i++){const z=gz+h-.22-i*.2; L+=seg([gx+.12,gy,z],[gx+w-(i%2?.35:.12),gy,z],{stroke:c,sw:.8});}
+  const t=[iso(gx,gy-.06,gz+h),iso(gx+w,gy-.06,gz+h),iso(gx+w,gy,gz+h),iso(gx,gy,gz+h)];
+  const r=[iso(gx+w,gy-.06,gz),iso(gx+w,gy,gz),iso(gx+w,gy,gz+h),iso(gx+w,gy-.06,gz+h)];
+  return `<g class="${cls}" ${extra}>${face(r,accent?C.aRight:C.right,{stroke:accent?'none':C.line,sw:.6})}${face(t,accent?C.aTop:C.top,{stroke:accent?'none':C.line,sw:.6})}${face([iso(gx,gy,gz),iso(gx+w,gy,gz),iso(gx+w,gy,gz+h),iso(gx,gy,gz+h)],accent?C.aLeft:'#fff',{stroke:accent?'none':C.line})}${L}</g>`;};
+/* server rack: tall box with slot lines */
+const rack=(gx,gy,{h=1.1,cls='',extra=''}={})=>{let s='';for(let i=1;i<5;i++)s+=seg([gx+.08,gy+.45,i*h/5],[gx+.45,gy+.45,i*h/5],{stroke:C.lineSoft,sw:.6});
+  return `<g class="${cls}" ${extra}>${box(gx,gy,0,.55,.45,h)}${s}</g>`;};
+/* control tower: slim shaft + wider glazed cab, in blue */
+const tower=(gx,gy)=>`${box(gx+.12,gy+.12,0,.36,.36,1.5,{accent:true})}${box(gx-.05,gy-.05,1.5,.7,.7,.38,{accent:true})}${face([iso(gx-.05,gy+.65,1.58),iso(gx+.65,gy+.65,1.58),iso(gx+.65,gy+.65,1.8),iso(gx-.05,gy+.65,1.8)],'#dbe7ff',{stroke:'none'})}${face([iso(gx+.65,gy-.05,1.58),iso(gx+.65,gy+.65,1.58),iso(gx+.65,gy+.65,1.8),iso(gx+.65,gy-.05,1.8)],'#c3d7ff',{stroke:'none'})}`;
+/* ---- scene templates: each takes [leftTag, rightTag, caption] ---- */
+const LS={
+/* knowledge retrieval: warehouse shelving; the right box slides out to the front in blue */
+retrieve:([L,R,K])=>wrap(`
+  ${shadow(-1.7,-1.3,3.4,2.6)}
+  ${[[-1.6,-1.2],[1.0,-1.2],[-1.6,-.3],[1.0,-.3]].map(([x,y])=>seg([x,y,0],[x,y,1.75],{stroke:C.line,sw:.9})).join('')}
+  ${[0,.6,1.2].map((z,i)=>slab(-1.6,-1.2,z,2.6,.9,.08,{cls:'fade',extra:`style="animation-delay:${i*.1}s"`})).join('')}
+  ${[[-1.45,.08],[-.85,.08],[.45,.08],[-1.45,.68],[-.25,.68],[.4,.68],[-1.4,1.28],[-.7,1.28],[.45,1.28]].map(([x,z],i)=>parcel(x,-1.05,z,.45,{cls:'fade',extra:`style="animation-delay:${.1+i*.05}s"`})).join('')}
+  ${glide([-.25,-1.05,.08],[-.25,.45,.08],parcel(-.25,-1.05,.08,.5,{accent:true}),{dur:3.2})}
+  ${parcel(-.25,.55,0,.5,{accent:true,cls:'settle',extra:'style="animation-delay:1.6s;opacity:.0"'})}
+  ${tag([-1.6,-.3,1.3],L,{side:'left',y:66})}
+  ${tag([.25,.9,.5],R,{side:'right',y:132,accent:true})}
+  ${caption(K)}`),
+/* tracking & closure: open parcels at the depot, the route to the customer's building, closed with a check */
+delivery:([L,R,K])=>wrap(`
+  ${shadow(-1.9,-1.7,3.8,3.3)}${roadX(-1.9,.2,3.8)}${roadY(.75,-1.7,1.9)}
+  ${pallet(-1.75,-.95,1.1,1.0)}${parcel(-1.65,-.85,.1,.5,{cls:'fade'})}${parcel(-1.1,-.85,.1,.5,{cls:'fade'})}${parcel(-1.4,-.85,.6,.5,{cls:'fade'})}
+  ${box(1.0,-1.7,0,.9,.9,1.1,{cls:'fade'})}${box(1.0,-1.7,1.1,.9,.9,.12,{accent:true})}
+  ${glide([-1.6,.33,0],[.55,.33,0],truck(-1.6,.33,{}),{dur:3.6})}
+  <path d="${pathIso([-.6,.65,0],[1.2,.65,0],[1.2,-.8,0])}" fill="none" stroke="${C.blue}" stroke-width="1.2" stroke-dasharray="2 3"/>
+  ${checkMark([1.15,-1.55,1.55])}
+  ${tag([-1.65,-.35,.6],L,{side:'left',y:84})}
+  ${tag([1.9,-1.25,.7],R,{side:'right',y:104,accent:true})}
+  ${caption(K)}`),
+/* turn-by-turn: a crossroads, the rider's car takes the turn, the drop-off pin waits */
+turn:([L,R,K])=>wrap(`
+  ${shadow(-1.9,-1.9,3.8,3.8)}
+  ${[[-1.9,-1.9],[.5,-1.9],[-1.9,.5],[.5,.5]].map(([x,y],i)=>box(x+.15,y+.15,0,1.1,1.1,.3+(i%3)*.25,{cls:'fade'})).join('')}
+  ${roadX(-1.9,-.45,3.8)}${roadY(-.45,-1.9,3.8)}
+  <path d="${pathIso([-1.8,.0,.02],[0,.0,.02],[0,-1.8,.02])}" fill="none" stroke="${C.blue}" stroke-width="1.6" stroke-linecap="round" class="draw"/>
+  ${glide([-1.8,-.15,0],[-.35,-.15,0],box(-1.8,-.15,0,.45,.3,.22,{accent:true}),{dur:3})}
+  ${pin([0,-1.75,0],{cls:'float'})}
+  ${tag([-1.7,.0,.2],L,{side:'left',y:122})}
+  ${tag([.2,-1.75,.6],R,{side:'right',y:52,accent:true})}
+  ${caption(K)}`),
+/* recommendations: three option cards; the timely, personal one rises in blue */
+recommend:([L,R,K])=>wrap(`
+  ${shadow(-1.8,-1.0,3.6,2.0)}${slab(-1.8,-1.0,0,3.6,2.0,.1,{cls:'fade'})}
+  ${parcel(-1.55,-.2,.1,.6,{cls:'fade'})}
+  ${card(-.55,-.2,.1,.75,.95,{lines:2,cls:'fade'})}
+  ${card(1.05,-.2,.1,.75,.95,{lines:2,cls:'fade',extra:'style="opacity:.6"'})}
+  <g class="float">${card(.25,.35,.55,.85,1.15,{accent:true,lines:3})}</g>
+  ${isoLine([-.95,.1,.4],[.25,.35,.9],{dash:'2 3',stroke:C.blue})}${runner(pathIso([-.95,.1,.4],[.25,.35,.9]),2.4)}
+  ${tag([-1.55,.4,.4],L,{side:'left',y:128})}
+  ${tag([1.1,.35,1.4],R,{side:'right',y:58,accent:true})}
+  ${caption(K)}`),
+/* fare transparency: distance ticks along the road, the fare card matches them */
+fare:([L,R,K])=>wrap(`
+  ${shadow(-1.9,-.9,3.8,1.9)}${roadX(-1.9,-.1,3.8)}
+  ${[-1.5,-.9,-.3,.3,.9,1.5].map(x=>seg([x,-.1,0],[x,-.32,0],{stroke:C.blue,sw:.8})).join('')}
+  ${glide([-1.8,.05,0],[.9,.05,0],box(-1.8,.05,0,.5,.32,.24,{}),{dur:3.4})}
+  ${card(-1.75,-1.0,0,.95,.85,{lines:2,cls:'fade'})}
+  <g class="settle" style="animation-delay:.5s">${card(.6,-1.0,0,1.15,1.15,{accent:true,lines:3})}</g>
+  ${tag([-1.75,-1.0,.8],L,{side:'left',y:72})}
+  ${tag([1.75,-1.0,1.0],R,{side:'right',y:70,accent:true})}
+  ${caption(K)}`),
+/* fleet Q&A: a question card, a tracked truck on the road, the answer card in blue */
+qa:([L,R,K])=>wrap(`
+  ${shadow(-1.9,-1.6,3.8,3.2)}${roadX(-1.9,.35,3.8)}
+  ${card(-1.75,-.9,0,1.05,.95,{lines:2,cls:'fade'})}
+  ${card(.35,-.9,0,1.3,1.25,{accent:true,lines:3,cls:'settle',extra:'style="animation-delay:.6s"'})}
+  <path d="${pathIso([-.7,-.9,.6],[.35,-.9,.75])}" fill="none" stroke="${C.blue}" stroke-width=".9" stroke-dasharray="2 3"/>${runner(pathIso([-.7,-.9,.6],[.35,-.9,.75]),2.2)}
+  ${glide([-1.8,.48,0],[.5,.48,0],truck(-1.8,.48,{})+pin([-.05,.78,.75],{s:.85}),{dur:4})}
+  ${tag([-1.2,1.0,.4],L,{side:'left',y:146})}
+  ${tag([1.65,-.9,1.0],R,{side:'right',y:70,accent:true})}
+  ${caption(K)}`),
+/* scale & governance: a control tower watches every rack on the platform */
+govern:([L,R,K])=>wrap(`
+  ${shadow(-1.8,-1.4,3.6,2.8)}${slab(-1.8,-1.4,0,3.6,2.8,.12,{cls:'fade'})}
+  <g>
+  ${[[-1.55,-1.1],[-.85,-1.1],[-.15,-1.1],[-1.55,-.3],[-.85,-.3]].map(([x,y],i)=>rack(x,y,{h:.9+(i%2)*.25,cls:'fade',extra:`style="animation-delay:${i*.08}s"`})).join('')}
+  ${tower(.75,.25)}
+  <g class="breathe">${rays([1.1,.6,2.3],{r1:17,r2:24})}</g>
+  ${[[-1.3,-.65,1.0],[-.6,-.65,1.15],[.1,-.65,1.0]].map(p=>isoLine(p,[.95,.45,1.7],{dash:'2 3',stroke:C.blue})).join('')}
+  </g>
+  ${tag([-1.55,-.2,.9],L,{side:'left',y:112})}
+  ${tag([1.4,.6,1.7],R,{side:'right',y:52,accent:true})}
+  ${caption(K)}`),
+/* email triage: an inbox tray of envelopes; noise drops into the bin, the one that needs action lifts out in blue */
+triage:([L,R,K])=>wrap(`
+  ${shadow(-1.8,-1.7,3.6,3.0)}
+  ${box(.35,-1.65,0,1.1,.95,.5,{cls:'fade'})}
+  ${[0,1].map(i=>envelope(.45+i*.12,-1.55+i*.1,.5+i*.02,{w:.8,d:.55,cls:'fade',extra:`style="animation-delay:${.2+i*.1}s;opacity:.5"`})).join('')}
+  ${glide([-1.2,-.6,1.0],[.5,-1.4,.75],envelope(-1.2,-.6,1.0,{w:.8,d:.55}),{dur:3.6,begin:.4})}
+  ${box(-1.75,-.55,0,1.4,1.1,.28,{cls:'fade'})}
+  ${[0,1,2,3].map(i=>envelope(-1.68+i*.03,-.48+i*.03,.28+i*.1,{w:1.25,d:.95,cls:'fade',extra:`style="animation-delay:${i*.1}s"`})).join('')}
+  <path d="${pathIso([-.45,.0,.7],[.2,.6,1.2],[.5,.6,1.3])}" fill="none" stroke="${C.blue}" stroke-width=".9" stroke-dasharray="2 3" stroke-linecap="round"/>
+  ${runner(pathIso([-.45,.0,.7],[.2,.6,1.2],[.5,.6,1.3]),2.6)}
+  <g class="float">${rays([1.15,.85,2.35],{r1:16,r2:24})}${envelope(.5,.4,1.3,{w:1.3,d:.9,accent:true})}</g>
+  ${tag([-1.75,.55,.5],L,{side:'left',y:122})}
+  ${tag([1.45,-1.2,.5],'NOISE',{side:'right',y:58})}
+  ${tag([1.8,.85,1.39],R,{side:'right',y:96,accent:true})}
+  ${caption(K)}`),
+/* waybills arrive; noise fades, the one that needs action lifts out in blue */
+docs:([L,R,K])=>wrap(`
+  ${shadow(-1.3,-1.0,2.6,2.2)}
+  ${[0,1,2].map(i=>sheet(-1.25+i*.08,-.95+i*.06,.06+i*.1,{cls:'fade',extra:`style="animation-delay:${i*.12}s"`})).join('')}
+  ${sheet(.35,-.95,.06,{cls:'fade',extra:'style="animation-delay:.3s;opacity:.55"'})}
+  <g class="float">${sheet(-.1,.15,.95,{accent:true})}</g>
+  ${tag([-1.2,-.4,.3],L,{side:'left',y:78})}
+  ${tag([.8,.7,.95],R,{side:'right',y:70,accent:true})}
+  ${caption(K)}`),
+/* a parcel label under a sweeping scan plane */
+scan:([L,R,K])=>wrap(`
+  ${shadow(-1.2,-1.2,2.4,2.4)}${pallet(-1.15,-1.15,2.3,2.3)}
+  ${parcel(-.9,-.9,.1,.75,{cls:'fade'})}${parcel(.15,-.9,.1,.75,{cls:'fade'})}
+  ${parcel(-.4,.2,.1,.85,{accent:true,cls:'fade'})}
+  ${wire(-1.0,-1.0,.12,2.0,{dash:'3 3',stroke:C.blue})}
+  ${scanPlane(-1.0,-1.0,.15,2.0)}
+  ${tag([-1.0,1.0,1.4],L,{side:'left',y:80,accent:true})}
+  ${tag([.45,1.05,.5],R,{side:'right',y:128})}
+  ${caption(K)}`),
+/* parcels ride a conveyor into the blue end-of-line tote */
+conveyor:([L,R,K])=>wrap(`
+  ${shadow(-1.9,-.5,3.6,1.1)}${slab(-1.9,-.45,.25,3.0,.9,.12,{cls:'fade'})}
+  ${[-1.6,-1.0,-.4,.2,.8].map(x=>seg([x,-.45,.25],[x,.45,.25],{stroke:C.lineSoft,sw:.6})).join('')}
+  ${glide([-1.8,-.3,.37],[.4,-.3,.37],parcel(-1.8,-.3,.37,.55),{dur:3.4})}
+  ${glide([-1.8,-.3,.37],[.4,-.3,.37],parcel(-1.8,-.3,.37,.55),{dur:3.4,begin:1.7})}
+  ${box(1.15,-.55,0,.9,1.1,.8,{accent:true,cls:'fade'})}
+  ${tag([-1.5,.45,.4],L,{side:'left',y:118})}
+  ${tag([1.6,-.55,.8],R,{side:'right',y:62,accent:true})}
+  ${caption(K)}`),
+/* a parcel is routed to the lit dock door of the right owner */
+bays:([L,R,K])=>wrap(`
+  ${shadow(-1.3,-1.4,2.6,2.8)}
+  ${warehouse(-1.3,-1.6,{lit:1})}
+  ${plane(-1.3,-.3,0,2.4,1.3,{fill:'#f6f8fc',cls:'fade'})}
+  ${glide([-.3,1.0,0],[.0,-.15,0],parcel(-.3,1.0,0,.45,{accent:true}),{dur:3})}
+  ${tag([-1.0,.4,.1],L,{side:'left',y:132})}
+  ${tag([.2,-.3,.6],R,{side:'right',y:70,accent:true})}
+  ${caption(K)}`),
+/* the truck at the dock pulls away down the road */
+dispatch:([L,R,K])=>wrap(`
+  ${shadow(-1.9,-1.5,3.6,3.0)}
+  ${warehouse(-1.9,-1.75,{w:1.7,d:1.0,h:.85,lit:0})}
+  ${roadX(-1.9,.05,3.8)}
+  ${glide([-1.7,.18,0],[.9,.18,0],truck(-1.7,.18,{accent:true}),{dur:3.6})}
+  ${tag([-1.3,-.75,.7],L,{side:'left',y:62})}
+  ${tag([1.8,.5,0],R,{side:'right',y:134,accent:true})}
+  ${caption(K)}`),
+/* a delivery runs its route; the destination pin confirms */
+track:([L,R,K])=>wrap(`
+  ${shadow(-1.7,-1.7,3.4,3.4)}${plane(-1.7,-1.7,0,3.4,3.4,{fill:'#f6f8fc',cls:'fade'})}
+  ${[-1,0,1].map(v=>isoLine([-1.7,v,0],[1.7,v,0],{stroke:'#e3e9f4'})+isoLine([v,-1.7,0],[v,1.7,0],{stroke:'#e3e9f4'})).join('')}
+  <path d="${pathIso([-1.4,1.2,0],[-1.4,0,0],[0,0,0],[0,-1.2,0],[1.3,-1.2,0])}" fill="none" stroke="${C.blue}" stroke-width="1.6" stroke-dasharray="3 3" stroke-linecap="round"/>
+  ${runner(pathIso([-1.4,1.2,0],[-1.4,0,0],[0,0,0],[0,-1.2,0],[1.3,-1.2,0]),4.2)}
+  ${pin([-1.4,1.2,0],{accent:false,s:.8})}${pin([1.3,-1.2,0],{cls:'float'})}
+  ${tag([-1.4,1.2,0],L,{side:'left',y:140})}
+  ${tag([1.3,-1.2,.6],R,{side:'right',y:52,accent:true})}
+  ${caption(K)}`),
+/* three operational sources settle into one blue data pool */
+lake:([L,M,R,K])=>wrap(`
+  ${shadow(-1.0,-.4,2.0,1.6)}
+  ${container(-1.9,-1.6,0,{w:1.1,cls:'fade'})}
+  ${truck(-.6,-1.95,{cls:'fade'})}
+  ${sheet(1.15,-1.0,.05,{cls:'fade'})}
+  ${slab(-.9,-.3,0,1.8,1.4,.14,{cls:'fade'})}${slab(-.85,-.25,.14,1.7,1.3,.14,{cls:'fade'})}${slab(-.8,-.2,.28,1.6,1.2,.12,{accent:true,cls:'fade'})}${glide([-1.4,-1.1,.9],[-.2,.1,.45],parcel(-1.4,-1.1,.9,.32,{}),{dur:3})}
+  ${isoLine([-1.3,-1.0,.3],[-.5,-.2,.4],{dash:'2 3',stroke:C.blue})}${isoLine([1.6,-.4,.05],[.9,.2,.4],{dash:'2 3',stroke:C.blue})}
+  ${tag([-1.9,-1.0,.6],L,{side:'left',y:72})}
+  ${tag([1.9,-1.0,.05],M,{side:'right',y:86})}
+  ${tag([0,1.1,.5],R,{side:'right',y:140,accent:true})}
+  ${caption(K)}`),
+/* a pin locates one container in the yard and reports on it */
+locate:([L,R,K])=>wrap(`
+  ${shadow(-1.6,-1.3,3.2,2.6)}${plane(-1.6,-1.3,0,3.2,2.6,{fill:'#f6f8fc',cls:'fade'})}
+  ${container(-1.5,-1.2,0,{w:1.3,cls:'fade'})}${container(-1.5,-1.2,.62,{w:1.3,cls:'fade'})}
+  ${container(.2,-1.2,0,{w:1.3,cls:'fade'})}
+  ${container(-1.5,.2,0,{w:1.3,cls:'fade'})}
+  ${container(.2,.2,0,{w:1.3,accent:true,cls:'fade'})}
+  <g class="float">${rays([.85,.5,1.75],{r1:14,r2:20})}${pin([.85,.5,.75],{s:1.15})}</g>
+  ${tag([-1.5,-.6,1.24],L,{side:'left',y:66})}
+  ${tag([1.5,.8,.5],R,{side:'right',y:120,accent:true})}
+  ${caption(K)}`),
+/* container stacks grow like a live chart; the tallest is blue */
+bars:([L,R,K])=>wrap(`
+  ${shadow(-1.6,-.8,3.2,1.6)}${plane(-1.6,-.8,0,3.2,1.6,{fill:'#f6f8fc',cls:'fade'})}
+  ${growBar(-1.4,-.35,.6,.9,{dur:4.4,begin:0})}
+  ${growBar(-.55,-.35,.6,1.5,{dur:4.4,begin:.25})}
+  ${growBar(.3,-.35,.6,1.2,{dur:4.4,begin:.5})}
+  ${growBar(1.15,-.35,.6,2.1,{dur:4.4,begin:.75,accent:true})}
+  ${tag([-1.1,.25,.9],L,{side:'left',y:120})}
+  ${tag([1.45,-.05,2.1],R,{side:'right',y:52,accent:true})}
+  ${caption(K)}`),
+/* freight history as containers on a ship; the next rate lifts in blue */
+ship:([L,R,K])=>wrap(`
+  ${shadow(-2.0,-.6,3.8,1.4)}
+  ${face([iso(-2.0,-.6,.0),iso(1.4,-.6,.0),iso(2.0,0,.0),iso(1.4,.6,.0),iso(-2.0,.6,.0)],'#e9eef8')}
+  ${box(-2.0,-.6,0,3.4,1.2,.32)}
+  ${face([iso(1.4,-.6,0),iso(2.0,0,0),iso(2.0,0,.32),iso(1.4,-.6,.32)],C.right)}${face([iso(2.0,0,0),iso(1.4,.6,0),iso(1.4,.6,.32),iso(2.0,0,.32)],C.left)}
+  ${[0,1,2].map(c=>container(-1.85+c*1.05,-.5,.32,{w:.95,d:.5,h:.42,cls:'fade',extra:`style="animation-delay:${c*.1}s"`})).join('')}
+  ${[0,1].map(c=>container(-1.85+c*1.05,.05,.32,{w:.95,d:.5,h:.42,cls:'fade'})).join('')}
+  <g class="float">${container(.25,.05,.95,{w:.95,d:.5,h:.42,accent:true})}</g>
+  ${tag([-1.4,.05,.74],L,{side:'left',y:122})}
+  ${tag([.7,.3,1.37],R,{side:'right',y:58,accent:true})}
+  ${caption(K)}`),
+/* the warehouse sits inside a dashed perimeter, checked */
+shield:([L,R,K])=>wrap(`
+  ${shadow(-1.5,-1.4,3.0,2.8)}
+  ${wire(-1.6,-1.5,0,3.0,{dash:'3 3',stroke:C.blue})}
+  ${warehouse(-1.3,-1.1,{w:2.4,d:1.4,h:.95,lit:1})}
+  ${checkMark([.9,-.1,2.2])}
+  ${tag([-1.6,1.5,0],L,{side:'left',y:140,accent:true})}
+  ${tag([1.1,-1.1,.95],R,{side:'right',y:70})}
+  ${caption(K)}`),
+/* a row of trucks: the efficient one rolls, the idle ones wait */
+fleet:([L,R,K])=>wrap(`
+  ${shadow(-1.9,-1.6,3.8,3.2)}
+  ${roadX(-1.9,-1.55,3.8)}${roadX(-1.9,-.35,3.8)}${roadX(-1.9,.85,3.8)}
+  ${truck(-1.5,-1.42,{cls:'fade'})}${truck(-1.1,.98,{cls:'fade'})}
+  ${glide([-1.7,-.22,0],[.4,-.22,0],truck(-1.7,-.22,{accent:true}),{dur:3.4})}
+  ${tag([-1.3,1.6,.4],L,{side:'left',y:150})}
+  ${tag([1.6,-.22,.6],R,{side:'right',y:96,accent:true})}
+  ${caption(K)}`),
+/* predictive maintenance: one truck flagged before it fails */
+alert:([L,R,K])=>wrap(`
+  ${shadow(-1.6,-.9,3.4,1.8)}${roadX(-1.8,-.4,3.6,{wid:1.0})}
+  <ellipse cx="${iso(.85,.08,0)[0].toFixed(1)}" cy="${iso(.85,.08,0)[1].toFixed(1)}" rx="30" ry="14" fill="rgba(0,100,255,.08)" stroke="${C.blue}" stroke-width=".9" stroke-dasharray="3 3" class="pulse"/>
+  ${truck(-1.2,-.22,{})}
+  ${face([iso(.8,-.22,.15),iso(.8,.4,.15),iso(.8,.4,.62),iso(.8,-.22,.62)],C.blue,{stroke:'none',cls:'breathe'})}
+  ${rays([.8,.1,1.05],{r1:12,r2:19})}
+  ${tag([-1.0,.4,.2],L,{side:'left',y:130})}
+  ${tag([.8,-.22,.62],R,{side:'right',y:62,accent:true})}
+  ${caption(K)}`),
+/* routing: two paths across the city grid, the best one blue */
+routes:([L,R,K])=>wrap(`
+  ${shadow(-1.7,-1.7,3.4,3.4)}${plane(-1.7,-1.7,0,3.4,3.4,{fill:'#f6f8fc',cls:'fade'})}
+  ${[[-1.3,-1.3],[.1,-1.3],[-1.3,.1],[.5,.5]].map(([x,y])=>box(x,y,0,.8,.8,.35+((x+y)%2?.3:0),{cls:'fade'})).join('')}
+  <path d="${pathIso([-1.6,1.6,0],[-1.6,-.1,0],[1.6,-.1,0])}" fill="none" stroke="#c6cfdf" stroke-width="1.4" stroke-dasharray="3 3"/>
+  <path d="${pathIso([-1.6,1.6,0],[-.2,1.6,0],[-.2,-1.6,0],[1.6,-1.6,0])}" fill="none" stroke="${C.blue}" stroke-width="1.8" stroke-linecap="round" class="draw"/>
+  ${runner(pathIso([-1.6,1.6,0],[-.2,1.6,0],[-.2,-1.6,0],[1.6,-1.6,0]),4)}
+  ${pin([1.6,-1.6,0],{s:.9})}
+  ${tag([-1.6,.6,0],L,{side:'left',y:118})}
+  ${tag([1.3,-1.6,0],R,{side:'right',y:58,accent:true})}
+  ${caption(K)}`),
+/* city expansion: clusters of blocks, the newest city lights up */
+city:([L,R,K])=>wrap(`
+  ${shadow(-1.8,-1.8,3.6,3.6)}${plane(-1.8,-1.8,0,3.6,3.6,{fill:'#f6f8fc',cls:'fade'})}
+  ${[[-1.6,-1.6,.9],[-1.0,-1.6,.6],[-1.6,-1.0,.5],[-1.0,-1.0,1.2]].map(([x,y,h])=>box(x,y,0,.5,.5,h,{cls:'fade'})).join('')}
+  ${[[.5,-1.4,.5],[1.0,-1.4,.8]].map(([x,y,h])=>box(x,y,0,.45,.45,h,{cls:'fade'})).join('')}
+  ${[[.6,.6,.45],[1.1,.6,.7],[.6,1.1,.35]].map(([x,y,h],i)=>box(x,y,0,.45,.45,h,{accent:true,cls:'fade',extra:`style="animation-delay:${.3+i*.15}s"`})).join('')}
+  ${isoLine([-.7,-.7,0],[.8,.8,0],{dash:'2 3',stroke:C.blue})}${runner(pathIso([-.7,-.7,0],[.8,.8,0]),3)}
+  ${tag([-1.6,-1.0,1.0],L,{side:'left',y:66})}
+  ${tag([1.3,.8,.7],R,{side:'right',y:120,accent:true})}
+  ${caption(K)}`)
+};
+/* which template + labels each stage uses, per tab */
+const TT_SCENES=[
+ [['triage',['INBOX','FLAGGED','NOISE REMOVED, ACTION FLAGGED']],
+  ['scan',['OCR','BILL OF LADING','INVOICES, BOLS AND POS READ']],
+  ['conveyor',['DOCUMENTS','WORKFLOW','THE RIGHT WORKFLOW FOR EACH DOCUMENT']],
+  ['bays',['TASK','OWNER','BY ROLE, WORKLOAD AND URGENCY']],
+  ['dispatch',['ERP · TMS · WMS','ACTION','ACTIONS FIRED, SENDERS ANSWERED']],
+  ['delivery',['OPEN ITEMS','CLOSED','DELAYS ESCALATED, LOOPS CLOSED']]],
+ [['lake',['RDS + MONGODB','S3','DATA LAKE','THREE SOURCES, ONE LIVE DATA LAKE']],
+  ['retrieve',['DATA + DOCUMENTS','RETRIEVED','THE RIGHT DATA AND DOCUMENTS FIRST']],
+  ['qa',['FLEET','ETA + STATUS','LOCATION, STATUS AND ETAS, ON ASK']],
+  ['bars',['KPIS','DASHBOARD','PLAIN QUESTIONS BECOME DASHBOARDS']],
+  ['ship',['RATE HISTORY','NEXT RATE','BENCHMARK FREIGHT RATES PREDICTED']],
+  ['govern',['GOVERNED','OBSERVABLE','OBSERVABLE, SECURE AND SCALABLE']]],
+ [['locate',['PICKUP ZONE','PICKUP POINT','PICKUP POINTS KEPT CURRENT']],
+  ['routes',['LIVE TRAFFIC','BEST PATH','BEST PATH FROM LIVE TRAFFIC']],
+  ['turn',['RIDER','DROP-OFF','GUIDED TURN BY TURN, IN-APP']],
+  ['fare',['DISTANCE','FAIR FARE','FARES MATCHED TO DISTANCE AND RULES']],
+  ['fleet',['IDLE','ON THE MOVE','LESS IDLE TIME, ROUTES DRIVERS TRUST']],
+  ['city',['METROS','TIER 2 + 3','ONE FRAMEWORK, METROS TO TIER 2 AND 3']]],
+ [['lake',['EQUIPMENT','CLIENTS','DATA LAKE','EQUIPMENT AND CLIENT DATA, ONE VIEW']],
+  ['scan',['QUERY','INSIGHT','SERVERLESS QUERIES, FASTER ANSWERS']],
+  ['bars',['STATUS','DASHBOARD','REAL-TIME SUPPLY CHAIN STATUS']],
+  ['locate',['ASK','LIVE ANSWER','PLAIN QUESTIONS, LIVE ANSWERS']],
+  ['alert',['EQUIPMENT','FAILURE RISK','FAILURES SPOTTED BEFORE DOWNTIME']],
+  ['recommend',['INSIGHT','NEXT ACTION','TIMELY, PERSONAL, NO MANUAL EFFORT']]]
+];
+/* LAYOUT PASS (runs once per scene, result cached as markup):
+   1. measure the drawing alone (labels, leaders and caption excluded; growing bars at full height; moving dots ignored)
+   2. scale it to fill one shared central box (x 74-226, y 40-168), so every scene reads at the same size and never reaches the card heading or caption so it never reaches the card heading or caption
+   3. rebuild every label just outside the drawing's real left/right edge (long labels wrap to two lines) with a fresh
+      dotted leader to its anchor point, so no text ever sits on the artwork */
+const FIT={L:74,R:226,T:40,B:168}, FIT_CACHE={};
+const NS='http://www.w3.org/2000/svg';
+const layoutScene=(markup)=>{
+  const host=document.createElement('div'); host.style.cssText='position:absolute;left:-9999px;top:0;width:600px;height:400px;visibility:hidden';
+  host.innerHTML=markup; document.body.appendChild(host);
+  const svg=host.querySelector('svg'), inv=svg.getCTM().inverse();
+  /* collect labels: tag() emits path.lead, circle(start), circle(anchor), text — in that order */
+  const leads=[...svg.querySelectorAll('.lead')], tags=[];
+  for(let i=0;i+3<leads.length;i+=4){const t=leads[i+3]; tags.push({text:t.textContent, side:t.getAttribute('text-anchor')==='end'?'left':'right', y:+t.getAttribute('y'),
+    accent:t.getAttribute('fill')===C.blue, ax:+leads[i+2].getAttribute('cx'), ay:+leads[i+2].getAttribute('cy'), delay:(t.getAttribute('style')||'').replace(/[^0-9.]/g,'')||'1.1'});}
+  leads.forEach(el=>el.remove());
+  const cap=[...svg.querySelectorAll('text')].find(t=>t.getAttribute('y')==='192'); const capHTML=cap?cap.outerHTML:''; if(cap) cap.remove();
+  const drawingHTML=svg.innerHTML;
+  /* measure a static copy */
+  svg.querySelectorAll('polygon > animate[attributeName="points"]').forEach(an=>an.parentNode.setAttribute('points',an.getAttribute('values').split(';')[1]));
+  svg.querySelectorAll('animate,animateMotion').forEach(x=>x.remove());
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  svg.querySelectorAll('polygon,line,path,circle,ellipse,text').forEach(el=>{
+    if(el.tagName==='circle'&&!el.hasAttribute('cx')) return;
+    const bb=el.getBBox(); if(!bb.width&&!bb.height) return; const m=inv.multiply(el.getCTM());
+    [[bb.x,bb.y],[bb.x+bb.width,bb.y+bb.height]].forEach(([X,Y])=>{const q=svg.createSVGPoint();q.x=X;q.y=Y;const r=q.matrixTransform(m);x0=Math.min(x0,r.x);x1=Math.max(x1,r.x);y0=Math.min(y0,r.y);y1=Math.max(y1,r.y);});});
+  host.remove();
+  const s=Math.min((FIT.R-FIT.L)/(x1-x0),(FIT.B-FIT.T)/(y1-y0)); /* every drawing fills the same box, so all read at one consistent size */
+  const cx=(x0+x1)/2, cy=(y0+y1)/2, tx=(FIT.L+FIT.R)/2, ty=(FIT.T+FIT.B)/2;
+  const P=(x,y)=>[tx+(x-cx)*s, ty+(y-cy)*s];
+  const dl=tx-(cx-x0)*s, dr=tx+(x1-cx)*s, dt=ty-(cy-y0)*s, db=ty+(y1-cy)*s;
+  /* labels */
+  const used={left:[],right:[]};
+  const labels=tags.map(t=>{
+    const [px,py]=P(t.ax,t.ay);
+    let ly=Math.min(Math.max(t.y,dt+4),db); /* keep the label band within the drawing's height */
+    while(used[t.side].some(u=>Math.abs(u-ly)<14)) ly+=14; used[t.side].push(ly);
+    const words=t.text.split(' '), two=t.text.length>9&&words.length>1;
+    let l1=t.text,l2='';
+    if(two){let best=1,bd=1e9;for(let k=1;k<words.length;k++){const d=Math.abs(words.slice(0,k).join(' ').length-words.slice(k).join(' ').length);if(d<bd){bd=d;best=k;}} l1=words.slice(0,best).join(' '); l2=words.slice(best).join(' ');}
+    const gap=7, ex=t.side==='left'?dl-gap:dr+gap, tx2=t.side==='left'?ex-4:ex+4, anchor=t.side==='left'?'end':'start';
+    const lineY=ly-2.5, d=Math.abs(py-lineY)>2?`M ${ex.toFixed(1)} ${lineY.toFixed(1)} H ${px.toFixed(1)} V ${py.toFixed(1)}`:`M ${ex.toFixed(1)} ${lineY.toFixed(1)} H ${px.toFixed(1)}`;
+    const late=`style="animation-delay:${t.delay}s"`, late2=`style="animation-delay:${(+t.delay+.5).toFixed(1)}s"`;
+    const txt=two?`<tspan x="${tx2.toFixed(1)}" dy="${-3.6}">${l1}</tspan><tspan x="${tx2.toFixed(1)}" dy="7.4">${l2}</tspan>`:l1;
+    return `<path d="${d}" fill="none" stroke="${C.line}" stroke-width="0.7" stroke-linecap="round" stroke-dasharray="0.6 2.4" class="fade lead" ${late}/>`+
+      `<circle cx="${ex.toFixed(1)}" cy="${lineY.toFixed(1)}" r="1.6" fill="#fff" stroke="${C.line}" stroke-width="0.6" class="fade lead" ${late}/>`+
+      `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="1.8" fill="${t.accent?C.blue:'#fff'}" stroke="${t.accent?C.blue:C.line}" stroke-width="0.6" class="fade lead" ${late2}/>`+
+      `<text x="${tx2.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${anchor}" font-family="Poppins" font-size="6" font-weight="500" fill="${t.accent?C.blue:'#54555a'}" opacity="${t.accent?.95:.6}" letter-spacing="1.3" class="fade lead" ${late}>${txt}</text>`;}).join('');
+  const open=markup.slice(0,markup.indexOf('>')+1);
+  return open+`<g transform="translate(${tx.toFixed(1)} ${ty.toFixed(1)}) scale(${s.toFixed(3)}) translate(${(-cx).toFixed(1)} ${(-cy).toFixed(1)})">`+drawingHTML+'</g>'+labels+capHTML+'</svg>';};
+const fitScene=(markup,key)=>{ if(!(key in FIT_CACHE)) FIT_CACHE[key]=layoutScene(markup); return FIT_CACHE[key]; };
+const SCENES3_ALL=TT_SCENES.map((tab,ti)=>tab.map(([k,lbl],si)=>()=>fitScene(LS[k](lbl),ti+'-'+si)));
 
 /* ---------------------------------------------------------------------------
    RENDER + INTERACTION — sliding card carousel
@@ -1813,7 +2205,7 @@ function renderProcess(pi){
     <div><span class="t">${s.title}</span><br><span class="ag">${sparkle}${s.agent}</span></div>
   </div>
   <div class="full">
-    <div class="full-top"><div><span class="num">${pad(i)}</span><h3>${s.title}</h3></div><div class="agent"><b>${sparkle}</b><span>AI agent</span>${s.agent}</div></div>
+    <div class="full-top"><div><span class="num">${pad(i)}</span><h3>${s.title}</h3></div><div class="agent"><b>${sparkle}</b><span>${P.kind||'AI agent'}</span>${s.agent}</div></div>
     <div class="panel"><div class="vector" aria-label="${s.flow}"></div></div>
   </div>
 </article>`;}).join(''));
@@ -1907,5 +2299,19 @@ window.addEventListener('resize',moveInd);moveInd();document.fonts&&document.fon
 })();
 </script>
 
+
+<script>
+/* Phones: every closed FAQ row takes the height of the tallest question, so the boxes line up evenly */
+(function(){
+  var qs=[].slice.call(document.querySelectorAll('.faq .faq-q')); if(!qs.length) return;
+  function sync(){
+    qs.forEach(function(q){q.style.minHeight='';});
+    if(window.innerWidth>720) return;
+    var h=Math.max.apply(null,qs.map(function(q){return q.offsetHeight;}));
+    qs.forEach(function(q){q.style.minHeight=h+'px';});
+  }
+  window.addEventListener('resize',sync); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(sync); sync();
+})();
+</script>
 </body>
 </html>

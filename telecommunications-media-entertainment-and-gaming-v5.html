@@ -163,7 +163,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .rcm-arch{--rcm-ink:#1a1a1c;--rcm-ink-40:#84868c;--rcm-ink-60:#54555a;--rcm-ink-80:#1a1a1c;--rcm-line:#e4e6ea;--rcm-blue-lit:#0064ff;--rcm-purple:#734bff;--rcm-paper-side:#f6f7f9;--rcm-paper-center:#ffffff;--rcm-card-ink:#1a1a1c;--rcm-card-ink-60:#54555a;--rcm-card-ink-40:#84868c;--rcm-card-line:#e4e6ea;--rcm-dark:#02061a;--rcm-dark-ink:#f2f7ff;--rcm-dark-ink-60:#a9b3c9;}
 .rcm-arch .rcm-carousel{position:relative;margin:0 auto 56px;max-width:1200px;height:385px;perspective:1500px;perspective-origin:50% 50%;}
 .rcm-arch .rcm-track{position:absolute;top:50%;left:50%;width:0;height:0;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.22,.61,.36,1);}
-.rcm-arch .rcm-slide{position:absolute;top:-159px;left:-158px;width:316px;height:318px;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid rgba(10,20,60,0.06);box-shadow:0 18px 50px -24px rgba(10,20,60,0.18), 0 1px 3px rgba(10,20,60,0.05);cursor:pointer;transform-origin:center center;backface-visibility:visible;transition:background .5s ease, border-color .5s ease, box-shadow .5s ease;}
+.rcm-arch .rcm-slide{backface-visibility:hidden;-webkit-backface-visibility:hidden;position:absolute;top:-159px;left:-158px;width:316px;height:318px;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid rgba(10,20,60,0.06);box-shadow:0 18px 50px -24px rgba(10,20,60,0.18), 0 1px 3px rgba(10,20,60,0.05);cursor:pointer;transform-origin:center center;backface-visibility:visible;transition:background .5s ease, border-color .5s ease, box-shadow .5s ease;}
 .rcm-arch .rcm-slide.pos-center{background:linear-gradient(160deg,#0a1c4a 0%,#050a1e 100%);border-color:rgba(179,208,255,0.22);box-shadow:0 30px 70px -24px rgba(0,0,0,0.7);cursor:default;}
 .rcm-arch .rcm-slide .wf-tag{position:absolute;top:18px;left:20px;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--rcm-card-ink-40);transition:color .4s;z-index:3;}
 .rcm-arch .rcm-slide.pos-center .wf-tag{color:#7ba9ff;}
@@ -447,50 +447,119 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   .reality,.processes,.leaks,.pillars,.engagement,.faq,.connect{padding:80px 0;}
   .outcomes-intro{padding:80px 0 40px;}
 }
+.proc-switch-wrap{overflow-x:auto;scrollbar-width:none;margin:0 auto 48px;}
+.proc-switch-wrap::-webkit-scrollbar{display:none;}
+.proc-switch{position:relative;display:flex;gap:12px;width:max-content;margin:0 auto;padding:2px;}
+.proc-tab{appearance:none;cursor:pointer;display:flex;align-items:baseline;gap:9px;padding:13px 22px;border:1px solid var(--paper-line);border-radius:14px;background:#fff;font-family:var(--display);font-weight:500;font-size:14px;letter-spacing:-0.005em;color:var(--ink-60);white-space:nowrap;box-shadow:0 1px 2px rgba(10,20,60,0.04);transition:color .25s,background .25s,border-color .25s,box-shadow .25s,transform .25s;}
+.proc-tab .n{font-size:10px;letter-spacing:.22em;color:var(--ink-40);transition:color .25s;}
+.proc-tab:hover{color:var(--ink);border-color:rgba(0,100,255,0.35);transform:translateY(-1px);}
+.proc-tab.active{color:#fff;background:linear-gradient(135deg,#0064ff 0%,#0051cb 100%);border-color:transparent;box-shadow:0 10px 24px -10px rgba(0,80,200,0.55);}
+.proc-tab.active .n{color:rgba(255,255,255,0.72);}
+.proc-tab.active:hover{transform:none;}
+.proc-tab:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+.proc-switch-line{display:none;}
+.proc-panel[hidden]{display:none;}
+.proc-head{text-align:center;margin:0 auto 64px;max-width:1040px;}
+.proc-title{font-family:var(--display);font-weight:400;font-size:clamp(24px,2.4vw,34px);line-height:1.15;letter-spacing:-0.015em;color:var(--ink);margin:0 0 14px;text-wrap:balance;}
+.proc-sub{color:var(--ink-60);font-size:15.5px;line-height:1.6;max-width:640px;margin:0 auto;text-wrap:pretty;}
+@media (max-width:720px){.proc-head{margin-bottom:44px;}}
+.proc-panel:not(#proc-rcm) .arch-footer{max-width:1200px;}
+.proc-panel.is-entering{animation:procIn .5s cubic-bezier(.22,.61,.36,1) both;}
+@keyframes procIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion:reduce){.proc-panel.is-entering{animation:none;}.proc-switch-line i{transition:none;}}
+@media (max-width:720px){.proc-switch{margin:0;gap:10px;}.proc-tab{padding:11px 18px;}.proc-switch-wrap{margin-bottom:36px;}}
 .reality,.agentic,.processes,.leaks,.outcomes,.pillars,.engagement,.faq,.connect{overflow:visible;}
 
+
+/* ---- phone layer, ported from hls-v5 (hero omitted: TMEG's collage is portrait and the shared sheet owns it) ---- */
+@media (max-width:720px){
+
+
+  /* type scale: 32px section headings, left-aligned */
+  .section-h,.reality-content h2,.agentic-intro h2,.engagement h2{font-size:32px;line-height:1.15;letter-spacing:-0.02em;}
+  .connect-heading{font-size:36px;line-height:1.1;}
+  .processes .section-h,.processes #processes-h,.outcomes-intro,.outcomes-intro .section-h{text-align:left;margin-left:0;}
+  .proc-head{text-align:left;margin-bottom:40px;}
+  .proc-title{font-size:24px;}
+  .proc-sub{margin:0;}
+  .proc-switch-wrap{margin:0 -24px 32px;padding:0 24px;}
+  .outcomes-intro{margin-bottom:32px;}
+  .outcomes-media{order:-1;}
+
+  /* tighter vertical rhythm between sections */
+  .agentic,.leaks,.processes,.outcomes,.pillars,.faq,.connect{padding:64px 0;}
+  .reality{padding:48px 0 64px;}
+  .outcomes-intro{padding:0;}
+  .leaks-stack{margin-top:32px;}
+
+  /* section 1 heading flows as one sentence */
+  .reality-content h2 span{display:inline;}
+  .reality-content h2{text-wrap:balance;margin-bottom:32px;}
+
+  /* FAQ: smaller boxes */
+  .faq-layout{gap:32px;}
+  .faq-title{font-size:32px;line-height:1.1;margin-bottom:14px;}
+  .faq-list{gap:8px;}
+  .faq-item{border-radius:12px;}
+  .faq-q{padding:14px 16px;font-size:15px;line-height:1.4;gap:14px;}
+  .faq-icon{width:28px;height:28px;}
+  .faq-a-inner{padding:14px 16px 16px;font-size:14.5px;line-height:1.65;}
+
+  /* shared intelligence / human oversight / business impact: centred */
+  .rcm-arch .arch-row{align-items:center;text-align:center;}
+  .rcm-arch .car-controls{margin-bottom:36px;}
+  .rcm-arch .rcm-carousel{margin-bottom:32px;}
+
+  /* engagement: no scroll-driven track on phones; the three steps stack as a list */
+  .engagement{min-height:0;padding:0;}
+  .eng-sticky{position:static;min-height:0;padding:40px 0 64px;}
+  .eng-layout{gap:32px;}
+  .eng-deck{padding-top:0;}
+  .eng-deck-stage{height:auto;display:grid;gap:12px;}
+  .eng-card{position:relative;inset:auto;transform:none !important;opacity:1 !important;pointer-events:auto !important;cursor:default;}
+  .eng-deck-dots{display:none;}
+  .eng-card-meta{padding-right:64px;line-height:1.5;}
+
+  /* outcomes: balanced heading, case tabs as a swipeable row */
+  .outcomes-intro .section-h,.outcomes-intro #outcomes-h{font-size:min(32px, calc((100vw - 48px) / 15.2));white-space:nowrap;}
+  .outcomes-tabs2{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -24px 32px;padding:0 24px 4px;}
+  .outcomes-tabs2::-webkit-scrollbar{display:none;}
+  .outcomes-item{flex:0 0 auto;min-height:0;padding:10px 16px 10px 10px;border:1px solid var(--paper-line);border-radius:14px;background:#fff;}
+  .outcomes-item.active{border-color:rgba(0,100,255,0.35);box-shadow:0 8px 20px -12px rgba(0,80,200,0.35);}
+  .outcomes-item-icon{width:36px;height:36px;border-radius:10px;}
+  .outcomes-item-icon svg{width:18px;height:18px;}
+  .outcomes-item-title{font-size:13px;}
+  .outcomes-item-title{line-height:1.25;}
+  .outcomes-story{gap:28px;}
+  .outcomes-case{margin-bottom:18px;}
+  .outcomes-detail-text{font-size:16px;line-height:1.65;}
+  .outcomes-metric-box{padding:14px 16px;right:12px;bottom:12px;}
+  .outcomes-metric-value{font-size:28px;margin-bottom:4px;}
+  .outcomes-metric-label{font-size:13px;}
+}
+
 </style>
+<link rel="stylesheet" href="assets/searce-nav.css">
+<link rel="stylesheet" href="assets/industry-mobile.css">
+<style>/* TMEG mobile: the long word "telecommunications," must fit a phone */
+@media (max-width:560px){.hero h1{font-size:clamp(1.7rem,8.4vw,2.3rem) !important;}}
+</style>
+
 </head>
 <body>
 
-<nav class="nav" aria-label="Primary navigation">
-  <div class="wrap">
-    <a href="index.html" class="nav-logo" aria-label="Searce home">Searce</a>
-    <ul class="nav-links">
-      <li><a href="#">outcomes</a></li>
-      <li><a href="#">how we solve <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="business-systems-engineering.html">practices <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="#" class="current">industries <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="#">insights</a></li>
-      <li class="has-dropdown">
-        <a href="#" aria-haspopup="true">company
-          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </a>
-        <div class="mega-panel">
-          <a class="mega-item" href="who-we-are.html"><span class="mega-title">Who we are</span></a>
-          <a class="mega-item" href="#"><span class="mega-title">Partners</span></a>
-          <a class="mega-item" href="careers.html"><span class="mega-title">Careers</span></a>
-          <a class="mega-item" href="#"><span class="mega-title">futurify.ai</span></a>
-        </div>
-      </li>
-    </ul>
-    <a href="#connect" class="nav-cta">
-      bring us a problem
-      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-    </a>
-  </div>
-</nav>
+<script src="assets/searce-nav.js" data-theme="dark" data-current="tmeg"></script>
 
 <!-- ============== HERO (split editorial: text left, masked-media Searce geometry right) ============== -->
 <section class="hero" aria-labelledby="hero-heading">
   <div class="wrap">
     <div class="hero-text">
       <div class="hero-badge">
-        <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true"><rect x="158" y="24" width="58" height="101" fill="#13377f"/><rect x="250" y="158" width="101" height="58" fill="#13377f"/><rect x="22" y="158" width="194" height="58" fill="#0064ff"/><rect x="158" y="250" width="58" height="101" fill="#0064ff"/></svg>
+        <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true"><rect x="24" y="57" width="56" height="243" fill="#79adff"/><path d="M124 105L262 178.5L124 252Z" fill="#0064ff"/><rect x="296" y="57" width="56" height="243" fill="#79adff"/></svg>
         2030 Vision &middot; Real-Time Experience Ops
       </div>
       <h1 id="hero-heading">
-        telecommunications,<br>media, entertainment<br>and gaming
+        telecommunications, <br>media, entertainment <br>and gaming
       </h1>
       <div class="hero-opening">
         <p>Self-Healing Networks. Automated Asset Creation. Frictionless Streaming.</p>
@@ -664,22 +733,35 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <img class="leaks-motif" src="assets/leaks-shapes-v5.svg" alt="" aria-hidden="true">
 </section>
 
-<!-- ============== PROCESSES (RCM architecture engine, TMEG workflows) ============== -->
+<!-- ============== PROCESSES (RCM architecture engine, TMEG swarms) ============== -->
 <section class="processes" aria-labelledby="processes-h">
   <span class="grid-motif" aria-hidden="true"></span>
   <div class="wrap">
-    <h2 id="processes-h" class="section-h">Pioneering AI-native platform and media delivery</h2>
-    <p class="section-sub">Six connected workflows. Purpose-built AI agents run each stage. Shared intelligence learns across every repository. Humans oversee the operational exceptions that matter.</p>
+    <h2 id="processes-h" class="section-h">Real business outcomes.</h2>
 
-    <div class="rcm-arch">
+    <div class="proc-switch-wrap">
+      <div class="proc-switch" role="tablist" aria-label="Autonomous process architectures">
+        <button class="proc-tab active" type="button" role="tab" id="ptab-tmeg" aria-controls="proc-tmeg" aria-selected="true" tabindex="0"><span class="n">01</span>Network &amp; Content Ops</button>
+        <button class="proc-tab" type="button" role="tab" id="ptab-newsroom" aria-controls="proc-newsroom" aria-selected="false" tabindex="-1"><span class="n">02</span>Newsroom</button>
+        <button class="proc-tab" type="button" role="tab" id="ptab-sales" aria-controls="proc-sales" aria-selected="false" tabindex="-1"><span class="n">03</span>Media Sales</button>
+        <button class="proc-tab" type="button" role="tab" id="ptab-workplace" aria-controls="proc-workplace" aria-selected="false" tabindex="-1"><span class="n">04</span>Media Workplace</button>
+        <span class="proc-switch-line" aria-hidden="true"><i></i></span>
+      </div>
+    </div>
+
+    <div class="rcm-arch proc-panel" id="proc-tmeg" data-proc="tmeg" role="tabpanel" aria-labelledby="ptab-tmeg">
+      <div class="proc-head">
+        <h3 class="proc-title">The Autonomous Network &amp; Content Architecture.</h3>
+        <p class="proc-sub">Six connected swarms. Purpose-built AI agents run each stage. Shared intelligence learns across every repository. Humans oversee the operational exceptions that matter.</p>
+      </div>
       <div class="rcm-carousel">
         <div class="rcm-track" id="carTrack"></div>
       </div>
       <div class="car-controls">
-        <button class="car-btn" id="carPrev" aria-label="Previous workflow">
+        <button class="car-btn" id="carPrev" aria-label="Previous swarm">
           <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <button class="car-btn" id="carNext" aria-label="Next workflow">
+        <button class="car-btn" id="carNext" aria-label="Next swarm">
           <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
@@ -696,6 +778,105 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         <div class="arch-row impact">
           <div class="arch-label">Business Impact</div>
           <div class="arch-content"><span class="arr">↑</span>Network Uptime<span class="sep">·</span><span class="arr">↓</span>Cost to Serve<span class="sep">·</span><span class="arr">↑</span>Watch Time &amp; Retention<span class="sep">·</span><span class="arr">↓</span>Mean Time to Repair</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rcm-arch proc-panel" id="proc-newsroom" data-proc="newsroom" role="tabpanel" aria-labelledby="ptab-newsroom" hidden>
+      <div class="proc-head">
+        <h3 class="proc-title">The Autonomous Newsroom Architecture.</h3>
+        <p class="proc-sub">Six connected swarms, from scattered sources to a published story. Purpose-built AI agents run each stage. Shared intelligence learns across every story. Editors keep the final call.</p>
+      </div>
+      <div class="rcm-carousel">
+        <div class="rcm-track"></div>
+      </div>
+      <div class="car-controls">
+        <button class="car-btn" aria-label="Previous swarm">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="car-btn" aria-label="Next swarm">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div class="arch-footer">
+        <div class="arch-row intel">
+          <div class="arch-label">Shared Intelligence</div>
+          <div class="arch-content">Story Knowledge Graph<span class="sep">·</span>Source Credibility Models<span class="sep">·</span>Editorial Style Library<span class="sep">·</span>Self-Learning Feedback Loop</div>
+        </div>
+        <div class="arch-row oversight">
+          <div class="arch-label">Human Oversight</div>
+          <div class="arch-content">Editors &amp; Reporters<span class="sep">·</span>Marketing &amp; Audience Teams<span class="sep">·</span>Continuous Optimization</div>
+        </div>
+        <div class="arch-row impact">
+          <div class="arch-label">Business Impact</div>
+          <div class="arch-content"><span class="arr">&darr;</span>Time to Publish<span class="sep">·</span><span class="arr">&uarr;</span>Source Coverage<span class="sep">·</span><span class="arr">&darr;</span>Manual Effort<span class="sep">·</span><span class="arr">&uarr;</span>Audience Reach</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rcm-arch proc-panel" id="proc-sales" data-proc="sales" role="tabpanel" aria-labelledby="ptab-sales" hidden>
+      <div class="proc-head">
+        <h3 class="proc-title">The Autonomous Media Sales Architecture.</h3>
+        <p class="proc-sub">Six connected swarms, from customer insight to repeat business. One dedicated agent attends to every customer, all day. Humans own the relationships and the negotiation.</p>
+      </div>
+      <div class="rcm-carousel">
+        <div class="rcm-track"></div>
+      </div>
+      <div class="car-controls">
+        <button class="car-btn" aria-label="Previous swarm">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="car-btn" aria-label="Next swarm">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div class="arch-footer">
+        <div class="arch-row intel">
+          <div class="arch-label">Shared Intelligence</div>
+          <div class="arch-content">Customer 360<span class="sep">·</span>Inventory &amp; Pricing Models<span class="sep">·</span>Audience &amp; Rating Insights<span class="sep">·</span>Self-Learning Feedback Loop</div>
+        </div>
+        <div class="arch-row oversight">
+          <div class="arch-label">Human Oversight</div>
+          <div class="arch-content">Key Account &amp; Sales Leaders<span class="sep">·</span>Marketing &amp; Sales Ops<span class="sep">·</span>Continuous Optimization</div>
+        </div>
+        <div class="arch-row impact">
+          <div class="arch-label">Business Impact</div>
+          <div class="arch-content"><span class="arr">&uarr;</span>Ad Revenue<span class="sep">·</span><span class="arr">&uarr;</span>Inventory Utilization<span class="sep">·</span><span class="arr">&uarr;</span>Customer Touchpoints<span class="sep">·</span><span class="arr">&darr;</span>Sales Cycle Time</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rcm-arch proc-panel" id="proc-workplace" data-proc="workplace" role="tabpanel" aria-labelledby="ptab-workplace" hidden>
+      <div class="proc-head">
+        <h3 class="proc-title">The AI-Native Media Workplace Architecture.</h3>
+        <p class="proc-sub">Six connected swarms, from migration to AI-powered work. Gemini sits inside the tools thousands of people already use. IT governs it; every department reviews the result.</p>
+      </div>
+      <div class="rcm-carousel">
+        <div class="rcm-track"></div>
+      </div>
+      <div class="car-controls">
+        <button class="car-btn" aria-label="Previous swarm">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="car-btn" aria-label="Next swarm">
+          <svg viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div class="arch-footer">
+        <div class="arch-row intel">
+          <div class="arch-label">Shared Intelligence</div>
+          <div class="arch-content">Single Platform<span class="sep">·</span>Gemini in Workspace (In-Tenant)<span class="sep">·</span>Admin &amp; Identity Controls<span class="sep">·</span>Instant Mailbox Search</div>
+        </div>
+        <div class="arch-row oversight">
+          <div class="arch-label">Human Oversight</div>
+          <div class="arch-content">IT &amp; Security Team<span class="sep">·</span>Department Teams<span class="sep">·</span>Adoption Champions</div>
+        </div>
+        <div class="arch-row impact">
+          <div class="arch-label">Business Impact</div>
+          <div class="arch-content"><span class="arr">&uarr;</span>Employees Unified<span class="sep">·</span><span class="arr">&uarr;</span>Data Migrated<span class="sep">·</span><span class="arr">&uarr;</span>AI Adoption<span class="sep">·</span><span class="arr">&darr;</span>Version Chaos</div>
         </div>
       </div>
     </div>
@@ -1022,126 +1203,340 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   const PAL_DARK      = {stroke:"#dbe9ff", dashed:"rgba(179,208,255,0.32)", fill:"rgba(179,208,255,0.06)", accent:"#7ba9ff", dark:"#02061a"};
   const PAL_SIDE_DARK = {stroke:"#54555a", dashed:"rgba(84,86,92,0.35)", fill:"rgba(84,86,92,0.04)", accent:"#0064ff", dark:"#f2f7ff"};
 
-  function shapeSvg(key, S){
-    const st = S.stroke, ds = S.dashed, fl = S.fill, ac = S.accent, dk = S.dark;
-    const thin   = `stroke="${st}" stroke-width="1" fill="none"`;
-    const filled = `fill="${fl}" stroke="${st}" stroke-width="1.2"`;
+  /* ---------- shared drawing kit: one dominant accent form per diagram, hairline context ---------- */
+  function tmKit(S){
+    const st=S.stroke, ds=S.dashed, fl=S.fill, ac=S.accent, dk=S.dark;
+    const K={st,ds,fl,ac,dk};
+    K.hair  = `stroke="${st}" stroke-width="0.9" fill="none" opacity="0.42"`;
+    K.line  = `stroke="${st}" stroke-width="1.3" fill="none"`;
+    K.panel = `fill="${fl}" stroke="${st}" stroke-width="1.3"`;
+    K.ghost = `fill="none" stroke="${st}" stroke-width="1.1" opacity="0.38"`;
+    K.solid = `fill="${ac}"`;
+    K.soft  = `fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1.3"`;
+    K.bold  = `stroke="${ac}" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"`;
+    K.flow  = (d,op=0.8)=>`<path d="${d}" fill="none" stroke="${ac}" stroke-width="1.1" stroke-dasharray="2.5 3.5" opacity="${op}"/>`;
+    K.cap   = (x,y,t,a='middle')=>`<text x="${x}" y="${y}" text-anchor="${a}" font-family="Poppins" font-size="6.5" font-weight="600" fill="${st}" letter-spacing="1.5" opacity="0.6">${t}</text>`;
+    K.num   = (x,y,t,sz=17,a='middle')=>`<text x="${x}" y="${y}" text-anchor="${a}" font-family="Poppins" font-size="${sz}" font-weight="600" fill="${ac}" letter-spacing="-0.02em">${t}</text>`;
+    K.on    = (x,y,t,a='middle')=>`<text x="${x}" y="${y}" text-anchor="${a}" font-family="Poppins" font-size="7" font-weight="700" fill="${dk}" letter-spacing="1.4">${t}</text>`;
+    K.pill  = (x,y,w,h,t)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${h/2}" ${K.panel}/><text x="${x+w/2}" y="${y+h/2+2.4}" text-anchor="middle" font-family="Poppins" font-size="6.5" font-weight="600" fill="${ac}" letter-spacing="1.2">${t}</text>`;
+    K.chipOn= (x,y,w,h,t)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${h/2}" ${K.solid}/>${K.on(x+w/2,y+h/2+2.4,t)}`;
+    K.track = (x,y,w,pct,h=7)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${h/2}" fill="${st}" opacity="0.13"/><rect x="${x}" y="${y}" width="${(w*pct).toFixed(1)}" height="${h}" rx="${h/2}" ${K.solid}/>`;
+    K.rows  = (x,y,w,n,gap=11,op=0.4)=>Array.from({length:n},(_,i)=>`<line x1="${x}" y1="${y+i*gap}" x2="${(x+w-(i%2?w*0.22:0)).toFixed(1)}" y2="${y+i*gap}" stroke="${st}" stroke-width="1.1" opacity="${op}"/>`).join('');
+    K.donut = (cx,cy,r,segs,w=10)=>{
+      const C=2*Math.PI*r; let off=0;
+      return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${st}" stroke-width="${w}" opacity="0.13"/>`+
+        segs.map((p,i)=>{const len=C*p, el=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${ac}" stroke-width="${w}" opacity="${(1-i*0.28).toFixed(2)}" stroke-dasharray="${len.toFixed(1)} ${(C-len).toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" transform="rotate(-90 ${cx} ${cy})"/>`; off+=len; return el;}).join('');
+    };
+    K.person=(cx,cy,s=1,on=false)=>{const f=on?`fill="${ac}"`:`fill="${st}" fill-opacity="0.3"`;
+      return `<g transform="translate(${cx} ${cy}) scale(${s})"><circle cx="0" cy="-5.5" r="5.2" ${f}/><path d="M -9 8 A 9 8 0 0 1 9 8 Z" ${f}/></g>`;};
+    K.badgeX=(x,y,r=8)=>`<circle cx="${x}" cy="${y}" r="${r}" ${K.solid}/><path d="M ${x-r*0.42} ${y-r*0.42} L ${x+r*0.42} ${y+r*0.42} M ${x+r*0.42} ${y-r*0.42} L ${x-r*0.42} ${y+r*0.42}" stroke="${dk}" stroke-width="1.8" stroke-linecap="round"/>`;
+    K.badgeV=(x,y,r=8)=>`<circle cx="${x}" cy="${y}" r="${r}" ${K.solid}/><path d="M ${x-r*0.42} ${y} L ${x-r*0.08} ${y+r*0.36} L ${x+r*0.48} ${y-r*0.34}" stroke="${dk}" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+    K.play  = (x,y,s,c)=>`<path d="M ${x-s*0.42} ${y-s*0.62} L ${x+s*0.66} ${y} L ${x-s*0.42} ${y+s*0.62} Z" fill="${c||ac}"/>`;
+    K.lucide= (x,y,sz,d,col,vw=2.2)=>`<g transform="translate(${x} ${y}) scale(${(sz/24).toFixed(4)}) translate(-12 -12)" fill="none" stroke="${col||ac}" stroke-width="${(vw*24/sz).toFixed(2)}" stroke-linecap="round" stroke-linejoin="round">${d}</g>`;
+    K.lucideFill=(x,y,sz,d,col)=>`<g transform="translate(${x} ${y}) scale(${(sz/24).toFixed(4)}) translate(-12 -12)" fill="${col||ac}" stroke="none">${d}</g>`;
+    K.screen= (x,y,w,h)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="5" ${K.panel}/><rect x="${x}" y="${y}" width="${w}" height="9" rx="5" fill="${st}" opacity="0.12"/>`;
+    return K;
+  }
+
+  /* ---------- Tab 01: network, content, moderation, royalty, retention ---------- */
+  function shapeNet(key, S){
+    const K=tmKit(S), {st,ds,ac,dk}=K;
     switch(key){
+
       case "submit": return `
-        <rect x="34" y="28" width="112" height="150" rx="4" ${filled}/>
-        <rect x="118" y="18" width="46" height="20" rx="4" fill="${ac}"/>
-        <text x="141" y="32" text-anchor="middle" font-family="Poppins" font-size="8" font-weight="700" fill="${dk}" letter-spacing="1.6">RAN</text>
-        <line x1="46" y1="52" x2="118" y2="52" ${thin} stroke="${ac}"/>
-        <line x1="46" y1="60" x2="96" y2="60" ${thin}/>
-        ${[80,98,116].map((y,i)=>`
-          <g transform="translate(52 ${y})">
-            <circle cx="0" cy="0" r="4.5" fill="${ac}"/>
-            <path d="M -2 0 L -0.4 1.7 L 2.5 -1.6" stroke="${dk}" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-          <line x1="62" y1="${y}" x2="${138-i*6}" y2="${y}" ${thin}/>
-        `).join('')}
-        <text x="46" y="138" font-family="Poppins" font-size="6" font-weight="500" fill="${st}" opacity="0.55" letter-spacing="1.2">NETWORK HEALTH SCORE</text>
-        <rect x="46" y="146" width="72" height="5" rx="2.5" fill="${ds}" opacity="0.6"/>
-        <rect x="46" y="146" width="66" height="5" rx="2.5" fill="${ac}"/>
-        <text x="134" y="151.5" text-anchor="end" font-family="Poppins" font-size="8.5" font-weight="600" fill="${ac}">98</text>
-        <path d="M 156 100 L 178 100 M 172 94 L 178 100 L 172 106" stroke="${ac}" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="182" cy="100" r="2.4" fill="${ac}"/>`;
+        ${[34,52,70].map((r,i)=>`<path d="M ${(100+0.42*r).toFixed(1)} ${(54-0.91*r).toFixed(1)} A ${r} ${r} 0 0 1 ${(100+0.42*r).toFixed(1)} ${(54+0.91*r).toFixed(1)}" fill="none" stroke="${ac}" stroke-width="1.3" opacity="${(0.34-i*0.09).toFixed(2)}"/>`).join('')}
+        ${[34,52,70].map((r,i)=>`<path d="M ${(100-0.42*r).toFixed(1)} ${(54+0.91*r).toFixed(1)} A ${r} ${r} 0 0 1 ${(100-0.42*r).toFixed(1)} ${(54-0.91*r).toFixed(1)}" fill="none" stroke="${ac}" stroke-width="1.3" opacity="${(0.24-i*0.06).toFixed(2)}"/>`).join('')}
+        <path d="M 100 40 L 124 146 M 100 40 L 76 146" ${K.line}/>
+        <line x1="72" y1="146" x2="128" y2="146" ${K.line}/>
+        ${[62,78,94,110,126].map(y=>{const w=(y-40)*0.2264;return `<line x1="${(100-w).toFixed(1)}" y1="${y}" x2="${(100+w).toFixed(1)}" y2="${y}" stroke="${st}" stroke-width="1" opacity="0.38"/>`;}).join('')}
+        ${[62,78,94,110].map(y=>{const w1=(y-40)*0.2264, w2=(y-24)*0.2264;
+          return `<path d="M ${(100-w1).toFixed(1)} ${y} L ${(100+w2).toFixed(1)} ${y+16} M ${(100+w1).toFixed(1)} ${y} L ${(100-w2).toFixed(1)} ${y+16}" stroke="${st}" stroke-width="0.9" fill="none" opacity="0.22"/>`;}).join('')}
+        <circle cx="100" cy="34" r="6.5" ${K.solid}/>
+        <rect x="52" y="158" width="96" height="26" rx="6" ${K.panel}/>
+        <path d="M 62 176 L 76 169 L 90 173 L 104 160" ${K.bold}/>
+        ${K.num(136,179,"98",15)}`;
+
       case "correct": return `
-        <rect x="14" y="42" width="70" height="116" rx="3" ${filled}/>
-        <g transform="translate(49 62)"><circle cx="0" cy="0" r="10" ${thin} stroke="${ac}" stroke-width="1.4"/><path d="M -3.5 -3.5 L 3.5 3.5 M 3.5 -3.5 L -3.5 3.5" stroke="${ac}" stroke-width="1.6" stroke-linecap="round"/></g>
-        <line x1="24" y1="86" x2="74" y2="86" ${thin}/>
-        <rect x="20" y="94" width="58" height="10" fill="${ac}" fill-opacity="0.14"/>
-        <line x1="24" y1="99" x2="74" y2="99" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 2"/>
-        <line x1="24" y1="112" x2="70" y2="112" ${thin}/>
-        <line x1="24" y1="120" x2="76" y2="120" ${thin}/>
-        <line x1="24" y1="128" x2="66" y2="128" ${thin}/>
-        <text x="49" y="146" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6" opacity="0.85">DEGRADED</text>
-        <path d="M 88 100 L 112 100 M 106 94 L 112 100 L 106 106" stroke="${ac}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="116" y="42" width="70" height="116" rx="3" ${filled}/>
-        <g transform="translate(151 62)"><circle cx="0" cy="0" r="10" fill="${ac}"/><path d="M -3.5 0 L -1 2.5 L 4 -2.8" stroke="${dk}" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
-        <line x1="126" y1="86" x2="176" y2="86" ${thin}/>
-        <line x1="126" y1="94" x2="172" y2="94" ${thin}/>
-        <rect x="122" y="102" width="58" height="10" fill="${ac}" fill-opacity="0.18"/>
-        <line x1="126" y1="107" x2="176" y2="107" stroke="${ac}" stroke-width="1.2"/>
-        <line x1="126" y1="118" x2="170" y2="118" ${thin}/>
-        <line x1="126" y1="126" x2="176" y2="126" ${thin}/>
-        <line x1="126" y1="134" x2="164" y2="134" ${thin}/>
-        <text x="151" y="150" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">REROUTED</text>`;
+        ${[0,1,2,3,4,5].map(r=>[0,1,2,3,4,5].map(c=>`<circle cx="${28+c*29}" cy="${36+r*26}" r="1.1" fill="${st}" opacity="0.18"/>`).join('')).join('')}
+        <path d="M 28 62 L 115 62 L 115 114" fill="none" stroke="${st}" stroke-width="1.6" opacity="0.28" stroke-dasharray="4 4"/>
+        <path d="M 28 62 L 28 140 L 86 140 L 86 166 L 173 166 L 173 88" ${K.bold}/>
+        ${[[28,62],[28,140],[86,140],[86,166],[173,166],[173,88]].map(([x,y],i)=>
+          `<rect x="${x-5}" y="${y-5}" width="10" height="10" rx="2" fill="${i===0||i===5?ac:dk}" stroke="${ac}" stroke-width="1.6"/>`).join('')}
+        <rect x="104" y="103" width="22" height="22" rx="4" fill="${dk}" stroke="${ac}" stroke-width="1.2" opacity="0.45"/>
+        ${K.badgeX(115,114,9)}
+        ${K.cap(100,190,"REROUTED")}`;
+
       case "pursue": return `
-        ${[44,64,86].map((r,i)=>`<circle cx="100" cy="100" r="${r}" fill="none" stroke="${ac}" stroke-width="0.9" opacity="${0.55 - i*0.16}" stroke-dasharray="3 4"/>`).join('')}
-        <rect x="80" y="80" width="40" height="46" rx="3" ${filled}/>
-        <line x1="86" y1="92" x2="114" y2="92" ${thin}/>
-        <line x1="86" y1="100" x2="110" y2="100" ${thin}/>
-        <line x1="86" y1="108" x2="114" y2="108" ${thin}/>
-        <line x1="86" y1="116" x2="104" y2="116" ${thin}/>
-        <rect x="88" y="70" width="24" height="10" rx="1.5" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="0.8"/>
-        <text x="100" y="77.5" text-anchor="middle" font-family="Poppins" font-size="6" font-weight="600" fill="${ac}" letter-spacing="1.4">CDN</text>
-        <g transform="translate(24 32)"><rect x="0" y="0" width="30" height="22" rx="2" ${filled}/><line x1="0" y1="7" x2="30" y2="7" ${thin}/><circle cx="4" cy="3.5" r="1.2" fill="${ac}"/><circle cx="8" cy="3.5" r="1.2" fill="${ac}"/><circle cx="12" cy="3.5" r="1.2" fill="${ac}"/><line x1="5" y1="13" x2="20" y2="13" ${thin} stroke="${ac}"/><line x1="5" y1="17" x2="14" y2="17" ${thin}/></g>
-        <line x1="54" y1="54" x2="80" y2="82" ${thin} stroke="${ac}" stroke-dasharray="2 3"/>
-        <g transform="translate(146 32)"><rect x="0" y="0" width="24" height="34" rx="4" ${filled}/><rect x="4" y="6" width="16" height="20" fill="${ds}" opacity="0.55"/><circle cx="12" cy="30" r="1.6" fill="${ac}"/></g>
-        <line x1="146" y1="52" x2="120" y2="82" ${thin} stroke="${ac}" stroke-dasharray="2 3"/>
-        <g transform="translate(80 156)"><rect x="0" y="0" width="40" height="26" rx="2.5" ${filled}/><path d="M 0 0 L 20 16 L 40 0" ${thin} stroke="${ac}"/><circle cx="34" cy="20" r="3.5" fill="${ac}"/></g>
-        <line x1="100" y1="126" x2="100" y2="156" ${thin} stroke="${ac}" stroke-dasharray="2 3"/>`;
+        <rect x="24" y="28" width="104" height="66" rx="7" ${K.solid}/>
+        ${K.play(76,61,26,dk)}
+        <rect x="138" y="28" width="38" height="66" rx="7" ${K.panel}/>
+        ${[38,54,70,86].map(y=>`<rect x="146" y="${y-4}" width="22" height="8" rx="4" fill="${ac}" opacity="${y===54?0.9:0.28}"/>`).join('')}
+        ${["AUDIO","SUBS","META"].map((t,i)=>{const y=116+i*24;
+          return `${K.cap(24,y+4,t,'start')}${K.track(74,y-3,74,[0.95,0.68,0.84][i],7)}${K.badgeV(166,y,7)}`;}).join('')}
+        ${K.pill(24,176,46,18,"EN")}${K.pill(78,176,46,18,"ES")}${K.pill(132,176,44,18,"HI")}`;
+
       case "appeal": return `
-        <g transform="translate(100 30)"><rect x="-34" y="-14" width="68" height="26" rx="4" ${filled}/><path d="M -6 -5 L 6 5 M 6 -5 L -6 5" stroke="${ac}" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/></g>
-        <text x="100" y="60" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">TOXICITY</text>
-        ${[48,100,152].map(x=>`
-          <path d="M 100 66 Q 100 78 ${x} 88" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
-          <circle cx="${x}" cy="96" r="9" fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1.1"/>
-          <circle cx="${x}" cy="96" r="2.5" fill="${ac}"/>`).join('')}
-        <path d="M 48 106 Q 48 118 100 128" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
-        <path d="M 100 106 L 100 128" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
-        <path d="M 152 106 Q 152 118 100 128" ${thin} stroke="${ac}" stroke-dasharray="2 3" fill="none"/>
-        <circle cx="100" cy="132" r="5.5" fill="${ac}"/>
-        <path d="M 100 138 L 100 156 M 94 148 L 100 138 L 106 148" stroke="${ac}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <g transform="translate(100 174)"><rect x="-36" y="-14" width="72" height="26" rx="4" fill="${ac}"/><text x="0" y="3.5" text-anchor="middle" font-family="Poppins" font-size="8" font-weight="700" fill="${dk}" letter-spacing="1.6">ACTION</text></g>`;
+        ${[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map(i=>{
+          const h=[14,28,18,40,24,34,20,56,74,62,30,22,38,16,26,12][i], x=22+i*10.6, hot=(i>=7&&i<=9);
+          return `<rect x="${x}" y="${(104-h/2).toFixed(1)}" width="5.4" height="${h}" rx="2.7" fill="${hot?ac:st}" opacity="${hot?1:0.26}"/>`;}).join('')}
+        <rect x="88" y="18" width="24" height="24" rx="6" ${K.solid}/>
+        <path d="M 95 25 L 105 35 M 105 25 L 95 35" stroke="${dk}" stroke-width="2.2" stroke-linecap="round"/>
+        ${K.flow("M 100 44 L 100 62",0.7)}
+        ${K.cap(100,154,"VOICE &middot; CHAT")}
+        ${K.chipOn(62,166,76,24,"MUTED")}`;
+
       case "post": return `
-        <text x="20" y="34" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">LOGS</text>
-        ${[56,80,104,128,152].map((y,i)=>`<circle cx="18" cy="${y}" r="2.4" fill="${ac}" opacity="${0.45+i*0.08}"/><path d="M 22 ${y} Q 44 ${y} 62 104" fill="none" stroke="${ac}" stroke-width="0.9" opacity="${0.35+i*0.08}"/>`).join('')}
-        <rect x="66" y="36" width="118" height="132" rx="4" ${filled}/>
-        <rect x="66" y="36" width="118" height="20" fill="${ac}" fill-opacity="0.14"/>
-        <text x="78" y="49" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">ROYALTY</text>
-        <line x1="118" y1="56" x2="118" y2="168" ${thin}/>
-        <line x1="152" y1="56" x2="152" y2="168" ${thin}/>
-        ${[74,92,110,128,146,164].map((y,i)=>{
-          const isVar = i===2;
-          if(isVar) return `
-            <rect x="66" y="${y-9}" width="118" height="18" fill="${ac}" fill-opacity="0.20"/>
-            <line x1="74" y1="${y}" x2="112" y2="${y}" stroke="${ac}" stroke-width="1.1"/>
-            <line x1="124" y1="${y}" x2="146" y2="${y}" stroke="${ac}" stroke-width="1.1"/>
-            <line x1="158" y1="${y}" x2="178" y2="${y}" stroke="${ac}" stroke-width="1.1"/>
-            <circle cx="60" cy="${y}" r="3.5" fill="${ac}"/>`;
-          return `
-            <line x1="74" y1="${y}" x2="112" y2="${y}" ${thin} opacity="0.7"/>
-            <line x1="124" y1="${y}" x2="146" y2="${y}" ${thin} opacity="0.7"/>
-            <line x1="158" y1="${y}" x2="178" y2="${y}" ${thin} opacity="0.7"/>`;
-        }).join('')}`;
+        ${K.donut(100,76,42,[0.48,0.31,0.21],14)}
+        <circle cx="100" cy="76" r="27" fill="${dk}"/>
+        ${K.num(100,74,"3",19)}${K.cap(100,88,"PAYEES")}
+        ${[0,1,2].map(i=>{const y=136+i*22;
+          return `<rect x="26" y="${y}" width="12" height="12" rx="3" fill="${ac}" opacity="${(1-i*0.28).toFixed(2)}"/>`+
+                 `${K.cap(46,y+9,["RIGHTS A","RIGHTS B","PARTNER"][i],'start')}`+
+                 `${K.track(104,y+2,48,[0.48,0.31,0.21][i]/0.48,8)}`+
+                 `${K.num(176,y+10,["48%","31%","21%"][i],8,'end')}`;}).join('')}`;
+
       case "communicate": return `
-        <rect x="16" y="36" width="88" height="128" rx="4" ${filled}/>
-        <rect x="16" y="36" width="88" height="20" fill="${ac}" fill-opacity="0.14"/>
-        <text x="26" y="49" font-family="Poppins" font-size="7" font-weight="600" fill="${ac}" letter-spacing="1.6">SUBSCRIBER</text>
-        <line x1="26" y1="70" x2="94" y2="70" ${thin}/>
-        <line x1="26" y1="78" x2="82" y2="78" ${thin}/>
-        <line x1="26" y1="86" x2="90" y2="86" ${thin}/>
-        <line x1="26" y1="94" x2="76" y2="94" ${thin}/>
-        <line x1="26" y1="106" x2="94" y2="106" ${thin} opacity="0.6"/>
-        <text x="26" y="128" font-family="Poppins" font-size="6.5" font-weight="500" fill="${st}" opacity="0.55" letter-spacing="1.6">WATCH TIME</text>
-        <text x="94" y="150" text-anchor="end" font-family="Poppins" font-size="16" font-weight="600" fill="${ac}" letter-spacing="-0.02em">4.8h</text>
-        <path d="M 108 65 Q 122 65 128 50" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
-        <path d="M 108 100 Q 122 100 128 100" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
-        <path d="M 108 135 Q 122 135 128 156" fill="none" stroke="${ac}" stroke-width="0.9" stroke-dasharray="2 3"/>
-        <g transform="translate(132 32)"><rect x="0" y="0" width="52" height="32" rx="3" ${filled}/><path d="M 0 0 L 26 22 L 52 0" ${thin} stroke="${ac}"/></g>
-        <g transform="translate(132 80)"><path d="M 6 0 Q 0 0 0 6 L 0 26 Q 0 32 6 32 L 30 32 L 40 42 L 36 32 L 46 32 Q 52 32 52 26 L 52 6 Q 52 0 46 0 Z" ${filled}/><circle cx="16" cy="16" r="1.8" fill="${ac}"/><circle cx="26" cy="16" r="1.8" fill="${ac}"/><circle cx="36" cy="16" r="1.8" fill="${ac}"/></g>
-        <g transform="translate(140 140)"><rect x="0" y="0" width="30" height="40" rx="4" ${filled}/><rect x="4" y="6" width="22" height="24" fill="${ds}" opacity="0.5"/><circle cx="15" cy="35" r="1.8" fill="${ac}"/></g>`;
-      default: return `<circle cx="100" cy="100" r="60" ${filled}/>`;
+        ${[0,1,2,3].map(i=>{const x=18+i*48, on=(i===2);
+          return `<rect x="${x}" y="22" width="38" height="40" rx="9" ${on?`fill="${ac}" fill-opacity="0.16" stroke="${ac}" stroke-width="1.6"`:K.ghost}/>`+K.person(x+19,45,0.92,on);}).join('')}
+        <circle cx="100" cy="110" r="26" fill="none" stroke="${st}" stroke-width="7" opacity="0.13"/>
+        <circle cx="100" cy="110" r="26" fill="none" stroke="${ac}" stroke-width="7" stroke-linecap="round" stroke-dasharray="57 107" transform="rotate(-90 100 110)"/>
+        ${K.num(100,115,"35%",14)}
+        ${K.cap(100,152,"CHURN RISK")}
+        <rect x="46" y="166" width="108" height="26" rx="13" ${K.solid}/>
+        ${K.lucide(65,179,15,`<path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>`,dk,2.4)}
+        <text x="108" y="183" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="700" fill="${dk}" letter-spacing="1.2">OFFER SENT</text>`;
+
+      default: return `<circle cx="100" cy="100" r="58" ${K.panel}/>`;
     }
   }
 
+  /* ---------- Tabs 02-04: newsroom, media sales, digital workplace ---------- */
+  function shapeTM(key, S){
+    const K=tmKit(S), {st,ds,ac,dk}=K;
+    switch(key){
+
+      /* newsroom */
+      case "collect": return `
+        ${[["AGENCY",30],["SOCIAL",80],["REPORTER",130]].map(([t,y])=>K.pill(14,y,76,20,t)).join('')}
+        ${K.flow("M 92 40 C 120 40 124 84 132 92")}${K.flow("M 92 90 L 132 96")}${K.flow("M 92 140 C 120 140 124 108 132 100")}
+        <rect x="124" y="64" width="64" height="64" rx="15" ${K.solid}/>
+        ${K.lucide(156,96,40,`<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>`,dk,2.3)}
+        ${K.cap(156,150,"INTAKE")}
+        ${K.num(156,176,"24",15)}${K.cap(156,190,"FEEDS")}`;
+
+      case "verify": return `
+        <rect x="26" y="40" width="94" height="62" rx="6" ${K.ghost}/>
+        ${K.rows(38,58,70,3,13,0.22)}
+        <rect x="62" y="74" width="94" height="62" rx="6" ${K.panel}/>
+        ${K.rows(74,92,70,3,13)}
+        ${K.badgeX(120,44,10)}
+        ${K.badgeV(156,78,10)}
+        ${K.cap(100,164,"CREDIBILITY")}
+        ${K.track(44,172,112,0.82,8)}`;
+
+      case "assemble": return `
+        ${[48,96,144].map(y=>`<rect x="18" y="${y-13}" width="40" height="26" rx="5" ${K.ghost}/>`).join('')}
+        ${K.flow("M 60 48 C 90 48 94 84 104 90")}${K.flow("M 60 96 L 104 96")}${K.flow("M 60 144 C 90 144 94 108 104 102")}
+        <rect x="106" y="34" width="78" height="124" rx="7" ${K.panel}/>
+        <rect x="106" y="34" width="78" height="22" rx="7" ${K.solid}/>
+        ${K.on(145,49,"BRIEF")}
+        ${[74,96,118,140].map(y=>`${K.badgeV(122,y,6.5)}<line x1="136" y1="${y}" x2="${y%44?172:164}" y2="${y}" stroke="${st}" stroke-width="1.1" opacity="0.4"/>`).join('')}`;
+
+      case "draft": return `
+        <rect x="44" y="24" width="112" height="118" rx="7" ${K.panel}/>
+        <rect x="56" y="38" width="88" height="16" rx="4" ${K.solid}/>
+        ${K.rows(56,70,88,5,12)}
+        ${K.flow("M 72 142 L 72 160",0.6)}${K.flow("M 100 142 L 100 160",0.6)}${K.flow("M 128 142 L 128 160",0.6)}
+        ${K.pill(22,160,50,20,"WEB")}${K.pill(76,160,48,20,"APP")}${K.pill(128,160,50,20,"OTT")}`;
+
+      case "review": return `
+        <rect x="18" y="38" width="72" height="112" rx="6" ${K.ghost}/>
+        ${K.rows(30,58,50,7,13,0.3)}
+        <circle cx="72" cy="132" r="14" fill="none" stroke="${ac}" stroke-width="1.8"/>
+        <path d="M 82 142 L 92 152" stroke="${ac}" stroke-width="2.2" stroke-linecap="round"/>
+        ${K.donut(148,72,29,[0.96],11)}
+        <circle cx="148" cy="72" r="19" fill="${dk}"/>
+        ${K.num(148,77,"96",16)}
+        ${K.cap(148,116,"QUALITY")}
+        ${K.badgeV(148,148,11)}`;
+
+      case "distribute": return `
+        <circle cx="52" cy="100" r="26" ${K.solid}/>
+        ${K.play(53.3,100,22,dk)}
+        ${[["WEB",30],["APP",76],["SOCIAL",122],["OTT",168]].map(([t,y])=>K.pill(116,y,68,22,t)).join('')}
+        ${[41,87,133,179].map(y=>K.flow(`M 80 100 C 100 100 100 ${y} 114 ${y}`,0.7)).join('')}
+        ${K.cap(52,146,"REACH")}
+        ${K.track(22,154,60,0.86,8)}`;
+
+      case "profile": return `
+        <rect x="18" y="34" width="104" height="132" rx="8" ${K.panel}/>
+        ${K.person(46,66,1.8,true)}
+        ${K.rows(70,60,42,2,13)}
+        ${[104,124,144].map((y,i)=>`${K.cap(30,y+4,["SPEND","GENRE","SEASON"][i],'start')}${K.track(72,y-3,40,[0.84,0.56,0.7][i],7)}`).join('')}
+        ${K.donut(158,62,23,[0.72],9)}
+        <circle cx="158" cy="62" r="14" fill="${dk}"/>
+        ${K.num(158,66,"360",10)}
+        ${K.cap(158,104,"VIEW")}`;
+
+      case "spot": return `
+        ${[0,1,2,3,4,5,6].map(i=>{const h=[26,40,32,58,86,50,34][i], x=24+i*23, on=i===4;
+          return `<rect x="${x}" y="${152-h}" width="15" height="${h}" rx="3.5" fill="${on?ac:st}" opacity="${on?1:0.22}"/>`;}).join('')}
+        <line x1="18" y1="152" x2="184" y2="152" stroke="${st}" stroke-width="1.1" opacity="0.4"/>
+        ${["J","F","M","A","M","J","J"].map((m,i)=>K.cap(31.5+i*23,168,m)).join('')}
+        <circle cx="116" cy="38" r="13" ${K.solid}/>${K.on(116,41,"!")}
+        ${K.flow("M 116 51 L 116 64",0.8)}
+        ${K.cap(116,22,"BUDGET MOMENT")}`;
+
+      case "outreach": return `
+        ${(()=>{const bub=(x,y,w,h,r,f)=>`<path d="M ${x+r} ${y} H ${x+w-r} A ${r} ${r} 0 0 1 ${x+w} ${y+r} V ${y+h-r} A ${r} ${r} 0 0 1 ${x+w-r} ${y+h} H ${x+24} L ${x+9} ${y+h+13} L ${x+13} ${y+h} H ${x+r} A ${r} ${r} 0 0 1 ${x} ${y+h-r} V ${y+r} A ${r} ${r} 0 0 1 ${x+r} ${y} Z" ${f}/>`;
+          return bub(58,32,128,58,13,K.solid)+
+            `<rect x="72" y="45" width="48" height="13" rx="6.5" fill="${dk}" opacity="0.45"/>`+
+            `<rect x="126" y="45" width="34" height="13" rx="6.5" fill="${dk}" opacity="0.17"/>`+
+            `<rect x="72" y="68" width="94" height="7" rx="3.5" fill="${dk}" opacity="0.26"/>`+
+            `<g opacity="0.5">`+bub(72,118,100,42,11,K.ghost)+
+            `<rect x="86" y="131" width="38" height="6" rx="3" fill="${st}" opacity="0.4"/>`+
+            `<rect x="86" y="145" width="60" height="6" rx="3" fill="${st}" opacity="0.22"/></g>`;})()}
+        <circle cx="28" cy="60" r="17" ${K.panel}/>
+        ${K.person(28,62,1.15,false)}
+        <circle cx="30" cy="150" r="19" ${K.solid}/>
+        ${K.lucide(30,150,20,`<path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/>`,dk,2.3)}
+        ${K.cap(30,184,"FOLLOW-UP")}
+        ${K.cap(118,180,"IN THEIR LANGUAGE")}`;
+
+      case "proposal": return `
+        ${[0,1,2,3,4].map(r=>[0,1,2,3].map(c=>{
+          const on=[[1,0],[1,1],[2,1],[0,2],[2,2],[3,3],[1,4]].some(p=>p[0]===c&&p[1]===r);
+          return `<rect x="${18+c*22}" y="${36+r*22}" width="17" height="17" rx="3.5" fill="${on?ac:'none'}" opacity="${on?0.92:1}" stroke="${st}" stroke-width="1.1" stroke-opacity="${on?0:0.4}"/>`;}).join('')).join('')}
+        ${K.cap(60,26,"INVENTORY")}
+        ${K.flow("M 112 100 L 132 100",0.9)}
+        <path d="M 126 95 L 133 100 L 126 105" stroke="${ac}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="138" y="44" width="48" height="112" rx="6" ${K.panel}/>
+        <rect x="148" y="58" width="28" height="10" rx="3" ${K.solid}/>
+        ${K.rows(148,82,28,4,12)}
+        ${K.badgeV(162,138,9)}
+        ${K.cap(162,176,"FIT")}`;
+
+      case "booking": return `
+        ${[0,1,2,3,4].map(i=>{const y=38+i*30, pct=[1,0,0.68,0.88,0][i];
+          return `${K.cap(16,y+15,["18:00","19:00","20:00","21:00","22:00"][i],'start')}`+
+                 `<rect x="58" y="${y}" width="124" height="22" rx="5" fill="${st}" opacity="0.12"/>`+
+                 (pct?`<rect x="58" y="${y}" width="${(124*pct).toFixed(0)}" height="22" rx="5" ${K.solid}/>`:``);}).join('')}
+        ${K.cap(120,24,"AIRTIME")}
+        ${K.num(120,190,"78% FILLED",10)}`;
+
+      case "nurture": return `
+        <path d="M 30 150 L 30 136 L 66 120 L 102 126 L 138 90 L 172 48 L 172 150 Z" fill="${ac}" opacity="0.13"/>
+        <line x1="24" y1="150" x2="182" y2="150" stroke="${st}" stroke-width="1.1" opacity="0.35"/>
+        ${[0,1,2,3].map(i=>`<line x1="24" y1="${120-i*24}" x2="182" y2="${120-i*24}" stroke="${st}" stroke-width="0.9" opacity="0.1"/>`).join('')}
+        <path d="M 30 136 L 66 120 L 102 126 L 138 90 L 172 48" ${K.bold}/>
+        ${[[30,136],[66,120],[102,126],[138,90]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3.6" fill="${dk}" stroke="${ac}" stroke-width="2"/>`).join('')}
+        <circle cx="172" cy="48" r="8" ${K.solid}/>
+        <path d="M 46 166 A 56 13 0 0 0 156 166" fill="none" stroke="${ac}" stroke-width="1.6" stroke-dasharray="4 4" opacity="0.8"/>
+        <path d="M 150 159 L 158 166 L 149 172" stroke="${ac}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        ${K.cap(100,26,"CAMPAIGN RESULTS")}
+        ${K.cap(100,194,"REPEAT BUSINESS")}`;
+
+      case "migrate": return `
+        ${[0,1,2].map(i=>`<rect x="14" y="${48+i*30}" width="50" height="22" rx="5" ${K.ghost}/><path d="M 22 ${55+i*30} h 13 v 8 h -13 Z M 22 ${55+i*30} l 6.5 4.5 l 6.5 -4.5" fill="none" stroke="${st}" stroke-width="1" opacity="0.4"/>`).join('')}
+        ${K.cap(39,36,"LEGACY")}
+        <path d="M 74 90 L 120 90" ${K.bold}/>
+        <path d="M 112 82 L 122 90 L 112 98" ${K.bold}/>
+        ${[0,1,2].map(i=>`<rect x="132" y="${48+i*30}" width="50" height="22" rx="5" fill="${ac}" opacity="${(0.95-i*0.22).toFixed(2)}"/>`).join('')}
+        ${K.cap(157,36,"WORKSPACE")}
+        ${K.track(34,158,132,1,9)}
+        ${K.cap(100,186,"70TB &middot; ZERO DOWNTIME")}`;
+
+      case "access": return `
+        <rect x="16" y="24" width="168" height="152" rx="12" fill="none" stroke="${ac}" stroke-width="1.1" stroke-dasharray="5 5" opacity="0.45"/>
+        ${K.cap(100,16,"IN-TENANT")}
+        ${K.lucideFill(100,86,96,`<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>`,ac)}
+        ${K.lucide(100,84,44,`<path d="m9 12 2 2 4-4"/>`,dk,2.6)}
+        <rect x="28" y="130" width="42" height="34" rx="9" ${K.panel}/>
+        ${K.lucide(49,147,20,`<path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r="1.2" fill="currentColor" stroke="none"/>`,ac,2.1)}
+        <rect x="130" y="130" width="42" height="34" rx="9" ${K.panel}/>
+        ${K.lucide(151,147,20,`<rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>`,ac,2.1)}`;
+
+      case "coauthor": return `
+        <rect x="30" y="28" width="140" height="132" rx="8" ${K.panel}/>
+        ${K.rows(44,52,112,8,14)}
+        <rect x="44" y="60" width="52" height="11" rx="2" fill="${ac}" opacity="0.3"/>
+        <path d="M 98 54 L 98 76 L 104 70 L 109 80 L 113 78 L 108 68 L 115 68 Z" ${K.solid}/>
+        <rect x="70" y="116" width="62" height="11" rx="2" fill="${ac}" opacity="0.16"/>
+        <path d="M 134 110 L 134 132 L 140 126 L 145 136 L 149 134 L 144 124 L 151 124 Z" fill="${ac}" opacity="0.55"/>
+        ${[0,1,2].map(i=>K.person(62+i*26,180,1.1,i===0)).join('')}
+        ${K.cap(154,184,"LIVE")}`;
+
+      case "assist": return `
+        ${[0,1,2].map(i=>`<rect x="${12+i*5}" y="${54+i*6}" width="50" height="86" rx="6" ${K.ghost}/>`).join('')}
+        ${K.rows(32,78,30,5,14,0.26)}
+        ${K.flow("M 76 100 L 94 100")}
+        <circle cx="122" cy="100" r="29" ${K.solid}/>
+        ${K.lucide(122,100,34,`<path d="M11.52 2.37a.5.5 0 0 0 .96 0l1.58 6.13A2 2 0 0 0 15.5 9.94l6.13 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0L9.94 15.5A2 2 0 0 0 8.5 14.06L2.37 12.48a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5z"/><path d="M20 3v4M22 5h-4M4 17v2M5 18H3"/>`,dk,2.3)}
+        ${K.flow("M 152 100 L 168 100")}
+        <rect x="160" y="62" width="28" height="76" rx="6" ${K.panel}/>
+        <rect x="166" y="72" width="16" height="6" rx="3" ${K.solid}/>
+        ${K.rows(166,90,16,4,13)}
+        ${K.cap(100,30,"SUMMARIZE &middot; ANALYZE")}`;
+
+      case "depts": return `
+        <circle cx="100" cy="100" r="27" ${K.solid}/>${K.on(100,104,"AI")}
+        ${[["LEGAL",22,30],["FINANCE",112,30],["MIS/IT",22,134],["EDITORIAL",112,134]].map(([t,x,y])=>
+          `<rect x="${x}" y="${y}" width="66" height="36" rx="8" ${K.panel}/>${K.cap(x+33,y+22,t)}`).join('')}
+        ${K.flow("M 82 84 L 66 68")}${K.flow("M 118 84 L 134 68")}
+        ${K.flow("M 82 116 L 66 132")}${K.flow("M 118 116 L 134 132")}
+        ${K.badgeV(100,182,9)}`;
+
+      case "forecast": return `
+        <line x1="24" y1="152" x2="184" y2="152" stroke="${st}" stroke-width="1.1" opacity="0.35"/>
+        <path d="M 32 140 L 64 124 L 96 130 L 118 104" ${K.bold}/>
+        <path d="M 118 104 L 148 84 L 178 52" fill="none" stroke="${ac}" stroke-width="2.4" stroke-dasharray="5 5" stroke-linecap="round"/>
+        ${[[32,140],[64,124],[96,130]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3.4" fill="${ac}" opacity="0.6"/>`).join('')}
+        <circle cx="118" cy="104" r="6" ${K.solid}/>
+        <circle cx="178" cy="52" r="7" fill="${dk}" stroke="${ac}" stroke-width="2.2"/>
+        ${K.pill(20,164,60,20,"CRM")}${K.pill(90,164,88,20,"ANALYTICS")}
+        ${K.flow("M 50 164 L 50 154",0.6)}${K.flow("M 134 164 L 134 154",0.6)}
+        ${K.cap(100,30,"READERSHIP FORECAST")}`;
+
+      default: return `<circle cx="100" cy="100" r="58" ${K.panel}/>`;
+    }
+  }
+
+  /* ---------- 02-04 - newsroom, media sales and digital workplace ---------- */
+  const TMEG_ARCHS = {
+    newsroom: [
+      {key:"collect",  name:"Source Collection",            agent:"Collector Agent",   desc:"Pulls in offline partner, agent and reporter feeds plus Instagram, Facebook and social."},
+      {key:"verify",   name:"Verification & De-duplication", agent:"Verifier Agent",    desc:"Checks credibility, removes duplicates and flags unverified claims."},
+      {key:"assemble", name:"Story Assembly",               agent:"Assembler Agent",   desc:"Merges every source on a story into one fact-linked brief."},
+      {key:"draft",    name:"Content Drafting",             agent:"Drafter Agent",     desc:"Writes headlines, copy and captions in house style, across formats."},
+      {key:"review",   name:"Editorial Review",             agent:"Checker Agent",     desc:"Fact-checks drafts, scores quality and prepares them for editors."},
+      {key:"distribute", name:"Publishing & Distribution",    agent:"Publisher Agent",   desc:"Schedules by channel, tracks reach and feeds trending topics back."}
+    ],
+    sales: [
+      {key:"profile",  name:"Customer Intelligence",        agent:"Profiler Agent",    desc:"Builds a live profile of each advertiser, agency and partner."},
+      {key:"spot",     name:"Opportunity Identification",   agent:"Spotter Agent",     desc:"Finds the next campaign, season and budget moment for each customer."},
+      {key:"outreach", name:"Personalized Outreach",        agent:"Engager Agent",     desc:"Sends personalized outreach and follow-ups in their language and context."},
+      {key:"proposal", name:"Proposal & Inventory Match",   agent:"Matcher Agent",     desc:"Builds proposals that fit unsold TV inventory to each customer's goals."},
+      {key:"booking",  name:"Booking & Scheduling",         agent:"Scheduler Agent",   desc:"Handles bookings, slot allocation and fill of unsold airtime."},
+      {key:"nurture",  name:"Campaign & Relationship Growth", agent:"Nurturer Agent",  desc:"Tracks campaign results, reports back and spots upsell chances."}
+    ],
+    workplace: [
+      {key:"migrate",   name:"Unified Platform",           agent:"Migrator Agent",    desc:"Moves mailboxes and 70TB+ of files with zero downtime."},
+      {key:"access",    name:"Secure Access",              agent:"Guardian Agent",    desc:"Identity-first access, unified sign-in and AI that stays in-tenant."},
+      {key:"coauthor",  name:"Real-Time Co-Authoring",     agent:"Collaborator Agent",desc:"Live co-editing in Docs, Sheets and Drive, with no version chaos."},
+      {key:"assist",    name:"AI-Assisted Work",           agent:"Assistant Agent",   desc:"Gemini summarizes email, analyzes documents and sparks ideas."},
+      {key:"depts",     name:"Department Use Cases",       agent:"Specialist Agent",  desc:"Legal vetting, finance reports, IT log summaries and editorial research."},
+      {key:"forecast",  name:"Enterprise Automation",      agent:"Forecaster Agent",  desc:"Gemini Enterprise pilot links CRMs and analytics to forecast readership."}
+    ]
+  };
+
+  /* ---------- shared carousel engine (RCM behaviour, per panel) ---------- */
+  function mountArch(root, WORKFLOWS, shapeSvg){
+    let currentStage = 0;
   function slideMarkup(wf, idx){
     const num = String(idx+1).padStart(2,'0');
     return `
       <div class="rcm-slide" data-idx="${idx}">
-        <div class="wf-tag">Workflow ${num}</div>
+        <div class="wf-tag">Swarm ${num}</div>
         <svg class="svg-side"   viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(wf.key, PAL_SIDE_DARK)}</svg>
         <svg class="svg-center" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">${shapeSvg(wf.key, PAL_DARK)}</svg>
         <div class="wf-mini">${wf.name}</div>
@@ -1154,48 +1549,116 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       </div>`;
   }
 
-  const track = document.getElementById('carTrack');
-  if(!track) return;
-  track.innerHTML = WORKFLOWS.map((w,i)=>slideMarkup(w,i)).join('');
-  track.querySelectorAll('.rcm-slide').forEach(el=>el.addEventListener('click',()=>{
-    const idx = parseInt(el.dataset.idx,10);
-    if(idx !== currentStage){ currentStage = idx; updatePositions(); }
-  }));
+    const track = root.querySelector('.rcm-track');
+    if(!track) return null;
+    track.innerHTML = WORKFLOWS.map((w,i)=>slideMarkup(w,i)).join('');
+    track.querySelectorAll('.rcm-slide').forEach(el=>el.addEventListener('click',()=>{
+      const idx = parseInt(el.dataset.idx,10);
+      if(idx !== currentStage){ currentStage = idx; updatePositions(); }
+    }));
 
-  const panelTimers = new Map();
-  function clearPanelTimers(el){
-    const t = panelTimers.get(el);
-    if(t){ clearTimeout(t.show); clearTimeout(t.hide); panelTimers.delete(el); }
-  }
-  function updatePositions(){
-    const n = WORKFLOWS.length;
-    const step = 360 / n;
-    const radius = Math.max(420, Math.round(160 / Math.tan(Math.PI/n)));
-    track.querySelectorAll('.rcm-slide').forEach((el,i)=>{
-      el.style.transform = `rotateY(${i*step}deg) translateZ(${radius}px)`;
-      const isCenter = (i===currentStage);
-      el.classList.toggle('pos-center', isCenter);
-      if(!isCenter){
-        el.classList.remove('panel-visible');
-        clearPanelTimers(el);
-      } else {
-        clearPanelTimers(el);
-        const show = setTimeout(()=>el.classList.add('panel-visible'), 1050);
-        const hide = setTimeout(()=>el.classList.remove('panel-visible'), 4200);
-        panelTimers.set(el, {show, hide});
-      }
-    });
-    track.style.transform = `rotateY(${-currentStage*step}deg)`;
-  }
-  updatePositions();
-
-  function stepFn(dir){
-    const n = WORKFLOWS.length;
-    currentStage = (currentStage + dir + n) % n;
+    const panelTimers = new Map();
+    function clearPanelTimers(el){
+      const t = panelTimers.get(el);
+      if(t){ clearTimeout(t.show); clearTimeout(t.hide); panelTimers.delete(el); }
+    }
+    function updatePositions(){
+      const n = WORKFLOWS.length;
+      const step = 360 / n;
+      const radius = Math.max(420, Math.round(160 / Math.tan(Math.PI/n)));
+      track.querySelectorAll('.rcm-slide').forEach((el,i)=>{
+        el.style.transform = `rotateY(${i*step}deg) translateZ(${radius}px)`;
+        const isCenter = (i===currentStage);
+        el.classList.toggle('pos-center', isCenter);
+        if(!isCenter){
+          el.classList.remove('panel-visible');
+          clearPanelTimers(el);
+        } else {
+          clearPanelTimers(el);
+          const show = setTimeout(()=>el.classList.add('panel-visible'), 1050);
+          const hide = setTimeout(()=>el.classList.remove('panel-visible'), 4200);
+          panelTimers.set(el, {show, hide});
+        }
+      });
+      track.style.transform = `rotateY(${-currentStage*step}deg)`;
+    }
     updatePositions();
+
+    function stepFn(dir){
+      const n = WORKFLOWS.length;
+      currentStage = (currentStage + dir + n) % n;
+      updatePositions();
+    }
+    const btns = root.querySelectorAll('.car-controls .car-btn');
+    if(btns[0]) btns[0].addEventListener('click', ()=>stepFn(-1));
+    if(btns[1]) btns[1].addEventListener('click', ()=>stepFn(1));
+    return {replay: updatePositions};
   }
-  document.getElementById('carPrev').addEventListener('click', ()=>stepFn(-1));
-  document.getElementById('carNext').addEventListener('click', ()=>stepFn(1));
+
+  const archs = {};
+  document.querySelectorAll('.processes .proc-panel').forEach(p=>{
+    const id = p.dataset.proc;
+    archs[id] = id === 'tmeg' ? mountArch(p, WORKFLOWS, shapeNet) : mountArch(p, TMEG_ARCHS[id], shapeTM);
+  });
+
+  /* ---------- process switcher ---------- */
+  const tabs = [...document.querySelectorAll('.processes .proc-tab')];
+  const ind = document.querySelector('.processes .proc-switch-line i');
+  let active = 0;
+  function moveInd(){
+    const t = tabs[active]; if(!t || !ind) return;
+    ind.style.width = t.offsetWidth + 'px';
+    ind.style.transform = `translateX(${t.offsetLeft}px)`;
+  }
+  function select(i, focus){
+    if(i === active){ if(focus) tabs[i].focus(); return; }
+    const prev = document.getElementById(tabs[active].getAttribute('aria-controls'));
+    const next = document.getElementById(tabs[i].getAttribute('aria-controls'));
+    active = i;
+    tabs.forEach((t,k)=>{
+      const on = k === i;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+    if(focus) tabs[i].focus({preventScroll:true});
+    moveInd();
+    const strip = document.querySelector('.processes .proc-switch-wrap');
+    if(strip && strip.scrollWidth > strip.clientWidth){
+      strip.scrollTo({left: Math.max(0, tabs[i].offsetLeft - (strip.clientWidth - tabs[i].offsetWidth)/2), behavior:'smooth'});
+    }
+    if(prev) prev.hidden = true;
+    if(next){
+      next.hidden = false;
+      next.classList.remove('is-entering'); void next.offsetWidth; next.classList.add('is-entering');
+      const a = archs[next.dataset.proc]; if(a) a.replay();
+    }
+  }
+  tabs.forEach((t,i)=>{
+    t.addEventListener('click', ()=>select(i,false));
+    t.addEventListener('keydown', e=>{
+      const n = tabs.length;
+      if(e.key==='ArrowRight'){ e.preventDefault(); select((active+1)%n,true); }
+      else if(e.key==='ArrowLeft'){ e.preventDefault(); select((active-1+n)%n,true); }
+      else if(e.key==='Home'){ e.preventDefault(); select(0,true); }
+      else if(e.key==='End'){ e.preventDefault(); select(n-1,true); }
+    });
+  });
+  /* equal panel heights so switching process never shifts the page below */
+  const panels = [...document.querySelectorAll('.processes .proc-panel')];
+  function equalize(){
+    panels.forEach(p=>p.style.minHeight='');
+    let max = 0;
+    const hiddenNow = panels.filter(p=>p.hidden);
+    hiddenNow.forEach(p=>p.hidden = false);
+    panels.forEach(p=>{ max = Math.max(max, p.offsetHeight); });
+    hiddenNow.forEach(p=>p.hidden = true);
+    panels.forEach(p=>p.style.minHeight = max + 'px');
+  }
+  function relayout(){ moveInd(); equalize(); }
+  relayout();
+  window.addEventListener('resize', relayout);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
 })();
 
 /* Value-leaks stacked accordion */
@@ -1265,6 +1728,21 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     }
   });
 });
+
+/* FAQ — every question box the same height, whatever the question length */
+(function(){
+  const qs = [...document.querySelectorAll('.faq-q')];
+  if(!qs.length) return;
+  function equalize(){
+    qs.forEach(q => q.style.minHeight = '');
+    let max = 0;
+    qs.forEach(q => { max = Math.max(max, q.offsetHeight); });
+    qs.forEach(q => q.style.minHeight = max + 'px');
+  }
+  equalize();
+  window.addEventListener('resize', equalize);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(equalize);
+})();
 </script>
 
 <script>

@@ -21,7 +21,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--paper);color:var(--ink);font-family:var(--body);font-variation-settings:'wght' 400;-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden;}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-variation-settings:'wght' 400;-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:clip;}
 img{display:block;max-width:100%;}
 a{color:inherit;text-decoration:none;}
 button{font-family:inherit;background:none;border:none;cursor:pointer;}
@@ -691,9 +691,8 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 .devops .p-tab.active small{color:#9bbcff;}
 .devops .p-tab.active .p-tab-name{color:#fff;}
 .devops .p-tab.active .p-tab-go{color:#fff;}
-.devops .p-tab.active::after{content:"";position:absolute;left:50%;bottom:-8px;width:16px;height:16px;margin-left:-8px;background:#0050d8;border-radius:3px;transform:rotate(45deg);}
 @media (prefers-reduced-motion:reduce){.devops .p-tab{transition:none;}}
-@media (max-width:1000px){.devops .p-tabs{grid-template-columns:repeat(2,minmax(0,1fr));}.devops .p-tab.active::after{display:none;}}
+@media (max-width:1000px){.devops .p-tabs{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media (max-width:520px){.devops .p-tab{padding:12px 36px 12px 14px;gap:8px;}.devops .p-tab-name{font-size:13.5px;}.devops .p-tab-go{right:12px;}}
 
 /* ========== Type scale · one set of sizes for the whole page (hero headline and metric figures excepted) ========== */
@@ -709,6 +708,158 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 .rflow-step p,.shift .shift-text,.econ .econ-desc,#strip .body p,.pillars .pillar-desc,.eng-card-desc,.faq .faq-a-inner,.faq .faq-side-text,.outcomes .outcomes-detail-text{font-size:var(--fs-body);line-height:1.6;}
 .devops .p-tab-name,.outcomes .outcomes-item-title{font-size:var(--fs-ui);}
 @media (max-width:600px){:root{--fs-h3:21px;--fs-lead:16px;--fs-body:15.5px;}}
+
+/* ========== MOBILE (≤720px) — modelled on verily.com: 24px gutters, single column, left-aligned type ========== */
+html{overflow-x:clip;}
+.processes{overflow:clip;}
+
+/* hamburger + drawer (shown wherever the desktop links are hidden, ≤900px) */
+.nav-burger{display:none;width:44px;height:44px;margin-right:-10px;border:none;background:transparent;cursor:pointer;align-items:center;justify-content:center;color:#fff;}
+.nav-burger span{position:relative;display:block;width:22px;height:1.6px;background:currentColor;border-radius:2px;transition:background .2s;}
+.nav-burger span::before,.nav-burger span::after{content:"";position:absolute;left:0;width:22px;height:1.6px;background:currentColor;border-radius:2px;transition:transform .25s ease,top .25s ease;}
+.nav-burger span::before{top:-7px;}
+.nav-burger span::after{top:7px;}
+.nav.nav-open .nav-burger span{background:transparent;}
+.nav.nav-open .nav-burger span::before{top:0;transform:rotate(45deg);}
+.nav.nav-open .nav-burger span::after{top:0;transform:rotate(-45deg);}
+.nav-drawer{display:none;}
+@media (max-width:900px){
+  .nav .wrap{height:72px;gap:16px;}
+  .nav-cta{display:none;}
+  .nav-burger{display:inline-flex;}
+  .nav.nav-open{position:fixed;background:#02061a;backdrop-filter:none;-webkit-backdrop-filter:none;}
+  .nav-drawer{display:block;position:fixed;top:72px;left:0;right:0;bottom:0;background:#02061a;padding:16px 24px 40px;overflow-y:auto;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s ease,transform .25s ease,visibility 0s linear .25s;}
+  .nav.nav-open .nav-drawer{opacity:1;visibility:visible;transform:none;transition:opacity .25s ease,transform .25s ease;}
+  .nav-drawer ul{list-style:none;margin:0;padding:0;border-top:1px solid rgba(255,255,255,0.1);}
+  .nav-drawer li a{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-family:var(--display);font-size:20px;letter-spacing:-0.01em;color:#fff;}
+  .nav-drawer li a.current{color:#79adff;}
+  .nav-drawer .nav-drawer-cta{display:inline-flex;align-items:center;gap:10px;margin-top:32px;background:var(--blue);color:#fff;font-family:var(--display);font-size:15px;padding:15px 26px;border-radius:999px;}
+  .nav-drawer .nav-drawer-cta svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;}
+  body.nav-locked{overflow:hidden;}
+
+  /* 24px gutters everywhere (desktop uses 72px on these) */
+  .nav .wrap,.hero .wrap,.reality > .wrap,.agentic > .wrap{padding:0 24px;}
+}
+@media (max-width:720px){
+  /* hero: collage first, full-bleed and cropped at the edges (Verily), then left-aligned type */
+  .hero{padding:72px 0 64px;}
+  .hero .wrap{justify-content:flex-start;padding-bottom:0;}
+  .hero-composition{order:-1;width:calc(100% + 96px);max-width:none;margin:12px 0 36px calc(((100% + 48px) - (100% + 96px) * 5 / 6) / 2 - (100% + 96px) / 6 - 24px);}
+  .hero-text{max-width:none;}
+  .hero-badge{font-size:9.5px;letter-spacing:.12em;padding:7px 14px 7px 11px;gap:8px;margin-bottom:22px;white-space:nowrap;}
+  .hero-badge-icon{width:15px;height:15px;}
+  .hero h1{font-size:42px;line-height:1.1;margin-bottom:20px;}
+  .hero-opening{font-size:17px;line-height:1.6;margin-bottom:32px;}
+  .hero-cta-primary{white-space:nowrap;}
+
+  /* type scale: 32px section headings, left-aligned */
+  .section-h,.reality-content h2,.agentic-intro h2,.engagement h2{font-size:32px;line-height:1.15;letter-spacing:-0.02em;}
+  .connect-heading{font-size:36px;line-height:1.1;}
+  .processes .section-h,.processes #processes-h,.outcomes-intro,.outcomes-intro .section-h{text-align:left;margin-left:0;}
+  .proc-head{text-align:left;margin-bottom:40px;}
+  .proc-title{font-size:24px;}
+  .proc-sub{margin:0;}
+  .proc-switch-wrap{margin:0 -24px 32px;padding:0 24px;}
+  .outcomes-intro{margin-bottom:32px;}
+  .outcomes-media{order:-1;}
+
+  /* tighter vertical rhythm between sections */
+  .agentic,.leaks,.processes,.outcomes,.pillars,.faq,.connect{padding:64px 0;}
+  .reality{padding:48px 0 64px;}
+  .outcomes-intro{padding:0;}
+  .leaks-stack{margin-top:32px;}
+
+  /* section 1 heading flows as one sentence */
+  .reality-content h2 span{display:inline;}
+  .reality-content h2{text-wrap:balance;margin-bottom:32px;}
+
+  /* FAQ: smaller boxes */
+  .faq-layout{gap:32px;}
+  .faq-title{font-size:32px;line-height:1.1;margin-bottom:14px;}
+  .faq-list{gap:8px;}
+  .faq-item{border-radius:12px;}
+  .faq-q{padding:14px 16px;font-size:15px;line-height:1.4;gap:14px;}
+  .faq-icon{width:28px;height:28px;}
+  .faq-a-inner{padding:14px 16px 16px;font-size:14.5px;line-height:1.65;}
+
+  /* shared intelligence / human oversight / business impact: centred */
+  .rcm-arch .arch-row{align-items:center;text-align:center;}
+  .rcm-arch .car-controls{margin-bottom:36px;}
+  .rcm-arch .rcm-carousel{margin-bottom:32px;}
+
+  /* engagement: no scroll-driven track on phones; the three steps stack as a list */
+  .engagement{min-height:0;padding:0;}
+  .eng-sticky{position:static;min-height:0;padding:40px 0 64px;}
+  .eng-layout{gap:32px;}
+  .eng-deck{padding-top:0;}
+  .eng-deck-stage{height:auto;display:grid;gap:12px;}
+  .eng-card{position:relative;inset:auto;transform:none !important;opacity:1 !important;pointer-events:auto !important;cursor:default;}
+  .eng-deck-dots{display:none;}
+  .eng-card-meta{padding-right:64px;line-height:1.5;}
+
+  /* outcomes: balanced heading, case tabs as a swipeable row */
+  .outcomes-intro .section-h,.outcomes-intro #outcomes-h{font-size:min(32px, calc((100vw - 48px) / 15.2));white-space:nowrap;}
+  .outcomes-tabs2{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -24px 32px;padding:0 24px 4px;}
+  .outcomes-tabs2::-webkit-scrollbar{display:none;}
+  .outcomes-item{flex:0 0 auto;min-height:0;padding:10px 16px 10px 10px;border:1px solid var(--paper-line);border-radius:14px;background:#fff;}
+  .outcomes-item.active{border-color:rgba(0,100,255,0.35);box-shadow:0 8px 20px -12px rgba(0,80,200,0.35);}
+  .outcomes-item-icon{width:36px;height:36px;border-radius:10px;}
+  .outcomes-item-icon svg{width:18px;height:18px;}
+  .outcomes-item-title{font-size:13px;}
+  .outcomes-item-title{line-height:1.25;}
+  .outcomes-story{gap:28px;}
+  .outcomes-case{margin-bottom:18px;}
+  .outcomes-detail-text{font-size:16px;line-height:1.65;}
+  .outcomes-metric-box{padding:14px 16px;right:12px;bottom:12px;}
+  .outcomes-metric-value{font-size:28px;margin-bottom:4px;}
+  .outcomes-metric-label{font-size:13px;}
+}
+
+
+/* ========== MOBILE · TSS-only sections (same rhythm and gutters as the healthcare page) ========== */
+@media (max-width:900px){
+  .devops{padding:80px 0;}
+}
+@media (max-width:720px){
+  /* hero: the TSS collage is a 2824 x 2349 canvas; show it first, full width, then left-aligned type */
+  .hero .wrap{display:flex;flex-direction:column;}
+  .hero-composition{position:relative;top:auto;right:auto;transform:none;order:-1;width:calc(100% + 24px);max-width:none;margin:8px 0 32px -12px;aspect-ratio:2824/2349;}
+  .hero-text{width:100%;}
+  /* same section rhythm as the healthcare page */
+  .shift,.leaks.econ,.devops{padding:64px 0;}
+  .shift-head,.econ-layout{gap:16px;}
+  .shift-head{margin-bottom:28px;}
+  .shift-head p,.econ .section-sub{max-width:none;}
+  /* section 1: photo collage a little smaller and centred */
+  .reality-media{margin-left:12px;margin-right:12px;}
+  .rflow-step{padding-left:34px;}
+  .rflow-step--key p{padding:16px 18px;}
+  /* section 2: accordion rows tighter; illustration panel above the list */
+  .shift-btn{padding:18px 0;}
+  .shift-stage{aspect-ratio:1 / 0.9;border-radius:20px;}
+  .shift-text{margin-bottom:22px;}
+  /* section 3: cards tighter */
+  .econ-card{padding:22px 22px 24px;min-height:0;}
+  .econ-q{padding-top:18px;}
+  .econ-list{gap:12px;}
+  /* processes: left-aligned head, picker cards two-up */
+  .devops-head{margin-bottom:20px;}
+  .devops .p-picker{margin-bottom:28px;}
+  .proc-head h3{font-size:var(--fs-h3);}
+  /* process picker: one compact row per process on phones */
+  .devops .p-tabs{grid-template-columns:1fr;gap:8px;}
+  .devops .p-tab{padding:13px 40px 13px 16px;gap:12px;}
+  .devops .p-tab-name{font-size:15px;}
+  /* open stage panel sizes to its content; no hover hint on touch screens */
+  .panel.is-open{min-height:0;}
+  .devops-hint{display:none;}
+  /* FAQ: same compact phone sizes as the healthcare page */
+  .faq .faq-q{font-size:15px;line-height:1.4;}
+  .faq .faq-a-inner{font-size:14.5px;line-height:1.65;}
+  /* practices: cards size to their content */
+  .pillar-card{min-height:0;height:auto;padding:24px 24px 26px;}
+  .pillars-cards{gap:12px;grid-auto-rows:auto;align-items:start;}
+}
 </style>
 </head>
 <body>
@@ -738,6 +889,21 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
       bring us a problem
       <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
     </a>
+    <button class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer"><span></span></button>
+  </div>
+
+  <div class="nav-drawer" id="navDrawer" aria-label="Mobile menu">
+    <ul>
+      <li><a href="#">outcomes</a></li>
+      <li><a href="#">how we solve</a></li>
+      <li><a href="business-systems-engineering.html">practices</a></li>
+      <li><a href="#" class="current">industries</a></li>
+      <li><a href="#">insights</a></li>
+      <li><a href="who-we-are.html">who we are</a></li>
+      <li><a href="#">partners</a></li>
+      <li><a href="careers.html">careers</a></li>
+    </ul>
+    <a href="#connect" class="nav-drawer-cta">bring us a problem <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
   </div>
 </nav>
 
@@ -746,7 +912,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <div class="wrap">
     <div class="hero-text">
       <div class="hero-badge">
-        <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true"><rect x="158" y="24" width="58" height="101" fill="#13377f"/><rect x="250" y="158" width="101" height="58" fill="#13377f"/><rect x="22" y="158" width="194" height="58" fill="#0064ff"/><rect x="158" y="250" width="58" height="101" fill="#0064ff"/></svg>
+        <svg class="hero-badge-icon" viewBox="0 0 300 300" aria-hidden="true"><path d="M0 10A290 290 0 0 1 290 300H235A235 235 0 0 0 0 65Z" fill="#13377f"/><path d="M0 113A187 187 0 0 1 187 300H132A132 132 0 0 0 0 168Z" fill="#0064ff"/><path d="M0 215A85 85 0 0 1 85 300H0Z" fill="#13377f"/></svg>
         2030 Vision &middot; Architecting Revenue Velocity
       </div>
       <h1 id="hero-heading">
@@ -905,7 +1071,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         <div class="shift-scene is-active"><svg viewBox="0 0 600 520"><rect x="36" y="70" width="236" height="230" rx="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" />
 <text x="60" y="104" font-size="13" fill="#84868c" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Licensed seats</text><g opacity="0.9"><circle cx="78" cy="128" r="9" fill="#c9d6ee"/><path d="M64 150 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="122" cy="128" r="9" fill="#c9d6ee"/><path d="M108 150 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="166" cy="128" r="9" fill="#c9d6ee"/><path d="M152 150 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="210" cy="128" r="9" fill="#c9d6ee"/><path d="M196 150 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="78" cy="168" r="9" fill="#c9d6ee"/><path d="M64 190 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="122" cy="168" r="9" fill="#c9d6ee"/><path d="M108 190 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="166" cy="168" r="9" fill="#c9d6ee"/><path d="M152 190 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="210" cy="168" r="9" fill="#c9d6ee"/><path d="M196 190 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="78" cy="208" r="9" fill="#c9d6ee"/><path d="M64 230 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="122" cy="208" r="9" fill="#c9d6ee"/><path d="M108 230 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="166" cy="208" r="9" fill="#c9d6ee"/><path d="M152 230 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g><g opacity="0.9"><circle cx="210" cy="208" r="9" fill="#c9d6ee"/><path d="M196 230 a14 11 0 0 1 28 0" fill="#c9d6ee"/></g>
 <rect x="60" y="272" width="120" height="8" rx="4.0" fill="#e3ebfa"/><text x="60" y="292" font-size="11" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Measured by access</text>
-<path d="M276 186 C 292 186, 292 150, 306 150" fill="none" stroke="#b3d0ff" stroke-width="2.5" stroke-dasharray="4 5" stroke-linecap="round"/><path d="M300 144 l7 6 -7 6" fill="none" stroke="#b3d0ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M279 185 H300" fill="none" stroke="#79adff" stroke-width="2.5" stroke-dasharray="4 5" stroke-linecap="round"/><path d="M298 178 L305 185 L298 192" fill="none" stroke="#79adff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 <rect x="310" y="36" width="254" height="316" rx="22" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" />
 <text x="334" y="70" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Outcomes delivered</text>
 <circle cx="437" cy="154" r="54" fill="none" stroke="#e6effd" stroke-width="14"/><path d="M437 100 A54 54 0 1 1 384.0 143.9" fill="none" stroke="#0064ff" stroke-width="14" stroke-linecap="round"/>
@@ -924,7 +1090,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 <rect x="440" y="208" width="74" height="24" rx="12" fill="#fff" stroke="#e3ebfa"/><text x="477" y="224" font-size="11" fill="#84868c" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">3 of 4</text>
 <rect x="330" y="400" width="250" height="72" rx="18" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><circle cx="362" cy="436" r="14" fill="#0064ff"/><path d="M357 436 l3.5 3.5 l6.5 -7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="386" y="432" font-size="13.5" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Action taken</text><text x="386" y="450" font-size="11" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Awaiting one approval</text></svg></div>
         <div class="shift-scene"><svg viewBox="0 0 600 520"><rect x="56" y="92" width="107.8" height="34" rx="17" fill="#fff" stroke="#c9d6ee" stroke-dasharray="3 4"/><text x="73" y="114" font-size="12.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Summarize</text><rect x="150" y="138" width="66.8" height="34" rx="17" fill="#fff" stroke="#c9d6ee" stroke-dasharray="3 4"/><text x="167" y="160" font-size="12.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Chat</text><rect x="70" y="188" width="83.19999999999999" height="34" rx="17" fill="#fff" stroke="#c9d6ee" stroke-dasharray="3 4"/><text x="87" y="210" font-size="12.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Search</text><rect x="118" y="236" width="132.39999999999998" height="34" rx="17" fill="#fff" stroke="#c9d6ee" stroke-dasharray="3 4"/><text x="135" y="258" font-size="12.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Autocomplete</text><rect x="52" y="284" width="107.8" height="34" rx="17" fill="#fff" stroke="#c9d6ee" stroke-dasharray="3 4"/><text x="69" y="306" font-size="12.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Translate</text><text x="56" y="350" font-size="12" fill="#84868c" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Features</text><text x="56" y="368" font-size="11" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Easy to replicate</text>
-<path d="M250 210 C 280 210, 282 250, 306 250" fill="none" stroke="#b3d0ff" stroke-width="2.5" stroke-dasharray="4 5" stroke-linecap="round"/><path d="M300 244 l7 6 -7 6" fill="none" stroke="#b3d0ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M262 210 H302" fill="none" stroke="#79adff" stroke-width="2.5" stroke-dasharray="4 5" stroke-linecap="round"/><path d="M300 203 L307 210 L300 217" fill="none" stroke="#79adff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 <rect x="312" y="44" width="252" height="436" rx="24" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><text x="336" y="80" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Your workflow</text>
 <path d="M358 156 V 420" stroke="#b3d0ff" stroke-width="2.5" stroke-dasharray="3 5"/><rect x="336" y="112" width="44" height="44" rx="13" fill="#e6effd"/><ellipse cx="358" cy="126" rx="10" ry="4" fill="none" stroke="#0064ff" stroke-width="2"/><path d="M348 126 v14 c0 2.2 4.5 4 10 4 s10 -1.8 10 -4 v-14" fill="none" stroke="#0064ff" stroke-width="2"/><text x="394" y="132" font-size="13.5" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Proprietary context</text><text x="394" y="149" font-size="10.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Only you hold this</text><rect x="336" y="200" width="44" height="44" rx="13" fill="#e6effd"/><ellipse cx="358" cy="214" rx="10" ry="4" fill="none" stroke="#0064ff" stroke-width="2"/><path d="M348 214 v14 c0 2.2 4.5 4 10 4 s10 -1.8 10 -4 v-14" fill="none" stroke="#0064ff" stroke-width="2"/><text x="394" y="220" font-size="13.5" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Customer data</text><text x="394" y="237" font-size="10.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Signals from your platform</text><rect x="336" y="288" width="44" height="44" rx="13" fill="#0064ff"/><path d="M358 298 l12 12 -12 12 -12 -12 z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><text x="394" y="308" font-size="13.5" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Decision</text><text x="394" y="325" font-size="10.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Reasoned on your context</text><rect x="336" y="376" width="44" height="44" rx="13" fill="#0064ff"/><path d="M349 398 l6 6 12 -13" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><text x="394" y="396" font-size="13.5" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Action</text><text x="394" y="413" font-size="10.5" fill="#84868c" font-weight="400" text-anchor="start" letter-spacing="0" class="il-t">Owned end to end</text></svg></div>
         <div class="shift-scene"><svg viewBox="0 0 600 520"><rect x="40" y="52" width="236" height="152" rx="20" fill="#fff" stroke="#e3ebfa" filter="url(#ilShadow)" /><text x="62" y="90" font-size="13" fill="#0b1a3a" font-weight="500" text-anchor="start" letter-spacing="0" class="il-t">Coding</text><rect x="170" y="74" width="86" height="24" rx="12" fill="#e6effd"/><path d="M186 79 l-5 8 h5 l-1.5 6 6 -9 h-5 l1.5 -5 z" fill="#0064ff"/><text x="221" y="90" font-size="10.5" fill="#0064ff" font-weight="500" text-anchor="middle" letter-spacing="0" class="il-t">AI-fast</text><rect x="66" y="108" width="60" height="7" rx="3.5" fill="#0064ff"/><rect x="66" y="124" width="110" height="7" rx="3.5" fill="#b3d0ff"/><rect x="78" y="140" width="80" height="7" rx="3.5" fill="#79adff"/><rect x="78" y="156" width="130" height="7" rx="3.5" fill="#b3d0ff"/><rect x="66" y="172" width="50" height="7" rx="3.5" fill="#0064ff"/><rect x="66" y="188" width="96" height="7" rx="3.5" fill="#dbe7fb"/>
@@ -2022,6 +2188,20 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)activate(+e.target.dataset.i);});},{rootMargin:'-45% 0px -45% 0px',threshold:0});
     cards.forEach(function(c){io.observe(c);});
   }
+})();
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('.nav'), btn=nav&&nav.querySelector('.nav-burger'), drawer=document.getElementById('navDrawer');
+  if(!btn||!drawer) return;
+  function set(open){
+    nav.classList.toggle('nav-open',open); document.body.classList.toggle('nav-locked',open);
+    btn.setAttribute('aria-expanded',open?'true':'false'); btn.setAttribute('aria-label',open?'Close menu':'Open menu');
+  }
+  btn.addEventListener('click',function(){ set(!nav.classList.contains('nav-open')); });
+  drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ set(false); }); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && nav.classList.contains('nav-open')){ set(false); btn.focus(); } });
+  window.addEventListener('resize',function(){ if(window.innerWidth>900) set(false); });
 })();
 </script>
 </body>

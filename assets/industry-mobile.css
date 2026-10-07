@@ -1,0 +1,98 @@
+/* Shared mobile/tablet fixes for all industry V5 pages (2026-10-07).
+   Linked last in <head> so it wins over each page's inline styles. Page-specific overrides live in the page itself. */
+@media (max-width:900px){
+  html,body{overflow-x:clip;}
+  .wrap{padding-left:24px !important;padding-right:24px !important;}
+  .reality,.agentic,.shift,.leaks,.processes,.devops,.cost,.outcomes,.pillars,.faq,.connect{padding-top:72px !important;padding-bottom:72px !important;}
+  .processes,.devops,.outcomes,.leaks,.agentic,.reality,.cost{overflow-x:clip !important;}
+
+  /* hero: text first, collage under it (as hls-v5 between 721 and 900px) */
+  .hero:not([data-mobile-hero="own"]){height:auto !important;min-height:0 !important;}
+  .hero:not([data-mobile-hero="own"]) .wrap{display:flex !important;flex-direction:column !important;}
+  .hero:not([data-mobile-hero="own"]) .hero-text{width:100% !important;max-width:none !important;}
+  .hero:not([data-mobile-hero="own"]) .hero-composition{position:relative !important;top:auto !important;right:auto !important;bottom:auto !important;left:auto !important;transform:none !important;width:100% !important;max-width:560px !important;margin:56px auto 0 !important;}
+
+  /* section 1 collage */
+  .reality-media{margin-left:0 !important;max-width:520px;}
+  .reality-layout{gap:40px !important;}
+
+  /* cards that kept desktop heights */
+  .leak-card{min-height:0 !important;padding:24px 22px 22px !important;}
+  .leak-card-icon{margin-bottom:18px !important;}
+  .leaks-stack{margin-top:32px !important;gap:14px !important;}
+  .pillar-card{min-height:0 !important;}
+  .agentic-card{min-height:0 !important;}
+
+  /* process sections */
+  .processes .proc-panel{min-height:0 !important;}
+  .rcm-arch .car-controls{margin-bottom:40px !important;}
+
+  /* outcomes */
+  .outcomes-intro{margin-bottom:24px !important;}
+  .outcomes-tabs2{margin-bottom:24px !important;}
+  .outcomes-media{max-width:100% !important;}
+  .outcomes-media-shape img{width:100% !important;max-width:100% !important;}
+
+  .faq-q{font-size:17px !important;}
+  .section-h,.outcomes h2,.processes h2,h2{white-space:normal !important;}
+  .hero h1{overflow-wrap:break-word;}
+}
+@media (max-width:560px){
+  .hero h1{font-size:clamp(2.2rem,11.2vw,42px) !important;line-height:1.1 !important;}
+  .reality-content h2,.reality h2,.agentic h2,.shift-head h2,.leaks .section-h,.processes .section-h,.devops h2,.cost h2,.outcomes .section-h,.pillars-intro .section-h,.pillars h2{font-size:30px !important;line-height:1.15 !important;}
+}
+/* hero matches the healthcare (hls-v5) and TSS mobile hero: collage first, nearly full-bleed, then badge, headline, tagline, button.
+   hls-v5 and TSS keep their own tuned collage crop (data-mobile-hero="own" on their hero). */
+@media (max-width:720px){
+  .hero:not([data-mobile-hero="own"]){padding:72px 0 64px !important;}
+  .hero:not([data-mobile-hero="own"]) .wrap{justify-content:flex-start !important;padding-bottom:0 !important;}
+  .hero:not([data-mobile-hero="own"]) .hero-composition{order:-1;width:calc(100% + 24px) !important;max-width:none !important;margin:8px 0 32px -12px !important;}
+  .hero-badge{margin-bottom:22px !important;}
+  .hero h1{margin-bottom:20px !important;}
+  .hero-badge{font-size:9.5px !important;letter-spacing:.12em !important;padding:7px 14px 7px 11px !important;gap:8px !important;white-space:nowrap;}
+  .hero-badge-icon{width:15px !important;height:15px !important;}
+  .hero-opening,.hero-opening p{font-size:17px !important;line-height:1.6 !important;}
+  .hero-opening{margin-bottom:32px !important;}
+  .hero-cta-primary{white-space:nowrap;}
+}
+/* Real Outcomes + How an engagement starts: same mobile layout as the TSS page */
+@media (max-width:720px){
+  .outcomes-intro,.outcomes-intro .section-h,.outcomes-intro #outcomes-h{text-align:left !important;margin-left:0 !important;}
+  .outcomes-intro{padding:0 !important;margin-bottom:32px !important;}
+  .outcomes-intro .section-h,.outcomes-intro #outcomes-h{font-size:min(32px, calc((100vw - 48px) / 15.2)) !important;white-space:nowrap !important;}
+  .outcomes-tabs2{display:flex !important;grid-template-columns:none !important;gap:10px !important;overflow-x:auto;scrollbar-width:none;margin:0 -24px 32px !important;padding:0 24px 4px !important;}
+  .outcomes-tabs2::-webkit-scrollbar{display:none;}
+  .outcomes-tabs-line{display:none !important;}
+  .outcomes-item{flex:0 0 auto !important;min-width:0 !important;min-height:0 !important;padding:10px 16px 10px 10px !important;gap:10px !important;align-items:center !important;justify-content:flex-start !important;border:1px solid var(--paper-line,#e4e6ea) !important;border-radius:14px !important;background:#fff !important;}
+  .outcomes-item.active{border-color:rgba(0,100,255,0.35) !important;box-shadow:0 8px 20px -12px rgba(0,80,200,0.35) !important;}
+  .outcomes-item-icon{width:36px !important;height:36px !important;border-radius:10px !important;flex:0 0 auto;}
+  .outcomes-item-icon svg{width:18px !important;height:18px !important;}
+  .outcomes-item-title{font-size:13px !important;line-height:1.25 !important;white-space:nowrap !important;text-align:left;}
+  .outcomes-story{grid-template-columns:1fr !important;gap:28px !important;}
+  .outcomes-media{order:-1;}
+  .outcomes-case{margin-bottom:18px !important;}
+  .outcomes-detail-text{font-size:16px !important;line-height:1.65 !important;}
+  .outcomes-metric-box{padding:14px 16px !important;right:12px !important;bottom:12px !important;min-width:0 !important;}
+  .outcomes-metric-value{font-size:28px !important;margin-bottom:4px !important;}
+  .outcomes-metric-label{font-size:13px !important;}
+
+  /* engagement: no scroll-driven track on phones; the three steps stack as a list */
+  .engagement{min-height:0 !important;height:auto !important;padding:0 !important;}
+  .eng-sticky{position:static !important;min-height:0 !important;height:auto !important;padding:56px 0 64px !important;}
+  .eng-layout{gap:32px !important;}
+  .eng-deck{padding-top:0 !important;}
+  .eng-deck-stage{height:auto !important;display:grid !important;gap:12px !important;}
+  .eng-card{position:relative !important;inset:auto !important;transform:none !important;opacity:1 !important;pointer-events:auto !important;cursor:default;}
+  .eng-deck-dots{display:none !important;}
+  .eng-card-meta{padding-right:64px;line-height:1.5;}
+}
+/* FAQ: same compact mobile treatment as hls-v5 */
+@media (max-width:720px){
+  .faq-layout{gap:32px !important;}
+  .faq-title{font-size:32px !important;line-height:1.1 !important;margin-bottom:14px !important;}
+  .faq-list{gap:8px !important;}
+  .faq-item{border-radius:12px !important;}
+  .faq-q{padding:14px 16px !important;line-height:1.4 !important;gap:14px !important;}
+  .faq-icon{width:28px !important;height:28px !important;}
+  .faq-a-inner{padding:14px 16px 16px !important;font-size:14.5px !important;line-height:1.65 !important;}
+}

@@ -605,9 +605,8 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 .devops .p-tab.active{background:linear-gradient(140deg,#0a2a8a 0%,#0050d8 60%,#0064ff 100%);border-color:transparent;box-shadow:0 26px 50px -26px rgba(0,80,220,0.6);transform:none;}
 .devops .p-tab.active small{color:#9bbcff;}
 .devops .p-tab.active .p-tab-name{color:#fff;}
-.devops .p-tab.active::after{content:"";position:absolute;left:50%;bottom:-8px;width:16px;height:16px;margin-left:-8px;background:#0050d8;border-radius:3px;transform:rotate(45deg);}
 @media (prefers-reduced-motion:reduce){.devops .p-tab{transition:none;}}
-@media (max-width:1000px){.devops .p-tabs{grid-template-columns:repeat(2,minmax(0,1fr));}.devops .p-tab.active::after{display:none;}}
+@media (max-width:1000px){.devops .p-tabs{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media (max-width:520px){.devops .p-tab{padding:12px 14px;gap:8px;}.devops .p-tab-name{font-size:13.5px;}}
 
 /* Layer 3 — humans in the loop, one line under the process rail */
@@ -615,37 +614,35 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 .hitl-label{display:flex;align-items:center;gap:10px;flex-shrink:0;font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);}
 .hitl-label b{width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px var(--blue-12);}
 .hitl-line{color:var(--ink-60);font-size:13.5px;line-height:1.55;}
+/* ========== MOBILE · MIC processes (same phone treatment as TSS / healthcare) ========== */
+@media (max-width:900px){
+  .devops{padding:80px 0;}
+}
+@media (max-width:720px){
+  .devops{padding:64px 0;}
+  .devops-head{margin-bottom:20px;}
+  .proc-head h3{font-size:var(--fs-h3);}
+  /* process picker: one compact row per process on phones */
+  .devops .p-tabs{grid-template-columns:1fr;gap:8px;margin-bottom:28px;}
+  .devops .p-tab{padding:13px 16px;gap:12px;}
+  .devops .p-tab-name{font-size:15px;}
+  /* open stage panel sizes to its content; no hover hint on touch screens */
+  .panel.is-open{min-height:0;}
+  .devops-hint{display:none;}
+}
+/* FAQ title on one line once the sidebar stacks above the questions */
+@media (max-width:900px){
+  .faq .faq-title{white-space:nowrap;font-size:clamp(18px,5.6vw,30px) !important;}
+  .faq .faq-title br{display:none;}
+  .faq .faq-title span{display:inline;}
+}
 </style>
+<link rel="stylesheet" href="assets/searce-nav.css">
+<link rel="stylesheet" href="assets/industry-mobile.css">
 </head>
 <body>
 
-<nav class="nav" aria-label="Primary navigation">
-  <div class="wrap">
-    <a href="index.html" class="nav-logo" aria-label="Searce home">Searce</a>
-    <ul class="nav-links">
-      <li><a href="#">outcomes</a></li>
-      <li><a href="#">how we solve <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="business-systems-engineering.html">practices <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="#" class="current">industries <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="#">insights</a></li>
-      <li class="has-dropdown">
-        <a href="#" aria-haspopup="true">company
-          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </a>
-        <div class="mega-panel">
-          <a class="mega-item" href="who-we-are.html"><span class="mega-title">Who we are</span></a>
-          <a class="mega-item" href="#"><span class="mega-title">Partners</span></a>
-          <a class="mega-item" href="careers.html"><span class="mega-title">Careers</span></a>
-          <a class="mega-item" href="#"><span class="mega-title">futurify.ai</span></a>
-        </div>
-      </li>
-    </ul>
-    <a href="#connect" class="nav-cta">
-      bring us a problem
-      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-    </a>
-  </div>
-</nav>
+<script src="assets/searce-nav.js" data-theme="light" data-current="mic"></script>
 
 <!-- ============== HERO + REALITY (one shared white -> light blue background) ============== -->
 <div class="hero-reality">
@@ -653,7 +650,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <div class="wrap">
     <div class="hero-text">
       <div class="hero-badge">
-        <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true"><rect x="158" y="24" width="58" height="101" fill="#13377f"/><rect x="250" y="158" width="101" height="58" fill="#13377f"/><rect x="22" y="158" width="194" height="58" fill="#0064ff"/><rect x="158" y="250" width="58" height="101" fill="#0064ff"/></svg>
+        <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true"><rect x="22" y="64" width="150" height="62" fill="#13377f"/><rect x="203" y="64" width="150" height="62" fill="#0064ff"/><rect x="22" y="157" width="62" height="62" fill="#13377f"/><rect x="113" y="157" width="150" height="62" fill="#0064ff"/><rect x="291" y="157" width="62" height="62" fill="#13377f"/><rect x="22" y="250" width="150" height="62" fill="#0064ff"/><rect x="203" y="250" width="150" height="62" fill="#13377f"/></svg>
         2030 Vision &middot; Zero Unplanned Downtime
       </div>
       <h1 id="hero-heading">
@@ -735,7 +732,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
         <span class="reality-media-quarter" aria-hidden="true"></span>
       </div>
       <div class="reality-content">
-        <h2 id="reality-h">Progress in manufacturing, industrials<br>and construction is held back by <span>unplanned downtime.</span></h2>
+        <h2 id="reality-h">Progress in manufacturing, industrials <br>and construction is held back by <span>unplanned downtime.</span></h2>
         <div class="reality-stats">
           <div class="reality-stat">
             <div class="reality-stat-value">SCADA + PLC</div>
@@ -836,7 +833,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 <section class="devops" id="processes" data-theme="light" aria-labelledby="devops-h">
   <div class="wrap">
     <div class="devops-head">
-      <h2 id="devops-h" class="section-h">The processes this industry runs on.</h2>
+      <h2 id="devops-h" class="section-h">Real business outcomes.</h2>
     </div>
 
     <div class="p-picker">
@@ -1038,7 +1035,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <div class="wrap">
     <div class="faq-layout">
       <div class="faq-sidebar">
-        <div class="faq-title">Frequently<br>Asked<br><span>Questions</span></div>
+        <div class="faq-title">Frequently <br>Asked <br><span>Questions</span></div>
         <div class="faq-side-text">The four questions every operations, engineering, and IT function raises before an agentic workflow touches a plant, an asset, or a jobsite.</div>
       </div>
 
@@ -1332,13 +1329,14 @@ const C={line:'#b9c4d8', lineSoft:'rgba(185,196,216,0.6)', top:'#ffffff', left:'
          aTop:'#4d8cff', aLeft:'#0064ff', aRight:'#0050cc', blue:'#0064ff', shadow:'rgba(0,51,127,0.06)', dot:'#0064ff'};
 const face=(a,fill,{stroke=C.line,sw=1,cls='',extra=''}={})=>`<polygon points="${pts(a)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" class="${cls}" ${extra}/>`;
 /* a cube occupying grid cell (gx,gy) at height gz, edge = s grid units */
-const cube=(gx,gy,gz,s=1,{accent=false,cls='',extra=''}={})=>{
+const rawCube=(gx,gy,gz,s=1,{accent=false,cls='',extra=''}={})=>{
   const t=[iso(gx,gy,gz+s),iso(gx+s,gy,gz+s),iso(gx+s,gy+s,gz+s),iso(gx,gy+s,gz+s)];
   const l=[iso(gx,gy+s,gz),iso(gx+s,gy+s,gz),iso(gx+s,gy+s,gz+s),iso(gx,gy+s,gz+s)];
   const r=[iso(gx+s,gy,gz),iso(gx+s,gy+s,gz),iso(gx+s,gy+s,gz+s),iso(gx+s,gy,gz+s)];
   const st=accent?'none':C.line;
   return `<g class="${cls}" ${extra}>${face(l,accent?C.aLeft:C.left,{stroke:st})}${face(r,accent?C.aRight:C.right,{stroke:st})}${face(t,accent?C.aTop:C.top,{stroke:st})}</g>`;
 };
+const cube=rawCube;
 /* wireframe cube (outline only, optional dashes) */
 const wire=(gx,gy,gz,s,{dash='',stroke=C.line,cls=''}={})=>{
   const a=[iso(gx,gy,gz),iso(gx+s,gy,gz),iso(gx+s,gy+s,gz),iso(gx,gy+s,gz)], b=a.map((_,i)=>iso([gx,gx+s,gx+s,gx][i],[gy,gy,gy+s,gy+s][i],gz+s));
@@ -1564,7 +1562,271 @@ const STAGES3=[
    flow:"Execution → Analyst → Uplift, margin & ROI → Growth decisions"}
 ];
 
-const SCENES=SCENES3, SCENES2=SCENES3_2;
+
+/* ---------------------------------------------------------------------------
+   INDUSTRY KIT — abstract isometric industry forms built from the same
+   primitives as the scenes (pale faces, #b9c4d8 hairlines, one Searce-blue
+   element). Each form is the industry object reduced to boxes, cylinders,
+   planes and lattices; no icons, no added layers.
+--------------------------------------------------------------------------- */
+const f1=n=>n.toFixed(1);
+const UX=ISO.U*ISO.cos*Math.SQRT2, UY=ISO.U*ISO.sin*Math.SQRT2;   /* iso circle radii per grid unit */
+/* rectangular block w×d×h */
+const box=(gx,gy,gz,w,d,h,{accent=false,cls='',extra='',top,left,right}={})=>{
+  const T=[iso(gx,gy,gz+h),iso(gx+w,gy,gz+h),iso(gx+w,gy+d,gz+h),iso(gx,gy+d,gz+h)];
+  const Lf=[iso(gx,gy+d,gz),iso(gx+w,gy+d,gz),iso(gx+w,gy+d,gz+h),iso(gx,gy+d,gz+h)];
+  const R=[iso(gx+w,gy,gz),iso(gx+w,gy+d,gz),iso(gx+w,gy+d,gz+h),iso(gx+w,gy,gz+h)];
+  const st=accent?'none':C.line;
+  return `<g class="${cls}" ${extra}>${face(Lf,left||(accent?C.aLeft:C.left),{stroke:st})}${face(R,right||(accent?C.aRight:C.right),{stroke:st})}${face(T,top||(accent?C.aTop:C.top),{stroke:st})}</g>`;};
+/* vertical cylinder centred on (cx,cy) */
+const cyl=(cx,cy,gz,r,h,{accent=false,cls='',extra='',side,top}={})=>{const [bx,by]=iso(cx,cy,gz),[,ty]=iso(cx,cy,gz+h),rx=r*UX,ry=r*UY,st=accent?'none':C.line;
+  return `<g class="${cls}" ${extra}><path d="M${f1(bx-rx)} ${f1(ty)}V${f1(by)}A${f1(rx)} ${f1(ry)} 0 0 0 ${f1(bx+rx)} ${f1(by)}V${f1(ty)}Z" fill="${side||(accent?C.aLeft:C.right)}" stroke="${st}" stroke-width="1" stroke-linejoin="round"/>`+
+    `<ellipse cx="${f1(bx)}" cy="${f1(ty)}" rx="${f1(rx)}" ry="${f1(ry)}" fill="${top||(accent?C.aTop:C.top)}" stroke="${st}" stroke-width="1"/></g>`;};
+/* flat ellipse on the floor / on a plane */
+const disc2=(cx,cy,gz,r,{fill='none',stroke=C.line,sw=1,cls='',extra=''}={})=>{const [x,y]=iso(cx,cy,gz);
+  return `<ellipse cx="${f1(x)}" cy="${f1(y)}" rx="${f1(r*UX)}" ry="${f1(r*UY)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" class="${cls}" ${extra}/>`;};
+/* hairline in iso space */
+const hl=(a,b,o={})=>isoLine(a,b,o);
+/* gable-roof building, ridge along x */
+const house=(gx,gy,w,d,h,rh,{accent=false,cls='',extra='',roofBlue=false}={})=>{const st=accent?'none':C.line;
+  const R1=iso(gx,gy+d/2,h+rh),R2=iso(gx+w,gy+d/2,h+rh);
+  const slope=[iso(gx,gy+d,h),iso(gx+w,gy+d,h),R2,R1], gable=[iso(gx+w,gy,h),iso(gx+w,gy+d,h),R2];
+  return `<g class="${cls}" ${extra}>${box(gx,gy,0,w,d,h,{accent})}`+
+    face(gable,accent?C.aRight:C.right,{stroke:st})+face(slope,roofBlue?C.blue:(accent?C.aTop:C.top),{stroke:roofBlue?'none':st})+`</g>`;};
+/* sawtooth-roof plant, teeth run along x */
+const plant=(gx,gy,w,d,h,{n=3,th=.45,accent=false,cls='',extra='',glass=false}={})=>{const u=w/n;let s=box(gx,gy,0,w,d,h,{accent});
+  for(let i=0;i<n;i++){const x0=gx+i*u,x1=x0+u;
+    s+=face([iso(x0,gy,h),iso(x1,gy,h+th),iso(x1,gy+d,h+th),iso(x0,gy+d,h)],accent?C.aTop:C.top);
+    s+=face([iso(x0,gy+d,h),iso(x1,gy+d,h+th),iso(x1,gy+d,h)],accent?C.aLeft:C.left);
+    s+=face([iso(x1,gy,h),iso(x1,gy+d,h),iso(x1,gy+d,h+th),iso(x1,gy,h+th)],glass?'rgba(0,100,255,0.16)':(accent?C.aRight:C.right),{stroke:glass?C.blue:C.line,sw:glass?.8:1});}
+  return `<g class="${cls}" ${extra}>${s}</g>`;};
+/* transmission pylon: tapering lattice + two cross-arms (along x) */
+const pylon=(cx,cy,h,{a=.32,b=.08,cls='',extra='',ins=C.line}={})=>{const L=[];
+  const lv=t=>a+(b-a)*t, ring=z=>{const k=lv(z/h);return [[cx-k,cy-k,z],[cx+k,cy-k,z],[cx+k,cy+k,z],[cx-k,cy+k,z]];};
+  const B=ring(0),T=ring(h);for(let i=0;i<4;i++) L.push(hl(B[i],T[i],{sw:.9}));
+  const zs=[0,h*.28,h*.52,h*.72,h];
+  for(let j=0;j<zs.length-1;j++){const P=ring(zs[j]),Q=ring(zs[j+1]);
+    L.push(hl(P[3],Q[2],{sw:.6}),hl(P[2],Q[3],{sw:.6}),hl(P[1],Q[2],{sw:.6}),hl(P[2],Q[1],{sw:.6}));
+    if(j) L.push(hl(P[3],P[2],{sw:.6}),hl(P[2],P[1],{sw:.6}));}
+  const arm=(z,ext)=>hl([cx-ext,cy,z],[cx+ext,cy,z],{sw:1.1})+[-ext,ext].map(e=>hl([cx+e*.92,cy,z],[cx+e*.92,cy,z-.22],{stroke:ins,sw:1.3})).join('');
+  return `<g class="${cls}" ${extra}>${L.join('')}${arm(h*.86,.9)}${arm(h*.66,.7)}${hl([cx,cy,h],[cx,cy,h+.25],{sw:.9})}</g>`;};
+/* sagging wire between two iso points */
+const wireSag=(a,b,{sag=6,stroke=C.line,sw=.7,cls='',dash=''}={})=>{const p=iso(...a),q=iso(...b);
+  return `<path d="M${f1(p[0])} ${f1(p[1])}Q${f1((p[0]+q[0])/2)} ${f1((p[1]+q[1])/2+sag)} ${f1(q[0])} ${f1(q[1])}" fill="none" stroke="${stroke}" stroke-width="${sw}" stroke-dasharray="${dash}" class="${cls}"/>`;};
+/* wind turbine: tapered mast, nacelle, three turning blades (screen-space) */
+const turbine=(cx,cy,h,{len=22,dur=7,accent=false,cls=''}={})=>{const [bx,by]=iso(cx,cy,0),[hx,hy]=iso(cx,cy,h);
+  const blade=`M0 0C2 -${f1(len*.25)} 1.6 -${f1(len*.7)} 0 -${len}C-1.1 -${f1(len*.7)} -1.4 -${f1(len*.25)} 0 0Z`;
+  return `<g class="${cls}">${disc2(cx,cy,0,.16,{fill:C.shadow,stroke:'none'})}<polygon points="${f1(bx-2.2)},${f1(by)} ${f1(bx+2.2)},${f1(by)} ${f1(hx+1)},${f1(hy)} ${f1(hx-1)},${f1(hy)}" fill="${C.top}" stroke="${C.line}" stroke-width="0.9" stroke-linejoin="round"/>`+
+    `<g transform="translate(${f1(hx)} ${f1(hy)})"><g>${[0,120,240].map(a=>`<path d="${blade}" transform="rotate(${a})" fill="${C.top}" stroke="${C.line}" stroke-width="0.9" stroke-linejoin="round"/>`).join('')}<animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="${dur}s" repeatCount="indefinite"/></g>`+
+    `<circle r="2.6" fill="${accent?C.blue:C.top}" stroke="${accent?'none':C.line}" stroke-width="0.9"/></g></g>`;};
+/* tilted solar table: high edge at gy, low edge at gy+d */
+const solar=(gx,gy,w,d,{z=.25,rise=.45,accent=false,cls='',extra='',cells=3}={})=>{
+  const P=[iso(gx,gy,z+rise),iso(gx+w,gy,z+rise),iso(gx+w,gy+d,z),iso(gx,gy+d,z)];
+  const at=(u,v)=>[gx+w*u,gy+d*v,z+rise*(1-v)];
+  let s=[.15,.85].map(u=>hl([gx+w*u,gy+d*.5,0],at(u,.5),{sw:.8})).join('');
+  s+=face(P,accent?C.aTop:C.top,{stroke:accent?C.blue:C.line});
+  for(let i=1;i<cells;i++) s+=hl(at(i/cells,0),at(i/cells,1),{stroke:accent?'rgba(255,255,255,.7)':C.line,sw:.5});
+  s+=hl(at(0,.5),at(1,.5),{stroke:accent?'rgba(255,255,255,.7)':C.line,sw:.5});
+  return `<g class="${cls}" ${extra}>${s}</g>`;};
+/* hyperbolic cooling tower */
+const cooling=(cx,cy,r,h,{cls='',steam=true}={})=>{const [bx,by]=iso(cx,cy,0),[tx,ty]=iso(cx,cy,h),rx=r*UX,ry=r*UY,tr=rx*.7,wr=rx*.62,my=by-(by-ty)*.68;
+  let s=`<path d="M${f1(bx-rx)} ${f1(by)}Q${f1(bx-wr*.9)} ${f1(my)} ${f1(tx-tr)} ${f1(ty)}H${f1(tx+tr)}Q${f1(bx+wr*.9)} ${f1(my)} ${f1(bx+rx)} ${f1(by)}A${f1(rx)} ${f1(ry)} 0 0 1 ${f1(bx-rx)} ${f1(by)}Z" fill="${C.right}" stroke="${C.line}" stroke-width="1" stroke-linejoin="round"/>`+
+    `<ellipse cx="${f1(tx)}" cy="${f1(ty)}" rx="${f1(tr)}" ry="${f1(tr*.5)}" fill="${C.top}" stroke="${C.line}" stroke-width="1"/>`;
+  if(steam) s+=[0,1,2].map(i=>`<circle cx="${f1(tx+(i-1)*4)}" cy="${f1(ty-7-i*6)}" r="${4+i}" fill="#fff" stroke="${C.line}" stroke-width="0.7"><animate attributeName="opacity" values="1;.3;1" dur="3.4s" begin="${i*.6}s" repeatCount="indefinite"/></circle>`).join('');
+  return `<g class="${cls}">${s}</g>`;};
+/* shipping container: block with ribs */
+const container=(gx,gy,gz,w,d,h,{accent=false,cls='',extra=''}={})=>{const st=accent?'rgba(255,255,255,.55)':C.line;let s=box(gx,gy,gz,w,d,h,{accent});
+  const n=Math.max(2,Math.round(w*5));for(let i=1;i<n;i++){const x=gx+w*i/n;s+=hl([x,gy+d,gz+.04],[x,gy+d,gz+h-.04],{stroke:st,sw:.5});}
+  for(let i=1;i<3;i++){const y=gy+d*i/3;s+=hl([gx+w,y,gz+.04],[gx+w,y,gz+h-.04],{stroke:st,sw:.5});}
+  return `<g class="${cls}" ${extra}>${s}</g>`;};
+/* truck: cargo block + cab, travelling along x */
+const wheel=(g,r=2.6)=>{const [x,y]=iso(...g);return `<ellipse cx="${f1(x)}" cy="${f1(y)}" rx="${f1(r*.62)}" ry="${f1(r)}" transform="rotate(-30 ${f1(x)} ${f1(y)})" fill="#fff" stroke="${C.line}" stroke-width=".9"/>`;};
+const truck=(gx,gy,{accent=false,cls='',extra='',s=1}={})=>`<g class="${cls}" ${extra}>`+box(gx,gy,0.1,.95*s,.5*s,.5*s,{accent})+box(gx+1*s,gy+.04*s,0.1,.32*s,.42*s,.34*s)+
+  wheel([gx+.22*s,gy+.5*s,.1],2.6*s)+wheel([gx+.75*s,gy+.5*s,.1],2.6*s)+wheel([gx+1.16*s,gy+.46*s,.1],2.6*s)+`</g>`;
+/* a chart board standing on the floor along x, with a curve on it */
+const board=(x0,x1,y,h,vals,{z0=.2,stroke=C.blue,sw=1.4,cls='redraw',dash='',fill='rgba(255,255,255,.92)'}={})=>
+  face([iso(x0,y,0),iso(x1,y,0),iso(x1,y,h),iso(x0,y,h)],fill,{cls:'fade'})+
+  [1,2,3].map(i=>hl([x0,y,h*i/4],[x1,y,h*i/4],{stroke:'rgba(185,196,216,.5)',sw:.5})).join('')+
+  curve(x0+.15,x1-.15,y,z0,vals,{stroke,sw,cls,dash});
+/* small quad-rotor drone */
+const drone=(cx,cy,z,{cls='float'}={})=>`<g class="${cls}">${box(cx-.18,cy-.18,z,.36,.36,.1)}${[[-.32,-.32],[.32,-.32],[.32,.32],[-.32,.32]].map(([dx,dy])=>hl([cx,cy,z+.08],[cx+dx,cy+dy,z+.12],{sw:.8})+disc2(cx+dx,cy+dy,z+.14,.16,{fill:'rgba(255,255,255,.8)'})).join('')}</g>`;
+/* storage rack: uprights + three shelves */
+const rack=(gx,gy,w,d,h,{levels=3}={})=>{let s='';const zs=[...Array(levels)].map((_,i)=>.1+i*(h-.1)/(levels-1||1));
+  [[gx,gy],[gx+w,gy],[gx+w,gy+d],[gx,gy+d]].forEach(([x,y])=>s+=hl([x,y,0],[x,y,h+.1],{sw:.9}));
+  zs.forEach(z=>s+=plane(gx,gy,z,w,d,{fill:'rgba(255,255,255,.85)'}));return s;};
+/* paper / record sheet with text lines */
+const sheet=(gx,gy,gz,w,d,{accent=false,cls='',extra='',lines=3}={})=>{let s=slab(gx,gy,gz,w,d,.06,{accent});
+  for(let i=0;i<lines;i++){const y=gy+d*(.25+i*.22);s+=hl([gx+w*.15,y,gz+.07],[gx+w*(i===lines-1?.55:.85),y,gz+.07],{stroke:accent?'rgba(255,255,255,.75)':C.line,sw:.6});}
+  return `<g class="${cls}" ${extra}>${s}</g>`;};
+/* map pin standing on a floor point */
+const pin=(g,{h=22,cls='pin'}={})=>{const [x,y]=iso(...g);
+  return `<g class="${cls}"><ellipse cx="${f1(x)}" cy="${f1(y)}" rx="4" ry="2" fill="rgba(0,100,255,.18)"/><path d="M${f1(x)} ${f1(y)}C${f1(x-2)} ${f1(y-h*.45)} ${f1(x-7)} ${f1(y-h*.55)} ${f1(x-7)} ${f1(y-h*.78)}A7 7 0 1 1 ${f1(x+7)} ${f1(y-h*.78)}C${f1(x+7)} ${f1(y-h*.55)} ${f1(x+2)} ${f1(y-h*.45)} ${f1(x)} ${f1(y)}Z" fill="${C.blue}"/><circle cx="${f1(x)}" cy="${f1(y-h*.8)}" r="2.6" fill="#fff"/></g>`;};
+/* line chart standing on a vertical plane along x (screen polyline lifted in z) */
+const curve=(x0,x1,y,z0,vals,{stroke=C.blue,sw=1.2,cls='redraw',dash=''}={})=>`<path d="${pathIso(...vals.map((v,i)=>[x0+(x1-x0)*i/(vals.length-1),y,z0+v]))}" fill="none" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="${dash}" class="${cls}"/>`;
+/* small blue check mark at an iso point */
+const check=(g,{cls='fade',extra=''}={})=>{const [x,y]=iso(...g);return `<g class="${cls}" ${extra}><circle cx="${f1(x)}" cy="${f1(y)}" r="5" fill="${C.blue}"/><path d="M${f1(x-2.3)} ${f1(y)}l1.6 1.7l3.2 -3.4" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></g>`;};
+/* floor tile marker (parcel) */
+const parcel=(gx,gy,w,d,{fill='rgba(255,255,255,.9)',stroke=C.line,dash='2 2',cls='fade',extra=''}={})=>face([iso(gx,gy,0.01),iso(gx+w,gy,0.01),iso(gx+w,gy+d,0.01),iso(gx,gy+d,0.01)],fill,{stroke,cls,extra:`stroke-dasharray="${dash}" ${extra}`,sw:.8});
+/* robot arm on a round base: two links, gripper */
+const robot=(cx,cy,{j1=[0.15,-0.1,1.25],j2=[0.85,-0.2,1.0],cls='',accentGrip=false}={})=>{const A=[cx,cy,.32],B=[cx+j1[0],cy+j1[1],j1[2]],Cc=[cx+j2[0],cy+j2[1],j2[2]];
+  const seg=(p,q)=>hl(p,q,{stroke:C.line,sw:5.2})+hl(p,q,{stroke:C.top,sw:3.4});
+  return `<g class="${cls}">${cyl(cx,cy,0,.32,.18)}${cyl(cx,cy,.18,.18,.14)}${seg(A,B)}${seg(B,Cc)}${node(A,2.2).replace(C.dot,C.top).replace('/>',` stroke="${C.line}" stroke-width=".9"/>`)}${node(B,2.4).replace(C.dot,C.top).replace('/>',` stroke="${C.line}" stroke-width=".9"/>`)}`+
+    hl(Cc,[Cc[0],Cc[1],Cc[2]-.3],{stroke:accentGrip?C.blue:C.line,sw:1.6})+`</g>`;};
+/* gantry crane: two legs frames and a top beam along x */
+const gantry=(gx,gy,w,d,h,{cls=''}={})=>{let s='';[[gx,gy],[gx,gy+d],[gx+w,gy],[gx+w,gy+d]].forEach(([x,y])=>s+=hl([x,y,0],[x,y,h],{sw:1.1}));
+  s+=hl([gx,gy,h],[gx+w,gy,h],{sw:1.1})+hl([gx,gy+d,h],[gx+w,gy+d,h],{sw:1.1})+hl([gx,gy,h],[gx,gy+d,h],{sw:1.1})+hl([gx+w,gy,h],[gx+w,gy+d,h],{sw:1.1})+
+    hl([gx-.6,gy+d/2,h+.05],[gx+w+.3,gy+d/2,h+.05],{sw:2.2})+hl([gx-.6,gy+d/2,h+.05],[gx-.6,gy+d/2,h+.05],{sw:1});
+  return `<g class="${cls}">${s}</g>`;};
+/* conveyor: long low slab with rollers along x */
+const conveyor=(gx,gy,w,d,{h=.35}={})=>{let s=hl([gx+.15,gy+d,0],[gx+.15,gy+d,h],{sw:.9})+hl([gx+w-.15,gy+d,0],[gx+w-.15,gy+d,h],{sw:.9})+hl([gx+w-.15,gy,0],[gx+w-.15,gy,h],{sw:.9});
+  s+=slab(gx,gy,h,w,d,.1);const n=Math.round(w*3);for(let i=1;i<n;i++) s+=hl([gx+w*i/n,gy+.05,h+.1],[gx+w*i/n,gy+d-.05,h+.1],{sw:.5});return s;};
+/* thin stack/chimney */
+const stack=(cx,cy,h,r=.14,o={})=>cyl(cx,cy,0,r,h,o);
+/* moving element along an iso path: draws `inner` (already at iso origin a) and slides it a→b */
+const slide=(inner,a,b,{dur=3,begin=0,fade=true}={})=>{const [ax,ay]=iso(...a),[bx,by]=iso(...b);
+  return `<g opacity="${fade?0:1}">${inner}<animateMotion dur="${dur}s" begin="${begin}s" repeatCount="indefinite" path="M 0 0 L ${f1(bx-ax)} ${f1(by-ay)}" calcMode="spline" keySplines=".4 0 .2 1" keyTimes="0;1"/>${fade?`<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.85;1" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/>`:''}</g>`;};
+/* soft floor */
+const floor=(gx,gy,w,d)=>shadow(gx,gy,w,d)+plane(gx,gy,0,w,d,{cls:'fade'});
+
+/* MIC v3 (option G, picked 2026-10-07): abstract industrial materials in isometric.
+   Bricks, steel coils, sheet stacks, crates and walls in pale grey; the finished piece in Searce blue.
+   Each card: one blue result + two short words + a plain caption. Drawn at 1.4x. */
+const GSf=()=>matchMedia('(max-width:720px)').matches?1.4:1.15, GCY=100;
+const gz=(body,words,capt)=>`<svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" role="img"><defs><pattern id="mhz" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fff"/><rect width="3" height="6" fill="#c3cde0"/></pattern></defs><style>.m3 polygon,.m3 ellipse,.m3 rect{stroke-width:.75}.m3 line{stroke-width:.7}</style><g class="m3" transform="translate(150 ${GCY}) scale(${GSf()}) translate(-150 -106)">${body}</g>${words}${caption(capt)}</svg>`;
+/* a word placed under an iso point, in screen space after the scale */
+const W=(g,t,blue=false,dy=10)=>{const [x,y]=iso(...g),sx=150+(x-150)*GSf(),sy=GCY+(y-106)*GSf()+dy;
+  return `<text x="${sx.toFixed(1)}" y="${sy.toFixed(1)}" text-anchor="middle" font-family="Poppins" font-size="6" font-weight="500" fill="${blue?C.blue:'#54555a'}" letter-spacing="1.2" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke" class="fade" style="animation-delay:.8s">${t}</text>`;};
+const yard=(x,y,w,d)=>shadow(x,y,w,d)+plane(x,y,0,w,d);
+const bricks=(gx,gy,rows=3,cols=3,{accentTop=false,z0=0}={})=>{let s='';for(let r=0;r<rows;r++)for(let c=0;c<cols-(r%2?1:0);c++)s+=box(gx+c*.42+(r%2?.21:0),gy,z0+r*.2,.38,.38,.18,{accent:accentTop&&r===rows-1});return s;};
+const coil=(cx,cy,{r=.28,h=.5,accent=false}={})=>cyl(cx,cy,0,r,h,{accent})+disc2(cx,cy,h,r*.45,{fill:accent?C.aLeft:C.left,stroke:accent?'none':C.line});
+const sheets=(gx,gy,n=4,w=.8,d=.5,{accentTop=false,z0=0,jitter=0}={})=>[...Array(n)].map((_,i)=>slab(gx+(i%2?jitter:0),gy-(i%2?jitter*.6:0),z0+i*.09,w,d,.07,{accent:accentTop&&i===n-1})).join('');
+const crate=(gx,gy,s=.45,{accent=false,z=0}={})=>{const ln=accent?'rgba(255,255,255,.6)':C.line;
+  return box(gx,gy,z,s,s,s,{accent})+hl([gx,gy+s,z+.05],[gx+s,gy+s,z+s-.05],{stroke:ln,sw:.6})+hl([gx+s,gy,z+.05],[gx+s,gy+s,z+s-.05],{stroke:ln,sw:.6});};
+const hazWall=(gx,gy,w,d,h)=>box(gx,gy,0,w,d,h)+face([iso(gx,gy+d,0),iso(gx+w,gy+d,0),iso(gx+w,gy+d,h),iso(gx,gy+d,h)],'url(#mhz)');
+const xmark=g=>{const [x,y]=iso(...g);return `<g class="fade"><circle cx="${f1(x)}" cy="${f1(y)}" r="4.2" fill="#fff" stroke="${C.line}" stroke-width="1"/><path d="M${f1(x-1.8)} ${f1(y-1.8)}l3.6 3.6m0 -3.6l-3.6 3.6" stroke="#54555a" stroke-width="1.1" stroke-linecap="round"/></g>`;};
+const tick=g=>{const [x,y]=iso(...g);return `<g class="float"><circle cx="${f1(x)}" cy="${f1(y)}" r="4.6" fill="${C.blue}"/><path d="M${f1(x-2)} ${f1(y)}l1.4 1.5l2.8 -3" fill="none" stroke="#fff" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></g>`;};
+const dash=(a,b)=>isoLine(a,b,{dash:'2 3',stroke:C.blue});
+const MIC_SCENES=[
+/* ===== 01 CONVERSATIONAL ANALYTICS ===== */
+[
+/* Data Unification — bricks, a coil and sheets become one finished block */
+()=>gz(`${yard(-1.8,-1.3,3.6,2.6)}
+  ${bricks(-1.65,-1.05,3,3)}${coil(-1.2,0.35)}${sheets(-1.65,0.85,4)}
+  ${dash([-0.45,-0.85,0.05],[0.35,-0.2,0.05])}${dash([-0.85,0.35,0.05],[0.35,0.2,0.05])}${dash([-0.85,1.05,0.05],[0.35,0.4,0.05])}
+  ${[0,1,2].map(i=>mover([[-0.6,-0.95,0],[-0.95,0.25,0],[-0.95,0.95,0]][i],[0.25,-0.05,0],.22,{dur:3,begin:i})).join('')}
+  <g class="breathe">${cube(0.35,-0.45,0,1.0,{accent:true})}</g>`,
+  W([-1.2,1.4,0],'MANY SOURCES')+W([1.55,0.35,0],'ONE SOURCE',true),'ERP AND FILES BECOME ONE SOURCE'),
+/* Enterprise Search — a yard of stock; the one piece you asked for lifts out */
+()=>gz(`${yard(-1.7,-1.4,3.4,2.8)}
+  ${bricks(-1.5,-1.2,2,2)}${coil(-0.3,-0.95)}${crate(0.55,-1.2)}
+  ${sheets(-1.5,0.0,3,.7,.45)}${crate(-0.55,-0.05)}${coil(0.75,0.15)}
+  ${crate(-1.45,0.85)}${bricks(-0.55,0.9,2,2)}${sheets(0.5,0.85,3,.7,.45)}
+  ${hl([-0.33,0.18,0.45],[-0.33,0.18,0.8],{dash:'2 3',stroke:C.blue})}
+  <g class="float">${crate(-0.55,-0.05,.45,{accent:true,z:0.75})}</g>`,
+  W([-1.4,1.35,0],'ALL RECORDS')+W([-0.33,0.18,1.7],'THE RIGHT ONE',true,-6),'ASK, AND THE RIGHT RECORD COMES TO YOU'),
+/* Governed Access — a wall with one opening: allowed goes through, the rest stops */
+()=>gz(`${yard(-1.8,-1.3,3.6,2.6)}
+  ${hazWall(-0.15,-1.3,.3,.9,.8)}${hazWall(-0.15,0.2,.3,1.1,.8)}
+  ${slide(cube(-1.2,-0.35,0,.4,{accent:true}),[-1.2,-0.35,0],[0.9,-0.35,0],{dur:3.6})}
+  ${crate(-1.0,0.6,.42)}${xmark([-0.35,0.8,0.5])}`,
+  W([-0.75,1.15,0],'BLOCKED')+W([1.15,-0.15,0],'ALLOWED',true),'ONLY THE RIGHT PEOPLE GET THROUGH'),
+/* Function Analysis — identical parts on the line; one is pulled out as the defect */
+()=>gz(`${yard(-2.0,-1.0,4.0,2.0)}
+  ${slab(-1.9,-0.35,0,3.8,.7,.12)}
+  ${[-1.7,-1.1,-0.5,0.7,1.3].map(x=>box(x,-0.22,.12,.42,.42,.3)).join('')}
+  <g class="float">${box(0.1,-0.22,.55,.42,.42,.3,{accent:true})}</g>${hl([0.31,-0.01,0.42],[0.31,-0.01,0.55],{stroke:C.blue,dash:'1.5 2'})}`,
+  W([-1.3,0.6,0],'EVERY PART')+W([0.3,0.6,0],'DEFECT FOUND',true),'EVERY PART CHECKED, DEFECTS CAUGHT'),
+/* Insight Delivery — a loose pile becomes a neat, readable stack */
+()=>gz(`${yard(-1.9,-1.2,3.8,2.4)}
+  ${[[-1.7,-0.9,0,.3],[-1.3,-0.7,0,.25],[-1.6,-0.3,0,.35],[-1.15,-0.2,0,.28],[-1.45,0.25,0,.3],[-1.6,-0.5,.35,.25]].map(([x,y,z,s])=>box(x,y,z,s,s,s*.8)).join('')}
+  ${dash([-0.85,-0.2,0.05],[-0.1,-0.2,0.05])}
+  ${[[0.0,-0.5,.4],[0.5,-0.5,.75],[1.0,-0.5,1.15]].map(([x,y,h],i)=>growBar(x,y,.42,h,{dur:5,begin:i*.3,accent:i===2})).join('')}`,
+  W([-1.4,0.6,0],'RAW DATA')+W([0.75,0.35,0],'CLEAR REPORT',true),'CLEAR REPORTS FOR THE PEOPLE WHO DECIDE'),
+/* Decision & Approval — the answer goes up on the plinth and gets signed off */
+()=>gz(`${yard(-1.8,-1.2,3.6,2.4)}
+  ${sheets(-1.55,-0.35,5,.8,.6)}
+  ${dash([-0.65,0.0,0.3],[0.15,0.0,0.3])}
+  ${box(0.25,-0.45,0,.9,.9,.25)}<g class="breathe">${cube(0.45,-0.25,.25,.5,{accent:true})}</g>${tick([0.7,0.0,1.25])}`,
+  W([-1.15,0.5,0],'PLAIN ANSWER')+W([0.7,0.65,0],'APPROVED',true),'A PLAIN-LANGUAGE ANSWER, SIGNED OFF')
+],
+/* ===== 02 SUPPLY CHAIN & PROCUREMENT ===== */
+[
+/* Route & Risk Sensing — crates on the move; the tile ahead is a hazard */
+()=>gz(`${yard(-2.0,-0.9,4.0,1.8)}
+  ${[-1.8,-1.2,-0.6,0,0.6,1.2].map(x=>plane(x,-0.25,.005,.5,.5,{fill:'#fff'})).join('')}
+  ${face([iso(1.2,-0.25,.01),iso(1.7,-0.25,.01),iso(1.7,0.25,.01),iso(1.2,0.25,.01)],'url(#mhz)')}
+  ${[0,1].map(i=>slide(crate(-1.75,-0.2,.38),[-1.75,-0.2,0],[0.65,-0.2,0],{dur:4.4,begin:i*2.2})).join('')}
+  <g class="pulse">${cube(1.3,-0.15,.3,.3,{accent:true})}</g>`,
+  W([-1.3,0.5,0],'SHIPMENTS')+W([1.45,0.5,0],'RISK AHEAD',true),'NEWS, PORTS AND WEATHER WATCHED FOR RISK'),
+/* Disruption Cost Modeling — each delayed load gets a price */
+()=>gz(`${yard(-1.9,-1.2,3.6,2.4)}
+  ${crate(-1.7,-0.3,.5)}${xmark([-1.45,0.2,0.6])}
+  ${dash([-1.1,-0.05,0.05],[-0.35,-0.05,0.05])}
+  ${[[-0.2,-0.5,.45],[0.35,-0.5,.85],[0.9,-0.5,1.35]].map(([x,y,h],i)=>growBar(x,y,.42,h,{dur:5,begin:i*.3,accent:i===2})).join('')}`,
+  W([-1.45,0.45,0],'DELAYED')+W([0.55,0.3,0],'COST OF DELAY',true),'EVERY DISRUPTION GETS A PRICE TAG'),
+/* Reroute & Mitigation — the load is lifted over the blocked wall */
+()=>gz(`${yard(-1.9,-1.2,3.8,2.4)}
+  ${hazWall(-0.15,-1.0,.3,2.0,.9)}
+  ${box(-1.6,-0.1,0,.6,.6,.05)}${box(1.0,-0.1,0,.6,.6,.05)}
+  <path d="${pathIso([-1.3,0.2,0.45],[-0.7,0.2,1.5],[0.7,0.2,1.5],[1.3,0.2,0.45])}" fill="none" stroke="${C.blue}" stroke-width="1.4" stroke-dasharray="3 3"/>
+  ${(()=>{const p=pathIso([0,0,0],[0.6,0,1.05],[2.0,0,1.05],[2.6,0,0]);return `<g opacity="0">${box(-1.5,0.0,0.05,.4,.4,.35,{accent:true})}<animateMotion dur="4s" repeatCount="indefinite" path="${(()=>{const o=iso(0,0,0);return p.replace(/(-?\d+\.\d) (-?\d+\.\d)/g,(m,a,b)=>(+a-o[0]).toFixed(1)+' '+(+b-o[1]).toFixed(1));})()}"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.88;1" dur="4s" repeatCount="indefinite"/></g>`;})()}`,
+  W([0,1.1,0],'BLOCKED')+W([0.75,0.2,1.6],'NEW ROUTE',true,-8),'LIFTED OVER THE PROBLEM'),
+/* Vendor Data Intake — a messy pile of paperwork becomes one neat stack */
+()=>gz(`${yard(-1.9,-1.2,3.8,2.4)}
+  ${[[-1.7,-0.8,0],[-1.5,-0.55,.09],[-1.75,-0.3,.18],[-1.4,-0.6,.27],[-1.6,-0.15,.36]].map(([x,y,z])=>slab(x,y,z,.7,.45,.07)).join('')}
+  ${dash([-0.85,-0.3,0.05],[-0.05,-0.3,0.05])}
+  ${sheets(0.15,-0.65,7,.8,.6,{accentTop:true})}`,
+  W([-1.4,0.55,0],'PAPERWORK')+W([0.55,0.35,0],'STRUCTURED',true),'INVOICES AND ORDERS, NEATLY STRUCTURED'),
+/* Matching & Reconciliation — two stacks line up; the third doesn't */
+()=>gz(`${yard(-1.9,-1.0,3.8,2.0)}
+  ${sheets(-1.7,-0.35,5,.7,.6)}${sheets(-0.45,-0.35,5,.7,.6)}${sheets(0.8,-0.35,8,.7,.6)}
+  ${hl([-1.35,-0.05,0.52],[0.25,-0.05,0.52],{stroke:C.blue,sw:1.4})}${tick([-0.55,-0.05,0.95])}${xmark([1.15,-0.05,1.05])}`,
+  W([-0.7,0.5,0],'MATCHED',true)+W([1.15,0.5,0],'EXCEPTION'),'ORDER, RECEIPT AND INVOICE CHECKED'),
+/* Settlement & Closure — the lid drops on, the case is closed */
+()=>gz(`${yard(-1.8,-1.2,3.6,2.4)}
+  ${sheets(-1.55,-0.4,3,.7,.55)}${dash([-0.75,-0.1,0.05],[-0.05,-0.1,0.05])}
+  ${box(0.0,-0.55,0,1.0,1.0,.55)}
+  <g class="float">${slab(-0.05,-0.6,.62,1.1,1.1,.1,{accent:true})}</g>${tick([0.5,-0.05,1.15])}`,
+  W([-1.2,0.45,0],'CREDIT NOTE')+W([0.55,0.75,0],'BOOKS CLOSED',true),'SETTLED, AND THE BOOKS CLOSED')
+],
+/* ===== 03 PREMIUM GROWTH ===== */
+[
+/* Market Sensing — a field of markets; one stands out */
+()=>gz(`${yard(-1.8,-1.8,3.6,3.6)}
+  ${[0,1,2].flatMap(r=>[0,1,2].map(c=>(r===1&&c===1)?'':box(-1.55+c*1.1,-1.55+r*1.1,0,.6,.6,[.3,.5,.25,.4,0,.35,.2,.45,.3][r*3+c]))).join('')}
+  <g class="pulse">${box(-0.45,-0.45,0,.6,.6,.95,{accent:true})}</g>`,
+  W([-1.7,1.25,0],'MARKETS')+W([-0.15,-0.15,0.95],'HOTSPOT',true,-8),'WHERE THE CUSTOMERS ARE'),
+/* Micro-Market Targeting — the high-potential patch is marked out */
+()=>gz(`${yard(-1.8,-1.8,3.6,3.6)}
+  ${plane(-0.55,-0.55,.005,1.1,1.1,{fill:'rgba(0,100,255,.14)',stroke:C.blue})}
+  ${[0,1,2,3].flatMap(r=>[0,1,2,3].map(c=>{const x=-1.5+c*.8,y=-1.5+r*.8,inz=(c===1||c===2)&&(r===1||r===2);return bricks(x,y,inz?2:1,1,{accentTop:inz&&c===2&&r===2});})).join('')}`,
+  W([-1.3,1.3,0],'ALL AREAS')+W([-0.55,-0.55,0.45],'TARGET',true,-8),'THE AREAS MOST LIKELY TO BUY PREMIUM'),
+/* Premium Positioning — built up in tiers, premium on top */
+()=>gz(`${yard(-1.6,-1.2,3.2,2.4)}
+  ${[0,1,2,3].map(c=>box(-1.0+c*.5,-0.3,0,.46,.6,.3)).join('')}
+  ${[0,1,2].map(c=>box(-0.75+c*.5,-0.3,.3,.46,.6,.3,{top:'#E4EFFF',left:'#dbe6f8',right:'#c9d8f2'})).join('')}
+  ${[0,1].map(c=>box(-0.5+c*.5,-0.3,.6,.46,.6,.3,{top:'#C9DEFF',left:'#b5ccf3',right:'#a1bdee'})).join('')}
+  <g class="float">${box(-0.25,-0.3,.95,.46,.6,.32,{accent:true})}</g>`,
+  W([-0.9,0.6,0],'STANDARD')+W([0.1,-0.3,1.4],'PREMIUM',true,-10),'BUILT UP TO THE PREMIUM TIER'),
+/* Channel Activation — stock goes out from the hub to every outlet */
+()=>gz(`${yard(-1.8,-1.8,3.6,3.6)}
+  ${[[-1.5,-1.5],[1.0,-1.5],[-1.5,1.0],[1.0,1.0]].map(([x,y])=>crate(x,y,.45)+dash([0,0,0.05],[x+.22,y+.22,0.05])).join('')}
+  ${[[-1.3,-1.3],[1.2,-1.3],[-1.3,1.2],[1.2,1.2]].map(([x,y],i)=>mover([-0.1,-0.1,0],[x-.1,y-.1,0],.2,{dur:3,begin:i*.75,accent:true})).join('')}
+  ${coil(0.15,0.15,{r:.4,h:.7})}`,
+  W([0.15,0.15,0.7],'HUB',false,-10)+W([1.45,-1.05,0],'OUTLETS',true),'OFFERS AND STOCK PUSHED TO EVERY OUTLET'),
+/* Field Execution — pallets roll down the lane to the dock */
+()=>gz(`${yard(-2.0,-1.0,4.0,2.0)}
+  ${[-1.8,-1.2,-0.6,0,0.6].map(x=>plane(x,-0.3,.005,.5,.6,{fill:'#fff'})).join('')}
+  ${box(1.2,-0.6,0,.7,1.1,.55)}
+  ${[0,1].map(i=>slide(slab(-1.75,-0.25,0,.45,.5,.06)+crate(-1.72,-0.22,.38,{accent:true,z:.06}),[-1.75,-0.25,0],[0.65,-0.25,0],{dur:4.2,begin:i*2.1})).join('')}`,
+  W([-1.2,0.55,0],'STOCK')+W([1.55,0.75,0],'DELIVERED',true),'ROUTES, STOCK AND STAFF, PLANNED'),
+/* Growth & Profit — each step higher than the last */
+()=>gz(`${yard(-1.9,-1.1,3.8,2.2)}
+  ${[[-1.6,-0.5,.3],[-1.0,-0.5,.55],[-0.4,-0.5,.85],[0.2,-0.5,1.2],[0.8,-0.5,1.65]].map(([x,y,h],i)=>growBar(x,y,.45,h,{dur:5,begin:i*.25,accent:i===4})).join('')}`,
+  W([-1.35,0.25,0],'BEFORE')+W([1.0,0.25,0],'GROWTH',true),'SALES, MARGIN AND RETURN, MEASURED')
+]];
+
+const SCENES=MIC_SCENES[0], SCENES2=MIC_SCENES[1], SCENES_C=MIC_SCENES[2];
 
 const PROCESSES=[
   {title:"The Conversational Analytics Architecture",
@@ -1579,7 +1841,7 @@ const PROCESSES=[
    hline:"Control tower specialists review disruption alerts and approve reroutes and cost scenarios · Procurement leads own vendor relationships and disputes."},
   {title:"The Autonomous Premium Growth Architecture",
    lede:"Six AI-powered workflows that scale the premium segment across offline channels, from market signal to profit.",
-   stages:STAGES3, scenes:SCENES,
+   stages:STAGES3, scenes:SCENES_C,
    rail:["Micro-Market Knowledge Graph","Premium Propensity Models","Customer 360","Self-Learning Feedback Loop"],
    hline:"Category and growth strategists set premium targets and approve pricing and mix · Channel teams own distributor relationships and on-ground feedback."}
 ];

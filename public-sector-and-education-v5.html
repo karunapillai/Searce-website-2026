@@ -850,37 +850,140 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 /* PSE section 2 scenes: four-station run */
 .ps-run4{opacity:0;animation:psRun4 3.2s cubic-bezier(.45,0,.55,1) .6s infinite;}
 @keyframes psRun4{0%{opacity:0;transform:translateX(0);}5%{opacity:1;}33%{transform:translateX(100px);}66%{transform:translateX(200px);}95%{opacity:1;}100%{opacity:0;transform:translateX(300px);}}
+/* ========== Processes — stacked stage cards (pss) ========== */
+.pss{--tint:#f2f7ff;--tint-2:#e6efff;--line:#e4e6ea;--ease:cubic-bezier(.22,.61,.36,1);background:#fff;position:relative;}
+.pss-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:clamp(14px,2.4vh,24px);}
+.pss .section-h{margin:0;white-space:nowrap;font-size:clamp(30px,3vw,46px);}
+.pss-tabs{display:flex;gap:4px;padding:5px;border-radius:999px;background:var(--tint);flex-shrink:0;}
+.pss-tab{padding:10px 18px;border-radius:999px;font-family:var(--display);font-size:14px;font-weight:500;color:var(--ink-60);white-space:nowrap;background:none;border:0;cursor:pointer;transition:background .3s,color .3s,box-shadow .3s;}
+.pss-tab:hover{color:var(--blue-deep);}
+.pss-tab:focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+.pss-tab.active{background:#fff;color:var(--blue);box-shadow:0 6px 16px -8px rgba(0,51,127,.35);}
+.pss-fd{transition:opacity .3s var(--ease),transform .3s var(--ease);}
+.pss-swap .pss-fd{opacity:0;transform:translateY(8px);}
+.pss-kick{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);}
+.pss-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:var(--tint);color:var(--blue-deep);font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.02em;}
+.pss-chip:empty{display:none;}
+.pss-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue);}
+.pss-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
+.pss-fig{display:block;}
+.pss button{font:inherit;color:inherit;text-align:inherit;background:none;border:0;cursor:pointer;}
+
+/* scroll-pinned: the section is a tall scroll track, the wrap sticks for one fold while the cards stack */
+.pss{display:block;height:calc(100vh + 6 * 62vh);padding:0;overflow:visible;}
+.pss>.wrap{position:sticky;top:0;height:100vh;padding-top:104px;padding-bottom:22px;display:flex;flex-direction:column;}
+.pss-top{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:center;gap:40px;margin-bottom:4px;min-height:64px;}
+.pss-tline{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;}
+.pss-title{font-weight:400;font-size:clamp(19px,1.6vw,23px);line-height:1.2;letter-spacing:-.015em;margin:0;}
+.pss-sub{font-size:13.5px;line-height:1.55;color:var(--ink-60);text-align:right;}
+.pss-deck{position:relative;flex:1;min-height:300px;overflow:hidden;}
+.pss-card{position:absolute;left:0;right:0;top:44px;bottom:2px;border-radius:28px;background:color-mix(in srgb,var(--tint) calc(var(--mix,0) * 100%),#fff);border:1px solid var(--line);box-shadow:0 -18px 40px -34px rgba(0,51,127,.45);display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);grid-template-rows:minmax(0,1fr);align-items:stretch;transform-origin:50% 0;will-change:transform;overflow:hidden;}
+.pss-card[data-i="0"]{--tint:#f2f6ff;}.pss-card[data-i="1"]{--tint:#e0ecff;}.pss-card[data-i="2"]{--tint:#c2dbff;}.pss-card[data-i="3"]{--tint:#8fc0ff;}.pss-card[data-i="4"]{--tint:#5da3ff;}.pss-card[data-i="5"]{--tint:#0064ff;}
+.pss-copy{min-height:0;padding:24px 36px;display:flex;flex-direction:column;justify-content:center;}
+.pss-num{font-weight:300;font-size:clamp(36px,3.4vw,52px);line-height:1;letter-spacing:-.03em;color:#c4d8ff;}
+.pss-copy .pss-kick{margin-top:12px;font-size:10.5px;}
+.pss-svc{font-weight:500;font-size:clamp(24px,2.3vw,32px);letter-spacing:-.015em;margin:4px 0 2px;}
+.pss-step{font-size:14px;font-weight:500;color:var(--blue-deep);}
+.pss-desc{font-size:15px;line-height:1.55;color:var(--ink-60);margin-top:10px;max-width:380px;}
+.pss-art{padding:18px 26px 14px 0;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.pss-art svg{width:100%;height:100%;max-height:100%;display:block;overflow:visible;}
+.pss-art .fade{opacity:0;animation:pssFade .5s var(--ease) forwards;}
+.pss-art .float{animation:pssFloat 4.2s ease-in-out infinite;}
+.pss-art .settle{opacity:0;animation:pssSettle .8s var(--ease) .4s forwards;}
+.pss-art .stackloop{animation:pssStack 5.6s var(--ease) infinite;}
+.pss-art .pulse{transform-box:fill-box;transform-origin:center;animation:pssPulse 2.4s ease-in-out infinite;}
+.pss-art .flow{stroke-dasharray:3 5;animation:pssFlow 1.4s linear infinite;}
+.pss-art .rays,.pss-art .breathe{animation:pssBreathe 2.8s ease-in-out infinite;}
+.pss-art .grow{transform-box:fill-box;transform-origin:50% 100%;animation:pssGrow 3.6s ease-in-out infinite;}
+.pss-art .mover{animation:pssMove 3s ease-in-out infinite;}
+.pss-art .mover2{animation:pssSpeed 1.3s linear infinite;}
+.pss-art .spin{transform-box:fill-box;transform-origin:center;animation:pssSpin 20s linear infinite;}
+@keyframes pssSpin{to{transform:rotate(360deg);}}
+@keyframes pssSpeed{0%{opacity:0;transform:translateX(-8px);}30%,70%{opacity:1;}100%{opacity:0;transform:translateX(8px);}}
+@keyframes pssFade{to{opacity:1;}}
+@keyframes pssFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
+@keyframes pssSettle{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
+@keyframes pssStack{0%{opacity:0;transform:translateY(-10px);}14%,78%{opacity:1;transform:none;}92%,100%{opacity:0;transform:translateY(-10px);}}
+@keyframes pssPulse{0%,100%{opacity:.35;transform:scale(1);}50%{opacity:.95;transform:scale(1.18);}}
+@keyframes pssFlow{to{stroke-dashoffset:-16;}}
+@keyframes pssBreathe{0%,100%{opacity:.4;}50%{opacity:1;}}
+@keyframes pssGrow{0%,100%{transform:scaleY(.55);}50%{transform:scaleY(1);}}
+@keyframes pssMove{0%{opacity:0;transform:translate(0,0);}15%,85%{opacity:1;}100%{opacity:0;transform:translate(37px,21px);}}
+
+/* final card: the breakthrough */
+.pss-res{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);}
+.pss-res .pss-copy{justify-content:center;}
+.pss-headline{font-weight:400;font-size:clamp(28px,2.8vw,40px);line-height:1.12;letter-spacing:-.02em;color:var(--blue-deep);margin-top:10px;}
+.pss-res-sub{font-size:14.5px;line-height:1.6;color:var(--ink-60);margin-top:14px;max-width:400px;}
+.pss-res-right{margin:14px 14px 14px 0;border-radius:22px;background:var(--tint);padding:28px 30px;display:flex;flex-direction:column;justify-content:center;gap:22px;}
+.pss-metrics{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;}
+.pss-metrics b{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:500;line-height:1.3;}
+.pss-metrics b em{flex:0 0 24px;height:24px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;font-style:normal;font-size:12px;}
+.pss-metrics span:not(.sr){display:block;font-size:13px;line-height:1.45;color:var(--ink-40);padding-left:33px;margin-top:2px;}
+.pss-people{border-top:1px solid #d6e4ff;padding-top:16px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;}
+.pss-people .pss-kick{flex:0 0 100%;font-size:10px;}
+.pss-role{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--ink-85);}
+/* stage row */
+.pss-stages{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:12px;}
+.pss-sg{text-align:left;padding:12px 14px;border-radius:16px;transition:background .3s;}
+.pss-sg:hover{background:#f7faff;}
+.pss-sg:focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+.pss-sg i{display:block;height:3px;border-radius:3px;background:var(--tint-2);overflow:hidden;margin-bottom:10px;}
+.pss-sg i b{display:block;height:100%;width:0;background:var(--blue);}
+.pss-sg .n{font-size:12px;font-weight:500;color:var(--ink-40);letter-spacing:.06em;}
+.pss-sg .nm{display:block;font-size:14px;font-weight:500;line-height:1.3;color:var(--ink-60);margin-top:3px;transition:color .3s;}
+.pss-sg .sv{display:block;font-size:12px;color:var(--ink-40);margin-top:2px;}
+.pss-sg.active{background:var(--tint);}
+.pss-sg.active .n,.pss-sg.active .sv{color:var(--blue);}
+.pss-sg.active .nm{color:var(--ink);}
+.pss-hint{position:absolute;right:4px;top:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);display:flex;align-items:center;gap:8px;transition:opacity .3s;}
+.pss-hint i{width:1px;height:16px;background:var(--ink-40);display:block;animation:sHint 1.6s ease-in-out infinite;}
+@keyframes sHint{50%{transform:translateY(4px);}}
+@media (max-width:1000px){.pss-card{grid-template-columns:1fr;grid-template-rows:auto 1fr;}.pss-art{margin:0 14px 14px;}.pss-stages{grid-template-columns:repeat(3,1fr);}.pss-top{grid-template-columns:1fr;}.pss-sub{text-align:left;}}
+
+/* small laptops / landscape tablets: compact tabs so they sit beside the heading without overflowing */
+@media (min-width:901px) and (max-width:1180px){
+  .pss-head{gap:20px;}
+  .pss-tab{padding:8px 12px;font-size:13px;}
+  .pss .section-h{font-size:clamp(28px,2.8vw,40px);}
+}
+/* phones and small tablets: no pinning, the stage cards simply stack down the page */
+@media (max-width:900px){
+  .pss{height:auto !important;padding:72px 0;}
+  .pss>.wrap{position:static !important;height:auto !important;padding-top:0 !important;padding-bottom:0 !important;display:block !important;}
+  .pss-head{flex-direction:column;align-items:flex-start;}
+  .pss .section-h{white-space:normal;}
+  /* same positioning as the case-study tabs below: one edge-to-edge row you swipe, no scrollbar */
+  .pss-tabs{display:flex !important;flex-wrap:nowrap;gap:8px;overflow-x:auto;align-self:stretch;min-width:0;margin:0 -24px;padding:4px 24px 8px;background:none;border-radius:0;max-width:none;width:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+  .pss-tabs::-webkit-scrollbar{display:none;}
+  .pss .pss-tab{flex:0 0 auto;white-space:nowrap;background:var(--tint);padding:10px 18px;font-size:13.5px;}
+  .pss .pss-tab.active{background:#fff;box-shadow:0 6px 16px -8px rgba(0,51,127,.35),inset 0 0 0 1px #dbe7ff;}
+  .pss-top{min-height:0 !important;gap:8px !important;margin-bottom:6px !important;}
+  .pss-sub{text-align:left !important;}
+  .pss-deck{overflow:visible !important;min-height:0 !important;}
+  .pss-card{position:relative !important;top:auto !important;bottom:auto !important;transform:none !important;visibility:visible !important;margin-top:14px;grid-template-columns:1fr !important;grid-template-rows:auto !important;--mix:0 !important;}
+  .pss-art{height:260px;padding:0 0 12px !important;overflow:hidden;}
+  .pss-art svg{transform:scale(1.15);transform-origin:50% 50%;}
+  .pss-copy{padding:26px 24px 8px !important;}
+  .pss-res-right{margin:0 14px 14px !important;}
+  .pss-stages,.pss-hint{display:none !important;}
+}
+@media (max-width:360px){
+  .pss-art{height:236px !important;}
+  .pss-art svg{transform:scale(1.06) !important;}
+}
+@media (max-width:560px){
+  .pss-metrics{grid-template-columns:1fr !important;gap:14px !important;}
+  .pss-res-right{padding:22px 20px !important;}
+  .pss-headline{font-size:28px !important;}
+}
 </style>
+<link rel="stylesheet" href="assets/searce-nav.css">
+<link rel="stylesheet" href="assets/industry-mobile.css">
 </head>
 <body>
 
-<nav class="nav" aria-label="Primary navigation">
-  <div class="wrap">
-    <a href="index.html" class="nav-logo" aria-label="Searce home">Searce</a>
-    <ul class="nav-links">
-      <li><a href="#">outcomes</a></li>
-      <li><a href="#">how we solve <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="business-systems-engineering.html">practices <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="#" class="current">industries <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="#">insights</a></li>
-      <li class="has-dropdown">
-        <a href="#" aria-haspopup="true">company
-          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </a>
-        <div class="mega-panel">
-          <a class="mega-item" href="who-we-are.html"><span class="mega-title">Who we are</span></a>
-          <a class="mega-item" href="#"><span class="mega-title">Partners</span></a>
-          <a class="mega-item" href="careers.html"><span class="mega-title">Careers</span></a>
-          <a class="mega-item" href="#"><span class="mega-title">futurify.ai</span></a>
-        </div>
-      </li>
-    </ul>
-    <a href="#connect" class="nav-cta">
-      bring us a problem
-      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-    </a>
-  </div>
-</nav>
+<script src="assets/searce-nav.js" data-theme="light" data-current="psed"></script>
 
 <!-- ============== HERO + REALITY (one shared white -> light blue background) ============== -->
 <div class="hero-reality">
@@ -888,7 +991,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <div class="wrap">
     <div class="hero-text">
       <div class="hero-badge">
-        <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true"><rect x="158" y="24" width="58" height="101" fill="#13377f"/><rect x="250" y="158" width="101" height="58" fill="#13377f"/><rect x="22" y="158" width="194" height="58" fill="#0064ff"/><rect x="158" y="250" width="58" height="101" fill="#0064ff"/></svg>
+        <svg class="hero-badge-icon" viewBox="35 -3 325 325" aria-hidden="true"><path d="M197 15 269 87 197 159 125 87Z" fill="#13377f"/><circle cx="107" cy="177" r="36" fill="#0064ff"/><circle cx="288" cy="177" r="36" fill="#0064ff"/><path d="M35 304a72 72 0 0 1 144 0Z" fill="#13377f"/><path d="M216 304a72 72 0 0 1 144 0Z" fill="#13377f"/></svg>
         2030 Vision &middot; Anticipatory Public Services
       </div>
       <h1 id="hero-heading">
@@ -1087,52 +1190,13 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <img class="leaks-motif" src="assets/leaks-shapes-v5.svg" alt="" aria-hidden="true">
 </section>
 
-<!-- ============== PROCESSES (Layout 2 · expanding stage panels) ============== -->
-<section class="devops" id="processes" data-theme="light" aria-labelledby="devops-h">
+<!-- ============== PROCESSES (stacked stage cards · scroll-pinned · four case-study architectures) ============== -->
+<section class="pss" id="processes" aria-labelledby="pss-h">
   <div class="wrap">
-    <div class="devops-head">
-      <h2 id="devops-h" class="section-h">Real business outcomes.</h2>
-    </div>
-
-    <div class="p-picker">
-      <div class="p-tabs" role="tablist" aria-label="Processes">
-        <button class="p-tab active" role="tab" aria-selected="true" data-p="0">
-          <small>01</small>
-          <span class="p-tab-name">Constituent Intake &amp; Eligibility</span>
-        </button>
-        <button class="p-tab" role="tab" aria-selected="false" data-p="1">
-          <small>02</small>
-          <span class="p-tab-name">Student Enrollment &amp; Financial Aid</span>
-        </button>
-        <button class="p-tab" role="tab" aria-selected="false" data-p="2">
-          <small>03</small>
-          <span class="p-tab-name">Audit &amp; Compliance Reporting</span>
-        </button>
-        <span class="p-ind" aria-hidden="true"></span>
-      </div>
-    </div>
-
-    <div class="proc-head">
-      <div>
-        <h3 id="procTitle">The Constituent Intake &amp; Eligibility Architecture</h3>
-        <p class="section-lede" id="procLede">Six AI-powered workflows that take an application from first contact to a traceable, human-approved decision.</p>
-      </div>
-      <div class="devops-hint" aria-hidden="true">Hover a stage <i></i></div>
-    </div>
-
-    <div class="strip" id="strip" role="list"></div>
-
-    <div class="rail" aria-label="Shared intelligence">
-      <div class="rail-row">
-        <div class="rail-label"><b></b>Shared intelligence</div>
-        <div class="rail-items" id="railItems">
-          <span>Case &amp; Policy Graph</span><i></i>
-          <span>Eligibility Rules Engine</span><i></i>
-          <span>Decision Lineage Ledger</span><i></i>
-          <span>Appeals Feedback Loop</span>
-        </div>
-      </div>
-    </div>
+    <div class="pss-head"><h2 id="pss-h" class="section-h">Real business outcomes.</h2><div class="pss-tabs" role="tablist" aria-label="Architectures"><button class="pss-tab active" role="tab" aria-selected="true" data-a="0">Cloud Operations</button><button class="pss-tab" role="tab" aria-selected="false" data-a="1">Digital Campus</button><button class="pss-tab" role="tab" aria-selected="false" data-a="2">Data Protection</button><button class="pss-tab" role="tab" aria-selected="false" data-a="3">Serverless Scale</button></div></div>
+<div class="pss-top pss-fd"><div class="pss-tline"><h3 class="pss-title" id="title"></h3><span class="pss-chip" id="tag"></span></div><p class="pss-sub" id="sub"></p></div>
+<div class="pss-deck pss-fd" id="deck"><span class="pss-hint" id="hint">Scroll <i></i></span></div>
+<div class="pss-stages pss-fd" id="stages" role="tablist" aria-label="Stages"></div>
   </div>
 </section>
 
@@ -1544,363 +1608,245 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 })();
 </script>
 <script>
-/* Processes — Layout 2 expanding stage panels (shared with tss-processes-layout2-autonomous-devops.html) */
+/* Processes — stacked stage cards (copy from the user's case-study architecture diagrams CS-89, CS-62, CS-61, CS-59) */
 (function(){
-/* ---------------------------------------------------------------------------
-   STAGES
---------------------------------------------------------------------------- */
-const STAGES = [
-  {title:"Multichannel Intake", agent:"Intake",
-   desc:"Captures applications from portals, email, phone and walk-in channels and turns each one into a single structured case record.",
-   flow:"Application → Intake → Structured case → Verification queue"},
-  {title:"Document Verification", agent:"Verifier",
-   desc:"Extracts and cross-checks identity, income and residency documents against agency records, flagging gaps before a caseworker opens the file.",
-   flow:"Structured case → Verifier → Document checks → Verified file"},
-  {title:"Eligibility Determination", agent:"Assessor",
-   desc:"Applies current policy rules to each case, scores eligibility and cites the exact provisions behind every recommendation.",
-   flow:"Verified file → Assessor → Policy rules → Eligibility recommendation"},
-  {title:"Case Prioritisation", agent:"Prioritiser",
-   desc:"Ranks the caseload by urgency and vulnerability so the people most at risk of delay are served first.",
-   flow:"Eligibility recommendation → Prioritiser → Ranked caseload → Work queue"},
-  {title:"Caseworker Review", agent:"Advisor",
-   desc:"Routes consequential and complex decisions to caseworkers with a summary, the evidence and a recommended next step.",
-   flow:"Work queue → Advisor → Case summary → Caseworker decision"},
-  {title:"Decision Audit & Learning", agent:"Auditor",
-   desc:"Records full decision lineage for every outcome and feeds appeals and overturns back into the rules.",
-   flow:"Decision → Auditor → Decision lineage → Rules feedback"}
+var A=[
+ {title:"The Well-Architected Cloud Operations Architecture",
+  sub:"Cloud Wellness Reviews, automated operations and human-in-the-loop for a secure, reliable and cost-efficient GCP environment.",
+  chip:"From assessment to continuous optimization", kicker:"Platform service",
+  steps:[["Wellness Assessment","Assessor","Cloud Wellness Review scores security, operations, performance & cost."],
+         ["Security Hardening","Hardener","Tightens firewall CIDRs and ports, and checks service account keys."],
+         ["Automated Patching","Patcher","VM Manager automates OS updates, with no downtime on critical patches."],
+         ["Data Protection","Preserver","Automated Cloud SQL backups give recovery points every 6 hours."],
+         ["Monitoring & Alerting","Watcher","Alerting policies flag resource issues before production goes down."],
+         ["Cost Optimization","Optimizer","Usage analysis and Committed Use Discounts cut cloud spend."]],
+  found:["Cloud Wellness Review","VM Manager & OS Update Policy","Alerting Policies","Committed Use Discounts"],
+  fed:"GCP project configurations · CPU, RAM & usage patterns · Firewall & service account data · Cloud SQL databases",
+  peopleCap:"Expert review, scaling & governance",
+  roles:[["Cloud & IT Teams",["Own the environment","Act on review findings","Plan upgrades safely"]],
+         ["Searce Cloud Experts",["Recommend VM sizes","Handle procurement","Guide commitment purchases"]],
+         ["Business Leadership",["Use wellness reports to decide","Back growth initiatives with confidence"]]],
+  headline:"74% cloud cost savings",
+  metrics:[["Monthly Cloud Cost","↓","74% saved vs prior year"],["Data Recovery","↑","Backups every 6 hours"],["Patch Downtime","↓","Critical patches, zero downtime"],["Cloud Visibility","↑","Four-pillar wellness reports"]],
+  source:"Education & Seminars · Success Resources · Built on GCP · Searce case study CS-89"},
+ {title:"The Collaborative Digital Campus Architecture",
+  sub:"Google for Education, centralized management and human-in-the-loop, connecting students and teachers across locations.",
+  chip:"From change readiness to secure, insight-led learning", kicker:"Platform service",
+  steps:[["Change & Upskilling","Enabler","Rebuilds teaching around technology and upskills teachers and students."],
+         ["Device & Workspace Rollout","Provisioner","Chromebooks, Workspace & Chrome Education Upgrade for every user."],
+         ["Central Administration","Administrator","Admin Console adds users, manages devices and creates groups centrally."],
+         ["Collaborative Learning","Collaborator","Group projects and peer-to-peer learning across locations."],
+         ["Family Engagement","Supporter","Personal support for families, with IT help handled in-house."],
+         ["Insights & Security","Guardian","Real-time insights and best-practice security for safe learning."]],
+  found:["Google Workspace for Education","Chromebooks & Chrome Education Upgrade","Admin Console","Security Best Practices"],
+  fed:"Student & teacher accounts · Device fleet · Classroom collaboration activity · Family communication",
+  peopleCap:"Teaching, governance & community",
+  roles:[["Teachers & Educators",["Lead digital pedagogy","Coach students","Build confidence with new tools"]],
+         ["School Leadership & IT",["Manage from one console","Act on real-time insights","Drive change"]],
+         ["Students & Families",["Collaborate on projects","Share feedback","Get personal support when needed"]]],
+  headline:"One school, every location connected",
+  metrics:[["Digital Literacy","↑","Teachers and students upskilled"],["Collaboration","↑","Group projects, peer learning"],["IT Support Cost","↓","Digital tools managed in-house"],["Visibility","↑","Real-time insights, corrective action"]],
+  source:"Education · Sun Valley International School · Google for Education · Searce case study CS-62"},
+ {title:"The Encrypted Data Protection Architecture",
+  sub:"Private connectivity, encryption at rest and in transit, and human-in-the-loop, securing a MongoDB Atlas database on AWS.",
+  chip:"From an exposed database to end-to-end encryption", kicker:"Security service",
+  steps:[["Risk Assessment","Assessor","Spots the unencrypted database and its theft, misuse & interception risks."],
+         ["Private Connectivity","Connector","Private endpoint links the AWS VPC and the Atlas VPC via PrivateLink."],
+         ["Key Management","Keymaker","AWS KMS creates and holds the encryption keys."],
+         ["Encryption at Rest","Sealer","Turns on Atlas encryption at rest using the KMS keys."],
+         ["Encryption in Transit","Shield","SSL certificates encrypt data in transit, ending plain-text travel."],
+         ["Secure Operations","Guardian","Data stays encrypted from source to destination every day."]],
+  found:["AWS KMS Key Store","PrivateLink Network","SSL Certificates","Encrypted MongoDB Atlas"],
+  fed:"Existing MongoDB Atlas data · Financial and personal records · Application traffic · AWS VPC",
+  peopleCap:"Governance, key ownership & assurance",
+  roles:[["Engineering & Data Teams",["Run the application on the encrypted database","Keep connections private"]],
+         ["Security & Compliance Owners",["Own key policy and certificates","Review access","Stay audit-ready"]],
+         ["Searce Cloud Experts",["Design and implement the encryption","Hand over operating guidance"]]],
+  headline:"Plain text to fully encrypted",
+  metrics:[["Data at Rest","↑","Encrypted with KMS keys"],["Data in Transit","↑","Encrypted with SSL"],["Theft & Misuse Risk","↓","Financial data protected"],["Interception Risk","↓","Man-in-the-middle exposure cut"]],
+  source:"EdTech · Harappa · MongoDB Atlas on AWS · Searce case study CS-61"},
+ {title:"The Serverless Scale Architecture",
+  sub:"Serverless PaaS, managed data & caching and human-in-the-loop, for sub-second response at 10,000 concurrent users.",
+  chip:"From a response-time target to lean operations", kicker:"Platform service",
+  steps:[["Performance Target","Planner","Sets the goal: under 1 second for 10,000 concurrent users."],
+         ["Serverless Deployment","Deployer","App Engine Standard 2nd Gen runs the app as a serverless PaaS."],
+         ["Managed Data Layer","Persister","Cloud SQL backend gives high availability and scalability."],
+         ["Caching & Speed","Accelerator","Memorystore for Redis serves hot data fast."],
+         ["Peak-Load Scaling","Scaler","Serverless capacity absorbs peak loads and surges."],
+         ["Lean Operations","Streamliner","Less management overhead, so teams focus on innovation."]],
+  found:["App Engine PaaS","Cloud SQL","Memorystore for Redis","Serverless Scaling"],
+  fed:"Application traffic · Concurrent user sessions · Application data · Peak-load patterns",
+  peopleCap:"Ownership, design & governance",
+  roles:[["Developers",["Ship features instead of managing servers","Higher productivity"]],
+         ["Platform & IT Owners",["Watch performance targets","Plan for surges","Control running cost"]],
+         ["Searce Cloud Architects",["Design the PaaS solution","Tune data and caching layers"]]],
+  headline:"Under 1 second for 10,000 users",
+  metrics:[["Response Time","↓","Below 1 second"],["Concurrent Users","↑","10,000 supported smoothly"],["Developer Productivity","↑","Focus on innovation"],["Burn Rate","↓","Lower running cost"]],
+  source:"Education · IIT Madras · App Engine on Google Cloud · Searce case study CS-59"}
 ];
+[['','assets/outcome-pse-monitoring.jpg'],['Sun Valley International School','assets/hero-pse-campus.jpg'],['Harappa','assets/outcome-pse-security.jpg'],['IIT Madras','assets/hero-pse-library.jpg']].forEach(function(x,i){A[i].tag=x[0];A[i].img=x[1];});
 
-/* Scenes are shared with Layout 3 (tss-processes-layout3-autonomous-devops.html) — keep both copies in sync. */
-/* ---------------------------------------------------------------------------
-   LAYOUT 3 SCENES — isometric line-art (per the user's references):
-   light outlined cubes & layered planes, pale faces, one solid Searce-blue
-   element per scene, dotted connectors. Motion is quiet: a float, one dot
-   travelling a line, planes settling, a soft pulse. 200x200 canvas.
---------------------------------------------------------------------------- */
-const ISO={U:27, ox:150, oy:106, cos:0.866, sin:0.5};   /* 300x200 canvas: labels live in the side margins */
-const iso=(gx,gy,gz)=>[ISO.ox+(gx-gy)*ISO.cos*ISO.U, ISO.oy+(gx+gy)*ISO.sin*ISO.U-gz*ISO.U];
-const pts=a=>a.map(p=>p.map(n=>n.toFixed(1)).join(',')).join(' ');
-const C={line:'#b9c4d8', lineSoft:'rgba(185,196,216,0.6)', top:'#ffffff', left:'#f1f4fa', right:'#e4eaf5',
-         aTop:'#4d8cff', aLeft:'#0064ff', aRight:'#0050cc', blue:'#0064ff', shadow:'rgba(0,51,127,0.06)', dot:'#0064ff'};
-const face=(a,fill,{stroke=C.line,sw=1,cls='',extra=''}={})=>`<polygon points="${pts(a)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" class="${cls}" ${extra}/>`;
-/* a cube occupying grid cell (gx,gy) at height gz, edge = s grid units */
-const cube=(gx,gy,gz,s=1,{accent=false,cls='',extra=''}={})=>{
-  const t=[iso(gx,gy,gz+s),iso(gx+s,gy,gz+s),iso(gx+s,gy+s,gz+s),iso(gx,gy+s,gz+s)];
-  const l=[iso(gx,gy+s,gz),iso(gx+s,gy+s,gz),iso(gx+s,gy+s,gz+s),iso(gx,gy+s,gz+s)];
-  const r=[iso(gx+s,gy,gz),iso(gx+s,gy+s,gz),iso(gx+s,gy+s,gz+s),iso(gx+s,gy,gz+s)];
-  const st=accent?'none':C.line;
-  return `<g class="${cls}" ${extra}>${face(l,accent?C.aLeft:C.left,{stroke:st})}${face(r,accent?C.aRight:C.right,{stroke:st})}${face(t,accent?C.aTop:C.top,{stroke:st})}</g>`;
-};
-/* wireframe cube (outline only, optional dashes) */
-const wire=(gx,gy,gz,s,{dash='',stroke=C.line,cls=''}={})=>{
-  const a=[iso(gx,gy,gz),iso(gx+s,gy,gz),iso(gx+s,gy+s,gz),iso(gx,gy+s,gz)], b=a.map((_,i)=>iso([gx,gx+s,gx+s,gx][i],[gy,gy,gy+s,gy+s][i],gz+s));
-  const seg=(p,q)=>`M ${p[0].toFixed(1)} ${p[1].toFixed(1)} L ${q[0].toFixed(1)} ${q[1].toFixed(1)}`;
-  const d=[0,1,2,3].map(i=>seg(a[i],a[(i+1)%4])+seg(b[i],b[(i+1)%4])+seg(a[i],b[i])).join(' ');
-  return `<path d="${d}" fill="none" stroke="${stroke}" stroke-width="0.9" stroke-dasharray="${dash}" class="${cls}"/>`;
-};
-/* flat plane w×d at height gz */
-const plane=(gx,gy,gz,w,d,{fill=C.top,stroke=C.line,cls='',extra='',sw=1}={})=>face([iso(gx,gy,gz),iso(gx+w,gy,gz),iso(gx+w,gy+d,gz),iso(gx,gy+d,gz)],fill,{stroke,cls,extra,sw});
-/* thin slab: plane with a visible edge */
-const slab=(gx,gy,gz,w,d,h=.14,o={})=>cube(gx,gy,gz,1,{})&&(()=>{
-  const t=[iso(gx,gy,gz+h),iso(gx+w,gy,gz+h),iso(gx+w,gy+d,gz+h),iso(gx,gy+d,gz+h)];
-  const l=[iso(gx,gy+d,gz),iso(gx+w,gy+d,gz),iso(gx+w,gy+d,gz+h),iso(gx,gy+d,gz+h)];
-  const r=[iso(gx+w,gy,gz),iso(gx+w,gy+d,gz),iso(gx+w,gy+d,gz+h),iso(gx+w,gy,gz+h)];
-  const ac=o.accent; return `<g class="${o.cls||''}" ${o.extra||''}>${face(l,ac?C.aLeft:C.left,{stroke:ac?'none':C.line})}${face(r,ac?C.aRight:C.right,{stroke:ac?'none':C.line})}${face(t,ac?C.aTop:C.top,{stroke:ac?'none':C.line})}</g>`;})();
-const shadow=(gx,gy,w,d)=>plane(gx,gy,0,w,d,{fill:C.shadow,stroke:'none'});
-/* iso line between grid points, optionally dotted with small blue nodes */
-const isoLine=(a,b,{dash='',stroke=C.line,sw=0.9}={})=>{const p=iso(...a),q=iso(...b);return `<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${q[0].toFixed(1)}" y2="${q[1].toFixed(1)}" stroke="${stroke}" stroke-width="${sw}" stroke-dasharray="${dash}" stroke-linecap="round"/>`;};
-const node=(g,r=2)=>{const p=iso(...g);return `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${r}" fill="${C.dot}"/>`;};
-const pathIso=(...gs)=>gs.map((g,i)=>{const p=iso(...g);return `${i?'L':'M'} ${p[0].toFixed(1)} ${p[1].toFixed(1)}`;}).join(' ');
-/* one travelling dot (the only SMIL motion) */
-const runner=(d,dur=3.4,begin=0)=>`<circle r="2.4" fill="${C.blue}" opacity="0"><animateMotion dur="${dur}s" begin="${begin}s" repeatCount="indefinite" path="${d}"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.92;1" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/></circle>`;
-/* soft rays around a point (reference 1) */
-const rays=(g,{r1=18,r2=26}={})=>{const [x,y]=iso(...g);return `<g class="rays">${[-150,-90,-30,30,90].map(a=>{const t=a*Math.PI/180;return `<line x1="${(x+Math.cos(t)*r1).toFixed(1)}" y1="${(y+Math.sin(t)*r1).toFixed(1)}" x2="${(x+Math.cos(t)*r2).toFixed(1)}" y2="${(y+Math.sin(t)*r2).toFixed(1)}" stroke="${C.line}" stroke-width="1" stroke-linecap="round"/>`;}).join('')}</g>`;};
-/* supporting keyword: sits in the left/right margin (never on the drawing), with a leader to its element */
-const tag=(g,text,{side='right',y=70,accent=false,delay=1.1}={})=>{const [px,py]=iso(...g);
-  const tx=side==='left'?94:206, anchor=side==='left'?'end':'start', ex=side==='left'?98:202, ly=y-2.5;
-  /* straight dotted connector: horizontal run from the label, then a vertical drop onto the element */
-  const d=Math.abs(py-ly)>2
-    ? `M ${ex} ${ly.toFixed(1)} H ${px.toFixed(1)} V ${py.toFixed(1)}`
-    : `M ${ex} ${ly.toFixed(1)} H ${px.toFixed(1)}`;
-  const late=`style="animation-delay:${delay}s"`, late2=`style="animation-delay:${(delay+.5).toFixed(1)}s"`;
-  return `<path d="${d}" fill="none" stroke="${C.line}" stroke-width="0.7" stroke-linecap="round" stroke-dasharray="0.6 2.4" class="fade lead" ${late}/>`+
-  `<circle cx="${ex}" cy="${ly.toFixed(1)}" r="1.6" fill="#fff" stroke="${C.line}" stroke-width="0.6" class="fade lead" ${late}/>`+
-  `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="1.8" fill="${accent?C.blue:'#fff'}" stroke="${accent?C.blue:C.line}" stroke-width="0.6" class="fade lead" ${late2}/>`+
-  `<text x="${tx}" y="${y}" text-anchor="${anchor}" font-family="Poppins" font-size="6" font-weight="500" fill="${accent?C.blue:'#54555a'}" opacity="${accent?.95:.6}" letter-spacing="1.3" class="fade lead" ${late}>${text}</text>`;};
-const caption=(t)=>`<text x="150" y="192" text-anchor="middle" font-family="Poppins" font-size="7" font-weight="500" fill="#54555a" opacity=".55" letter-spacing="2" class="fade" style="animation-delay:1.4s">${t}</text>`;
-const wrap=body=>`<svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" role="img">${body}</svg>`;
-const scanPlane=(gx,gy,gz,s)=>`<g class="scan">${plane(gx,gy,gz,s,s,{fill:'rgba(0,100,255,0.10)',stroke:C.blue,sw:.8})}</g>`;
-/* a cube that travels from grid point a to grid point b (screen-space motion), fading in and out — loops */
-const mover=(a,b,s,{dur=3,begin=0,accent=false}={})=>{const [ax,ay]=iso(...a),[bx,by]=iso(...b);
-  return `<g opacity="0">${cube(a[0],a[1],a[2],s,{accent})}<animateMotion dur="${dur}s" begin="${begin}s" repeatCount="indefinite" path="M 0 0 L ${(bx-ax).toFixed(1)} ${(by-ay).toFixed(1)}" calcMode="spline" keySplines=".4 0 .2 1" keyTimes="0;1"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/></g>`;};
-/* an iso bar that grows from the plane to height H and back — loops (polygon points animate) */
-const growBar=(gx,gy,w,H,{dur=4,begin=0,accent=false}={})=>{
-  const f=(h)=>({t:[iso(gx,gy,h),iso(gx+w,gy,h),iso(gx+w,gy+w,h),iso(gx,gy+w,h)],
-                 l:[iso(gx,gy+w,0),iso(gx+w,gy+w,0),iso(gx+w,gy+w,h),iso(gx,gy+w,h)],
-                 r:[iso(gx+w,gy,0),iso(gx+w,gy+w,0),iso(gx+w,gy+w,h),iso(gx+w,gy,h)]});
-  const lo=f(0.04), hi=f(H), st=accent?'none':C.line;
-  const poly=(k,fill)=>`<polygon points="${pts(lo[k])}" fill="${fill}" stroke="${st}" stroke-width="1" stroke-linejoin="round"><animate attributeName="points" values="${pts(lo[k])};${pts(hi[k])};${pts(hi[k])};${pts(lo[k])}" keyTimes="0;.35;.8;1" dur="${dur}s" begin="${begin}s" repeatCount="indefinite" calcMode="spline" keySplines=".4 0 .2 1;0 0 1 1;.4 0 .2 1"/></polygon>`;
-  return poly('l',accent?C.aLeft:C.left)+poly('r',accent?C.aRight:C.right)+poly('t',accent?C.aTop:C.top);};
-
-const SCENES3=[
-/* 01 Code Commit & Review */
-()=>wrap(`
-  ${plane(-1.5,-1.5,0,3,3,{cls:'fade'})}
-  ${shadow(-0.9,0.1,0.8,0.8)}
-  ${cube(-1.3,-1.3,0,.7,{cls:'fade'})}${cube(0.4,-1.3,0,.7,{cls:'fade'})}${cube(-1.3,0.5,0,.7,{cls:'fade'})}
-  <g class="float">${rays([-0.5,0.5,1.9])}${cube(-0.9,0.1,1.1,.8,{accent:true})}</g>
-  ${tag([-1.3,-0.95,0.7],'COMMITS',{side:'left',y:64})}
-  ${tag([-0.1,0.9,1.9],'IN REVIEW',{side:'right',y:64,accent:true})}
-  ${caption('EVERY COMMIT REVIEWED BEFORE IT BUILDS')}
-`),
-/* 02 Build & Test */
-()=>wrap(`
-  ${shadow(-1.2,-1.2,2.4,2.4)}
-  ${[0,1,2,3].map(i=>slab(-1.1+i*.05,-1.1+i*.05,0.15+i*.42,2.2-i*.1,2.2-i*.1,.14,{cls:'stackloop',extra:`style="animation-delay:${i*.45}s"`})).join('')}
-  <g class="stackloop" style="animation-delay:1.9s">${cube(-0.35,-0.35,2.05,.7,{accent:true})}</g>
-  ${tag([-1.1,1.1,0.9],'BUILD LAYERS',{side:'left',y:120})}
-  ${tag([0.35,-0.35,2.75],'TESTED ARTIFACT',{side:'right',y:50,accent:true})}
-  ${caption('BUILD · TEST · ASSEMBLE, ON REPEAT')}
-`),
-/* 03 Security & Compliance */
-()=>wrap(`
-  ${shadow(-1.3,-1.3,2.6,2.6)}${plane(-1.3,-1.3,0,2.6,2.6,{cls:'fade'})}
-  ${wire(-1.0,-1.0,0.1,2.0,{dash:'3 3',stroke:C.blue})}
-  ${cube(-0.45,-0.45,0.7,.9,{accent:true,cls:'fade'})}
-  ${scanPlane(-1.0,-1.0,0.15,2.0)}
-  ${tag([-1.0,1.0,1.6],'SCAN',{side:'left',y:84,accent:true})}
-  ${tag([1.3,-0.2,0],'CLEARED',{side:'right',y:130})}
-  ${caption('SECURITY + COMPLIANCE SWEEP EVERY BUILD')}
-`),
-/* 04 Deployment & Release */
-()=>wrap(`
-  ${shadow(-1.6,-1.6,3.2,3.2)}${plane(-1.6,-1.6,0,3.2,3.2,{cls:'fade'})}
-  ${[0,1,2].flatMap(r=>[0,1,2].map(c=>cube(-1.4+c*1.0,-1.4+r*1.0,0,.6,{accent:(r===2&&c<=1),cls:'fade',extra:`style="animation-delay:${(r*3+c)*.05}s"`}))).join('')}
-  ${isoLine([-1.6,1.6,0],[1.6,1.6,0],{dash:'2 3',stroke:C.blue})}${runner(pathIso([-1.6,1.6,0],[1.6,1.6,0]),3.2)}
-  ${tag([-1.4,1.2,0.6],'CANARY',{side:'left',y:136,accent:true})}
-  ${tag([1.2,-1.1,0.6],'FLEET',{side:'right',y:70})}
-  ${caption('PROGRESSIVE ROLLOUT, ROLLBACK ON RISK')}
-`),
-/* 05 Monitoring & Incident */
-()=>wrap(`
-  ${shadow(-1.7,-1.4,3.4,2.8)}${plane(-1.7,-1.4,0,3.4,2.8,{cls:'fade'})}
-  ${isoLine([-1.5,0,0],[1.5,0,0],{dash:'2 3'})}
-  <path d="${pathIso([-1.5,0,0],[-0.9,0,0],[-0.6,0,0.35],[-0.3,0,0],[0,0,0.25],[0.3,0,0],[0.5,0,1.3],[0.75,0,0],[1.1,0,0.3],[1.5,0,0])}" fill="none" stroke="${C.blue}" stroke-width="1.2" stroke-linejoin="round" class="redraw"/>
-  <g class="pulse">${node([0.5,0,1.3],3.5)}</g>${rays([0.5,0,1.3],{r1:9,r2:16})}
-  ${cube(-1.5,-1.2,0,.5,{cls:'fade'})}${cube(-0.8,-1.2,0,.5,{cls:'fade'})}${cube(-0.1,-1.2,0,.5,{cls:'fade'})}
-  ${tag([0.5,0,1.3],'ANOMALY',{side:'right',y:52,accent:true})}
-  ${tag([-1.5,0,0],'TELEMETRY',{side:'left',y:120})}
-  ${caption('SIGNALS CORRELATED INTO ONE INCIDENT')}
-`),
-/* 06 Postmortem & Feedback */
-()=>wrap(`
-  ${shadow(-1.5,-1.5,3,3)}${plane(-1.5,-1.5,0,3,3,{cls:'fade'})}
-  <path d="${pathIso([-1.2,1.2,0],[1.2,1.2,0],[1.2,-1.2,0],[-1.2,-1.2,0],[-1.2,1.2,0])}" fill="none" stroke="${C.blue}" stroke-width="1" stroke-dasharray="2 3" class="flow"/>
-  ${[[-1.2,1.2,0],[1.2,1.2,0],[1.2,-1.2,0],[-1.2,-1.2,0]].map(g=>node(g,1.8)).join('')}
-  ${cube(-1.0,-1.0,0,.6,{cls:'fade'})}${cube(0.4,-1.0,0,.6,{cls:'fade'})}
-  <g class="float">${cube(-0.4,0.2,0.4,.8,{accent:true})}</g>
-  ${runner(pathIso([-1.2,1.2,0],[1.2,1.2,0],[1.2,-1.2,0],[-1.2,-1.2,0],[-1.2,1.2,0]),4.5)}
-  ${tag([0.4,0.6,1.2],'ROOT CAUSE',{side:'right',y:96,accent:true})}
-  ${tag([-1.2,-1.2,0],'NEXT COMMIT',{side:'left',y:64})}
-  ${caption('LEARNINGS FEED THE NEXT RELEASE')}
-`)];
-
-const SCENES3_2=[
-/* 01 Creative Brief Intake */
-()=>wrap(`
-  ${shadow(-1.3,-1.3,2.6,2.6)}
-  ${[0,1,2].map(i=>slab(-1.1,-1.1,0.15+i*.45,2.2,2.2,.12,{cls:'stackloop',extra:`style="animation-delay:${i*.5}s"`})).join('')}
-  <g class="stackloop" style="animation-delay:1.6s">${cube(-0.3,-0.3,1.8,.6,{accent:true})}</g>
-  ${tag([-1.1,1.1,0.6],'BRIEF',{side:'left',y:124})}
-  ${tag([0.3,-0.3,2.4],'STRUCTURED',{side:'right',y:56,accent:true})}
-  ${caption('THE BRIEF BECOMES STRUCTURED INPUT')}
-`),
-/* 02 Creative Data Retrieval — NEW: data cubes are pulled in from both sources and settle into the context cube */
-()=>wrap(`
-  ${shadow(-1.7,-1.7,3.4,3.4)}${plane(-1.7,-1.7,0,3.4,3.4,{cls:'fade'})}
-  ${plane(-1.6,-1.6,0.01,1.1,1.1,{fill:'rgba(0,100,255,0.06)',stroke:C.line,cls:'fade'})}${plane(0.5,-1.6,0.01,1.1,1.1,{fill:'rgba(0,100,255,0.06)',stroke:C.line,cls:'fade'})}
-  ${isoLine([-1.05,-1.05,0],[0,0.4,0],{dash:'2 3'})}${isoLine([1.05,-1.05,0],[0.4,0.4,0],{dash:'2 3'})}
-  ${[0,1,2].map(i=>mover([-1.4,-1.4,0],[-0.1,0.5,0],.4,{dur:3.6,begin:i*1.2})).join('')}
-  ${[0,1,2].map(i=>mover([0.7,-1.4,0],[0.2,0.5,0],.4,{dur:3.6,begin:.6+i*1.2})).join('')}
-  <g class="breathe">${cube(-0.2,0.4,0,.8,{accent:true})}</g>
-  ${tag([-1.05,-1.6,0],'CREATIVE ASSETS',{side:'left',y:58})}
-  ${tag([1.6,-1.05,0],'PERFORMANCE',{side:'right',y:58})}
-  ${tag([0.6,1.2,0.4],'CONTEXT',{side:'right',y:134,accent:true})}
-  ${caption('ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT')}
-`),
-/* 03 Insight Reasoning — NEW: signal bars rise from the plane in turn; the strongest pattern turns blue */
-()=>wrap(`
-  ${shadow(-1.7,-1.5,3.4,3)}${plane(-1.7,-1.5,0,3.4,3,{cls:'fade'})}
-  ${[[-1.3,0.6,.6],[-0.7,0.6,1.0],[-0.1,0.6,.8],[0.5,0.6,1.5],[1.1,0.6,1.1]].map(([x,y,h],i)=>growBar(x,y,.45,h,{dur:5,begin:i*.35,accent:i===3})).join('')}
-  ${[[-1.3,-0.6,.4],[-0.7,-0.6,.7],[-0.1,-0.6,.5],[0.5,-0.6,.9],[1.1,-0.6,.6]].map(([x,y,h],i)=>growBar(x,y,.45,h,{dur:5,begin:.2+i*.35})).join('')}
-  ${tag([-1.3,1.05,0],'SIGNALS',{side:'left',y:130})}
-  ${tag([0.72,0.6,1.5],'PATTERN FOUND',{side:'right',y:56,accent:true})}
-  ${caption('GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN')}
-`),
-/* 04 Guardrail & Compliance */
-()=>wrap(`
-  ${shadow(-1.3,-1.3,2.6,2.6)}${plane(-1.3,-1.3,0,2.6,2.6,{cls:'fade'})}
-  ${wire(-1.0,-1.0,0.1,2.0,{dash:'3 3',stroke:C.blue})}
-  ${cube(-0.45,-0.45,0.7,.9,{accent:true,cls:'fade'})}
-  ${scanPlane(-1.0,-1.0,0.15,2.0)}
-  ${isoLine([1.0,1.0,0.1],[1.7,1.7,0.1],{dash:'2 3',stroke:C.blue})}${node([1.7,1.7,0.1])}
-  ${tag([-1.0,1.0,1.6],'GUARDRAILS',{side:'left',y:84,accent:true})}
-  ${tag([1.7,1.7,0.1],'APPROVED',{side:'right',y:150})}
-  ${caption('SAFETY + EVALUATION CHECKS BEFORE DELIVERY')}
-`),
-/* 05 Recommendation Delivery — NEW: insight cards leave the stack one by one and land at the user */
-()=>wrap(`
-  ${shadow(-1.7,-1.2,2.2,2.2)}${shadow(1.2,0.6,1.0,1.0)}
-  ${[0,1,2].map(i=>slab(-1.6,-1.1,0.1+i*.4,2.0,2.0,.1,{cls:'fade',extra:`style="animation-delay:${.1+i*.15}s"`})).join('')}
-  ${isoLine([0.4,-0.1,1.3],[1.7,1.1,0.05],{dash:'2 3',stroke:C.blue})}
-  ${[0,1,2].map(i=>mover([-0.9,-0.4,1.3],[1.45,0.85,0.05],.5,{dur:3,begin:i*1,accent:true})).join('')}
-  ${wire(1.2,0.6,0,1.0,{stroke:C.line})}
-  <g class="pulse">${node([1.7,1.1,1.0],3)}</g>
-  ${tag([-1.6,0.9,0.9],'INSIGHTS',{side:'left',y:120})}
-  ${tag([2.2,1.1,0.5],'THE USER',{side:'right',y:120,accent:true})}
-  ${caption('STREAMED LIVE INTO THE CONVERSATION')}
-`),
-/* 06 Feedback & Continuous Learning */
-()=>wrap(`
-  ${shadow(-1.5,-1.5,3,3)}${plane(-1.5,-1.5,0,3,3,{cls:'fade'})}
-  ${[0,1].map(i=>slab(-0.8,-0.8,0.1+i*.45,1.6,1.6,.12,{cls:'fade',extra:`style="animation-delay:${.15+i*.2}s"`})).join('')}
-  <g class="float">${cube(-0.3,-0.3,1.05,.6,{accent:true})}</g>
-  <path d="${pathIso([-1.3,1.3,0],[1.3,1.3,0],[1.3,-1.3,0],[-1.3,-1.3,0],[-1.3,1.3,0])}" fill="none" stroke="${C.blue}" stroke-width="1" stroke-dasharray="2 3" class="flow"/>
-  ${[[-1.3,1.3,0],[1.3,1.3,0],[1.3,-1.3,0],[-1.3,-1.3,0]].map(g=>node(g,1.8)).join('')}
-  ${runner(pathIso([-1.3,1.3,0],[1.3,1.3,0],[1.3,-1.3,0],[-1.3,-1.3,0],[-1.3,1.3,0]),4.5)}
-  ${tag([0.3,0.3,1.65],'EVALUATED RUN',{side:'right',y:56,accent:true})}
-  ${tag([-1.3,-1.3,0],'NEXT RUN',{side:'left',y:64})}
-  ${caption('EVERY RUN SCORED, EVERY SCORE LEARNED FROM')}
-`)];
-const SCENES3_ALL=[SCENES3,SCENES3_2];
-
-const STAGES2 = [
-  {title:"Application Intake", agent:"Interpreter",
-   desc:"Reads admissions and aid applications, transcripts and forms, and structures them into one student record.",
-   flow:"Application → Interpreter → Student record → Review request"},
-  {title:"Student Record Retrieval", agent:"Retriever",
-   desc:"Pulls transcripts, SIS history and financial documents into the context needed to assess each student.",
-   flow:"Review request → Retriever → Transcripts + Aid forms → Student view"},
-  {title:"Need & Risk Analysis", agent:"Analyst",
-   desc:"Assesses financial need and early signals of disengagement so support reaches students before they fall behind.",
-   flow:"Student view → Analyst → Need + Risk signals → Support plan"},
-  {title:"Policy & Compliance Check", agent:"Guardian",
-   desc:"Checks every award and admission decision against institutional policy, funding rules and regulatory requirements.",
-   flow:"Support plan → Guardian → Policy + Funding checks → Approved award"},
-  {title:"Student Outreach", agent:"Advisor",
-   desc:"Sends timely, personalised guidance on next steps, deadlines and support services through the channels students already use.",
-   flow:"Approved award → Advisor → Guidance → Student"},
-  {title:"Outcome Tracking", agent:"Observer",
-   desc:"Tracks enrollment, retention and completion outcomes and feeds them back to sharpen the next intervention.",
-   flow:"Student outcome → Observer → Outcome signals → Learning loop"}
-];
-
-const STAGES3 = [
-  {title:"Records Ingestion", agent:"Collector",
-   desc:"Gathers transactions, case files and policy documents from every department into one auditable record set.",
-   flow:"Department records → Collector → Indexed records → Control mapping"},
-  {title:"Control Mapping", agent:"Mapper",
-   desc:"Maps each record to the statutory controls, grant conditions and policies it must satisfy.",
-   flow:"Indexed records → Mapper → Records + Controls → Evidence map"},
-  {title:"Exception Detection", agent:"Scanner",
-   desc:"Sweeps every transaction and decision for policy breaches, missing evidence and unusual patterns.",
-   flow:"Evidence map → Scanner → Exception sweep → Flagged items"},
-  {title:"Policy Verification", agent:"Guardian",
-   desc:"Validates each finding against current regulation and policy before it reaches an auditor.",
-   flow:"Flagged items → Guardian → Regulatory checks → Verified findings"},
-  {title:"Audit Report Drafting", agent:"Reporter",
-   desc:"Drafts audit-ready reports with cited evidence for auditors and oversight bodies to review and sign off.",
-   flow:"Verified findings → Reporter → Draft report → Auditor sign-off"},
-  {title:"Remediation Tracking", agent:"Tracker",
-   desc:"Traces each finding to its root cause and tracks remediation through to closure.",
-   flow:"Finding → Tracker → Root cause → Remediation closed"}
-];
-
-/* PSE: relabel the isometric scenes for each architecture (tab 3 reuses geometry from both sets) */
-const relabel=(fn,map)=>()=>{let s=fn();for(const [a,b] of map){s=s.split('>'+a+'<').join('>'+b+'<');}return s;};
-const PS1=[[["COMMITS", "APPLICATIONS"], ["IN REVIEW", "ONE CASE"], ["EVERY COMMIT REVIEWED BEFORE IT BUILDS", "EVERY CHANNEL, ONE CASE RECORD"]], [["BUILD LAYERS", "DOCUMENTS"], ["TESTED ARTIFACT", "VERIFIED FILE"], ["BUILD · TEST · ASSEMBLE, ON REPEAT", "EVERY DOCUMENT CHECKED, LAYER BY LAYER"]], [["SCAN", "POLICY RULES"], ["CLEARED", "ELIGIBLE"], ["SECURITY + COMPLIANCE SWEEP EVERY BUILD", "EVERY CASE CHECKED AGAINST CURRENT POLICY"]], [["CANARY", "URGENT"], ["FLEET", "CASELOAD"], ["PROGRESSIVE ROLLOUT, ROLLBACK ON RISK", "THE MOST URGENT CASES WORKED FIRST"]], [["ANOMALY", "COMPLEX CASE"], ["TELEMETRY", "CASE SIGNALS"], ["SIGNALS CORRELATED INTO ONE INCIDENT", "COMPLEX CASES ROUTED TO A CASEWORKER"]], [["ROOT CAUSE", "LINEAGE"], ["NEXT COMMIT", "NEXT CASE"], ["LEARNINGS FEED THE NEXT RELEASE", "EVERY DECISION TRACEABLE, EVERY APPEAL LEARNED FROM"]]];
-const PS2=[[["BRIEF", "APPLICATION"], ["STRUCTURED", "STUDENT FILE"], ["THE BRIEF BECOMES STRUCTURED INPUT", "EVERY APPLICATION, ONE STUDENT RECORD"]], [["CREATIVE ASSETS", "TRANSCRIPTS"], ["PERFORMANCE", "AID FORMS"], ["CONTEXT", "STUDENT VIEW"], ["ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT", "TRANSCRIPTS + AID FORMS, ONE STUDENT VIEW"]], [["SIGNALS", "NEED SIGNALS"], ["PATTERN FOUND", "AT RISK"], ["GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN", "EVERY SIGNAL WEIGHED, AT-RISK STUDENTS SURFACED"]], [["GUARDRAILS", "AID RULES"], ["APPROVED", "APPROVED"], ["SAFETY + EVALUATION CHECKS BEFORE DELIVERY", "POLICY + FUNDING RULES BEFORE ANY AWARD"]], [["INSIGHTS", "GUIDANCE"], ["THE USER", "STUDENT"], ["STREAMED LIVE INTO THE CONVERSATION", "THE RIGHT NEXT STEP, BEFORE THE DEADLINE"]], [["EVALUATED RUN", "OUTCOME"], ["NEXT RUN", "NEXT TERM"], ["EVERY RUN SCORED, EVERY SCORE LEARNED FROM", "EVERY OUTCOME MEASURED, EVERY TERM SHARPER"]]];
-const PS3=[[0, [["BRIEF", "RECORDS"], ["STRUCTURED", "INDEXED"], ["THE BRIEF BECOMES STRUCTURED INPUT", "EVERY RECORD INDEXED FOR AUDIT"]], "B"], [1, [["CREATIVE ASSETS", "RECORDS"], ["PERFORMANCE", "CONTROLS"], ["CONTEXT", "EVIDENCE MAP"], ["ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT", "RECORDS + CONTROLS, ONE EVIDENCE MAP"]], "B"], [2, [["SCAN", "EXCEPTIONS"], ["CLEARED", "COMPLIANT"], ["SECURITY + COMPLIANCE SWEEP EVERY BUILD", "EVERY TRANSACTION SWEPT FOR EXCEPTIONS"]], "A"], [3, [["GUARDRAILS", "REGULATION"], ["APPROVED", "VERIFIED"], ["SAFETY + EVALUATION CHECKS BEFORE DELIVERY", "REGULATORY CHECKS BEFORE ANY FINDING"]], "B"], [4, [["INSIGHTS", "FINDINGS"], ["THE USER", "AUDITOR"], ["STREAMED LIVE INTO THE CONVERSATION", "AUDITORS SIGN OFF EVERY REPORT"]], "B"], [5, [["ROOT CAUSE", "ROOT CAUSE"], ["NEXT COMMIT", "NEXT AUDIT"], ["LEARNINGS FEED THE NEXT RELEASE", "EVERY FINDING TRACED TO CLOSURE"]], "A"]];
-const SCENES=SCENES3.map((fn,i)=>relabel(fn,PS1[i]));
-const SCENES2=SCENES3_2.map((fn,i)=>relabel(fn,PS2[i]));
-const SCENESX=PS3.map(([i,map,set])=>relabel((set==='A'?SCENES3:SCENES3_2)[i],map));
-
-const PROCESSES=[
-  {title:"The Constituent Intake & Eligibility Architecture",
-   lede:"Six AI-powered workflows that take an application from first contact to a traceable, human-approved decision.",
-   stages:STAGES, scenes:SCENES,
-   rail:["Case &amp; Policy Graph","Eligibility Rules Engine","Decision Lineage Ledger","Appeals Feedback Loop"]},
-  {title:"The Student Enrollment & Financial Aid Architecture",
-   lede:"Six AI-powered workflows that move students from application to enrollment and aid, with support before they fall behind.",
-   stages:STAGES2, scenes:SCENES2,
-   rail:["Student Record Graph","Aid &amp; Admissions Rules","Interaction Ledger","Outcome Feedback Loop"]},
-  {title:"The Audit & Compliance Reporting Architecture",
-   lede:"Six AI-powered workflows that keep every public record, decision and grant audit-ready by default.",
-   stages:STAGES3, scenes:SCENESX,
-   rail:["Records &amp; Controls Graph","Regulatory Rule Library","Audit Evidence Ledger","Remediation Feedback Loop"]}
-];
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+var FIGC=[['#0064ff','#00337f'],['#4d8cff','#0050d8'],['#00337f','#0064ff']];
+function fig(i,size){var c=FIGC[i%3];return '<svg class="pss-fig" width="'+size+'" height="'+size+'" viewBox="0 0 54 54" aria-hidden="true"><circle cx="27" cy="15" r="10" fill="'+c[0]+'"/><path d="M7 50a20 20 0 0 1 40 0z" fill="'+c[1]+'"/></svg>';}
+function arrow(m){return '<em aria-hidden="true">'+m+'</em><span class="pss-sr">'+(m==='↑'?' (up)':' (down)')+'</span>';}
 
 /* ---------------------------------------------------------------------------
-   RENDER + INTERACTION
+   PSE PROCESS SCENES — "collage" abstraction, the same language as the PSE hero:
+   overlapping brand shapes in the Searce blue palette (#001630 → #F2F7FF),
+   gradients, cropping, the dot field and the thick blue ring (inner r ≈ .49).
+   Each composition carries a public-sector / education idea (civic arches,
+   colonnades, open book, home, people, seals, campus paths). 300x200 canvas.
 --------------------------------------------------------------------------- */
-const sparkle='<svg viewBox="0 0 16 16"><path d="M8 0 L9.8 6.2 L16 8 L9.8 9.8 L8 16 L6.2 9.8 L0 8 L6.2 6.2 Z"/></svg>';
-const strip=document.getElementById('strip');
-const fine=matchMedia('(hover:hover) and (pointer:fine)');
-let panels=[], openIdx=-1, leaveTimer, current=0;
+var PSE_SCENES=(function(){
+var DEFS='<svg id="pss-defs" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>'+
+ '<linearGradient id="pssNavy" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0064ff"/><stop offset="1" stop-color="#001630"/></linearGradient>'+
+ '<linearGradient id="pssBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4d8cff"/><stop offset="1" stop-color="#0050d8"/></linearGradient>'+
+ '<linearGradient id="pssSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#f2f7ff"/></linearGradient>'+
+ '<linearGradient id="pssSoft" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9cc0ff"/><stop offset="1" stop-color="#e6efff"/></linearGradient>'+
+ '<linearGradient id="pssLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9cc0ff"/><stop offset="1" stop-color="#0064ff"/></linearGradient>'+
+ '<pattern id="pssDots" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.3" fill="#9cc0ff"/></pattern>'+
+ '</defs></svg>';
+if(!document.getElementById('pss-defs')) document.body.insertAdjacentHTML('afterbegin',DEFS);
+var NV='url(#pssNavy)', BL='url(#pssBlue)', SK='url(#pssSky)', SF='url(#pssSoft)', DT='url(#pssDots)', LN='url(#pssLine)';
+var N='#00337f', B='#0064ff', L1='#9cc0ff', L2='#cfe0ff', L3='#e6efff', W='#fff';
+function f(fill,o){o=o||{};return ' fill="'+fill+'"'+(o.op?' opacity="'+o.op+'"':'')+(o.cls?' class="'+o.cls+'"':'')+(o.style?' style="'+o.style+'"':'');}
+function arch(x,y,w,h,fill,o){var r=w/2;return '<path d="M'+x+' '+(y+h)+'V'+(y+r)+'A'+r+' '+r+' 0 0 1 '+(x+w)+' '+(y+r)+'V'+(y+h)+'Z"'+f(fill,o)+'/>';}
+function pill(x,y,w,h,fill,o){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+(Math.min(w,h)/2)+'"'+f(fill,o)+'/>';}
+function rr(x,y,w,h,r,fill,o){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+r+'"'+f(fill,o)+'/>';}
+function circ(cx,cy,r,fill,o){return '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'"'+f(fill,o)+'/>';}
+function semi(cx,cy,r,fill,o){return '<path d="M'+(cx-r)+' '+cy+'A'+r+' '+r+' 0 0 1 '+(cx+r)+' '+cy+'Z"'+f(fill,o)+'/>';}
+/* quarter-disc with its corner at (x,y): default corner bottom-left, 'br' mirrored */
+function quarter(x,y,r,fill,dir,o){return dir==='br'?'<path d="M'+x+' '+y+'V'+(y-r)+'A'+r+' '+r+' 0 0 0 '+(x-r)+' '+y+'Z"'+f(fill,o)+'/>':'<path d="M'+x+' '+y+'V'+(y-r)+'A'+r+' '+r+' 0 0 1 '+(x+r)+' '+y+'Z"'+f(fill,o)+'/>';}
+/* the reference ring: thick solid donut, inner radius ≈ 0.49 × outer */
+function ring(cx,cy,r,fill,o){var i=r*.49;return '<path fill-rule="evenodd" d="M'+cx+' '+(cy-r)+'a'+r+' '+r+' 0 1 1 0 '+(2*r)+'a'+r+' '+r+' 0 1 1 0 '+(-2*r)+'zm0 '+(r-i)+'a'+i+' '+i+' 0 1 0 0 '+(2*i)+'a'+i+' '+i+' 0 1 0 0 '+(-2*i)+'z"'+f(fill||B,o)+'/>';}
+function dots(x,y,w,h,op){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+DT+'" opacity="'+(op||.7)+'"/>';}
+function poly(p,fill,o){return '<path d="'+p+'"'+f(fill,o)+'/>';}
+function person(cx,cy,s,head,body){return circ(cx,cy,s*.34,head)+semi(cx,cy+s*1.15,s*.62,body);}
+function g(cls,inner,style){return '<g class="'+cls+'"'+(style?' style="'+style+'"':'')+'>'+inner+'</g>';}
+function stroke(d,col,w,o){o=o||{};return '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="'+w+'" stroke-linecap="round"'+(o.dash?' stroke-dasharray="'+o.dash+'"':'')+(o.cls?' class="'+o.cls+'"':'')+(o.op?' opacity="'+o.op+'"':'')+'/>';}
+function runner(d,dur,col){return '<circle r="3.4" fill="'+(col||B)+'" opacity="0"><animateMotion dur="'+(dur||3)+'s" repeatCount="indefinite" path="'+d+'"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.9;1" dur="'+(dur||3)+'s" repeatCount="indefinite"/></circle>';}
+function floor(){return '<rect x="66" y="158" width="168" height="1.2" fill="'+L3+'"/>';}
+function caption(t){return '<text x="150" y="186" text-anchor="middle" font-family="Poppins" font-size="6.5" font-weight="500" fill="#54555a" opacity=".55" letter-spacing="1.8">'+t+'</text>';}
+function wrap(b){return '<svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" role="img">'+b+'</svg>';}
+function stack(cx,cy,rs,fills){return rs.map(function(r,i){return semi(cx,cy,r,fills[i]);}).join('');}
 
-function openPanel(i){
-  if(i===openIdx) return;
-  panels.forEach((p,k)=>p.classList.toggle('is-open',k===i));
-  openIdx=i;
-  if(i>=0){ const v=panels[i].querySelector('.vector'); v.innerHTML=PROCESSES[current].scenes[i](); }
+return [
+/* ===== Cloud Operations ===== */
+[
+/* 01 wellness: a colonnade under a civic arch, four pillars scored, the strongest in navy */
+function(){return wrap(floor()+arch(86,30,128,128,SK)+dots(96,40,54,54)+circ(196,70,30,L1,{op:.55})+pill(104,96,16,62,SF)+g('float',pill(128,62,16,96,NV))+pill(152,86,16,72,BL)+pill(176,100,16,58,SF)+quarter(70,158,38,N)+g('spin',ring(222,58,14))+caption('SECURITY · OPERATIONS · PERFORMANCE · COST'));},
+/* 02 hardening: layered perimeter — a shield arch with its gate, firewall pills in front, a ring on watch */
+function(){return wrap(floor()+circ(150,96,62,SK)+dots(70,52,46,64,.6)+arch(110,48,80,110,BL)+arch(126,70,48,88,W)+g('pulse',circ(150,112,12,NV))+pill(96,104,12,54,SF)+pill(112,94,12,64,L1,{op:.9})+pill(176,94,12,64,L1,{op:.9})+pill(192,104,12,54,SF)+quarter(234,158,30,N,'br')+g('spin',ring(214,52,12))+caption('THE PERIMETER, TIGHTENED'));},
+/* 03 patching: three arch-topped columns; a navy half-disc settles onto the middle one */
+function(){return wrap(floor()+circ(150,92,58,SK)+dots(186,44,54,50)+arch(100,90,28,68,SF)+arch(136,74,28,84,BL)+arch(172,90,28,68,SF)+g('stackloop',semi(150,64,16,NV))+stroke('M96 60A60 60 0 0 1 150 34',L1,3,{dash:'1 7'})+quarter(66,158,34,N)+caption('UPDATES ROLL OUT WITH NO DOWNTIME'));},
+/* 04 data protection: an archive of stacked half-discs and its blue copy; a dot carries data between them */
+function(){var d='M150 120C166 108 182 108 196 122';return wrap(floor()+dots(76,42,60,48)+stack(122,158,[58,44,30,16],[SK,SF,BL,NV])+circ(206,92,26,L1,{op:.5})+g('settle',stack(208,158,[34,22],[BL,NV]))+stroke(d,L1,2,{dash:'1 6'})+runner(d,2.6)+g('spin',ring(232,66,11))+caption('A RECOVERY POINT EVERY SIX HOURS'));},
+/* 05 monitoring: the dot field, a calm wave and one navy signal with its pulse */
+function(){return wrap(floor()+circ(118,98,54,SK)+dots(90,46,140,96,.75)+stroke('M74 128C100 128 108 98 132 98S164 140 190 128 214 110 226 110',LN,4)+g('pulse',circ(176,92,24,L1,{op:.45}))+circ(176,92,11,NV)+quarter(234,158,34,BL,'br')+caption('ISSUES FLAGGED BEFORE THEY LAND'));},
+/* 06 cost: a budget disc with the navy savings slice lifting out of it, usage pillars stepping down beside */
+function(){return wrap(floor()+dots(70,34,56,46)+circ(126,104,44,SK)+'<path d="M126 104V60A44 44 0 1 0 170 104Z" fill="'+SF+'"/>'+g('float','<path d="M134 96V52A44 44 0 0 1 178 96Z" fill="'+NV+'"/>')+circ(126,104,14,W)+pill(194,92,13,66,L1)+pill(212,110,13,48,BL)+pill(230,128,13,30,N)+g('spin',ring(222,58,10))+caption('SPEND, BROUGHT DOWN'));}
+],
+/* ===== Digital Campus ===== */
+[
+/* 01 upskilling: an open book with ideas rising out of it */
+function(){return wrap(floor()+dots(96,36,108,50,.6)+circ(170,86,34,L1,{op:.45})+poly('M150 158C130 140 104 136 84 142V112C104 104 130 110 150 128Z',BL)+poly('M150 158C170 140 196 136 216 142V112C196 104 170 110 150 128Z',SF)+g('float',circ(150,82,13,NV)+circ(124,98,6,B)+circ(178,70,7,L2))+quarter(234,158,30,N,'br')+caption('TEACHING REBUILT AROUND TECHNOLOGY'));},
+/* 02 rollout: a row of screens under a campus arch, the middle one switched on */
+function(){return wrap(floor()+arch(92,44,116,114,SK)+dots(186,36,50,46)+rr(90,100,40,30,8,SF)+rr(130,92,44,34,8,BL)+g('float',rr(178,100,40,30,8,SF))+semi(110,158,14,L1)+semi(152,158,16,NV)+semi(198,158,14,L1)+g('spin',ring(80,64,11))+caption('A DEVICE AND A WORKSPACE FOR EVERY USER'));},
+/* 03 central admin: one hub with an orbit of people and devices */
+function(){return wrap(dots(70,40,60,60,.6)+circ(150,102,58,SK)+g('spin',circ(150,44,9,N)+rr(198,94,16,16,4,BL)+poly('M150 152l9 14h-18z',B)+semi(102,110,10,L1))+'<circle cx="150" cy="102" r="50" fill="none" stroke="'+L2+'" stroke-width="2" stroke-dasharray="2 6"/>'+circ(150,102,24,BL)+circ(150,102,9,W)+quarter(234,160,32,N,'br')+caption('USERS, DEVICES AND GROUPS IN ONE PLACE'));},
+/* 04 collaborative learning: two campus arches, a shared space between them, a path that joins them */
+function(){var d='M110 140C130 112 170 112 190 140';return wrap(floor()+dots(118,38,64,40)+arch(78,96,48,62,SF)+arch(174,96,48,62,SK)+circ(150,110,34,L1,{op:.45})+person(102,124,13,N,N)+person(198,124,13,B,BL)+stroke(d,L1,2,{dash:'1 6'})+runner(d,3)+g('float',semi(150,96,15,NV))+caption('LEARNING ACROSS LOCATIONS'));},
+/* 05 family engagement: a home with an arched door, parent and child, a blue speech bubble */
+function(){return wrap(dots(80,40,60,60,.6)+poly('M150 52l58 50v56H92v-56z',BL)+arch(138,124,24,34,W)+circ(214,112,15,L1,{op:.85})+semi(214,158,24,N,{op:.92})+circ(242,128,9,L2)+semi(242,158,14,B)+g('float',poly('M176 40h40a14 14 0 0 1 14 14v8a14 14 0 0 1-14 14h-26l-10 10v-10a14 14 0 0 1-4-28z',NV)+circ(192,58,2.5,W)+circ(202,58,2.5,W)+circ(212,58,2.5,W))+quarter(60,158,30,L2)+caption('SUPPORT THAT REACHES HOME'));},
+/* 06 insights & security: a gauge of blue bands inside a protective arch, the needle pointing up */
+function(){return wrap(floor()+arch(84,40,132,118,SK)+dots(190,34,48,44)+stack(150,158,[62,50],[SF,W])+'<path d="M96 158A54 54 0 0 1 116 116" fill="none" stroke="'+L1+'" stroke-width="10"/><path d="M118 114A54 54 0 0 1 172 106" fill="none" stroke="'+B+'" stroke-width="10"/><path d="M175 108A54 54 0 0 1 204 158" fill="none" stroke="'+N+'" stroke-width="10"/>'+g('float',stroke('M150 158L176 118',N,4))+circ(150,158,8,NV)+caption('REAL-TIME INSIGHT, SECURED'));}
+],
+/* ===== Data Protection ===== */
+[
+/* 01 risk: an exposed record inside a broken seal, three risks pointing in */
+function(){return wrap(floor()+circ(150,100,56,SK)+dots(184,40,56,50)+rr(128,76,44,58,8,SF)+rr(136,88,28,4,2,W)+rr(136,98,20,4,2,W)+'<circle cx="150" cy="104" r="46" fill="none" stroke="'+B+'" stroke-width="6" stroke-dasharray="40 16" class="spin"/>'+g('pulse',circ(150,118,7,NV))+poly('M84 76l18 6-12 12z',N)+poly('M218 120l-18-2 10-14z',BL)+poly('M150 166l-8-14h16z',B)+caption('EVERY EXPOSURE MAPPED'));},
+/* 02 private connectivity: two gateway buildings joined by a covered navy tunnel with a padlock; the open road below fades out */
+function(){var d='M116 108H184';return wrap(floor()+circ(150,96,52,SK)+dots(118,28,64,36)+arch(70,70,46,88,BL)+arch(85,130,16,28,W)+arch(184,70,46,88,SF)+arch(199,130,16,28,W)+pill(110,98,80,20,NV)+runner(d,2.2,W)+g('float',rr(140,70,20,16,4,B)+'<path d="M144.5 70v-5a5.5 5.5 0 0 1 11 0v5" fill="none" stroke="'+B+'" stroke-width="2.6"/>'+circ(150,78,2.4,W))+'<path d="M58 170H242" stroke="'+L2+'" stroke-width="2" stroke-dasharray="3 6" opacity=".7"/>'+g('spin',ring(236,52,10))+caption('A PRIVATE LINK, OFF THE PUBLIC INTERNET'));},
+/* 03 key management: nested vault arches holding a white keyhole */
+function(){return wrap(arch(90,40,120,120,NV)+arch(104,54,92,106,BL)+arch(118,68,64,92,SF)+g('float',circ(150,110,10,W)+poly('M144 116h12l4 24h-20z',W))+dots(196,54,54,54)+circ(82,70,20,L1,{op:.6})+quarter(210,160,30,N)+caption('KEYS CREATED AND HELD SAFELY'));},
+/* 04 at rest: record sheets sealed inside the ring */
+function(){return wrap(floor()+dots(72,44,56,56,.6)+ring(150,104,58,SK)+rr(122,112,56,34,7,SF)+rr(126,98,56,34,7,L1)+g('settle',rr(118,84,56,34,7,BL)+rr(128,96,30,4,2,W)+rr(128,106,20,4,2,W))+g('spin',ring(222,58,11))+quarter(234,158,30,N,'br')+caption('DATA SEALED AT REST'));},
+/* 05 in transit: two endpoints face each other; a sealed packet crosses between */
+function(){return wrap(floor()+circ(150,92,50,SK)+dots(118,36,64,40)+semi(98,158,34,NV)+semi(202,158,34,BL)+circ(98,116,13,L1)+circ(202,116,13,L2)+stroke('M118 112H182',L1,2,{dash:'1 6'})+'<g><rect x="-10" y="-8" width="20" height="16" rx="4" fill="'+N+'"/><path d="M-5 -8v-4a5 5 0 0 1 10 0v4" fill="none" stroke="'+N+'" stroke-width="2.4"/><animateMotion dur="2.8s" repeatCount="indefinite" path="M116 112H184"/></g>'+caption('NO MORE PLAIN-TEXT TRAVEL'));},
+/* 06 secure operations: source and destination rings linked in one protected loop */
+function(){var d='M122 104C122 70 178 70 178 104S122 138 122 104';return wrap(floor()+dots(76,42,60,52,.6)+circ(150,104,54,SK)+g('spin',ring(122,104,30,NV))+ring(178,104,30,BL,{op:.92})+runner(d,4,W)+quarter(234,158,30,L1,'br')+caption('ENCRYPTED END TO END, EVERY DAY'));}
+],
+/* ===== Serverless Scale ===== */
+[
+/* 01 target: a stopwatch of brand shapes — the navy sweep stays under one second — facing a crowd of users */
+function(){var crowd='',xs=[84,104,124,176,196,216],fs=[[L1,SF],[B,BL],[L2,SK],[N,NV],[L1,SF],[B,BL]];xs.forEach(function(x,i){crowd+=person(x,140,11,fs[i][0],fs[i][1]);});
+  return wrap(floor()+dots(176,30,60,46)+circ(150,96,48,SK)+circ(150,96,36,W)+g('spin','<circle cx="150" cy="96" r="36" fill="transparent"/><path d="M150 96V60A36 36 0 0 1 186 96Z" fill="'+NV+'"/>')+circ(150,96,6,N)+pill(144,40,12,10,BL)+g('spin',ring(196,52,9))+crowd+caption('UNDER ONE SECOND, FOR 10,000 USERS'));},
+/* 02 serverless deploy: a tall app arch rises out of a soft cloud; instances float up around it as it scales on its own */
+function(){return wrap(circ(150,100,60,SK)+dots(64,34,56,50)+quarter(236,160,56,NV,'br')+arch(124,46,52,112,BL)+circ(150,72,9,W)+rr(136,96,28,6,3,L2)+rr(136,108,20,6,3,L2)+circ(112,150,22,SF)+circ(136,156,20,L2)+circ(170,154,22,SF)+circ(192,150,16,L2)+rr(84,156,132,6,3,SK)+g('float',circ(92,92,10,L1))+g('float',circ(206,74,12,N),'animation-delay:1.2s')+g('float',circ(214,118,7,B),'animation-delay:2.2s')+g('spin',ring(80,56,9))+caption('THE APP RUNS AS A MANAGED SERVICE'));},
+/* 03 managed data: a civic rotunda (dome on columns) is the primary data layer; its pale twin stands behind as the standby */
+function(){var d='M110 62C134 30 184 32 202 70',rot=function(x,dome,col,base){return semi(x,92,32,dome)+rr(x-38,92,76,7,3,base)+pill(x-30,101,9,40,col)+pill(x-14,101,9,40,col)+pill(x+5,101,9,40,col)+pill(x+21,101,9,40,col)+rr(x-40,141,80,7,3,base)+rr(x-46,148,92,10,3,base);};
+  return wrap(floor()+circ(166,96,58,SK)+dots(196,28,52,44)+rot(196,L1,SF,L2)+rot(108,NV,BL,SF)+'<path d="'+d+'" fill="none" stroke="'+L1+'" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round"/>'+runner(d,2.4)+g('pulse',circ(108,52,5,B))+quarter(236,158,22,L1,'br')+caption('A DATA LAYER THAT STAYS UP'));},
+/* 04 caching: hot data dashes to the front in speed pills */
+function(){return wrap(floor()+circ(110,108,42,SK)+circ(110,108,26,SF)+dots(70,40,54,40,.6)+g('mover2',pill(144,90,40,8,L1)+pill(152,106,52,8,BL)+pill(144,122,30,8,L2))+g('float',circ(214,108,18,NV))+quarter(234,160,28,L1,'br')+caption('HOT DATA, SERVED FAST'));},
+/* 05 scaling: a colonnade growing in height, the last pillar navy */
+function(){return wrap(floor()+quarter(80,158,80,SK)+dots(168,36,60,42)+g('grow',pill(100,122,18,36,SF))+g('grow',pill(126,106,18,52,L1),'animation-delay:.25s')+g('grow',pill(152,88,18,70,BL),'animation-delay:.5s')+g('grow',pill(178,66,18,92,NV),'animation-delay:.75s')+g('spin',ring(220,60,11))+caption('PEAKS ABSORBED AUTOMATICALLY'));},
+/* 06 lean: a wide quiet arch holding one blue form — what is left is the work that matters */
+function(){return wrap(floor()+arch(88,40,124,118,SK)+dots(100,50,46,46,.5)+g('float',quarter(132,158,48,BL))+circ(190,116,13,NV)+semi(190,158,22,L1)+circ(72,80,16,L1,{op:.5})+caption('TEAMS FREED TO FOCUS ON WHAT MATTERS'));}
+]
+];
+})();
+
+
+function $(i){return document.getElementById(i);}
+var sec=$('processes'), deck=$('deck'), cards=[], sgs=[], cur=0, ticking=false;
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+function stepPx(){return innerHeight*0.62;}
+function render(a){
+  $('tag').textContent=a.tag; $('title').textContent=a.title; $('sub').textContent=a.sub;
+  cards.forEach(function(c){c.remove();});
+  var h=a.steps.map(function(s,i){return '<article class="pss-card" data-i="'+i+'" aria-label="Stage '+(i+1)+': '+esc(s[0])+'"><div class="pss-copy"><div class="pss-num">0'+(i+1)+'</div><span class="pss-kick">'+a.kicker+'</span><div class="pss-svc">'+esc(s[1])+'</div><div class="pss-step">'+esc(s[0])+'</div><p class="pss-desc">'+esc(s[2])+'</p></div><div class="pss-art" aria-hidden="true">'+PSE_SCENES[cur][i]()+'</div></article>';}).join('');
+  h+='<article class="pss-card pss-res" aria-label="The breakthrough"><div class="pss-copy"><span class="pss-kick">The breakthrough</span><div class="pss-headline">'+esc(a.headline)+'</div><p class="pss-res-sub">'+esc(a.title.replace(/^The /,''))+', from '+esc(a.steps[0][0].toLowerCase())+' to '+esc(a.steps[5][0].toLowerCase())+'.</p></div><div class="pss-res-right"><div class="pss-metrics">'+a.metrics.map(function(m){return '<div><b>'+arrow(m[1])+esc(m[0])+'</b><span>'+esc(m[2])+'</span></div>';}).join('')+'</div><div class="pss-people"><span class="pss-kick">Human in the loop</span>'+a.roles.map(function(r,i){return '<span class="pss-role" title="'+esc(r[1].join(' · '))+'">'+fig(i,22)+esc(r[0])+'</span>';}).join('')+'</div></div></article>';
+  deck.insertAdjacentHTML('beforeend',h);
+  cards=[].slice.call(deck.querySelectorAll('.pss-card'));
+  $('stages').innerHTML=a.steps.map(function(s,i){return '<button class="pss-sg" role="tab" aria-label="Stage '+(i+1)+': '+esc(s[0])+'"><i><b></b></i><span class="n">0'+(i+1)+'</span><span class="nm">'+esc(s[0])+'</span><span class="sv">'+esc(s[1])+'</span></button>';}).join('');
+  sgs=[].slice.call(document.querySelectorAll('.pss-sg'));
+  sgs.forEach(function(b,i){b.addEventListener('click',function(){window.scrollTo({top:sec.offsetTop+i*stepPx()+2,behavior:reduce?'auto':'smooth'});});});
+  update();
 }
-function closeAll(){ openPanel(0); }
-
-function renderProcess(pi){
-  current=pi; openIdx=-1;
-  const P=PROCESSES[pi];
-  document.getElementById('procTitle').textContent=P.title;
-  document.getElementById('procLede').textContent=P.lede;
-  document.getElementById('railItems').innerHTML=P.rail.map(r=>`<span>${r}</span>`).join('<i></i>');
-  strip.innerHTML=P.stages.map((s,i)=>{
-    const num=String(i+1).padStart(2,'0');
-    return `<article class="panel" role="listitem" tabindex="0" data-i="${i}" aria-label="Stage ${num}: ${s.title}">
-      <div class="face"><span class="num">${num}</span><span class="vt">${s.title}</span><span class="dot"></span></div>
-      <div class="body">
-        <div class="body-top">
-          <div><span class="num">${num}</span><h3>${s.title}</h3></div>
-          <div class="agent"><b>${sparkle}</b><span>AI agent</span>${s.agent}</div>
-        </div>
-        <p>${s.desc}</p>
-        <div class="vector" aria-label="${s.flow}"></div>
-      </div>
-    </article>`;
-  }).join('');
-  panels=[...strip.querySelectorAll('.panel')];
-  panels.forEach((p,i)=>{
-    p.addEventListener('mouseenter',()=>{ if(!fine.matches) return; clearTimeout(leaveTimer); openPanel(i); });
-    p.addEventListener('focus',()=>openPanel(i));
-    p.addEventListener('click',()=>openPanel(i));
-    p.addEventListener('keydown',e=>{
-      if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();panels[(i+1)%panels.length].focus();}
-      if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();panels[(i+panels.length-1)%panels.length].focus();}
-      if(e.key==='Escape'){closeAll();}
-    });
+function progress(){return Math.max(0,Math.min(6,(window.scrollY-sec.offsetTop)/stepPx()));}
+var small=window.matchMedia('(max-width:900px)');
+function update(){
+  ticking=false;
+  if(small.matches){cards.forEach(function(c){c.style.transform='';c.style.visibility='';c.style.setProperty('--mix','0');});return;}
+  var p=progress(), H=deck.clientHeight;
+  cards.forEach(function(c,i){
+    var d=p-i, y, s=1, mix=0;
+    if(d<0){ y=Math.min(-d,1)*(H+40); c.style.visibility=d<-1?'hidden':'visible'; }
+    else { var k=Math.min(d,3); y=-k*14; s=1-k*0.03; mix=Math.min(d,1); c.style.visibility=d>3.2?'hidden':'visible'; }
+    c.style.transform='translateY('+y.toFixed(1)+'px) scale('+s.toFixed(4)+')';
+    c.style.setProperty('--mix',mix.toFixed(3));
+    c.style.zIndex=i+1;
   });
-  openPanel(0);
+  var act=Math.min(6,Math.round(p));
+  sgs.forEach(function(b,i){
+    b.classList.toggle('active',i===act);
+    b.querySelector('b').style.width=(Math.max(0,Math.min(1,p-i+0.5))*100)+'%';
+    b.setAttribute('aria-selected',i===act);
+  });
+  $('hint').style.opacity=p>0.15?0:1;
 }
-strip.addEventListener('mouseleave',()=>{ if(fine.matches){ leaveTimer=setTimeout(closeAll,260); } });
-renderProcess(0);
+window.addEventListener('scroll',function(){ if(!ticking){ticking=true;requestAnimationFrame(update);} },{passive:true});
+window.addEventListener('resize',update);
+var tabs=[].slice.call(document.querySelectorAll('.pss-tab'));
+tabs.forEach(function(t){t.addEventListener('click',function(){
+  var i=+t.dataset.a; if(i===cur) return;
+  tabs.forEach(function(x){x.classList.toggle('active',x===t);x.setAttribute('aria-selected',x===t?'true':'false');});
+  cur=i; var tb=t.parentNode; if(tb.scrollWidth>tb.clientWidth) tb.scrollTo({left:Math.max(0,t.offsetLeft-24),behavior:'smooth'}); sec.classList.add('pss-swap');
+  setTimeout(function(){ render(A[cur]); sec.classList.remove('pss-swap'); if(window.scrollY>sec.offsetTop+4) window.scrollTo({top:sec.offsetTop,behavior:'auto'}); },reduce?0:260);
+});});
+render(A[0]);
 
-const ind=document.querySelector('.p-ind');
-function moveInd(){const a=document.querySelector('.p-tab.active');if(!a)return;ind.style.left=a.offsetLeft+'px';ind.style.width=a.offsetWidth+'px';}
-document.querySelectorAll('.p-tab').forEach(t=>t.addEventListener('click',()=>{
-  if(t.getAttribute('aria-disabled')==='true') return;
-  document.querySelectorAll('.p-tab').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-selected','false');});
-  t.classList.add('active');t.setAttribute('aria-selected','true');moveInd();
-  const pi=parseInt(t.dataset.p,10); if(!Number.isNaN(pi)&&pi!==current) renderProcess(pi);
-}));
-window.addEventListener('resize',moveInd);moveInd();document.fonts&&document.fonts.ready.then(moveInd);
 })();
 </script>
 

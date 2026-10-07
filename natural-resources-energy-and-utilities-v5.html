@@ -473,7 +473,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 /* ========== PROCESSES · Layout 3 sliding card carousel (from tss-processes-layout3) ========== */
 .section-lede{max-width:720px;color:var(--ink-60);font-size:17px;line-height:1.65;}
 /* ========== Layout 3 · Sliding card carousel ========== */
-.devops{padding:120px 0 112px;background:var(--paper);border-bottom:1px solid var(--paper-line);position:relative;overflow:hidden;}
+.devops{padding:120px 0 112px;background:var(--paper);border-bottom:none;position:relative;overflow:hidden;}
 /* background grid — same treatment as the RCM (Distyl) layout */
 .devops::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right, rgba(29,29,31,0.025) 1px, transparent 1px),linear-gradient(to bottom, rgba(29,29,31,0.025) 1px, transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 85% 75% at 50% 50%, #000 55%, transparent 100%);-webkit-mask-image:radial-gradient(ellipse 85% 75% at 50% 50%, #000 55%, transparent 100%);}
 .devops .wrap{position:relative;z-index:1;}
@@ -771,7 +771,7 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 .hero-video-wrap.nr-video video{left:0;top:0;width:100%;height:100%;object-position:50% 50%;}
 .hero-composition.nr-comp{aspect-ratio:1500/900;width:min(43%,calc((100vh - 240px) * 1.667));right:48px;}
 .nr-comp .hero-video-wrap.nr-video video{top:-14%;height:114%;}
-@media (max-width:900px){.hero-composition.nr-comp{width:100%;max-width:560px;right:auto;}}
+/* (mobile hero sizing lives in the NREU mobile block after assets/industry-mobile.css) */
 /* NREU hero: "natural resources," is the longest first line of the industry pages, so a smaller clamp (~76px at 1440, in line with MIC 75 / TTL 80) */
 .hero h1{font-size:clamp(2.4rem,5.3vw,4.75rem);}
 
@@ -787,36 +787,28 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
 .devops .p-ind{display:none;}
 @media (max-width:900px){.devops .devops-head{align-items:center;}.devops .p-tabs{gap:10px;}.devops .p-tab{padding:11px 18px;font-size:13.5px;}}
 </style>
+<link rel="stylesheet" href="assets/searce-nav.css">
+<link rel="stylesheet" href="assets/industry-mobile.css">
+<style>
+/* NREU mobile, matched to TSS / HLS (2026-10-07). Loaded after assets/industry-mobile.css so it wins. */
+@media (max-width:720px){
+  /* the collage takes the shared full-bleed hero slot; being wide (5:3) it is scaled up to carry the same weight as the HLS/TSS collages, bleeding off the left edge */
+  .hero .hero-composition.nr-comp{transform:scale(1.24);transform-origin:64% 50%;margin-top:36px;margin-bottom:62px;}
+  .shift .shift-new{font-size:21px;line-height:1.25;}
+  .shift .shift-text{font-size:15.5px;line-height:1.6;}
+  .shift-stage{aspect-ratio:1 / 0.9;}
+  .devops .devops-head{justify-content:flex-start;text-align:left;}
+  .devops .p-tabs{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;margin:0 -24px 32px;padding:2px 24px 6px;scroll-snap-type:x proximity;scroll-padding-inline:24px;scrollbar-width:none;}
+  .devops .p-tabs::-webkit-scrollbar{display:none;}
+  .devops .p-tab{flex:0 0 auto;scroll-snap-align:start;}
+  .tile .full{padding:20px 18px 16px;}
+  .tile .full h3{font-size:21px;}
+}
+</style>
 </head>
 <body>
 
-<nav class="nav" aria-label="Primary navigation">
-  <div class="wrap">
-    <a href="index.html" class="nav-logo" aria-label="Searce home">Searce</a>
-    <ul class="nav-links">
-      <li><a href="#">outcomes</a></li>
-      <li><a href="#">how we solve <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="business-systems-engineering.html">practices <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="#" class="current">industries <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></li>
-      <li><a href="#">insights</a></li>
-      <li class="has-dropdown">
-        <a href="#" aria-haspopup="true">company
-          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </a>
-        <div class="mega-panel">
-          <a class="mega-item" href="who-we-are.html"><span class="mega-title">Who we are</span></a>
-          <a class="mega-item" href="#"><span class="mega-title">Partners</span></a>
-          <a class="mega-item" href="careers.html"><span class="mega-title">Careers</span></a>
-          <a class="mega-item" href="#"><span class="mega-title">futurify.ai</span></a>
-        </div>
-      </li>
-    </ul>
-    <a href="#connect" class="nav-cta">
-      bring us a problem
-      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
-    </a>
-  </div>
-</nav>
+<script src="assets/searce-nav.js" data-theme="light" data-current="nreu"></script>
 
 <!-- ============== HERO + REALITY (one shared white -> light blue background) ============== -->
 <div class="hero-reality">
@@ -824,11 +816,11 @@ footer{background:#020614;color:rgba(255,255,255,0.6);padding:80px 0 40px;font-s
   <div class="wrap">
     <div class="hero-text">
       <div class="hero-badge">
-        <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true"><rect x="158" y="24" width="58" height="101" fill="#13377f"/><rect x="250" y="158" width="101" height="58" fill="#13377f"/><rect x="22" y="158" width="194" height="58" fill="#0064ff"/><rect x="158" y="250" width="58" height="101" fill="#0064ff"/></svg>
+        <svg class="hero-badge-icon" viewBox="0 0 375 375" aria-hidden="true"><path d="M197 25H341V170Z" fill="#13377f"/><rect x="106" y="117" width="144" height="144" fill="#0064ff"/><path d="M34 188H70V297H178V333H34Z" fill="#13377f"/></svg>
         2030 Vision &middot; Intelligent Energy Systems
       </div>
       <h1 id="hero-heading">
-        natural resources,<br>energy &amp; utilities
+        natural resources, <br>energy &amp; utilities
       </h1>
       <div class="hero-opening">
         <p>Real-Time Grid Intelligence. Predictive Assets. Resilient Operations.</p>
@@ -1528,8 +1520,8 @@ const runner=(d,dur=3.4,begin=0)=>`<circle r="2.4" fill="${C.blue}" opacity="0">
 /* soft rays around a point (reference 1) */
 const rays=(g,{r1=18,r2=26}={})=>{const [x,y]=iso(...g);return `<g class="rays">${[-150,-90,-30,30,90].map(a=>{const t=a*Math.PI/180;return `<line x1="${(x+Math.cos(t)*r1).toFixed(1)}" y1="${(y+Math.sin(t)*r1).toFixed(1)}" x2="${(x+Math.cos(t)*r2).toFixed(1)}" y2="${(y+Math.sin(t)*r2).toFixed(1)}" stroke="${C.line}" stroke-width="1" stroke-linecap="round"/>`;}).join('')}</g>`;};
 /* supporting keyword: sits in the left/right margin (never on the drawing), with a leader to its element */
-const tag=(g,text,{side='right',y=70,accent=false,delay=1.1}={})=>{const [px,py]=iso(...g);
-  const tx=side==='left'?94:206, anchor=side==='left'?'end':'start', ex=side==='left'?98:202, ly=y-2.5;
+const tag=(g,text,{side='right',y=70,accent=false,delay=1.1,dx=0}={})=>{const [px,py]=iso(...g);
+  const tx=(side==='left'?94:206)+dx, anchor=side==='left'?'end':'start', ex=(side==='left'?98:202)+dx, ly=y-2.5;
   /* straight dotted connector: horizontal run from the label, then a vertical drop onto the element */
   const d=Math.abs(py-ly)>2
     ? `M ${ex} ${ly.toFixed(1)} H ${px.toFixed(1)} V ${py.toFixed(1)}`
@@ -1684,11 +1676,421 @@ const SCENES3_2=[
   ${tag([-1.3,-1.3,0],'NEXT RUN',{side:'left',y:64})}
   ${caption('EVERY RUN SCORED, EVERY SCORE LEARNED FROM')}
 `)];
-/* NREU: relabel the isometric scenes for each architecture (geometry reused from the two Layout 3 sets) */
-const relabel=(fn,map)=>()=>{let s=fn();for(const [a,b] of map){s=s.split('>'+a+'<').join('>'+b+'<');}return s;};
-const NR_SET={A:SCENES3,B:SCENES3_2};
-const NRT=[[["B", 0, [["BRIEF", "PHOTO + SOUND"], ["STRUCTURED", "CAPTURED"], ["THE BRIEF BECOMES STRUCTURED INPUT", "EVERY PHOTO AND SOUND, READY TO READ"]]], ["A", 2, [["SCAN", "SIX CHECKS"], ["CLEARED", "CHECKED"], ["SECURITY + COMPLIANCE SWEEP EVERY BUILD", "SIX HAZARD CHECKS ON EVERY CAPTURE"]]], ["B", 2, [["SIGNALS", "FLAGS"], ["PATTERN FOUND", "REAL HAZARD"], ["GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN", "REAL HAZARDS SEPARATED FROM NOISE"]]], ["B", 4, [["INSIGHTS", "TICKET"], ["THE USER", "REPAIR CREW"], ["STREAMED LIVE INTO THE CONVERSATION", "REPAIR TICKET OPENED IN SECONDS"]]], ["A", 4, [["ANOMALY", "RISK SCORE"], ["TELEMETRY", "ASSETS"], ["SIGNALS CORRELATED INTO ONE INCIDENT", "FAILURE RISK SCORED BEFORE OUTAGES"]]], ["A", 5, [["ROOT CAUSE", "RECORDS"], ["NEXT COMMIT", "FIELD"], ["LEARNINGS FEED THE NEXT RELEASE", "FIELD AND RECORDS KEPT IN SYNC"]]]], [["B", 1, [["CREATIVE ASSETS", "MACRO"], ["PERFORMANCE", "MICRO"], ["CONTEXT", "SIGNALS"], ["ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT", "MACRO + MICRO SIGNALS GATHERED"]]], ["A", 1, [["BUILD LAYERS", "FACTORS"], ["TESTED ARTIFACT", "KNOWLEDGE BASE"], ["BUILD · TEST · ASSEMBLE, ON REPEAT", "FACTORS LINKED INTO ONE KNOWLEDGE BASE"]]], ["A", 0, [["COMMITS", "PATTERNS"], ["IN REVIEW", "TRAINING"], ["EVERY COMMIT REVIEWED BEFORE IT BUILDS", "A MODEL FOR EVERY DEMAND PATTERN"]]], ["B", 2, [["SIGNALS", "HORIZONS"], ["PATTERN FOUND", "DEMAND PEAK"], ["GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN", "SHORT, MEDIUM AND LONG HORIZONS"]]], ["B", 3, [["GUARDRAILS", "BACKTEST"], ["APPROVED", "BEST MODEL"], ["SAFETY + EVALUATION CHECKS BEFORE DELIVERY", "BACKTESTED, DRIFT TRACKED, BEST PICKED"]]], ["A", 3, [["CANARY", "DISPATCH"], ["FLEET", "GENERATION"], ["PROGRESSIVE ROLLOUT, ROLLBACK ON RISK", "FORECASTS BECOME DISPATCH PLANS"]]]], [["B", 1, [["CREATIVE ASSETS", "LOCATION"], ["PERFORMANCE", "GRID DATA"], ["CONTEXT", "CANDIDATES"], ["ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT", "CANDIDATE SITES FROM EVERY SIGNAL"]]], ["A", 2, [["SCAN", "SCREEN"], ["CLEARED", "FEASIBLE"], ["SECURITY + COMPLIANCE SWEEP EVERY BUILD", "CAPACITY, LAND AND REGULATORY CHECKS"]]], ["B", 2, [["SIGNALS", "SITES"], ["PATTERN FOUND", "TOP RETURN"], ["GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN", "SITES RANKED BY EXPECTED RETURN"]]], ["B", 3, [["GUARDRAILS", "APPROVALS"], ["APPROVED", "APPROVED"], ["SAFETY + EVALUATION CHECKS BEFORE DELIVERY", "LEGAL, LAND AND FINANCE IN ONE FLOW"]]], ["A", 1, [["BUILD LAYERS", "MILESTONES"], ["TESTED ARTIFACT", "LIVE SITE"], ["BUILD · TEST · ASSEMBLE, ON REPEAT", "VENDORS AND MILESTONES TO GO-LIVE"]]], ["A", 5, [["ROOT CAUSE", "UPTIME"], ["NEXT COMMIT", "NEXT SITE"], ["LEARNINGS FEED THE NEXT RELEASE", "EVERY SITE IMPROVES THE NEXT"]]]], [["A", 4, [["ANOMALY", "PEAK"], ["TELEMETRY", "FEEDERS"], ["SIGNALS CORRELATED INTO ONE INCIDENT", "PEAK LOAD BY FEEDER AND TIME"]]], ["B", 1, [["CREATIVE ASSETS", "USAGE"], ["PERFORMANCE", "WILLINGNESS"], ["CONTEXT", "COHORT"], ["ASSETS + PERFORMANCE PULLED INTO ONE CONTEXT", "COHORTS MOST ABLE TO SHIFT LOAD"]]], ["B", 2, [["SIGNALS", "LEVERS"], ["PATTERN FOUND", "CHEAPEST MIX"], ["GEMINI WEIGHS EVERY SIGNAL, SURFACES THE PATTERN", "THE CHEAPEST MIX OF LEVERS"]]], ["B", 4, [["INSIGHTS", "OFFERS"], ["THE USER", "CONSUMER"], ["STREAMED LIVE INTO THE CONVERSATION", "RIGHT OFFER, CHANNEL AND TIMING"]]], ["A", 3, [["CANARY", "DISPATCH"], ["FLEET", "DER FLEET"], ["PROGRESSIVE ROLLOUT, ROLLBACK ON RISK", "BATTERIES, EVS AND SOLAR AS ONE FLEET"]]], ["B", 5, [["EVALUATED RUN", "VERIFIED SHIFT"], ["NEXT RUN", "NEXT EVENT"], ["EVERY RUN SCORED, EVERY SCORE LEARNED FROM", "EVERY LOAD SHIFT MEASURED AND REWARDED"]]]]];
-const SCENES3_ALL=NRT.map(tab=>tab.map(([set,i,map])=>relabel(NR_SET[set][i],map)));
+/* ---------------------------------------------------------------------------
+   INDUSTRY KIT — abstract isometric industry forms built from the same
+   primitives as the scenes (pale faces, #b9c4d8 hairlines, one Searce-blue
+   element). Each form is the industry object reduced to boxes, cylinders,
+   planes and lattices; no icons, no added layers.
+--------------------------------------------------------------------------- */
+const f1=n=>n.toFixed(1);
+const UX=ISO.U*ISO.cos*Math.SQRT2, UY=ISO.U*ISO.sin*Math.SQRT2;   /* iso circle radii per grid unit */
+/* rectangular block w×d×h */
+const box=(gx,gy,gz,w,d,h,{accent=false,cls='',extra='',top,left,right}={})=>{
+  const T=[iso(gx,gy,gz+h),iso(gx+w,gy,gz+h),iso(gx+w,gy+d,gz+h),iso(gx,gy+d,gz+h)];
+  const Lf=[iso(gx,gy+d,gz),iso(gx+w,gy+d,gz),iso(gx+w,gy+d,gz+h),iso(gx,gy+d,gz+h)];
+  const R=[iso(gx+w,gy,gz),iso(gx+w,gy+d,gz),iso(gx+w,gy+d,gz+h),iso(gx+w,gy,gz+h)];
+  const st=accent?'none':C.line;
+  return `<g class="${cls}" ${extra}>${face(Lf,left||(accent?C.aLeft:C.left),{stroke:st})}${face(R,right||(accent?C.aRight:C.right),{stroke:st})}${face(T,top||(accent?C.aTop:C.top),{stroke:st})}</g>`;};
+/* vertical cylinder centred on (cx,cy) */
+const cyl=(cx,cy,gz,r,h,{accent=false,cls='',extra='',side,top}={})=>{const [bx,by]=iso(cx,cy,gz),[,ty]=iso(cx,cy,gz+h),rx=r*UX,ry=r*UY,st=accent?'none':C.line;
+  return `<g class="${cls}" ${extra}><path d="M${f1(bx-rx)} ${f1(ty)}V${f1(by)}A${f1(rx)} ${f1(ry)} 0 0 0 ${f1(bx+rx)} ${f1(by)}V${f1(ty)}Z" fill="${side||(accent?C.aLeft:C.right)}" stroke="${st}" stroke-width="1" stroke-linejoin="round"/>`+
+    `<ellipse cx="${f1(bx)}" cy="${f1(ty)}" rx="${f1(rx)}" ry="${f1(ry)}" fill="${top||(accent?C.aTop:C.top)}" stroke="${st}" stroke-width="1"/></g>`;};
+/* flat ellipse on the floor / on a plane */
+const disc2=(cx,cy,gz,r,{fill='none',stroke=C.line,sw=1,cls='',extra=''}={})=>{const [x,y]=iso(cx,cy,gz);
+  return `<ellipse cx="${f1(x)}" cy="${f1(y)}" rx="${f1(r*UX)}" ry="${f1(r*UY)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" class="${cls}" ${extra}/>`;};
+/* hairline in iso space */
+const hl=(a,b,o={})=>isoLine(a,b,o);
+/* gable-roof building, ridge along x */
+const house=(gx,gy,w,d,h,rh,{accent=false,cls='',extra='',roofBlue=false}={})=>{const st=accent?'none':C.line;
+  const R1=iso(gx,gy+d/2,h+rh),R2=iso(gx+w,gy+d/2,h+rh);
+  const slope=[iso(gx,gy+d,h),iso(gx+w,gy+d,h),R2,R1], gable=[iso(gx+w,gy,h),iso(gx+w,gy+d,h),R2];
+  return `<g class="${cls}" ${extra}>${box(gx,gy,0,w,d,h,{accent})}`+
+    face(gable,accent?C.aRight:C.right,{stroke:st})+face(slope,roofBlue?C.blue:(accent?C.aTop:C.top),{stroke:roofBlue?'none':st})+`</g>`;};
+/* sawtooth-roof plant, teeth run along x */
+const plant=(gx,gy,w,d,h,{n=3,th=.45,accent=false,cls='',extra='',glass=false}={})=>{const u=w/n;let s=box(gx,gy,0,w,d,h,{accent});
+  for(let i=0;i<n;i++){const x0=gx+i*u,x1=x0+u;
+    s+=face([iso(x0,gy,h),iso(x1,gy,h+th),iso(x1,gy+d,h+th),iso(x0,gy+d,h)],accent?C.aTop:C.top);
+    s+=face([iso(x0,gy+d,h),iso(x1,gy+d,h+th),iso(x1,gy+d,h)],accent?C.aLeft:C.left);
+    s+=face([iso(x1,gy,h),iso(x1,gy+d,h),iso(x1,gy+d,h+th),iso(x1,gy,h+th)],glass?'rgba(0,100,255,0.16)':(accent?C.aRight:C.right),{stroke:glass?C.blue:C.line,sw:glass?.8:1});}
+  return `<g class="${cls}" ${extra}>${s}</g>`;};
+/* transmission pylon: tapering lattice + two cross-arms (along x) */
+const pylon=(cx,cy,h,{a=.32,b=.08,cls='',extra='',ins=C.line}={})=>{const L=[];
+  const lv=t=>a+(b-a)*t, ring=z=>{const k=lv(z/h);return [[cx-k,cy-k,z],[cx+k,cy-k,z],[cx+k,cy+k,z],[cx-k,cy+k,z]];};
+  const B=ring(0),T=ring(h);for(let i=0;i<4;i++) L.push(hl(B[i],T[i],{sw:.9}));
+  const zs=[0,h*.28,h*.52,h*.72,h];
+  for(let j=0;j<zs.length-1;j++){const P=ring(zs[j]),Q=ring(zs[j+1]);
+    L.push(hl(P[3],Q[2],{sw:.6}),hl(P[2],Q[3],{sw:.6}),hl(P[1],Q[2],{sw:.6}),hl(P[2],Q[1],{sw:.6}));
+    if(j) L.push(hl(P[3],P[2],{sw:.6}),hl(P[2],P[1],{sw:.6}));}
+  const arm=(z,ext)=>hl([cx-ext,cy,z],[cx+ext,cy,z],{sw:1.1})+[-ext,ext].map(e=>hl([cx+e*.92,cy,z],[cx+e*.92,cy,z-.22],{stroke:ins,sw:1.3})).join('');
+  return `<g class="${cls}" ${extra}>${L.join('')}${arm(h*.86,.9)}${arm(h*.66,.7)}${hl([cx,cy,h],[cx,cy,h+.25],{sw:.9})}</g>`;};
+/* sagging wire between two iso points */
+const wireSag=(a,b,{sag=6,stroke=C.line,sw=.7,cls='',dash=''}={})=>{const p=iso(...a),q=iso(...b);
+  return `<path d="M${f1(p[0])} ${f1(p[1])}Q${f1((p[0]+q[0])/2)} ${f1((p[1]+q[1])/2+sag)} ${f1(q[0])} ${f1(q[1])}" fill="none" stroke="${stroke}" stroke-width="${sw}" stroke-dasharray="${dash}" class="${cls}"/>`;};
+/* wind turbine: tapered mast, nacelle, three turning blades (screen-space) */
+const turbine=(cx,cy,h,{len=22,dur=7,accent=false,cls=''}={})=>{const [bx,by]=iso(cx,cy,0),[hx,hy]=iso(cx,cy,h);
+  const blade=`M0 0C2 -${f1(len*.25)} 1.6 -${f1(len*.7)} 0 -${len}C-1.1 -${f1(len*.7)} -1.4 -${f1(len*.25)} 0 0Z`;
+  return `<g class="${cls}">${disc2(cx,cy,0,.16,{fill:C.shadow,stroke:'none'})}<polygon points="${f1(bx-2.2)},${f1(by)} ${f1(bx+2.2)},${f1(by)} ${f1(hx+1)},${f1(hy)} ${f1(hx-1)},${f1(hy)}" fill="${C.top}" stroke="${C.line}" stroke-width="0.9" stroke-linejoin="round"/>`+
+    `<g transform="translate(${f1(hx)} ${f1(hy)})"><g>${[0,120,240].map(a=>`<path d="${blade}" transform="rotate(${a})" fill="${C.top}" stroke="${C.line}" stroke-width="0.9" stroke-linejoin="round"/>`).join('')}<animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="${dur}s" repeatCount="indefinite"/></g>`+
+    `<circle r="2.6" fill="${accent?C.blue:C.top}" stroke="${accent?'none':C.line}" stroke-width="0.9"/></g></g>`;};
+/* tilted solar table: high edge at gy, low edge at gy+d */
+const solar=(gx,gy,w,d,{z=.25,rise=.45,accent=false,cls='',extra='',cells=3}={})=>{
+  const P=[iso(gx,gy,z+rise),iso(gx+w,gy,z+rise),iso(gx+w,gy+d,z),iso(gx,gy+d,z)];
+  const at=(u,v)=>[gx+w*u,gy+d*v,z+rise*(1-v)];
+  let s=[.15,.85].map(u=>hl([gx+w*u,gy+d*.5,0],at(u,.5),{sw:.8})).join('');
+  s+=face(P,accent?C.aTop:C.top,{stroke:accent?C.blue:C.line});
+  for(let i=1;i<cells;i++) s+=hl(at(i/cells,0),at(i/cells,1),{stroke:accent?'rgba(255,255,255,.7)':C.line,sw:.5});
+  s+=hl(at(0,.5),at(1,.5),{stroke:accent?'rgba(255,255,255,.7)':C.line,sw:.5});
+  return `<g class="${cls}" ${extra}>${s}</g>`;};
+/* hyperbolic cooling tower */
+const cooling=(cx,cy,r,h,{cls='',steam=true}={})=>{const [bx,by]=iso(cx,cy,0),[tx,ty]=iso(cx,cy,h),rx=r*UX,ry=r*UY,tr=rx*.7,wr=rx*.62,my=by-(by-ty)*.68;
+  let s=`<path d="M${f1(bx-rx)} ${f1(by)}Q${f1(bx-wr*.9)} ${f1(my)} ${f1(tx-tr)} ${f1(ty)}H${f1(tx+tr)}Q${f1(bx+wr*.9)} ${f1(my)} ${f1(bx+rx)} ${f1(by)}A${f1(rx)} ${f1(ry)} 0 0 1 ${f1(bx-rx)} ${f1(by)}Z" fill="${C.right}" stroke="${C.line}" stroke-width="1" stroke-linejoin="round"/>`+
+    `<ellipse cx="${f1(tx)}" cy="${f1(ty)}" rx="${f1(tr)}" ry="${f1(tr*.5)}" fill="${C.top}" stroke="${C.line}" stroke-width="1"/>`;
+  if(steam) s+=[0,1,2].map(i=>`<circle cx="${f1(tx+(i-1)*4)}" cy="${f1(ty-7-i*6)}" r="${4+i}" fill="#fff" stroke="${C.line}" stroke-width="0.7"><animate attributeName="opacity" values="1;.3;1" dur="3.4s" begin="${i*.6}s" repeatCount="indefinite"/></circle>`).join('');
+  return `<g class="${cls}">${s}</g>`;};
+/* shipping container: block with ribs */
+const container=(gx,gy,gz,w,d,h,{accent=false,cls='',extra=''}={})=>{const st=accent?'rgba(255,255,255,.55)':C.line;let s=box(gx,gy,gz,w,d,h,{accent});
+  const n=Math.max(2,Math.round(w*5));for(let i=1;i<n;i++){const x=gx+w*i/n;s+=hl([x,gy+d,gz+.04],[x,gy+d,gz+h-.04],{stroke:st,sw:.5});}
+  for(let i=1;i<3;i++){const y=gy+d*i/3;s+=hl([gx+w,y,gz+.04],[gx+w,y,gz+h-.04],{stroke:st,sw:.5});}
+  return `<g class="${cls}" ${extra}>${s}</g>`;};
+/* truck: cargo block + cab, travelling along x */
+const wheel=(g,r=2.6)=>{const [x,y]=iso(...g);return `<ellipse cx="${f1(x)}" cy="${f1(y)}" rx="${f1(r*.62)}" ry="${f1(r)}" transform="rotate(-30 ${f1(x)} ${f1(y)})" fill="#fff" stroke="${C.line}" stroke-width=".9"/>`;};
+const truck=(gx,gy,{accent=false,cls='',extra='',s=1}={})=>`<g class="${cls}" ${extra}>`+box(gx,gy,0.1,.95*s,.5*s,.5*s,{accent})+box(gx+1*s,gy+.04*s,0.1,.32*s,.42*s,.34*s)+
+  wheel([gx+.22*s,gy+.5*s,.1],2.6*s)+wheel([gx+.75*s,gy+.5*s,.1],2.6*s)+wheel([gx+1.16*s,gy+.46*s,.1],2.6*s)+`</g>`;
+/* a chart board standing on the floor along x, with a curve on it */
+const board=(x0,x1,y,h,vals,{z0=.2,stroke=C.blue,sw=1.4,cls='redraw',dash='',fill='rgba(255,255,255,.92)'}={})=>
+  face([iso(x0,y,0),iso(x1,y,0),iso(x1,y,h),iso(x0,y,h)],fill,{cls:'fade'})+
+  [1,2,3].map(i=>hl([x0,y,h*i/4],[x1,y,h*i/4],{stroke:'rgba(185,196,216,.5)',sw:.5})).join('')+
+  curve(x0+.15,x1-.15,y,z0,vals,{stroke,sw,cls,dash});
+/* small quad-rotor drone */
+const drone=(cx,cy,z,{cls='float'}={})=>`<g class="${cls}">${box(cx-.18,cy-.18,z,.36,.36,.1)}${[[-.32,-.32],[.32,-.32],[.32,.32],[-.32,.32]].map(([dx,dy])=>hl([cx,cy,z+.08],[cx+dx,cy+dy,z+.12],{sw:.8})+disc2(cx+dx,cy+dy,z+.14,.16,{fill:'rgba(255,255,255,.8)'})).join('')}</g>`;
+/* storage rack: uprights + three shelves */
+const rack=(gx,gy,w,d,h,{levels=3}={})=>{let s='';const zs=[...Array(levels)].map((_,i)=>.1+i*(h-.1)/(levels-1||1));
+  [[gx,gy],[gx+w,gy],[gx+w,gy+d],[gx,gy+d]].forEach(([x,y])=>s+=hl([x,y,0],[x,y,h+.1],{sw:.9}));
+  zs.forEach(z=>s+=plane(gx,gy,z,w,d,{fill:'rgba(255,255,255,.85)'}));return s;};
+/* paper / record sheet with text lines */
+const sheet=(gx,gy,gz,w,d,{accent=false,cls='',extra='',lines=3}={})=>{let s=slab(gx,gy,gz,w,d,.06,{accent});
+  for(let i=0;i<lines;i++){const y=gy+d*(.25+i*.22);s+=hl([gx+w*.15,y,gz+.07],[gx+w*(i===lines-1?.55:.85),y,gz+.07],{stroke:accent?'rgba(255,255,255,.75)':C.line,sw:.6});}
+  return `<g class="${cls}" ${extra}>${s}</g>`;};
+/* map pin standing on a floor point */
+const pin=(g,{h=22,cls='pin'}={})=>{const [x,y]=iso(...g);
+  return `<g class="${cls}"><ellipse cx="${f1(x)}" cy="${f1(y)}" rx="4" ry="2" fill="rgba(0,100,255,.18)"/><path d="M${f1(x)} ${f1(y)}C${f1(x-2)} ${f1(y-h*.45)} ${f1(x-7)} ${f1(y-h*.55)} ${f1(x-7)} ${f1(y-h*.78)}A7 7 0 1 1 ${f1(x+7)} ${f1(y-h*.78)}C${f1(x+7)} ${f1(y-h*.55)} ${f1(x+2)} ${f1(y-h*.45)} ${f1(x)} ${f1(y)}Z" fill="${C.blue}"/><circle cx="${f1(x)}" cy="${f1(y-h*.8)}" r="2.6" fill="#fff"/></g>`;};
+/* line chart standing on a vertical plane along x (screen polyline lifted in z) */
+const curve=(x0,x1,y,z0,vals,{stroke=C.blue,sw=1.2,cls='redraw',dash=''}={})=>`<path d="${pathIso(...vals.map((v,i)=>[x0+(x1-x0)*i/(vals.length-1),y,z0+v]))}" fill="none" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="${dash}" class="${cls}"/>`;
+/* small blue check mark at an iso point */
+const check=(g,{cls='fade',extra=''}={})=>{const [x,y]=iso(...g);return `<g class="${cls}" ${extra}><circle cx="${f1(x)}" cy="${f1(y)}" r="5" fill="${C.blue}"/><path d="M${f1(x-2.3)} ${f1(y)}l1.6 1.7l3.2 -3.4" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></g>`;};
+/* floor tile marker (parcel) */
+const parcel=(gx,gy,w,d,{fill='rgba(255,255,255,.9)',stroke=C.line,dash='2 2',cls='fade',extra=''}={})=>face([iso(gx,gy,0.01),iso(gx+w,gy,0.01),iso(gx+w,gy+d,0.01),iso(gx,gy+d,0.01)],fill,{stroke,cls,extra:`stroke-dasharray="${dash}" ${extra}`,sw:.8});
+/* robot arm on a round base: two links, gripper */
+const robot=(cx,cy,{j1=[0.15,-0.1,1.25],j2=[0.85,-0.2,1.0],cls='',accentGrip=false}={})=>{const A=[cx,cy,.32],B=[cx+j1[0],cy+j1[1],j1[2]],Cc=[cx+j2[0],cy+j2[1],j2[2]];
+  const seg=(p,q)=>hl(p,q,{stroke:C.line,sw:5.2})+hl(p,q,{stroke:C.top,sw:3.4});
+  return `<g class="${cls}">${cyl(cx,cy,0,.32,.18)}${cyl(cx,cy,.18,.18,.14)}${seg(A,B)}${seg(B,Cc)}${node(A,2.2).replace(C.dot,C.top).replace('/>',` stroke="${C.line}" stroke-width=".9"/>`)}${node(B,2.4).replace(C.dot,C.top).replace('/>',` stroke="${C.line}" stroke-width=".9"/>`)}`+
+    hl(Cc,[Cc[0],Cc[1],Cc[2]-.3],{stroke:accentGrip?C.blue:C.line,sw:1.6})+`</g>`;};
+/* gantry crane: two legs frames and a top beam along x */
+const gantry=(gx,gy,w,d,h,{cls=''}={})=>{let s='';[[gx,gy],[gx,gy+d],[gx+w,gy],[gx+w,gy+d]].forEach(([x,y])=>s+=hl([x,y,0],[x,y,h],{sw:1.1}));
+  s+=hl([gx,gy,h],[gx+w,gy,h],{sw:1.1})+hl([gx,gy+d,h],[gx+w,gy+d,h],{sw:1.1})+hl([gx,gy,h],[gx,gy+d,h],{sw:1.1})+hl([gx+w,gy,h],[gx+w,gy+d,h],{sw:1.1})+
+    hl([gx-.6,gy+d/2,h+.05],[gx+w+.3,gy+d/2,h+.05],{sw:2.2})+hl([gx-.6,gy+d/2,h+.05],[gx-.6,gy+d/2,h+.05],{sw:1});
+  return `<g class="${cls}">${s}</g>`;};
+/* conveyor: long low slab with rollers along x */
+const conveyor=(gx,gy,w,d,{h=.35}={})=>{let s=hl([gx+.15,gy+d,0],[gx+.15,gy+d,h],{sw:.9})+hl([gx+w-.15,gy+d,0],[gx+w-.15,gy+d,h],{sw:.9})+hl([gx+w-.15,gy,0],[gx+w-.15,gy,h],{sw:.9});
+  s+=slab(gx,gy,h,w,d,.1);const n=Math.round(w*3);for(let i=1;i<n;i++) s+=hl([gx+w*i/n,gy+.05,h+.1],[gx+w*i/n,gy+d-.05,h+.1],{sw:.5});return s;};
+/* thin stack/chimney */
+const stack=(cx,cy,h,r=.14,o={})=>cyl(cx,cy,0,r,h,o);
+/* moving element along an iso path: draws `inner` (already at iso origin a) and slides it a→b */
+const slide=(inner,a,b,{dur=3,begin=0,fade=true}={})=>{const [ax,ay]=iso(...a),[bx,by]=iso(...b);
+  return `<g opacity="${fade?0:1}">${inner}<animateMotion dur="${dur}s" begin="${begin}s" repeatCount="indefinite" path="M 0 0 L ${f1(bx-ax)} ${f1(by-ay)}" calcMode="spline" keySplines=".4 0 .2 1" keyTimes="0;1"/>${fade?`<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.85;1" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/>`:''}</g>`;};
+/* soft floor */
+const floor=(gx,gy,w,d)=>shadow(gx,gy,w,d)+plane(gx,gy,0,w,d,{cls:'fade'});
+
+/* NREU — 4 architectures × 6 stages. Each scene is an abstract energy landscape:
+   pylons, poles, turbines, solar tables, plants and homes reduced to the isometric primitives. */
+const pole=(cx,cy,h=1.8,{arm=.42}={})=>cyl(cx,cy,0,.04,h)+hl([cx,cy-arm,h-.12],[cx,cy+arm,h-.12],{sw:1.2});
+const xfmr=(cx,cy,{accent=false}={})=>box(cx-.38,cy-.3,0,.76,.6,.12)+cyl(cx,cy,.12,.27,.55,{accent})+[-.14,0,.14].map(d=>cyl(cx+d,cy-d*.3,.67,.04,.22)).join('');
+const vpanel=(x0,x1,y,z0,h,{fill='rgba(255,255,255,.92)',cls='fade',extra=''}={})=>face([iso(x0,y,z0),iso(x1,y,z0),iso(x1,y,z0+h),iso(x0,y,z0+h)],fill,{cls,extra});
+/* NREU-only forms: pole-top transformer, smart meter, apartment block, battery, heat pump, EV charger, car;
+   NREU loops are round and its screening is a radar sweep (MIC keeps the square loop and the dashed scan box) */
+const poleX=(cx,cy,h=1.9)=>cyl(cx,cy,0,.05,h)+hl([cx,cy-.45,h-.12],[cx,cy+.45,h-.12],{sw:1.2})+[-.4,.4].map(d=>hl([cx,cy+d,h-.12],[cx,cy+d,h+.04],{sw:1.4})).join('')+hl([cx,cy,h*.62],[cx+.14,cy,h*.62],{sw:1})+cyl(cx+.26,cy,h*.42,.13,.36);
+const meter=(cx,cy,{h=.55}={})=>hl([cx,cy,0],[cx,cy,h],{sw:1.2})+box(cx-.12,cy-.08,h,.24,.16,.3)+hl([cx-.07,cy+.08,h+.2],[cx+.07,cy+.08,h+.2],{sw:.6});
+const apartment=(gx,gy,w,d,h)=>{let s=box(gx,gy,0,w,d,h);for(let z=.22;z<h-.05;z+=.22){s+=hl([gx+.06,gy+d,z],[gx+w-.06,gy+d,z],{sw:.5})+hl([gx+w,gy+.06,z],[gx+w,gy+d-.06,z],{sw:.5});}return s;};
+const battery=(gx,gy,{w=.42,d=.3,h=.5}={})=>box(gx,gy,0,w,d,h)+cyl(gx+w*.3,gy+d*.5,h,.05,.06)+cyl(gx+w*.7,gy+d*.5,h,.05,.06);
+const heatpump=(gx,gy)=>box(gx,gy,0,.5,.3,.38)+wheel([gx+.25,gy+.3,.19],5.4)+wheel([gx+.25,gy+.3,.19],1.6);
+const charger=(gx,gy)=>{const p=iso(gx+.16,gy+.06,.42),q=iso(gx+.16,gy+.1,.24);return box(gx,gy,0,.16,.12,.6)+`<path d="M${f1(p[0])} ${f1(p[1])}C${f1(p[0]+7)} ${f1(p[1]+2)} ${f1(q[0]+7)} ${f1(q[1]+5)} ${f1(q[0])} ${f1(q[1])}" fill="none" stroke="${C.line}" stroke-width=".9" stroke-linecap="round"/>`;};
+const car=(gx,gy,{accent=false}={})=>box(gx,gy,.07,.75,.4,.18,{accent})+box(gx+.18,gy+.04,.25,.38,.32,.15)+wheel([gx+.17,gy+.4,.07],2.2)+wheel([gx+.58,gy+.4,.07],2.2);
+const loopO=(cx,cy,r,dur=5)=>{const [x,y]=iso(cx,cy,0),rx=r*UX,ry=r*UY,d=`M${f1(x-rx)} ${f1(y)}A${f1(rx)} ${f1(ry)} 0 1 0 ${f1(x+rx)} ${f1(y)}A${f1(rx)} ${f1(ry)} 0 1 0 ${f1(x-rx)} ${f1(y)}`;
+  return `<path d="${d}" fill="none" stroke="${C.blue}" stroke-width="1" stroke-dasharray="2 3" class="flow"/>`+runner(d,dur);};
+const sweep=(cx,cy,r,dur=4)=>{const [x,y]=iso(cx,cy,0.01),R=r*UX,a=-0.9;
+  return `<g transform="translate(${f1(x)} ${f1(y)}) scale(1 ${(ISO.sin/ISO.cos).toFixed(3)})"><circle r="${f1(R)}" fill="rgba(0,100,255,.04)" stroke="${C.blue}" stroke-width="1" stroke-dasharray="2 3" vector-effect="non-scaling-stroke"/><circle r="${f1(R*.55)}" fill="none" stroke="${C.blue}" stroke-width=".6" opacity=".5" vector-effect="non-scaling-stroke"/>`+
+    `<g><path d="M0 0L${f1(R)} 0A${f1(R)} ${f1(R)} 0 0 0 ${f1(R*Math.cos(a))} ${f1(R*Math.sin(a))}Z" fill="rgba(0,100,255,.16)"/><line x1="0" y1="0" x2="${f1(R)}" y2="0" stroke="${C.blue}" stroke-width="1.2" vector-effect="non-scaling-stroke"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="${dur}s" repeatCount="indefinite"/></g><circle r="2.2" fill="${C.blue}"/></g>`;};
+const NR_SCENES=[
+/* ===== 01 GRID SAFETY ===== */
+[
+/* Field Capture — a drone frames the pylon; captures stack up, the newest one ready to read */
+()=>wrap(`
+  ${floor(-1.7,-1.7,3.4,3.4)}
+  ${pylon(-0.8,-0.5,2.15,{cls:'fade'})}
+  ${hl([0.95,-1.3,1.75],[-0.62,-0.5,1.45],{dash:'1.5 2.5'})}${hl([0.95,-1.3,1.75],[-0.62,-0.5,0.6],{dash:'1.5 2.5'})}
+  ${drone(0.96,-1.3,1.7)}
+  ${[0,1,2].map(i=>sheet(0.15,0.55,0.05+i*.2,1.0,.8,{accent:i===2,cls:'stackloop',extra:`style="animation-delay:${i*.45}s"`})).join('')}
+  ${tag([1.12,-1.3,1.95],'PHOTO + SOUND',{side:'right',y:40})}
+  ${tag([0.15,1.35,0.45],'CAPTURED',{side:'left',y:150,accent:true})}
+  ${caption('EVERY PHOTO AND SOUND, READY TO READ')}
+`),
+/* Hazard Detection — six checks run on the captured pole; one comes back flagged */
+()=>wrap(`
+  ${floor(-1.7,-1.6,3.4,3.2)}
+  ${poleX(-0.5,-0.6,2.0)}
+  ${[0,1,2,3,4,5].map(i=>box(-1.4+i*.5,0.9,0,.32,.32,.1,{accent:i===3,cls:'fade',extra:`style="animation-delay:${.3+i*.22}s"`})).join('')}
+  ${hl([-0.26,-0.6,0.95],[0.26,1.06,0.1],{dash:'1.5 2.5',stroke:C.blue})}${runner(pathIso([-0.26,-0.6,0.95],[0.26,1.06,0.1]),2.6)}
+  ${tag([-1.24,1.06,0.1],'SIX CHECKS',{side:'left',y:150})}
+  ${tag([0.26,1.06,0.1],'FLAGS',{side:'right',y:150,accent:true})}
+  ${caption('SIX HAZARD CHECKS ON EVERY CAPTURE')}
+`),
+/* Hazard Judgment — three flagged poles; only one flag holds as a real hazard */
+()=>wrap(`
+  ${floor(-1.8,-1.2,3.6,2.4)}
+  ${[-1.3,0,1.3].map(x=>pole(x,0,1.8)).join('')}
+  ${[-0.42,0.42].map(d=>wireSag([-1.3,d,1.68],[0,d,1.68],{sag:5})+wireSag([0,d,1.68],[1.3,d,1.68],{sag:5})).join('')}
+  ${[-1.3,1.3].map(x=>`<g opacity=".45">${node([x,-0.42,1.68],2.4).replace(C.dot,'#b9c4d8')}</g>`).join('')}
+  ${rays([0,-0.42,1.68],{r1:7,r2:13})}<g class="pulse">${node([0,-0.42,1.68],3.4)}</g>
+  ${tag([-1.3,-0.42,1.68],'FLAGS',{side:'left',y:40})}
+  ${tag([0,-0.42,1.68],'REAL HAZARD',{side:'right',y:40,accent:true})}
+  ${caption('REAL HAZARDS SEPARATED FROM NOISE')}
+`),
+/* Ticket Creation — the ticket is raised on the faulty pole; the crew truck drives out to it */
+()=>wrap(`
+  ${floor(-1.8,-1.6,3.6,3.2)}
+  ${box(-1.65,-1.35,0,.75,.6,.5)}${hl([-1.6,-0.75,0.3],[-0.95,-0.75,0.3],{sw:.6})}
+  ${poleX(1.1,-0.5,1.9)}
+  <g class="float">${sheet(0.95,-0.78,2.15,.55,.45,{accent:true,lines:2})}</g>
+  ${plane(-1.8,0.1,0.005,3.6,.6,{fill:'rgba(241,244,250,.9)'})}<path d="${pathIso([-1.8,0.4,0.01],[1.8,0.4,0.01])}" fill="none" stroke="${C.line}" stroke-width="1" stroke-dasharray="3 4"/>
+  ${(()=>{const L=2.2,dx=ISO.cos*ISO.U*L,dy=ISO.sin*ISO.U*L;return `<g opacity="0">${truck(-1.7,0.17,{s:.55})}<animateMotion dur="5s" repeatCount="indefinite" path="M0 0 L ${f1(dx)} ${f1(dy)}" keyPoints="0;1;1" keyTimes="0;.75;1" calcMode="spline" keySplines=".3 0 .5 1;0 0 1 1"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.9;1" dur="5s" repeatCount="indefinite"/></g>`;})()}
+  ${tag([1.22,-0.78,2.21],'TICKET',{side:'right',y:40,accent:true})}
+  ${tag([-1.27,-0.75,0.5],'REPAIR CREW',{side:'left',y:70})}
+  ${caption('REPAIR TICKET OPENED IN SECONDS')}
+`),
+/* Failure Prediction — transformers in a row; their risk scores rise, one tops out */
+()=>wrap(`
+  ${floor(-1.8,-1.4,3.6,2.8)}
+  ${[[-1.25,-0.85,.7],[-0.15,-0.85,1.55],[0.95,-0.85,.95]].map(([x,y,h],i)=>growBar(x,y,.42,h,{dur:5,begin:i*.35,accent:i===1})).join('')}
+  ${[-1.05,0.05,1.15].map(x=>xfmr(x,0.55)).join('')}
+  ${tag([-1.05,0.85,0.4],'ASSETS',{side:'left',y:150})}
+  ${tag([0.27,-0.85,1.55],'RISK SCORE',{side:'right',y:40,accent:true})}
+  ${caption('FAILURE RISK SCORED BEFORE OUTAGES')}
+`),
+/* Records Sync — the substation and the registry on one round loop; every field update closes the record */
+()=>wrap(`
+  ${floor(-1.7,-1.7,3.4,3.4)}
+  ${loopO(0,0,1.45,6)}
+  ${box(-1.35,-0.75,0,.5,.4,.4)}
+  ${[-1.25,-0.55].map(y=>hl([-0.6,y,0],[-0.6,y,1.15],{sw:1})).join('')}${hl([-0.6,-1.35,1.15],[-0.6,-0.45,1.15],{sw:1.2})}${[-1.15,-0.9,-0.65].map(y=>hl([-0.6,y,1.15],[-0.6,y,0.92],{sw:1.3})).join('')}
+  ${[0,1,2].map(i=>sheet(0.15,0.15,0.05+i*.22,.95,.95,{accent:i===2,cls:'fade',extra:`style="animation-delay:${.2+i*.15}s"`})).join('')}
+  ${tag([-0.6,-1.35,1.15],'FIELD',{side:'left',y:46})}
+  ${tag([1.1,0.6,0.5],'RECORDS',{side:'right',y:110,accent:true})}
+  ${caption('FIELD AND RECORDS KEPT IN SYNC')}
+`)],
+/* ===== 02 DEMAND FORECASTING ===== */
+[
+/* Signal Collection — weather mast, city load and the economy feed one signal */
+()=>wrap(`
+  ${floor(-1.8,-1.8,3.6,3.6)}
+  ${cyl(-1.2,-0.6,0,.05,2.0)}${hl([-1.2,-0.95,1.85],[-1.2,-0.25,1.85],{sw:1})}
+  <g transform="translate(${f1(iso(-1.2,-0.6,2.05)[0])} ${f1(iso(-1.2,-0.6,2.05)[1])})"><g>${[0,120,240].map(a=>`<g transform="rotate(${a})"><path d="M0 0H7" stroke="${C.line}" stroke-width=".9"/><circle cx="7" cy="1.2" r="1.8" fill="#fff" stroke="${C.line}" stroke-width=".8"/></g>`).join('')}<animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="2.6s" repeatCount="indefinite"/></g></g>
+  ${box(0.5,-1.5,0,.5,.5,1.3)}${box(1.1,-1.5,0,.45,.45,.85)}${box(0.5,-0.9,0,.45,.45,.6)}
+  ${[0,1,2].map(i=>growBar(-1.4+i*.38,1.0,.26,[.35,.6,.45][i],{dur:5,begin:i*.3})).join('')}
+  ${hl([-1.2,-0.6,0],[0,0,0],{dash:'2 3'})}${hl([0.75,-0.9,0],[0.2,0,0],{dash:'2 3'})}${hl([-1.0,1.0,0],[-0.1,0.4,0],{dash:'2 3'})}
+  ${runner(pathIso([-1.2,-0.6,0],[0,0,0]),2.8)}${runner(pathIso([0.75,-0.9,0],[0.2,0,0]),2.8,.9)}${runner(pathIso([-1.0,1.0,0],[-0.1,0.4,0]),2.8,1.8)}
+  <g class="breathe">${cube(-0.25,-0.1,0,.55,{accent:true})}</g>
+  ${tag([-1.2,-0.6,2.05],'WEATHER',{side:'left',y:36})}
+  ${tag([0.3,0.45,0.55],'SIGNALS',{side:'right',y:140,accent:true})}
+  ${caption('MACRO + MICRO SIGNALS GATHERED')}
+`),
+/* Knowledge Base — what the plant and the turbine report settles into one layered base */
+()=>wrap(`
+  ${floor(-1.8,-1.8,3.6,3.6)}
+  ${cooling(-1.35,0.75,.4,1.2)}
+  ${turbine(0.85,-1.25,2.1,{len:20})}
+  ${hl([-0.95,0.75,0],[-0.65,0.6,0.1],{dash:'2 3'})}${hl([0.85,-1.25,0],[0.5,-0.5,0.1],{dash:'2 3'})}
+  ${[0,1,2].map(i=>slab(-0.65,-0.45,0.1+i*.36,1.3,1.3,.12,{cls:'stackloop',extra:`style="animation-delay:${i*.45}s"`})).join('')}
+  <g class="stackloop" style="animation-delay:1.4s">${cube(-0.25,-0.05,1.18,.5,{accent:true})}</g>
+  ${tag([-1.35,0.75,1.2],'SIGNALS',{side:'left',y:70})}
+  ${tag([0.25,-0.05,1.68],'KNOWLEDGE',{side:'right',y:62,accent:true,dx:18})}
+  ${caption('FACTORS LINKED INTO ONE KNOWLEDGE BASE')}
+`),
+/* Model Training — demand history under the grid; the model's curve learns its shape */
+()=>wrap(`
+  ${floor(-1.8,-1.4,3.6,2.8)}
+  ${[-1.2,-0.4,0.4].map((x,i)=>meter(x,-0.95)+hl([x,-0.87,0.01],[x,0.35,0.01],{dash:'1.5 2.5'})+runner(pathIso([x,-0.87,0.01],[x,0.35,0.01]),2.4,i*.7)).join('')}
+  ${[.35,.55,.5,.8,1.05,.75,.5].map((h,i)=>growBar(-1.45+i*.42,0.4,.26,h,{dur:5.4,begin:i*.18})).join('')}
+  ${curve(-1.32,1.21,0.53,0.3,[.35,.55,.5,.8,1.05,.75,.5],{sw:1.4})}
+  ${tag([-1.45,0.66,0.35],'HISTORY',{side:'left',y:150})}
+  ${tag([0.36,0.53,1.35],'MODEL',{side:'right',y:70,accent:true})}
+  ${caption('A MODEL FOR EVERY DEMAND PATTERN')}
+`),
+/* Demand Prediction — the city's load forecast traced above its skyline, peak marked */
+()=>wrap(`
+  ${floor(-1.8,-1.4,3.6,2.8)}
+  ${[[-1.5,-0.1,.5,.9],[-0.85,-0.3,.45,1.3],[-0.25,0.0,.5,.75],[0.4,-0.4,.45,1.1],[1.0,-0.1,.5,.6]].map(([x,y,w,h])=>box(x,y,0,w,w,h,{cls:'fade'})).join('')}
+  ${board(-1.6,1.4,-1.2,2.3,[.2,.4,.35,.8,1.2,1.75,1.1,.6,.4],{z0:.25})}
+  <g class="pulse">${node([0.19,-1.2,2.0],3.2)}</g>
+  ${tag([-1.5,0.2,0.5],'CITY LOAD',{side:'left',y:140})}
+  ${tag([0.19,-1.2,2.0],'PEAK',{side:'right',y:30,accent:true})}
+  ${caption('SHORT, MEDIUM AND LONG HORIZONS')}
+`),
+/* Forecast Validation — the meter's actuals check three model panels; one wins */
+()=>wrap(`
+  ${floor(-1.8,-1.6,3.6,3.2)}
+  ${[-1.0,0.0,1.0].map((y,i)=>vpanel(-0.9,0.9,y-0.5,0.05,1.25,{extra:`style="animation-delay:${i*.15}s"`})+curve(-0.75,0.75,y-0.5,0.3,[.2,.45,.35,.7,.5].map((v,k)=>v+(i===1?0:(k%2?.15:-.1))),{stroke:i===1?C.blue:C.line,sw:i===1?1.4:.9,cls:i===1?'redraw':'fade'})).join('')}
+  ${check([0.9,-0.5,1.3])}
+  ${box(1.2,0.9,0,.32,.22,.5)}${hl([1.2,1.0,0.3],[0.9,0.5,0.3],{dash:'1.5 2.5'})}
+  ${tag([-0.9,0.5,1.0],'BACKTEST',{side:'left',y:120})}
+  ${tag([0.9,-0.5,1.3],'BEST MODEL',{side:'right',y:50,accent:true})}
+  ${caption('BACKTESTED, DRIFT TRACKED, BEST PICKED')}
+`),
+/* Operational Planning — the plan dispatches the plant, the turbine and the solar field */
+()=>wrap(`
+  ${floor(-1.8,-1.8,3.6,3.6)}
+  ${box(-1.55,-1.0,0,.9,.7,.6)}${stack(-1.35,-1.15,1.5,.11)}${stack(-1.0,-1.15,1.3,.11)}
+  ${turbine(0.2,-1.5,2.0,{len:18})}
+  ${solar(1.25,-0.5,.8,.42)}${solar(1.25,0.08,.8,.42)}
+  ${hl([-1.1,-0.65,0],[0.1,0.45,0],{dash:'2 3',stroke:C.blue})}${hl([0.2,-1.5,0],[0.35,0.2,0],{dash:'2 3',stroke:C.blue})}${hl([1.25,0.05,0],[0.65,0.35,0],{dash:'2 3',stroke:C.blue})}
+  ${runner(pathIso([0.1,0.45,0],[-1.1,-0.65,0]),2.6)}${runner(pathIso([0.35,0.2,0],[0.2,-1.5,0]),2.6,.8)}${runner(pathIso([0.65,0.35,0],[1.25,0.05,0]),2.6,1.6)}
+  <g class="float">${cube(0.1,0.2,0.05,.55,{accent:true})}</g>
+  ${tag([-1.35,-1.15,1.5],'GENERATION',{side:'left',y:40})}
+  ${tag([0.65,0.75,0.6],'DISPATCH',{side:'right',y:150,accent:true})}
+  ${caption('FORECASTS BECOME DISPATCH PLANS')}
+`)],
+/* ===== 03 ASSET SITE ===== */
+[
+/* Site Discovery — parcels along the grid line; a candidate is pinned */
+()=>wrap(`
+  ${floor(-1.8,-1.8,3.6,3.6)}
+  ${[0,1,2].flatMap(r=>[0,1,2].map(c=>parcel(-1.5+c*1.05,-0.6+r*.75,.9,.6,{extra:`style="animation-delay:${(r*3+c)*.05}s"`}))).join('')}
+  ${pylon(-1.3,-1.35,1.45,{a:.2})}${pylon(0.3,-1.35,1.45,{a:.2})}
+  ${[-0.6,0.6].map(e=>wireSag([-1.3+e*.92,-1.35,1.25],[0.3+e*.92,-1.35,1.25],{sag:4})+wireSag([0.3+e*.92,-1.35,1.25],[1.8,-1.35,1.1],{sag:3})).join('')}
+  <g class="float">${pin([0.0,0.45,0.02])}</g>
+  ${tag([-1.3,-1.35,1.45],'GRID DATA',{side:'left',y:46})}
+  ${tag([0.0,0.45,0.6],'CANDIDATES',{side:'right',y:96,accent:true})}
+  ${caption('CANDIDATE SITES FROM EVERY SIGNAL')}
+`),
+/* Feasibility Screening — capacity, land and permits swept over each parcel */
+()=>wrap(`
+  ${floor(-1.7,-1.7,3.4,3.4)}
+  ${parcel(-1.5,0.6,.9,.9,{fill:'rgba(255,255,255,.6)'})}${parcel(0.6,-1.5,.9,.9,{fill:'rgba(255,255,255,.6)'})}
+  ${parcel(-0.6,-0.6,1.2,1.2)}
+  ${solar(-0.5,-0.5,1.0,.45,{z:.1,rise:.3})}${solar(-0.5,0.05,1.0,.45,{z:.1,rise:.3})}
+  ${sweep(0,0,0.95,4)}
+  ${check([0.7,0.7,0.1])}
+  ${tag([-0.67,0.67,0.01],'SCREEN',{side:'left',y:150,accent:true})}
+  ${tag([0.7,0.7,0.1],'FEASIBLE',{side:'right',y:130})}
+  ${caption('CAPACITY, LAND AND REGULATORY CHECKS')}
+`),
+/* Business Case & Ranking — three sites, three expected returns, one leads */
+()=>wrap(`
+  ${floor(-1.8,-1.6,3.6,3.2)}
+  ${[[-1.5,0.3],[-0.35,0.3],[0.8,0.3]].map(([x,y],i)=>parcel(x,y,1.0,.95,{extra:`style="animation-delay:${i*.1}s"`})+solar(x+.1,y+.1,.8,.38,{z:.06,rise:.22,cells:2})+solar(x+.1,y+.52,.8,.38,{z:.06,rise:.22,cells:2})).join('')}
+  ${[[-1.2,-0.5,.6],[-0.05,-0.5,1.45],[1.1,-0.5,.9]].map(([x,y,h],i)=>growBar(x,y,.4,h,{dur:5,begin:i*.35,accent:i===1})).join('')}
+  ${tag([-1.5,1.25,0],'SITES',{side:'left',y:160})}
+  ${tag([0.15,-0.5,1.45],'TOP RETURN',{side:'right',y:44,accent:true})}
+  ${caption('SITES RANKED BY EXPECTED RETURN')}
+`),
+/* Permits & Approvals — legal, land and finance sheets; one stamp clears the site */
+()=>wrap(`
+  ${floor(-1.8,-1.8,3.6,3.6)}
+  ${parcel(-1.6,-0.2,1.5,1.5)}${[0,1,2,3].map(i=>hl([-1.6+i*.5,1.3,0],[-1.6+i*.5,1.3,0.35],{sw:.8})).join('')}${hl([-1.6,1.3,0.3],[-0.1,1.3,0.3],{sw:.7})}${hl([-0.1,-0.2,0.3],[-0.1,1.3,0.3],{sw:.7})}${[0,1,2,3].map(i=>hl([-0.1,-0.2+i*.5,0],[-0.1,-0.2+i*.5,0.35],{sw:.8})).join('')}
+  ${[0,1,2].map(i=>sheet(0.3,-1.2+i*.05,0.05+i*.2,1.0,.8,{cls:'fade',extra:`style="animation-delay:${.2+i*.15}s"`})).join('')}
+  <g class="float">${box(0.55,-0.95,0.95,.5,.4,.3,{accent:true})}${cyl(0.8,-0.75,1.25,.07,.3,{accent:true})}</g>
+  ${tag([0.3,-0.4,0.45],'APPROVALS',{side:'left',y:54})}
+  ${tag([1.05,-0.95,1.1],'APPROVED',{side:'right',y:60,accent:true})}
+  ${caption('LEGAL, LAND AND FINANCE IN ONE FLOW')}
+`),
+/* Build & Commission — rows go in one by one; the inverter comes live */
+()=>wrap(`
+  ${floor(-1.8,-1.6,3.6,3.2)}
+  ${[0,1,2,3].map(i=>solar(-1.4,-1.3+i*.62,1.6,.45,{cls:'stackloop',extra:`style="animation-delay:${i*.5}s"`})).join('')}
+  ${hl([0.2,0.75,0.01],[1.0,0.75,0.01],{dash:'2 3',stroke:C.blue})}
+  ${box(1.0,0.5,0,.5,.5,.55,{accent:true,cls:'fade'})}
+  ${tag([-1.4,1.0,0.3],'MILESTONES',{side:'left',y:150})}
+  ${tag([1.5,0.75,0.55],'LIVE SITE',{side:'right',y:100,accent:true})}
+  ${caption('VENDORS AND MILESTONES TO GO-LIVE')}
+`),
+/* Operate & Optimize — the running site, looped back into the next one */
+()=>wrap(`
+  ${floor(-1.7,-1.7,3.4,3.4)}
+  ${loopO(0,0,1.45,6)}
+  ${turbine(-0.8,-0.9,2.0,{len:20,accent:true})}
+  ${[0,1].flatMap(r=>[0,1].map(c=>solar(-0.25+c*.8,-0.1+r*.6,.7,.42,{cells:2}))).join('')}
+  ${tag([-0.8,-0.9,2.0],'UPTIME',{side:'left',y:40,accent:true})}
+  ${tag([1.03,-1.03,0],'NEXT SITE',{side:'right',y:80})}
+  ${caption('EVERY SITE IMPROVES THE NEXT')}
+`)],
+/* ===== 04 DEMAND FLEXIBILITY ===== */
+[
+/* Peak Load Forecasting — substation feeders to the streets; the peak is called by feeder */
+()=>wrap(`
+  ${floor(-1.8,-1.8,3.6,3.6)}
+  ${box(-1.6,-1.6,0,.8,.8,.35)}${xfmr(-1.25,-1.25)}
+  ${[-0.55,0.5,1.45].map(y=>hl([-1.25,-0.85,0.01],[-1.25,y,0.01],{dash:'2 3'})+hl([-1.25,y,0.01],[1.5,y,0.01],{dash:'2 3'})).join('')}
+  ${apartment(-0.6,-0.95,.45,.4,.8)}${house(0.4,-0.95,.45,.4,.3,.2)}${house(-0.6,0.1,.45,.4,.3,.2)}${apartment(0.4,0.1,.45,.4,1.05)}${apartment(-0.6,1.05,.45,.4,.55)}${house(0.4,1.05,.45,.4,.3,.2)}
+  ${board(0.0,1.7,-1.75,1.6,[.15,.25,.45,.85,1.25,.8,.4,.25],{z0:.1})}
+  <g class="pulse">${node([0.97,-1.75,1.35],3)}</g>
+  ${tag([-1.25,-1.25,0.9],'FEEDERS',{side:'left',y:70})}
+  ${tag([0.97,-1.75,1.35],'PEAK',{side:'right',y:40,accent:true})}
+  ${caption('PEAK LOAD BY FEEDER AND TIME')}
+`),
+/* Cohort Identification — a street of homes; the ones able to shift load light up */
+()=>wrap(`
+  ${floor(-1.8,-1.8,3.6,3.6)}
+  ${[0,1,2].flatMap(r=>[0,1,2].map(c=>{const blue=(r===1&&c===2)||(r===2&&c===1)||(r===0&&c===1);
+    return house(-1.5+c*1.05,-1.5+r*1.05,.55,.45,.35,.25,{roofBlue:blue,cls:'fade',extra:`style="animation-delay:${(r*3+c)*.06}s"`});})).join('')}
+  ${tag([-1.5,-0.6,0.35],'USAGE',{side:'left',y:84})}
+  ${tag([0.6,-0.83,0.6],'COHORT',{side:'right',y:70,accent:true})}
+  ${caption('COHORTS MOST ABLE TO SHIFT LOAD')}
+`),
+/* Flexibility Planning — battery, EV, heat pump, solar: the cheapest mix of levers */
+()=>wrap(`
+  ${floor(-1.8,-1.6,3.6,3.2)}
+  ${[[-1.3,-0.75,.6],[-0.45,-0.75,1.2],[0.4,-0.75,.8],[1.25,-0.75,.5]].map(([x,y,h],i)=>growBar(x,y,.42,h,{dur:5,begin:i*.3,accent:i===1})).join('')}
+  ${battery(-1.3,0.75,{h:.4})}${car(-0.6,0.7)}${heatpump(0.35,0.75)}${solar(1.2,0.75,.5,.3,{z:.05,rise:.18,cells:2})}
+  ${tag([-1.3,1.05,0.25],'LEVERS',{side:'left',y:150})}
+  ${tag([-0.24,-0.75,1.2],'CHEAPEST MIX',{side:'right',y:40,accent:true})}
+  ${caption('THE CHEAPEST MIX OF LEVERS')}
+`),
+/* Consumer Engagement — offers leave the utility for the right homes, at the right time */
+()=>wrap(`
+  ${floor(-1.8,-1.8,3.6,3.6)}
+  ${box(-1.55,-1.0,0,.7,.7,1.15)}${cyl(-1.2,-0.65,1.15,.06,.4)}
+  ${apartment(0.6,-1.25,.5,.45,1.0)}${charger(1.25,0.0)}${car(0.35,0.1)}${house(0.4,1.0,.55,.45,.35,.25)}
+  ${[[0.6,-1.0],[0.7,0.2],[0.4,1.2]].map(([x,y],i)=>hl([-0.85,-0.65,0.5],[x,y,0.5],{dash:'2 3'})+slide(sheet(-0.95,-0.85,0.5,.35,.3,{accent:true,lines:1}),[-0.95,-0.85,0.5],[x-.2,y-.1,0.5],{dur:3.2,begin:i*1})).join('')}
+  ${tag([-1.2,-0.65,1.55],'OFFERS',{side:'left',y:40,accent:true})}
+  ${tag([1.45,0.0,0.6],'CONSUMER',{side:'right',y:96})}
+  ${caption('RIGHT OFFER, CHANNEL AND TIMING')}
+`),
+/* DER Orchestration — batteries, EVs and rooftop solar run as one fleet */
+()=>wrap(`
+  ${floor(-1.8,-1.8,3.6,3.6)}
+  ${box(-1.6,-1.6,0,1.0,.75,.35)}${solar(-1.52,-1.55,.84,.3,{z:.38,rise:.14})}${solar(-1.52,-1.2,.84,.3,{z:.38,rise:.14})}
+  ${battery(1.0,-1.4,{h:.7})}
+  ${car(-1.45,0.9)}${charger(0.95,0.9)}
+  ${[[-1.1,-0.9],[1.2,-1.2],[-1.0,1.1],[1.0,1.0]].map(([x,y],i)=>hl([x,y,0],[0,0,0],{dash:'2 3',stroke:C.blue})+runner(pathIso([0,0,0],[x,y,0]),2.6,i*.6)).join('')}
+  <g class="float">${cube(-0.3,-0.3,0.05,.6,{accent:true})}</g>
+  ${tag([-1.1,-1.2,0.8],'DER FLEET',{side:'left',y:44})}
+  ${tag([0.3,0.3,0.6],'DISPATCH',{side:'right',y:120,accent:true})}
+  ${caption('BATTERIES, EVS AND SOLAR AS ONE FLEET')}
+`),
+/* Impact Verification — the peak, before and after: the shift is measured and rewarded */
+()=>wrap(`
+  ${floor(-1.8,-1.4,3.6,2.8)}
+  ${[-1.3,-0.45,0.4,1.25].map(x=>meter(x,0.55)).join('')}
+  ${board(-1.6,1.6,-0.7,1.9,[.1,.2,.45,.9,1.4,.8,.35,.2],{z0:.2,stroke:C.line,sw:1,cls:'fade',dash:'2 2.5'})}
+  ${curve(-1.45,1.45,-0.7,0.2,[.1,.25,.55,.7,.78,.7,.5,.3],{sw:1.4})}
+  ${check([1.6,-0.7,1.9])}
+  ${tag([-0.6,-0.7,1.1],'LOAD SHIFT',{side:'left',y:40})}
+  ${tag([1.6,-0.7,1.9],'REWARDED',{side:'right',y:60,accent:true})}
+  ${caption('EVERY LOAD SHIFT MEASURED AND REWARDED')}
+`)]
+];
+
+/* each stage has its own abstract energy scene (2026-10-07) */
+const SCENES3_ALL=NR_SCENES;
 
 /* ---------------------------------------------------------------------------
    RENDER + INTERACTION — sliding card carousel

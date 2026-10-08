@@ -380,8 +380,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .tf-left-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;}
 .transform h2{
   font-family:var(--display);font-weight:400;
-  font-size:clamp(36px,4.2vw,64px);line-height:1.02;letter-spacing:-.035em;
-  color:var(--ink);max-width:12ch;
+  font-size:clamp(34px,3.6vw,54px);line-height:1.04;letter-spacing:-.035em;
+  color:var(--ink);max-width:13ch;
 }
 .transform-sub{
   font-size:18px;line-height:1.5;color:var(--ink);
@@ -875,6 +875,7 @@ footer{background:#071028;padding:72px 0 0;}
       <div class="hero-graph" aria-hidden="true">
         <canvas id="heroGraph"></canvas>
       </div>
+      <svg class="hero-link" id="heroLink" aria-hidden="true"></svg>
     </div>
   </div>
 </section>
@@ -1236,7 +1237,7 @@ footer{background:#071028;padding:72px 0 0;}
         </div></div>
       </article>
       <article class="oc" tabindex="0">
-        <div class="oc-art" aria-hidden="true"><svg viewBox="30 20 240 180" preserveAspectRatio="xMidYMid meet"><g class="a2-g l1"><path class="a2-l base" d="M150 96 L230 130 L150 164 L70 130 Z"/></g><g class="a2-g l2"><path class="a2-l mid" d="M150 72 L230 106 L150 140 L70 106 Z"/></g><g class="a2-g l3"><path class="a2-l top" d="M150 48 L230 82 L150 116 L70 82 Z"/></g></svg></div>
+        <div class="oc-art" aria-hidden="true"><svg viewBox="20 30 260 160" preserveAspectRatio="xMidYMid meet"><path class="sr-patch" d="M82.0 71.0 C 140.0 45.0, 190.0 75.0, 164.0 63.0 M74.0 151.0 C 120.0 185.0, 170.0 175.0, 220.0 149.0"/><rect class="sr-t" style="--dx:-18px;--dy:-14px;--r:-12deg;--k:0" x="80.0" y="65.0" width="40" height="40" rx="10"/><rect class="sr-t" style="--dx:14px;--dy:-22px;--r:9deg;--k:1" x="130.0" y="65.0" width="40" height="40" rx="10"/><rect class="sr-t" style="--dx:-26px;--dy:16px;--r:7deg;--k:2" x="180.0" y="65.0" width="40" height="40" rx="10"/><rect class="sr-t" style="--dx:20px;--dy:14px;--r:-10deg;--k:3" x="80.0" y="115.0" width="40" height="40" rx="10"/><rect class="sr-t grow ai" style="--dx:0px;--dy:0px;--r:0deg;--k:4" x="130.0" y="115.0" width="40" height="40" rx="10"/><rect class="sr-t grow" style="--dx:0px;--dy:0px;--r:0deg;--k:5" x="180.0" y="115.0" width="40" height="40" rx="10"/><text class="sr-ai" x="150.0" y="139.0">AI</text></svg></div>
         <div class="oc-head"><span class="oc-num">02</span><span class="oc-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
         <h3 class="oc-title">Systems Rebuild</h3>
         <div class="oc-body"><div class="oc-body-in">
@@ -1246,7 +1247,7 @@ footer{background:#071028;padding:72px 0 0;}
         </div></div>
       </article>
       <article class="oc" tabindex="0">
-        <div class="oc-art" aria-hidden="true"><svg viewBox="40 40 220 150" preserveAspectRatio="xMidYMid meet"><path class="g-seg" style="--k:0" d="M68.1 147.1 A82 82 0 0 1 72.0 124.7"/><path class="g-seg" style="--k:1" d="M74.0 119.3 A82 82 0 0 1 85.4 99.5"/><path class="g-seg" style="--k:2" d="M89.1 95.1 A82 82 0 0 1 106.5 80.5"/><path class="g-seg" style="--k:3" d="M111.5 77.6 A82 82 0 0 1 132.9 69.8"/><path class="g-seg" style="--k:4" d="M138.6 68.8 A82 82 0 0 1 161.4 68.8"/><path class="g-seg" style="--k:5" d="M167.1 69.8 A82 82 0 0 1 188.5 77.6"/><path class="g-seg" style="--k:6" d="M193.5 80.5 A82 82 0 0 1 210.9 95.1"/><path class="g-seg" style="--k:7" d="M214.6 99.5 A82 82 0 0 1 226.0 119.3"/><path class="g-seg" style="--k:8" d="M228.0 124.7 A82 82 0 0 1 231.9 147.1"/><g class="g-needle"><line x1="150" y1="150" x2="88" y2="150"/></g><circle class="g-hub" cx="150" cy="150" r="9"/><text class="g-lab l" x="68" y="172">BEFORE</text><text class="g-lab r" x="232" y="172">AFTER</text><g class="g-chip"><rect x="110" y="92" width="80" height="24" rx="8"/><text x="150" y="108">Measured</text></g></svg></div>
+        <div class="oc-art" aria-hidden="true"><svg viewBox="40 30 220 160" preserveAspectRatio="xMidYMid meet"><circle class="ol-track" cx="150" cy="110" r="56"/><circle class="ol-arc" cx="150" cy="110" r="56"/><circle class="ol-n" style="--k:0" cx="150.0" cy="54.0" r="7"/><circle class="ol-n" style="--k:1" cx="206.0" cy="110.0" r="7"/><circle class="ol-n" style="--k:2" cx="150.0" cy="166.0" r="7"/><circle class="ol-n" style="--k:3" cx="94.0" cy="110.0" r="7"/><rect class="ol-core" x="134" y="94" width="32" height="32" rx="10"/><circle class="ol-run" r="3.5"><animateMotion dur="6s" repeatCount="indefinite" path="M150 54 A56 56 0 1 1 149.99 54"/></circle></svg></div>
         <div class="oc-head"><span class="oc-num">03</span><span class="oc-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
         <h3 class="oc-title">Operate &amp; Rebuild</h3>
         <div class="oc-body"><div class="oc-body-in">
@@ -1256,7 +1257,7 @@ footer{background:#071028;padding:72px 0 0;}
         </div></div>
       </article>
       <article class="oc" tabindex="0">
-        <div class="oc-art" aria-hidden="true"><svg viewBox="30 30 240 160" preserveAspectRatio="xMidYMid meet"><circle class="dn-track" cx="108" cy="110" r="52"/><circle class="dn-ai" cx="108" cy="110" r="52" style="--c:326.7"/><text class="dn-v" x="108" y="108">AI</text><text class="dn-s" x="108" y="126">attributed</text><g class="dn-leg"><rect x="178" y="84" width="12" height="12" rx="4" class="a"/><text x="196" y="94">AI-driven</text><rect x="178" y="110" width="12" height="12" rx="4" class="b"/><text x="196" y="120">Baseline</text></g><g class="dn-coins"><circle cx="186" cy="150" r="7"/><circle cx="202" cy="150" r="7"/><circle cx="218" cy="150" r="7"/></g></svg></div>
+        <div class="oc-art" aria-hidden="true"><svg viewBox="20 30 270 160" preserveAspectRatio="xMidYMid meet"><path class="rc-l" style="--k:0" d="M82 110 C 112 110, 118 70, 148 70"/><path class="rc-l" style="--k:1" d="M82 110 C 112 110, 118 110, 148 110"/><path class="rc-l" style="--k:2" d="M82 110 C 112 110, 118 150, 148 150"/><rect class="rc-b" style="--k:0;--w:96" x="148" y="61" width="96" height="18" rx="9"/><text class="rc-t" x="148" y="56">Conversion</text><rect class="rc-b" style="--k:1;--w:116" x="148" y="101" width="116" height="18" rx="9"/><text class="rc-t" x="148" y="96">Retention</text><rect class="rc-b" style="--k:2;--w:136" x="148" y="141" width="136" height="18" rx="9"/><text class="rc-t" x="148" y="136">Customer value</text><circle class="rc-ai" cx="64" cy="110" r="18"/><text class="rc-ait" x="64" y="114.5">AI</text></svg></div>
         <div class="oc-head"><span class="oc-num">04</span><span class="oc-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
         <h3 class="oc-title">Revenue &amp; Customer AI</h3>
         <div class="oc-body"><div class="oc-body-in">
@@ -1277,6 +1278,10 @@ footer{background:#071028;padding:72px 0 0;}
       <div class="tf-left-top">
         <h2 id="transform-h">Start with one function or work across multiple parts of the enterprise.</h2>
       </div>
+      </div>
+      <div class="tf-net" aria-hidden="true">
+        <svg viewBox="30 8 362 290" preserveAspectRatio="xMinYMid meet"><g class="mt" data-i="0"><rect class="mt-s" x="40" y="22" width="96" height="96" rx="20"/><text class="mt-t" x="88.0" y="139">Finance</text><g class="mt-b"><circle cx="130" cy="28" r="13"/><text x="130" y="32.5"></text></g></g><g class="mt" data-i="1"><circle class="mt-s" cx="202.0" cy="70.0" r="48.0"/><text class="mt-t" x="202.0" y="139">HR</text><g class="mt-b"><circle cx="244" cy="28" r="13"/><text x="244" y="32.5"></text></g></g><g class="mt" data-i="2"><path class="mt-s" d="M268 118V22A96 96 0 0 1 364 118Z"/><text class="mt-t" x="316.0" y="139">IT</text><g class="mt-b"><circle cx="358" cy="28" r="13"/><text x="358" y="32.5"></text></g></g><g class="mt" data-i="3"><path class="mt-s" d="M40 252V204.0A48.0 48.0 0 0 1 136 204.0V252Z"/><text class="mt-t" x="88.0" y="273">Marketing</text><g class="mt-b"><circle cx="130" cy="162" r="13"/><text x="130" y="166.5"></text></g></g><g class="mt" data-i="4"><circle class="mt-s" cx="202.0" cy="204.0" r="48.0"/><text class="mt-t" x="202.0" y="273">Legal</text><g class="mt-b"><circle cx="244" cy="162" r="13"/><text x="244" y="166.5"></text></g></g><g class="mt" data-i="5"><rect class="mt-s" x="268" y="156" width="96" height="96" rx="20"/><text class="mt-t" x="316.0" y="273">Core processes</text><g class="mt-b"><circle cx="358" cy="162" r="13"/><text x="358" y="166.5"></text></g></g></svg>
+        <p class="tn-cap"><span></span>Start anywhere. Any order works.</p>
       </div>
       <p class="transform-sub">AI Outcome Engineering redesigns workflows, decisions, and operations around AI to create measurable business outcomes.</p>
     </div>
@@ -1376,7 +1381,7 @@ footer{background:#071028;padding:72px 0 0;}
     </div>
     <div class="bento">
       <article class="bt bt-1 bc" style="--ar:360/390">
-        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 200 338" preserveAspectRatio="xMaxYMid slice"><defs><linearGradient id="mg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset="1" stop-color="#8fbaff"/></linearGradient><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b3d0ff"/><stop offset="1" stop-color="#5a98ff"/></linearGradient><linearGradient id="mg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#7aabff"/></linearGradient><linearGradient id="mg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef4ff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient><linearGradient id="mg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fbaff"/><stop offset="1" stop-color="#4d8fff"/></linearGradient></defs><path class="mz" style="--k:0" d="M0 0H100V50.0A50.0 50.0 0 0 1 50.0 100H0Z" fill="url(#mg1)"/><path class="mz" style="--k:1" d="M0 100H100V200Z" fill="url(#mg0)"/><path class="mz" style="--k:2" d="M0 300V200A100 100 0 0 1 100 300Z" fill="url(#mg3)"/><path class="mz" style="--k:3" d="M0 300H100V400H0Z" fill="url(#mg2)"/><path class="mz" style="--k:4" d="M100 100V50.0A50.0 50.0 0 0 1 200 50.0V100Z" fill="url(#mg3)"/><path class="mz" style="--k:5" d="M100 100H200V200H100Z" fill="url(#mg2)"/><path class="mz" style="--k:6" d="M100 250.0A50.0 50.0 0 1 1 200 250.0A50.0 50.0 0 1 1 100 250.0Z" fill="url(#mg1)"/><path class="mz" style="--k:7" d="M100 300H200V350.0A50.0 50.0 0 0 1 100 350.0Z" fill="url(#mg0)"/></svg></div>
+        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 200 338" preserveAspectRatio="xMaxYMid slice"><path class="mz" style="--k:0" d="M0 0H200V150H0Z"/><path class="mz" style="--k:1" d="M0 250A100 100 0 1 1 200 250A100 100 0 1 1 0 250Z"/></svg></div>
         <div class="bt-txt">
           <div class="bt-top"><span class="bt-n">01</span><span class="bt-ctx">Claims</span><span class="bt-ind">Insurance</span></div>
           <div class="bt-body">
@@ -1388,7 +1393,7 @@ footer{background:#071028;padding:72px 0 0;}
         </div>
       </article>
       <article class="bt bt-2 bc" style="--ar:195/390">
-        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 790 1836" preserveAspectRatio="xMaxYMid slice"><defs><linearGradient id="mg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset="1" stop-color="#8fbaff"/></linearGradient><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b3d0ff"/><stop offset="1" stop-color="#5a98ff"/></linearGradient><linearGradient id="mg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#7aabff"/></linearGradient><linearGradient id="mg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef4ff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient><linearGradient id="mg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fbaff"/><stop offset="1" stop-color="#4d8fff"/></linearGradient></defs><path class="mz" style="--k:0" d="M0 530L540 0H790V530Z" fill="url(#mg3)" fill-rule="evenodd"/><path class="mz" style="--k:1" d="M0 530H790V1297H0Z" fill="url(#mg0)" fill-rule="evenodd"/><path class="mz" style="--k:2" d="M5 1685A390 390 0 1 1 785 1685A390 390 0 1 1 5 1685Z" fill="url(#mg1)" fill-rule="evenodd"/></svg></div>
+        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 790 1836" preserveAspectRatio="xMaxYMid slice"><path class="mz" style="--k:0" d="M0 530H790V1297H0Z"/><path class="mz" style="--k:1" d="M5 1685A390 390 0 1 1 785 1685A390 390 0 1 1 5 1685Z"/></svg></div>
         <div class="bt-txt">
           <div class="bt-top"><span class="bt-n">02</span><span class="bt-ctx">Underwriting</span><span class="bt-ind">Financial services</span></div>
           <div class="bt-body">
@@ -1400,19 +1405,19 @@ footer{background:#071028;padding:72px 0 0;}
         </div>
       </article>
       <article class="bt bt-3 bc" style="--ar:157/325">
-        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 790 1836" preserveAspectRatio="xMaxYMid slice"><defs><linearGradient id="mg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset="1" stop-color="#8fbaff"/></linearGradient><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b3d0ff"/><stop offset="1" stop-color="#5a98ff"/></linearGradient><linearGradient id="mg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#7aabff"/></linearGradient><linearGradient id="mg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef4ff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient><linearGradient id="mg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fbaff"/><stop offset="1" stop-color="#4d8fff"/></linearGradient></defs><path class="mz" style="--k:0" d="M0 0H790V550H0Z" fill="url(#mg3)" fill-rule="evenodd"/><path class="mz" style="--k:1" d="M0 1305A790 755 0 0 1 790 550V1305Z" fill="url(#mg0)" fill-rule="evenodd"/><path class="mz" style="--k:2" d="M0 1305L560 1836H0Z" fill="url(#mg2)" fill-rule="evenodd"/></svg></div>
+        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 790 1836" preserveAspectRatio="xMaxYMid slice"><path class="mz" style="--k:0" d="M0 0H790V550H0Z"/><path class="mz" style="--k:1" d="M0 1305A790 755 0 0 1 790 550V1305Z"/></svg></div>
         <div class="bt-txt">
           <div class="bt-top"><span class="bt-n">03</span><span class="bt-ctx">Prior Authorizations</span><span class="bt-ind">Healthcare</span></div>
           <div class="bt-body">
           <p class="bt-quote">&ldquo;Approvals sit in a queue nobody owns.&rdquo;</p>
           <span class="bt-before">&nbsp;</span>
-          <p class="bt-big" aria-hidden="true"><span class="ct" data-from="0" data-to="83">83</span><small>%</small></p>
+          <p class="bt-big" aria-hidden="true"><span class="ct" data-from="0" data-to="83">83</span><small class="u-full">%</small></p>
           <p class="bt-changed">83% of prior authorizations touchless.</p>
         </div>
         </div>
       </article>
       <article class="bt bt-4 bc" style="--ar:177/325">
-        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 790 1836" preserveAspectRatio="xMaxYMid slice"><defs><linearGradient id="mg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset="1" stop-color="#8fbaff"/></linearGradient><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b3d0ff"/><stop offset="1" stop-color="#5a98ff"/></linearGradient><linearGradient id="mg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#7aabff"/></linearGradient><linearGradient id="mg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef4ff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient><linearGradient id="mg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fbaff"/><stop offset="1" stop-color="#4d8fff"/></linearGradient></defs><path class="mz" style="--k:0" d="M0 392A393 393 0 1 1 786 392A393 393 0 1 1 0 392ZM200 392A193 193 0 1 0 586 392A193 193 0 1 0 200 392Z" fill="url(#mg0)" fill-rule="evenodd"/><path class="mz" style="--k:1" d="M0 785H790A790 790 0 0 1 0 1575Z" fill="url(#mg2)" fill-rule="evenodd"/><path class="mz" style="--k:2" d="M0 1575H790V1836H0Z" fill="url(#mg3)" fill-rule="evenodd"/></svg></div>
+        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 790 1836" preserveAspectRatio="xMaxYMid slice"><path class="mz" style="--k:0" d="M0 392A393 393 0 1 1 786 392A393 393 0 1 1 0 392ZM200 392A193 193 0 1 0 586 392A193 193 0 1 0 200 392Z"/><path class="mz" style="--k:1" d="M0 785H790A790 790 0 0 1 0 1575Z"/></svg></div>
         <div class="bt-txt">
           <div class="bt-top"><span class="bt-n">04</span><span class="bt-ctx">Financial Close</span><span class="bt-ind">Enterprise finance</span></div>
           <div class="bt-body">
@@ -1424,7 +1429,7 @@ footer{background:#071028;padding:72px 0 0;}
         </div>
       </article>
       <article class="bt bt-5 bc" style="--ar:182/325">
-        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 790 1836" preserveAspectRatio="xMaxYMid slice"><defs><linearGradient id="mg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dbe9ff"/><stop offset="1" stop-color="#8fbaff"/></linearGradient><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b3d0ff"/><stop offset="1" stop-color="#5a98ff"/></linearGradient><linearGradient id="mg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#7aabff"/></linearGradient><linearGradient id="mg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef4ff"/><stop offset="1" stop-color="#b3d0ff"/></linearGradient><linearGradient id="mg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fbaff"/><stop offset="1" stop-color="#4d8fff"/></linearGradient></defs><path class="mz" style="--k:0" d="M0 0A790 795 0 0 0 790 795V0Z" fill="url(#mg3)" fill-rule="evenodd"/><path class="mz" style="--k:1" d="M0 800L790 795L0 1590Z" fill="url(#mg0)" fill-rule="evenodd"/><path class="mz" style="--k:2" d="M-5 1770A465 465 0 1 1 925 1770A465 465 0 1 1 -5 1770ZM230 1770A230 230 0 1 0 690 1770A230 230 0 1 0 230 1770Z" fill="url(#mg1)" fill-rule="evenodd"/></svg></div>
+        <div class="bc-art" aria-hidden="true"><svg viewBox="0 0 790 1836" preserveAspectRatio="xMaxYMid slice"><path class="mz" style="--k:0" d="M0 0A790 795 0 0 0 790 795V0Z"/><path class="mz" style="--k:1" d="M0 800L790 795L0 1590Z"/></svg></div>
         <div class="bt-txt">
           <div class="bt-top"><span class="bt-n">05</span><span class="bt-ctx">Freight Exceptions</span><span class="bt-ind">Logistics</span></div>
           <div class="bt-body">
@@ -1971,6 +1976,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     ctx.clearRect(0, 0, W, H);
     const t = (now % CYCLE) / CYCLE;
     const p = progress(t);
+    window.__heroP = p;
     const pInv = 1 - p;
     const driftAmp = 3 + 5 * pInv;
 
@@ -2607,14 +2613,14 @@ html:not(.cx) .chap::after{transform:scale(1);}
   position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;
   height:528px;padding:12px 12px 20px;
   background:#fff;border:1px solid var(--paper-line);border-radius:24px;
-  box-shadow:0 1px 0 rgba(0,0,0,.02),0 14px 34px -20px rgba(0,40,120,.22);
+  box-shadow:none;
   transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s ease,border-color .4s ease;outline:none;
 }
 .oc::after{ /* cursor-follow glow */
   content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .4s ease;
   background:radial-gradient(260px circle at var(--mx,50%) var(--my,30%),rgba(0,100,255,.08),transparent 70%);
 }
-.oc:hover,.oc:focus-within{transform:translateY(-10px);border-color:var(--blue-24);box-shadow:0 34px 64px -26px rgba(0,60,160,.32);}
+.oc:hover,.oc:focus-within{transform:translateY(-10px);border-color:var(--blue-24);box-shadow:none;}
 .oc:hover::after,.oc:focus-within::after{opacity:1;}
 .oc-art{
   position:relative;flex:1 1 0;min-height:88px;border-radius:16px;overflow:hidden;
@@ -2635,7 +2641,7 @@ html:not(.cx) .chap::after{transform:scale(1);}
 .oc:hover .oc-go svg,.oc:focus-within .oc-go svg{stroke:#fff;}
 .oc-title{flex:none;box-sizing:content-box;height:2.4em;padding:10px 14px 0;font-family:var(--display);font-weight:400;font-size:clamp(21px,1.75vw,26px);line-height:1.2;letter-spacing:-.02em;color:var(--ink);}
 .oc-body{flex:0 1 auto;padding:0 14px;display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s cubic-bezier(.2,.7,.2,1);}
-.oc-body-in{min-height:0;overflow:hidden;opacity:0;transform:translateY(24px);transition:opacity .35s ease,transform .6s cubic-bezier(.2,.7,.2,1);}
+.oc-body-in{min-height:0;overflow:hidden;opacity:0;transform:translateY(48px);transition:opacity .35s ease,transform .6s cubic-bezier(.2,.7,.2,1);}
 .oc:hover .oc-body,.oc:focus-within .oc-body{grid-template-rows:1fr;flex:1 1 auto;}
 .oc-body-in{display:flex;flex-direction:column;}
 .oc-cta{margin-top:auto;align-self:flex-start;}
@@ -2665,53 +2671,50 @@ html:not(.cx) .chap::after{transform:scale(1);}
 .oc:hover .wr-run{opacity:1;}
 .oc:hover .wr-chip{opacity:1;transform:none;}
 
-/* 02 · Systems Rebuild — the workflow layer lifts off the stack */
-.a2-l{stroke-width:1.5;}
-.a2-l.base{fill:#e3e8f0;stroke:#c7cfdc;}
-.a2-l.mid{fill:#d6e5ff;stroke:var(--blue-24);}
-.a2-l.top{fill:var(--blue);stroke:var(--blue-strong);}
-.a2-g{transition:transform .7s cubic-bezier(.3,1.3,.5,1);}
-.a2-g.l3{animation:a2Bob 4s ease-in-out infinite;}
-@keyframes a2Bob{50%{transform:translateY(-4px);}}
-.oc:hover .a2-g.l3{animation:none;transform:translateY(-26px);}
-.oc:hover .a2-g.l2{transform:translateY(-10px);}
-.oc:hover .a2-l.top{filter:drop-shadow(0 10px 14px rgba(0,100,255,.35));}
+/* 02 · Systems Rebuild — patched, misaligned systems snap into one modular, scalable, AI-native system */
+.sr-patch{fill:none;stroke:#b9c3d3;stroke-width:1.4;stroke-dasharray:3 4;transition:opacity .35s ease;}
+.sr-t{fill:#fff;stroke:#b9c3d3;stroke-width:1.5;transform-box:fill-box;transform-origin:center;transform:translate(var(--dx),var(--dy)) rotate(var(--r));transition:transform .7s cubic-bezier(.3,1.25,.5,1) calc(var(--k) * .06s),fill .4s ease .5s,stroke .4s ease .5s,opacity .4s ease;}
+.sr-t.grow{opacity:0;transform:scale(.3);}
+.sr-ai{font-family:var(--display);font-size:12px;font-weight:600;fill:#fff;text-anchor:middle;opacity:0;transition:opacity .3s ease 1s;}
+.oc:hover .sr-patch{opacity:0;}
+.oc:hover .sr-t{transform:none;fill:#eef4ff;stroke:var(--blue);}
+.oc:hover .sr-t.grow{opacity:1;transition-delay:calc(var(--k) * .06s + .45s),.5s,.5s,calc(var(--k) * .06s + .45s);}
+.oc:hover .sr-t.ai{fill:var(--blue);}
+.oc:hover .sr-ai{opacity:1;}
 
-/* 03 · Operate & Rebuild — a performance gauge: improvement is measured, not promised */
-.g-seg{fill:none;stroke:#dfe4ec;stroke-width:14;stroke-linecap:round;transition:stroke .3s ease calc(var(--k) * .06s + .1s);}
-.g-seg:nth-of-type(-n+3){stroke:var(--blue-24);}
-.oc:hover .g-seg{stroke:var(--blue);}
-.g-needle{transform-origin:150px 150px;transform:rotate(38deg);animation:gIdle 3.5s ease-in-out infinite;transition:transform .9s cubic-bezier(.3,1.3,.5,1);}
-@keyframes gIdle{50%{transform:rotate(46deg);}}
-.g-needle line{stroke:#0b0b0b;stroke-width:4;stroke-linecap:round;}
-.oc:hover .g-needle{animation:none;transform:rotate(158deg);}
-.oc:hover .g-needle line{stroke:var(--blue-strong);}
-.g-hub{fill:#0b0b0b;transition:fill .4s ease;} .oc:hover .g-hub{fill:var(--blue);}
-.g-lab{font-family:var(--display);font-size:10px;font-weight:500;letter-spacing:.16em;fill:#84868c;text-anchor:middle;}
-.oc:hover .g-lab.r{fill:var(--blue);}
-.g-chip{opacity:0;transform:translateY(6px);transition:opacity .4s ease .7s,transform .5s ease .7s;}
-.g-chip rect{fill:var(--blue);} .g-chip text{fill:#fff;font-family:var(--display);font-size:11px;font-weight:600;text-anchor:middle;}
-.oc:hover .g-chip{opacity:1;transform:none;}
+/* 03 · Operate & Rebuild — one owner holds the whole loop: run it, rebuild it, end to end */
+.ol-track{fill:none;stroke:#c7cfdc;stroke-width:1.6;stroke-dasharray:3 5;}
+.ol-arc{fill:none;stroke:var(--blue);stroke-width:3;stroke-linecap:round;transform-origin:150px 110px;transform:rotate(-90deg);stroke-dasharray:351.9;stroke-dashoffset:351.9;transition:stroke-dashoffset 1.1s cubic-bezier(.4,0,.2,1);}
+.ol-n{fill:#fff;stroke:#b9c3d3;stroke-width:1.6;transition:fill .3s ease calc(var(--k) * .26s + .15s),stroke .3s ease calc(var(--k) * .26s + .15s);}
+.ol-core{fill:#fff;stroke:#b9c3d3;stroke-width:1.6;transform-box:fill-box;transform-origin:center;transition:fill .4s ease .9s,stroke .4s ease .9s,transform .5s cubic-bezier(.3,1.6,.5,1) .9s;}
+.ol-run{fill:#9aa3b2;}
+.oc:hover .ol-arc{stroke-dashoffset:0;}
+.oc:hover .ol-n{fill:var(--blue);stroke:var(--blue);}
+.oc:hover .ol-core{fill:var(--blue);stroke:var(--blue);transform:scale(1.12);}
+.oc:hover .ol-run{fill:var(--blue);}
 
-/* 04 · Revenue & Customer AI — the AI-attributed share of revenue grows */
-.dn-track{fill:none;stroke:#dfe4ec;stroke-width:18;}
-.dn-ai{fill:none;stroke:var(--blue);stroke-width:18;stroke-linecap:round;transform-origin:108px 110px;transform:rotate(-90deg);stroke-dasharray:var(--c);stroke-dashoffset:calc(var(--c) * .8);transition:stroke-dashoffset 1s cubic-bezier(.4,0,.2,1);}
-.oc:hover .dn-ai{stroke-dashoffset:calc(var(--c) * .32);}
-.dn-v{font-family:var(--display);font-size:22px;font-weight:600;fill:#0b0b0b;text-anchor:middle;transition:fill .4s ease;}
-.oc:hover .dn-v{fill:var(--blue);}
-.dn-s{font-family:var(--display);font-size:10px;fill:#84868c;text-anchor:middle;letter-spacing:.06em;}
-.dn-leg text{font-family:var(--display);font-size:11px;fill:#0b0b0b;}
-.dn-leg .a{fill:var(--blue);} .dn-leg .b{fill:#dfe4ec;}
-.dn-coins circle{fill:#fff;stroke:#c7cfdc;stroke-width:2;transform-box:fill-box;transform-origin:center;transition:fill .3s ease,stroke .3s ease,transform .45s cubic-bezier(.3,1.6,.5,1);}
-.dn-coins circle:nth-child(2){transition-delay:.1s;} .dn-coins circle:nth-child(3){transition-delay:.2s;}
-.oc:hover .dn-coins circle{fill:var(--blue);stroke:var(--blue);transform:translateY(-6px);}
+/* 04 · Revenue & Customer AI — AI stops being standalone and drives conversion, retention, customer value */
+.rc-l{fill:none;stroke:#c7cfdc;stroke-width:1.4;stroke-dasharray:3 4;}
+.rc-ai{fill:#fff;stroke:#b9c3d3;stroke-width:1.6;transition:fill .4s ease,stroke .4s ease;}
+.rc-ait{font-family:var(--display);font-size:12px;font-weight:600;fill:#84868c;text-anchor:middle;transition:fill .4s ease;}
+.rc-b{fill:#d6dde8;transform-box:fill-box;transform-origin:left center;transform:scaleX(.45);transition:transform .7s cubic-bezier(.3,1.2,.5,1) calc(var(--k) * .18s + .35s),fill .4s ease calc(var(--k) * .18s + .35s);}
+.rc-t{font-family:var(--display);font-size:9.5px;font-weight:500;fill:#84868c;transition:fill .4s ease;}
+.oc:hover .rc-ai{fill:var(--blue);stroke:var(--blue);}
+.oc:hover .rc-ait{fill:#fff;}
+.oc:hover .rc-l{stroke:var(--blue);stroke-dasharray:none;stroke-width:1.6;transition:stroke .3s ease calc(var(--k) * .18s + .15s);}
+.oc:hover .rc-b{transform:none;fill:var(--blue);}
+.oc:hover .rc-b:nth-of-type(2){fill:#4d8fff;}
+.oc:hover .rc-b:nth-of-type(1){fill:#79adff;}
+.oc:hover .rc-t{fill:var(--ink);}
 
-/* hover sequence: illustration plays first, then the card lifts and the text slides up */
-.oc:hover,.oc:focus-within{transition-delay:1.6s,1.6s,1.6s;}
-.oc:hover .oc-art,.oc:focus-within .oc-art{transition-delay:1.6s;transition-duration:.8s;}
-.oc:hover .oc-head,.oc:focus-within .oc-head{transition-delay:1.6s;}
-.oc:hover .oc-body,.oc:focus-within .oc-body{transition-delay:1.6s;transition-duration:.8s;}
-.oc:hover .oc-body-in,.oc:focus-within .oc-body-in{transition-delay:1.85s;transition-duration:.5s,.8s;}
+/* hover sequence: illustration plays first, then the card lifts and the text swipes up */
+.oc:hover,.oc:focus-within{transition-delay:2.3s,2.3s,2.3s;}
+.oc:hover .oc-art,.oc:focus-within .oc-art{transition-delay:2.3s;transition-duration:.9s;}
+.oc:hover .oc-head,.oc:focus-within .oc-head{transition-delay:2.3s;}
+.oc:hover .oc-body,.oc:focus-within .oc-body{transition-delay:2.3s;transition-duration:.9s;}
+.oc:hover .oc-body-in,.oc:focus-within .oc-body-in{transition-delay:2.5s;transition-duration:.6s,.9s;}
+/* illustrations play at a calmer pace on hover */
+.oc:hover .oc-art svg *{transition-duration:1.2s!important;}
 @media(max-width:1100px){.oc-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.oc{height:456px;}}
 @media(max-width:600px){.oc-grid{grid-template-columns:1fr;}}
 @media(hover:none){
@@ -2721,7 +2724,7 @@ html:not(.cx) .chap::after{transform:scale(1);}
 }
 @media (prefers-reduced-motion:reduce){
   .oc,.oc-body,.oc-body-in,.oc-art{transition:none;}.oc:hover{transform:none;}
-  .wr-st,.a2-g.l3,.g-needle{animation:none;}
+  .wr-st{animation:none;}
 }
 
 /* ---------- Section 5 · Outcomes: dark bento with live metrics ---------- */
@@ -2800,8 +2803,8 @@ html:not(.cx) .chap::after{transform:scale(1);}
 .mz{transform-box:fill-box;transform-origin:center;transition:transform .6s cubic-bezier(.3,1.4,.5,1) calc(var(--k) * .035s);}
 .bc-acc{transform-box:fill-box;transform-origin:center;transition:transform .7s cubic-bezier(.3,1.4,.5,1);}
 /* outline-only shapes */
-.bc .mz{fill:none;stroke:#79adff;stroke-width:1.5px;vector-effect:non-scaling-stroke;}
-.bt.bc:hover .mz{stroke:#0064ff;}
+.bc .mz{fill:#0064ff;fill-opacity:.06;stroke:none;transition:fill-opacity .4s ease;}
+.bt.bc:hover .mz{fill-opacity:.1;}
 .bt.bc:hover .mz:nth-child(3n+1){transform:scale(.92);}
 .bt.bc:hover .mz:nth-child(3n+2){transform:translateY(-4px);}
 
@@ -2823,6 +2826,7 @@ html:not(.cx) .chap::after{transform:scale(1);}
 .bt.bc .bt-before{font-size:15px;}
 .bt.bc .bt-big{font-size:clamp(38px,3vw,48px);gap:10px;}
 .bt.bc .bt-big small{font-size:.5em;letter-spacing:-.01em;}
+.bt.bc .bt-big small.u-full{font-size:1em;margin-left:-8px;}
 @media(max-width:1100px){.bt.bc{height:auto!important;min-height:340px;}}
 @media(max-width:640px){.bt.bc{--aw:34%!important;}}
 @media(max-width:1100px){
@@ -2890,6 +2894,59 @@ button.transform-core-cta{border:0;cursor:pointer;font:inherit;font-family:var(-
   .hero-copy,.hero-copy > *:last-child{margin-bottom:0;padding-bottom:0;}
   .hero-graph{margin:16px 0 -12px;}
   .hero-zone > .intro{padding-top:28px;}
+}
+
+/* hero: a few graph spokes reach further out — one touches the word "systems" when the graph converges */
+.hero-cols{position:relative;}
+.hero-copy{position:relative;z-index:3;}
+.hero-link{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:2;}
+.hr-l{stroke:rgba(11,11,11,.22);stroke-width:.6;}
+
+@media(max-width:900px){.hero-link{display:none;}}
+
+/* transform: shape mosaic — functions light up in a different, non-linear order each loop */
+.tf-net{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:12px;max-width:440px;margin:8px 0;}
+.tf-net svg{width:100%;height:auto;max-height:calc(100% - 30px);min-height:0;overflow:visible;}
+.mt-s{fill:#fff;stroke:#c7cfdc;stroke-width:1.5;transform-box:fill-box;transform-origin:center;transition:fill .45s ease,stroke .45s ease,transform .5s cubic-bezier(.3,1.5,.5,1);}
+.mt.lit .mt-s{fill:#b3d0ff;stroke:var(--blue);}
+.mt.start .mt-s{fill:var(--blue);stroke:var(--blue);transform:scale(1.04);}
+.mt-t{font-family:var(--display);font-size:15px;font-weight:500;fill:#84868c;text-anchor:middle;transition:fill .4s ease;}
+.mt.lit .mt-t{fill:var(--ink);}
+.mt-b{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.4);transition:opacity .3s ease,transform .45s cubic-bezier(.3,1.7,.5,1);}
+.mt-b circle{fill:#0b0b0b;}
+.mt-b text{font-family:var(--display);font-size:13px;font-weight:600;fill:#fff;text-anchor:middle;}
+.mt.lit .mt-b{opacity:1;transform:none;}
+.tn-cap{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:13px;color:var(--ink-60);}
+.tn-cap span{width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px rgba(0,100,255,.15);}
+@media(max-width:900px){.tf-net{margin:8px 0 4px;}.tf-net svg{max-height:none;}}
+
+/* ================= MOBILE / TABLET PASS ================= */
+@media(max-width:900px){
+  .hero-cols{grid-template-columns:minmax(0,1fr);}
+  .hero-graph{width:100%;max-width:418px;}
+}
+@media(max-width:640px){
+  .squad{padding:56px 0;}
+  .offer{padding:64px 0 88px;}
+  .oc-grid{gap:14px;margin-top:32px;}
+  .outcomes{padding:64px 0;}
+  .out-head{margin-bottom:28px;}
+  .bento{gap:14px;grid-auto-rows:auto;}
+  .bt.bc{height:auto!important;min-height:0!important;}
+  .bc-art{top:0;bottom:0;height:100%!important;width:auto!important;aspect-ratio:790/1836;}
+  .bt-1.bc .bc-art{aspect-ratio:200/338;}
+  .bc .bt-txt{padding:22px!important;justify-content:flex-start;gap:14px;}
+  .bc .bt-quote{max-width:none;padding-right:30%;}
+  .how-build{padding:64px 0 28px;}
+  .build-row-bar{display:none;}
+  .build-row{padding:12px 10px;}
+  .after{padding:40px 0 64px;}
+  .after .after-headline{font-size:clamp(24px,7vw,28px);}
+  .ship{margin-top:36px;padding:8px;}
+  .ship-item{padding:18px 16px 20px;gap:14px;}
+  .ship-check{width:38px;height:38px;}
+  .tf-card.show-ind .ti-grid{grid-auto-rows:56px;gap:10px;}
+  .connect{padding:56px 0;}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -3016,6 +3073,86 @@ button.transform-core-cta{border:0;cursor:pointer;font:inherit;font-family:var(-
   function alignGrid(){ if(hbSec&&afSec) afSec.style.setProperty('--gy', (-(hbSec.offsetHeight % 64))+'px'); }
   alignGrid(); addEventListener('resize',alignGrid); addEventListener('load',alignGrid);
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(alignGrid);
+
+  /* ---- hero: several graph spokes reach beyond the circle; one ends on the full stop after "systems" ---- */
+  (function(){
+    const svg=document.getElementById('heroLink'), cols=document.querySelector('.hero-cols'), cv=document.getElementById('heroGraph');
+    if(!svg||!cols||!cv) return;
+    const NS='http://www.w3.org/2000/svg';
+    /* [angle° (0 = right, 90 = down), reach × graph radius, dot r, dot colour] — extras spread round the circle */
+    const EXTRA=[[-47,1.58,4,'#0b0b0b',.05],[11,1.18,3.5,'#0064ff',.32],[37,1.46,5,'#b3d0ff',.18],[121,1.26,3.5,'#0b0b0b',.42]];   /* angle, reach, dot r, colour, growth delay */
+    const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);svg.appendChild(e);return e;};
+    const toStop=mk('line',{class:'hr-l'});
+    const extras=EXTRA.map(([a,f,r,c,d])=>({a:a*Math.PI/180,f,d,line:mk('line',{class:'hr-l'}),dot:mk('circle',{r,fill:c})}));
+    let geo=null;
+    function measure(){
+      const w=[...document.querySelectorAll('#heroLine1 .hw')].find(x=>/^systems/i.test(x.textContent.trim()));
+      if(!w){geo=null;return;}
+      const c=cols.getBoundingClientRect(), r=w.getBoundingClientRect(), g=cv.getBoundingClientRect();
+      const fs=parseFloat(getComputedStyle(w).fontSize);
+      /* locate the full stop precisely: last glyph's x, and the text baseline via a zero-size probe */
+      const tn=[...w.childNodes].reverse().find(n=>n.nodeType===3&&n.textContent.trim());
+      let px=r.right-c.left-fs*.11, py=r.top-c.top+r.height*.7;
+      if(tn){
+        const rg=document.createRange(); rg.setStart(tn,tn.length-1); rg.setEnd(tn,tn.length);
+        const gr=rg.getBoundingClientRect(); px=(gr.left+gr.right)/2-c.left;
+        const probe=document.createElement('span'); probe.style.cssText='display:inline-block;width:0;height:0;vertical-align:baseline';
+        w.appendChild(probe); py=probe.getBoundingClientRect().top-c.top-fs*.06; probe.remove();
+      }
+      geo={cx:g.left-c.left+g.width/2, cy:g.top-c.top+g.height/2, R:g.width*.47, px, py};
+    }
+    const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+    const set=(e,a)=>{for(const k in a)e.setAttribute(k,a[k]);};
+    function frame(){
+      const p=window.__heroP||0;
+      if(geo){
+        const k=ease(Math.max(0,Math.min(1,(p-.35)/.65)));
+        extras.forEach(s=>{
+          const ks=ease(Math.max(0,Math.min(1,(k-s.d)/(1-s.d))));
+          const len=geo.R*(1+(s.f-1)*ks), x=geo.cx+Math.cos(s.a)*len, y=geo.cy+Math.sin(s.a)*len;
+          set(s.line,{x1:geo.cx,y1:geo.cy,x2:x,y2:y}); s.line.style.opacity=ks; set(s.dot,{cx:x,cy:y}); s.dot.style.opacity=ks;
+        });
+        const x=geo.cx+(geo.px-geo.cx)*k, y=geo.cy+(geo.py-geo.cy)*k;
+        set(toStop,{x1:geo.cx,y1:geo.cy,x2:x,y2:y}); toStop.style.opacity=k;
+      }
+      requestAnimationFrame(frame);
+    }
+    measure(); addEventListener('resize',measure);
+    setTimeout(measure,1700);
+    if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>setTimeout(measure,1700));
+    requestAnimationFrame(frame);
+  })();
+
+  /* ---- transform: tiles light in a random, non-linear order (1, 2, 3) — never the card order ---- */
+  (function(){
+    const net=document.querySelector('.tf-net'); if(!net) return;
+    const tiles=[...net.querySelectorAll('.mt')], cards=[...document.querySelectorAll('.tf-card')];
+    let timers=[], last=-1, lockedTo=-1;
+    const clear=()=>{timers.forEach(clearTimeout);timers=[];tiles.forEach(t=>t.classList.remove('lit','start'));};
+    function orderFrom(start){
+      const rest=tiles.map((_,i)=>i).filter(i=>i!==start&&i!==start+1&&i!==start-1);   /* skip neighbours so it never reads as a sequence */
+      for(let i=rest.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[rest[i],rest[j]]=[rest[j],rest[i]];}
+      return [start,...rest.slice(0,2)];
+    }
+    function run(start){
+      clear(); last=start;
+      orderFrom(start).forEach((ti,n)=>{
+        const go=()=>{ const t=tiles[ti]; t.querySelector('.mt-b text').textContent=n+1; t.classList.add('lit'); if(n===0) t.classList.add('start'); };
+        REDUCE?go():timers.push(setTimeout(go,250+n*650));
+      });
+      if(!REDUCE) timers.push(setTimeout(()=>{ if(lockedTo<0) run(pick()); },4200));
+    }
+    function pick(){ let i; do{ i=Math.floor(Math.random()*tiles.length); }while(i===last); return i; }
+    let tk=false;
+    function onScroll(){ tk=false;
+      const sec=document.getElementById('transform').getBoundingClientRect();
+      if(sec.bottom<0||sec.top>innerHeight){ lockedTo=-1; return; }
+      let a=-1; cards.forEach((c,i)=>{ const st=parseFloat(getComputedStyle(c).top)||0; if(c.getBoundingClientRect().top<=st+2) a=i; });
+      if(a>=0&&a!==lockedTo){ lockedTo=a; run(a); timers.push(setTimeout(()=>{ lockedTo=-1; run(pick()); },4200)); }
+    }
+    addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(onScroll);}},{passive:true});
+    run(pick());
+  })();
 
   /* ---- how-build pipeline: fill + done states follow the active row ---- */
   const rows=[...document.querySelectorAll('.build-row')];

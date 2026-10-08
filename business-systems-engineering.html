@@ -380,7 +380,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .tf-left-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;}
 .transform h2{
   font-family:var(--display);font-weight:400;
-  font-size:clamp(34px,3.6vw,54px);line-height:1.04;letter-spacing:-.035em;
+  font-size:clamp(32px,3.3vw,50px);line-height:1.04;letter-spacing:-.035em;
   color:var(--ink);max-width:13ch;
 }
 .transform-sub{
@@ -390,7 +390,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 .tf-stack{padding-bottom:12vh;}
 .tf-card{
   position:sticky;top:calc(var(--tf-top) + var(--i) * var(--tf-strip));
-  height:max(440px, calc(100vh - var(--tf-top) - 5 * var(--tf-strip)));
+  height:clamp(440px, calc(100vh - var(--tf-top) - 5 * var(--tf-strip)), 480px);   /* capped so tall screens (iMac) don't leave empty card space */
   padding:0 clamp(24px,3vw,44px) 36px;
   display:flex;flex-direction:column;
   background:var(--bg);color:#fff;
@@ -1228,42 +1228,38 @@ footer{background:#071028;padding:72px 0 0;}
     <div class="oc-grid">
       <article class="oc" tabindex="0">
         <div class="oc-art" aria-hidden="true"><svg viewBox="20 30 260 160" preserveAspectRatio="xMidYMid meet"><path class="wr-wind" d="M40 60 H250 Q270 60 270 80 V90 Q270 110 250 110 H60 Q40 110 40 130 V140 Q40 160 60 160 H260"/><rect class="wr-st" x="71" y="51" width="18" height="18" rx="5" style="--k:0"/><rect class="wr-st" x="141" y="51" width="18" height="18" rx="5" style="--k:1"/><rect class="wr-st" x="211" y="51" width="18" height="18" rx="5" style="--k:2"/><rect class="wr-st" x="221" y="101" width="18" height="18" rx="5" style="--k:3"/><rect class="wr-st" x="151" y="101" width="18" height="18" rx="5" style="--k:4"/><rect class="wr-st" x="81" y="101" width="18" height="18" rx="5" style="--k:5"/><rect class="wr-st" x="81" y="151" width="18" height="18" rx="5" style="--k:6"/><rect class="wr-st" x="161" y="151" width="18" height="18" rx="5" style="--k:7"/><rect class="wr-st" x="231" y="151" width="18" height="18" rx="5" style="--k:8"/><circle class="wr-a" cx="40" cy="60" r="7"/><circle class="wr-b" cx="260" cy="160" r="7"/><path class="wr-direct" d="M40 60 C 120 60, 180 160, 260 160"/><g class="wr-new"><rect x="98" y="88" width="22" height="22" rx="7"/><rect x="170" y="118" width="22" height="22" rx="7"/></g><circle class="wr-run" r="4.5"><animateMotion dur="1.6s" repeatCount="indefinite" path="M40 60 C 120 60, 180 160, 260 160"/></circle><g class="wr-chip"><rect x="196" y="40" width="72" height="24" rx="8"/><text x="232" y="56">9 → 2 steps</text></g></svg></div>
-        <div class="oc-head"><span class="oc-num">01</span><span class="oc-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
+        <div class="oc-head"><span class="oc-num">01</span></div>
         <h3 class="oc-title">Work Redesign</h3>
         <div class="oc-body"><div class="oc-body-in">
           <p class="oc-q">Name one process that should work dramatically better than it does.</p>
           <p class="oc-d">Process <span class="nowrap">re-engineering</span> and work redesign, with the build authority to make it real. Process intelligence and dependency mapping to find where the work actually breaks, then agentic workflow engineering to rebuild it - not a recommendation deck, a running system.</p>
-          <a href="work-redesign.html" class="oc-cta">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         </div></div>
       </article>
       <article class="oc" tabindex="0">
         <div class="oc-art" aria-hidden="true"><svg viewBox="20 30 260 160" preserveAspectRatio="xMidYMid meet"><path class="sr-patch" d="M82.0 71.0 C 140.0 45.0, 190.0 75.0, 164.0 63.0 M74.0 151.0 C 120.0 185.0, 170.0 175.0, 220.0 149.0"/><rect class="sr-t" style="--dx:-18px;--dy:-14px;--r:-12deg;--k:0" x="80.0" y="65.0" width="40" height="40" rx="10"/><rect class="sr-t" style="--dx:14px;--dy:-22px;--r:9deg;--k:1" x="130.0" y="65.0" width="40" height="40" rx="10"/><rect class="sr-t" style="--dx:-26px;--dy:16px;--r:7deg;--k:2" x="180.0" y="65.0" width="40" height="40" rx="10"/><rect class="sr-t" style="--dx:20px;--dy:14px;--r:-10deg;--k:3" x="80.0" y="115.0" width="40" height="40" rx="10"/><rect class="sr-t grow ai" style="--dx:0px;--dy:0px;--r:0deg;--k:4" x="130.0" y="115.0" width="40" height="40" rx="10"/><rect class="sr-t grow" style="--dx:0px;--dy:0px;--r:0deg;--k:5" x="180.0" y="115.0" width="40" height="40" rx="10"/><text class="sr-ai" x="150.0" y="139.0">AI</text></svg></div>
-        <div class="oc-head"><span class="oc-num">02</span><span class="oc-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
+        <div class="oc-head"><span class="oc-num">02</span></div>
         <h3 class="oc-title">Systems Rebuild</h3>
         <div class="oc-body"><div class="oc-body-in">
           <p class="oc-q">Which system are you working around rather than working with?</p>
           <p class="oc-d">Enterprise systems rebuild at the workflow layer replacing legacy and SaaS where configuration has become contortion. Includes systems consolidation and rationalisation, and application and product engineering for the custom systems that carry competitive advantage.</p>
-          <a href="#" class="oc-cta">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         </div></div>
       </article>
       <article class="oc" tabindex="0">
         <div class="oc-art" aria-hidden="true"><svg viewBox="40 30 220 160" preserveAspectRatio="xMidYMid meet"><circle class="ol-track" cx="150" cy="110" r="56"/><circle class="ol-arc" cx="150" cy="110" r="56"/><circle class="ol-n" style="--k:0" cx="150.0" cy="54.0" r="7"/><circle class="ol-n" style="--k:1" cx="206.0" cy="110.0" r="7"/><circle class="ol-n" style="--k:2" cx="150.0" cy="166.0" r="7"/><circle class="ol-n" style="--k:3" cx="94.0" cy="110.0" r="7"/><rect class="ol-core" x="134" y="94" width="32" height="32" rx="10"/><circle class="ol-run" r="3.5"><animateMotion dur="6s" repeatCount="indefinite" path="M150 54 A56 56 0 1 1 149.99 54"/></circle></svg></div>
-        <div class="oc-head"><span class="oc-num">03</span><span class="oc-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
+        <div class="oc-head"><span class="oc-num">03</span></div>
         <h3 class="oc-title">Operate &amp; Rebuild</h3>
         <div class="oc-body"><div class="oc-body-in">
           <p class="oc-q">Is there a process you would hand to someone else if they could prove they would improve it?</p>
           <p class="oc-d">Searce takes operational ownership of a process and rebuilds it while running it. Improvement is measured, not promised. The process comes back better than it left, with the economics to show it.</p>
-          <a href="#" class="oc-cta">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         </div></div>
       </article>
       <article class="oc" tabindex="0">
         <div class="oc-art" aria-hidden="true"><svg viewBox="20 30 270 160" preserveAspectRatio="xMidYMid meet"><path class="rc-l" style="--k:0" d="M82 110 C 112 110, 118 70, 148 70"/><path class="rc-l" style="--k:1" d="M82 110 C 112 110, 118 110, 148 110"/><path class="rc-l" style="--k:2" d="M82 110 C 112 110, 118 150, 148 150"/><rect class="rc-b" style="--k:0;--w:96" x="148" y="61" width="96" height="18" rx="9"/><text class="rc-t" x="148" y="56">Conversion</text><rect class="rc-b" style="--k:1;--w:116" x="148" y="101" width="116" height="18" rx="9"/><text class="rc-t" x="148" y="96">Retention</text><rect class="rc-b" style="--k:2;--w:136" x="148" y="141" width="136" height="18" rx="9"/><text class="rc-t" x="148" y="136">Customer value</text><circle class="rc-ai" cx="64" cy="110" r="18"/><text class="rc-ait" x="64" y="114.5">AI</text></svg></div>
-        <div class="oc-head"><span class="oc-num">04</span><span class="oc-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span></div>
+        <div class="oc-head"><span class="oc-num">04</span></div>
         <h3 class="oc-title">Revenue &amp; Customer AI</h3>
         <div class="oc-body"><div class="oc-body-in">
           <p class="oc-q">What would you do differently if you could prove which revenue came from the AI?</p>
           <p class="oc-d">AI engineered into revenue and customer workflows with attribution built in from the start, so every system answers not just "did it run" but "what did it earn."</p>
-          <a href="#" class="oc-cta">Learn more <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         </div></div>
       </article>
     </div>
@@ -1279,9 +1275,8 @@ footer{background:#071028;padding:72px 0 0;}
         <h2 id="transform-h">Start with one function or work across multiple parts of the enterprise.</h2>
       </div>
       </div>
-      <div class="tf-net" aria-hidden="true">
-        <svg viewBox="30 8 362 290" preserveAspectRatio="xMinYMid meet"><g class="mt" data-i="0"><rect class="mt-s" x="40" y="22" width="96" height="96" rx="20"/><text class="mt-t" x="88.0" y="139">Finance</text><g class="mt-b"><circle cx="130" cy="28" r="13"/><text x="130" y="32.5"></text></g></g><g class="mt" data-i="1"><circle class="mt-s" cx="202.0" cy="70.0" r="48.0"/><text class="mt-t" x="202.0" y="139">HR</text><g class="mt-b"><circle cx="244" cy="28" r="13"/><text x="244" y="32.5"></text></g></g><g class="mt" data-i="2"><path class="mt-s" d="M268 118V22A96 96 0 0 1 364 118Z"/><text class="mt-t" x="316.0" y="139">IT</text><g class="mt-b"><circle cx="358" cy="28" r="13"/><text x="358" y="32.5"></text></g></g><g class="mt" data-i="3"><path class="mt-s" d="M40 252V204.0A48.0 48.0 0 0 1 136 204.0V252Z"/><text class="mt-t" x="88.0" y="273">Marketing</text><g class="mt-b"><circle cx="130" cy="162" r="13"/><text x="130" y="166.5"></text></g></g><g class="mt" data-i="4"><circle class="mt-s" cx="202.0" cy="204.0" r="48.0"/><text class="mt-t" x="202.0" y="273">Legal</text><g class="mt-b"><circle cx="244" cy="162" r="13"/><text x="244" y="166.5"></text></g></g><g class="mt" data-i="5"><rect class="mt-s" x="268" y="156" width="96" height="96" rx="20"/><text class="mt-t" x="316.0" y="273">Core processes</text><g class="mt-b"><circle cx="358" cy="162" r="13"/><text x="358" y="166.5"></text></g></g></svg>
-        <p class="tn-cap"><span></span>Start anywhere. Any order works.</p>
+      <div class="tf-net" aria-label="Scope can be one function, several functions, or the whole enterprise">
+        <div class="fr" id="tfFrame"><div class="fr-tile">Finance</div><div class="fr-tile">HR</div><div class="fr-tile">IT</div><div class="fr-tile">Marketing</div><div class="fr-tile">Legal</div><div class="fr-tile">Core processes</div><div class="fr-box" aria-hidden="true"><span class="fr-tag"></span></div></div>
       </div>
       <p class="transform-sub">AI Outcome Engineering redesigns workflows, decisions, and operations around AI to create measurable business outcomes.</p>
     </div>
@@ -2523,12 +2518,13 @@ html:not(.cx) .chap::after{transform:scale(1);}
 .how-build .build-line{background:rgba(255,255,255,.12);}
 .how-build .build-row-num{color:#7f8aa3;}
 .how-build .build-row-text{color:#c9d3e6;}
-.how-build .build-row::before{background:#0a1226;border-color:rgba(179,208,255,.3);}
-.how-build .build-row.done::before{background:var(--blue-24);border-color:var(--blue-24);}
+/* timeline markers = Searce ring (thick donut, inner ≈ 0.49 × outer) */
+.how-build .build-row::before{width:14px;height:14px;margin-top:-7px;left:-39px;border-width:3.6px;box-sizing:border-box;background:#040814;border-color:rgba(179,208,255,.28);}
+.how-build .build-row.done::before{background:#040814;border-color:var(--blue-24);}
 .how-build .build-row.active{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(179,208,255,.18);}
 .how-build .build-row.active .build-row-num{color:var(--blue-24);}
 .how-build .build-row.active .build-row-text{color:#fff;}
-.how-build .build-row.active::before{background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 6px rgba(0,100,255,.25);}
+.how-build .build-row.active::before{background:#040814;border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,100,255,.22);transform:scale(1.1);}
 .how-build .build-row-bar{background:var(--blue-24);}
 .how-build > .wrap{position:relative;z-index:1;}
 .how-build-grid{align-items:start;}
@@ -2540,7 +2536,7 @@ html:not(.cx) .chap::after{transform:scale(1);}
 .build-row:first-child{border-top:none;}
 .build-row::before{
   content:"";position:absolute;left:-39px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;
-  background:#fff;border:2px solid var(--blue-12);transition:background .35s ease,border-color .35s ease,box-shadow .35s ease;
+  background:#fff;border:2px solid var(--blue-12);transition:background .35s ease,border-color .35s ease,box-shadow .35s ease,transform .35s ease;
 }
 .build-row.done{opacity:.85;}
 .build-row.done::before{background:var(--blue-24);border-color:var(--blue-24);}
@@ -2607,12 +2603,14 @@ html:not(.cx) .chap::after{transform:scale(1);}
 .connect > .wrap{position:relative;z-index:1;}
 
 /* ---------- Section 3 · Offerings: four white cards with live illustrations ---------- */
-.offer{background:var(--paper);border-bottom:none;padding:96px 0 176px;}
+.offer{background:var(--paper);border-bottom:none;padding:96px 0 176px;position:relative;}
+.offer::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,100,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,255,.1) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse at 50% 45%,#000 40%,transparent 92%);mask-image:radial-gradient(ellipse at 50% 45%,#000 40%,transparent 92%);}
+.offer > .wrap{position:relative;z-index:1;}
 .oc-grid{margin-top:48px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;}
 .oc{
   position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;
   height:528px;padding:12px 12px 20px;
-  background:#fff;border:1px solid var(--paper-line);border-radius:24px;
+  background:#fff;border:1px solid transparent;border-radius:24px;
   box-shadow:none;
   transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s ease,border-color .4s ease;outline:none;
 }
@@ -2627,7 +2625,7 @@ html:not(.cx) .chap::after{transform:scale(1);}
   background:linear-gradient(160deg,#e8f1ff 0%,#f4f8ff 60%,#fbfdff 100%);
   transition:flex .6s cubic-bezier(.2,.7,.2,1);
 }
-.oc-art::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,100,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,255,.07) 1px,transparent 1px);background-size:24px 24px;}
+/* grid now lives on the section background, not inside the cards */
 .oc-art svg{position:relative;width:100%;height:100%;display:block;}
 .oc:hover .oc-art,.oc:focus-within .oc-art{flex:0 0 0px;min-height:0;opacity:0;}
 .oc-art{transition:flex .6s cubic-bezier(.2,.7,.2,1),opacity .3s ease,min-height .6s cubic-bezier(.2,.7,.2,1);}
@@ -2708,7 +2706,7 @@ html:not(.cx) .chap::after{transform:scale(1);}
 .oc:hover .rc-t{fill:var(--ink);}
 
 /* hover sequence: illustration plays first, then the card lifts and the text swipes up */
-.oc:hover,.oc:focus-within{transition-delay:2.3s,2.3s,2.3s;}
+.oc:hover,.oc:focus-within{transition-delay:2.3s,2.3s,0s;}   /* lift waits; border shows immediately */
 .oc:hover .oc-art,.oc:focus-within .oc-art{transition-delay:2.3s;transition-duration:.9s;}
 .oc:hover .oc-head,.oc:focus-within .oc-head{transition-delay:2.3s;}
 .oc:hover .oc-body,.oc:focus-within .oc-body{transition-delay:2.3s;transition-duration:.9s;}
@@ -2904,18 +2902,13 @@ button.transform-core-cta{border:0;cursor:pointer;font:inherit;font-family:var(-
 
 @media(max-width:900px){.hero-link{display:none;}}
 
-/* transform: shape mosaic — functions light up in a different, non-linear order each loop */
-.tf-net{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:12px;max-width:440px;margin:8px 0;}
-.tf-net svg{width:100%;height:auto;max-height:calc(100% - 30px);min-height:0;overflow:visible;}
-.mt-s{fill:#fff;stroke:#c7cfdc;stroke-width:1.5;transform-box:fill-box;transform-origin:center;transition:fill .45s ease,stroke .45s ease,transform .5s cubic-bezier(.3,1.5,.5,1);}
-.mt.lit .mt-s{fill:#b3d0ff;stroke:var(--blue);}
-.mt.start .mt-s{fill:var(--blue);stroke:var(--blue);transform:scale(1.04);}
-.mt-t{font-family:var(--display);font-size:15px;font-weight:500;fill:#84868c;text-anchor:middle;transition:fill .4s ease;}
-.mt.lit .mt-t{fill:var(--ink);}
-.mt-b{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.4);transition:opacity .3s ease,transform .45s cubic-bezier(.3,1.7,.5,1);}
-.mt-b circle{fill:#0b0b0b;}
-.mt-b text{font-family:var(--display);font-size:13px;font-weight:600;fill:#fff;text-anchor:middle;}
-.mt.lit .mt-b{opacity:1;transform:none;}
+/* transform: scope frame — a blue frame wraps one function, several, or the whole enterprise */
+.tf-net{flex:0 0 auto;max-width:480px;margin:28px 0 8px;}
+.fr{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px;margin-left:-12px;}
+.fr-tile{height:70px;border-radius:14px;background:#eef4ff;display:flex;align-items:flex-end;padding:10px 12px;font-family:var(--display);font-size:13px;font-weight:500;line-height:1.2;color:var(--ink-40);transition:background .6s ease,color .6s ease;}
+.fr-tile.on{background:var(--blue);color:#fff;}
+.fr-box{position:absolute;border:2px solid var(--blue);border-radius:20px;pointer-events:none;transition:left .9s cubic-bezier(.4,0,.2,1),top .9s cubic-bezier(.4,0,.2,1),width .9s cubic-bezier(.4,0,.2,1),height .9s cubic-bezier(.4,0,.2,1);}
+.fr-tag{position:absolute;top:-13px;left:14px;background:#00337f;color:#fff;box-shadow:0 0 0 3px #fff;font-family:var(--display);font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:999px;white-space:nowrap;}
 .tn-cap{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:13px;color:var(--ink-60);}
 .tn-cap span{width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px rgba(0,100,255,.15);}
 @media(max-width:900px){.tf-net{margin:8px 0 4px;}.tf-net svg{max-height:none;}}
@@ -3123,35 +3116,36 @@ button.transform-core-cta{border:0;cursor:pointer;font:inherit;font-family:var(-
     requestAnimationFrame(frame);
   })();
 
-  /* ---- transform: tiles light in a random, non-linear order (1, 2, 3) — never the card order ---- */
+  /* ---- transform: scope frame — one function → several → whole enterprise; the start is random ---- */
   (function(){
-    const net=document.querySelector('.tf-net'); if(!net) return;
-    const tiles=[...net.querySelectorAll('.mt')], cards=[...document.querySelectorAll('.tf-card')];
-    let timers=[], last=-1, lockedTo=-1;
-    const clear=()=>{timers.forEach(clearTimeout);timers=[];tiles.forEach(t=>t.classList.remove('lit','start'));};
-    function orderFrom(start){
-      const rest=tiles.map((_,i)=>i).filter(i=>i!==start&&i!==start+1&&i!==start-1);   /* skip neighbours so it never reads as a sequence */
-      for(let i=rest.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[rest[i],rest[j]]=[rest[j],rest[i]];}
-      return [start,...rest.slice(0,2)];
+    const g=document.getElementById('tfFrame'); if(!g) return;
+    const tiles=[...g.querySelectorAll('.fr-tile')], box=g.querySelector('.fr-box'), tag=g.querySelector('.fr-tag');
+    const cards=[...document.querySelectorAll('.tf-card')], n=tiles.length;
+    /* neighbours on the 3×2 grid, so "several" stays one tidy frame */
+    const nb=i=>{const c=i%3,r=Math.floor(i/3),o=[];if(c>0)o.push(i-1);if(c<2)o.push(i+1);o.push(r?i-3:i+3);return o;};
+    let step=0, set=[], start=-1, last=-1, timer=null, locked=-1;
+    function place(on,text){
+      tiles.forEach((t,i)=>t.classList.toggle('on',on.includes(i)));
+      const gr=g.getBoundingClientRect(), rs=on.map(i=>tiles[i].getBoundingClientRect());
+      const L=Math.min(...rs.map(r=>r.left))-gr.left-6, T=Math.min(...rs.map(r=>r.top))-gr.top-6;
+      const R=Math.max(...rs.map(r=>r.right))-gr.left+6, B=Math.max(...rs.map(r=>r.bottom))-gr.top+6;
+      Object.assign(box.style,{left:L+'px',top:T+'px',width:(R-L)+'px',height:(B-T)+'px'}); tag.textContent=text;
     }
-    function run(start){
-      clear(); last=start;
-      orderFrom(start).forEach((ti,n)=>{
-        const go=()=>{ const t=tiles[ti]; t.querySelector('.mt-b text').textContent=n+1; t.classList.add('lit'); if(n===0) t.classList.add('start'); };
-        REDUCE?go():timers.push(setTimeout(go,250+n*650));
-      });
-      if(!REDUCE) timers.push(setTimeout(()=>{ if(lockedTo<0) run(pick()); },4200));
+    function tick(){
+      if(step===0){ start=locked>=0?locked:(()=>{let s;do{s=Math.floor(Math.random()*n);}while(s===last);return s;})(); last=start; set=[start]; place(set,'One function'); }
+      else if(step===1){ const c=nb(start); set=[start,c[Math.floor(Math.random()*c.length)]]; place(set,'Several functions'); }
+      else { set=tiles.map((_,i)=>i); place(set,'The whole enterprise'); }
+      step=(step+1)%3;
     }
-    function pick(){ let i; do{ i=Math.floor(Math.random()*tiles.length); }while(i===last); return i; }
+    tick(); if(!REDUCE) timer=setInterval(tick,2400);
+    addEventListener('resize',()=>place(set,tag.textContent));
     let tk=false;
-    function onScroll(){ tk=false;
+    addEventListener('scroll',()=>{ if(tk) return; tk=true; requestAnimationFrame(()=>{ tk=false;
       const sec=document.getElementById('transform').getBoundingClientRect();
-      if(sec.bottom<0||sec.top>innerHeight){ lockedTo=-1; return; }
-      let a=-1; cards.forEach((c,i)=>{ const st=parseFloat(getComputedStyle(c).top)||0; if(c.getBoundingClientRect().top<=st+2) a=i; });
-      if(a>=0&&a!==lockedTo){ lockedTo=a; run(a); timers.push(setTimeout(()=>{ lockedTo=-1; run(pick()); },4200)); }
-    }
-    addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(onScroll);}},{passive:true});
-    run(pick());
+      if(sec.bottom<0||sec.top>innerHeight){ locked=-1; return; }
+      let a=-1; cards.forEach((cd,i)=>{ const st=parseFloat(getComputedStyle(cd).top)||0; if(cd.getBoundingClientRect().top<=st+2) a=i; });
+      if(a>=0&&a!==locked){ locked=a; step=0; tick(); }
+    }); },{passive:true});
   })();
 
   /* ---- how-build pipeline: fill + done states follow the active row ---- */

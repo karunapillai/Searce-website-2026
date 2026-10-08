@@ -3133,7 +3133,7 @@ button.transform-core-cta{border:0;cursor:pointer;font:inherit;font-family:var(-
     }
     function tick(){
       if(step===0){ start=locked>=0?locked:(()=>{let s;do{s=Math.floor(Math.random()*n);}while(s===last);return s;})(); last=start; set=[start]; place(set,'One function'); }
-      else if(step===1){ const c=nb(start); set=[start,c[Math.floor(Math.random()*c.length)]]; place(set,'Several functions'); }
+      else if(step===1){ const r=Math.floor(start/3)*3; set=[r,r+1,r+2]; place(set,'Several functions'); }   /* three: the start's full row, so the frame wraps only selected tiles */
       else { set=tiles.map((_,i)=>i); place(set,'The whole enterprise'); }
       step=(step+1)%3;
     }

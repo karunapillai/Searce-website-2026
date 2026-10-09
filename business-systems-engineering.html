@@ -1430,7 +1430,7 @@ footer{background:#071028;padding:72px 0 0;}
           <div class="bt-body">
           <p class="bt-quote">&ldquo;Exceptions eat the team's week.&rdquo;</p>
           <span class="bt-before">&nbsp;</span>
-          <p class="bt-big" aria-hidden="true"><span class="ct" data-from="1" data-to="8">8</span><small>× faster</small></p>
+          <p class="bt-big" aria-hidden="true"><span class="ct" data-from="1" data-to="8">8</span><small class="u-x">x faster</small></p>
           <p class="bt-changed">Freight exception handling 8x faster.</p>
         </div>
         </div>
@@ -2823,8 +2823,12 @@ html:not(.cx) .chap::after{transform:scale(1);}
 .bt.bc .bt-changed{font-size:14px;margin-top:6px;}
 .bt.bc .bt-before{font-size:15px;}
 .bt.bc .bt-big{font-size:clamp(38px,3vw,48px);gap:10px;}
-.bt.bc .bt-big small{font-size:.5em;letter-spacing:-.01em;}
-.bt.bc .bt-big small.u-full{font-size:1em;margin-left:-8px;}
+.bt.bc .bt-big small{font-size:1em;font-weight:inherit;letter-spacing:-.03em;}   /* units match the number: same size, same weight */
+.bt.bc .bt-big small.u-full{margin-left:-8px;}
+/* result line on one row so the big numbers line up across the bottom cards */
+.bt.bc .bt-changed{white-space:nowrap;margin-right:calc(-1 * min(var(--aw),var(--awmax,40%)));position:relative;z-index:1;}
+@media(max-width:640px){.bt.bc .bt-changed{white-space:normal;margin-right:0;}}
+.bt.bc .bt-big small.u-x{margin-left:-6px;}   /* "8x" reads as one value, x at full size */
 @media(max-width:1100px){.bt.bc{height:auto!important;min-height:340px;}}
 @media(max-width:640px){.bt.bc{--aw:34%!important;}}
 @media(max-width:1100px){
@@ -3120,10 +3124,10 @@ button.transform-core-cta{border:0;cursor:pointer;font:inherit;font-family:var(-
   (function(){
     const g=document.getElementById('tfFrame'); if(!g) return;
     const tiles=[...g.querySelectorAll('.fr-tile')], box=g.querySelector('.fr-box'), tag=g.querySelector('.fr-tag');
-    const cards=[...document.querySelectorAll('.tf-card')], n=tiles.length;
+    const n=tiles.length;
     /* neighbours on the 3×2 grid, so "several" stays one tidy frame */
     const nb=i=>{const c=i%3,r=Math.floor(i/3),o=[];if(c>0)o.push(i-1);if(c<2)o.push(i+1);o.push(r?i-3:i+3);return o;};
-    let step=0, set=[], start=-1, last=-1, timer=null, locked=-1;
+    let step=0, set=[], start=-1, last=-1, timer=null;   /* runs on its own — not tied to the card scroll */
     function place(on,text){
       tiles.forEach((t,i)=>t.classList.toggle('on',on.includes(i)));
       const gr=g.getBoundingClientRect(), rs=on.map(i=>tiles[i].getBoundingClientRect());
@@ -3132,20 +3136,13 @@ button.transform-core-cta{border:0;cursor:pointer;font:inherit;font-family:var(-
       Object.assign(box.style,{left:L+'px',top:T+'px',width:(R-L)+'px',height:(B-T)+'px'}); tag.textContent=text;
     }
     function tick(){
-      if(step===0){ start=locked>=0?locked:(()=>{let s;do{s=Math.floor(Math.random()*n);}while(s===last);return s;})(); last=start; set=[start]; place(set,'One function'); }
+      if(step===0){ start=(()=>{let s;do{s=Math.floor(Math.random()*n);}while(s===last);return s;})(); last=start; set=[start]; place(set,'One function'); }
       else if(step===1){ const r=Math.floor(start/3)*3; set=[r,r+1,r+2]; place(set,'Several functions'); }   /* three: the start's full row, so the frame wraps only selected tiles */
       else { set=tiles.map((_,i)=>i); place(set,'The whole enterprise'); }
       step=(step+1)%3;
     }
     tick(); if(!REDUCE) timer=setInterval(tick,2400);
     addEventListener('resize',()=>place(set,tag.textContent));
-    let tk=false;
-    addEventListener('scroll',()=>{ if(tk) return; tk=true; requestAnimationFrame(()=>{ tk=false;
-      const sec=document.getElementById('transform').getBoundingClientRect();
-      if(sec.bottom<0||sec.top>innerHeight){ locked=-1; return; }
-      let a=-1; cards.forEach((cd,i)=>{ const st=parseFloat(getComputedStyle(cd).top)||0; if(cd.getBoundingClientRect().top<=st+2) a=i; });
-      if(a>=0&&a!==locked){ locked=a; step=0; tick(); }
-    }); },{passive:true});
   })();
 
   /* ---- how-build pipeline: fill + done states follow the active row ---- */

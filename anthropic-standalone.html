@@ -16,6 +16,7 @@
   position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--snav-h);font-family:'Poppins',system-ui,sans-serif;color:#fff;transition:background-color .3s,box-shadow .3s,color .3s;}
 .snav *{box-sizing:border-box;}
 .snav a{color:inherit;text-decoration:none;}
+.snav a:not([href]){cursor:default;}  /* static nav: items without links */
 .snav button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;}
 .snav-bar{position:relative;z-index:2;max-width:1440px;height:100%;margin:0 auto;padding:0 72px;display:flex;align-items:center;justify-content:space-between;gap:32px;}
 .snav-logo{position:relative;top:-4px;display:block;width:132px;height:31px;flex:0 0 auto;}
@@ -709,11 +710,15 @@ a.tier-card:hover{border-color:var(--b9);box-shadow:0 20px 50px -34px rgba(0,22,
 <script data-theme="dark" data-current="anthropic">
 /* Searce navbar (shared by all industry pages). Include as the first element inside <body>:
    <script src="assets/searce-nav.js" data-theme="dark|light" data-current="<industry key>"><\/script>
-   It writes the bar, the four mega panels and the mobile drawer, then wires hover/click/keyboard. */
+   It writes the bar, the four mega panels and the mobile drawer, then wires hover/click/keyboard.
+   STATIC BY DEFAULT (Nov 2026): menu items render without links, because several target pages are still
+   work in progress. Menus still open for show; only on-page anchors (#connect) work. To switch links back
+   on, add data-links="live" to the script tag. */
 (function(){
   var me = document.currentScript;
   var theme = (me && me.getAttribute('data-theme')) || 'dark';
   var current = (me && me.getAttribute('data-current')) || '';
+  var LIVE = !!(me && me.getAttribute('data-links') === 'live');
 
   var IMG = 'https://assets.searce.com/nextjs-assets/FeaturedSectionMenu/';
   var FEAT_CASE = {t:'Searce helps Redcliffe Labs Improve the Cloud Security Posture', img:IMG+'services.webp',
@@ -749,7 +754,9 @@ a.tier-card:hover{border-color:var(--b9);box-shadow:0 20px 50px -34px rgba(0,22,
   ];
 
   var esc = function(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
-  var ext = function(o){ return o.ext ? ' target="_blank" rel="noopener"' : ''; };
+  /* href only for in-page anchors unless links are live; an <a> without href is inert and not focusable */
+  var hrefA = function(h){ return (LIVE || String(h).charAt(0) === '#') ? ' href="'+h+'"' : ''; };
+  var ext = function(o){ return (o.ext && LIVE) ? ' target="_blank" rel="noopener"' : ''; };
   var CHEV = '<svg class="snav-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
   var RIGHT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
   var ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
@@ -760,11 +767,11 @@ a.tier-card:hover{border-color:var(--b9);box-shadow:0 20px 50px -34px rgba(0,22,
 
   var linkHTML = function(l, cls){
     var cur = (l.k && l.k === current) ? ' is-current' : '';
-    return '<a class="'+cls+cur+'" href="'+l.href+'"'+ext(l)+(cur?' aria-current="page"':'')+'><span class="snav-link-t">'+esc(l.t)+'</span><span class="snav-link-d">'+esc(l.d)+'</span></a>';
+    return '<a class="'+cls+cur+'"'+hrefA(l.href)+ext(l)+(cur?' aria-current="page"':'')+'><span class="snav-link-t">'+esc(l.t)+'</span><span class="snav-link-d">'+esc(l.d)+'</span></a>';
   };
 
   var items = MENUS.map(function(m){
-    if(!m.links) return '<li class="snav-item"><a href="'+m.href+'"><span class="snav-label">'+m.label+'</span></a></li>';
+    if(!m.links) return '<li class="snav-item"><a'+hrefA(m.href)+'><span class="snav-label">'+m.label+'</span></a></li>';
     return '<li class="snav-item" data-menu="'+m.id+'"><button type="button" aria-expanded="false" aria-controls="snav-p-'+m.id+'"><span class="snav-label">'+m.label+'</span>'+CHEV+'</button></li>';
   }).join('');
 
@@ -773,14 +780,14 @@ a.tier-card:hover{border-color:var(--b9);box-shadow:0 20px 50px -34px rgba(0,22,
     return '<div class="snav-panel" id="snav-p-'+m.id+'" data-panel="'+m.id+'"><div class="snav-panel-inner">'
       + '<div class="snav-links">'+m.links.map(function(l){return linkHTML(l,'snav-link');}).join('')+'</div>'
       + '<div class="snav-feat"><p class="snav-feat-t">'+esc(f.t)+'</p><div class="snav-feat-b"><img src="'+f.img+'" alt=""><p>'+esc(f.d)+'</p></div>'
-      + '<a class="snav-feat-cta" href="'+f.href+'"'+ext(f)+'>'+f.cta+'<i>'+ARROW+'</i></a></div>'
+      + '<a class="snav-feat-cta"'+hrefA(f.href)+ext(f)+'>'+f.cta+'<i>'+ARROW+'</i></a></div>'
       + '</div></div>';
   }).join('');
 
   var drawerMain = '<div class="snav-dview" data-view="main">' + MENUS.map(function(m){
     return m.links
       ? '<button type="button" class="snav-drow" data-open="'+m.id+'">'+m.label+RIGHT+'</button>'
-      : '<a class="snav-drow" href="'+m.href+'">'+m.label+RIGHT+'</a>';
+      : '<a class="snav-drow"'+hrefA(m.href)+'>'+m.label+RIGHT+'</a>';
   }).join('') + '<a class="snav-dcta" href="#connect">Let’s Connect</a></div>';
   var drawerSubs = MENUS.filter(function(m){return m.links;}).map(function(m){
     return '<div class="snav-dview" data-view="'+m.id+'" hidden><button type="button" class="snav-dback" data-back>'+RIGHT+m.label+'</button>'
@@ -790,7 +797,7 @@ a.tier-card:hover{border-color:var(--b9);box-shadow:0 20px 50px -34px rgba(0,22,
   var html = '<nav class="snav" data-theme="'+theme+'" aria-label="Primary navigation">'
     + '<div class="snav-bar">'
     +   '<button type="button" class="snav-burger" aria-label="Open navigation menu" aria-expanded="false">'+BURGER+'</button>'
-    +   '<a class="snav-logo" href="index.html" aria-label="Searce home">'+LOGO+'</a>'
+    +   '<a class="snav-logo"'+hrefA('index.html')+' aria-label="Searce">'+LOGO+'</a>'
     +   '<ul class="snav-menu">'+items+'</ul>'
     +   '<div class="snav-actions"><a class="snav-cta" href="#connect">Let’s Connect</a><button type="button" class="snav-search" aria-label="Search">'+SEARCH+'</button></div>'
     + '</div>'
